@@ -1,0 +1,21 @@
+# Rockefeller Center reference photos
+
+From Wikimedia Commons, used as build references (concept images for the kit runs).
+
+- 30-rock/30-rock-01.jpg: "30 Rockefeller Plaza (6334840819).jpg" by InSapphoWeTrust from Los Angeles, California, USA, CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0), https://commons.wikimedia.org/wiki/File:30_Rockefeller_Plaza_(6334840819).jpg
+- 30-rock/30-rock-02.jpg: "GE Building 1.jpg" by Cab02 (talk) (Uploads), CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0/), https://commons.wikimedia.org/wiki/File:GE_Building_1.jpg
+- 30-rock/wisdom-01.jpg: "Rockefeller Center entrance (4674369705).jpg" by Tony Hisgett from Birmingham, UK, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), https://commons.wikimedia.org/wiki/File:Rockefeller_Center_entrance_(4674369705).jpg
+- 30-rock/30-rock-03.jpg: "NY Plushev 22.jpg" by Aleksandr Plyushchev, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), https://commons.wikimedia.org/wiki/File:NY_Plushev_22.jpg
+- plaza/plaza-01.jpg: "Rockefeller Center Lower Plaza New York City 2022.jpg" by Larry D. Moore, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), https://commons.wikimedia.org/wiki/File:Rockefeller_Center_Lower_Plaza_New_York_City_2022.jpg
+- plaza/plaza-night-01.jpg: "Prometheus and Skate Rink at Night.JPG" by Andy C, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Prometheus_and_Skate_Rink_at_Night.JPG
+- plaza/channel-gardens-01.jpg: "The Channel Gardens, facing 30 Rockefeller Plaza.jpg" by dconvertini, CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0), https://commons.wikimedia.org/wiki/File:The_Channel_Gardens,_facing_30_Rockefeller_Plaza.jpg
+- plaza/channel-gardens-02.jpg: "Channel Gardens Rockefeller Center New York 2022.jpg" by Larry D. Moore, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0), https://commons.wikimedia.org/wiki/File:Channel_Gardens_Rockefeller_Center_New_York_2022.jpg
+- radio-city/radio-city-01.jpg: "Radio City Music Hall neon (Unsplash).jpg" by Luca Bravo lucabravo, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), https://commons.wikimedia.org/wiki/File:Radio_City_Music_Hall_neon_(Unsplash).jpg
+- radio-city/radio-city-02.jpg: "Radio City Music Hall Night - June 19, 1984.jpg" by TedQuackenbush, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Radio_City_Music_Hall_Night_-_June_19,_1984.jpg
+- radio-city/radio-city-03.jpg: "Radio City sign.jpg" by Ypsilon from Finland, CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en), https://commons.wikimedia.org/wiki/File:Radio_City_sign.jpg
+- st-patricks/st-patricks-01.jpg: "NYC - St. Patrick's Cathedral - Facade.jpg" by Jean-Christophe BENOIST, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0), https://commons.wikimedia.org/wiki/File:NYC_-_St._Patrick%27s_Cathedral_-_Facade.jpg
+- st-patricks/st-patricks-aerial-01.jpg: "Aerial view of St Patricks Cathedral.jpg" by Photomepretty, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Aerial_view_of_St_Patricks_Cathedral.jpg
+- st-patricks/st-patricks-02.jpg: "St Patrick's Cathedral from the Top of the Rock (4692497251).jpg" by Tony Hisgett from Birmingham, UK, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), https://commons.wikimedia.org/wiki/File:St_Patrick%27s_Cathedral_from_the_Top_of_the_Rock_(4692497251).jpg
+- international/atlas-01.jpg: "Atlas - Rockefeller Center (51394733772).jpg" by ajay_suresh, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), https://commons.wikimedia.org/wiki/File:Atlas_-_Rockefeller_Center_(51394733772).jpg
+- international/atlas-02.jpg: "Rockefeller Center Atlas 02.jpg" by PortableNYCTours, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Rockefeller_Center_Atlas_02.jpg
+- aerial/rockefeller-aerial-01.jpg: "NewYorkCityManhattanRockefellerCenter.jpg" by derivative work: Massimo Catarinella (talk) New_York_City_Midtown_from_Rockefeller_Center_NIH.jpg: Unknown, Public domain, https://commons.wikimedia.org/wiki/File:NewYorkCityManhattanRockefellerCenter.jpg

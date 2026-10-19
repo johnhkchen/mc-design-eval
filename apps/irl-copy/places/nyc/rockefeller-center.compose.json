@@ -1,0 +1,7939 @@
+{
+ "note": "Rockefeller Center: five hero kits (runs/rockefeller-center: 30 Rock, the plaza and Channel Gardens, Radio City, the International Building with Atlas and the Fifth Avenue pair, St Patrick's Cathedral), each module on its footprint or open-ground box at its own ground level; the metered Haiku fill (bin/fill.mjs) on the other blocks.",
+ "modules": {
+  "rock30-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/rock30-kit/v3.nbt",
+   "plot": [
+    0,
+    0,
+    145,
+    53
+   ]
+  },
+  "plaza-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/plaza-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    50,
+    53
+   ]
+  },
+  "plaza-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/plaza-kit/v2.nbt",
+   "plot": [
+    55,
+    0,
+    108,
+    15
+   ]
+  },
+  "radio-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/radio-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    53
+   ]
+  },
+  "radio-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/radio-kit/v2.nbt",
+   "plot": [
+    38,
+    0,
+    100,
+    54
+   ]
+  },
+  "radio-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/radio-kit/v2.nbt",
+   "plot": [
+    105,
+    0,
+    155,
+    54
+   ]
+  },
+  "intl-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/intl-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    83,
+    54
+   ]
+  },
+  "intl-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/intl-kit/v2.nbt",
+   "plot": [
+    88,
+    0,
+    141,
+    18
+   ]
+  },
+  "intl-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/intl-kit/v2.nbt",
+   "plot": [
+    146,
+    0,
+    199,
+    18
+   ]
+  },
+  "stpat-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/stpat-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    104,
+    41
+   ]
+  },
+  "stpat-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/stpat-kit/v2.nbt",
+   "plot": [
+    109,
+    0,
+    127,
+    14
+   ]
+  },
+  "stpat-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/rockefeller-center/stpat-kit/v2.nbt",
+   "plot": [
+    132,
+    0,
+    149,
+    14
+   ]
+  },
+  "fill-NYC1034788": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034788.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    21
+   ]
+  },
+  "fill-NYC1034240": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034240.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    16
+   ]
+  },
+  "fill-NYC1069583": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1069583.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    32
+   ]
+  },
+  "fill-NYC1022698": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022698.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1035428": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035428.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    7
+   ]
+  },
+  "fill-NYC1022637": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022637.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    21
+   ]
+  },
+  "fill-NYC1081128": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081128.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    30
+   ]
+  },
+  "fill-NYC1034248": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034248.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    26
+   ]
+  },
+  "fill-NYC1034795": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034795.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    16
+   ]
+  },
+  "fill-NYC1034786": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034786.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    21
+   ]
+  },
+  "fill-NYC1034500": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034500.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    26
+   ]
+  },
+  "fill-NYC1035748": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035748.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    22
+   ]
+  },
+  "fill-NYC1035451": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035451.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    7
+   ]
+  },
+  "fill-NYC1034498": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034498.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    27
+   ]
+  },
+  "fill-NYC1034267": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034267.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1035393": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035393.nbt",
+   "plot": [
+    0,
+    0,
+    59,
+    55
+   ]
+  },
+  "fill-NYC1034501": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034501.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    26
+   ]
+  },
+  "fill-NYC1076265": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076265.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    27
+   ]
+  },
+  "fill-NYC1081151": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081151.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    27
+   ]
+  },
+  "fill-NYC1034326": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034326.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    25
+   ]
+  },
+  "fill-NYC1034482": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034482.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    26
+   ]
+  },
+  "fill-NYC1034249": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034249.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    21
+   ]
+  },
+  "fill-NYC1081153": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081153.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    20
+   ]
+  },
+  "fill-NYC1035370": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035370.nbt",
+   "plot": [
+    0,
+    0,
+    38,
+    9
+   ]
+  },
+  "fill-NYC1035463": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035463.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    26
+   ]
+  },
+  "fill-NYC1035414": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035414.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    25
+   ]
+  },
+  "fill-NYC1034504": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034504.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    20
+   ]
+  },
+  "fill-NYC1034269": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034269.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    27
+   ]
+  },
+  "fill-NYC1069590": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1069590.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    21
+   ]
+  },
+  "fill-NYC1083716": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083716.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    26
+   ]
+  },
+  "fill-NYC1035712": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035712.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    27
+   ]
+  },
+  "fill-NYC1035406": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035406.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    27
+   ]
+  },
+  "fill-NYC1085016": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1085016.nbt",
+   "plot": [
+    0,
+    0,
+    31,
+    10
+   ]
+  },
+  "fill-NYC1035708": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035708.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    26
+   ]
+  },
+  "fill-NYC1034473": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034473.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    25
+   ]
+  },
+  "fill-NYC1034259": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034259.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1034356": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034356.nbt",
+   "plot": [
+    0,
+    0,
+    31,
+    27
+   ]
+  },
+  "fill-NYC1035765": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035765.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    15
+   ]
+  },
+  "fill-NYC1035448": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035448.nbt",
+   "plot": [
+    0,
+    0,
+    48,
+    26
+   ]
+  },
+  "fill-NYC1034321": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034321.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    25
+   ]
+  },
+  "fill-NYC1034235": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034235.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    27
+   ]
+  },
+  "fill-NYC1035744": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035744.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    5
+   ]
+  },
+  "fill-NYC1085630": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1085630.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    33
+   ]
+  },
+  "fill-NYC1035417": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035417.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1022667": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022667.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    54
+   ]
+  },
+  "fill-NYC1035475": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035475.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    19
+   ]
+  },
+  "fill-NYC1022668": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022668.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    23
+   ]
+  },
+  "fill-NYC1022661": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022661.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    27
+   ]
+  },
+  "fill-NYC1022658": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022658.nbt",
+   "plot": [
+    0,
+    0,
+    3,
+    22
+   ]
+  },
+  "fill-NYC1034807": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034807.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    4
+   ]
+  },
+  "fill-NYC1077286": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1077286.nbt",
+   "plot": [
+    0,
+    0,
+    30,
+    48
+   ]
+  },
+  "fill-NYC1035449": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035449.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    6
+   ]
+  },
+  "fill-NYC1035435": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035435.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    22
+   ]
+  },
+  "fill-NYC1035369": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035369.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    9
+   ]
+  },
+  "fill-NYC1035476": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035476.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    27
+   ]
+  },
+  "fill-NYC1034345": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034345.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    26
+   ]
+  },
+  "fill-NYC1035737": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035737.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    15
+   ]
+  },
+  "fill-NYC1035378": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035378.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    25
+   ]
+  },
+  "fill-NYC1022628": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022628.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    10
+   ]
+  },
+  "fill-NYC1076258": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076258.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    19
+   ]
+  },
+  "fill-NYC1081152": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081152.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    19
+   ]
+  },
+  "fill-NYC1022663": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022663.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    26
+   ]
+  },
+  "fill-NYC1034495": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034495.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1090748": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090748.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    27
+   ]
+  },
+  "fill-NYC1077287": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1077287.nbt",
+   "plot": [
+    0,
+    0,
+    65,
+    54
+   ]
+  },
+  "fill-NYC1089023": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1089023.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    27
+   ]
+  },
+  "fill-NYC1035411": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035411.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1081154": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081154.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    22
+   ]
+  },
+  "fill-NYC1035470": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035470.nbt",
+   "plot": [
+    0,
+    0,
+    37,
+    54
+   ]
+  },
+  "fill-NYC1035399": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035399.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    26
+   ]
+  },
+  "fill-NYC1090823": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090823.nbt",
+   "plot": [
+    0,
+    0,
+    31,
+    28
+   ]
+  },
+  "fill-NYC1034349": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034349.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1035407": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035407.nbt",
+   "plot": [
+    0,
+    0,
+    53,
+    26
+   ]
+  },
+  "fill-NYC1035709": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035709.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    44
+   ]
+  },
+  "fill-NYC1036185": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1036185.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    54
+   ]
+  },
+  "fill-NYC1035725": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035725.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    23
+   ]
+  },
+  "fill-NYC1035405": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035405.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    54
+   ]
+  },
+  "fill-NYC1034499": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034499.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    26
+   ]
+  },
+  "fill-NYC1035444": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035444.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    7
+   ]
+  },
+  "fill-NYC1034484": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034484.nbt",
+   "plot": [
+    0,
+    0,
+    67,
+    26
+   ]
+  },
+  "fill-NYC1087733": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1087733.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    27
+   ]
+  },
+  "fill-NYC1034251": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034251.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    6
+   ]
+  },
+  "fill-NYC1034264": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034264.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    27
+   ]
+  },
+  "fill-NYC1034350": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034350.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    18
+   ]
+  },
+  "fill-NYC1022647": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022647.nbt",
+   "plot": [
+    0,
+    0,
+    3,
+    26
+   ]
+  },
+  "fill-NYC1034797": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034797.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    21
+   ]
+  },
+  "fill-NYC1035467": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035467.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    26
+   ]
+  },
+  "fill-NYC1034344": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034344.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    25
+   ]
+  },
+  "fill-NYC1023157": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023157.nbt",
+   "plot": [
+    0,
+    0,
+    67,
+    48
+   ]
+  },
+  "fill-NYC1034505": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034505.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1022669": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022669.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    24
+   ]
+  },
+  "fill-NYC1035481": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035481.nbt",
+   "plot": [
+    0,
+    0,
+    52,
+    54
+   ]
+  },
+  "fill-NYC1022693": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022693.nbt",
+   "plot": [
+    0,
+    0,
+    106,
+    53
+   ]
+  },
+  "fill-NYC1081146": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081146.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    53
+   ]
+  },
+  "fill-NYC1034798": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034798.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    22
+   ]
+  },
+  "fill-NYC1035471": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035471.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    26
+   ]
+  },
+  "fill-NYC1034256": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034256.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    24
+   ]
+  },
+  "fill-NYC1022649": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022649.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    21
+   ]
+  },
+  "fill-NYC1034492": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034492.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1082694": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1082694.nbt",
+   "plot": [
+    0,
+    0,
+    2,
+    18
+   ]
+  },
+  "fill-NYC1034341": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034341.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    26
+   ]
+  },
+  "fill-NYC1023161": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023161.nbt",
+   "plot": [
+    0,
+    0,
+    93,
+    54
+   ]
+  },
+  "fill-NYC1034244": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034244.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    26
+   ]
+  },
+  "fill-NYC1035477": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035477.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    27
+   ]
+  },
+  "fill-NYC1034477": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034477.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    25
+   ]
+  },
+  "fill-NYC1034794": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034794.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    21
+   ]
+  },
+  "fill-NYC1022646": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022646.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    26
+   ]
+  },
+  "fill-NYC1034353": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034353.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    18
+   ]
+  },
+  "fill-NYC1082697": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1082697.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1035746": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035746.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    2
+   ]
+  },
+  "fill-NYC1034320": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034320.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1035730": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035730.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    4
+   ]
+  },
+  "fill-NYC1022645": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022645.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    27
+   ]
+  },
+  "fill-NYC1035398": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035398.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    19
+   ]
+  },
+  "fill-NYC1034227": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034227.nbt",
+   "plot": [
+    0,
+    0,
+    47,
+    36
+   ]
+  },
+  "fill-NYC1034479": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034479.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    26
+   ]
+  },
+  "fill-NYC1076175": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076175.nbt",
+   "plot": [
+    0,
+    0,
+    53,
+    53
+   ]
+  },
+  "fill-NYC1090691": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090691.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    51
+   ]
+  },
+  "fill-NYC1035397": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035397.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    23
+   ]
+  },
+  "fill-NYC1035736": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035736.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    25
+   ]
+  },
+  "fill-NYC1034218": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034218.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    17
+   ]
+  },
+  "fill-NYC1022679": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022679.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    27
+   ]
+  },
+  "fill-NYC1034790": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034790.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    16
+   ]
+  },
+  "fill-NYC1035390": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035390.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    26
+   ]
+  },
+  "fill-NYC1081124": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081124.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    13
+   ]
+  },
+  "fill-NYC1034220": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034220.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    7
+   ]
+  },
+  "fill-NYC1022641": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022641.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    23
+   ]
+  },
+  "fill-NYC1035469": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035469.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    27
+   ]
+  },
+  "fill-NYC1035749": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035749.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    21
+   ]
+  },
+  "fill-NYC1083718": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083718.nbt",
+   "plot": [
+    0,
+    0,
+    1,
+    27
+   ]
+  },
+  "fill-NYC1034486": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034486.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    11
+   ]
+  },
+  "fill-NYC1034322": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034322.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1034254": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034254.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    25
+   ]
+  },
+  "fill-NYC1034519": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034519.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    27
+   ]
+  },
+  "fill-NYC1034219": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034219.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    9
+   ]
+  },
+  "fill-NYC1089796": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1089796.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    14
+   ]
+  },
+  "fill-NYC1035404": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035404.nbt",
+   "plot": [
+    0,
+    0,
+    56,
+    53
+   ]
+  },
+  "fill-NYC1035429": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035429.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    5
+   ]
+  },
+  "fill-NYC1034516": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034516.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    31
+   ]
+  },
+  "fill-NYC1071414": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1071414.nbt",
+   "plot": [
+    0,
+    0,
+    48,
+    48
+   ]
+  },
+  "fill-NYC1035480": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035480.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    9
+   ]
+  },
+  "fill-NYC1035409": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035409.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    10
+   ]
+  },
+  "fill-NYC1035377": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035377.nbt",
+   "plot": [
+    0,
+    0,
+    47,
+    30
+   ]
+  },
+  "fill-NYC1071418": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1071418.nbt",
+   "plot": [
+    0,
+    0,
+    61,
+    48
+   ]
+  },
+  "fill-NYC1085017": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1085017.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    27
+   ]
+  },
+  "fill-NYC1022629": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022629.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    10
+   ]
+  },
+  "fill-NYC1022638": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022638.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    21
+   ]
+  },
+  "fill-NYC1035389": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035389.nbt",
+   "plot": [
+    0,
+    0,
+    54,
+    27
+   ]
+  },
+  "fill-NYC1034325": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034325.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    22
+   ]
+  },
+  "fill-NYC1083721": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083721.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    21
+   ]
+  },
+  "fill-NYC1022657": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022657.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    21
+   ]
+  },
+  "fill-NYC1023162": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023162.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    32
+   ]
+  },
+  "fill-NYC1022659": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022659.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    23
+   ]
+  },
+  "fill-NYC1022650": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022650.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    23
+   ]
+  },
+  "fill-NYC1034246": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034246.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    24
+   ]
+  },
+  "fill-NYC1023158": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023158.nbt",
+   "plot": [
+    0,
+    0,
+    105,
+    48
+   ]
+  },
+  "fill-NYC1034511": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034511.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    20
+   ]
+  },
+  "fill-NYC1022651": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022651.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    24
+   ]
+  },
+  "fill-NYC1076173": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076173.nbt",
+   "plot": [
+    0,
+    0,
+    53,
+    48
+   ]
+  },
+  "fill-NYC1035460": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035460.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    27
+   ]
+  },
+  "fill-NYC1034324": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034324.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    23
+   ]
+  },
+  "fill-NYC1034508": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034508.nbt",
+   "plot": [
+    0,
+    0,
+    43,
+    27
+   ]
+  },
+  "fill-NYC1035443": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035443.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    19
+   ]
+  },
+  "fill-NYC1034485": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034485.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    14
+   ]
+  },
+  "fill-NYC1076267": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076267.nbt",
+   "plot": [
+    0,
+    0,
+    38,
+    40
+   ]
+  },
+  "fill-NYC1034313": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034313.nbt",
+   "plot": [
+    0,
+    0,
+    55,
+    27
+   ]
+  },
+  "fill-NYC1034228": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034228.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    27
+   ]
+  },
+  "fill-NYC1034351": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034351.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    18
+   ]
+  },
+  "fill-NYC1022632": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022632.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    23
+   ]
+  },
+  "fill-NYC1035733": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035733.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    28
+   ]
+  },
+  "fill-NYC1034323": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034323.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    23
+   ]
+  },
+  "fill-NYC1081130": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081130.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    30
+   ]
+  },
+  "fill-NYC1034512": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034512.nbt",
+   "plot": [
+    0,
+    0,
+    74,
+    53
+   ]
+  },
+  "fill-NYC1035479": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035479.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    23
+   ]
+  },
+  "fill-NYC1022630": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022630.nbt",
+   "plot": [
+    0,
+    0,
+    31,
+    10
+   ]
+  },
+  "fill-NYC1034472": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034472.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    27
+   ]
+  },
+  "fill-NYC1034257": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034257.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    23
+   ]
+  },
+  "fill-NYC1035374": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035374.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    10
+   ]
+  },
+  "fill-NYC1034221": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034221.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    10
+   ]
+  },
+  "fill-NYC1035727": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035727.nbt",
+   "plot": [
+    0,
+    0,
+    64,
+    50
+   ]
+  },
+  "fill-NYC1035745": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035745.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    6
+   ]
+  },
+  "fill-NYC1035750": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035750.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    23
+   ]
+  },
+  "fill-NYC1022706": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022706.nbt",
+   "plot": [
+    0,
+    0,
+    107,
+    51
+   ]
+  },
+  "fill-NYC1034224": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034224.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    36
+   ]
+  },
+  "fill-NYC1035720": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035720.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    25
+   ]
+  },
+  "fill-NYC1035478": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035478.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    27
+   ]
+  },
+  "fill-NYC1034515": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034515.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    26
+   ]
+  },
+  "fill-NYC1034480": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034480.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    27
+   ]
+  },
+  "fill-NYC1035419": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035419.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    24
+   ]
+  },
+  "fill-NYC1035446": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035446.nbt",
+   "plot": [
+    0,
+    0,
+    2,
+    16
+   ]
+  },
+  "fill-NYC1034514": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034514.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    26
+   ]
+  },
+  "fill-NYC1034481": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034481.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    27
+   ]
+  },
+  "fill-NYC1034497": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034497.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    27
+   ]
+  },
+  "fill-NYC1022709": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022709.nbt",
+   "plot": [
+    0,
+    0,
+    109,
+    54
+   ]
+  },
+  "fill-NYC1034252": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034252.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    12
+   ]
+  },
+  "fill-NYC1035422": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035422.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    25
+   ]
+  },
+  "fill-NYC1083869": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083869.nbt",
+   "plot": [
+    0,
+    0,
+    62,
+    55
+   ]
+  },
+  "fill-NYC1076172": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076172.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    38
+   ]
+  },
+  "fill-NYC1081060": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081060.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    7
+   ]
+  },
+  "fill-NYC1035722": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035722.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    6
+   ]
+  },
+  "fill-NYC1090672": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090672.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    24
+   ]
+  },
+  "fill-NYC1034237": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034237.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    27
+   ]
+  },
+  "fill-NYC1034266": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034266.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    22
+   ]
+  },
+  "fill-NYC1034503": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034503.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    20
+   ]
+  },
+  "fill-NYC1083858": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083858.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    13
+   ]
+  },
+  "fill-NYC1035400": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035400.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    22
+   ]
+  },
+  "fill-NYC1035706": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035706.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    13
+   ]
+  },
+  "fill-NYC1034506": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034506.nbt",
+   "plot": [
+    0,
+    0,
+    53,
+    25
+   ]
+  },
+  "fill-NYC1023159": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023159.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    53
+   ]
+  },
+  "fill-NYC1034342": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034342.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    23
+   ]
+  },
+  "fill-NYC1034258": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034258.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1082895": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1082895.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    26
+   ]
+  },
+  "fill-NYC1022695": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022695.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1022665": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022665.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    54
+   ]
+  },
+  "fill-NYC1035743": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035743.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    22
+   ]
+  },
+  "fill-NYC1087455": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1087455.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    25
+   ]
+  },
+  "fill-NYC1022710": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022710.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    26
+   ]
+  },
+  "fill-NYC1034496": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034496.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    27
+   ]
+  },
+  "fill-NYC1034243": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034243.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    26
+   ]
+  },
+  "fill-NYC1035403": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035403.nbt",
+   "plot": [
+    0,
+    0,
+    65,
+    54
+   ]
+  },
+  "fill-NYC1035375": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035375.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    27
+   ]
+  },
+  "fill-NYC1087646": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1087646.nbt",
+   "plot": [
+    0,
+    0,
+    76,
+    54
+   ]
+  },
+  "fill-NYC1034250": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034250.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    23
+   ]
+  },
+  "fill-NYC1034513": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034513.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    26
+   ]
+  },
+  "fill-NYC1035751": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035751.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    23
+   ]
+  },
+  "fill-NYC1034537": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034537.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    30
+   ]
+  },
+  "fill-NYC1035423": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035423.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    24
+   ]
+  },
+  "fill-NYC1076844": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1076844.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    54
+   ]
+  },
+  "fill-NYC1034263": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034263.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    27
+   ]
+  },
+  "fill-NYC1035711": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035711.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    27
+   ]
+  },
+  "fill-NYC1035723": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035723.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    6
+   ]
+  },
+  "fill-NYC1081127": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081127.nbt",
+   "plot": [
+    0,
+    0,
+    36,
+    26
+   ]
+  },
+  "fill-NYC1034217": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034217.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    2
+   ]
+  },
+  "fill-NYC1034522": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034522.nbt",
+   "plot": [
+    0,
+    0,
+    28,
+    42
+   ]
+  },
+  "fill-NYC1034265": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034265.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    27
+   ]
+  },
+  "fill-NYC1034355": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034355.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    6
+   ]
+  },
+  "fill-NYC1083720": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083720.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    21
+   ]
+  },
+  "fill-NYC1034223": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034223.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    36
+   ]
+  },
+  "fill-NYC1035732": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035732.nbt",
+   "plot": [
+    0,
+    0,
+    43,
+    53
+   ]
+  },
+  "fill-NYC1035453": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035453.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    26
+   ]
+  },
+  "fill-NYC1034815": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034815.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    17
+   ]
+  },
+  "fill-NYC1034225": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034225.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    5
+   ]
+  },
+  "fill-NYC1069581": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1069581.nbt",
+   "plot": [
+    0,
+    0,
+    41,
+    23
+   ]
+  },
+  "fill-NYC1034346": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034346.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    54
+   ]
+  },
+  "fill-NYC1035714": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035714.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    26
+   ]
+  },
+  "fill-NYC1034236": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034236.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    24
+   ]
+  },
+  "fill-NYC1034475": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034475.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    23
+   ]
+  },
+  "fill-NYC1083719": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083719.nbt",
+   "plot": [
+    0,
+    0,
+    57,
+    16
+   ]
+  },
+  "fill-NYC1084667": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1084667.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    53
+   ]
+  },
+  "fill-NYC1035367": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035367.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    9
+   ]
+  },
+  "fill-NYC1088582": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1088582.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    24
+   ]
+  },
+  "fill-NYC1081406": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081406.nbt",
+   "plot": [
+    0,
+    0,
+    43,
+    35
+   ]
+  },
+  "fill-NYC1035459": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035459.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    26
+   ]
+  },
+  "fill-NYC1035724": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035724.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    13
+   ]
+  },
+  "fill-NYC1034487": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034487.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    27
+   ]
+  },
+  "fill-NYC1035440": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035440.nbt",
+   "plot": [
+    0,
+    0,
+    52,
+    41
+   ]
+  },
+  "fill-NYC1090615": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090615.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    8
+   ]
+  },
+  "fill-NYC1034517": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034517.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    26
+   ]
+  },
+  "fill-NYC1035427": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035427.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    27
+   ]
+  },
+  "fill-NYC1035473": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035473.nbt",
+   "plot": [
+    0,
+    0,
+    29,
+    53
+   ]
+  },
+  "fill-NYC1034509": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034509.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    6
+   ]
+  },
+  "fill-NYC1035741": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035741.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    19
+   ]
+  },
+  "fill-NYC1034233": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034233.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    27
+   ]
+  },
+  "fill-NYC1034242": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034242.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    26
+   ]
+  },
+  "fill-NYC1023160": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023160.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    21
+   ]
+  },
+  "fill-NYC1034238": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034238.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    14
+   ]
+  },
+  "fill-NYC1085873": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1085873.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    33
+   ]
+  },
+  "fill-NYC1035468": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035468.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    26
+   ]
+  },
+  "fill-NYC1022671": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022671.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    25
+   ]
+  },
+  "fill-NYC1034502": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034502.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    33
+   ]
+  },
+  "fill-NYC1035408": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035408.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    26
+   ]
+  },
+  "fill-NYC1088772": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1088772.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    19
+   ]
+  },
+  "fill-NYC1035416": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035416.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1035455": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035455.nbt",
+   "plot": [
+    0,
+    0,
+    47,
+    41
+   ]
+  },
+  "fill-NYC1034474": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034474.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    27
+   ]
+  },
+  "fill-NYC1034491": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034491.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    27
+   ]
+  },
+  "fill-NYC1035447": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035447.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    31
+   ]
+  },
+  "fill-NYC1034532": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034532.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    26
+   ]
+  },
+  "fill-NYC1034478": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034478.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1035740": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035740.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    10
+   ]
+  },
+  "fill-NYC1034354": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034354.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    5
+   ]
+  },
+  "fill-NYC1035738": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035738.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    10
+   ]
+  },
+  "fill-NYC1081061": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081061.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    9
+   ]
+  },
+  "fill-NYC1034520": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034520.nbt",
+   "plot": [
+    0,
+    0,
+    85,
+    54
+   ]
+  },
+  "fill-NYC1035441": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035441.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    46
+   ]
+  },
+  "fill-NYC1077284": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1077284.nbt",
+   "plot": [
+    0,
+    0,
+    83,
+    54
+   ]
+  },
+  "fill-NYC1034253": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034253.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    7
+   ]
+  },
+  "fill-NYC1022631": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022631.nbt",
+   "plot": [
+    0,
+    0,
+    54,
+    34
+   ]
+  },
+  "fill-NYC1035420": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035420.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    50
+   ]
+  },
+  "fill-NYC1034789": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034789.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    20
+   ]
+  },
+  "fill-NYC1035395": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035395.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    26
+   ]
+  },
+  "fill-NYC1083717": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1083717.nbt",
+   "plot": [
+    0,
+    0,
+    49,
+    45
+   ]
+  },
+  "fill-NYC1082695": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1082695.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    24
+   ]
+  },
+  "fill-NYC1035394": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035394.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    26
+   ]
+  },
+  "fill-NYC1034247": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034247.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    24
+   ]
+  },
+  "fill-NYC1035713": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035713.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    55
+   ]
+  },
+  "fill-NYC1022664": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022664.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1022708": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022708.nbt",
+   "plot": [
+    0,
+    0,
+    64,
+    54
+   ]
+  },
+  "fill-NYC1022634": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022634.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    24
+   ]
+  },
+  "fill-NYC1035426": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035426.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    25
+   ]
+  },
+  "fill-NYC1022675": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022675.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    26
+   ]
+  },
+  "fill-NYC1035401": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035401.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    32
+   ]
+  },
+  "fill-NYC1022648": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022648.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    23
+   ]
+  },
+  "fill-NYC1085493": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1085493.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    23
+   ]
+  },
+  "fill-NYC1086068": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1086068.nbt",
+   "plot": [
+    0,
+    0,
+    52,
+    27
+   ]
+  },
+  "fill-NYC1035413": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035413.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1035402": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035402.nbt",
+   "plot": [
+    0,
+    0,
+    48,
+    30
+   ]
+  },
+  "fill-NYC1034816": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034816.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    21
+   ]
+  },
+  "fill-NYC1035450": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035450.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    5
+   ]
+  },
+  "fill-NYC1034796": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034796.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    16
+   ]
+  },
+  "fill-NYC1034245": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034245.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    24
+   ]
+  },
+  "fill-NYC1035462": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035462.nbt",
+   "plot": [
+    0,
+    0,
+    54,
+    53
+   ]
+  },
+  "fill-NYC1035368": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035368.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    9
+   ]
+  },
+  "fill-NYC1035366": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035366.nbt",
+   "plot": [
+    0,
+    0,
+    38,
+    16
+   ]
+  },
+  "fill-NYC1035412": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035412.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    25
+   ]
+  },
+  "fill-NYC1035472": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035472.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    24
+   ]
+  },
+  "fill-NYC1035380": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035380.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    25
+   ]
+  },
+  "fill-NYC1034470": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034470.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    20
+   ]
+  },
+  "fill-NYC1086846": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1086846.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    8
+   ]
+  },
+  "fill-NYC1022670": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022670.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    27
+   ]
+  },
+  "fill-NYC1035410": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035410.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    4
+   ]
+  },
+  "fill-NYC1035431": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035431.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    7
+   ]
+  },
+  "fill-NYC1035432": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035432.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    18
+   ]
+  },
+  "fill-NYC1035474": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035474.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    26
+   ]
+  },
+  "fill-NYC1035731": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035731.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    24
+   ]
+  },
+  "fill-NYC1034507": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034507.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    8
+   ]
+  },
+  "fill-NYC1034787": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034787.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    20
+   ]
+  },
+  "fill-NYC1035418": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035418.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    25
+   ]
+  },
+  "fill-NYC1034483": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034483.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    26
+   ]
+  },
+  "fill-NYC1035726": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035726.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    27
+   ]
+  },
+  "fill-NYC1035734": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035734.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    26
+   ]
+  },
+  "fill-NYC1022640": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022640.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    23
+   ]
+  },
+  "fill-NYC1022666": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022666.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    23
+   ]
+  },
+  "fill-NYC1035433": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035433.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    22
+   ]
+  },
+  "fill-NYC1034234": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034234.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    26
+   ]
+  },
+  "fill-NYC1022678": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022678.nbt",
+   "plot": [
+    0,
+    0,
+    119,
+    51
+   ]
+  },
+  "fill-NYC1034791": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034791.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    22
+   ]
+  },
+  "fill-NYC1022676": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022676.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    27
+   ]
+  },
+  "fill-NYC1034260": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034260.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    25
+   ]
+  },
+  "fill-NYC1034476": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034476.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    25
+   ]
+  },
+  "fill-NYC1089376": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1089376.nbt",
+   "plot": [
+    0,
+    0,
+    46,
+    27
+   ]
+  },
+  "fill-NYC1034510": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034510.nbt",
+   "plot": [
+    0,
+    0,
+    122,
+    54
+   ]
+  },
+  "fill-NYC1082746": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1082746.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    54
+   ]
+  },
+  "fill-NYC1034799": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034799.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    22
+   ]
+  },
+  "fill-NYC1022639": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022639.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    21
+   ]
+  },
+  "fill-NYC1034800": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034800.nbt",
+   "plot": [
+    0,
+    0,
+    47,
+    22
+   ]
+  },
+  "fill-NYC1035434": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035434.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    35
+   ]
+  },
+  "fill-NYC1035430": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035430.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    14
+   ]
+  },
+  "fill-NYC1034352": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034352.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    18
+   ]
+  },
+  "fill-NYC1022633": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022633.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    53
+   ]
+  },
+  "fill-NYC1035464": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035464.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    54
+   ]
+  },
+  "fill-NYC1081145": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081145.nbt",
+   "plot": [
+    0,
+    0,
+    56,
+    55
+   ]
+  },
+  "fill-NYC1023166": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023166.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    25
+   ]
+  },
+  "fill-NYC1034792": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034792.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    19
+   ]
+  },
+  "fill-NYC1035445": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035445.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    16
+   ]
+  },
+  "fill-NYC1035747": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035747.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    22
+   ]
+  },
+  "fill-NYC1035454": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035454.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    54
+   ]
+  },
+  "fill-NYC1035707": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035707.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    19
+   ]
+  },
+  "fill-NYC1035764": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035764.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    6
+   ]
+  },
+  "fill-NYC1088581": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1088581.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    23
+   ]
+  },
+  "fill-NYC1035437": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035437.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    20
+   ]
+  },
+  "fill-NYC1035710": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035710.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    15
+   ]
+  },
+  "fill-NYC1034471": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034471.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    27
+   ]
+  },
+  "fill-NYC1035742": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035742.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    9
+   ]
+  },
+  "fill-NYC1080440": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1080440.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    20
+   ]
+  },
+  "fill-NYC1035729": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035729.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    5
+   ]
+  },
+  "fill-NYC1022694": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022694.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    30
+   ]
+  },
+  "fill-NYC1035438": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035438.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    9
+   ]
+  },
+  "fill-NYC1035379": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035379.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    25
+   ]
+  },
+  "fill-NYC1022624": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1022624.nbt",
+   "plot": [
+    0,
+    0,
+    29,
+    38
+   ]
+  },
+  "fill-NYC1034343": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034343.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    23
+   ]
+  },
+  "fill-NYC1035739": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035739.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    26
+   ]
+  },
+  "fill-NYC1034531": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1034531.nbt",
+   "plot": [
+    0,
+    0,
+    68,
+    26
+   ]
+  },
+  "fill-NYC1091592": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1091592.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    26
+   ]
+  },
+  "fill-NYC1090777": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090777.nbt",
+   "plot": [
+    0,
+    0,
+    34,
+    54
+   ]
+  },
+  "fill-NYC1090733": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1090733.nbt",
+   "plot": [
+    0,
+    0,
+    28,
+    27
+   ]
+  },
+  "fill-NYC1089406": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1089406.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    26
+   ]
+  },
+  "fill-NYC1091781": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1091781.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    52
+   ]
+  },
+  "fill-NYC1035371": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035371.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    12
+   ]
+  },
+  "fill-NYC1035436": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035436.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    26
+   ]
+  },
+  "fill-NYC1091010": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1091010.nbt",
+   "plot": [
+    0,
+    0,
+    96,
+    46
+   ]
+  },
+  "fill-NYC1081126": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1081126.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    51
+   ]
+  },
+  "fill-NYC1023163": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1023163.nbt",
+   "plot": [
+    0,
+    0,
+    126,
+    53
+   ]
+  },
+  "fill-NYC1035728": {
+   "file": "work/nyc/rockefeller-center/fill/NYC1035728.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    26
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "NYC1076262",
+   "module": "rock30-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090167",
+   "module": "plaza-0",
+   "mode": "at",
+   "at": [
+    -19,
+    1
+   ],
+   "y": -3,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090166",
+   "module": "plaza-1",
+   "mode": "at",
+   "at": [
+    32,
+    -25
+   ],
+   "y": 3,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083861",
+   "module": "radio-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083862",
+   "module": "radio-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083859",
+   "module": "radio-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083860",
+   "module": "intl-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1075692",
+   "module": "intl-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082656",
+   "module": "intl-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081150",
+   "module": "stpat-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081149",
+   "module": "stpat-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082595",
+   "module": "stpat-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": -1,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034788",
+   "module": "fill-NYC1034788",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034240",
+   "module": "fill-NYC1034240",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1069583",
+   "module": "fill-NYC1069583",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022698",
+   "module": "fill-NYC1022698",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035428",
+   "module": "fill-NYC1035428",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022637",
+   "module": "fill-NYC1022637",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081128",
+   "module": "fill-NYC1081128",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034248",
+   "module": "fill-NYC1034248",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034795",
+   "module": "fill-NYC1034795",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034786",
+   "module": "fill-NYC1034786",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034500",
+   "module": "fill-NYC1034500",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035748",
+   "module": "fill-NYC1035748",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035451",
+   "module": "fill-NYC1035451",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034498",
+   "module": "fill-NYC1034498",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034267",
+   "module": "fill-NYC1034267",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035393",
+   "module": "fill-NYC1035393",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034501",
+   "module": "fill-NYC1034501",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076265",
+   "module": "fill-NYC1076265",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081151",
+   "module": "fill-NYC1081151",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034326",
+   "module": "fill-NYC1034326",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034482",
+   "module": "fill-NYC1034482",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034249",
+   "module": "fill-NYC1034249",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081153",
+   "module": "fill-NYC1081153",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035370",
+   "module": "fill-NYC1035370",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035463",
+   "module": "fill-NYC1035463",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035414",
+   "module": "fill-NYC1035414",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034504",
+   "module": "fill-NYC1034504",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034269",
+   "module": "fill-NYC1034269",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1069590",
+   "module": "fill-NYC1069590",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083716",
+   "module": "fill-NYC1083716",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035712",
+   "module": "fill-NYC1035712",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035406",
+   "module": "fill-NYC1035406",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1085016",
+   "module": "fill-NYC1085016",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035708",
+   "module": "fill-NYC1035708",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034473",
+   "module": "fill-NYC1034473",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034259",
+   "module": "fill-NYC1034259",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034356",
+   "module": "fill-NYC1034356",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035765",
+   "module": "fill-NYC1035765",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035448",
+   "module": "fill-NYC1035448",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034321",
+   "module": "fill-NYC1034321",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034235",
+   "module": "fill-NYC1034235",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035744",
+   "module": "fill-NYC1035744",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1085630",
+   "module": "fill-NYC1085630",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035417",
+   "module": "fill-NYC1035417",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022667",
+   "module": "fill-NYC1022667",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035475",
+   "module": "fill-NYC1035475",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022668",
+   "module": "fill-NYC1022668",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022661",
+   "module": "fill-NYC1022661",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022658",
+   "module": "fill-NYC1022658",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034807",
+   "module": "fill-NYC1034807",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1077286",
+   "module": "fill-NYC1077286",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035449",
+   "module": "fill-NYC1035449",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035435",
+   "module": "fill-NYC1035435",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035369",
+   "module": "fill-NYC1035369",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035476",
+   "module": "fill-NYC1035476",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034345",
+   "module": "fill-NYC1034345",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035737",
+   "module": "fill-NYC1035737",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035378",
+   "module": "fill-NYC1035378",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022628",
+   "module": "fill-NYC1022628",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076258",
+   "module": "fill-NYC1076258",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081152",
+   "module": "fill-NYC1081152",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022663",
+   "module": "fill-NYC1022663",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034495",
+   "module": "fill-NYC1034495",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090748",
+   "module": "fill-NYC1090748",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1077287",
+   "module": "fill-NYC1077287",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1089023",
+   "module": "fill-NYC1089023",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035411",
+   "module": "fill-NYC1035411",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081154",
+   "module": "fill-NYC1081154",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035470",
+   "module": "fill-NYC1035470",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035399",
+   "module": "fill-NYC1035399",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090823",
+   "module": "fill-NYC1090823",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034349",
+   "module": "fill-NYC1034349",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035407",
+   "module": "fill-NYC1035407",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035709",
+   "module": "fill-NYC1035709",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1036185",
+   "module": "fill-NYC1036185",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035725",
+   "module": "fill-NYC1035725",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035405",
+   "module": "fill-NYC1035405",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034499",
+   "module": "fill-NYC1034499",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035444",
+   "module": "fill-NYC1035444",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034484",
+   "module": "fill-NYC1034484",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1087733",
+   "module": "fill-NYC1087733",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034251",
+   "module": "fill-NYC1034251",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034264",
+   "module": "fill-NYC1034264",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034350",
+   "module": "fill-NYC1034350",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022647",
+   "module": "fill-NYC1022647",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034797",
+   "module": "fill-NYC1034797",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035467",
+   "module": "fill-NYC1035467",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034344",
+   "module": "fill-NYC1034344",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023157",
+   "module": "fill-NYC1023157",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034505",
+   "module": "fill-NYC1034505",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022669",
+   "module": "fill-NYC1022669",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035481",
+   "module": "fill-NYC1035481",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022693",
+   "module": "fill-NYC1022693",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081146",
+   "module": "fill-NYC1081146",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034798",
+   "module": "fill-NYC1034798",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035471",
+   "module": "fill-NYC1035471",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034256",
+   "module": "fill-NYC1034256",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022649",
+   "module": "fill-NYC1022649",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034492",
+   "module": "fill-NYC1034492",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082694",
+   "module": "fill-NYC1082694",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034341",
+   "module": "fill-NYC1034341",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023161",
+   "module": "fill-NYC1023161",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034244",
+   "module": "fill-NYC1034244",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035477",
+   "module": "fill-NYC1035477",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034477",
+   "module": "fill-NYC1034477",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034794",
+   "module": "fill-NYC1034794",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022646",
+   "module": "fill-NYC1022646",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034353",
+   "module": "fill-NYC1034353",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082697",
+   "module": "fill-NYC1082697",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035746",
+   "module": "fill-NYC1035746",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034320",
+   "module": "fill-NYC1034320",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035730",
+   "module": "fill-NYC1035730",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022645",
+   "module": "fill-NYC1022645",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035398",
+   "module": "fill-NYC1035398",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034227",
+   "module": "fill-NYC1034227",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034479",
+   "module": "fill-NYC1034479",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076175",
+   "module": "fill-NYC1076175",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090691",
+   "module": "fill-NYC1090691",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035397",
+   "module": "fill-NYC1035397",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035736",
+   "module": "fill-NYC1035736",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034218",
+   "module": "fill-NYC1034218",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022679",
+   "module": "fill-NYC1022679",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034790",
+   "module": "fill-NYC1034790",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035390",
+   "module": "fill-NYC1035390",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081124",
+   "module": "fill-NYC1081124",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034220",
+   "module": "fill-NYC1034220",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022641",
+   "module": "fill-NYC1022641",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035469",
+   "module": "fill-NYC1035469",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035749",
+   "module": "fill-NYC1035749",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083718",
+   "module": "fill-NYC1083718",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034486",
+   "module": "fill-NYC1034486",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034322",
+   "module": "fill-NYC1034322",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034254",
+   "module": "fill-NYC1034254",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034519",
+   "module": "fill-NYC1034519",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034219",
+   "module": "fill-NYC1034219",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1089796",
+   "module": "fill-NYC1089796",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035404",
+   "module": "fill-NYC1035404",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035429",
+   "module": "fill-NYC1035429",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034516",
+   "module": "fill-NYC1034516",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1071414",
+   "module": "fill-NYC1071414",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035480",
+   "module": "fill-NYC1035480",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035409",
+   "module": "fill-NYC1035409",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035377",
+   "module": "fill-NYC1035377",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1071418",
+   "module": "fill-NYC1071418",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1085017",
+   "module": "fill-NYC1085017",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022629",
+   "module": "fill-NYC1022629",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022638",
+   "module": "fill-NYC1022638",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035389",
+   "module": "fill-NYC1035389",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034325",
+   "module": "fill-NYC1034325",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083721",
+   "module": "fill-NYC1083721",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022657",
+   "module": "fill-NYC1022657",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023162",
+   "module": "fill-NYC1023162",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022659",
+   "module": "fill-NYC1022659",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022650",
+   "module": "fill-NYC1022650",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034246",
+   "module": "fill-NYC1034246",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023158",
+   "module": "fill-NYC1023158",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034511",
+   "module": "fill-NYC1034511",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022651",
+   "module": "fill-NYC1022651",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076173",
+   "module": "fill-NYC1076173",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035460",
+   "module": "fill-NYC1035460",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034324",
+   "module": "fill-NYC1034324",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034508",
+   "module": "fill-NYC1034508",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035443",
+   "module": "fill-NYC1035443",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034485",
+   "module": "fill-NYC1034485",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076267",
+   "module": "fill-NYC1076267",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034313",
+   "module": "fill-NYC1034313",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034228",
+   "module": "fill-NYC1034228",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034351",
+   "module": "fill-NYC1034351",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022632",
+   "module": "fill-NYC1022632",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035733",
+   "module": "fill-NYC1035733",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034323",
+   "module": "fill-NYC1034323",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081130",
+   "module": "fill-NYC1081130",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034512",
+   "module": "fill-NYC1034512",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035479",
+   "module": "fill-NYC1035479",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022630",
+   "module": "fill-NYC1022630",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034472",
+   "module": "fill-NYC1034472",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034257",
+   "module": "fill-NYC1034257",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035374",
+   "module": "fill-NYC1035374",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034221",
+   "module": "fill-NYC1034221",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035727",
+   "module": "fill-NYC1035727",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035745",
+   "module": "fill-NYC1035745",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035750",
+   "module": "fill-NYC1035750",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022706",
+   "module": "fill-NYC1022706",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034224",
+   "module": "fill-NYC1034224",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035720",
+   "module": "fill-NYC1035720",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035478",
+   "module": "fill-NYC1035478",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034515",
+   "module": "fill-NYC1034515",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034480",
+   "module": "fill-NYC1034480",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035419",
+   "module": "fill-NYC1035419",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035446",
+   "module": "fill-NYC1035446",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034514",
+   "module": "fill-NYC1034514",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034481",
+   "module": "fill-NYC1034481",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034497",
+   "module": "fill-NYC1034497",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022709",
+   "module": "fill-NYC1022709",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034252",
+   "module": "fill-NYC1034252",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035422",
+   "module": "fill-NYC1035422",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083869",
+   "module": "fill-NYC1083869",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076172",
+   "module": "fill-NYC1076172",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081060",
+   "module": "fill-NYC1081060",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035722",
+   "module": "fill-NYC1035722",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090672",
+   "module": "fill-NYC1090672",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034237",
+   "module": "fill-NYC1034237",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034266",
+   "module": "fill-NYC1034266",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034503",
+   "module": "fill-NYC1034503",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083858",
+   "module": "fill-NYC1083858",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035400",
+   "module": "fill-NYC1035400",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035706",
+   "module": "fill-NYC1035706",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034506",
+   "module": "fill-NYC1034506",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023159",
+   "module": "fill-NYC1023159",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034342",
+   "module": "fill-NYC1034342",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034258",
+   "module": "fill-NYC1034258",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082895",
+   "module": "fill-NYC1082895",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022695",
+   "module": "fill-NYC1022695",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022665",
+   "module": "fill-NYC1022665",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035743",
+   "module": "fill-NYC1035743",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1087455",
+   "module": "fill-NYC1087455",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022710",
+   "module": "fill-NYC1022710",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034496",
+   "module": "fill-NYC1034496",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034243",
+   "module": "fill-NYC1034243",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035403",
+   "module": "fill-NYC1035403",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035375",
+   "module": "fill-NYC1035375",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1087646",
+   "module": "fill-NYC1087646",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034250",
+   "module": "fill-NYC1034250",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034513",
+   "module": "fill-NYC1034513",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035751",
+   "module": "fill-NYC1035751",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034537",
+   "module": "fill-NYC1034537",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035423",
+   "module": "fill-NYC1035423",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1076844",
+   "module": "fill-NYC1076844",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034263",
+   "module": "fill-NYC1034263",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035711",
+   "module": "fill-NYC1035711",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035723",
+   "module": "fill-NYC1035723",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081127",
+   "module": "fill-NYC1081127",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034217",
+   "module": "fill-NYC1034217",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034522",
+   "module": "fill-NYC1034522",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034265",
+   "module": "fill-NYC1034265",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034355",
+   "module": "fill-NYC1034355",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083720",
+   "module": "fill-NYC1083720",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034223",
+   "module": "fill-NYC1034223",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035732",
+   "module": "fill-NYC1035732",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035453",
+   "module": "fill-NYC1035453",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034815",
+   "module": "fill-NYC1034815",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034225",
+   "module": "fill-NYC1034225",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1069581",
+   "module": "fill-NYC1069581",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034346",
+   "module": "fill-NYC1034346",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035714",
+   "module": "fill-NYC1035714",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034236",
+   "module": "fill-NYC1034236",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034475",
+   "module": "fill-NYC1034475",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083719",
+   "module": "fill-NYC1083719",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1084667",
+   "module": "fill-NYC1084667",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035367",
+   "module": "fill-NYC1035367",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1088582",
+   "module": "fill-NYC1088582",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081406",
+   "module": "fill-NYC1081406",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035459",
+   "module": "fill-NYC1035459",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035724",
+   "module": "fill-NYC1035724",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034487",
+   "module": "fill-NYC1034487",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035440",
+   "module": "fill-NYC1035440",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090615",
+   "module": "fill-NYC1090615",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034517",
+   "module": "fill-NYC1034517",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035427",
+   "module": "fill-NYC1035427",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035473",
+   "module": "fill-NYC1035473",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034509",
+   "module": "fill-NYC1034509",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035741",
+   "module": "fill-NYC1035741",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034233",
+   "module": "fill-NYC1034233",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034242",
+   "module": "fill-NYC1034242",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023160",
+   "module": "fill-NYC1023160",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034238",
+   "module": "fill-NYC1034238",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1085873",
+   "module": "fill-NYC1085873",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035468",
+   "module": "fill-NYC1035468",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022671",
+   "module": "fill-NYC1022671",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034502",
+   "module": "fill-NYC1034502",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035408",
+   "module": "fill-NYC1035408",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1088772",
+   "module": "fill-NYC1088772",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035416",
+   "module": "fill-NYC1035416",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035455",
+   "module": "fill-NYC1035455",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034474",
+   "module": "fill-NYC1034474",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034491",
+   "module": "fill-NYC1034491",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035447",
+   "module": "fill-NYC1035447",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034532",
+   "module": "fill-NYC1034532",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034478",
+   "module": "fill-NYC1034478",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035740",
+   "module": "fill-NYC1035740",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034354",
+   "module": "fill-NYC1034354",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035738",
+   "module": "fill-NYC1035738",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081061",
+   "module": "fill-NYC1081061",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034520",
+   "module": "fill-NYC1034520",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035441",
+   "module": "fill-NYC1035441",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1077284",
+   "module": "fill-NYC1077284",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034253",
+   "module": "fill-NYC1034253",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022631",
+   "module": "fill-NYC1022631",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035420",
+   "module": "fill-NYC1035420",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034789",
+   "module": "fill-NYC1034789",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035395",
+   "module": "fill-NYC1035395",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1083717",
+   "module": "fill-NYC1083717",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082695",
+   "module": "fill-NYC1082695",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035394",
+   "module": "fill-NYC1035394",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034247",
+   "module": "fill-NYC1034247",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035713",
+   "module": "fill-NYC1035713",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022664",
+   "module": "fill-NYC1022664",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022708",
+   "module": "fill-NYC1022708",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022634",
+   "module": "fill-NYC1022634",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035426",
+   "module": "fill-NYC1035426",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022675",
+   "module": "fill-NYC1022675",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035401",
+   "module": "fill-NYC1035401",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022648",
+   "module": "fill-NYC1022648",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1085493",
+   "module": "fill-NYC1085493",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1086068",
+   "module": "fill-NYC1086068",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035413",
+   "module": "fill-NYC1035413",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035402",
+   "module": "fill-NYC1035402",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034816",
+   "module": "fill-NYC1034816",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035450",
+   "module": "fill-NYC1035450",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034796",
+   "module": "fill-NYC1034796",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034245",
+   "module": "fill-NYC1034245",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035462",
+   "module": "fill-NYC1035462",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035368",
+   "module": "fill-NYC1035368",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035366",
+   "module": "fill-NYC1035366",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035412",
+   "module": "fill-NYC1035412",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035472",
+   "module": "fill-NYC1035472",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035380",
+   "module": "fill-NYC1035380",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034470",
+   "module": "fill-NYC1034470",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1086846",
+   "module": "fill-NYC1086846",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022670",
+   "module": "fill-NYC1022670",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035410",
+   "module": "fill-NYC1035410",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035431",
+   "module": "fill-NYC1035431",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035432",
+   "module": "fill-NYC1035432",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035474",
+   "module": "fill-NYC1035474",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035731",
+   "module": "fill-NYC1035731",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034507",
+   "module": "fill-NYC1034507",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034787",
+   "module": "fill-NYC1034787",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035418",
+   "module": "fill-NYC1035418",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034483",
+   "module": "fill-NYC1034483",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035726",
+   "module": "fill-NYC1035726",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035734",
+   "module": "fill-NYC1035734",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022640",
+   "module": "fill-NYC1022640",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022666",
+   "module": "fill-NYC1022666",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035433",
+   "module": "fill-NYC1035433",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034234",
+   "module": "fill-NYC1034234",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022678",
+   "module": "fill-NYC1022678",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034791",
+   "module": "fill-NYC1034791",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022676",
+   "module": "fill-NYC1022676",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034260",
+   "module": "fill-NYC1034260",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034476",
+   "module": "fill-NYC1034476",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1089376",
+   "module": "fill-NYC1089376",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034510",
+   "module": "fill-NYC1034510",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1082746",
+   "module": "fill-NYC1082746",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034799",
+   "module": "fill-NYC1034799",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022639",
+   "module": "fill-NYC1022639",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034800",
+   "module": "fill-NYC1034800",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035434",
+   "module": "fill-NYC1035434",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035430",
+   "module": "fill-NYC1035430",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034352",
+   "module": "fill-NYC1034352",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022633",
+   "module": "fill-NYC1022633",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035464",
+   "module": "fill-NYC1035464",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081145",
+   "module": "fill-NYC1081145",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023166",
+   "module": "fill-NYC1023166",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034792",
+   "module": "fill-NYC1034792",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035445",
+   "module": "fill-NYC1035445",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035747",
+   "module": "fill-NYC1035747",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035454",
+   "module": "fill-NYC1035454",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035707",
+   "module": "fill-NYC1035707",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035764",
+   "module": "fill-NYC1035764",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1088581",
+   "module": "fill-NYC1088581",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035437",
+   "module": "fill-NYC1035437",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035710",
+   "module": "fill-NYC1035710",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034471",
+   "module": "fill-NYC1034471",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035742",
+   "module": "fill-NYC1035742",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1080440",
+   "module": "fill-NYC1080440",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035729",
+   "module": "fill-NYC1035729",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022694",
+   "module": "fill-NYC1022694",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035438",
+   "module": "fill-NYC1035438",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035379",
+   "module": "fill-NYC1035379",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1022624",
+   "module": "fill-NYC1022624",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034343",
+   "module": "fill-NYC1034343",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035739",
+   "module": "fill-NYC1035739",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1034531",
+   "module": "fill-NYC1034531",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1091592",
+   "module": "fill-NYC1091592",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090777",
+   "module": "fill-NYC1090777",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1090733",
+   "module": "fill-NYC1090733",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1089406",
+   "module": "fill-NYC1089406",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1091781",
+   "module": "fill-NYC1091781",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035371",
+   "module": "fill-NYC1035371",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035436",
+   "module": "fill-NYC1035436",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1091010",
+   "module": "fill-NYC1091010",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1081126",
+   "module": "fill-NYC1081126",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1023163",
+   "module": "fill-NYC1023163",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "NYC1035728",
+   "module": "fill-NYC1035728",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  }
+ ]
+}

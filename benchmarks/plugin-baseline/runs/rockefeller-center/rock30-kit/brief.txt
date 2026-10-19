@@ -1,0 +1,55 @@
+30 Rockefeller Plaza (the Comcast Building; the RCA Building of 1933, the GE Building 1988-2015), Raymond Hood and the Associated Architects: the 70-storey Art Deco slab at the heart of Rockefeller Center and the hero of the render. It must read, at a glance, as THIS tower: a thin, sheer, pale limestone slab, narrow end to the plaza (east), broad flanks north and south that step back in a cascade of setbacks, every face ribbed by continuous vertical limestone piers with dark recessed window strips between them, so it reads as a bundle of vertical lines soaring to a flat crown.
+
+Scale: 0.9 blocks per metre (a storey is about 3.5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of Rockefeller Center in Midtown Manhattan, New York, for a hero AERIAL render at golden hour and dusk: the camera looks down from high over Fifth Avenue, so ROOFS, setbacks and the tops of the buildings matter as much as the street fronts. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: the Manhattan grid is square to the axes; uptown (north) is low z, downtown (south) high z; Fifth Avenue is east (high x), Sixth Avenue (Avenue of the Americas) west (low x); the cross streets (48th, 49th, 50th, 51st Streets) run along x. The ground is nearly flat: y 0 of each plot is the lowest ground under it and the GROUND map gives the ground above y 0 per cell. Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm light in a scattering of office windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and signs where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..145, z 0..53 (146 x 54), up to y 245: 30 ROCKEFELLER PLAZA AND ITS SIXTH AVENUE WING — Follow the ROOF HEIGHT map exactly: it is the real massing. THE TOWER is the tall slab in the east part of the footprint (its narrow EAST face on Rockefeller Plaza, at the footprint's high-x edge, faces the sunken plaza): the east and west faces rise sheer; the long NORTH and SOUTH flanks step back in many narrow setbacks (each a ledge 1-3 blocks deep, crowned with stair/slab copings), so from the air the slab narrows in tiers toward its top. Walls: pale buff Indiana limestone (smooth_sandstone, sandstone, end_stone_bricks or white_terracotta in a consistent light buff) as continuous vertical PIERS 1 block wide, proud of the wall, with 1-block recessed vertical window strips between them (dark: gray or black stained glass panes, with dark gray_terracotta or polished deepslate spandrels between storeys), so every face is fluted with vertical lines top to bottom; the corners are solid limestone. THE CROWN: the top three tiers are the Top of the Rock observation decks: open terraces with glass-pane parapets, the topmost a narrow flat roof with a low mechanical penthouse and a slim mast; around the crown a band of big illuminated red letters (the GE-era red-lit sign: red concrete or red stained glass over glowstone/shroomlight) on the north and south faces near the top, and the crown floodlit warm white (light blocks/shroomlights hidden in the setback ledges so the upper faces glow). THE ENTRANCE: at the base of the east face on Rockefeller Plaza, the great entrance: three tall portals under Lee Lawrie's WISDOM relief, a large polychrome-and-gold Art Deco panel over the doors (a bearded figure with dividers over gold rays and a glass block screen: gold blocks, yellow and light blue terracotta, glass) with the inscription band; lit lobby glass below. THE SIXTH AVENUE WING (the west, lower part of the footprint, about 16 storeys, as the roof map shows) is the same limestone and vertical-pier language, its flat roofs with low parapets and a few planted roof gardens, entrances and lit shopfronts on Sixth Avenue (the west face) and on 49th and 50th Streets (the south and north faces). Street level all round: tall shop windows lit warm, bronze/dark framing, flags over the entrances.
+
+PLOT 0 (30 ROCKEFELLER PLAZA AND ITS SIXTH AVENUE WING): place box x 204..349, z 326..379; y 0 = its lowest ground; the real roofs reach about y 232 (lidar); 1 column = 4x4 blocks
+FOOTPRINT (# = build here):
+.....###############################.
+####################################.
+####################################.
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+#####################################
+####################################.
+####################################.
+####################################.
+####.................................
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   .   .   .   .   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3   3   3   .
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3   3   .
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3   .
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3
+   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3
+   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3
+   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3
+   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3
+   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3
+   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   2
+   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   3   .
+   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   0   0   0   0   1   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .
+ROOF HEIGHT above y 0 (lidar, median in each cell: the real massing and its setbacks; follow it closely):
+   .   .   .   .  12  11  11  11  11  11  11  11  11  11  11  11  11  14  15  15  11  11  11  11  11  11  11  11  11  11  11  11  11  10  10  11   .
+  58  56  58  58  57  42  47  41  41  41  41  41  44  41  44  45  45  44  42  44  42  41  36  36  36  36  36  36  23  23  23  23  23  10  10  10   .
+  58  63  63  64  60  57  46  43  48  42  42  45  45  45  45  45  44  45  41  42  47  41  36  36  36  36  36  36  23  23  23  23  23  10  10  10   .
+  63  63  63  63  59  58  43  43  47  42  42  45  45  45  45  41  45 212 219 218 218 218 219 218 218 219 219 216 196 196 153 153 110  41  41  10  11
+  63  64  66  66  60  61  43  43  42  42  42  45  45  45 216 216 216 217 220 228 228 228 228 228 228 228 228 228 228 224 223 224 223 203 202 164 114
+  63  63  66  66  63  61  43  43  42  42  42  45  45  44 216 221 222 222 222 228 228 228 228 228 228 228 228 228 228 228 223 224 224 214 202 163 113
+  63  63  66  63  63  62  43  43  42  42  43  45  45  41 216 221 222 222 221 228 232 232 232 231 231 231 232 232 231 231 231 231 231 232 209 209 170
+  63  63  66  66  64  62  43  49  42  42  43  45  45  43 216 221 222 222 222 228 231 232 232 231 231 231 231 232 231 231 231 231 231 232 208 202 169
+  63  63  66  66  61  58  47  51  51  42  42  45  42  41 216 220 221 221 221 228 228 228 228 228 228 228 228 228 228 228 224 224 224 202 202 163 113
+  63  63  66  66  60  56  43  51  50  42  48  43  41  41  41   1   1 216 220 220 221 220 222 220 220 220 223 222 196 197 153 154 110 111  41  38  11
+  63  63  63  59  59  58  43  50  49  43  51  52  41  41  41  41  41  41  48 216 216 216 216 216  36 216 216 197 196 153 153 111 110  40  40  10  11
+  63  64  63  57  59  57  49  50  49  47  48  50  41  41  41  41  41  41  42  47  42  41  36  36  36  36  36  36  23  23  23  23  23  10  10  10   .
+  13   0   0   0   1   1  41  48  46  41  41  41  41  41  41  41  41  41  41  41  41  41  36  36  36  36  36  36  23  23  23  23  23  10  10  10   .
+  12  12   0   0  13   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.

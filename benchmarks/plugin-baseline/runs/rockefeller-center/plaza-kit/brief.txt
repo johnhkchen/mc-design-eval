@@ -1,0 +1,50 @@
+The Lower Plaza of Rockefeller Center with its skating rink and Paul Manship's gilded PROMETHEUS (1934), the ring of flags around it, and the Channel Gardens that run up to Fifth Avenue between La Maison Francaise and the British Empire Building: the open heart of the complex, seen from above right in front of 30 Rock. These are LANDSCAPE modules on the real ground.
+
+Scale: 0.9 blocks per metre (a storey is about 3.5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of Rockefeller Center in Midtown Manhattan, New York, for a hero AERIAL render at golden hour and dusk: the camera looks down from high over Fifth Avenue, so ROOFS, setbacks and the tops of the buildings matter as much as the street fronts. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: the Manhattan grid is square to the axes; uptown (north) is low z, downtown (south) high z; Fifth Avenue is east (high x), Sixth Avenue (Avenue of the Americas) west (low x); the cross streets (48th, 49th, 50th, 51st Streets) run along x. The ground is nearly flat: y 0 of each plot is the lowest ground under it and the GROUND map gives the ground above y 0 per cell. Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm light in a scattering of office windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and signs where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..50, z 0..53 (51 x 54), up to y 22: ROCKEFELLER PLAZA (THE STREET) AND THE SUNKEN LOWER PLAZA — VERTICAL DATUM: y 0 is the rink floor's level (the lowest ground in the box); the GROUND map gives the real levels: street level around the edge at about y 4-5, the sunken plaza about 4-5 blocks lower. This module replaces EVERYTHING in its box, so rebuild the ground of every column: solid stone from y 0 up to the mapped ground with the surface at that height; keep the outermost 2 blocks of every edge at the mapped heights so it meets the streets around it. From west to east: x 0..18 is ROCKEFELLER PLAZA, the private street along the foot of 30 Rock (the tower stands just west of this box): a granite-paved street (gray_concrete road with smooth_stone or polished andesite pavers, a sidewalk on each side, a few street lamps). East of it, the SUNKEN LOWER PLAZA, about 29 wide (x 20..48) and 34 long (z 10..43), a rectangular well 4-5 blocks deep: its floor the ICE RINK (ice or packed ice, a white rim) filling most of it; at its WEST end, against the west wall, PROMETHEUS: a large gilded figure (gold blocks, raw gold / yellow terracotta for modelling, about 6 blocks long, flying horizontally, arm raised holding fire) over a ring of gold, rising from a fountain basin with water jets against a tall dark granite wall (polished blackstone / deepslate tiles) carved with the zodiac ring and an inscription; the rink's long north and south sides bordered by the sunken restaurants' glass fronts under the plaza edge (lit warm, umbrellas); stepped granite edges. AROUND THE WELL at street level: the promenade, paved in pale granite, with the famous FLAGS: a continuous ring of tall white flagpoles (end rods or white fences, 7-8 tall) every 2 blocks on all four sides of the well, each flying a coloured flag (banners or wool, 2x1, all colours, mixed like the nations' flags); low granite parapets with railings at the well's edge; on the EAST side the head of the Channel Gardens: broad granite steps down into the plaza (the Channel Gardens' axis meets the plaza at the middle of the east edge, z about 19..34), flanked by planters. Light it all (lanterns on the parapets, light under the restaurant awnings, the rink lit).
+ plot 1, x 55..108, z 0..15 (54 x 16), up to y 14: THE CHANNEL GARDENS — The pedestrian promenade between La Maison Francaise (just south of this box) and the British Empire Building (just north), sloping gently DOWN from Fifth Avenue (east, high x) to the plaza (west, low x): rebuild the ground of every column as in plot 0 (solid from y 0 up to the mapped ground, the surface there; keep the outermost 2 blocks of every edge at the mapped heights). Down the centre a line of SIX long rectangular GRANITE POOLS (each about 6-7 long and 3-4 wide, raised granite rims of polished andesite/polished blackstone slabs, water inside, a small bronze fountain jet at each one's end), separated by short cross walks; along both sides of the pools long raised PLANTERS full of seasonal flowers and clipped shrubs (azalea, flowering azalea, leaves, allium, tulips of several colours, peonies, roses), with granite curbs and benches; wide granite-paved walks along each side next to the buildings. At the east end the opening onto Fifth Avenue, at the west end the head of the steps down to the Lower Plaza. Lamps along the walks.
+
+PLOT 0 (ROCKEFELLER PLAZA (THE STREET) AND THE SUNKEN LOWER PLAZA): place box x 350..400, z 326..379; y 0 = its lowest ground; 1 column = 2x2 blocks
+GROUND above y 0 (highest ground in each cell: the plaza's real levels, from the lidar):
+   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   4   4   5   5   5   5   5   5
+   5   5   5   5   5   5   5   5   5   5   5   5   5   5   5   4   4   4   4   4   5   5   5   5   5   4
+   5   5   5   5   5   5   5   5   5   5   5   5   4   5   4   4   4   4   4   4   4   5   5   4   4   4
+   5   5   5   5   5   5   5   5   5   5   5   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4
+   5   5   5   5   5   5   5   5   5   5   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4
+   5   5   5   5   5   5   5   5   5   4   2   2   1   2   2   2   2   2   2   2   2   2   2   4   4   4
+   5   5   5   5   5   5   5   5   5   4   1   0   0   0   0   0   0   0   0   0   0   0   1   4   4   4
+   5   5   5   4   4   5   5   5   5   5   1   0   0   0   0   0   0   0   0   0   0   0   1   4   4   4
+   5   5   5   5   4   5   5   5   5   5   1   0   0   0   0   0   0   0   0   0   0   0   1   4   4   4
+   5   5   4   5   4   5   5   5   5   5   1   0   0   0   0   0   0   0   0   0   0   0   1   4   4   4
+   4   4   4   4   4   4   4   5   5   4   1   0   0   0   0   0   0   0   0   0   0   1   1   4   4   4
+   5   4   4   4   4   5   4   5   5   3   1   1   0   0   0   0   0   0   0   0   0   1   2   3   4   4
+   5   4   4   4   4   4   5   5   5   3   2   1   0   0   0   0   0   0   0   0   0   1   2   3   4   4
+   4   4   4   4   4   4   4   5   5   3   2   1   0   0   0   0   0   0   0   0   0   1   2   3   4   4
+   4   4   4   4   4   4   4   5   5   3   2   1   0   0   0   0   0   0   0   0   0   1   2   3   3   4
+   4   4   4   4   4   4   4   5   5   3   2   1   0   0   0   0   0   0   0   0   0   1   2   3   4   4
+   4   4   4   4   4   4   4   5   5   3   1   1   0   0   0   0   0   0   0   0   0   1   1   4   4   4
+   4   4   4   4   4   4   4   5   5   2   1   0   0   0   0   0   0   0   0   0   0   1   1   4   4   4
+   4   4   4   4   4   4   4   4   4   1   0   0   0   0   0   0   0   0   0   0   0   0   0   4   4   4
+   4   4   4   4   4   4   4   4   5   2   0   0   0   0   0   0   0   0   0   0   0   0   0   4   4   4
+   4   4   4   4   4   4   4   4   4   2   0   0   0   0   0   0   0   0   0   0   0   0   0   4   4   4
+   4   4   4   4   4   4   4   4   4   0   0   0   0   0   0   0   0   0   0   0   0   0   0   4   4   4
+   4   4   4   4   4   4   4   4   4   4   2   2   4   2   2   2   2   0   2   2   2   4   2   4   4   4
+   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4
+   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4   4
+   4   4   4   4   4   4   4   4   4   4   4   4   4   5   4   4   4   5   5   4   4   5   5   4   4   4
+   4   4   4   4   4   4   4   4   4   4   4   5   5   5   4   4   4   5   5   5   5   5   5   4   4   4
+
+PLOT 1 (THE CHANNEL GARDENS): place box x 401..454, z 345..360; y 0 = its lowest ground; 1 column = 2x2 blocks
+GROUND above y 0 (highest ground in each cell: the plaza's real levels, from the lidar):
+   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2
+   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.

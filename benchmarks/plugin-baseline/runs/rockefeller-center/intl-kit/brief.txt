@@ -1,0 +1,169 @@
+The Fifth Avenue front of Rockefeller Center: the International Building (1935) with Lee Lawrie's bronze ATLAS in its forecourt, and the two low six-storey buildings that flank the Channel Gardens, La Maison Francaise and the British Empire Building (1933). Seen from the air from over Fifth Avenue, it is the foreground of the hero view.
+
+Scale: 0.9 blocks per metre (a storey is about 3.5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of Rockefeller Center in Midtown Manhattan, New York, for a hero AERIAL render at golden hour and dusk: the camera looks down from high over Fifth Avenue, so ROOFS, setbacks and the tops of the buildings matter as much as the street fronts. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: the Manhattan grid is square to the axes; uptown (north) is low z, downtown (south) high z; Fifth Avenue is east (high x), Sixth Avenue (Avenue of the Americas) west (low x); the cross streets (48th, 49th, 50th, 51st Streets) run along x. The ground is nearly flat: y 0 of each plot is the lowest ground under it and the GROUND map gives the ground above y 0 per cell. Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm light in a scattering of office windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and signs where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..83, z 0..54 (84 x 55), up to y 155: THE INTERNATIONAL BUILDING, ITS FIFTH AVENUE WINGS AND ATLAS — The 41-storey International Building: a pale buff limestone tower set back from Fifth Avenue (follow the ROOF HEIGHT map: the tall slab stands back in the block, the six-storey wings along Fifth Avenue in front of it), with continuous vertical limestone piers and dark recessed window strips, the slab narrowing in setbacks, a flat crown with a low penthouse, floodlit. ON FIFTH AVENUE (the east face, high x): two six-storey limestone wings (the Palazzo d'Italia to the south and International Building North to the north) with roof gardens on their flat roofs (grass, hedges, small trees, paths), and between them the tall recessed ENTRANCE FORECOURT of the International Building, framed by a monumental limestone portal; in the forecourt, on the axis of the entrance and facing Fifth Avenue (east), ATLAS: a huge bronze figure (about 11-13 blocks tall on a granite plinth) shouldering the open celestial sphere: a big armillary sphere of thin bronze rings (copper blocks, cut copper, waxed weathered copper, or chains/iron bars in dark bronze tones: a sphere about 9 across of crossing rings with a central axis), the figure in dark bronze (copper, exposed/weathered copper, brown terracotta) between two tall granite pylons; lit from below. Over the entrance doors, gilded Art Deco relief panels. Lit shopfronts along 50th and 51st Streets (south and north faces) and Fifth Avenue; the lobby glowing behind tall glass.
+ plot 1, x 88..141, z 0..18 (54 x 19), up to y 50: THE BRITISH EMPIRE BUILDING (NORTH OF THE CHANNEL GARDENS) — A six-storey pale buff limestone building, long along x, its narrow EAST end on Fifth Avenue (high x), its south face on the Channel Gardens (high z): vertical limestone piers with dark recessed window strips, a deeper setback top storey, a flat roof with a ROOF GARDEN (lawns, hedges, flower beds, small trees, gravel paths) seen from above. Over the Fifth Avenue entrance a gilded bronze relief panel (gold blocks and yellow terracotta in an Art Deco pattern) above tall bronze-framed doors with a coat of arms; lit shop windows along the Channel Gardens and the street.
+ plot 2, x 146..199, z 0..18 (54 x 19), up to y 50: LA MAISON FRANCAISE (SOUTH OF THE CHANNEL GARDENS) — The twin of the British Empire Building: a six-storey pale buff limestone building, long along x, its narrow EAST end on Fifth Avenue (high x), its NORTH face on the Channel Gardens (low z): vertical limestone piers with dark recessed window strips, a setback top storey, a flat roof with a ROOF GARDEN (lawns, hedges, flower beds, small trees, paths). Over the Fifth Avenue entrance a gilded bronze relief panel (gold and yellow terracotta Art Deco figures) above bronze-framed doors; lit shop windows along the Channel Gardens and the street.
+
+PLOT 0 (THE INTERNATIONAL BUILDING, ITS FIFTH AVENUE WINGS AND ATLAS): place box x 371..454, z 254..308; y 0 = its lowest ground; the real roofs reach about y 143 (lidar); 1 column = 2x2 blocks
+FOOTPRINT (# = build here):
+..########################################
+.#########################################
+##########################################
+##########################################
+##########################################
+##########################################
+##########################################
+##########################################
+##########################################
+##########################################
+####################################......
+####################################......
+####################################......
+####################################......
+####################################......
+####################################......
+####################################......
+####################################......
+##########################################
+##########################################
+##########################################
+##########################################
+##########################################
+..........################################
+..........################################
+...........###############################
+...............###########################
+...............###########################
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   .   .   .   .   .   .   .   .   .   .   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   .   .   .   .   .   .   .   .   .   .   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   .   .   .   .   .   .   .   .   .   .   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+ROOF HEIGHT above y 0 (lidar, median in each cell: the real massing and its setbacks; follow it closely):
+   .   6   7   7   7   7   7   7   7   7   7   7   7   7   7  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22
+   6   7   6   6   6   6   6   6   6   6   6   6   6   6   6  22  21  26  26  26  26  26  26  26  26  26  26  26  26  26  26  28  26  26  26  26  26  28  26  26  28  22
+   7   6   6   6   6   6   6   6   6   6  26  26  26  26  26  26  26  26  26  26  26  28  26  26  26  26  26  26  26  27  27  28  27  26  28  26  28  28  26  28  28  26
+   7   6   6   6   6   6   6   6   6   6  26  27  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  26  25  28  25  25  28  25  25  25  25  27  28  25
+  36  36  36  36  36  36  36  36  36  36  36  36  29  29  29  29  29  29  29  29  29  29  29  29  29  25  29  29  25  25  25  28  28  28  29  28  28  28  26  28  28  25
+  36  35  35  35  35  35  35  35  35  35  35  36  28  29  28  28  28  28  28  29  28  28  28  28  29  28  28  28  29  25  27  28  28  28  28  26  26  27  26  26  28  25
+ 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 131 132 105 105 106  95  59  59  59  29  28  25  26  26  26  26  26  26  26  26  26  26  26  25
+ 132 131 131 131 131 131 131 131 131 131 131 131 131 131 131 131 131 131 131 132 105 104 105 105  59  59  59  29  28  25  26  28  26  26  28  26  28  28  26  27  28  25
+ 132 133 131 131 131 131 132 131 131 131 131 132 131 131 131 131 131 131 131 132 107 104 104 105  59  59  59  42  26  25  26  28  26  28  28  26  28  28  26  28  28  26
+ 142 142 142 141 141 141 142 142 142 142 142 142 141 142 142 142 142 142 141 141 141 142 141 141 141 142 142 141 142 142 142  26  26  26  22  26  28  28  26  21  26  21
+ 141 140 141 141 140 141 141 140 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 140 141 141  26  26  22  22  22   .   .   .   .   .   .
+ 140 140 141 141 141 141 140 140 141 141 141 141 141 141 141 141 142 141 141 141 141 141 141 141 141 141 141 141 140 141 142  21  19  18  18  18   .   .   .   .   .   .
+ 140 140 140 141 141 141 141 140 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 140 142  18  18  17  17  18   .   .   .   .   .   .
+ 141 140 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 142  17  17  17  17  17   .   .   .   .   .   .
+ 142 140 140 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 140 142 131  17  17  17  17   .   .   .   .   .   .
+ 141 140 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 141 140 141  17  18  17  17  18   .   .   .   .   .   .
+ 142 140 140 140 141 141 141 141 140 141 141 141 141 141 141 141 141 140 141 141 141 141 141 141 141 140 141 141 140 141 142  17  18  18  18  19   .   .   .   .   .   .
+ 141 141 141 140 141 141 141 141 140 141 140 141 141 141 141 141 141 140 141 140 141 141 141 141 141 141 141 140 141 140 142  26  26  17  17  17   .   .   .   .   .   .
+ 141 142 142 142 141 141 141 142 142 143 141 142 142 142 142 142 141 142 141 141 142 140 142 141 142 142 140 141 141 142 142  26  26  21  22  22  22  21  22  21  22  22
+ 142 131 131 140 131 131 131 138 143 143 142 142 131 134 140 136 131 131 131 142 137 105 105 104 142  59 142  29 134 140 139  26  26  26  28  27  26  28  26  27  26  26
+ 132 131 131 131 131 131 131 131 143 131 131 131 131 131 131 131 131 131 131 132 104 104 105 105  59  59  59  28  27  25  26  28  26  26  27  26  26  28  26  28  28  25
+ 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 132 105 105 106 105  59  59  60  28  29  25  26  26  26  26  26  26  26  26  26  26  26  25
+  36  35  35  35  35  35  35  35  35  35  35  36  28  28  28  28  28  28  28  28  28  28  28  29  29  29  28  28  25  25  26  26  26  26  26  26  26  27  26  26  27  25
+   .   .   .   .   .   .   .   .   .   .  36  36  29  29  29  29  29  29  29  29  29  29  29  29  29  29  29  29  25  25  28  28  27  26  27  26  26  28  27  26  28  26
+   .   .   .   .   .   .   .   .   .   .  26  26  26  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  28  26  26  26  26  26  27  26  26  26  25
+   .   .   .   .   .   .   .   .   .   .  26  26  26  26  26  26  26  27  26  26  26  26  26  26  25  26  26  27  26  25  26  28  26  26  27  26  28  28  26  28  28  25
+   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .  22  26  26  26  26  26  26  26  26  26  26  26  26  26  26  26  28  26  26  27  27  27  27  26  28  28  26
+   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .  22  22  21  22  21  22  22  22  21  22  21  22  21  22  22  22  21  21  21  21  21  21  21  21  21  21  21
+
+PLOT 1 (THE BRITISH EMPIRE BUILDING (NORTH OF THE CHANNEL GARDENS)): place box x 401..454, z 326..344; y 0 = its lowest ground; the real roofs reach about y 38 (lidar); 1 column = 2x2 blocks
+FOOTPRINT (# = build here):
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2   2
+   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2   2   2
+   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2   2
+   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2   2
+   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+ROOF HEIGHT above y 0 (lidar, median in each cell: the real massing and its setbacks; follow it closely):
+  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23
+  34  34  34  34  34  34  34  34  34  34  34  34  34  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  35  37  37  37  37  37  37  37  37  37  37  37  34  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  37  37  36  36  36  36  37  37  36  37  37  37  37  29  30  30  27  27  27  27  27  27  27  28  28  27  27
+  37  36  36  36  36  36  36  36  36  37  36  37  37  31  31  31  31  27  27  27  27  27  27  27  27  27  27
+  37  36  36  36  36  36  36  36  36  36  36  38  37  31  31  31  30  30  27  27  27  27  27  27  27  27  27
+  37  37  36  36  36  36  36  36  36  36  36  37  37  29  29  29  29  27  27  27  27  27  27  28  28  27  27
+  37  33  37  37  37  37  37  37  37  37  37  37  37  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  34  34  34  34  34  34  34  34  34  34  34  34  34  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  23  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22  22
+
+PLOT 2 (LA MAISON FRANCAISE (SOUTH OF THE CHANNEL GARDENS)): place box x 401..454, z 361..379; y 0 = its lowest ground; the real roofs reach about y 38 (lidar); 1 column = 2x2 blocks
+FOOTPRINT (# = build here):
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+###########################
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   0   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2   2
+   0   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2
+   0   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2   2   2
+   0   0   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2   2
+ROOF HEIGHT above y 0 (lidar, median in each cell: the real massing and its setbacks; follow it closely):
+  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23  23
+  34  34  34  34  34  34  34  33  34  34  34  34  34  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  33  34  37  37  37  37  37  37  36  37  37  33  34  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  37  37  37  36  37  37  37  37  36  36  37  37  37  27  29  27  27  27  27  27  27  27  27  28  28  28  27
+  37  34  35  37  36  36  36  36  36  36  36  37  37  26  27  27  27  27  27  27  27  27  27  27  27  27  27
+  37  33  33  36  36  36  36  37  36  37  36  38  37  26  26  26  27  27  27  27  27  27  27  27  27  27  27
+  37  37  36  36  36  36  37  36  37  37  37  37  37  27  28  27  27  27  27  27  27  27  27  28  27  27  27
+  37  37  37  37  37  37  37  37  37  37  37  37  37  27  29  27  27  27  27  27  27  27  27  28  27  27  27
+  34  34  34  34  33  34  34  34  34  34  34  34  34  27  27  27  27  27  27  27  27  27  27  27  27  27  27
+  23  22  22  34  34  22  22  22  22  22  22  22  22  27  22  27  22  27  27  22  22  22  27  27  27  22  23
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.
