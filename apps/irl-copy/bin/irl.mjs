@@ -80,7 +80,10 @@ function buildFrom(n, { composeWith, world } = {}) {
   if (composeWith) {
     const spec = JSON.parse(readFileSync(`${HERE}/places/${n}.compose.json`, "utf8")), files = new Map();
     const mod = (name) => { const m = spec.modules[name]; if (!files.has(m.file)) files.set(m.file, loadStructure(resolve(HERE, m.file))); return { module: files.get(m.file), plot: m.plot, swap: m.swap }; };
+    // the designed blocks: every block a module puts down (not the open-data land, not what compose clears)
+    let designed = 0; const set0 = grid.set; grid.set = function (x, y, z, block, state) { if (!/air$/.test(block)) designed++; return set0.call(this, x, y, z, block, state); };
     const notes = compose(grid, manifest, spec.placements.map((p) => ({ ...p, ...mod(p.module), ...(p.end ? { end: mod(p.end) } : {}) })), { ground, I: (x, z) => z * frame.N + x, angle: spec.angle ?? 0 });
+    grid.set = set0; console.log(`${n}: ${designed} designed blocks placed by the modules`);
     // anything left hanging in the air (a module on the wrong base, a kit missing its bottom course): named, by the
     // placement whose footprint box holds it, so the compose file or the kit can be fixed
     // first propped up where they nearly touch (a module's tower one block over its podium, a chimney short of its roof)

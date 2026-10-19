@@ -4,7 +4,10 @@
 // stretch of 10+ minutes with nothing running (no agent, no render) is collapsed to a narrow break. Cost, sessions and
 // render time per project at the right; the whole portfolio's totals on top.
 //   node portfolio-gantt.mjs <spec.json> <out.svg> [--tz America/Los_Angeles]
-//   spec: { title, projects: [{ name, billing, note?, runs: [dir|ledger, ...], renders: [{ png | scene, ms?, lost? }] }] }
+//   spec: { title, builderPace?: { blocksPerHour: 1000, overhead: 0.2 }, projects: [{ name, billing, note?, blocks? (designed blocks, from
+//           `irl compose`), runs: [dir|ledger, ...], renders: [{ png | scene, ms?, lost? }] }] }
+// Builder-hours: the designed blocks at a human builder's pace plus overhead for references, planning and rework, the
+// hours a person would need to place what the agents designed (the open-data land, streets and trees are left out).
 //   -> out.svg + out.png
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
@@ -43,15 +46,16 @@ const P = spec.projects.map((p) => {
 // the shared clock: busy spans (any agent, any render), gaps of 10+ minutes collapsed to a break
 const spans = P.flatMap((p) => [...p.rows, ...p.renders]).map((s) => [s.a, s.b]).sort((x, y) => x[0] - y[0]);
 const busy = []; for (const [a, b] of spans) { const l = busy[busy.length - 1]; if (l && a <= l[1] + 10 * 6e4) l[1] = Math.max(l[1], b); else busy.push([a, b]); }
-const L = 190, R = 250, BREAK = 16, CW = 1200;
+const pace = spec.builderPace ?? { blocksPerHour: 1000, overhead: 0.2 }, bh = (n) => (n / pace.blocksPerHour) * (1 + pace.overhead);
+const L = 190, R = 400, BREAK = 16, CW = 1200;
 const activeMs = busy.reduce((s, [a, b]) => s + b - a, 0), pxPerMs = (CW - BREAK * (busy.length - 1)) / activeMs;
 const X = (t) => { let x = L; for (let i = 0; i < busy.length; i++) { const [a, b] = busy[i];
   if (t <= b) return x + Math.max(0, t - a) * pxPerMs; x += (b - a) * pxPerMs + BREAK; } return x; };
 
 const clock = (t) => new Date(t).toLocaleTimeString("en-US", { timeZone: tz, hour: "numeric", minute: "2-digit" });
 const day = (t) => new Date(t).toLocaleDateString("en-US", { timeZone: tz, weekday: "short", month: "short", day: "numeric" });
-const tot = { cost: 0, tin: 0, out: 0, sessions: 0, render: 0, api: 0, by: { opus: 0, sonnet: 0, haiku: 0 } };
-for (const p of P) { tot.cost += p.cost; tot.tin += p.tin; tot.out += p.out; tot.sessions += p.rows.length; tot.render += p.renderMs; if (p.billing === "API") tot.api += p.cost; for (const m of ORDER) tot.by[m] += p.byModel[m]; }
+const tot = { blocks: 0, cost: 0, tin: 0, out: 0, sessions: 0, render: 0, api: 0, by: { opus: 0, sonnet: 0, haiku: 0 } };
+for (const p of P) { tot.blocks += p.blocks ?? 0; tot.cost += p.cost; tot.tin += p.tin; tot.out += p.out; tot.sessions += p.rows.length; tot.render += p.renderMs; if (p.billing === "API") tot.api += p.cost; for (const m of ORDER) tot.by[m] += p.byModel[m]; }
 const t0 = busy[0][0], t1 = busy[busy.length - 1][1];
 
 const ROWH = 66, TOP = 150, H = TOP + P.length * ROWH + 60, W = L + CW + R;
@@ -59,12 +63,13 @@ const o = [`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" f
 o.push(`<text x="24" y="38" font-size="22" font-weight="bold" fill="#1d1b24">${esc(spec.title)}</text>`);
 // headline numbers
 const kpis = [[dur(t1 - t0), `end to end (${day(t0)} – ${day(t1)})`], [dur(activeMs), "active"], [`$${tot.cost.toFixed(2)}`, `$${tot.api.toFixed(2)} API · $${(tot.cost - tot.api).toFixed(2)} subscription`],
-  [String(tot.sessions), "agent sessions"], [`${fmt(tot.tin)} / ${fmt(tot.out)}`, "tokens in / out"], [dur(tot.render), "final renders"]];
-kpis.forEach(([v, k], i) => { const x = 24 + i * 260; o.push(`<text x="${x}" y="78" font-size="20" font-weight="bold" fill="#1d1b24">${esc(v)}</text>`, `<text x="${x}" y="96" fill="#7a7466">${esc(k)}</text>`); });
+  [String(tot.sessions), "agent sessions"], [`${fmt(tot.tin)} / ${fmt(tot.out)}`, "tokens in / out"], [dur(tot.render), "final renders"],
+  [fmt(tot.blocks), "blocks designed"], [`${Math.round(bh(tot.blocks)).toLocaleString("en-US")} h`, `builder-hours (${pace.blocksPerHour.toLocaleString("en-US")} blocks/h + ${Math.round(pace.overhead * 100)}%)`]];
+kpis.forEach(([v, k], i) => { const x = 24 + i * 222; o.push(`<text x="${x}" y="78" font-size="20" font-weight="bold" fill="#1d1b24">${esc(v)}</text>`, `<text x="${x}" y="96" fill="#7a7466">${esc(k)}</text>`); });
 // legend: models with their share of spend, then renders
 let lx = 24; for (const m of ORDER) { o.push(`<rect x="${lx}" y="114" width="12" height="12" rx="2" fill="${MODEL[m]}"/><text x="${lx + 18}" y="124" fill="#3a3630">${m[0].toUpperCase() + m.slice(1)} $${tot.by[m].toFixed(2)}</text>`); lx += 150; }
 o.push(`<rect x="${lx}" y="117" width="22" height="6" rx="2" fill="${RENDER}"/><text x="${lx + 30}" y="124" fill="#3a3630">Path-traced render</text>`);
-o.push(`<text x="${L + CW + 16}" y="${TOP - 10}" fill="#7a7466" font-size="11">COST · SESSIONS · RENDER</text>`);
+for (const [dx, h] of [[16, "COST"], [92, "SESSIONS"], [165, "RENDER"], [228, "BLOCKS"], [298, "BUILDER-H"]]) o.push(`<text x="${L + CW + dx}" y="${TOP - 10}" fill="#7a7466" font-size="10" letter-spacing="0.5">${h}</text>`);
 
 // breaks first, under everything
 // break lengths labelled longest first, each kept clear of the ones already placed
@@ -101,7 +106,9 @@ P.forEach((p, k) => {
     o.push(`<rect x="${xa.toFixed(1)}" y="${y + 52}" width="${Math.max(2, xb - xa).toFixed(1)}" height="7" rx="2" fill="${RENDER}"${r.lost ? ` fill-opacity="0.35"` : ""}/>`); }
   o.push(`<text x="${L + CW + 16}" y="${y + 26}" font-size="14" font-weight="bold" fill="#1d1b24">$${p.cost.toFixed(2)}</text>`,
     `<text x="${L + CW + 92}" y="${y + 26}" fill="#3a3630">${p.rows.length} sess</text>`,
-    `<text x="${L + CW + 170}" y="${y + 26}" fill="${RENDER}">${p.renderMs ? dur(p.renderMs) : ""}</text>`,
+    `<text x="${L + CW + 165}" y="${y + 26}" fill="${RENDER}">${p.renderMs ? dur(p.renderMs) : ""}</text>`,
+    `<text x="${L + CW + 228}" y="${y + 26}" fill="#3a3630">${p.blocks ? fmt(p.blocks) : ""}</text>`,
+    `<text x="${L + CW + 298}" y="${y + 26}" font-weight="bold" fill="#1d1b24">${p.blocks ? Math.round(bh(p.blocks)).toLocaleString("en-US") : ""}</text>`,
     `<text x="${L + CW + 16}" y="${y + 44}" font-size="11" fill="#7a7466">${fmt(p.tin)} in · ${fmt(p.out)} out</text>`);
 });
 o.push("</svg>");
