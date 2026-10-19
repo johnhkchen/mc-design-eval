@@ -1,0 +1,119 @@
+West Crissy Field in the Presidio of San Francisco, on the bay shore a short walk east of the Golden Gate Bridge: the historic US Army buildings at the west end of the old Crissy airfield, now a climbing gym, a swim school, a bike shop and offices, and the old Fort Point Coast Guard Station (1915) on the beach with its boathouse, now the Greater Farallones visitor centre. It must read, at a glance, as the Presidio: a tidy, low, historic military post by the water, white and cream painted walls, red and grey roofs, green trim, flagpole and lawns, with the Golden Gate Bridge's orange in the distance (not in these modules).
+
+Scale: 0.5 blocks per metre (a storey is about 2 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). These are the real buildings in a real-place diorama; placement code sets each module on its real footprint exactly as it stands (no turning), so build each building IN ITS SITE ORIENTATION: north is low z, east is high x, as in the footprint maps below, and keep its walls to the map (# = the building, . = open ground inside the plot, which may get paving, a lawn, a path or planting). Several footprints sit at an angle to the grid: follow their diagonal walls as clean, regular block steps and set the roof ridges along the long axis. Each module stands at y 0 on a flat 1-block ground of smooth stone. No villagers. Light every building so no mob spawns. Nothing may leave its plot or exceed its stated height.
+
+Plots along x, each standing at y 0, each the building on its footprint (maps below in this order):
+ plot 0, x 0..28, z 0..38 (29 x 39), up to y 10: the big WAREHOUSE / HANGAR (map 201006.0001005, now a climbing gym): a tall single-storey Army warehouse, whitewashed walls with a regular rhythm of tall multi-pane windows, big sliding doors, a broad gabled roof (grey or dark red), a modest sign band.
+ plot 1, x 29..56, z 0..22 (28 x 23), up to y 10: ARMY BUILDING (map 201006.0001467): a long two-storey cream-stucco building with a red clay-tile hipped roof and rows of paired windows (Mission Revival military style).
+ plot 2, x 57..83, z 0..19 (27 x 20), up to y 10: ARMY BUILDING (map 201006.0001463): its sister, white painted wood siding, two storeys, a grey gabled roof, a porch along the front.
+ plot 3, x 84..97, z 0..35 (14 x 36), up to y 9: LONG STOREHOUSE (map 201006.0002072, now a swim school): long and narrow, cream walls, low gabled red roof, a row of loading doors.
+ plot 4, x 98..107, z 0..10 (10 x 11), up to y 8: SMALL OFFICE (map 201006.0010529): a white two-storey office with a hipped roof.
+ plot 5, x 108..118, z 0..8 (11 x 9), up to y 7: SHOP (map 201006.0013013, the bike shop): a small single-storey workshop with a shopfront and an awning.
+ plot 6, x 119..131, z 0..11 (13 x 12), up to y 10: THE COAST GUARD STATION (map 201006.0008998, now the Greater Farallones visitor centre): a 1915 Colonial Revival station house, white clapboard, red roof, dark green trim, a small square lookout cupola on the roof, a flagpole with a US flag (banners) in front.
+ plot 7, x 132..139, z 0..7 (8 x 8), up to y 8: OCEAN CLIMATE CENTER (map 201006.0040809): a small white clapboard Coast Guard building with a red hipped roof.
+ plot 8, x 140..148, z 0..8 (9 x 9), up to y 6: SHOP AND GARAGE (map 201006.0040157): a small white garage with red roof and a wide door.
+ plot 9, x 149..155, z 0..7 (7 x 8), up to y 6: THE 1890 BOATHOUSE (map 201006.0093516): a little white wooden boathouse with a steep red roof and a big door facing the water (north).
+
+FOOTPRINT MAPS (from the city's building outlines; the map's top-left character is the plot's (x 0, z 0) corner):
+201006.0001005: box x 450..478, z 802..840 (29 x 39); 1 char = 2x2 blocks
+......##.......
+....#####......
+..#######......
+..#######......
+...#######.....
+...#######.....
+...########....
+....#######....
+..#########....
+############...
+############...
+#############..
+.############..
+.####.#######..
+.......#######.
+.......#######.
+.......#######.
+........######.
+........####...
+...............
+201006.0001467: box x 436..463, z 779..801 (28 x 23); 1 char = 2x2 blocks
+.........###..
+.....#######..
+.############.
+#############.
+#############.
+#############.
+##############
+.#############
+.#############
+.#########....
+..#####.......
+..#...........
+201006.0001463: box x 427..453, z 722..741 (27 x 20); 1 char = 2x2 blocks
+.....########.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+.############.
+.#####........
+201006.0002072: box x 430..443, z 743..778 (14 x 36); 1 char = 2x2 blocks
+#####..
+#####..
+#####..
+.####..
+.#####.
+.#####.
+.#####.
+.#####.
+.#####.
+.#####.
+.#####.
+.######
+.######
+..#####
+..#####
+..#####
+..#####
+..#####
+201006.0010529: box x 445..454, z 741..751 (10 x 11); 1 char = 2x2 blocks
+#####
+#####
+#####
+#####
+#####
+.....
+201006.0013013: box x 448..458, z 768..776 (11 x 9); 1 char = 2x2 blocks
+#####.
+#####.
+######
+#####.
+......
+201006.0008998: box x 522..534, z 762..773 (13 x 12); 1 char = 2x2 blocks
+...##..
+..###..
+.#####.
+######.
+.#####.
+..###..
+201006.0040809: box x 509..516, z 752..759 (8 x 8); 1 char = 2x2 blocks
+.##.
+####
+####
+.##.
+201006.0040157: box x 537..545, z 763..771 (9 x 9); 1 char = 2x2 blocks
+.##..
+####.
+.###.
+..##.
+...#.
+201006.0093516: box x 501..507, z 744..751 (7 x 8); 1 char = 2x2 blocks
+..#.
+.###
+###.
+.#..
+
+Use the photographs only as inspiration for character and colour.
