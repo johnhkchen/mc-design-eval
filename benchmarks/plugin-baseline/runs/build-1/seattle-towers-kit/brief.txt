@@ -1,0 +1,101 @@
+The modern blocks east and south of the Space Needle: KOMO Plaza (Fisher Plaza, 2000-2003), two white and pale-grey office buildings with bands of windows, curved green-glass curtain-wall towers and a round glass drum at a corner, and a crowd of big white satellite dishes on their roofs (it's a broadcasting centre); Hyatt House Seattle (a modern hotel block: light panels, regular windows, a glazed ground floor); and Aperture on Fifth (a modern apartment block: dark and light panels, balconies).
+
+Scale: 1.4 blocks per metre. For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). These are the real neighbours of the Space Needle at Seattle Center; placement code sets each module on its real footprint exactly as it stands (no turning), so build each building IN ITS SITE ORIENTATION: north is low z, east is high x, as in the footprint map below, and keep its walls to the map (# = the building, . = open ground inside the plot, which may get paving, steps or planting). Each module stands at y 0 on a flat 1-block ground of smooth stone. Use the photographs only as inspiration for character and colour. No villagers. Light every building so no mob spawns. Nothing may leave its plot or exceed its stated height.
+
+Plots along x, each standing at y 0, each the building on its footprint (maps below in this order):
+ plot 0, x 0..104, z 0..124 (105 x 125), up to y 47: KOMO PLAZA EAST (map SEA1270123762): white/pale grey office floors with horizontal window bands, one or two curved green-glass towers, a round glass drum, 8-12 big white satellite dishes (white concrete/quartz bowls tilted, on grey bases) on the roof, a glazed ground floor with entrances.
+ plot 1, x 105..151, z 0..61 (47 x 62), up to y 45: KOMO PLAZA WEST (map SEA1270154128): its sister, same language, a few dishes.
+ plot 2, x 152..200, z 0..92 (49 x 93), up to y 44: HYATT HOUSE (map SEA1270123760): a modern hotel of light grey and beige panels and regular windows over a glazed lobby floor, a flat roof with plant screens.
+ plot 3, x 201..250, z 0..52 (50 x 53), up to y 40: APERTURE ON FIFTH (map SEA1270123759): a modern apartment block with dark grey and white panels and balconies, shops at the ground floor.
+
+FOOTPRINT MAPS (from the city's 2023 building outlines; the map's top-left character is the plot's (x0, z0) corner):
+SEA1270123762: box x 303..407, z 379..503 (105 x 125), roof up to 45 above its base; 1 char = 4x4 blocks
+....#..#....#######........
+..########################.
+.#########################.
+##########################.
+##########################.
+##########################.
+##########################.
+.#########################.
+.#########################.
+.#########################.
+.#########################.
+..########################.
+...........###############.
+...........###############.
+...........###############.
+............##############.
+............##############.
+.............#############.
+..............############.
+.............#############.
+..............############.
+..............############.
+..............############.
+..............############.
+.............#############.
+..............############.
+..............############.
+..............############.
+..............############.
+..................########.
+..................########.
+...........................
+SEA1270154128: box x 299..345, z 442..503 (47 x 62), roof up to 43 above its base; 1 char = 4x4 blocks
+....####....
+..######....
+.########...
+#########...
+##########..
+.#########..
+##########..
+##########..
+##########..
+.#########..
+.#########..
+.#########..
+.#########..
+###########.
+############
+.##########.
+SEA1270123760: box x 359..407, z 262..354 (49 x 93), roof up to 42 above its base; 1 char = 4x4 blocks
+.............
+...........#.
+..........##.
+.........###.
+........####.
+.......#####.
+......######.
+......######.
+.....#######.
+....########.
+...#########.
+...#########.
+....########.
+###.########.
+#####.######.
+#####..#####.
+############.
+############.
+############.
+############.
+############.
+############.
+############.
+.............
+SEA1270123759: box x 441..490, z 302..354 (50 x 53), roof up to 38 above its base; 1 char = 4x4 blocks
+############.
+############.
+############.
+############.
+############.
+############.
+############.
+############.
+############.
+#############
+#############
+#############
+#############
+.............
