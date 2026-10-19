@@ -27,7 +27,18 @@
   "BAKER ST",
   "GORGAS AVE"
  ],
- "trees": 198,
+ "trees": 211,
+ "dressing": {
+  "palms": 0,
+  "canopyPatchesKept": 85,
+  "canopyPatchesDropped": 106,
+  "crossing cells": 1195,
+  "barrier hedge": 1,
+  "railing": 74,
+  "benches": 15,
+  "bins": 2,
+  "lamps": 43
+ },
  "buildings": [
   {
    "id": "201006.0034453",
@@ -157009,7 +157020,13 @@
   "paths": "osm",
   "trees": "osm",
   "playgrounds": "osm",
-  "canopy": "meta-canopy"
+  "canopy": "meta-canopy",
+  "rails": "osm",
+  "furniture": "osm",
+  "barriers": "osm",
+  "platforms": "osm",
+  "piers": "osm",
+  "greens": "osm"
  },
  "credits": [
   "U.S. Geological Survey, 3D Elevation Program (Public domain (US Government work))",

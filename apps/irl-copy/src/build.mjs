@@ -10,6 +10,8 @@
 //              returns standing 2 m above the ground away from any building (in place of the canopy map)
 //   trees      from the canopy (trees.mjs), else the mapped tree points as simple trees
 //   fit-out    a floor at every storey, a front door on the side facing the street, windows along it (fitout.mjs)
+//   dressing   kerbs, lane lines, crossings, paving joints, lawns, rails, platforms, lamps, benches, railings, piers,
+//              palms: the street-level detail from the same layers (dress.mjs)
 //   materials  walls by the assessor's record (era and construction: materials.mjs), roofs the colour the aerial photo
 //              shows, open ground green, sand or paving by the aerial photo's colour and near-infrared
 // The manifest lists every building (id, footprint cells, base, height, peak) in the structure's frame, the streets
@@ -20,6 +22,7 @@ import { groundFromContours } from "./ground.mjs";
 import { canopyTrees } from "./trees.mjs";
 import { wallFor, roofBlock, groundFrom } from "./materials.mjs";
 import { fitOut } from "./fitout.mjs";
+import { trimCanopy, dress } from "./dress.mjs";
 
 // widths in metres; everything below is in blocks (metres x the place's scale)
 const ROAD_M = 6, WALK_M = 10.5;
@@ -74,13 +77,14 @@ export function buildPlace(place, frame, L) {
   const isB = new Uint8Array(N * N); for (const b of buildings) for (const [x, z] of b.cells) isB[I(x, z)] = 1;
   // the canopy: from the lidar where there is one (returns 2 m above the ground, a block clear of any building, with at
   // least three canopy neighbours so a lamp post isn't a tree), else the canopy map
-  let chm = L.canopy?.data ?? null;
+  let chm = L.canopy?.data ?? null, canopyGreen = null;
   if (lid) { chm = new Float32Array(N * N); const near = new Uint8Array(N * N);
     for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) if (isB[I(x, z)]) for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, zz = z + dz; if (xx >= 0 && zz >= 0 && xx < N && zz < N) near[I(xx, zz)] = 1; }
-    // and green in the aerial photo's near-infrared, where there is one: lidar can't tell a crown from a planter box, a
-    // lamp post or a cornice past the footprint, but foliage is bright in near-infrared and stone isn't
-    const green = (i) => !air || (air.nir[i] - air.r[i]) / (air.nir[i] + air.r[i] + 1e-6) > 0.12;
-    const h = (i) => (lid.count[i] && !near[i] && green(i) ? lid.surface[i] - lid.ground[i] : 0);
+    // lidar can't tell a crown from a planter box, a lamp post or a cornice past the footprint, but foliage is bright in
+    // the aerial photo's near-infrared and stone isn't: trimCanopy (dress.mjs) judges each patch by its green, its size
+    // and its height (a bare winter crown is still a tree; a pole or a kiosk isn't)
+    const green = (i) => !air || (air.nir[i] - air.r[i]) / (air.nir[i] + air.r[i] + 1e-6) > 0.12; canopyGreen = green;
+    const h = (i) => (lid.count[i] && !near[i] ? lid.surface[i] - lid.ground[i] : 0);
     // no tree stands over 70 m (the tallest in either city are about 60): taller returns off a footprint are a tower's
     // reach past its outline (the Space Needle's legs and saucer over its lawn), not a crown
     for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2 || v > 70) continue;
@@ -117,6 +121,8 @@ export function buildPlace(place, frame, L) {
     // floors, a front door to the street, windows (fitout.mjs); not on the big civic buildings, which the design pass draws
     if (rec && wall.kind !== "civic or commercial" || /commercial/.test(wall.kind) && b.cells.length / (sc * sc) < 800) Object.assign(b, fitOut(g, b, { I, ground, road, sc })); }
 
+  // the street's dressing (dress.mjs) reads the same layers; palms and specks leave the canopy before the trees grow
+  const site = { place, frame, L, N, I, sc, ground, road, ROAD, WALK, water, park, path, isB }, trimmed = chm ? trimCanopy(chm, site, { green: canopyGreen }) : null;
   const open = (x, z) => { const i = I(x, z); return !isB[i] && !water[i] && road[i] > ROAD; };
   let trees;
   if (chm) trees = canopyTrees(g, { chm, n: N, ground, open, scale: sc });
@@ -126,9 +132,10 @@ export function buildPlace(place, frame, L) {
       for (let y = 1; y <= 5; y++) g.set(x, y0 + y, z, "oak_log", { axis: "y" });
       for (let dy = 3; dy <= 6; dy++) for (let dx = -2; dx <= 2; dx++) for (let dz = -2; dz <= 2; dz++) if (Math.abs(dx) + Math.abs(dz) <= (dy === 6 ? 1 : 3) && !g.get(x + dx, y0 + dy, z + dz)) g.set(x + dx, y0 + dy, z + dz, "oak_leaves", { persistent: "true", distance: "1", waterlogged: "false" });
       trees.trees.push({ at: [x, z] }); } }
+  const dressing = { ...trimmed, ...dress(g, site) };
 
   const manifest = { place: place.id, name: place.name, size: g.size, metresPerBlock: 1 / sc, floorElevation: +(floor / sc).toFixed(1), box: frame.box, ground: [+(lo / sc).toFixed(1), +(hi / sc).toFixed(1)],
-    streets: [...new Set((L.streets?.features ?? []).map((f) => f.properties.name))], trees: trees.trees.length,
+    streets: [...new Set((L.streets?.features ?? []).map((f) => f.properties.name))], trees: trees.trees.length, dressing,
     buildings: buildings.map(({ cells, k, tops, own, ...b }) => ({ ...b, top: Math.max(...tops.values()), footprint: cells })),
     aerial: L.aerial ? { year: L.aerial.year, tiles: L.aerial.tiles } : null, parcelRollYear: L.parcels?.rollYear ?? null };
   return { grid: g, manifest, ground };

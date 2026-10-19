@@ -22,5 +22,27 @@
    "angle": -36,
    "fill": 0.87
   }
+ },
+ "dress": {
+  "note": "Harry Bridges Plaza, across the Embarcadero from the building: dark and light granite in a staggered checker (refs 01-land-front, 06-high-roof-plan; the bands in the aerial)",
+  "paving": [
+   {
+    "box": [
+     68,
+     95,
+     101,
+     365
+    ],
+    "pattern": "checker",
+    "size": [
+     8,
+     4
+    ],
+    "blocks": [
+     "smooth_stone",
+     "tuff"
+    ]
+   }
+  ]
  }
 }

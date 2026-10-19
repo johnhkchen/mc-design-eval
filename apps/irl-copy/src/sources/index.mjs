@@ -9,7 +9,7 @@ import lidar from "./usgs-lidar.mjs";
 import naip from "./naip.mjs";
 
 export const SOURCES = [...lidar, ...naip, ...datasf, ...seattle, ...nhd, ...canopy, ...osm];
-export const LAYERS = ["lidar", "aerial", "parcels", "landmarks", "ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy"];
+export const LAYERS = ["lidar", "aerial", "parcels", "landmarks", "ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy", "rails", "furniture", "barriers", "platforms", "piers", "greens"];
 
 /** layer -> the source that supplies it for this place (null if none does) */
 export function plan(place) {

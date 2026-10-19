@@ -3,7 +3,7 @@
  "name": "Alamo Square and the Painted Ladies",
  "size": [
   448,
-  144,
+  120,
   448
  ],
  "metresPerBlock": 0.7142857142857143,
@@ -25,7 +25,15 @@
   "GROVE ST",
   "FULTON ST"
  ],
- "trees": 526,
+ "trees": 611,
+ "dressing": {
+  "palms": 0,
+  "canopyPatchesKept": 134,
+  "canopyPatchesDropped": 199,
+  "crossing cells": 1597,
+  "railing": 0,
+  "lamps": 61
+ },
  "buildings": [
   {
    "id": "201006.0039039",

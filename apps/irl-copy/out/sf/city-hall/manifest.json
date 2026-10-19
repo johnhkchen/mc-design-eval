@@ -32,7 +32,21 @@
   "GROVE ST",
   "GOLDEN GATE AVE"
  ],
- "trees": 163,
+ "trees": 220,
+ "dressing": {
+  "palms": 0,
+  "canopyPatchesKept": 80,
+  "canopyPatchesDropped": 305,
+  "crossing cells": 2234,
+  "platform canopies": 1,
+  "barrier hedge": 7,
+  "barrier bars": 1,
+  "railing": 67,
+  "lamps": 79,
+  "bike racks": 5,
+  "bins": 3,
+  "drinking_water": 1
+ },
  "buildings": [
   {
    "id": "201006.0000248",
@@ -327176,7 +327190,13 @@
   "paths": "osm",
   "trees": "osm",
   "playgrounds": "osm",
-  "canopy": "meta-canopy"
+  "canopy": "meta-canopy",
+  "rails": "osm",
+  "furniture": "osm",
+  "barriers": "osm",
+  "platforms": "osm",
+  "piers": "osm",
+  "greens": "osm"
  },
  "credits": [
   "U.S. Geological Survey, 3D Elevation Program (Public domain (US Government work))",

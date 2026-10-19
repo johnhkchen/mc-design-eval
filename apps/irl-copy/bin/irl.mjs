@@ -3,7 +3,8 @@
 // in place of a player's land export.
 //   node bin/irl.mjs sources [place]      the sources, and which supplies each layer for a place
 //   node bin/irl.mjs fetch <place>        download every planned source into .cache/<place>/ (once per source); with
-//                                         "align": "auto" it first turns the place to its landmark or street grid
+//                                         "align": "auto" it first turns the place to its landmark or street grid;
+//                                         --only <source> fetches that source again (e.g. --only osm), whether cached or not
 //   node bin/irl.mjs build <place>        compose out/<place>/{land.nbt, manifest.json, SOURCES.md} from the cache
 //   node bin/irl.mjs all <place>          fetch, then build
 //   node bin/irl.mjs landmark <no> <place> [--city san-francisco|seattle] [--half m] [--scale s]   a place file framed on a city landmark
@@ -45,7 +46,8 @@ async function resolveAlign(n) {
 
 async function fetchPlace(n) {
   await resolveAlign(n);
-  const place = load(n), frame = frameFor(place), chosen = [...new Set(Object.values(plan(place)).filter(Boolean))];
+  const only = process.argv.includes("--only") ? process.argv[process.argv.indexOf("--only") + 1] : null;
+  const place = load(n), frame = frameFor(place), chosen = [...new Set(Object.values(plan(place)).filter(Boolean))].filter((s) => !only || s.id === only);
   mkdirSync(`${HERE}/.cache/${n}`, { recursive: true });
   for (const s of chosen) {
     const t0 = Date.now(), layers = await s.fetch(place, frame), meta = {};
