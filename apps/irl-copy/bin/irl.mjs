@@ -11,7 +11,7 @@
 //   node bin/irl.mjs landmark <no> <place> [--city san-francisco|seattle] [--half m] [--scale s]   a place file framed on a city landmark
 //   node bin/irl.mjs world <place>        build (and compose, if the place has a compose file) into a Minecraft Java world:
 //                                         out/<place>/world/ (for Chunky, or a single-player save)
-//   node bin/irl.mjs modules <place> <dir>    each module of the place's compose file as its own .nbt, its swaps applied
+//   node bin/irl.mjs modules <place> <dir> [--palette places/survival-palette.json]    each module of the place's compose file as its own .nbt, its swaps applied (and the palette's)
 //                                         (for the catalog: names from "catalog": { module: id } in the compose file)
 //   node bin/irl.mjs compose <place>      build, then put the designed modules in (places/<place>.compose.json):
 //                                         out/<place>/composed.nbt
@@ -132,13 +132,16 @@ else if (cmd === "world") buildFrom(name, { composeWith: existsSync(`${HERE}/pla
 else if (cmd === "modules") {
   const spec = JSON.parse(readFileSync(`${HERE}/places/${name}.compose.json`, "utf8")), dir = resolve(process.argv[4]); mkdirSync(dir, { recursive: true });
   const { Voxels } = await import("../src/voxels.mjs");
+  // --palette <file>: a swap applied over every module's own (places/survival-palette.json: blocks a survival supply chain
+  // can't make in volume, swapped for ones it can)
+  const pal = process.argv.includes("--palette") ? JSON.parse(readFileSync(resolve(process.argv[process.argv.indexOf("--palette") + 1]), "utf8")).swap : {};
   for (const [mod, id] of Object.entries(spec.catalog ?? {})) {
     const m = spec.modules[mod], src = loadStructure(resolve(HERE, m.file)), [x0, z0, x1, z1] = m.plot;
     let H = 0; for (const c of src.cells.values()) if (c.pos[0] >= x0 && c.pos[0] <= x1 && c.pos[2] >= z0 && c.pos[2] <= z1 && !/air$/.test(c.block)) H = Math.max(H, c.pos[1] + 1);
     const out = new Voxels([x1 - x0 + 1, H, z1 - z0 + 1]);
     for (const c of src.cells.values()) { const [x, y, z] = c.pos; if (x < x0 || x > x1 || z < z0 || z > z1 || /air$/.test(c.block)) continue;
       const n = c.block.replace(/^minecraft:/, ""), w = m.swap?.find((r) => r.from === n && (r.minY == null || y >= r.minY) && (r.maxY == null || y <= r.maxY));
-      out.set(x - x0, y, z - z0, w ? w.to : c.block, c.state); }
+      const b = (w ? w.to : c.block).replace(/^minecraft:/, ""); out.set(x - x0, y, z - z0, pal[b] ?? b, c.state); }
     out.save(`${dir}/${id}.nbt`); console.log(`${id}: ${out.size.join("x")}`);
   }
 }

@@ -1,0 +1,8 @@
+{
+ "note": "Blocks a Create survival supply chain can't make in volume, swapped at export (irl modules --palette) for ones it can. With these three, five farmable lines (stone; sand, gravel and clay; dyes; nether quartz; wood) plus iron nuggets from washing and ground shaped on site cover 98% of the eight landmark projects' blocks (98% without Rockefeller Center too). Calcite has no crafting recipe in 1.21.1; 138K iron blocks would be 1.2M ingots; blackstone is Nether-only.",
+ "swap": {
+  "calcite": "white_concrete",
+  "iron_block": "light_gray_concrete",
+  "blackstone": "black_concrete"
+ }
+}
