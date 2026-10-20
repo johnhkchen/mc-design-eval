@@ -1,0 +1,18 @@
+{
+  "roles": {
+    "marble": ["white_terracotta"],
+    "stone_upper": ["calcite"],
+    "trim": ["smooth_quartz", "smooth_quartz_stairs", "smooth_quartz_slab", "quartz_slab"],
+    "column": ["quartz_pillar"],
+    "podium": ["polished_granite", "polished_granite_stairs", "polished_granite_slab"],
+    "dome": ["weathered_cut_copper", "weathered_cut_copper_stairs", "weathered_cut_copper_slab"],
+    "roof_deck": ["smooth_stone_slab"],
+    "skylight_glass": ["glass", "light_gray_stained_glass", "glass_pane"],
+    "skylight_frame": ["smooth_stone", "light_gray_concrete"],
+    "dark_band": ["gray_stained_glass"],
+    "recess_back": ["tinted_glass"],
+    "light": ["pearlescent_froglight", "shroomlight"],
+    "ground": ["grass_block", "smooth_sandstone", "smooth_sandstone_slab", "dirt_path"]
+  },
+  "objects": ["lantern", "chain", "oak_fence", "cobblestone_wall"]
+}

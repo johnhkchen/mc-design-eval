@@ -1,0 +1,27 @@
+# REQUIRED ELEMENTS (checklist)
+
+Frames: plot 0 local x 0..127 z 0..339; plot 1 local x 0..80 z 0..132. Everything clipped to the footprint `#` cells and footed down to the GROUND map. Part ids: P1 shell0, P2 plot1, P3 towers, P4 facades, P5 plaza, P6 dusk.
+
+| # | Element | Construction (block by block) | Coordinates (plan.md) | Part | Vocab |
+|---|---|---|---|---|---|
+| 1 | Four west-facing tiers (W0 base, T1, T2, T3) | solid masonry mass: stone_bricks body (<=10% mossy_stone_bricks low down), polished_andesite cap course at deck, smooth_stone deck slab layer; fill ground..deck solid on the uphill side | W0 x0..20 z147..244 deck6; T1 x21..41 deck13; T2 x42..69 deck20; T3 x70..125 deck28 | P1 | retainingWall, tierMass |
+| 2 | Rooftop plaza | smooth_stone deck y28, spruce_planks strips 3 wide along z, walk y29, flush with Pike Place | x70..125 z98..230 | P1 deck, P5 strips | deckStrip |
+| 3 | Glass railing, plaza edges | glass_pane y29 (1 high on deck edge) + polished_andesite post every 10 (andesite_wall stands in: polished_andesite_wall does NOT exist) | x70 (77/84 on T3N), north and south edges | P5 | glassRail |
+| 4 | Bronze pig "Billie" | waxed_copper_block body 3x2 at y30..31 (x100..102), head waxed_copper_block at x99 y30..31, snout waxed_cut_copper_stairs facing west at x99 y30 (bottom half), legs 4 corner waxed_cut_copper_stairs/ blocks at y29, ears two waxed_cut_copper_slab top on head, tail waxed_cut_copper_stairs at x103 y31 | x99..103 z170..171 y29..31 | P5 | bronzePig |
+| 5 | Planters with grasses + small trees, benches | rim = smooth_stone full block ring 1 high at y29, inside moss_block/grass_block at y29, short_grass/tall_grass/azalea at y30; small oak (oak_log x3 + persistent leaves) in every 2nd bed; bench = spruce_stairs facing west, half bottom, on the west side, a row 6 long | beds x76..81/88..93/108..113 at z150..157,180..187,210..215 | P5 | planterBed, benchRow, plazaTree |
+| 6 | Lamp posts | andesite_wall x3 + lantern on top, hanging=false | x71 and x124 every 9 z102..228, y29..32 | P5 | lampPost |
+| 7 | West glass tiers (stalls, long gallery) | glass_pane F+1..F+5 recessed 1 between stripped_spruce_log posts every 5 (z%5==0), gray_concrete kick strip at F+1 on T2, every 3rd T1/T3 bay gray_concrete panel | T1 x21 F6; T2 x42 F13; T3 x70 F20; T3N x77/84 F22 | P4 | glassBay, timberPost |
+| 8 | Timber canopy fascia | stripped_spruce_wood beam axis z at F+6 out 1 block, spruce_slab (top) soffit, hanging lantern under every bay, spruce_stairs (upside down) bracket on every 2nd post on T3 | x20,41,69,76/83 | P4 | canopyBay |
+| 9 | Shop doors | spruce_door pairs (both halves, same facing west, hinge mirrored) in the openings | OPENINGS table | P4 | shopDoor |
+| 10 | Housing block with balconies | white_concrete body, stripped_spruce_log fins every 7 proud 1, windows 3x2 with glass_pane, balconies x40..41 smooth_stone_slab(top) floor, glass_pane rail, spruce_trapdoor screens, smooth_stone string courses y27,y34, moss_block + short_grass green roof y41 inside smooth_stone parapet 42 + iron_bars | x42..62 z70..132 y21..42 | P1 shell, P4 detail | balconyBay |
+| 11 | Old white-brick market building M1 | quartz_bricks body, polished_andesite plinth to y34, 4-wide shopfronts with spruce frames, 2x3 windows with smooth_quartz_slab sill + smooth_quartz lintel, string courses y40,y46, quartz_stairs cornice y52 +1, parapet y53..54, paired smooth_quartz quoins | x98..118 z0..69 y..54 | P1 shell, P4 windows | quartzWindow, cornice |
+| 12 | M2 Pike Place stall shed | spruce posts (stripped_spruce_log) every 4, flat spruce_slab roof y37, red/white wool-carpet striped awning on spruce_slab y36 +1, hanging lanterns | x119..125 z70..97 | P4 | awningStall |
+| 13 | West stair tower TW | polished_andesite 2x2 corner piers, full `glass` between, smooth_stone floor bands each deck, 3x4 lift shaft interior air, soul_sand + bubble_column (drag false) water elevator, cap smooth_stone + polished_andesite parapet | x14..20 z189..202 y..35 | P3 | towerShaft |
+| 14 | Pike St elevator kiosk K | same grammar as TW, glass only | x105..111 z301..335, x98..104 z322..335 y..40 | P3 | towerShaft |
+| 15 | South hillclimb stair SH | polished_andesite_stairs facing east (flight 1 facing +x), polished_andesite cheek walls, smooth_stone landing, planters both sides | x35..90 z231..251 | P3 | stairFlight |
+| 16 | Overlook deck D3, terraces D2/D1/D0 | plot 1: polished_andesite walls ground..deck, smooth_stone deck, smooth_stone_slab seats, steps y3..9 etc. | plan Plot 1 table | P2 | terraceMass |
+| 17 | Zigzag stairs S32/S21/S10 | polished_andesite_stairs facing north, 9 wide, cheeks polished_andesite, top step flush | plan Plot 1 table | P2 | stairFlight |
+| 18 | Elevator + stair tower ET + "HILLCLIMB" sign | piers + glass as TW; dark gray_concrete board y30..34 west face with white letters via plaque() | x63..71 z48..59 | P3 shell, P6 sign | towerShaft, plaque |
+| 19 | Planted slopes / banks | grass_block, moss_block, short_grass, tall_grass, azalea, flowering_azalea, small oak every ~12 cells | plot 1 banks, N slope | P2 | plantedBank |
+| 20 | Dusk glow | shroomlight/ochre_froglight ceiling 1 inside glass, lit lanterns, glow behind panes, lit candles in stalls | behind every glass band | P6 | glowStrip |
+| 21 | Rooftop neon-like signs | HILLCLIMB band; "PIKE PLACE MARKET" style banner letters on M1 parapet (plaque, banner style) | M1 y53..54 | P6 | plaque |

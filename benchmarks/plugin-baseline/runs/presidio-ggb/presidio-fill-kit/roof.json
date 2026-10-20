@@ -1,0 +1,73 @@
+{
+  "preset": "cottage",
+  "material": "barn-red",
+  "footprint": [
+    1,
+    1,
+    5,
+    5
+  ],
+  "ridgeAxis": "z",
+  "front": "south",
+  "overhang": 1,
+  "pitch": 45,
+  "y": 6,
+  "edges": {
+    "fascia": false,
+    "soffit": true,
+    "barge": true
+  },
+  "keep": [
+    {
+      "from": [
+        5,
+        6,
+        3
+      ],
+      "to": [
+        5,
+        8,
+        3
+      ]
+    },
+    {
+      "from": [
+        6,
+        1,
+        2
+      ],
+      "to": [
+        7,
+        8,
+        4
+      ]
+    },
+    {
+      "from": [
+        2,
+        6,
+        1
+      ],
+      "to": [
+        4,
+        7,
+        1
+      ]
+    },
+    {
+      "from": [
+        2,
+        6,
+        5
+      ],
+      "to": [
+        4,
+        7,
+        5
+      ]
+    }
+  ],
+  "verge": "smooth_quartz",
+  "soffit": "dark_oak",
+  "chimneys": []
+}

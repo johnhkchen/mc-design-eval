@@ -1,0 +1,13 @@
+{
+  "footprint": [[0, 4, 107, 35], [4, 36, 103, 131], [0, 132, 123, 143]],
+  "style": "flat-parapet",
+  "y": 28,
+  "parapet": 2,
+  "material": "smooth_stone",
+  "texture": false,
+  "trim": "smooth_quartz_slab",
+  "keep": [
+    { "from": [29, 28, 45], "to": [38, 36, 122] },
+    { "from": [69, 28, 45], "to": [78, 36, 122] }
+  ]
+}

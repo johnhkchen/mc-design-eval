@@ -1,0 +1,25 @@
+# REQUIRED ELEMENTS — 30 Rockefeller Plaza (plot-local coords from plan.md; y0 = lowest ground)
+
+Part numbers refer to PARTS in plan.md. Vocab names refer to VOCABULARY in plan.md.
+
+- [ ] **E01 Massing, union of boxes I1..I4, C1, F1..F6, E1..E6, W1..W5, N1, P1, LC** — solid white_terracotta shell boxes carried down to ground (plinth, no floating); N/S mirror about z=27.5. Part 1. Vocab: `box`, `groundDown`.
+- [x] **E02 Fluted piers + recessed window strips on every face above the base** — global parity: even x (N/S faces) / even z (E/W faces) = white_terracotta pier at layer 0, -1, -2; odd = air at layer 0, glass strip at layer -1, backing at -2. 2-cell solid corners. Tower storey 3 (glass, glass, gray_terracotta spandrel) from y15; wings 4 (3 glass + spandrel). Parts 2 (tower), 3 (wings). Vocab: `flute`, `windowCell`.
+- [x] **E03 Lit-window scatter** — ~1 in 7 windows yellow_stained_glass_pane with shroomlight behind, never whole columns/rows, a few more below storey 40; rest gray_stained_glass_pane over black_concrete. Parts 2, 3. Vocab: `windowCell` (hash-based `isLit`).
+- [x] **E04 Tower setback cascade** — N/S ledges 212→218→222→224→228→232, east cascade 196→153→110→41, each ledge a 1-course smooth_stone deck, outer edge smooth_sandstone_stairs facing out. Parts 1, 4. Vocab: `ledge`.
+- [x] **E05 Floodlights** — shroomlight flush in the deck against the upper wall, every 2nd cell (ledges y>=196), every 4th (lower). Part 4. Vocab: `ledge`.
+- [x] **E06 Top of the Rock decks (I3 y224, I4 y228)** — smooth_stone deck, glass_pane parapet 2 high on a polished_andesite_slab curb, lantern on curb every 6. Part 4. Vocab: `deckParapet`.
+- [x] **E07 Crown C1 roof y232 + penthouse + mast** — smooth_stone deck, glass_pane parapet 2 high; penthouse x96..119 z25..30 y233..236 white_terracotta, smooth_sandstone_slab cap; mast x107..108 z27..28 iron_bars y237..243, lightning_rod y244 (one rod, at x107 z27, y244). Lantern on penthouse cap. Part 4. Vocab: `mast`.
+- [x] **E08 Red "GE" crown sign** — N face z12 and S face z43, x76..103, y197..209: block-font letters in red_stained_glass, layer -1 shroomlight backing (shell), non-letter cells white_terracotta. Part 5 (sign). Vocab: `plaque`/`geSign`.
+- [x] **E09 East entrance: three portals** — recessed frame x144..145 z20..35 y3..27; portals z21..23, z26..29, z32..34, y3..9: polished_blackstone frames, glass_pane doors (door plane x144), lit lobby shroomlight behind; reveals white_terracotta at z19, z36. Part 6. Vocab: `portal`.
+- [x] **E10 Glass-block screen** — x144, z20..35, y10..13: `glass` with yellow_stained_glass_pane accents in a lattice, shroomlight behind at x143. Part 6. Vocab: `glassScreen`.
+- [x] **E11 WISDOM inscription band** — black_terracotta board x144..145 z20..35 y14..16; "WISDOM" banner letters (white) via `plaque`/`bannerWord` facing east. Part 6.
+- [x] **E12 Lee Lawrie WISDOM relief** — x144 background / x145 relief, z20..35, y17..27: yellow_terracotta sky, gold_block rays fanning from the centre (z27..28, y22), light_blue + cyan_terracotta clouds, smooth_quartz bearded figure (torso z26..29) with gold_block dividers arm spanning and gold crown. Part 6. Vocab: `wisdomPanel`.
+- [ ] **E13 Flags / banners** — row of 5 wall banners (white, blue, red, yellow, green) on the transom over each main entrance (east, north marquee, Sixth Ave, 49th St). Part 6, 7. Vocab: `flagRow`.
+- [ ] **E14 Shop base all round** — plinth polished_andesite at ground; piers every 4th cell; 3-wide glass_pane bays, polished_blackstone frames, transom, white_terracotta fascia band, smooth_sandstone_slab (top) string course; shops lit by shroomlight inside. Tower base to y14 (fascia y12..13), wings to y8 (transom y6, fascia y7). Parts 2, 3. Vocab: `shopBay`.
+- [ ] **E15 Tower north entrance + marquee** — N entrance x71..76 y2..8 under marquee x68..79 z0..3 y12..15: white_terracotta slab with a lit underside (shroomlight flush in soffit every 2nd cell), polished_blackstone fascia. Part 6. Vocab: `marquee`.
+- [x] **E16 Sixth Ave main entrance + 49th St passage entrance** — x0 z24..29 y1..8; z51 x96..103 y2..8; polished_blackstone frames, glass_pane double leaves, lit. Parts 3, 6. Vocab: `portal`.
+- [x] **E17 Wing parapets and roofs** — W1..W5, N1 flat decks, 1-course white_terracotta parapet, smooth_sandstone_slab coping, lit by shroomlight in deck every 6. Part 3. Vocab: `parapet`.
+- [ ] **E18 Roof gardens** — W2 y41 patches x28..39 z8..19, x60..79 z44..49, x28..43 z20..27; N1 y11 every 12 blocks; LC y12: grass_block/moss_block beds, oak_leaves persistent hedges, flowering_azalea, smooth_stone paths, a lantern per patch. Part 7. Vocab: `gardenBed`.
+- [ ] **E19 Forecourt FC + pavilion P1** — paving smooth_stone/polished_andesite chequer; P1 glazed lit kiosk x0..7 z48..53 y0..12, flat roof, parapet. Parts 1, 7.
+- [ ] **E20 Street lighting** — lantern on polished_blackstone_wall post at each main entrance and every ~10 blocks along street faces at grade (inside plot only). Part 7. Vocab: `lampPost`.
+- [ ] **E21 Anti-spawn** — every deck and ledge lit (<=6 apart); `$MCD light` shows no dark deck cell.

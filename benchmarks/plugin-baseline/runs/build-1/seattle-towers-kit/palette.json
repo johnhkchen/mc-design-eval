@@ -1,0 +1,26 @@
+{
+  "roles": {
+    "ground": ["smooth_stone", "smooth_stone_slab", "polished_andesite", "moss_block", "azalea_leaves", "oak_log", "oak_leaves", "oak_fence", "oak_slab", "lantern"],
+    "body": ["white_concrete"],
+    "piers": ["light_gray_concrete"],
+    "ribbon-glass": ["gray_stained_glass_pane"],
+    "curtain-wall": ["cyan_stained_glass", "cyan_stained_glass_pane"],
+    "canopy": ["smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs", "quartz_stairs"],
+    "dish": ["white_concrete", "smooth_quartz", "polished_andesite", "polished_andesite_slab", "iron_block", "iron_bars", "end_rod"],
+    "glazing": ["glass", "glass_pane"],
+    "hyatt": ["smooth_sandstone", "smooth_sandstone_slab", "light_gray_concrete", "white_concrete", "light_blue_stained_glass_pane"],
+    "aperture": ["gray_concrete", "polished_deepslate", "white_concrete", "black_concrete", "glass_pane", "smooth_stone", "smooth_stone_slab"],
+    "floors": ["polished_diorite", "birch_planks"],
+    "signs": ["blue_concrete", "red_concrete"],
+    "lift": ["soul_sand", "bubble_column", "glass"],
+    "rails": ["iron_bars", "iron_chain"],
+    "doors": ["iron_door"]
+  },
+  "objects": [
+    "sea_lantern",
+    "lantern",
+    "ladder",
+    "bubble_column",
+    "iron_door"
+  ]
+}

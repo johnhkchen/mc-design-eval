@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "ground": ["smooth_stone", "smooth_stone_slab"],
+    "brick_wall": ["bricks", "brick_stairs", "brick_slab"],
+    "base": ["polished_andesite", "polished_andesite_slab"],
+    "chimney_band": ["stone_bricks"],
+    "red_tile_roof": ["polished_granite", "polished_granite_stairs", "polished_granite_slab"],
+    "white_trim": ["smooth_quartz", "smooth_quartz_stairs", "smooth_quartz_slab"],
+    "white_post_rail": ["diorite_wall"],
+    "black_rail_cannon": ["polished_blackstone_wall", "polished_blackstone", "polished_blackstone_slab"],
+    "glass": ["glass_pane", "gray_stained_glass_pane", "iron_bars"],
+    "stucco": ["white_concrete"],
+    "doors": ["spruce_door", "dark_oak_door", "dark_oak_trapdoor"],
+    "red_sign": ["red_wall_banner", "red_wool", "red_concrete", "blue_wool", "white_wool"],
+    "plants": ["azalea_leaves", "oak_leaves", "oak_log"],
+    "light": ["lantern", "lightning_rod"]
+  },
+  "objects": []
+}

@@ -1,0 +1,24 @@
+{
+  "roles": {
+    "nmnh-wall": ["calcite"],
+    "nmnh-rustic": ["stone_bricks", "stone_brick_slab"],
+    "nmnh-plinth": ["polished_diorite"],
+    "nmnh-trim": ["smooth_quartz", "smooth_quartz_slab", "quartz_slab", "quartz_stairs"],
+    "nmnh-column": ["quartz_pillar", "chiseled_quartz_block"],
+    "nmnh-balustrade": ["diorite_wall"],
+    "nmnh-roof": ["brick_stairs", "granite_stairs", "polished_granite_slab"],
+    "nmnh-dome": ["oxidized_copper", "oxidized_cut_copper", "oxidized_cut_copper_slab", "oxidized_cut_copper_stairs"],
+    "nmnh-glass": ["glass_pane", "gray_stained_glass_pane", "glass"],
+    "nmnh-door": ["iron_door"],
+    "nmah-body": ["white_terracotta"],
+    "nmah-deck": ["smooth_stone", "smooth_stone_slab"],
+    "nmah-glass": ["gray_stained_glass_pane", "glass_pane", "glass", "light_gray_stained_glass"],
+    "nmaahc-lattice": ["waxed_copper_grate"],
+    "nmaahc-bronze": ["waxed_cut_copper", "waxed_cut_copper_slab", "waxed_cut_copper_stairs", "waxed_copper_trapdoor"],
+    "nmaahc-glass": ["brown_stained_glass", "black_stained_glass"],
+    "nmaahc-base": ["polished_deepslate_wall"],
+    "walk": ["light_gray_concrete", "smooth_stone"],
+    "lawn": ["grass_block", "gravel"]
+  },
+  "objects": ["lantern", "lightning_rod", "oak_fence", "ochre_froglight", "water", "azalea_leaves", "oak_log", "oak_leaves"]
+}

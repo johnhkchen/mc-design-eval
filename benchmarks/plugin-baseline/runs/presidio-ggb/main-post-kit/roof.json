@@ -1,0 +1,19 @@
+{
+  "style": "hip",
+  "footprint": [0, 7, 23, 14],
+  "y": 10,
+  "pitch": 45,
+  "overhang": 0,
+  "ridge": "none",
+  "maxHeight": 4,
+  "material": "polished_granite",
+  "why": "civic massing in red granite, flush to the plot: an eave at -1 shifts the build",
+  "keep": [
+    { "from": [3, 10, 12], "to": [5, 12, 15] },
+    { "from": [8, 10, 12], "to": [10, 12, 15] },
+    { "from": [13, 10, 12], "to": [15, 12, 15] },
+    { "from": [18, 10, 12], "to": [20, 12, 15] },
+    { "from": [5, 10, 7], "to": [6, 13, 8] },
+    { "from": [17, 10, 7], "to": [18, 13, 8] }
+  ]
+}

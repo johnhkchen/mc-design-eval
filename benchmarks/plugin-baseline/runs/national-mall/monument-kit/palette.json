@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "obelisk_lower": ["smooth_quartz"],
+    "obelisk_upper": ["calcite", "smooth_sandstone"],
+    "pyramidion": ["smooth_sandstone_stairs", "smooth_sandstone", "sandstone_wall"],
+    "tip": ["chain"],
+    "window": ["tinted_glass"],
+    "warning": ["red_stained_glass", "glowstone"],
+    "plaza": ["smooth_stone", "polished_andesite", "polished_andesite_slab", "polished_andesite_stairs"],
+    "pavilion": ["polished_diorite", "smooth_stone_slab", "glass_pane"],
+    "walk": ["white_concrete_powder", "smooth_stone_slab"],
+    "flag": ["end_rod", "white_concrete", "white_wall_banner"],
+    "lamp": ["andesite_wall", "lantern"],
+    "light": ["ochre_froglight"],
+    "ground": ["grass_block", "dirt", "stone"],
+    "tree": ["oak_log", "oak_leaves"],
+    "lodge": ["stone_bricks", "stone_brick_stairs", "stone_brick_slab"]
+  },
+  "objects": ["chain", "tinted_glass", "red_stained_glass", "glowstone", "end_rod", "white_wall_banner", "andesite_wall", "lantern", "ochre_froglight", "glass_pane"]
+}

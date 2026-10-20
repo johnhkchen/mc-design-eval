@@ -1,0 +1,23 @@
+# Presidio Tunnel Tops, the Main Post, the Golden Gate Bridge and the Marin Headlands: sources
+
+| Layer | Source | Licence | Credit |
+|---|---|---|---|
+| lidar | [USGS 3DEP lidar point cloud](https://registry.opendata.aws/usgs-lidar/) | Public domain (US Government work) | U.S. Geological Survey, 3D Elevation Program |
+| aerial | [NAIP aerial imagery (USDA, via Microsoft Planetary Computer)](https://planetarycomputer.microsoft.com/dataset/naip) | Public domain (US Government work) | USDA Farm Production and Conservation Business Center, National Agriculture Imagery Program |
+| parcels | [Assessor Historical Secured Property Tax Rolls](https://data.sf.gov/d/wv5m-vpq2) | Open Data Commons PDDL 1.0 (public domain) | City and County of San Francisco, DataSF |
+| landmarks | [Landmarks Listed in Article 10 of the San Francisco Planning Code](https://data.sf.gov/d/97yj-54sx) | Open Data Commons PDDL 1.0 (public domain) | City and County of San Francisco, DataSF |
+| ground | [Elevation Contours (5 ft)](https://data.sf.gov/d/6d73-6c4f) | Open Data Commons PDDL 1.0 (public domain) | City and County of San Francisco, DataSF |
+| buildings | [Building Footprints (LiDAR heights)](https://data.sf.gov/d/ynuv-fyni) | Open Data Commons PDDL 1.0 (public domain) | City and County of San Francisco, DataSF |
+| streets | [Streets – Active and Retired](https://data.sf.gov/d/3psu-pn9h) | Open Data Commons PDDL 1.0 (public domain) | City and County of San Francisco, DataSF |
+| parks | [Recreation and Parks Properties](https://data.sf.gov/d/gtr9-ntp6) | Open Data Commons PDDL 1.0 (public domain) | City and County of San Francisco, DataSF |
+| water | [National Hydrography Dataset, waterbodies](https://www.usgs.gov/national-hydrography) | Public domain (US Government work) | U.S. Geological Survey, National Hydrography Dataset |
+| paths | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| trees | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| playgrounds | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| canopy | [High Resolution Canopy Height Maps (Meta & WRI)](https://registry.opendata.aws/dataforgood-fb-forests/) | CC BY 4.0 | Meta and World Resources Institute, High Resolution Canopy Height Maps (2024) |
+| rails | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| furniture | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| barriers | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| platforms | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| piers | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| greens | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |

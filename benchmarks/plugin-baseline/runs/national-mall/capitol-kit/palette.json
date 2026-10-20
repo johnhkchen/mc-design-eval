@@ -1,0 +1,21 @@
+{
+  "roles": {
+    "wall": ["smooth_quartz", "smooth_quartz_stairs", "smooth_quartz_slab"],
+    "rusticated": ["quartz_bricks"],
+    "columns": ["quartz_pillar"],
+    "drum": ["calcite"],
+    "balustrade": ["diorite_wall"],
+    "ornament": ["chiseled_quartz_block"],
+    "trim": ["polished_diorite", "polished_diorite_stairs", "polished_diorite_slab"],
+    "deck": ["smooth_stone_slab"],
+    "skylight_curb": ["polished_andesite"],
+    "cupola_cap": ["oxidized_cut_copper", "oxidized_cut_copper_stairs", "oxidized_cut_copper_slab"],
+    "glass": ["gray_stained_glass_pane", "glass"],
+    "light": ["glowstone", "shroomlight", "lantern"],
+    "door": ["dark_oak_door"],
+    "statue": ["polished_blackstone", "polished_blackstone_wall"],
+    "core": ["smooth_stone"],
+    "chain": ["chain"]
+  },
+  "objects": ["white_concrete"]
+}

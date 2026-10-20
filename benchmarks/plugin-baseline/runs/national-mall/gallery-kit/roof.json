@@ -1,0 +1,33 @@
+{
+  "preset": "temple",
+  "footprint": [
+    [
+      42,
+      3,
+      58,
+      8
+    ],
+    [
+      42,
+      31,
+      58,
+      36
+    ]
+  ],
+  "y": 13,
+  "ridgeAxis": "z",
+  "overhang": {
+    "north": 1,
+    "south": 1,
+    "east": 0,
+    "west": 0
+  },
+  "material": "smooth_quartz",
+  "trim": "smooth_quartz",
+  "verge": "smooth_quartz",
+  "gable": "calcite",
+  "alt": [],
+  "texture": false,
+  "why": "plan.md ROOFS: Pope's portico pediments are plain marble (smooth quartz, calcite tympanum), not a mixed tile roof",
+  "pitch": 0.3
+}

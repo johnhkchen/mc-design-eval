@@ -1,0 +1,18 @@
+{
+  "preset": "civic",
+  "style": "gable",
+  "footprint": [13, 58, 33, 78],
+  "y": 27,
+  "ridgeAxis": "z",
+  "pitch": 45,
+  "material": "deepslate_tiles",
+  "texture": false,
+  "alt": [],
+  "eave": "plain",
+  "ridge": "slab",
+  "trim": "smooth_quartz",
+  "verge": "smooth_quartz_stairs",
+  "pediment": false,
+  "edges": false,
+  "overhang": { "north": 0, "south": 1, "east": 0, "west": 0 }
+}

@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "marble": ["calcite", "polished_diorite", "diorite"],
+    "trim": ["polished_diorite_stairs", "polished_diorite_slab", "polished_diorite"],
+    "tracery": ["diorite_wall", "iron_bars"],
+    "highlight": ["smooth_quartz_stairs", "smooth_quartz_slab", "end_rod"],
+    "base": ["polished_andesite", "polished_andesite_slab", "smooth_stone"],
+    "roof": ["deepslate_tile_stairs", "deepslate_tiles", "deepslate_tile_slab", "cobbled_deepslate_stairs"],
+    "copper": ["waxed_oxidized_cut_copper_slab", "waxed_oxidized_cut_copper_stairs", "waxed_oxidized_cut_copper", "waxed_oxidized_copper_grate"],
+    "glass": ["purple_stained_glass_pane", "blue_stained_glass_pane", "red_stained_glass_pane", "yellow_stained_glass_pane", "purple_stained_glass", "blue_stained_glass", "red_stained_glass", "yellow_stained_glass", "glass_pane"],
+    "light": ["ochre_froglight"],
+    "doors": ["waxed_exposed_copper_door", "dark_oak_door"],
+    "lamps": ["polished_blackstone_wall", "lantern"],
+    "bell": ["bell"],
+    "ground": ["grass_block", "moss_block", "oak_log", "oak_leaves"],
+    "chimney": ["deepslate_bricks"]
+  },
+  "objects": []
+}

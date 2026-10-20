@@ -1,0 +1,24 @@
+{
+  "roles": {
+    "fill": ["stone"],
+    "field": ["smooth_stone", "smooth_stone_slab"],
+    "granite": ["polished_andesite", "polished_andesite_slab", "polished_andesite_stairs", "andesite_wall"],
+    "railing": ["iron_bars"],
+    "road": ["gray_concrete"],
+    "dark_stone": ["polished_blackstone_bricks", "deepslate_tiles", "polished_blackstone", "polished_blackstone_slab", "chiseled_polished_blackstone"],
+    "gold": ["gold_block", "raw_gold_block", "yellow_terracotta"],
+    "water": ["water"],
+    "rink": ["packed_ice", "white_concrete"],
+    "glass": ["glass_pane"],
+    "birch": ["birch_fence", "birch_door", "birch_pressure_plate"],
+    "pool_floor": ["prismarine_bricks"],
+    "planter": ["grass_block", "moss_block"],
+    "flag_wool": ["red_wool", "white_wool", "blue_wool", "green_wool", "yellow_wool", "black_wool", "orange_wool", "light_blue_wool"]
+  },
+  "objects": [
+    "lantern", "candle", "ochre_froglight", "shroomlight", "end_rod", "waxed_exposed_copper", "lightning_rod",
+    "azalea", "flowering_azalea", "azalea_leaves", "flowering_azalea_leaves", "oak_leaves",
+    "allium", "red_tulip", "orange_tulip", "pink_tulip", "white_tulip", "peony", "rose_bush", "lilac", "cornflower", "oxeye_daisy",
+    "polished_blackstone_wall"
+  ]
+}

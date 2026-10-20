@@ -1,0 +1,90 @@
+{
+  "style": "hip",
+  "material": {
+    "mix": [
+      [
+        "brick",
+        100
+      ]
+    ],
+    "eave": "brick",
+    "ridge": "polished_granite",
+    "verge": "brick"
+  },
+  "pitch": "half",
+  "overhang": 0,
+  "why": "NMNH ranges sit behind the balustrade with no eave, as plan.md ROOFS says (overhang 0, grow false)",
+  "ridge": "slab",
+  "grow": false,
+  "y": 12,
+  "footprint": [
+    [
+      22,
+      33,
+      92,
+      41
+    ],
+    [
+      25,
+      3,
+      88,
+      11
+    ],
+    [
+      48,
+      12,
+      66,
+      17
+    ]
+  ],
+  "keep": [
+    {
+      "from": [
+        48,
+        12,
+        18
+      ],
+      "to": [
+        66,
+        19,
+        36
+      ]
+    },
+    {
+      "from": [
+        47,
+        1,
+        33
+      ],
+      "to": [
+        67,
+        16,
+        39
+      ]
+    },
+    {
+      "from": [
+        22,
+        1,
+        8
+      ],
+      "to": [
+        31,
+        13,
+        42
+      ]
+    },
+    {
+      "from": [
+        83,
+        1,
+        8
+      ],
+      "to": [
+        92,
+        13,
+        42
+      ]
+    }
+  ]
+}

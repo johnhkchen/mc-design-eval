@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "limestone": ["white_terracotta"],
+    "coping": ["smooth_sandstone_stairs", "smooth_sandstone_slab"],
+    "spandrel": ["gray_terracotta"],
+    "windowDark": ["gray_stained_glass_pane", "black_concrete"],
+    "windowLit": ["yellow_stained_glass_pane", "shroomlight"],
+    "shopGlass": ["glass_pane", "glass"],
+    "bronze": ["polished_blackstone", "polished_blackstone_stairs", "polished_blackstone_slab", "polished_blackstone_wall"],
+    "plinth": ["polished_andesite", "polished_andesite_slab"],
+    "deck": ["smooth_stone", "smooth_stone_slab"],
+    "sign": ["red_stained_glass"],
+    "wisdom": ["gold_block", "yellow_terracotta", "light_blue_terracotta", "cyan_terracotta", "smooth_quartz", "black_terracotta"],
+    "mast": ["iron_bars", "lightning_rod"],
+    "garden": ["grass_block", "moss_block", "oak_leaves", "flowering_azalea"],
+    "lamp": ["lantern"]
+  },
+  "objects": ["white_wall_banner", "blue_wall_banner", "red_wall_banner", "yellow_wall_banner", "green_wall_banner"]
+}

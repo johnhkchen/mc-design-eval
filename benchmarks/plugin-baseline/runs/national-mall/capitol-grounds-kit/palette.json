@@ -1,0 +1,12 @@
+{
+  "roles": {
+    "marble": ["smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs", "quartz_pillar", "quartz_stairs", "quartz_slab", "quartz_bricks"],
+    "trim": ["polished_diorite", "polished_diorite_slab", "diorite_wall"],
+    "bronze": ["polished_blackstone", "polished_blackstone_slab", "polished_blackstone_stairs", "polished_blackstone_wall"],
+    "pool_plaza": ["polished_andesite", "polished_andesite_slab", "smooth_stone", "smooth_stone_slab", "water"],
+    "walks": ["smooth_sandstone", "smooth_sandstone_slab", "smooth_sandstone_stairs"],
+    "ground": ["grass_block", "dirt", "stone", "podzol", "rooted_dirt", "moss_block", "dirt_path"],
+    "trees": ["dark_oak_log", "dark_oak_leaves", "oak_leaves", "azalea_leaves", "flowering_azalea_leaves"]
+  },
+  "objects": ["decorated_pot", "lantern", "shroomlight", "glowstone"]
+}

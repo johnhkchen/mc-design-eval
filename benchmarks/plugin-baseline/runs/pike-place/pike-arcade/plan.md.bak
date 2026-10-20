@@ -1,0 +1,245 @@
+# Pike Place Market: Main Arcade and North Arcade (plot 0), form plan
+
+## SITE
+
+- Plot: x 0..42, z 0..311, y 0..82. Build only on footprint cells. Column x 42 is never built (not in the footprint).
+- **Orientation (site, not the generic "front faces north"):** the street front faces **EAST (+x)** onto Pike Place. Pike Place runs along z (north-west end at z 0, Pike Street at z 311). Elliott Bay is west (low x, downhill). Pike Street runs east-west past the south end (z 311). Hero corner = south-east corner (x 34..41, z 280..311).
+- Ground: the street edge (x 35..41) sits at y 18..23 and rises toward the south. The ground falls west to y 2..7 at x 0. **Rule for every outer wall column:** the footing goes down to (ground of that 7x7 cell − 2). Nothing floats; the extra buried masonry doesn't matter.
+- Floor convention: a floor value F is the y of the floor BLOCK, and people stand at F+1.
+
+Footprint, decoded (7x7 cells):
+
+| rows | z | footprint x |
+|---|---|---|
+| 0–18 | 0..132 | 28..34 |
+| 19–22 | 133..160 | 28..41 |
+| 23–26 | 161..188 | 21..41 |
+| 27–31 | 189..223 | 14..41 |
+| 32–35 | 224..251 | 7..41 |
+| 36–43 | 252..307 | 0..41 |
+| 44 | 308..311 | 7..41 |
+
+Masses (all coordinates are inclusive):
+
+| # | mass | x | y | z | notes |
+|---|---|---|---|---|---|
+| A | North Arcade shed (open market on posts) | 28..34 | 19..28 | 0..132 | floor 19; west wall x 29; post line x 33; roof covers 28..34 |
+| A-f | North Arcade footing / plinth | 28..34 | ground−2 .. 18 | 0..132 | solid masonry under the floor; west face x 28 |
+| B1 | North Arcade hall (wider shed) | 28..41 | 20..31 | 133..160 | floor 20; west wall x 29; post line x 40 |
+| B1-f | its plinth | 28..41 | ground−2 .. 19 | 133..160 | |
+| B2 | Upper market building, north (2 storeys) | 21..33 | 20..36 | 161..188 | street floor 20, upper floor 26, walls to y 31, eave course y 32 |
+| C | Upper market building, Main Arcade (3 storeys) | 14..33 | 22..45 | 189..279 | street floor 22, floors 28 and 34, walls to y 39, eave course y 40 |
+| S | Street arcade shed (stalls) | 34..41 | 20/22..29 | 161..279 | floor 20 (z 161..188), 22 (z 189..279); post line x 40; eave x 41 |
+| D | Corner block at Pike Street (3 storeys, flat roof) | 14..41 | 23..43 | 280..311 | floor 23: open arcade storey y 24..28, floors 29 and 35, walls to y 41, roof deck y 42, parapet y 43 |
+| DU | Down Under (the stone base under street level) | west edge of footprint .. 33 | ground−2 .. street floor | 161..311 | follows the footprint steps; levels at floor 2, 7, 12, 17 |
+| T | West terraces on the Down Under roof | x 7..13 (z 224..251), x 0..13 (z 252..307), x 7..13 (z 308..311) | 22 (deck), 23 (parapet) | | deck y 22 (y 23 for z 280..311), parapet wall on the outer edge |
+| SG | PUBLIC MARKET CENTER sign | 37..39 | 43..70 | 279..310 | stands on D's roof deck (legs y 43..47, board y 48..69, top rail y 70) |
+| CK | Corner clock, two faces | east face x 41, south face z 311 | 35..41 | | see FACADES |
+| MP | MEET THE PRODUCER board | x 41 (raised parapet) | 42..45 | 281..299 | |
+
+There are no stairs to the street inside the plot. The street floors are at street grade. Where two street floors meet (z 132/133: 19→20, z 160/161 continuous at 20, z 188/189: 20→22, z 279/280: 22→23), the aisle steps up by slab ramps (half steps, at most 3 then a level landing of 2) inside the arcade, at x 34..39.
+
+## ROOFS
+
+| roof | over | form | pitch | ridge | eave course | overhang | material |
+|---|---|---|---|---|---|---|---|
+| R-A | A, x 28..34, z 0..132 | gable, ridge along z (by type a market shed; `shop` preset rules, but with the ridge along the street) | ~0.75 | x 31, y 28 | y 25 | 1 (walls x 29/33, eave at x 28/34); north gable end at z 0 overhang 0 | `dark-slate` palette, dark oak verge, stone brick ridge |
+| R-B1 | B1, x 28..41, z 133..160 | gable, ridge along z | ~0.6 | x 34–35, y 31 | y 27 | 1 (walls x 29/40, eave x 28/41) | `dark-slate` |
+| R-S | S, x 34..41, z 161..279 | shed (lean-to) falling east, high side against the upper wall | ~0.3 | high edge x 34: y 27 (z 161..188), y 29 (z 189..279) | low eave x 41: y 25 (z 161..188), y 27 (z 189..279) | 1 past the posts (x 41); 0 at the north end | `dark-slate`, dark oak fascia |
+| R-B2 | B2, x 21..33, z 161..188 | low gable, ridge along z | 0.5 | x 27, y 36 | y 32 | 1 west (x 20 is off-footprint, so overhang 0 there; run the wall at x 22 if the tool insists on 1) | `dark-slate` |
+| R-C | C, x 14..33, z 189..279 | low gable, ridge along z | 0.5 | x 23–24, y 45 | y 40 | 1 east over the shed and west over the terraces; the north gable at z 189 faces R-B2 (gable wall in `quartz_bricks`, keep) | `dark-slate` palette, `smooth_quartz` cornice under the eave |
+| R-D | D, x 14..41, z 280..311 | flat roof deck (by type the `modern` flat-parapet preset): deck y 42, white parapet y 43 with `smooth_quartz_slab` coping | flat | — | y 41 cornice | cornice 0 (footprint edge) | deck `smooth_stone`, parapet `smooth_quartz` |
+
+- Roofs meet by abutment. R-S's high edge stops flush against the upper building's east wall at x 33 (B2, C), with a slab flashing course. R-C's south end butts into D's north wall (D is taller, y 43 vs C eave 40; R-C's ridge at y 45 rises above D's parapet, so D's north wall rises in a stepped gable up to y 45 behind it, built by hand). R-B2 meets C's north gable at z 189. R-B1's south gable meets B2/S at z 160/161. R-A's south end butts under R-B1's north gable at z 132/133.
+- Chimneys (the concept's dark stacks on the ridge): brick stacks 2x2 on R-C at (x 23..24, z 214..215) and (x 23..24, z 254..255), and on R-B2 at (x 27..28, z 174..175), each rising 3 above the ridge. These are dummy stacks (exterior only, no hearths), so they go in the roof's `keep`.
+- Hand-built roofs: R-D's stepped north gable wall, and the shed's slab flashing.
+
+## FACADES
+
+**East (street) face, the hero.** Base, middle, top read left to right as low tail → market → corner.
+
+| zone | base (street floor) | middle | top |
+|---|---|---|---|
+| A, z 0..132 | open: `green_concrete` posts x 33 at z 1, 5, 9 … 129 (every 4), y 20..24, each with an upside-down `dark_oak_stairs` bracket under the head beam; head beam `dark_oak_planks` y 25 along x 33; red/white awning valance on it | — | R-A eave |
+| B1, z 133..160 | posts x 40 at z 133, 137 … 157, y 21..26; head beam y 27 | — | R-B1 |
+| S, z 161..279 | stall front: posts x 40 every 4 (z 161, 165 … 277), y floor+1 .. floor+4; head beam/fascia `dark_oak_planks` at x 40..41, y floor+5; **awning valance** hanging one below the fascia on x 41, alternating `red_wool`/`white_wool` per cell; a hanging lantern under the beam in every bay; counters x 37..39 heaped with produce; aisle x 34..36; shop doors in the upper wall x 33 | upper wall x 33 above R-S: `quartz_bricks`; C storeys 28 and 34 show (windows rows y 30..32 and y 36..38); B2 storey 26 shows (window row y 28..30); `smooth_quartz` pilaster (1 proud, at x 34) on every 3rd pier | `smooth_quartz` string course (slab, 1 proud) at y 34 (C) under the top storey; eave cornice `smooth_quartz_stairs` upside down, 1 proud, y 39 (C) / y 31 (B2) |
+| D, z 280..311 | open arcade storey y 24..28: posts x 41 at z 280, 284 … 308 and the corner post (41, 311); head beam y 29 `dark_oak_planks`; Pike Place Fish ice beds x 35..40, z 296..309 | storeys 29 and 35 in `quartz_bricks`, windows (below); `smooth_quartz` quoins at the corner (41, z 311) and (41, z 280), paired 2-on/2-off | cornice `smooth_quartz_stairs` y 41, 1 proud only where it stays inside the footprint (so recessed: the wall face at x 40 for y 30..40 and the cornice at x 41); parapet y 43; MP board; clock |
+
+Depth on D: the upper wall plane is x 40 for y 30..40, set back 1 from the post line x 41, so that the cornice (x 41, y 41), the quoins (x 41) and the clock (x 41) stand proud of it.
+
+**South face (z 311, Pike Street):** the arcade storey is open at x 34..41 (corner entrance, posts at x 34 and x 41). Westward the face drops into the Down Under (x 7..33, `stone_bricks`) with window tiers by the DU rule. The upper storeys 29/35 of D run x 14..41 with windows. The second clock face sits here.
+
+**West face (bay side).**
+- Down Under walls `stone_bricks` on faces x 0 (z 252..307), x 7 (z 224..251 and z 308..311), x 14 (z 189..223), x 21 (z 161..188), and the north-facing step faces z 161 (x 21..27), z 189 (x 14..20), z 224 (x 7..13), z 252 (x 0..6).
+- Plinth: `cobbled_deepslate` from the footing up to ground+1. String course `stone_brick_stairs` (upside down, 1 proud) at each level line y 7, 12, 17. Top: parapet coping at the terrace edge, `stone_brick_wall` at y 23 (y 24 over D).
+- Upper building west face x 14 (C, z 189..279) and x 21 (B2): `quartz_bricks`, same window rhythm as the east face, cornice as on the east face. Over z 189..223 it rises sheer from the DU face (the full Down Under drop + 3 storeys: the tallest wall over the bay).
+- A North Arcade west wall x 29 above its plinth (x 28 face below y 19): `quartz_bricks` y 20..24 with 2-wide windows. Plinth `stone_bricks`.
+
+**Rhythm:** one bay = 6 blocks along z. Bay k starts at z = 190 + 6k (C, D: k = 0..20). Window = 4 wide at z start+1..start+4, then a 2-wide pier. B2 uses the same grid running back (z 184−6k).
+
+## MATERIALS
+
+| role | block |
+|---|---|
+| upper body (white-painted brick) | `quartz_bricks` |
+| trim: pilasters, quoins, string courses, cornice | `smooth_quartz`, `smooth_quartz_stairs`, `smooth_quartz_slab` |
+| Down Under body | `stone_bricks` (cracked/mossy at most 1 in 10, near the ground) |
+| base plinth | `cobbled_deepslate` |
+| DU string courses, terrace parapet | `stone_brick_stairs`, `stone_brick_wall` |
+| arcade posts (green-painted) | `green_concrete` |
+| beams, fascia, window frames, sills | `dark_oak_planks`, `dark_oak_stairs`, `dark_oak_trapdoor` |
+| awning valance | `red_wool` / `white_wool` alternating |
+| roofs | `dark-slate` palette (`deepslate_tiles` base) |
+| flat roof deck | `smooth_stone` |
+| arcade floor | `polished_andesite` with a `smooth_stone` edge |
+| glass | `glass_pane` (multi-pane read from the frames) |
+| window glow (one cell behind the glass) | `ochre_froglight` |
+| stall and street light | `lantern` (hanging) |
+| sign board / frame | `white_concrete` board, `iron_bars` lattice legs and bracing, `white_concrete` frame rails |
+| sign letters (red neon) | `red_stained_glass` letter faces at x 39, `glowstone` behind each letter cell at x 38, `white_concrete` back skin at x 37 |
+| clock | dial `white_concrete`, bezel/ring `red_concrete` (neon ring), hands `black_concrete` |
+| MEET THE PRODUCER | board `dark_oak_planks`; banner letters white on brown |
+| fish ice beds | `packed_ice` |
+| chimneys | `bricks`, cap `stone_brick_slab` |
+
+All ids pass `$MCD blocks --check` and all exist in 1.21.1. There is nothing post-1.21.1 here (no pale oak, no `iron_chain`; use `chain` for any hanging lamp).
+
+## OPENINGS
+
+East face (all open bays are air between the posts):
+- A: open from y 20..24 at x 33 between the posts, all along z 0..132.
+- B1: open y 21..26 at x 40, z 133..160.
+- S: open y floor+1..floor+4 at x 40, z 161..279.
+- D: open y 24..28 at x 41, z 280..311, and on the south face z 311 at x 34..41.
+- Shop doors in the upper wall behind the arcade: x 33, 2 wide, at every 2nd bay (z start+2..start+3), y floor+1..floor+2 (C: y 23..24; B2: y 21..22). Glazed shopfront panes in the remaining bays at y 23..25 (C) / 21..23 (B2).
+- Upper windows, C east (x 33) and west (x 14): 4 wide × 3 tall at y 30..32 (storey 28) and y 36..38 (storey 34), per bay. West x 14 also has y 24..26 (storey 22).
+- B2 east (x 33) and west (x 21): 4 × 3 at y 28..30, per bay (the bay grid runs from z 184).
+- D east (x 40) and south (z 311, x 15..39): 4 × 3 at y 31..33 and y 37..39 per bay (south bays: x 16..19, 22..25, 28..31, 34..37). Cells under the clock are left out (see RESERVED).
+- North Arcade west wall x 29: 2 × 2 windows at y 21..22, z 2+4k..3+4k.
+
+Down Under windows (west faces and the north-facing step faces): for each level floor f in {2, 7, 12, 17}, windows 3 wide × 2 tall at y f+2..f+3, centred in each bay (z start+1..start+3; on the step faces x the same 6-grid from the west edge). A window exists only where f+1 > the ground of that cell. Below that the face is blank masonry.
+
+Doors at grade:
+- Down Under: x 0, z 300..301, y 8..10 (level 7, ground 6–7 there), with a slab ramp outside.
+- x 7, z 236..237, y 13..15 (level 12; the ground there is 9–10, so the door opens straight to grade).
+- x 14, z 200..201, y 13..15 (ground 12–13).
+- South face z 311: x 10..11, y 13..15 (ground 10–12).
+
+## RESERVED (the shell leaves these as air)
+
+- Post line cells between posts (above).
+- Counters/stall tables: x 37..39, floor+1, along S (z 161..279) and B1 (x 34..38 tables in rows, z 134..159); North Arcade craft tables x 30..32, y 20, z 2..130, in rows of 2 with 1-cell lanes.
+- Fish ice beds: x 35..40, y 24..25, z 296..309.
+- Clock east face: x 41, y 35..41, z 302..308 (radius 3, flush; `smooth_quartz` surround, no window there). Clock south face: z 311, y 35..41, x 33..39.
+- MEET THE PRODUCER board: x 41, y 42..45, z 281..299 (it rises out of the parapet; the parapet leaves these cells).
+- Sign SG: x 37..39, y 43..70, z 279..310. Legs at x 38, z 281, 289, 297, 305, y 43..47 (lattice `iron_bars` between); board plane x 38 y 48..69; letters x 39; back x 37. Three lines, narrow block font, 5 rows each: PUBLIC y 62..66, MARKET y 55..59, CENTER y 48..52 (with margins inside the board, frame rail y 70 and y 47). Facing east, the letters read left to right toward −z. Use `plaque(..., face: "east")`, never a hand loop.
+- Chimney stack cells (roof `keep`): R-C (x 23..24, z 214..215) and (x 23..24, z 254..255); R-B2 (x 27..28, z 174..175); from eave to ridge+3.
+- Hanging lanterns: one per bay under the head beams (x 39, y floor+4).
+
+## FLOORS
+
+| mass | floors (floor block y) | interior volume |
+|---|---|---|
+| A | 19 | x 30..32, y 20..24, z 0..132 (open) |
+| B1 | 20 | x 30..39, y 21..26, z 133..160 |
+| S | 20 / 22 | x 34..39, y floor+1..floor+4 |
+| B2 | 20, 26 | x 22..32, z 162..187 |
+| C | 22, 28, 34 | x 15..32, z 190..278 |
+| D | 23, 29, 35 | x 15..39, z 281..310 (storey 23 open arcade x 34..40) |
+| DU | 2, 7, 12, 17 (each 5 tall, walk at f+1) | under B2, C and D, from the footprint's west edge to x 33 |
+
+Exterior only. Interiors show only through glass: the lit stalls, the shop fronts at x 33, and the `ochre_froglight` glow one cell behind every upper and Down Under window.
+
+---
+# DESIGNER SECTIONS (below the architect's form; nothing above is changed)
+
+## PALETTE
+
+Architect's ids kept exactly (see MATERIALS). Shape variants and extras (all verified with `$MCD blocks --check`; only `chain` is flagged, because the toolkit names the newer `iron_chain`: **on 1.21.1 write `chain`**).
+
+| role | blocks |
+|---|---|
+| white brick | `quartz_bricks` |
+| trim | `smooth_quartz`, `smooth_quartz_stairs`, `smooth_quartz_slab` |
+| Down Under | `stone_bricks`, `cracked_stone_bricks`, `mossy_stone_bricks` (<=1 in 10, low), `stone_brick_stairs`, `stone_brick_slab`, `stone_brick_wall` |
+| plinth | `cobbled_deepslate`, `cobbled_deepslate_stairs` |
+| posts | `green_concrete` |
+| timber | `dark_oak_planks`, `dark_oak_stairs`, `dark_oak_slab`, `dark_oak_fence`, `dark_oak_trapdoor`, `dark_oak_door`, `stripped_dark_oak_log` |
+| awning | `red_wool`, `white_wool` |
+| roofs | `dark-slate` palette (`deepslate_tiles`, `deepslate_tile_stairs`, `deepslate_tile_slab`), verge `dark_oak_stairs`, ridge `stone_brick_slab` |
+| deck/floor | `smooth_stone`, `smooth_stone_slab`, `polished_andesite`, `polished_andesite_slab` |
+| glass | `glass_pane`, `ochre_froglight` (glow) |
+| sign | `white_concrete`, `iron_bars`, `red_stained_glass`, `red_stained_glass_pane`, `glowstone`, `redstone_lamp` (lit=true), `red_concrete`, `black_concrete` |
+| ice/fish | `packed_ice`, `dried_kelp_block`, `red_wool`, `pink_wool`, `light_gray_wool`, `orange_wool`, `barrel` |
+| produce | `melon`, `pumpkin`, `hay_block`, `red_wool`, `orange_wool`, `yellow_wool`, `green_wool`, `flowering_azalea_leaves` (persistent=true), `moss_block`, `flower_pot` with `potted_red_tulip`/`potted_poppy`/`potted_cornflower`/`potted_allium`/`potted_orange_tulip`, `cauldron`, `composter`, `candle` (lit) |
+| lights | `lantern` (hanging=true under beams, on `chain`), `lantern` standing on posts |
+| chimney | `bricks`, `stone_brick_slab` |
+| text | `dark_oak_hanging_sign`, `dark_oak_wall_sign`, banners (`red_banner`, `white_banner`, `brown_banner`) via plaque/bannerWord |
+
+## VOCABULARY
+
+Helpers all take `g` (grid) first; `face` is the direction the thing looks (east for the street).
+
+- `post_bay(g, {x, z, y0, h, beamY})`: `green_concrete` column y0..y0+h-1; at (x±1 along street, beamY-1) NOT used; upside-down `dark_oak_stairs` (half top, facing away from the post) on the two cells either side along z at y=beamY-1; `dark_oak_planks` beam block at (x,beamY,z) and the run between posts. Footing: post stands on `polished_andesite`.
+- `awning(g, {x, y, z0, z1})`: for each z, wool at (x, y, z): `red_wool` if (z-z0) is even else `white_wool`; below it a `dark_oak_trapdoor` open=false half=top at (x, y-1, z) every 2nd cell is NOT used (keep walk clear). One row only (valance), y >= floor+4.
+- `hang_lamp(g, {x, y, z})`: `chain` axis y at (x,y+1,z) below beam y+2, `lantern` hanging=true at (x,y,z). Beam must be at y+2; y>=floor+4 (where the arcade is 5 tall: y=floor+4 => beam floor+5, chain one cell).
+- `stall(g, {x0, x1, z0, z1, y, kind})`: base `dark_oak_planks` row at y, top `dark_oak_slab` (type top) at y+1 (counter surface y+1 = top face at y+2 level: goods stand on a FULL block, so goods go on the plank cells; slab is only the front lip). Concretely: counter cells x37..39: planks at y floor+1; goods layer at floor+2. Kinds: `produce` (rows: melon | pumpkin | hay_block | `red_wool` heap + `green_wool` cap), `flowers` (`flower_pot`s with potted flowers in rows, `cauldron`+`flowering_azalea_leaves` buckets), `fish` (`packed_ice` + wool fish rows), `honey` (`honeycomb_block`, `beehive` not used, `candle`), `crates` (`barrel` facing up 2 high, `dark_oak_trapdoor` lid). Sloped front: `dark_oak_stairs` facing east (half bottom) at x39 for heaped look. Never block the aisle x34..36 or z-gaps at post lines.
+- `produce_row(g, {x, y, z0, z1, block})`: alternate blocks along z; every 4th cell a `barrel` crate (facing up) with `dark_oak_trapdoor` lid.
+- `flower_bucket(g, {x, y, z, flower})`: `cauldron` at (x,y,z), `flowering_azalea_leaves` persistent on top at y+1 (or `potted_*` pot on a plank slab); sit against a post base.
+- `stall_sign(g, {x, y, z, text})`: `dark_oak_fence` bracket at (x,y+1,z) hanging from the beam (x,y+2,z) and `dark_oak_hanging_sign` below at (x,y,z) with text via `signboard(g, text, {mode:"hanging", wood:"dark_oak"})`; text in 1.21.1 `front_text`.
+- `window_bay(g, {x or z, y, start, face, w:4, h:3, glow:true})`: `glass_pane` 4x3 with a centre muntin: middle column cell(s) `dark_oak_trapdoor` open=true pressed to the glass side, plus transom row (top row replaced by `dark_oak_trapdoor` half top closed? no: keep glass) => reads as 6 panes; sill `smooth_quartz_slab` type top 1 proud at y-1; lintel `smooth_quartz_stairs` half top at y+h, facing out; `ochre_froglight` at the cell behind (inside the wall line, one in) for every pane column; panes connect (set north/south/east/west states along the wall).
+- `pier_bay(g, {face, z0})`: the 2-wide pier between windows, `quartz_bricks`; on every 3rd pier a `smooth_quartz` pilaster 1 proud (x34 on the east face of C/B2) full height of the storey, with `smooth_quartz_stairs` cap.
+- `cornice(g, {x, y, z0, z1, face})`: `smooth_quartz_stairs` half top facing out, 1 proud, along the eave; under it a `smooth_quartz_slab` (type top) course for depth. At the corner D: only inside the footprint.
+- `string_course(g, {y, ...})`: `smooth_quartz_slab` type bottom, 1 proud, one run along the face at y34 (C).
+- `shop_door(g, {x, y, z, face})`: `dark_oak_door` lower + upper, 2 wide (double, hinge left/right mirrored), facing out (east), sidelight panes, transom of `glass_pane`; lintel `smooth_quartz_stairs`.
+- `du_window(g, {face, f, start})`: 3x2 `glass_pane` at y f+2..f+3 centred in the 6-bay; sill `stone_brick_slab` top, lintel `stone_brick_stairs` upside-down; `ochre_froglight` behind. Only where f+1 > ground.
+- `du_course(g, {face, y})`: `stone_brick_stairs` half top, 1 proud, along the whole face at y 7, 12, 17.
+- `terrace_edge(g, {...})`: `smooth_stone` deck, `stone_brick_wall` parapet on the outer edge, `smooth_stone_slab` coping optional, planters of `barrel` + `flowering_azalea_leaves`.
+- `quoins(g, {x, z, y0, y1})`: `smooth_quartz` in pairs 2-on/2-off up the corner on both faces.
+- `ramp(g, {x0, x1, z, from, dir})`: bottom `polished_andesite_slab` run 1..3 then level landing 2 (the aisle steps at z132/133, 188/189, 279/280), 3 wide at least, never stairs.
+- `craft_table(g, {x0, z, y})`: 2 long (z, z+1), x30..32: `dark_oak_fence` legs at the 4 corners, top `dark_oak_slab` (top), wares: `flower_pot` (potted_*), `candle` lit on the slab? NO candles on slab tops are fine only on TOP slabs; `decorated_pot` on top slab; lane of 1 between pairs.
+- `stack(g, {x, z, y0, ridgeY})`: 2x2 `bricks` from y0 (the eave) to ridgeY+3, one `deepslate_bricks`... use `stone_bricks` band at ridgeY+1, cap `stone_brick_slab` stepped out (no flue, dummy). Cells in roof `keep`.
+- `parapet(g, {...})`: `smooth_quartz` wall y43 with `smooth_quartz_slab` coping y44 (top), skipping the MP board cells.
+- `neon_sign(g, {x:37..39, y0:43, z0:279..310})`: legs at x38 z281,289,297,305: `iron_bars` y43..47 with `white_concrete` bracing at y47 (rail beam x37..39 along z 279..310); board x37..39 y48..69: back skin `white_concrete` x37, `glowstone` at x38 behind each LETTER cell only (else `white_concrete`), face x39 `white_concrete` except letters: `red_stained_glass` (letters via `plaque(g,"PUBLIC",{face:"east", at:[39,62,..], width, height:5, letter:"red_stained_glass", material:null})`), outline border one cell inside the board edge of `red_stained_glass` with `redstone_lamp` lit=true behind at x38; top rail y70 `white_concrete` + `iron_bars` finials. Letters read left to right toward -z. Lines: PUBLIC y62..66, MARKET y55..59, CENTER y48..52.
+- `market_clock(g, {center, face, radius:3})`: `clock()` with `white_concrete` dial, `red_concrete` bezel replaced at 12 hour marks by `black_concrete` on 3/6/9/12, `black_concrete` hands 10:10; neon ring: second ring cell outside the bezel in `red_stained_glass` over `glowstone` (glow x40 behind, in the wall); `smooth_quartz` surround square; "PUBLIC MARKET" `bannerWord` (red on white) on a `white_concrete` strip one row under it, y35 (inside z302..308 7 wide: use 2-line "PUBLIC"/"MARKET" via plaque banner letters on y34 row if needed; else omit).
+- `producer_board(g, {x:41, y:42..45, z:281..299})`: `dark_oak_planks` board, `dark_oak_stairs` frame rim, `bannerWord`/`plaque` "MEET THE PRODUCER" white on brown (banner letters in a 2-4 row band, shortened to "MEET THE PRODUCER" over 19 columns, one column per char).
+- `ice_bed(g, {x0..x1, z0..z1, y})`: `dark_oak_planks` trough y24, `packed_ice` y25 heaped (one cell at y26 randomly), fish: rows of `red_wool` / `pink_wool` / `light_gray_wool` / `orange_wool` laid on the ice in diagonal rows (a salmon row, a crab row `red_concrete`), kelp `dried_kelp_block`; `lantern` standing on a post at the corners; chalk board = `dark_oak_wall_sign` "FRESH FISH".
+
+## ROOMS
+
+Exterior-only build; the interiors that show are open arcades and shop interiors behind glass. Room boxes are the architect's FLOORS volumes (inner air).
+
+| room | box | purpose | ways in |
+|---|---|---|---|
+| North Arcade craft market | [30,20,0,32,24,132] | open covered market on posts: rows of craft tables x30..32, lantern hung from truss every 4 z, warm dusk | open east side at x33 between posts z 2+4k; north end z 0 open |
+| North Arcade hall (B1) | [30,21,133,39,26,160] | wider hall with stall tables x34..38 in rows, a flower stall and a baker; hung lanterns centre line | open x40 between posts (z133..160); ramp from A at z132/133 |
+| Street stall arcade, north (S, floor 20) | [34,21,161,39,24,188] | produce, flowers, honey stalls, counters x37..39, aisle x34..36 | open at x40 bays between posts; shop doors x33 at y21..22 |
+| Street stall arcade, main (S, floor 22) | [34,23,189,39,26,279] | the heart of the market: produce, flower, craft stalls heaped with colour, lamps every bay, hand-painted signs | open at x40 between posts z 161+4k; ramp at z188/189 from the north arcade; doors x33 y23..24 |
+| Pike Place Fish corner | [35,24,284,40,28,310] | iconic fish market: ice beds x35..40 z296..309, chalk signs, lanterns, orange/red fish rows | open at x41 between posts z280..308 and south face z311 x34..41 |
+| Shopfronts behind the arcade (C ground) | [15,23,190,32,27,278] | lit shops seen only through glass: shelves, lamp glow, counters near the x33 glass | doors x33 z start+2..start+3 (y23..24) |
+
+Stairs: none inside the plot; floor steps are slab ramps at z132/133, 188/189, 279/280 (x34..39).
+
+**entrance** (just outside the main door, the arcade bay at the hero corner): (41, 23, 285), a cell in the open arcade storey of D; **street** (Pike Place, off footprint): (43, 23, 285). The street edge is level with the arcade floor (floor 23 at D), so the way in is level; where the street meets floors 20/22 the ground is graded to match (slab ramps 2 wide, half steps only). All of x 42.. is outside the plot; place the ramp inside x34..41 if the street is lower.
+
+## PARTS
+
+1. **South shell: Down Under, main building, corner block** (parts/shell-south.mjs). Footings to ground-2 (use the GROUND map, per 7x7 cell: each outer wall column down to its ground-2), `cobbled_deepslate` plinth to ground+1, `stone_bricks` DU walls with levels 2, 7, 12, 17 (floor `smooth_stone`/`polished_andesite`), C walls x14/x33 z189..279 with floors 22/28/34 (walls to y39), D walls x14..41 z280..311 floors 23/29/35, roof deck y42, terraces T. Leave every opening of OPENINGS as air (windows, doors). Vocab: `terrace_edge`, `du_course`, `pier_bay`.
+2. **North shell, shed frame and arcade floor** (parts/shell-north.mjs). Masses A (footing, floor y19, west wall x29, posts, head beam), B1, B2 (walls x22/x33 to y31, floors 20/26), S frame (posts x40 each 4, head beam y floor+5, arcade floor `polished_andesite` with `smooth_stone` edge, ramps), D open storey posts. Vocab: `post_bay`, `ramp`, `pier_bay`.
+3. **Roofs and chimneys** (parts/roofs.mjs): write roof.json per ROOFS table (R-A, R-B1, R-S, R-B2, R-C each as `footprint` rect with `keep` for stacks; `dark-slate`), then by hand: R-D deck + parapet y43, stepped north gable of D to y45, the slab flashing along x33/34, `stack` x3. Run `$MCD roof ... --dry-run` and fix warnings. Vocab: `parapet`, `stack`.
+4. **Facades: windows, doors, trim, awnings, lighting** (parts/facades.mjs). All `window_bay` on C, B2, D, A west, DU windows with glow, `shop_door`s + panes at x33, `string_course`, `cornice`, `quoins`, `awning`, `hang_lamp` per bay, `stall_sign`s, DU doors and ramps. Vocab: `window_bay`, `du_window`, `shop_door`, `cornice`, `string_course`, `quoins`, `awning`, `hang_lamp`, `stall_sign`.
+5. **Corner landmarks: sign, clock, board, fish market** (parts/landmarks.mjs): `neon_sign` (SG), both `market_clock`s, `producer_board`, `ice_bed`s with fish. Check letters render left to right from the east. Vocab: `neon_sign`, `market_clock`, `producer_board`, `ice_bed`.
+6. **Stalls, craft tables, grounds** (parts/stalls.mjs): S counters x37..39 with produce, B1 tables, North Arcade craft tables x30..32, `flower_bucket`s, crates, barrels, lanterns standing on posts, dusk props. Vocab: `stall`, `produce_row`, `craft_table`, `flower_bucket`.
+
+Checklist: [ ] 1 south shell  [ ] 2 north shell  [ ] 3 roofs  [ ] 4 facades  [ ] 5 landmarks  [ ] 6 stalls
+
+## NOTES FOR WORKERS
+
+- Build in the site orientation, no turning: street = east (+x). y 0 = lowest ground; floors per FLOORS table. Build only on footprint cells; check each cell against the footprint table before writing (x ranges per z row).
+- Footing: every outer wall column down to ground-2 of its 7x7 cell, never floating (`$MCD check`).
+- Hanging chain is `chain` on 1.21.1; ignore `$MCD blocks` warning for it only. No pale oak, no `iron_chain`, no 1.21.4+ blocks (no `resin`, `creaking_heart`).
+- Letters: only through `plaque`/`bannerWord` with face east; never a hand loop.
+- Part order matters: shells, then roofs, facades, landmarks, stalls. Later parts write only into air or their own cells; reserved cells (post line gaps, aisle x34..36, sign, clock, MP board, ice beds, stacks) stay clear in earlier parts.
+- Openings left air by shells; the facade part glazes.
+- Dusk: every window pane column has `ochre_froglight` behind; every bay a lantern; sign letters glow (glowstone behind red glass). Keep lights above counters and signs; nothing in the 2 cells in front of the aisle.
+- Wool for awnings is non-flammable concern: ignore. Never use sand, gravel or powder.

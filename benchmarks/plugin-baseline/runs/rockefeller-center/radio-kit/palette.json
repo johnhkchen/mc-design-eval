@@ -1,0 +1,18 @@
+{
+  "roles": {
+    "limestone": ["smooth_sandstone", "smooth_sandstone_stairs", "smooth_sandstone_slab"],
+    "frieze": ["cut_sandstone", "cut_sandstone_slab"],
+    "plinth": ["polished_granite", "polished_granite_stairs", "polished_granite_slab"],
+    "spandrel": ["polished_deepslate", "polished_deepslate_slab"],
+    "glass": ["gray_stained_glass", "glass", "glass_pane", "light_gray_stained_glass"],
+    "bronze": ["waxed_cut_copper", "waxed_cut_copper_stairs", "waxed_cut_copper_slab"],
+    "marquee": ["light_gray_concrete", "iron_block", "blue_stained_glass", "red_stained_glass", "blue_concrete", "smooth_quartz_slab"],
+    "light": ["sea_lantern", "shroomlight", "glowstone", "end_rod"],
+    "banner": ["white_banner", "blue_banner", "white_wall_banner", "blue_wall_banner"],
+    "roundel": ["light_blue_terracotta", "orange_terracotta", "yellow_terracotta", "white_terracotta", "purple_terracotta", "lime_terracotta"],
+    "roof": ["light_gray_concrete", "gray_concrete", "iron_block", "iron_trapdoor", "lightning_rod", "iron_bars"],
+    "garden": ["moss_block", "oak_leaves", "azalea", "flowering_azalea"],
+    "ground": ["smooth_stone", "polished_andesite", "polished_andesite_slab", "lantern"]
+  },
+  "objects": ["end_rod", "lightning_rod", "iron_trapdoor", "lantern", "white_banner", "blue_banner", "white_wall_banner", "blue_wall_banner"]
+}

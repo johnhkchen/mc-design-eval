@@ -1,0 +1,109 @@
+{
+  "roles": {
+    "ground": [
+      "stone",
+      "dirt",
+      "grass_block",
+      "coarse_dirt",
+      "rooted_dirt",
+      "podzol",
+      "gravel",
+      "clay"
+    ],
+    "paths": [
+      "smooth_sandstone",
+      "smooth_sandstone_slab",
+      "smooth_sandstone_stairs"
+    ],
+    "lawnEdge": [
+      "mossy_cobblestone_slab"
+    ],
+    "seating": [
+      "white_terracotta",
+      "birch_slab",
+      "birch_stairs",
+      "birch_fence"
+    ],
+    "campfire": [
+      "stone_bricks",
+      "stone_brick_slab",
+      "campfire",
+      "hay_block"
+    ],
+    "station": [
+      "stripped_dark_oak_log",
+      "dark_oak_planks",
+      "dark_oak_slab",
+      "glass",
+      "glass_pane",
+      "dark_oak_door",
+      "polished_andesite",
+      "spruce_planks",
+      "spruce_slab"
+    ],
+    "outpost": [
+      "gravel",
+      "stripped_spruce_log",
+      "spruce_log",
+      "andesite",
+      "tuff",
+      "andesite_slab",
+      "moss_carpet"
+    ],
+    "portal": [
+      "light_gray_concrete",
+      "black_concrete",
+      "smooth_stone",
+      "smooth_stone_slab",
+      "iron_bars",
+      "lantern",
+      "gray_concrete",
+      "white_concrete",
+      "yellow_concrete"
+    ],
+    "lights": [
+      "polished_blackstone_wall",
+      "lantern",
+      "shroomlight",
+      "moss_carpet"
+    ],
+    "planting": [
+      "moss_block",
+      "moss_carpet",
+      "azalea_leaves",
+      "flowering_azalea_leaves",
+      "spruce_leaves",
+      "dark_oak_leaves",
+      "birch_leaves",
+      "fern",
+      "short_grass",
+      "tall_grass",
+      "dead_bush",
+      "sunflower",
+      "allium",
+      "cornflower",
+      "lilac",
+      "sweet_berry_bush",
+      "torchflower",
+      "orange_tulip",
+      "oxeye_daisy",
+      "poppy",
+      "dandelion"
+    ],
+    "trees": [
+      "dark_oak_log",
+      "spruce_log",
+      "birch_log"
+    ],
+    "umbrellas": [
+      "birch_fence"
+    ]
+  },
+  "objects": [
+    "orange_banner",
+    "white_banner",
+    "red_banner",
+    "yellow_banner",
+    "light_blue_banner"
+  ]
+}
