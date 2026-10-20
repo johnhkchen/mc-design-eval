@@ -34,3 +34,15 @@ test("a gap taller than the reach is left alone", () => {
   for (let z = 1; z < 4; z++) for (let x = 1; x < 4; x++) g.set(x, 12, z, "stone");
   const [h] = floating(g, { ground, min: 1 }); assert.equal(h.gap, 11); assert.equal(underpin(g, h), 0);
 });
+
+test("floating finds the same pieces on a sparse volume, and underpin closes the gap there too", () => {
+  const dense = scene(), sparse = new Voxels([12, 12, 12], { sparse: true });
+  dense.forEachCell((i, v) => sparse.setCellAt(i, v)); sparse.palette = dense.palette; sparse.index = dense.index;
+  const fd = floating(dense, { ground }), fs = floating(sparse, { ground });
+  assert.equal(fs.length, fd.length); assert.equal(fs[0].size, fd[0].size); assert.equal(fs[0].gap, 1); assert.deepEqual(fs[0].box, fd[0].box);
+  assert.equal(underpin(sparse, fs[0]), 16); assert.equal(floating(sparse, { ground }).length, 0);
+  // and a piece high in a tall, mostly empty world
+  const t = new Voxels([40, 700, 40], { sparse: true }); for (let z = 0; z < 40; z++) for (let x = 0; x < 40; x++) t.set(x, 0, z, "stone");
+  for (let y = 600; y < 640; y++) t.set(20, y, 20, "glass");
+  const [h] = floating(t, { ground, min: 1 }); assert.equal(h.size, 40); assert.equal(h.gap, 599);
+});

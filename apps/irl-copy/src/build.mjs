@@ -36,6 +36,8 @@ export function buildPlace(place, frame, L) {
   for (const k of ["streets", "paths", "barriers", "rails"]) if (L[k]?.features) L = { ...L, [k]: { ...L[k], features: L[k].features.filter((f) => !onBridge(f)) } };
   const parcels = new Map((L.parcels?.features ?? []).map((f) => [f.properties.parcel, f.properties]));
   const H = lid ? Float64Array.from(lid.ground, (m) => m * (frame.scale ?? 1))
+    // a ground raster (metres per cell: a national DTM, or a DEM taken down to the ground) is used as it is
+    : L.ground?.kind === "raster" ? Float64Array.from(L.ground.data, (m) => m * (frame.scale ?? 1))
     : L.ground ? groundFromContours(frame, L.ground, { field: L.ground.field, unit: L.ground.unit * (frame.scale ?? 1) }) : new Float64Array(N * N);
   const park = new Uint8Array(N * N), water = new Uint8Array(N * N), path = new Uint8Array(N * N), play = new Uint8Array(N * N);
   for (const f of L.parks?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) park[I(x, z)] = 1;
@@ -103,8 +105,9 @@ export function buildPlace(place, frame, L) {
           // no higher than the footprint's own peak (a tree over the roof is not roof), 1 m of slack
           if (Number.isFinite(p.peak) && p.peak > 0) m = Math.min(m, base + Math.round((p.peak + 1) * sc));
           if (m > ground(x, z) + Math.round(2 * sc)) t = m; } }
-      // Minecraft 1.21.1 builds no higher than y 319 (a world's sections start at 0 here): a supertall stops at the limit
-      tops.set(I(x, z), Math.min(t, 318));
+      // Minecraft 1.21.1 builds no higher than y 319 (a world's sections start at 0 here): a supertall stops at the limit,
+      // unless the place raises it (place.maxY: a tall world, which anvil.mjs opens past 320 with a datapack)
+      tops.set(I(x, z), Math.min(t, place.maxY ?? 318));
     }
     return { id: p.id, parcel: p.parcel ?? null, name: p.name ?? null, cells, base, height, peak: p.peak, k, tops, own };
   }).filter(Boolean);
@@ -131,7 +134,8 @@ export function buildPlace(place, frame, L) {
   // the tallest roof or the tallest crown on the highest ground, whichever is higher (H is already in blocks)
   let roofTop = 0; for (const b of buildings) for (const t of b.tops.values()) if (t > roofTop) roofTop = t;
   const top = Math.max(roofTop, Math.round(hi) - floor + Math.ceil(canopyTop)) + 3;
-  const g = new Voxels([N, top, N], { dataVersion: 3955 });   // 2 bytes a cell (voxels.mjs), not an object a block
+  // place.sparse (or a volume past 2^31 cells): 16-cube sections allocated as they fill, not one dense array
+  const g = new Voxels([N, top, N], { dataVersion: 3955, sparse: place.sparse ?? N * N * top > 2 ** 31 });   // 2 bytes a cell (voxels.mjs), not an object a block
 
   // the open ground's cover by the aerial photo, cell by cell, then the commonest within 2 blocks: one pixel of sunlit
   // concrete is not a sandpit, and a plaza shouldn't speckle stone, andesite and sand

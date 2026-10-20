@@ -22,11 +22,12 @@ const composeFile = `${HERE}/places/${name}.compose.json`, compose = existsSync(
 const dir = `${HERE}/work/${name}/fill`, ledger = resolve(opt("--ledger", `${dir}/ledger.jsonl`));
 mkdirSync(dir, { recursive: true });
 // ground per cell from the lidar raster, as build.mjs rounds it (unsmoothed: offsets within a footprint)
-const gfile = `${HERE}/.cache/${name}/usgs-lidar.lidar.ground.f32`, G = existsSync(gfile) ? new Float32Array(readFileSync(gfile).buffer.slice(0)) : null;
+// (or, with no lidar, the place's ground raster: Taiwan's DTM or its bare-earth DEM, src/sources/taipei.mjs)
+const gfile = [`${HERE}/.cache/${name}/usgs-lidar.lidar.ground.f32`, `${HERE}/.cache/${name}/taiwan-ground.ground.f32`].find((f) => existsSync(f)), G = gfile ? new Float32Array(readFileSync(gfile).buffer.slice(0)) : null;
 let lo = Infinity; if (G) for (const v of G) lo = Math.min(lo, v * sc);
 const ground = (x, z) => (G ? Math.round(G[z * N + x] * sc) - (Math.floor(lo) - Math.round(4 * sc)) : 0);
 const parcels = new Map();
-try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${({ seattle: "sea", "new-york": "nyc", "washington-dc": "dc" })[place.city] ?? "sf"}-parcels.json`, "utf8")).layers.parcels.features) parcels.set(f.properties.parcel, f.properties); } catch {}
+try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${({ seattle: "sea", "new-york": "nyc", "washington-dc": "dc", taipei: "taipei-buildings" })[place.city] ?? "sf"}${place.city === "taipei" ? "" : "-parcels"}.json`, "utf8")).layers.parcels.features) parcels.set(f.properties.parcel, f.properties); } catch {}
 
 const placed = new Set(compose.placements.map((p) => p.building));
 const todo = m.buildings.filter((b) => !placed.has(b.id) && (!only || only.includes(b.id)) && b.footprint.length >= +opt("--min-cells", 20));

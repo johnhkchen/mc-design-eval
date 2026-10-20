@@ -32,6 +32,13 @@ import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/
 const HERE = resolve(import.meta.dirname, ".."), [cmd, name] = process.argv.slice(2);
 const load = (n) => ({ id: n, ...JSON.parse(readFileSync(`${HERE}/places/${n}.json`, "utf8")) });
 const cache = (n, s) => `${HERE}/.cache/${n}/${s}`;
+// a sparse (tall) world's structure file can run to gigabytes before gzip: past place.maxStructureBlocks (default 40M) it
+// is left out (the world, the manifest and the briefs carry the place); dense places always write it, as before
+function saveStructure(grid, file, place) {
+  if (grid.sparse) { const n = grid.count(), max = place.maxStructureBlocks ?? 40e6;
+    if (n > max) { console.warn(`(${n.toLocaleString()} blocks: past ${max.toLocaleString()}, ${file.split("/").pop()} is not written; use the world)`); return; } }
+  grid.save(file);
+}
 
 // place.align "auto": before anything is sampled on the grid, turn the place so its landmark's footprint (or, failing a
 // rectangular one, its streets) runs along the axes; the angle is written into the place file (rotate, and what it came
@@ -90,24 +97,24 @@ function buildFrom(n, { composeWith, world } = {}) {
     let propped = 0; for (const h of floating(grid, { ground })) propped += underpin(grid, h);
     if (propped) console.warn(`${n}: ${propped} blocks of support under pieces that hung just clear of what is under them`);
     // a crown whose trunk a placement cleared (the module's box takes logs, the leaves overhanging it stay) goes too
-    let crowns = 0; for (const h of floating(grid, { ground, min: 1 })) if (h.cells.every((c) => /leaves$/.test(grid.palette[grid.data[c]].block))) { for (const c of h.cells) grid.data[c] = 0; crowns++; }
+    let crowns = 0; for (const h of floating(grid, { ground, min: 1 })) if (h.cells.every((c) => /leaves$/.test(grid.palette[grid.cellAt(c)].block))) { for (const c of h.cells) grid.setCellAt(c, 0); crowns++; }
     if (crowns) console.warn(`${n}: ${crowns} tree crowns left without their trunks removed`);
     const hung = floating(grid, { ground, faces: false }), boxes = spec.placements.map((p) => { const b = manifest.buildings.find((m) => m.id === p.building); if (!b) return null;
       const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]); return { m: p.module, b: p.building, box: [Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs)] }; }).filter(Boolean);
     for (const h of hung.slice(0, 40)) { const [x0, y0, z0, x1, y1, z1] = h.box, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
       const by = boxes.filter((q) => cx >= q.box[0] - 8 && cx <= q.box[2] + 8 && cz >= q.box[1] - 8 && cz <= q.box[3] + 8).map((q) => `${q.m} (${q.b})`);
-      const k = new Map(); for (const c of h.cells) { const b = grid.palette[grid.data[c]].block.replace("minecraft:", ""); k.set(b, (k.get(b) ?? 0) + 1); }
+      const k = new Map(); for (const c of h.cells) { const b = grid.palette[grid.cellAt(c)].block.replace("minecraft:", ""); k.set(b, (k.get(b) ?? 0) + 1); }
       console.warn(`floating: ${h.size} blocks (${[...k].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([b, v]) => `${b} ${v}`).join(", ")}) at ${x0},${y0},${z0}..${x1},${y1},${z1}, ${h.gap} above what is under it${by.length ? ` - ${[...new Set(by)].join(", ")}` : ""}`); }
     if (hung.length) console.warn(`${n}: ${hung.length} floating pieces of 8+ blocks (${hung.reduce((s, h) => s + h.size, 0)} blocks)`);
-    mkdirSync(out, { recursive: true }); grid.save(`${out}/composed.nbt`); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`);
-    if (world) { const r = writeWorld(`${out}/world`, grid, { name: place.name }); console.log(`${n}: world -> out/${n}/world (${r.chunks} chunks, ${r.regions} regions)`); }
+    mkdirSync(out, { recursive: true }); saveStructure(grid, `${out}/composed.nbt`, place); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`);
+    if (world) { const r = writeWorld(`${out}/world`, grid, { name: place.name }); console.log(`${n}: world -> out/${n}/world (${r.chunks} chunks, ${r.regions} regions${r.datapack ? `; datapack ${r.datapack.name}: the overworld ${r.datapack.height} high, to y ${r.datapack.maxY}` : ""})`); }
     return;
   }
   mkdirSync(out, { recursive: true });
   const used = [...new Set(Object.entries(p).filter(([l, s]) => s && L[l]).map(([, s]) => s))];
   manifest.sources = Object.fromEntries(Object.entries(p).filter(([l, s]) => s && L[l]).map(([l, s]) => [l, s.id]));
   manifest.credits = used.map((s) => `${s.attribution} (${s.licence})`);
-  grid.save(`${out}/land.nbt`);
+  saveStructure(grid, `${out}/land.nbt`, place);
   writeFileSync(`${out}/manifest.json`, JSON.stringify(manifest, null, 1));
   writeFileSync(`${out}/SOURCES.md`, [`# ${place.name}: sources`, "", "| Layer | Source | Licence | Credit |", "|---|---|---|---|",
     ...Object.entries(p).filter(([l, s]) => s && L[l]).map(([l, s]) => `| ${l} | [${s.name}](${s.url}) | ${s.licence} | ${s.attribution} |`), ""].join("\n"));

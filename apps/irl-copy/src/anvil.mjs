@@ -29,6 +29,11 @@ function chunkNbt(v, cx, cz, dataVersion) {
   const [X, Y, Z] = v.size, nSec = Math.ceil(Y / 16), sections = [];
   for (let sy = 0; sy < nSec; sy++) {
     const local = new Map(), ids = new Uint16Array(4096); let any = false;
+    // a sparse volume (voxels.mjs SparseVoxels) keeps its sections in this very order: copied, and empty ones skipped
+    if (v.sparse) { const sec = v.section(cx, sy, cz); if (!sec) continue;
+      for (let i = 0; i < 4096; i++) { const wx = cx * 16 + (i & 15), wz = cz * 16 + ((i >> 4) & 15), wy = sy * 16 + (i >> 8);
+        const p = wx < X && wy < Y && wz < Z ? sec[i] : 0; if (p) any = true; if (!local.has(p)) local.set(p, local.size); ids[i] = local.get(p); }
+      if (any) sections.push({ y: sy, local, ids }); continue; }
     for (let y = 0; y < 16; y++) for (let z = 0; z < 16; z++) for (let x = 0; x < 16; x++) {
       const wx = cx * 16 + x, wy = sy * 16 + y, wz = cz * 16 + z;
       const p = wx < X && wy < Y && wz < Z ? v.data[(wz * Y + wy) * X + wx] : 0;
@@ -39,6 +44,10 @@ function chunkNbt(v, cx, cz, dataVersion) {
     if (any) sections.push({ y: sy, local, ids });
   }
   if (!sections.length) return null;
+  // a tall world (past 320) gives every chunk an empty section at Y -1: Chunky keeps a chunk whose sections all lie in
+  // 0..255 in a fixed 256-high buffer and reuses that buffer for later chunks, which clipped a 711-block tower at 256
+  // whenever such a chunk had loaded before it (chunky-dev/chunky Dimension.createChunkData / Chunk.getChunkData)
+  if (Y > 320) sections.unshift({ y: -1, local: new Map([[0, 0]]), ids: new Uint16Array(4096) });
   const w = new W();
   w.begin("");
   w.int("DataVersion", dataVersion); w.int("xPos", cx); w.int("zPos", cz); w.int("yPos", 0);
@@ -89,7 +98,29 @@ export function writeWorld(dir, v, { name = "irl-copy", dataVersion = 3955, vers
   w.int("SpawnX", Math.floor(X / 2)); w.int("SpawnY", 100); w.int("SpawnZ", Math.floor(Z / 2));
   w.int("GameType", 1); w.byte("hardcore", 0); w.byte("allowCommands", 1); w.long("LastPlayed", Date.now()); w.long("Time", 6000); w.long("DayTime", 6000);
   w.begin("Version"); w.int("Id", dataVersion); w.string("Name", versionName); w.byte("Snapshot", 0); w.string("Series", "main"); w.end();
+  // a tall world names its datapack as enabled (tallWorldPack, below), so the game loads it with the save
+  if (v.size[1] > 320) { w.begin("DataPacks"); w.list("Enabled", 8, 2); w.str("vanilla"); w.str("file/irl-copy-tall"); w.list("Disabled", 8, 0); w.end(); }
   w.end(); w.end();
   writeFileSync(`${dir}/level.dat`, gzipSync(w.bytes()));
-  return { chunks, regions: regions.size };
+  // a world taller than vanilla's 320 opens at full height with a datapack (world/datapacks/<name>/) that redefines the
+  // overworld's dimension type: min_y -64 as vanilla, the height raised (a multiple of 16) to cover the build
+  const tall = v.size[1] > 320 ? tallWorldPack(dir, v.size[1]) : null;
+  return { chunks, regions: regions.size, ...(tall ? { datapack: tall } : {}) };
+}
+
+// pack_format 48 is 1.21.1's data pack format; every other overworld field keeps its vanilla 1.21.1 value
+export const PACK_FORMAT_1_21_1 = 48;
+export function overworldType(top) {
+  const height = Math.ceil((top + 64) / 16) * 16;
+  if (height > 4064 || -64 + height > 2032) throw new Error(`a world ${top} high is past what a dimension type allows`);
+  return { ultrawarm: false, natural: true, piglin_safe: false, respawn_anchor_works: false, bed_works: true, has_raids: true, has_skylight: true, has_ceiling: false,
+    coordinate_scale: 1.0, ambient_light: 0.0, logical_height: height, effects: "minecraft:overworld", infiniburn: "#minecraft:infiniburn_overworld",
+    min_y: -64, height, monster_spawn_light_level: { type: "minecraft:uniform", min_inclusive: 0, max_inclusive: 7 }, monster_spawn_block_light_limit: 0 };
+}
+export function tallWorldPack(dir, top, name = "irl-copy-tall") {
+  const root = `${dir}/datapacks/${name}`, type = overworldType(top);
+  mkdirSync(`${root}/data/minecraft/dimension_type`, { recursive: true });
+  writeFileSync(`${root}/pack.mcmeta`, JSON.stringify({ pack: { pack_format: PACK_FORMAT_1_21_1, description: `irl-copy: the overworld ${type.height} blocks high (y -64 to ${type.height - 65}) for a tall build` } }, null, 2) + "\n");
+  writeFileSync(`${root}/data/minecraft/dimension_type/overworld.json`, JSON.stringify(type, null, 2) + "\n");
+  return { name, height: type.height, maxY: type.height - 65 };
 }

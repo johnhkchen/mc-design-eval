@@ -62,6 +62,8 @@ const scene = {
   sky: { skyYaw: 0, skyPitch: 0, skyRoll: 0, skyMirrored: true, skyExposure: 1, skyLight: +opt("--sky-light", 1), apparentSkyLight: +opt("--sky-light", 1), mode: "SIMULATED", horizonOffset: +opt("--horizon", 0.1),
     cloudsEnabled: opt("--clouds", "no") === "yes", cloudSize: 64, cloudOffset: { x: 0, y: eye[1] + 120, z: 0 }, simulatedSky: "Nishita", skyCacheResolution: 128 },
   chunkList, cameraPresets: {}, materials: {}, renderer: "PathTracingRenderer", previewRenderer: "PreviewRenderer",
+  // --octree PACKED|BIGPACKED|NODE|DICTIONARY: Chunky's world octree implementation (default left to Chunky)
+  ...(opt("--octree") ? { octreeImplementation: opt("--octree") } : {}),
 };
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
 writeFileSync(`${sceneDir}/${name}.json`, JSON.stringify(scene, null, 1));
