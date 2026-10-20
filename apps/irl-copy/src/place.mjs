@@ -13,6 +13,9 @@
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
 //                  ground?: false (drop the module's own bottom course),
 //                  centre mode: angle?: degrees clockwise (the module turned about its centre onto the footprint's centre), shift?: [dx, dz] }]
+//                  any mode: turn?: { angle, pivot: [x, z], box: [x0, z0, x1, z1] }: the placements sharing one turn are
+//                  composed straight over that box (a long bridge laid out section by section along an axis, so its
+//                  sections join before any resampling), then turned as one about pivot onto the site
 import { Voxels } from "./voxels.mjs";
 const DIRS = ["south", "west", "north", "east"];                    // yaw 0, 90, 180, 270 degrees (Minecraft's)
 const turn = (facing, quarter) => (DIRS.includes(facing) ? DIRS[(DIRS.indexOf(facing) + quarter + 4) % 4] : facing);
@@ -104,6 +107,7 @@ function placeTurned(g, b, p, { H, skip }) {
 /** Voxels turned by any angle about a pivot (x, z), nearest block: each target cell looks up the source cell it came from
  *  (an inverse map, so there are no holes), facings turn by the nearest quarter. Cells the source cleared are cleared. */
 export function rotateInto(g, src, cleared, { angle, pivot: [px, pz], box: [x0, z0, x1, z1] }) {
+  const wasCleared = typeof cleared === "function" ? cleared : (x, y, z) => cleared[(z * g.size[1] + y) * g.size[0] + x];
   const t = (angle * Math.PI) / 180, c = Math.cos(t), s = Math.sin(t), q = ((Math.round(angle / 90) % 4) + 4) % 4, [X, Y, Z] = g.size;
   // the turned box's corners bound the cells to visit
   const corners = [[x0, z0], [x1 + 1, z0], [x0, z1 + 1], [x1 + 1, z1 + 1]].map(([x, z]) => [px + (x - px) * c - (z - pz) * s, pz + (x - px) * s + (z - pz) * c]);
@@ -115,12 +119,34 @@ export function rotateInto(g, src, cleared, { angle, pivot: [px, pz], box: [x0, 
     if (sx < x0 || sx > x1 || sz < z0 || sz > z1) continue;
     for (let y = 0; y < Y; y++) { const b = src.get(sx, y, sz);
       if (b) { g.set(x, y, z, b.block, b.state?.facing ? { ...b.state, facing: turn(b.state.facing, q) } : b.state); n++; }
-      else if (cleared[(sz * Y + y) * X + sx]) g.set(x, y, z, "air"); }
+      else if (wasCleared(sx, y, sz)) g.set(x, y, z, "air"); }
   }
   return n;
 }
 
+// a group of placements composed straight on a scratch volume over turn.box (absolute block coordinates), then turned
+function composeTurned(g, manifest, ps, { ground, I }, { angle, pivot, box: [bx0, bz0, bx1, bz1] }) {
+  const X = bx1 - bx0 + 1, Y = g.size[1], Z = bz1 - bz0 + 1, src = new Voxels([X, Y, Z]), cleared = new Uint8Array(X * Y * Z);
+  let x0 = Infinity, z0 = Infinity, x1 = -Infinity, z1 = -Infinity;
+  const scratch = { size: g.size, get: (x, y, z) => src.get(x - bx0, y, z - bz0), set(x, y, z, block, state) {
+    const lx = x - bx0, lz = z - bz0; if (!src.inBounds(lx, y, lz)) return this;
+    x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z);
+    if (/air$/.test(block)) cleared[(lz * Y + y) * X + lx] = 1; src.set(lx, y, lz, block, state); return this; } };
+  const notes = compose(scratch, manifest, ps, { ground, I });
+  if (x0 > x1) return [...notes, `turn about ${pivot.join(",")}: nothing placed`];
+  const view = { get: (x, y, z) => src.get(x - bx0, y, z - bz0) };
+  const n = rotateInto(g, view, (x, y, z) => cleared[((z - bz0) * Y + y) * X + (x - bx0)], { angle, pivot, box: [x0, z0, x1, z1] });
+  return [...notes, `turned ${angle} degrees about ${pivot.join(",")}: ${n} blocks`];
+}
+
 export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
+  if (!angle && placements.some((p) => p.turn)) {
+    const groups = new Map();
+    for (const p of placements.filter((q) => q.turn)) { const k = JSON.stringify(p.turn); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(p); }
+    const notes = compose(g, manifest, placements.filter((q) => !q.turn), { ground, I });
+    for (const ps of groups.values()) notes.push(...composeTurned(g, manifest, ps.map(({ turn, ...q }) => q), { ground, I }, ps[0].turn));
+    return notes;
+  }
   if (angle) {
     // a building set at an angle to the grid: composed square on a scratch volume, then turned onto the site about the
     // centre of its footprint's box (Minecraft has no rotated blocks, so the turn resamples to the nearest block)

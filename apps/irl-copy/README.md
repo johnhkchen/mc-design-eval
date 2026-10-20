@@ -60,7 +60,17 @@ from the map, trunks run up under each top), else from mapped tree points.
 footprint: a circle fit, an inverse map so the band has no holes, facings turned with the curve, never mirrored) and `at`
 (at an offset in the footprint's box, turned by quarter turns, repeated). Each module can carry colour swaps
 (`swap: [{ from, to, minY?, maxY? }]`) so the design run's files stay as they are; `node bin/irl.mjs modules <place> <dir>`
-writes the modules with their swaps applied, for the catalog.
+writes the modules with their swaps applied, for the catalog. Placements that share a `turn: { angle, pivot, box }` are
+composed straight over that box and turned as one about the pivot (a long bridge at an angle to the place's axes: its
+deck sections join before the resampling, so there are no seams).
+
+## Filling the other buildings
+
+`node bin/fill.mjs <place>` gives every building no placement covers one model session (Haiku) that writes a script
+building it on its footprint, renders it, looks once and fixes; `--batch` does the same through the Message Batches API at
+half price, in lockstep rounds over every building at once (write; run and render here; one fix round with the sheet;
+a last round only for scripts that still fail), each request just the brief. `--turn auto` builds each footprint square
+in its own frame and places it turned back (a street grid at an angle to the place: straight walls, not staircases).
 
 Nothing is left hanging in the air (`src/float.mjs`): after the modules go in, every piece not joined to the ground
 through touching faces is found. One that nearly touches (a module's tower one course over its podium, a skylight or
@@ -92,6 +102,26 @@ memorial points and the historic landmarks, joined to tax parcels), owner polygo
 DDOT centrelines, NPS and DPR parks and waterbodies (CC BY 4.0); the USGS Sandy NCR 2014 lidar. Optional place keys used
 there: `peaks` { footprint id: metres } where the lidar caught a bird over a roof, and `parkPaths` { width, block } to
 draw the walks inside parks wider and in their own surface (the Mall's gravel walks).
+
+Taipei (`city: "taipei"`, `country: "TW"`, `src/sources/taipei.mjs`): the city's building licence overlay map (臺北市建築執照
+套繪圖, data.gov.tw 151936: a shapefile in TWD97 / TM2, EPSG:3826, floors per footprint; OGDL-Taiwan 1.0), joined with OSM
+for the buildings it lacks (it holds ~10,000 footprints city-wide, mostly licensed since 2012) and for OSM's `height` tags
+on the towers; heights are floors x 3.4 m + 1.5 m otherwise, and `heights` { id: metres } overrides any. The ground is the
+MOI 20 m DTM when `dtmFile` names its GeoTIFF (EPSG:3826; tgos.tw, its download host, refuses requests from outside
+Taiwan), else Copernicus GLO-30 taken down to the ground (`groundFit` { canopyShare, openM, basinM }: the canopy off the
+forest, an opening off the basin's buildings). The aerial is Sentinel-2 L2A (10 m; NLSC's orthophoto tiles carry no open
+licence for derived models); parks from OSM. A small TM projection (TWD97, UTM) and zip / shapefile readers come with it.
+
+## Tall worlds
+
+A place taller than vanilla's 320 (Taipei 101 at 1.4 blocks/m is 711): `maxY` lifts build.mjs's cap on building tops
+(318 by default), `sparse: true` (or any volume past 2^31 cells) builds it in `SparseVoxels` (voxels.mjs: 16-cube sections
+allocated as they fill, the same API; the 2800 x 730 x 2800 Xinyi volume is 2.2 GB where dense would be 11 GB), and
+`writeWorld` adds `world/datapacks/irl-copy-tall` (pack_format 48, the vanilla 1.21.1 overworld dimension type with min_y
+-64 and the height raised to cover the build), enabled in level.dat, so a single-player save or a server opens it at full
+height. Every chunk of a tall world also carries an empty section at Y -1: Chunky keeps a chunk whose sections all fit in
+0..255 in a 256-high buffer and reuses it for later chunks, which clipped the tower at 256. Photograph it with
+`chunky-shot --ymax <top>`. A sparse world's structure file is left out past `maxStructureBlocks` (default 40M blocks).
 
 ## Licences
 

@@ -24,16 +24,27 @@ const PROJECT = opt("--project"), TITLE = opt("--title"), FROM = opt("--from"), 
 const clock = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", ...(TZ ? { timeZone: TZ } : {}) });
 const hm = (min) => (min >= 60 ? `${Math.floor(min / 60)}h ${String(Math.round(min % 60)).padStart(2, "0")}m` : `${Math.round(min)}m`);
 
+// batched sessions (billing "api-batch") log one row per turn, its ms the batch's wait (submit to result): one session's
+// turns become one bar from its first submit to its last result, the waiting included, its cost their sum
+function batchSessions(rows) {
+  const by = new Map(), out = [];
+  for (const r of rows) { if (r.billing !== "api-batch" || !r.session) { out.push(r); continue; } if (!by.has(r.session)) by.set(r.session, []); by.get(r.session).push(r); }
+  for (const [sid, rs] of by) { const start = Math.min(...rs.map((r) => r.start)), end = Math.max(...rs.map((r) => r.end));
+    out.push({ ...rs[0], sid, start, end, ms: end - start, turns: rs.length, cost: rs.reduce((a, r) => a + (r.cost ?? 0), 0), out: rs.reduce((a, r) => a + (r.out ?? 0), 0),
+      waits: rs.reduce((a, r) => a + (r.ms ?? 0), 0) }); }
+  return out;
+}
+
 function sessions(dir) {
-  const rows = read(join(dir, "ledger.jsonl")).filter((r) => r.model).map((r) => ({ ...r, end: Date.parse(r.t), start: Date.parse(r.t) - (r.ms ?? 0) }));
+  const rows = batchSessions(read(join(dir, "ledger.jsonl")).filter((r) => r.model).map((r) => ({ ...r, end: Date.parse(r.t), start: Date.parse(r.t) - (r.ms ?? 0) })));
   const plan = existsSync(join(dir, "plan.json")) ? JSON.parse(readFileSync(join(dir, "plan.json"), "utf8")) : {};
   const names = [...(plan.parts ?? []).map((p) => p.name), ...(plan.rooms ?? []).map((r) => r.name)];
   // tapes: file name = start time, first frame carries the cwd
   const tapes = existsSync(join(dir, "sessions")) ? readdirSync(join(dir, "sessions")).map((f) => {
     const m = f.match(/^(\d{4}-\d\d-\d\dT\d\d)-(\d\d)-(\d\d)-(\d{3})Z/);
-    let cwd = "";
-    try { cwd = JSON.parse(readFileSync(join(dir, "sessions", f), "utf8").split("\n")[0]).cwd ?? ""; } catch {}
-    return { start: m ? Date.parse(`${m[1]}:${m[2]}:${m[3]}.${m[4]}Z`) : NaN, cwd };
+    let cwd = "", sid = null;
+    try { const first = JSON.parse(readFileSync(join(dir, "sessions", f), "utf8").split("\n")[0]); cwd = first.cwd ?? ""; sid = first.session_id ?? null; } catch {}
+    return { start: m ? Date.parse(`${m[1]}:${m[2]}:${m[3]}.${m[4]}Z`) : NaN, cwd, sid };
   }) : [];
   // fix rounds: each revise-vN.log was created when its round started
   const rounds = readdirSync(dir).map((f) => f.match(/^revise-(v\d+)\.log$/)).filter(Boolean)
@@ -42,7 +53,8 @@ function sessions(dir) {
   let art = 0, rootHaiku = 0;
   for (const r of rows.sort((a, b) => a.start - b.start)) {
     let best = -1, gap = 5000;
-    tapes.forEach((t, i) => { const d = Math.abs(t.start - r.start); if (!used.has(i) && d < gap) { gap = d; best = i; } });
+    if (r.sid) best = tapes.findIndex((t) => t.sid === r.sid);                       // a batched session: by its id
+    else tapes.forEach((t, i) => { const d = Math.abs(t.start - r.start); if (!used.has(i) && d < gap) { gap = d; best = i; } });
     const cwd = best >= 0 ? (used.add(best), tapes[best].cwd) : "";
     const crew = cwd.match(/\/crew\/(part|fix|lamp)-(\d+)$/);
     const round = rounds.filter((x) => r.start >= x.at - 5000).pop();

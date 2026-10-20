@@ -37,3 +37,17 @@ test("a module set at an offset turns a quarter clockwise as a rotation, its sta
   assert.equal(g.get(10, 1, 10).state.facing, "east");               // north-facing stairs now face east
   assert.equal(g.get(16, 1, 10).block, "minecraft:stone");           // repeated 5 blocks east
 });
+
+test("placements sharing a turn are composed straight over its box, then turned as one about its pivot", async () => {
+  const { compose } = await import("../src/place.mjs");
+  const { Voxels } = await import("../src/voxels.mjs");
+  const N = 40, g = new Voxels([N, 6, N]);
+  // a 1 x 1 x 4 rod module placed twice end to end along z (a deck in two sections), turned a quarter about 20,20
+  const mod = new Voxels([1, 2, 4]); for (let z = 0; z < 4; z++) mod.set(0, 1, z, "stone");
+  const manifest = { buildings: [{ id: "a", base: 0, footprint: [[20, 12]] }] };
+  const turn = { angle: 90, pivot: [20, 20], box: [15, 10, 25, 30] };
+  compose(g, manifest, [0, 1].map((k) => ({ building: "a", module: mod, plot: [0, 0, 0, 3], mode: "at", at: [0, 4 * k], keep: true, turn })), { ground: () => 0, I: (x, z) => z * N + x });
+  // straight: x 20, z 12..19 (north of the pivot); a quarter turn clockwise takes north to east: z 20, x 20..27
+  let n = 0; for (let x = 0; x < N; x++) for (let z = 0; z < N; z++) if (g.get(x, 1, z)) { n++; assert.equal(z, 20, `z ${z}`); assert.ok(x >= 20 && x <= 27, `x ${x}`); }
+  assert.equal(n, 8);
+});
