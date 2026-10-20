@@ -3,7 +3,7 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--water-plane y] (water past the world's edge) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
+//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
@@ -52,6 +52,8 @@ const scene = {
   // --water-plane y: an endless water plane at that height past the world's edge (clipped inside the loaded chunks), so an
   // oblique view sees a horizon of water instead of the void's black band under the sky
   ...(opt("--water-plane") != null ? { waterWorldEnabled: true, waterWorldHeight: +opt("--water-plane"), waterWorldClipEnabled: true, waterWorldHeightOffsetEnabled: false } : {}),
+  // --ymax y: the highest block Chunky loads (its default clips at 256), for a world taller than vanilla's
+  ...(opt("--ymax") != null ? { yMin: 0, yMax: +opt("--ymax"), yClipMin: 0, yClipMax: +opt("--ymax") } : {}),
   fog: { mode: +opt("--fog", 0) > 0 ? "UNIFORM" : "NONE", uniformDensity: +opt("--fog", 0), skyFogDensity: +opt("--sky-fog", 1), fogColor: { red: 0.66, green: 0.73, blue: 0.82 }, fastFog: true, layers: [] },
   world: { path: world, dimension: "minecraft:overworld" },
   camera: { name: "camera 1", position: { x: eye[0], y: eye[1], z: eye[2] }, orientation: { roll: 0, pitch, yaw }, projectionMode: opt("--projection", "PINHOLE"), fov: chunkyFov, dof: "Infinity", focalOffset: 2, shift: { x: 0, y: 0 } },
