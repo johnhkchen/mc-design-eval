@@ -219,3 +219,35 @@ benchmarks/plugin-baseline/runs/fresh-2/**/*tiles/
 benchmarks/plugin-baseline/runs/fresh-2/**/session*.jsonl
 benchmarks/plugin-baseline/runs/fresh-2/**/stage*.nbt
 .baml/
+
+# design-run and fill working files (regenerable): a kit run keeps its brief, build.mjs, comments, ledger, cards,
+# vN.nbt and gantt; a fill keeps each building's .mjs and .nbt and its ledger
+benchmarks/plugin-baseline/runs/**/crew/
+benchmarks/plugin-baseline/runs/**/sessions/
+benchmarks/plugin-baseline/runs/**/plan-kit/
+benchmarks/plugin-baseline/runs/**/v*-card-tiles/
+benchmarks/plugin-baseline/runs/**/batch-pool/
+apps/irl-copy/work/**/fill/*-sheet.png
+apps/irl-copy/work/**/fill/*.cells.json
+apps/irl-copy/work/**/fill/*.prev
+apps/irl-copy/work/**/fill/sessions/
+# path-traced photographs (big, re-rendered from the world and the camera flags)
+apps/irl-copy/out/*/*/shots/
+# a place's built outputs (regenerable with irl build / compose; SOURCES.md, the credits, stays committed)
+apps/irl-copy/out/*/*/land.nbt
+apps/irl-copy/out/*/*/composed.nbt
+apps/irl-copy/out/*/*/manifest.json
+apps/irl-copy/out/*/*/*sheet.png
+apps/irl-copy/out/*/*/tiles/
+# a kit run's heavy renders and intermediate model (regenerable from build.mjs and its parts)
+benchmarks/plugin-baseline/runs/**/build.nbt
+benchmarks/plugin-baseline/runs/**/*.litematic
+benchmarks/plugin-baseline/runs/**/*-card-sheet.png
+benchmarks/plugin-baseline/runs/**/build-sheet.png
+benchmarks/plugin-baseline/runs/**/front-left.png
+benchmarks/plugin-baseline/runs/**/front-right.png
+benchmarks/plugin-baseline/runs/**/*-elevation.png
+benchmarks/plugin-baseline/runs/**/down-the-street-*.png
+benchmarks/plugin-baseline/runs/**/street.png
+benchmarks/plugin-baseline/runs/**/concept*.png
+benchmarks/plugin-baseline/runs/**/moodboard*.png
