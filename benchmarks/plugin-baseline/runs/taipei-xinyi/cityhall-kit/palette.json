@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "body": ["smooth_sandstone", "smooth_sandstone_slab", "smooth_sandstone_stairs"],
+    "spandrel": ["white_terracotta"],
+    "joints": ["cut_sandstone"],
+    "coping": ["smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs", "quartz_pillar"],
+    "plinth": ["polished_andesite", "polished_andesite_slab", "andesite_wall"],
+    "groundPiers": ["smooth_stone", "smooth_stone_slab"],
+    "glass": ["gray_stained_glass", "light_blue_stained_glass", "gray_stained_glass_pane", "light_blue_stained_glass_pane"],
+    "backing": ["black_concrete"],
+    "lights": ["shroomlight", "sea_lantern", "ochre_froglight", "pearlescent_froglight", "lantern"],
+    "penthouse": ["light_gray_concrete", "iron_bars"],
+    "emblem": ["smooth_quartz", "blue_concrete", "yellow_concrete"],
+    "masts": ["lightning_rod", "iron_bars", "redstone_torch"],
+    "flags": ["red_banner", "white_banner", "blue_banner"],
+    "grounds": ["grass_block", "moss_block", "flowering_azalea_leaves", "oak_log", "jungle_log", "oak_leaves", "jungle_leaves", "water", "dirt_path"],
+    "doors": ["iron_door", "glass_pane"]
+  },
+  "objects": ["dirt"]
+}

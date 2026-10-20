@@ -1,0 +1,209 @@
+{
+ "note": "Taipei 101 and Xinyi: hero kits (runs/taipei-xinyi): Taipei 101 as tiling modules (pedestal and mall on the footprint, one flared segment stacked eight times, the crown and spire), Nan Shan Plaza and Taipei Sky Tower, Taipei City Hall, the Taipei World Trade Center group, Sun Yat-sen Memorial Hall, and the Elephant Mountain viewpoint; the batched Haiku fill (bin/fill.mjs --batch) on the other blocks.",
+ "modules": {
+  "t101-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/taipei-xinyi/t101-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    192,
+    205
+   ]
+  },
+  "t101-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/taipei-xinyi/t101-kit/build.nbt",
+   "plot": [
+    197,
+    0,
+    272,
+    75
+   ]
+  },
+  "t101-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/taipei-xinyi/t101-kit/build.nbt",
+   "plot": [
+    277,
+    0,
+    352,
+    75
+   ]
+  },
+  "nanshan-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/taipei-xinyi/nanshan-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    247,
+    89
+   ]
+  },
+  "nanshan-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/taipei-xinyi/nanshan-kit/build.nbt",
+   "plot": [
+    252,
+    0,
+    308,
+    126
+   ]
+  },
+  "view-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/taipei-xinyi/view-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    105,
+    100
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 158,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 205,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 252,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 299,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 346,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 393,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 440,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-1",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 487,
+   "quarter": 0
+  },
+  {
+   "building": "OSMw1159328965",
+   "module": "t101-2",
+   "mode": "at",
+   "at": [
+    96,
+    108
+   ],
+   "y": 534,
+   "quarter": 0
+  },
+  {
+   "building": "TPE103-6688-45F",
+   "module": "nanshan-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "TPE108-0075-46F",
+   "module": "nanshan-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "OSMw1237332588",
+   "module": "view-0",
+   "mode": "at",
+   "at": [
+    -72,
+    -52
+   ],
+   "y": -38,
+   "quarter": 0,
+   "keep": true,
+   "trees": false
+  }
+ ]
+}

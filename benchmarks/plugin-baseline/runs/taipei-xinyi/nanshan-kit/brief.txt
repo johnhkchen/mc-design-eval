@@ -1,0 +1,133 @@
+Two supertalls beside Taipei 101: Taipei Nan Shan Plaza (2018, Mitsubishi Jisho Sekkei; 272 m, 48 floors) across Songren Road east of Taipei 101, and Taipei Sky Tower (The Sky Taipei, 2024; 280 m, 46 floors) north of it on Songgao Road. Both stand in front of the camera's view of Taipei 101, so their tops and their south and east faces matter most.
+
+Scale: 1.4 blocks per metre (a storey is about 5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of the Xinyi district of Taipei, Taiwan, for a hero render at DUSK from the Elephant Mountain trail, about 1.8 km to the SOUTH-EAST and 200 blocks up: the camera looks north-west across the district, so the SOUTH and EAST faces and the ROOFS and crowns are what it sees most; the street fronts matter too. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: north is low z, south high z, east high x, west low x; Xinyi Road runs along x north of Taipei 101. The district is flat (the GROUND map gives the ground above y 0 per cell). Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm and cool light in a scattering of windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and red aircraft lights on the towers where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..247, z 0..89 (248 x 90), up to y 390: TAIPEI NAN SHAN PLAZA — the tower stands in the EAST part of the footprint (plot x 156 and up): a slender square tower rising sheer to about y 381, dark glass with fine vertical pale fins (white/light gray concrete or quartz fins every second block over gray/black stained glass), its four corners chamfered, the top 30 blocks a lit open crown frame (the 'wheat ear' top: vertical fins rising past the roof, lit white-gold from inside). THE PODIUM (the west part, plot x 0..155) is Breeze Nan Shan: a stack of big rectangular boxes about 6 storeys high (to about y 45), each box shifted against the one below, the lower boxes clad in a gold perforated metal screen (gold-patterned: yellow terracotta, gold blocks, birch trapdoors, gold-brown) and the top box dark glass, with roof terraces and lit shopfronts at street level; a covered walk links it north toward Xinyi Road.
+ plot 1, x 252..308, z 0..126 (57 x 127), up to y 400: TAIPEI SKY TOWER — the tower stands in the SOUTH part of the footprint (plot z 65 and up, about 56 x 62): a sleek tower to about y 392, a pale silver-white frame of continuous vertical ribs over blue-gray glass, its corners rounded, tapering a little near the top, crowned by a glass-roofed observatory (The Sky Taipei, lit warmly at dusk) and a short mast with a red aircraft light; the north part of the footprint is its podium, about 8 storeys (to about y 40), glass and stone with a lit lobby on Songgao Road (west).
+
+PLOT 0 (TAIPEI NAN SHAN PLAZA): place box x 1216..1463, z 1287..1376; y 0 = its lowest ground; 1 column = 6x6 blocks
+FOOTPRINT (# = build here):
+............................###....##.....
+..........................##############..
+##################........##############..
+##################........##############..
+#########################################.
+#########################################.
+#########################################.
+#########################################.
+#########################################.
+#########################################.
+#################.........##############..
+#################.........##############..
+#################.........##############..
+#################...........###....##.....
+...##.....................................
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   3   3   3   3   3   .   .   3   3   3   3   3   .   .   .
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .   .   .   .   .   .   .   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .   .   .   .   .   .   .   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3
+   2   2   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3
+   1   1   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3
+   1   1   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3
+   1   1   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .
+   1   1   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   .   .   .   .   .   .   .   .   .   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .
+   1   1   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   .   .   .   .   .   .   .   .   .   3   3   3   3   3   3   3   3   3   3   3   3   3   3   .   .
+   1   1   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   .   .   .   .   .   .   .   .   .   .   3   3   3   3   3   .   .   3   3   3   3   3   .   .   .
+   .   .   2   2   2   3   3   3   3   3   3   3   3   3   3   3   3   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .
+
+PLOT 1 (TAIPEI SKY TOWER): place box x 1225..1281, z 949..1075; y 0 = its lowest ground; 1 column = 3x3 blocks
+FOOTPRINT (# = build here):
+......#######......
+....###########....
+...#############...
+..################.
+.#################.
+.##################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+.#################.
+..###############..
+...##############..
+...##############..
+..###############..
+.##################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+###################
+.##################
+...................
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   .   .   .   .   .   0   0   0   0   0   0   0   0   0   .   .   .   .   .
+   .   .   .   .   0   0   0   0   0   0   0   0   0   0   0   0   .   .   .
+   .   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   .   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.

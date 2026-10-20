@@ -1,0 +1,92 @@
+National Dr. Sun Yat-sen Memorial Hall (1972, Wang Da-hong): the yellow-roofed memorial hall in its park north-west of Taipei 101, far back in the view.
+
+Scale: 1.4 blocks per metre (a storey is about 5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of the Xinyi district of Taipei, Taiwan, for a hero render at DUSK from the Elephant Mountain trail, about 1.8 km to the SOUTH-EAST and 200 blocks up: the camera looks north-west across the district, so the SOUTH and EAST faces and the ROOFS and crowns are what it sees most; the street fronts matter too. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: north is low z, south high z, east high x, west low x; Xinyi Road runs along x north of Taipei 101. The district is flat (the GROUND map gives the ground above y 0 per cell). Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm and cool light in a scattering of windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and red aircraft lights on the towers where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..152, z 0..158 (153 x 159), up to y 50: SUN YAT-SEN MEMORIAL HALL — a square hall on a raised stone podium with broad steps: tall gray-white columns (14 a side, quartz pillars or smooth stone) carrying a deep eave; the great YELLOW GLAZED-TILE ROOF (yellow terracotta and yellow concrete, gold trim) whose ridge lines sweep up dramatically at the main (south) entrance and the corners, the south front's eave raised high over the entrance (the famous upswept roof), a red-brown band under the eaves; floodlit warm at dusk.
+
+PLOT 0 (SUN YAT-SEN MEMORIAL HALL): place box x 355..507, z 400..558; y 0 = its lowest ground; 1 column = 4x4 blocks
+FOOTPRINT (# = build here):
+.#.....................................
+.#####################################.
+.#####################################.
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+.####################################..
+#####################################..
+##...........########################..
+.............############..............
+..............##########...............
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   0   0   0   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   0   .   .   .   .   .   .   .   .   .   .   .   .   0   0   0   0   0   0   0   0   0   0   0   0   .   .   .   .   .   .   .   .   .   .   .   0   0   .
+   .   .   .   .   .   .   .   .   .   .   .   .   .   0   0   0   0   0   0   0   0   0   0   0   0   .   .   .   .   .   .   .   .   .   .   .   .   .   .
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.

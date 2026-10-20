@@ -1,0 +1,17 @@
+{
+  "roles": {
+    "roof_tile": ["yellow_concrete", "yellow_terracotta", "ochre_froglight"],
+    "stone_trim": ["smooth_stone", "smooth_stone_slab", "stone_stairs", "stone_brick_stairs"],
+    "gold": ["gold_block"],
+    "columns": ["quartz_pillar", "smooth_quartz", "quartz_slab", "quartz_stairs"],
+    "podium": ["polished_andesite", "polished_andesite_slab", "polished_andesite_stairs", "stone_bricks", "stone_brick_wall"],
+    "wall_post": ["andesite_wall"],
+    "walls": ["red_terracotta", "polished_granite", "polished_granite_slab"],
+    "glass": ["glass_pane", "polished_deepslate"],
+    "board": ["black_concrete", "yellow_banner", "yellow_wall_banner"],
+    "greenery": ["grass_block", "dirt_path", "coarse_dirt", "azalea_leaves", "flowering_azalea_leaves", "spruce_leaves"],
+    "flags": ["iron_bars", "red_banner"],
+    "lights": ["lantern", "shroomlight", "sea_lantern"]
+  },
+  "objects": ["chain"]
+}

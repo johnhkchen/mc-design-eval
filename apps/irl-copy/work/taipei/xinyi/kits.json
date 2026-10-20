@@ -1,0 +1,209 @@
+{
+ "note": "Taipei 101 and Xinyi: hero kits (runs/taipei-xinyi): Taipei 101 as tiling modules (pedestal and mall on the footprint, one flared segment stacked eight times, the crown and spire), Nan Shan Plaza and Taipei Sky Tower, Taipei City Hall, the Taipei World Trade Center group, Sun Yat-sen Memorial Hall, and the Elephant Mountain viewpoint; the batched Haiku fill (bin/fill.mjs --batch) on the other blocks.",
+ "common": "Scale: 1.4 blocks per metre (a storey is about 5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no \"iron_chain\" (it is \"chain\" in 1.21.1), nothing 1.21.4+). These are real buildings of the Xinyi district of Taipei, Taiwan, for a hero render at DUSK from the Elephant Mountain trail, about 1.8 km to the SOUTH-EAST and 200 blocks up: the camera looks north-west across the district, so the SOUTH and EAST faces and the ROOFS and crowns are what it sees most; the street fronts matter too. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: north is low z, south high z, east high x, west low x; Xinyi Road runs along x north of Taipei 101. The district is flat (the GROUND map gives the ground above y 0 per cell). Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm and cool light in a scattering of windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and red aircraft lights on the towers where the real building has them; light every roof and terrace so no mob spawns.",
+ "closing": "Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.",
+ "kits": [
+  {
+   "key": "t101",
+   "concept": "taipei-101/01-taipei-101-viewed-from-elephant-mountain.jpg",
+   "intro": "Taipei 101 (C.Y. Lee & Partners, 2004; 508 m to the spire tip, 101 floors): the hero of the render, seen from Elephant Mountain at dusk. It must read at a glance as THIS tower: a bamboo stalk or pagoda of EIGHT identical stacked segments of eight floors each, every segment a square inverted frustum whose green-blue glass walls flare OUTWARD as they rise, so each segment overhangs the foot of the one above; it stands on a tapering pedestal with a giant coin medallion on each face, carries ruyi ornaments, and ends in a stepped pinnacle and a slim spire. It is built here as TILING MODULES, three plots: the pedestal and podium mall on the real footprint, ONE segment (compose stacks it eight times, so its foot must sit exactly on its own top), and the crown and spire (compose sets it on the eighth segment). The three must line up: the tower's square is centred in the 76 x 76 boxes; the pedestal's top and every segment's foot are the same 62 x 62 square centred in that box (box x and z 7..68), every segment's top and the crown's foot are the 76 x 76 square. Glass: a fine green-blue grid (cyan and light blue stained glass panes in a frame of light gray / gray metal mullions, or cyan/light blue stained glass blocks with prismarine accents), with a darker band at every floor line. Dusk lighting as the real building: white-gold light strips running up every segment's four flared corners, a glowing band at the top ledge of each segment, a scatter of lit office floors, the observatory floors and the crown lit brightly, red aircraft lights on the spire.",
+   "plots": [
+    {
+     "id": "OSMw1159328965",
+     "label": "PEDESTAL AND PODIUM MALL",
+     "maxY": 162,
+     "text": "the whole Taipei 101 site. THE TOWER PEDESTAL (floors 1 to 26) stands in the south-east of the footprint at plot x 96..171, z 108..183 (76 x 76): a truncated pyramid, the full 76 x 76 square at the ground tapering INWARD evenly to a 62 x 62 square (plot x 103..164, z 115..176) at its top course, y 157, which is a solid flat roof (the first segment sits on it); green-blue glass with the same grid as the segments, a tall glazed entrance hall on the north and east faces. On each of its four faces, centred, near the top (about y 128..154): a GIANT COIN MEDALLION, a round disc about 22 across and 2 deep standing proud of the wall, gold or bronze (gold block, yellow/orange terracotta, raw gold), with a square hole in its middle, lit from below. THE PODIUM MALL (Taipei 101 Mall) fills the rest of the footprint west and north of the pedestal: six storeys of glass and pale stone, its roof stepping in terraces from about y 70 at its north-west block down to about y 35 along the street edges, roof gardens and skylights, the main entrance on Xinyi Road (north, low z) under a glass canopy, lit shop windows all round at street level, the mall's sign. Nothing above y 161 here."
+    },
+    {
+     "module": [
+      76,
+      76,
+      47
+     ],
+     "label": "ONE SEGMENT (stacked eight times)",
+     "text": "one of the eight identical segments, 8 floors, 47 tall (y 0..46). Its FOOT (y 0) is the 62 x 62 square centred in the box (x and z 7..68): a solid floor course, so the segment stands on the pedestal and on the segment below; its walls lean OUTWARD evenly to the full 76 x 76 square at y 44..46 (one block out about every 6 courses, as a smooth stepped flare on all four faces), and its TOP (y 46) is a solid flat ledge over the whole 76 x 76 square (the next segment's foot stands in its middle, so the outer ring of the ledge shows as the pagoda overhang). Eight floors of green-blue glass grid with the floor lines; the four corners are NOTCHED (a double sawtooth step at each corner, as the real building), and at the foot of each face, centred, a RUYI ornament (a cloud-scroll head over a short stem, about 7 wide and 9 tall, pale metal: iron block, quartz, light gray concrete, 1 deep, standing proud); the top ledge carries a lit band (sea lanterns or shroomlight behind glass) all round, and white-gold light strips run up the four flared corners. Some office windows lit, most dark green glass. Keep the inside hollow behind the glass (a floor slab every 6 blocks is fine).",
+     "place": [
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 158
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 205
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 252
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 299
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 346
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 393
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 440
+      },
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 487
+      }
+     ]
+    },
+    {
+     "module": [
+      76,
+      76,
+      176
+     ],
+     "label": "CROWN, PINNACLE AND SPIRE",
+     "text": "the top of the tower, set on the eighth segment's 76 x 76 top ledge (its foot, y 0, is a solid floor over the centre of the box). y 0..12: the observatory levels (floors 88 to 91), a 52 x 52 square (x and z 12..63) of glass with a lit band and the outdoor observatory deck around its roof; y 13..80: the pinnacle, a 30 x 30 square tower (x and z 23..52) in the same green-blue glass with its own small flares and corner notches, two or three stepped tiers narrowing slightly, lit brightly at dusk; y 81..92: a 20 x 20 cap (x and z 28..47), stepped in; y 93..175: the SPIRE, a slim mast centred (x and z 37..38), 2 x 2 at its foot for its first 30 blocks then 1 x 1 to the tip at y 175 (iron bars, chain, end rods, lightning rod at the top), a few red aircraft lights (red stained glass over a light) up it. Nothing outside the 76 x 76 box.",
+     "place": [
+      {
+       "building": "OSMw1159328965",
+       "at": [
+        96,
+        108
+       ],
+       "y": 534
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "nanshan",
+   "concept": "nan-shan-sky-tower/02-taipei-nan-shan-plaza-and-taipei-101-view-from-songren-road-.jpg",
+   "intro": "Two supertalls beside Taipei 101: Taipei Nan Shan Plaza (2018, Mitsubishi Jisho Sekkei; 272 m, 48 floors) across Songren Road east of Taipei 101, and Taipei Sky Tower (The Sky Taipei, 2024; 280 m, 46 floors) north of it on Songgao Road. Both stand in front of the camera's view of Taipei 101, so their tops and their south and east faces matter most.",
+   "plots": [
+    {
+     "id": "TPE103-6688-45F",
+     "label": "TAIPEI NAN SHAN PLAZA",
+     "maxY": 390,
+     "text": "the tower stands in the EAST part of the footprint (plot x 156 and up): a slender square tower rising sheer to about y 381, dark glass with fine vertical pale fins (white/light gray concrete or quartz fins every second block over gray/black stained glass), its four corners chamfered, the top 30 blocks a lit open crown frame (the 'wheat ear' top: vertical fins rising past the roof, lit white-gold from inside). THE PODIUM (the west part, plot x 0..155) is Breeze Nan Shan: a stack of big rectangular boxes about 6 storeys high (to about y 45), each box shifted against the one below, the lower boxes clad in a gold perforated metal screen (gold-patterned: yellow terracotta, gold blocks, birch trapdoors, gold-brown) and the top box dark glass, with roof terraces and lit shopfronts at street level; a covered walk links it north toward Xinyi Road."
+    },
+    {
+     "id": "TPE108-0075-46F",
+     "label": "TAIPEI SKY TOWER",
+     "maxY": 400,
+     "text": "the tower stands in the SOUTH part of the footprint (plot z 65 and up, about 56 x 62): a sleek tower to about y 392, a pale silver-white frame of continuous vertical ribs over blue-gray glass, its corners rounded, tapering a little near the top, crowned by a glass-roofed observatory (The Sky Taipei, lit warmly at dusk) and a short mast with a red aircraft light; the north part of the footprint is its podium, about 8 storeys (to about y 40), glass and stone with a lit lobby on Songgao Road (west)."
+    }
+   ]
+  },
+  {
+   "key": "cityhall",
+   "concept": "city-hall/01-taipei-taiwan-taipei-city-hall-01.jpg",
+   "intro": "Taipei City Hall (1994): the city government's 12-storey seat north of Taipei 101, a vast building whose plan is a double cross around four courtyards; seen from Elephant Mountain behind Taipei 101, so its roofs and south and east fronts matter.",
+   "plots": [
+    {
+     "id": "OSMw142113976",
+     "label": "TAIPEI CITY HALL",
+     "maxY": 80,
+     "text": "follow the footprint exactly: long wings round open courtyards. 12 storeys to about y 60 (roof parapet), with stepped-up central blocks and rooftop mechanical penthouses to about y 72; pale beige-gray tile walls (light gray / white terracotta, smooth sandstone) with long horizontal bands of dark windows, the wings ending in squared towers, a monumental main entrance with a canopy and the city emblem on the west front (Shifu Road), courtyards planted with trees and lawn, flagpoles at the entrance; lit office windows scattered, the entrance and courtyard lamps lit at dusk."
+    }
+   ]
+  },
+  {
+   "key": "wtc",
+   "concept": "world-trade-center/03-taipei-101-mall-twtcitb-twtc-exhibition-hall-and-grand-hyatt.jpg",
+   "intro": "The Taipei World Trade Center group west of Taipei 101 along Xinyi Road: the International Trade Building (1988, 34 floors, 143 m), Exhibition Hall 1 (the long low hall), the Grand Hyatt Taipei and the Taipei International Convention Center (TICC). They stand left of Taipei 101 in the camera's view.",
+   "plots": [
+    {
+     "id": "OSMw137077756",
+     "label": "INTERNATIONAL TRADE BUILDING",
+     "maxY": 205,
+     "text": "a 34-storey office tower to about y 200: a square shaft of bronze-brown reflective glass (brown stained glass, dark brown terracotta frame) with chamfered corners, its top a stepped crown with a lit rim and roof mechanicals; a low lobby podium on its north side."
+    },
+    {
+     "id": "OSMw137077752",
+     "label": "TWTC EXHIBITION HALL 1",
+     "maxY": 45,
+     "text": "a huge, low exhibition hall about 40 tall: a flat roof over the whole footprint with skylight strips and roof plant, its long fronts a regular rhythm of tall pale piers (smooth stone, light gray concrete) with dark glass between, a deep entrance canopy with 'TAIPEI WORLD TRADE CENTER' lettering on Xinyi Road (south), flags on poles along the front, lit lobby glass."
+    },
+    {
+     "id": "OSMw137077760",
+     "label": "GRAND HYATT TAIPEI",
+     "maxY": 125,
+     "text": "a 27-storey hotel to about y 118: a broad slab with stepped ends, warm beige stone and bands of windows (many lit warmly at dusk), a lit crown sign, and a lower podium with the porte-cochere and a lit lobby on its south side."
+    },
+    {
+     "id": "OSMw136814399",
+     "label": "TAIPEI INTERNATIONAL CONVENTION CENTER",
+     "maxY": 75,
+     "text": "a heavy, monumental convention hall to about y 69: a long box with a deep overhanging roof and a colonnade of tall square pale piers all round over dark glass, a grand stair and entrance on its east front, lit lobby."
+    }
+   ]
+  },
+  {
+   "key": "sysmh",
+   "concept": "sun-yat-sen-memorial-hall/01-taipei-taiwan-sun-yat-sen-memorial-hall-02.jpg",
+   "intro": "National Dr. Sun Yat-sen Memorial Hall (1972, Wang Da-hong): the yellow-roofed memorial hall in its park north-west of Taipei 101, far back in the view.",
+   "plots": [
+    {
+     "id": "OSMw189788192",
+     "label": "SUN YAT-SEN MEMORIAL HALL",
+     "maxY": 50,
+     "text": "a square hall on a raised stone podium with broad steps: tall gray-white columns (14 a side, quartz pillars or smooth stone) carrying a deep eave; the great YELLOW GLAZED-TILE ROOF (yellow terracotta and yellow concrete, gold trim) whose ridge lines sweep up dramatically at the main (south) entrance and the corners, the south front's eave raised high over the entrance (the famous upswept roof), a red-brown band under the eaves; floodlit warm at dusk."
+    }
+   ]
+  },
+  {
+   "key": "view",
+   "concept": "elephant-mountain/01-2413.jpg",
+   "intro": "The Elephant Mountain (Xiangshan) viewpoint at the Six Giant Rocks: the hero camera stands here, on the ridge 1.8 km south-east of Taipei 101, and looks NORTH-WEST over the city. This plot is the photograph's FOREGROUND: the rocks, the viewing platform and the trail, on the real hillside, which falls away to the north (low z).",
+   "plots": [
+    {
+     "id": "OSMw1237332588",
+     "box": [
+      2395,
+      2420,
+      2500,
+      2520
+     ],
+     "label": "SIX GIANT ROCKS VIEWPOINT",
+     "maxY": 75,
+     "text": "the hillside as it is (follow the GROUND map: build the ground surface back exactly, grass, coarse dirt, moss and rooted dirt, some stone): SIX GIANT ROCKS, huge rounded sandstone boulders (each 8 to 16 across and 8 to 18 tall: smooth sandstone, sandstone, terracotta, tuff, mossy patches, cracks), clustered on the ridge around plot x 30..75, z 45..70, some leaning together with gaps between; a TIMBER VIEWING PLATFORM (spruce or dark oak planks, slabs, a fence or chain railing) jutting out at the north-west edge of the rocks (around plot x 40..70, z 25..45) facing north-west over the city; a stone-step trail (stone brick stairs and slabs) climbing from the north edge to the platform and on up to the south-east; a few low shrubs and ferns (azalea, moss carpets, grass, ferns) and two or three broadleaf trees only at the plot's EAST and SOUTH edges, NOTHING tall in the north-west half (the view must stay open); a bench, a trail sign and a few lanterns on posts lit warmly at dusk."
+    }
+   ]
+  }
+ ]
+}

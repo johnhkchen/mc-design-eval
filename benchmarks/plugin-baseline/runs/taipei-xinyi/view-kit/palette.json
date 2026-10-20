@@ -1,0 +1,13 @@
+{
+  "roles": {
+    "ground": ["grass_block", "coarse_dirt", "moss_block", "rooted_dirt", "podzol", "stone", "andesite", "dirt"],
+    "rock": ["smooth_sandstone", "sandstone", "cut_sandstone", "orange_terracotta", "terracotta", "light_gray_terracotta", "brown_terracotta", "tuff", "granite", "moss_block", "moss_carpet", "fern", "short_grass", "coarse_dirt", "rooted_dirt", "stone"],
+    "deck": ["spruce_planks", "dark_oak_slab", "dark_oak_planks", "stripped_dark_oak_log", "dark_oak_log", "dark_oak_stairs", "spruce_fence", "dark_oak_fence", "stone_bricks"],
+    "trail": ["stone_brick_stairs", "stone_brick_slab", "stone_bricks", "mossy_stone_bricks", "mossy_stone_brick_stairs", "mossy_stone_brick_slab"],
+    "bench": ["spruce_stairs", "spruce_trapdoor"],
+    "sign": ["spruce_sign"],
+    "light": ["lantern"],
+    "plants": ["azalea", "flowering_azalea", "fern", "large_fern", "short_grass", "oak_log", "jungle_log", "oak_leaves", "jungle_leaves", "azalea_leaves"]
+  },
+  "objects": ["spruce_slab"]
+}

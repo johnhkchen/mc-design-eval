@@ -1,0 +1,27 @@
+# REQUIRED ELEMENTS: Sun Yat-sen Memorial Hall (plot-local coords from plan.md; parts P1..P6 are listed in plan.md PARTS)
+
+- [ ] **Raised stone podium** y 0..2, x/z 8..143. polished_andesite body, stone_bricks course y 0, smooth_stone_slab coping (type top) y 2 on the outer ring. P1, `podium()`.
+- [ ] **Broad south steps** x 56..95, z 144..157 as the architect's slab ramp (half steps, 3 then 2-long landing). polished_andesite_slab (bottom) + full polished_andesite; cheeks x 52..55 / 96..99 stone_bricks with `lamp_post()`. P1, `step_ramp()`, `cheek_wall()`.
+- [ ] **52 columns, 14 a side**, 3x3 quartz_pillar axis y, centres 17..134 step 9, y 3..19; polished_andesite base y 3, smooth_stone capital y 19. P1, `column()`.
+- [ ] **Red walls + gray pilasters** closed box x 21..130 z 21..130, red_terracotta y 3..19; smooth_stone pilaster 1 wide, +1 proud at each column centre line (x/z 20 and 131). P1, `red_wall_run()`.
+- [ ] **Red-brown band** polished_granite ring y 20..21 on the wall plane. P1.
+- [ ] **Eave beam ring** smooth_stone y 22..23 over the columns (16..18 / 133..135) with smooth_stone_slab top brackets y 21 each side of each column. P1, `eave_bracket()`.
+- [x] **Great yellow concave-hip roof** x 10..141, y 24..41 per the architect's d-table; yellow_concrete 60% with yellow_terracotta every 3rd ring; smooth_stone fascia ring y 24; solid closed shell with smooth_stone soffit y 23..24 for d 0..5. P2, `roof_cell()`, `roof_shell()`.
+- [x] **Hip ridges** on the four diagonals, smooth_stone one above the surface, corner to top deck. P2, `hip_ridge()`.
+- [x] **Corner upsweep** eave lifts +0,0,1,1,1,2,2,3,3,4 over 10 cells; curled tip of stone_stairs to y 31, gold_block tip at the corner cell. P2, `corner_flick()`.
+- [x] **Top deck** y 41 yellow, smooth_stone rim y 42 at d=30, gold_block at four rim corners. P2.
+- [ ] **South raised-eave portal** x 49..102: roof cut away z 120..141 between fins; lintel box y 37..40 (smooth_stone), dentil row y 36, deck y 41, parapet y 42. P3, `portal_lintel()`.
+- [x] **Upswept fins** x 49..51 and 100..102, z 124..141, rising to y 45, flick stepping to z 143 at y 46..47 in stone_stairs, gold_block tip y 47. The famous upswept roof. P3, `fin()`.
+- [x] **Six tall portal columns** quartz_pillar, centres 53..98 on z 134, y 3..36. P3, `column(tall)`.
+- [ ] **Mid beam + name board** smooth_stone beam y 30..31 z 131..132; black_concrete board x 64..87 y 32..35 on z 133, gold_block frame, "SUN YAT-SEN" gold banner letters via `plaque()`. P4, `name_board()`.
+- [x] **Lit glass lobby wall** z 130, x 55..96, y 3..36: glass_pane, polished_deepslate mullions every 3 (x 55,58..96), transoms y 9,15,21,27,33; four door pairs left open air y 3..5 (x 60..63, 66..69, 82..85, 88..91). P4, `glass_wall()`.
+- [ ] **Lobby interior seen through glass** smooth_quartz floor, three chandeliers (chain + lanterns) x 66, 75..76, 85, z 125, y 26..30. P5, `chandelier()`.
+- [x] **East/west/north lit door bays** x 130 / x 21 z 73..78, z 21 x 73..78; y 3..9 glass_pane with a lit sea_lantern-backed vestibule pocket behind. P4, `door_bay()`.
+- [ ] **Red-banner flagpoles** iron_bars 6 high with red_banner in the south hedge. P6, `flagpole()`.
+- [ ] **Floodlight wells** shroomlight flush in the deck y 2 one cell outboard of every column (all sides). P5, `flood_well()`.
+- [x] **Gallery hanging lanterns** under the eave beam, y 20..21, between columns. P5, `gallery_lantern()`.
+- [ ] **Roof lights** ochre_froglight set in the tiles on an 8-grid (offset 4) plus one at every ridge foot. P5, `roof_light()`.
+- [ ] **Red aircraft lights**: not applicable (low building); instead gold_block tips are floodlit by a shroomlight under each fin flick. P5.
+- [x] **Lamp posts** on step cheeks x 53, 98 at z 145, 150, 155 and the podium corners: andesite_wall post (1.21.1 has no polished_andesite_wall) + lantern. P5, `lamp_post()`.
+- [x] **Park: hedges, topiary, lawn** azalea/flowering azalea hedge z 144..147 (x 4..51, 100..147) and lawn strips; spruce_leaves cone topiary every 18; grass patches with dirt_path/coarse_dirt. P6, `hedge_run()`, `topiary_cone()`.
+- [ ] **Dusk light and no spawns**: every roof, deck, gallery and lawn cell at light >= 1 from lanterns, shroomlights, froglights. P5.

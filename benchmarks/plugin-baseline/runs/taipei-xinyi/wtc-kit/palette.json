@@ -1,0 +1,33 @@
+{
+  "roles": {
+    "itb_glass": ["brown_stained_glass"],
+    "itb_frame": ["brown_terracotta"],
+    "itb_pier": ["brown_concrete"],
+    "stone_coping": ["smooth_stone", "smooth_stone_slab"],
+    "granite_base": ["polished_granite", "polished_granite_slab", "polished_granite_stairs"],
+    "hall_body": ["light_gray_concrete"],
+    "hall_glass": ["gray_stained_glass", "gray_stained_glass_pane"],
+    "quartz_column": ["quartz_pillar"],
+    "pale_trim": ["smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs"],
+    "paving": ["polished_andesite", "polished_andesite_slab"],
+    "hyatt_band": ["smooth_sandstone", "smooth_sandstone_slab"],
+    "hyatt_mullion": ["cut_sandstone"],
+    "ticc_glass": ["black_stained_glass", "black_stained_glass_pane"],
+    "ticc_mullion": ["gray_concrete"],
+    "lobby_glass": ["glass", "glass_pane"],
+    "dark_backing": ["black_concrete"],
+    "warm_light": ["ochre_froglight"],
+    "cool_light": ["pearlescent_froglight"],
+    "roof_light": ["sea_lantern"],
+    "rim_glass": ["light_gray_stained_glass"],
+    "aircraft_light": ["redstone_torch"],
+    "floodlight": ["end_rod"],
+    "rail": ["iron_bars"],
+    "louvre": ["iron_trapdoor"],
+    "flag": ["red_wool", "white_wool", "blue_wool"],
+    "lamp_post": ["stone_brick_wall", "lantern"],
+    "tree": ["oak_log", "oak_leaves"],
+    "planter": ["grass_block", "coarse_dirt"]
+  },
+  "objects": ["dirt"]
+}

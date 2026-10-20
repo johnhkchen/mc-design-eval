@@ -1,0 +1,14 @@
+{
+  "roles": {
+    "fin": ["smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs", "quartz_pillar", "quartz_slab"],
+    "glass": ["gray_stained_glass", "black_stained_glass", "light_gray_stained_glass", "cyan_stained_glass", "white_stained_glass", "red_stained_glass", "glass"],
+    "pane": ["glass_pane", "light_gray_stained_glass_pane", "gray_stained_glass_pane"],
+    "concrete": ["light_gray_concrete", "gray_concrete", "white_concrete"],
+    "stone": ["smooth_stone", "smooth_stone_slab", "polished_andesite", "polished_andesite_slab", "polished_diorite", "polished_diorite_slab", "stone_bricks"],
+    "gold": ["yellow_terracotta", "orange_terracotta", "gold_block", "birch_slab"],
+    "metal": ["iron_block"],
+    "light": ["sea_lantern", "ochre_froglight", "pearlescent_froglight", "shroomlight", "glowstone"],
+    "planting": ["moss_block", "flowering_azalea", "oak_leaves"]
+  },
+  "objects": ["oak_door", "birch_door", "birch_trapdoor", "iron_bars", "lightning_rod", "end_rod", "redstone_lamp", "lantern"]
+}

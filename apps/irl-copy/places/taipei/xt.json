@@ -1,0 +1,15 @@
+{
+ "name": "Taipei 101 and the Xinyi district, Taipei",
+ "note": "The Xinyi planned district of Taipei from the Elephant Mountain (Xiangshan, 183 m) trail: Taipei 101 (2004, C.Y. Lee & Partners, 508 m to the spire tip) and its podium mall, Taipei Nan Shan Plaza (272 m), Taipei Sky Tower (280 m), Fubon Xinyi A25, the Taipei World Trade Center and the International Trade Building, Taipei City Hall, the Shin Kong Mitsukoshi Xinyi stores (A4, A8, A9, A11) along Songgao Road and the Xinyi Road frontage, Sun Yat-sen Memorial Hall to the north-west, and Elephant Mountain's ridge and the Six Giant Rocks viewpoint to the south-east. Scale 1.4 blocks per metre, so Taipei 101 stands about 711 blocks: past vanilla's 320, the world opens at full height with the datapack anvil.mjs writes (place.maxY 760). Turned -1.23 degrees to the Xinyi street grid (the mode of its streets' directions; Taipei 101's own outline reads 1.25). 2800 blocks a side (half 1000 m), centred 250 m east of Taipei 101 so the mountain viewpoint and the Memorial Hall both fit; the volume is sparse (voxels.mjs SparseVoxels).",
+ "city": "taipei",
+ "country": "TW",
+ "scale": 1.4,
+ "centre": [25.03395, 121.56703],
+ "half": 1000,
+ "rotate": -1.23,
+ "rotateFrom": { "from": "the Xinyi street grid (primary to residential streets within 700 m of Taipei 101: 1.23 degrees, 70% of the length within 3 degrees)" },
+ "maxY": 760,
+ "sparse": true,
+ "heights": { "TPE108-0075-46F": 280, "TPE106-0237-52F": 266, "TPE103-6699-3F": 11.7 },
+ "groundFit": { "canopyShare": 0.3, "openM": 100, "basinM": 40 }
+}

@@ -1,0 +1,96 @@
+Taipei City Hall (1994): the city government's 12-storey seat north of Taipei 101, a vast building whose plan is a double cross around four courtyards; seen from Elephant Mountain behind Taipei 101, so its roofs and south and east fronts matter.
+
+Scale: 1.4 blocks per metre (a storey is about 5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of the Xinyi district of Taipei, Taiwan, for a hero render at DUSK from the Elephant Mountain trail, about 1.8 km to the SOUTH-EAST and 200 blocks up: the camera looks north-west across the district, so the SOUTH and EAST faces and the ROOFS and crowns are what it sees most; the street fronts matter too. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: north is low z, south high z, east high x, west low x; Xinyi Road runs along x north of Taipei 101. The district is flat (the GROUND map gives the ground above y 0 per cell). Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm and cool light in a scattering of windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and red aircraft lights on the towers where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..202, z 0..374 (203 x 375), up to y 80: TAIPEI CITY HALL — follow the footprint exactly: long wings round open courtyards. 12 storeys to about y 60 (roof parapet), with stepped-up central blocks and rooftop mechanical penthouses to about y 72; pale beige-gray tile walls (light gray / white terracotta, smooth sandstone) with long horizontal bands of dark windows, the wings ending in squared towers, a monumental main entrance with a canopy and the city emblem on the west front (Shifu Road), courtyards planted with trees and lawn, flagpoles at the entrance; lit office windows scattered, the entrance and courtyard lamps lit at dusk.
+
+PLOT 0 (TAIPEI CITY HALL): place box x 926..1128, z 666..1040; y 0 = its lowest ground; 1 column = 9x9 blocks
+FOOTPRINT (# = build here):
+.........#.............
+.........#.............
+.........#.............
+.........#####.........
+...###########.........
+...###########.........
+...###########.........
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+...###################.
+..####################.
+...###################.
+...###################.
+.......########........
+######################.
+######################.
+######################.
+######################.
+######################.
+######################.
+.......########........
+...###################.
+...###################.
+..#####################
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+....##########.........
+...###########.........
+...###########.........
+........######.........
+.........#####.........
+.........#.............
+.........#.............
+.........#.............
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   .   .   .   .   .   .   .   .   0   0   0   .   .   .   .   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   0   0   0   .   .   .   .   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   0   0   0   .   .   .   .   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   .   .   2   2   2   2   2   .
+   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   1   1   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2
+   .   .   .   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   2   2   2   2   2   2   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   2   2   2   2   2   2   2   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   2   2   2   .   .   .   .   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   2   2   2   .   .   .   .   .   .   .   .   .   .   .   .
+   .   .   .   .   .   .   .   .   2   2   2   .   .   .   .   .   .   .   .   .   .   .   .
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.

@@ -1,0 +1,15 @@
+{
+  "roles": {
+    "tower_glass": ["cyan_stained_glass", "light_blue_stained_glass"],
+    "trim": ["light_gray_concrete", "dark_prismarine", "dark_prismarine_slab", "smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs", "quartz_pillar"],
+    "lit": ["ochre_froglight", "pearlescent_froglight", "sea_lantern", "shroomlight"],
+    "spire": ["iron_block", "gray_concrete", "iron_bars", "end_rod", "lightning_rod"],
+    "aircraft": ["red_stained_glass"],
+    "coin": ["gold_block", "raw_gold_block", "yellow_terracotta"],
+    "mall": ["polished_diorite", "smooth_stone", "smooth_stone_slab", "polished_andesite", "polished_andesite_slab", "glass", "glass_pane", "gray_concrete"],
+    "garden": ["moss_block", "grass_block", "oak_log", "oak_leaves"],
+    "ground": ["smooth_stone", "polished_andesite"],
+    "rails": ["iron_bars"]
+  },
+  "objects": ["lantern", "cobblestone_wall"]
+}

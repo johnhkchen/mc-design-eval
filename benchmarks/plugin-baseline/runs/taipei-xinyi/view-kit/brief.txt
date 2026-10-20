@@ -1,0 +1,45 @@
+The Elephant Mountain (Xiangshan) viewpoint at the Six Giant Rocks: the hero camera stands here, on the ridge 1.8 km south-east of Taipei 101, and looks NORTH-WEST over the city. This plot is the photograph's FOREGROUND: the rocks, the viewing platform and the trail, on the real hillside, which falls away to the north (low z).
+
+Scale: 1.4 blocks per metre (a storey is about 5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real buildings of the Xinyi district of Taipei, Taiwan, for a hero render at DUSK from the Elephant Mountain trail, about 1.8 km to the SOUTH-EAST and 200 blocks up: the camera looks north-west across the district, so the SOUTH and EAST faces and the ROOFS and crowns are what it sees most; the street fronts matter too. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the maps: north is low z, south high z, east high x, west low x; Xinyi Road runs along x north of Taipei 101. The district is flat (the GROUND map gives the ground above y 0 per cell). Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit lobbies, shop windows). No villagers. Nothing may leave its plot or exceed its stated height. Make it read at dusk: warm and cool light in a scattering of windows (not all), lit lobbies and shopfronts at street level, floodlit crowns and red aircraft lights on the towers where the real building has them; light every roof and terrace so no mob spawns.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..105, z 0..100 (106 x 101), up to y 75: SIX GIANT ROCKS VIEWPOINT — the hillside as it is (follow the GROUND map: build the ground surface back exactly, grass, coarse dirt, moss and rooted dirt, some stone): SIX GIANT ROCKS, huge rounded sandstone boulders (each 8 to 16 across and 8 to 18 tall: smooth sandstone, sandstone, terracotta, tuff, mossy patches, cracks), clustered on the ridge around plot x 30..75, z 45..70, some leaning together with gaps between; a TIMBER VIEWING PLATFORM (spruce or dark oak planks, slabs, a fence or chain railing) jutting out at the north-west edge of the rocks (around plot x 40..70, z 25..45) facing north-west over the city; a stone-step trail (stone brick stairs and slabs) climbing from the north edge to the platform and on up to the south-east; a few low shrubs and ferns (azalea, moss carpets, grass, ferns) and two or three broadleaf trees only at the plot's EAST and SOUTH edges, NOTHING tall in the north-west half (the view must stay open); a bench, a trail sign and a few lanterns on posts lit warmly at dusk.
+
+PLOT 0 (SIX GIANT ROCKS VIEWPOINT): place box x 2395..2500, z 2420..2520; y 0 = its lowest ground; 1 column = 3x3 blocks
+GROUND above y 0 (highest ground in each cell: the real hillside, from the terrain model; rebuild it as it is):
+  17  17  18  18  19  19  18  18  16  15  14  14  13  13  12  12  11  10  10   9   9   8   8   7   6   6   5   5   4   4   3   3   3   2   1   1
+  18  18  19  19  20  20  19  18  17  16  16  15  15  14  14  13  12  12  11  11  11  10   9   9   8   8   7   6   6   6   5   5   4   3   3   2
+  19  19  20  20  21  20  20  19  18  18  17  16  16  16  15  14  14  14  13  12  12  11  11  10  10   9   9   8   7   7   7   6   6   5   4   3
+  20  21  21  22  22  22  21  20  20  19  19  18  17  17  17  16  16  15  15  14  14  13  12  12  11  11  10  10   9   9   8   8   7   6   5   5
+  21  22  22  23  23  23  22  22  21  21  20  19  19  19  18  18  17  17  16  16  15  14  14  13  13  12  11  11  11  10  10   9   8   7   6   6
+  22  23  23  24  25  24  23  23  22  22  21  21  20  20  20  19  19  19  18  18  17  16  15  15  14  14  13  12  12  12  11  10   9   8   7   7
+  23  24  24  25  25  25  24  24  24  23  23  23  22  22  22  21  21  20  20  19  18  18  17  16  16  15  14  14  14  13  13  12  10   9   9   8
+  24  25  26  26  26  26  25  25  25  25  25  24  24  24  24  23  23  23  22  21  20  19  18  18  18  17  16  16  16  15  14  13  13  11  10  10
+  24  25  26  26  26  26  26  26  26  26  26  26  26  25  25  25  25  24  24  23  22  22  21  20  19  19  18  18  18  18  17  16  15  14  13  12
+  25  25  26  26  27  27  27  27  27  27  27  27  27  27  27  27  26  26  26  25  24  24  23  22  22  21  21  20  20  20  20  19  18  17  16  15
+  25  25  26  27  28  28  28  28  29  29  28  28  28  28  28  28  28  28  28  27  27  26  26  25  24  24  24  23  23  23  22  22  21  20  19  18
+  25  26  27  28  29  29  29  29  30  30  29  29  30  30  30  30  30  30  30  29  29  29  29  28  27  27  26  26  25  25  25  24  23  22  22  21
+  26  27  28  29  30  30  30  30  30  30  30  30  31  31  31  31  32  32  32  31  31  31  31  30  29  29  28  28  28  28  27  27  26  25  25  24
+  27  28  29  30  30  31  31  31  31  31  31  32  32  33  33  33  33  33  33  33  33  33  32  32  31  31  31  31  31  30  30  29  29  28  27  27
+  28  28  29  31  32  32  32  33  33  33  33  33  33  34  34  35  35  35  35  35  35  35  34  34  33  33  33  33  33  33  33  32  31  30  30  29
+  28  29  30  32  33  35  35  35  35  34  34  34  35  35  36  36  37  37  36  36  36  36  35  35  35  35  35  35  35  35  35  34  34  33  33  32
+  29  30  31  33  36  38  39  39  39  38  36  36  36  37  37  38  38  38  38  37  37  37  37  37  37  37  36  37  37  37  37  37  37  36  35  34
+  29  30  32  33  36  39  40  41  41  40  37  37  38  38  39  39  40  40  40  39  39  39  39  39  39  39  39  39  39  39  40  39  39  38  38  37
+  30  31  32  33  36  38  40  41  41  40  38  38  39  40  40  41  41  41  41  41  41  41  41  41  41  40  40  40  41  42  42  42  41  41  40  40
+  31  31  32  34  35  36  39  40  41  41  39  40  40  41  42  42  43  43  43  43  43  43  43  43  43  42  42  43  43  44  44  44  44  43  43  42
+  32  32  33  34  35  37  39  41  43  43  41  41  42  42  43  44  44  45  45  45  45  45  45  45  45  45  44  45  45  46  47  47  47  46  46  45
+  32  33  33  35  36  38  40  42  44  44  43  43  43  44  45  45  46  47  47  47  46  47  47  47  47  47  47  47  48  49  49  50  49  49  48  48
+  33  33  34  36  37  39  40  43  44  44  44  44  45  46  46  47  48  48  48  48  48  48  48  48  49  49  48  49  50  51  52  52  52  51  51  50
+  33  33  34  36  37  39  40  42  44  44  44  44  45  46  47  47  48  49  49  49  49  49  49  49  50  50  50  50  51  52  52  53  53  53  52  51
+  32  33  33  35  37  38  39  40  42  42  43  44  45  46  47  47  48  49  49  50  50  50  50  51  51  51  51  52  52  53  54  54  54  54  53  53
+  32  32  33  34  36  36  38  39  40  40  41  43  44  45  46  47  48  49  50  50  50  51  51  52  52  53  53  53  54  55  56  56  55  55  55  55
+  32  32  32  33  35  36  37  39  39  40  41  42  44  45  46  47  48  50  50  51  51  51  52  53  53  54  55  55  56  57  57  57  57  56  56  56
+  31  31  31  32  34  35  37  38  38  39  40  42  43  44  46  47  48  49  50  51  51  52  53  53  54  55  56  57  57  58  59  58  58  58  57  57
+  29  30  31  32  33  35  36  37  38  38  40  41  42  44  45  47  48  49  50  51  52  53  53  54  55  56  57  58  59  59  60  60  60  59  59  59
+  28  30  32  32  33  34  35  36  37  38  40  41  42  44  46  47  48  50  51  51  52  53  54  54  55  56  57  58  59  60  60  60  60  60  60  60
+  28  31  32  32  32  33  35  35  37  38  39  41  42  44  46  47  48  50  51  51  52  53  54  55  55  56  57  58  59  60  61  61  61  61  61  61
+  28  30  32  31  31  33  34  35  37  38  39  41  42  44  46  47  48  50  51  52  53  54  54  55  56  57  58  58  60  60  61  62  62  62  62  62
+  26  29  30  30  31  32  34  35  37  38  39  41  42  44  45  47  49  50  51  52  53  54  54  55  56  57  58  59  60  61  62  63  63  63  63  63
+  26  28  29  30  30  32  34  36  37  38  39  40  42  43  45  47  49  50  51  52  53  54  55  55  57  57  58  59  60  62  63  63  63  63  63  63
+
+Use the photograph only as inspiration for character and colour; the maps and dimensions above are exact.
