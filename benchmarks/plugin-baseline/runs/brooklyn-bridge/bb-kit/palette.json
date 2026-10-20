@@ -1,0 +1,22 @@
+{
+  "roles": {
+    "masonry": ["stone_bricks", "cracked_stone_bricks", "mossy_stone_bricks", "stone_brick_stairs", "stone_brick_slab", "stone_brick_wall"],
+    "rustication": ["polished_andesite", "polished_andesite_stairs", "polished_andesite_slab"],
+    "limestone": ["smooth_sandstone", "smooth_sandstone_stairs", "smooth_sandstone_slab"],
+    "shadow_backs": ["tuff_bricks"],
+    "corbels": ["stone_brick_stairs"],
+    "parapet": ["stone_brick_wall"],
+    "caisson": ["cobblestone", "andesite", "mossy_cobblestone"],
+    "tablet": ["polished_blackstone"],
+    "cables": ["smooth_quartz", "smooth_quartz_slab", "smooth_quartz_stairs"],
+    "cable_bands": ["light_gray_concrete"],
+    "stays": ["diorite_wall"],
+    "truss": ["smooth_sandstone"],
+    "floor": ["smooth_stone"],
+    "road": ["gray_concrete", "light_gray_concrete"],
+    "promenade": ["spruce_planks", "spruce_stairs", "spruce_slab"],
+    "railing": ["dark_oak_fence"],
+    "lights": ["lantern"]
+  },
+  "objects": ["lantern", "dark_oak_fence"]
+}

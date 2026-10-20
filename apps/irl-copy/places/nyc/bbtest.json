@@ -1,0 +1,15 @@
+{
+ "name": "The Brooklyn Bridge and DUMBO, New York City",
+ "note": "The Brooklyn Bridge (1883, John A. and Washington Roebling) over the East River: both Gothic granite and limestone towers with their twin pointed arches, the four main cables, the diagonal stays and the elevated promenade, from the Manhattan anchorage and approach to the Brooklyn anchorage; DUMBO beside its Brooklyn end (the Clock Tower Building at 1 Main Street, Empire Stores, the brick warehouse blocks of Water, Front, Washington and Plymouth Streets, Jane's Carousel in its glass pavilion, Pebble Beach, the Manhattan Bridge's Brooklyn tower and the Archway under its anchorage); Brooklyn Bridge Park's piers; and the Lower Manhattan skyline across the water as lidar massing. Scale 0.7 blocks per metre, so the 84 m towers stand about 59 blocks over the river and the 486 m main span is 340 blocks long. Turned 43.6 degrees clockwise so the bridge (Brooklyn anchorage to Manhattan anchorage, OSM way 432550255) runs straight along z, Manhattan at low z; DUMBO's grid then lies on the diagonal. 1400 blocks a side (half 1000 m) about a centre on the bridge's Manhattan half, so the views from Brooklyn Bridge Park see the Financial District behind the bridge.",
+ "city": "new-york",
+ "country": "US",
+ "scale": 0.7,
+ "centre": [40.7068, -73.9985],
+ "half": 1000,
+ "rotate": 43.6,
+ "rotateFrom": {
+  "from": "the Brooklyn Bridge's axis (OSM: towers at 40.70405,-73.99449 and 40.70721,-73.99847)",
+  "brooklynTower": [40.70405, -73.99449],
+  "manhattanTower": [40.70721, -73.99847]
+ }
+}

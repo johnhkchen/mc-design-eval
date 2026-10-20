@@ -1,0 +1,16 @@
+{
+  "roles": {
+    "walls": ["bricks", "terracotta", "mud_bricks"],
+    "brick_relief": ["brick_stairs", "brick_slab"],
+    "base": ["stone_bricks", "stone_brick_stairs", "stone_brick_wall"],
+    "trim": ["smooth_stone", "smooth_stone_slab", "smooth_sandstone_slab", "polished_andesite"],
+    "openings": ["glass", "glass_pane", "dark_oak_trapdoor", "dark_oak_door", "dark_oak_planks"],
+    "pavilion": ["black_concrete", "polished_blackstone_slab"],
+    "roof_deck": ["smooth_stone_slab"],
+    "garden": ["grass_block", "moss_block", "coarse_dirt", "oak_log", "azalea_leaves", "flowering_azalea_leaves", "stripped_dark_oak_log", "oak_fence", "oak_stairs"],
+    "warm_light": ["lantern", "shroomlight"],
+    "carousel_box": ["light_gray_concrete", "white_concrete"],
+    "carousel": ["red_concrete", "yellow_concrete", "gold_block", "smooth_quartz", "smooth_sandstone_slab", "white_wool", "brown_wool", "red_glazed_terracotta", "end_rod", "spruce_slab"]
+  },
+  "objects": ["bricks", "terracotta", "mud_bricks", "brick_stairs", "brick_slab", "stone_bricks", "stone_brick_stairs", "stone_brick_wall", "smooth_stone", "smooth_stone_slab", "smooth_sandstone_slab", "polished_andesite", "glass", "glass_pane", "dark_oak_trapdoor", "dark_oak_door", "dark_oak_planks", "black_concrete", "polished_blackstone_slab", "grass_block", "moss_block", "coarse_dirt", "oak_log", "azalea_leaves", "flowering_azalea_leaves", "stripped_dark_oak_log", "oak_fence", "oak_stairs", "lantern", "shroomlight", "light_gray_concrete", "white_concrete", "red_concrete", "yellow_concrete", "gold_block", "smooth_quartz", "white_wool", "brown_wool", "red_glazed_terracotta", "end_rod", "spruce_slab"]
+}

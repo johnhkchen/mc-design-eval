@@ -1,0 +1,11 @@
+# REQUIRED ELEMENTS (coords local to plot; part in brackets)
+- [ ] Twin pointed Gothic arches, tower x8..14 / x19..25, y27..48, through z4..15: R1 recess steps, smooth_sandstone inner ring at z5/z14, polished_andesite voussoir ring at z4/z15, upside-down stone_brick_stairs at edges, hood-mould smooth_sandstone_stairs. Part: Tower shell + Tower facade. Vocab: gothic_arch.
+- [ ] Granite/limestone tower body, string courses y26, y48, cornice y55..57, parapet y58 (stone_brick_wall), caisson y1..3. Vocab: quoin_corner, cornice_ring.
+- [ ] Gothic panels (tuff_bricks recessed) above arches. Vocab: gothic_panel.
+- [ ] Four main cables over tower top, saddles y57 x8,14,19,25, falling to y54 at z0/z19 (smooth_quartz). Vocab: cable_line.
+- [ ] Deck section: roadways y27 (gray_concrete, light_gray dashes), trusses y22..29, floor beams, promenade y30 spruce_planks with dark_oak_fence railings y31, lamp pairs z8. Vocab: truss_bay, lamp_post.
+- [ ] Main-span cables y=33+24(u/170)^2, bands every 6, suspenders (diorite_wall) every 3, 16 diagonal stays per plane (plot 2). Vocab: cable_line, suspender, stay_line.
+- [ ] Side-span cables, suspenders to stepped truss top, 12 stays per plane (plot 3). Same vocab.
+- [ ] Anchorage: granite block, 6 round vaults, buttresses, cornice, parapets, road y20, promenade y23, cable housings z0..3 with quartz cable ends y24. Vocab: round_vault, lamp_post.
+- [ ] Approach viaduct with through-vault z3..12, cornice, parapets, lamp pair z8. Vocab: round_vault, lamp_post.
+- [ ] Dusk lighting: lanterns on every walkable surface (reserved cells in plan).

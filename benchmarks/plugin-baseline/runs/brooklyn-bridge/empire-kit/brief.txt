@@ -1,0 +1,114 @@
+Empire Stores and Jane's Carousel, DUMBO, Brooklyn: the waterfront heart of Brooklyn Bridge Park between the two bridges. EMPIRE STORES (1869-1885): a long row of seven joined brick coffee and sugar warehouses, five storeys, on Water Street facing the river: deep red-brown brick walls, rows of round-arched and segmental-arched window openings with heavy iron shutters (dark green / black) pinned open, granite sills and lintels, stone quoins, a stepped and corbelled roofline over each warehouse bay, and since 2017 a cut through its middle to a green roof garden. JANE'S CAROUSEL (1922 Philadelphia Toboggan carousel; pavilion by Jean Nouvel, 2011): a vintage painted carousel in a clear GLASS BOX pavilion on the riverside lawn, a flat black-edged roof over a tall transparent cube, the carousel's lights glowing inside at dusk. They must read, at a glance, as THESE: the long red-brick arcade of shuttered openings beside the river, and the glowing glass box.
+
+Scale: 0.7 blocks per metre (a storey is about 2.5 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no "iron_chain" (it is "chain" in 1.21.1), nothing 1.21.4+). These are real structures of the Brooklyn waterfront in New York for a hero AERIAL render at golden hour: the camera looks from high over the East River and Brooklyn Bridge Park toward the Brooklyn Bridge with the Lower Manhattan skyline behind, so silhouettes, tops and the faces toward the river matter most. Placement code sets each module exactly where the real one stands, so every dimension and coordinate below is exact; keep to them. Exterior only: no interiors beyond what shows through glass. No villagers. Nothing may leave its plot or exceed its stated height. Light it for dusk (lamps on the bridge decks and promenade, warm windows in some lofts, floodlit stone) so no mob spawns on a walkable surface.
+
+THE PLOTS' FRAME: DUMBO's own street grid: north (low z) is true north, toward the East River; Water Street runs along x on the south side of Empire Stores. Placement turns each module 46.1 degrees back onto its real footprint, so build them square in this frame.
+
+Plots along x, each standing at its own y 0:
+ plot 0, x 0..97, z 0..43 (98 x 44), up to y 24: EMPIRE STORES: five storeys of brick warehouse over the whole footprint (follow the ROOF HEIGHT map), divided along x into seven warehouse bays each with its own stepped, corbelled gable-parapet top; the north (river) and south (Water Street) facades: rows of tall arched openings, one bay of openings every 3 blocks, with iron shutters (dark spruce or dark oak trapdoors set open beside each window, or dark green / black blocks), glass behind; granite string courses; the ground floor with big arched loading doors, now shopfronts, warm-lit; the roof: a green roof garden with planters, lawn and a few small trees over the middle bays, reached by an open cut through the building in the middle of its length.
+ plot 1, x 102..117, z 0..15 (16 x 16), up to y 16: JANE'S CAROUSEL: the clear glass pavilion over the whole footprint: a square box of glass (glass blocks or white-framed glass panes), about 7 blocks high, a thin flat roof with a black edge, a low concrete plinth; inside, centred, the round carousel about 13 across: a ring floor, a central drum with mirrors and painted panels (colourful: red, gold, white, cream), a conical striped canopy roof, carved horses (use colourful blocks, banners or armour-stand-free shapes) around the platform, and a ring of warm lights (lanterns, glowstone, shroomlights) under the canopy so the whole box glows.
+
+PLOT 0 (EMPIRE STORES): 98 x 44; y 0 = its lowest ground; the real roofs reach about y 14 (lidar); 1 column = 3x3 blocks
+FOOTPRINT (# = build here, nothing outside it):
+##...............................
+#################################
+#################################
+################################.
+.###############################.
+.###############################.
+.###############################.
+.################################
+#################################
+.################################
+##########################.......
+.########################........
+.########################........
+.########################........
+.#...............................
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1
+   1   1   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1
+   1   1   1   1   1   1   1   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   0   0   0   0   0   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   0   0   0   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   0   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   0   0   0   0   0
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+   1   1   1   1   .   .   .   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   .   .   .   .   .   .   .   .
+ROOF HEIGHT above y 0 (lidar, median in each cell: the real massing and its setbacks):
+  11  11  11  11  11   1   1  11   0  11  11  11  11  11  11  11  11  11  11  14  14  14  14  14  14  14   0  14   1  13  14  14  13
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  13  13  13  13  14  13  13  13  13  13  13  13  13
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  13  13  13  13  13  13  13  13  13  13  13  13  13  13
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  13  13  13  13  14  13  13  13  14  14  13  13  13
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  14  13  14  14  14  14  14  14  14  14  14  14  14
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  14  14  14  14  14  14  14  14  14  14  14  14  14
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  14  14  14  14  14  14  14  14  14  14  14  14  14
+  12  11  11  11  11  11  12  11  11  12  11  12  12  11  12  11  11  11  12  14  14  14  14  14  14  14  14  14  14  13  13  14  14
+  12  12  11  12  12  12  11  12  12  12  12  12  11  11  12  11  12  12  11  14  14  14  14  14  14  13  13  13  13  13  13  13  13
+  12  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  14  14  14  14  14  13  13  13  13  13  13  13  13
+  12  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  14  14  14  13  14  14  13  14   .   .   .   .   .   .
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  13  13  13  13  13  13   .   .   .   .   .   .   .   .
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  13  13  13  13  13  13   .   .   .   .   .   .   .   .
+  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  11  13  13  13  13  13  13   .   .   .   .   .   .   .   .
+  11  11  11  11   .   .   .  11  11  11  11  11  11  11  11  11  11  11  11  13  13  13  13  13  13   .   .   .   .   .   .   .   .
+
+PLOT 1 (JANE'S CAROUSEL): 16 x 16; y 0 = its lowest ground; the real roofs reach about y 6 (lidar); 1 column = 1x1 blocks
+FOOTPRINT (# = build here, nothing outside it):
+.######.########
+################
+###############.
+################
+################
+###############.
+################
+################
+################
+.###############
+.###############
+.###############
+.###############
+.###############
+.###############
+.###............
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+   .   0   0   0   0   0   0   .   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   .
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   .   0   0   0   .   .   .   .   .   .   .   .   .   .   .   .
+ROOF HEIGHT above y 0 (lidar, median in each cell: the real massing and its setbacks):
+   .   6   0   6   6   6   6   .   6   6   6   6   6   6   6   6
+   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6   .
+   6   6   6   6   6   6   6   6   5   6   5   6   6   6   6   6
+   6   6   6   6   6   5   6   6   6   6   5   6   6   6   6   6
+   6   6   6   6   0   5   6   0   6   6   6   6   6   6   6   .
+   6   6   6   5   0   6   6   6   6   6   6   6   6   6   6   6
+   6   6   6   5   6   6   6   6   6   6   6   6   6   6   6   6
+   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   6   6   6   6   6   6   6   6   6   6   6   6
+   .   6   6   6   .   .   .   .   .   .   .   .   .   .   .   .
+
+Use the photograph only as inspiration for character and colour; the dimensions above are exact.
