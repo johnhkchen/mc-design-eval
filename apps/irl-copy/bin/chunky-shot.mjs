@@ -3,7 +3,7 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--cloud-y y] (the cloud layer, default 120 over the eye) [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>] [--rerender] (the saved scene <name> again on the re-composed world) [--reuse-octree <scene>] (its loaded world, not the chunks again) [--crop x,y,w,h] (one window of the full frame, at final resolution) [--water-shading STILL|SIMPLEX|TILED_NORMALMAP] [--sun-sampling IMPORTANCE|NON_LUMINOUS|HIGH_QUALITY|FAST|OFF] [--emitters 0] (off: lamps sampled by chance are fireflies in daylight)
+//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--cloud-y y] (the cloud layer, default 120 over the eye) [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>] [--rerender] (the saved scene <name> again on the re-composed world; render options given with it override the saved ones) [--reuse-octree <scene>] (its loaded world, not the chunks again) [--crop x,y,w,h] (one window of the full frame, at final resolution) [--water-shading STILL|SIMPLEX|TILED_NORMALMAP] [--sun-sampling IMPORTANCE|NON_LUMINOUS|HIGH_QUALITY|FAST|OFF] [--emitter-sampling NONE|ONE|ALL] [--emitters 0] (off: lamps sampled by chance are fireflies in daylight)
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
@@ -49,7 +49,9 @@ if (chunkList.length < chunks.length) console.log(`${chunkList.length} of ${chun
 const scene = {
   sdfVersion: 10, name, width: W, height: H, exposure: +opt("--exposure", 1.0), postprocess: opt("--post", "TONEMAP2"), outputMode: "PNG",
   renderTime: 0, spp: 0, sppTarget: spp, rayDepth: 6, pathTrace: true, dumpFrequency: 500, saveSnapshots: false,
-  emittersEnabled: +opt("--emitters", 13) > 0, emitterIntensity: +opt("--emitters", 13), sunSamplingStrategy: opt("--sun-sampling", "IMPORTANCE"),   // NON_LUMINOUS: the sun lights surfaces directly but a bounced ray never hits it (no glint fireflies)
+  emittersEnabled: +opt("--emitters", 13) > 0, emitterIntensity: +opt("--emitters", 13),
+  // --emitter-sampling NONE|ONE|ALL: lamps sampled directly (a dusk scene's lights without fireflies); NONE leaves them to chance
+  emitterSamplingStrategy: opt("--emitter-sampling", "NONE"), sunSamplingStrategy: opt("--sun-sampling", "IMPORTANCE"),   // NON_LUMINOUS: the sun lights surfaces directly but a bounced ray never hits it (no glint fireflies)
   fancierTranslucency: true, transmissivityCap: 1.0,
   // --water-shading STILL|SIMPLEX|TILED_NORMALMAP: a rippled normal map glints the sun into fireflies on open water
   waterShadingStrategy: opt("--water-shading", "TILED_NORMALMAP"), waterOpacity: 0.42, waterVisibility: 9, useCustomWaterColor: false, biomeColorsEnabled: true, transparentSky: false,
@@ -76,7 +78,20 @@ const crop = opt("--crop")?.split(",").map(Number);
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
 if (rerender) {
   const saved = JSON.parse(readFileSync(`${sceneDir}/${name}.json`, "utf8"));
+  // the options given on this command line win over the saved scene's (new render settings on an old camera)
+  const given = (k) => process.argv.includes(k), fresh = { ...scene, sun: { ...scene.sun }, sky: { ...scene.sky } };
   Object.keys(scene).forEach((k) => delete scene[k]); Object.assign(scene, saved, { spp: 0, renderTime: 0 });
+  if (given("--sun-sampling")) scene.sunSamplingStrategy = fresh.sunSamplingStrategy;
+  if (given("--emitters")) Object.assign(scene, { emittersEnabled: fresh.emittersEnabled, emitterIntensity: fresh.emitterIntensity });
+  if (given("--emitter-sampling")) scene.emitterSamplingStrategy = fresh.emitterSamplingStrategy;
+  if (given("--sun-color")) scene.sun.color = fresh.sun.color;
+  if (given("--sun-intensity")) scene.sun.intensity = fresh.sun.intensity;
+  if (given("--clouds")) scene.sky.cloudsEnabled = fresh.sky.cloudsEnabled;
+  if (given("--spp")) scene.sppTarget = fresh.sppTarget;
+  if (given("--fog")) scene.fog = fresh.fog;
+  if (given("--size")) Object.assign(scene, { width: fresh.width, height: fresh.height });
+  if (given("--ymax")) for (const k of ["yMin", "yMax", "yClipMin", "yClipMax"]) scene[k] = fresh[k];
+  if (given("--water-plane")) for (const k of ["waterWorldEnabled", "waterWorldHeight", "waterWorldClipEnabled", "waterWorldHeightOffsetEnabled"]) scene[k] = fresh[k];
   for (const f of [`${name}.dump`, `${name}.dump.backup`, `${name}.octree2`]) if (existsSync(`${sceneDir}/${f}`)) unlinkSync(`${sceneDir}/${f}`);
   if (existsSync(`${sceneDir}/snapshots`)) for (const f of readdirSync(`${sceneDir}/snapshots`)) if (new RegExp(`^${name}-\\d+\\.png$`).test(f)) renameSync(`${sceneDir}/snapshots/${f}`, `${sceneDir}/snapshots/pre-fix-${f}`);
   if (existsSync(`${out}/shots/${name}.png`) && !existsSync(`${out}/shots/${name}-pre-fix.png`)) copyFileSync(`${out}/shots/${name}.png`, `${out}/shots/${name}-pre-fix.png`);

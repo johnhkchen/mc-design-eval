@@ -23,8 +23,9 @@ const opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] :
 const [cx, cy, cz] = opt("--center").split(",").map(Number), R = +opt("--radius", 500), eyeY = +opt("--height", cy + 150);
 const N = +opt("--frames", 240), fps = +opt("--fps", 24), arc = +opt("--degrees", 360), start = +opt("--start", 0);
 const size = opt("--size", "1280x720"), spp = opt("--spp", "100");
-// the world box every frame needs: the circle and what lies beyond it (a horizon), unless --chunks says otherwise
-const chunks = opt("--chunks", [cx - R - 1500, cz - R - 1500, cx + R + 1500, cz + R + 1500].map(Math.round).join(","));
+// every frame shares frame 0's world, so it is the whole world (each frame looks a different way) unless --chunks says
+// otherwise: Mont-Saint-Michel's 4480 square loads in about 4 minutes in a 16 GB heap
+const chunks = opt("--chunks", "-1000000,-1000000,1000000,1000000");
 const pass = []; for (let i = 2; i < argv.length; i++) { if (OWN.has(argv[i])) { i++; continue; } if (argv[i] === "--encode-only") continue; pass.push(argv[i]); }
 
 const out = `${HERE}/out/${place}`, shots = `${out}/shots`, frames = `${shots}/${name}`, sceneDir = `${out}/chunky`;
