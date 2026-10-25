@@ -3,19 +3,22 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--cloud-y y] (the cloud layer, default 120 over the eye) [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
+//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--cloud-y y] (the cloud layer, default 120 over the eye) [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>] [--rerender] (the saved scene <name> again on the re-composed world)
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, readFileSync, readdirSync, copyFileSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync } from "node:fs";
 import { resolve } from "node:path";
 import { homedir } from "node:os";
 
 const HERE = resolve(import.meta.dirname, ".."), [place, name] = process.argv.slice(2);
 const opt = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
 const v3 = (s) => s.split(",").map(Number);
-const eye = v3(opt("--eye")), look = v3(opt("--look")), [alt, az] = v3(opt("--sun", "22,10")).map((d) => (d * Math.PI) / 180);
+// --rerender: the scene <name> exactly as saved (camera, sun, sky, size, samples, chunks) on the world as it now is (after
+// a re-compose): its progress is reset and the old photograph kept as shots/<name>-pre-fix.png
+const rerender = process.argv.includes("--rerender");
+const eye = v3(opt("--eye", rerender ? "0,0,0" : undefined)), look = v3(opt("--look", rerender ? "1,0,1" : undefined)), [alt, az] = v3(opt("--sun", "22,10")).map((d) => (d * Math.PI) / 180);
 const [W, H] = opt("--size", "3200x2000").split("x").map(Number), spp = +opt("--spp", 400), fov = +opt("--fov", 50);
 // Chunky's panoramic slot reads its fov as the VERTICAL angle and spans fov x width/height across (measured: 140 at 3:1
 // wrapped past 360 degrees), so the horizontal angle asked for is turned into that
@@ -66,6 +69,13 @@ const scene = {
   ...(opt("--octree") ? { octreeImplementation: opt("--octree") } : {}),
 };
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
+if (rerender) {
+  const saved = JSON.parse(readFileSync(`${sceneDir}/${name}.json`, "utf8"));
+  Object.keys(scene).forEach((k) => delete scene[k]); Object.assign(scene, saved, { spp: 0, renderTime: 0 });
+  for (const f of [`${name}.dump`, `${name}.dump.backup`, `${name}.octree2`]) if (existsSync(`${sceneDir}/${f}`)) unlinkSync(`${sceneDir}/${f}`);
+  if (existsSync(`${sceneDir}/snapshots`)) for (const f of readdirSync(`${sceneDir}/snapshots`)) if (new RegExp(`^${name}-\\d+\\.png$`).test(f)) renameSync(`${sceneDir}/snapshots/${f}`, `${sceneDir}/snapshots/pre-fix-${f}`);
+  if (existsSync(`${out}/shots/${name}.png`) && !existsSync(`${out}/shots/${name}-pre-fix.png`)) copyFileSync(`${out}/shots/${name}.png`, `${out}/shots/${name}-pre-fix.png`);
+}
 writeFileSync(`${sceneDir}/${name}.json`, JSON.stringify(scene, null, 1));
 const t0 = Date.now();
 // Chunky's launcher starts the renderer as a second JVM with its own heap (1 GB unless set in its settings), which a big
@@ -83,4 +93,4 @@ const own = new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-(\\d+)\\
 const png = snaps.filter((f) => own.test(f.split("/").pop())).sort((a, b) => +own.exec(a.split("/").pop())[1] - +own.exec(b.split("/").pop())[1]).at(-1);
 if (!png) throw new Error("Chunky wrote no image");
 copyFileSync(`${sceneDir}/snapshots/${png}`, `${out}/shots/${name}.png`);
-console.log(`${place}: ${name}.png (${W}x${H}, ${spp} spp, ${Math.round((Date.now() - t0) / 1000)} s)`);
+console.log(`${place}: ${name}.png (${scene.width}x${scene.height}, ${scene.sppTarget} spp, ${Math.round((Date.now() - t0) / 1000)} s)`);
