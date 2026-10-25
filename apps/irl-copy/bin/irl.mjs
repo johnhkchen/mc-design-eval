@@ -30,7 +30,9 @@ import { alignment } from "../src/align.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
 
 const HERE = resolve(import.meta.dirname, ".."), [cmd, name] = process.argv.slice(2);
-const load = (n) => ({ id: n, ...JSON.parse(readFileSync(`${HERE}/places/${n}.json`, "utf8")) });
+// --set key=json (repeatable) overrides a place key for this run (e.g. --set tideM=8.2 for a high-tide world)
+const sets = Object.fromEntries(process.argv.flatMap((a, i) => (a === "--set" ? [process.argv[i + 1]] : [])).map((kv) => { const [k, ...v] = kv.split("="); let j; try { j = JSON.parse(v.join("=")); } catch { j = v.join("="); } return [k, j]; }));
+const load = (n) => ({ id: n, ...JSON.parse(readFileSync(`${HERE}/places/${n}.json`, "utf8")), ...sets });
 const cache = (n, s) => `${HERE}/.cache/${n}/${s}`;
 // a sparse (tall) world's structure file can run to gigabytes before gzip: past place.maxStructureBlocks (default 40M) it
 // is left out (the world, the manifest and the briefs carry the place); dense places always write it, as before

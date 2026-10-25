@@ -3,7 +3,7 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
+//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--cloud-y y] (the cloud layer, default 120 over the eye) [--water-plane y] (water past the world's edge) [--ymax y] (load blocks up to y, for a world taller than vanilla's; Chunky clips at 256 by default) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
@@ -60,7 +60,7 @@ const scene = {
   sun: { altitude: alt, azimuth: az, intensity: +opt("--sun-intensity", 1.25), luminosity: 100, apparentBrightness: 1, radius: 0.03, modifySunTexture: false,
     color: { red: 1, green: 1, blue: 1 }, importanceSampling: { chance: 0.1, radius: 1.2 } },
   sky: { skyYaw: 0, skyPitch: 0, skyRoll: 0, skyMirrored: true, skyExposure: 1, skyLight: +opt("--sky-light", 1), apparentSkyLight: +opt("--sky-light", 1), mode: "SIMULATED", horizonOffset: +opt("--horizon", 0.1),
-    cloudsEnabled: opt("--clouds", "no") === "yes", cloudSize: 64, cloudOffset: { x: 0, y: eye[1] + 120, z: 0 }, simulatedSky: "Nishita", skyCacheResolution: 128 },
+    cloudsEnabled: opt("--clouds", "no") === "yes", cloudSize: 64, cloudOffset: { x: 0, y: +opt("--cloud-y", eye[1] + 120), z: 0 }, simulatedSky: "Nishita", skyCacheResolution: 128 },
   chunkList, cameraPresets: {}, materials: {}, renderer: "PathTracingRenderer", previewRenderer: "PreviewRenderer",
   // --octree PACKED|BIGPACKED|NODE|DICTIONARY: Chunky's world octree implementation (default left to Chunky)
   ...(opt("--octree") ? { octreeImplementation: opt("--octree") } : {}),
@@ -78,7 +78,9 @@ if (core) { let java = "java"; try { java = `${execFileSync("/usr/libexec/java_h
 else execFileSync("java", [heap, "-jar", jar, ...args], { stdio: ["ignore", "inherit", "inherit"] });
 // Chunky writes its snapshots under <scene dir>/snapshots/: the newest PNG for this scene is the photograph
 const snaps = existsSync(`${sceneDir}/snapshots`) ? readdirSync(`${sceneDir}/snapshots`, { recursive: true }).map(String) : [];
-const png = snaps.filter((f) => f.split("/").pop().startsWith(name) && f.endsWith(".png")).sort().at(-1);
+// (<name>-<spp>.png exactly: a prefix match took "wtest-se-50.png" for the scene "wtest-s")
+const own = new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-(\\d+)\\.png$`);
+const png = snaps.filter((f) => own.test(f.split("/").pop())).sort((a, b) => +own.exec(a.split("/").pop())[1] - +own.exec(b.split("/").pop())[1]).at(-1);
 if (!png) throw new Error("Chunky wrote no image");
 copyFileSync(`${sceneDir}/snapshots/${png}`, `${out}/shots/${name}.png`);
 console.log(`${place}: ${name}.png (${W}x${H}, ${spp} spp, ${Math.round((Date.now() - t0) / 1000)} s)`);

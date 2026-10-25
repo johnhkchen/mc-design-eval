@@ -15,12 +15,12 @@ async function overpass(query) {
 const feature = (e) => ({ type: "Feature", properties: { osm: `${e.type}/${e.id}`, ...e.tags },
   geometry: e.type === "node" ? { type: "Point", coordinates: [e.lon, e.lat] }
     : (e.geometry ?? []).length > 3 && e.geometry[0].lat === e.geometry.at(-1).lat && e.geometry[0].lon === e.geometry.at(-1).lon && !e.tags?.barrier
-      && (e.tags?.building || /^(water|scrub|grassland)$/.test(e.tags?.natural ?? "") || e.tags?.leisure || e.tags?.landuse || e.tags?.area === "yes" || e.tags?.man_made === "pier" || e.tags?.public_transport === "platform" || e.tags?.railway === "platform")
+      && (e.tags?.building || /^(farmland|meadow|orchard)$/.test(e.tags?.landuse ?? "") || /^(water|scrub|grassland)$/.test(e.tags?.natural ?? "") || e.tags?.leisure || e.tags?.landuse || e.tags?.area === "yes" || e.tags?.man_made === "pier" || e.tags?.public_transport === "platform" || e.tags?.railway === "platform")
       ? { type: "Polygon", coordinates: [e.geometry.map((p) => [p.lon, p.lat])] } : { type: "LineString", coordinates: (e.geometry ?? []).map((p) => [p.lon, p.lat]) } });
 const fc = (features) => ({ type: "FeatureCollection", features });
 
 export default [{
-  id: "osm", layers: ["paths", "trees", "water", "playgrounds", "buildings", "streets", "rails", "furniture", "barriers", "platforms", "piers", "greens"], name: "OpenStreetMap (Overpass API)", licence: ODBL,
+  id: "osm", layers: ["paths", "trees", "water", "playgrounds", "buildings", "streets", "rails", "furniture", "barriers", "platforms", "piers", "greens", "fields"], name: "OpenStreetMap (Overpass API)", licence: ODBL,
   attribution: "© OpenStreetMap contributors", url: "https://www.openstreetmap.org/copyright", covers: () => true,
   async fetch(place, { box: b }) {
     const bb = `${b.south},${b.west},${b.north},${b.east}`;
@@ -28,7 +28,7 @@ export default [{
       + `way["railway"~"^(tram|light_rail)$"](${bb});node["highway"~"^(street_lamp|crossing)$"](${bb});node["amenity"~"^(bench|waste_basket|bicycle_parking|drinking_water|fountain)$"](${bb});`
       + `node["barrier"="bollard"](${bb});node["leisure"="picnic_table"](${bb});way["barrier"~"^(fence|railing|wall|hedge|guard_rail)$"](${bb});`
       + `way["railway"="platform"](${bb});way["public_transport"="platform"](${bb});way["man_made"~"^(pier|breakwater)$"](${bb});`
-      + `way["leisure"~"^(park|garden)$"](${bb});way["landuse"~"^(grass|flowerbed|village_green)$"](${bb});way["natural"="scrub"](${bb}););out geom;`);
+      + `way["landuse"~"^(farmland|meadow|orchard)$"](${bb});way["leisure"~"^(park|garden)$"](${bb});way["landuse"~"^(grass|flowerbed|village_green)$"](${bb});way["natural"="scrub"](${bb}););out geom;`);
     const f = els.map(feature), t = (e) => e.properties;
     const levels = (p) => (p.height ? parseFloat(p.height) : p["building:levels"] ? 3.2 * parseFloat(p["building:levels"]) : 8);
     return {
@@ -45,6 +45,7 @@ export default [{
       barriers: fc(f.filter((e) => t(e).barrier && e.geometry.type === "LineString")),
       platforms: fc(f.filter((e) => (t(e).railway === "platform" || t(e).public_transport === "platform") && e.geometry.type !== "Point")),
       piers: fc(f.filter((e) => /^(pier|breakwater)$/.test(t(e).man_made ?? ""))),
+      fields: fc(f.filter((e) => e.geometry.type === "Polygon" && /^(farmland|meadow|orchard)$/.test(t(e).landuse ?? ""))),
       greens: fc(f.filter((e) => e.geometry.type === "Polygon" && (/^(park|garden)$/.test(t(e).leisure ?? "") || t(e).landuse || t(e).natural === "scrub"))),
     };
   },

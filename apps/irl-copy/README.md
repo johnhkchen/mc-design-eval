@@ -122,7 +122,7 @@ place works with no per-city code; `places/fr/notre-dame-test.json` is the smoke
 
 Where LiDAR HD isn't published yet (the Bay of Mont-Saint-Michel, 2026) the adapter falls back to RGE ALTI's 1 m terrain
 and the photogrammetric surface model (`HIGHRES.MNS`: roofs yes, thin spires no). Three place keys came with Mont-Saint-Michel
-and work anywhere: `flats` { belowM, block } (open ground below that elevation is tidal flat: wet sand photographs grey),
+and work anywhere: `flats` { belowM, block | blocks: [[block, weight]], flatten } (open ground below that elevation, outside OSM farmland and meadows, is tidal flat: wet sand photographs grey; `blocks` mixes broad soft zones, `flatten` lays it level so the survey's 1-block steps don't read as contour lines), `tideM` (the sea in at that level over open ground: `irl world <place> --set tideM=8.3` for a high-tide world; `--set key=json` overrides any place key for one run),
 `dress.decks` [{ ways: [osm ids or names], walkM, deck, lane, pile, pileEveryM }] (a footbridge on piles at the lidar
 surface's height along its OSM ways: two ways give the walkways on both edges and a lane between; bridge ways are kept
 aside for this as `L.bridges`), and `dress.ramparts` { minRiseM, block, cap } (an OSM wall whose lidar rise has a median

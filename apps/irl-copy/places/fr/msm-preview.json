@@ -10,7 +10,17 @@
  "half": 300,
  "flats": {
   "belowM": 9,
-  "block": "sand"
+  "flatten": true,
+  "blocks": [
+   [
+    "sand",
+    5
+   ],
+   [
+    "light_gray_concrete_powder",
+    2
+   ]
+  ]
  },
  "dress": {
   "decks": [

@@ -13,7 +13,7 @@ import taipei from "./taipei.mjs";
 import france from "./france.mjs";
 
 export const SOURCES = [...lidar, ...naip, ...datasf, ...seattle, ...nyc, ...dc, ...taipei, ...france, ...nhd, ...canopy, ...osm];
-export const LAYERS = ["lidar", "aerial", "parcels", "landmarks", "ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy", "rails", "furniture", "barriers", "platforms", "piers", "greens"];
+export const LAYERS = ["lidar", "aerial", "parcels", "landmarks", "ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy", "rails", "furniture", "barriers", "platforms", "piers", "greens", "fields"];
 
 /** layer -> the source that supplies it for this place (null if none does) */
 export function plan(place) {

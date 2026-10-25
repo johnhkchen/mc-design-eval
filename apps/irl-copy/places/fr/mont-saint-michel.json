@@ -1,17 +1,27 @@
 {
  "name": "Mont-Saint-Michel, Normandy",
- "note": "The tidal island of Mont-Saint-Michel in its bay, on the border of Normandy and Brittany: the granite rock (about 80 m) crowned by the Benedictine abbey (abbey church with its Romanesque nave and Flamboyant Gothic choir, the Merveille on the north face, the neo-Gothic spire of 1897 with Fremiet's gilded Saint Michael at about 157 m above the sands), the walled village climbing the Grande Rue on the south-east, the ramparts and towers of the Hundred Years' War, and the 2014 passerelle footbridge (Dietmar Feichtinger) crossing the sands to the south. Scale 1.4 blocks per metre; 2100 blocks a side (half 750 m), centred south of the rock so the footbridge's run fits.",
+ "note": "The tidal island of Mont-Saint-Michel in its bay, on the border of Normandy and Brittany: the granite rock (about 80 m) crowned by the Benedictine abbey (abbey church with its Romanesque nave and Flamboyant Gothic choir, the Merveille on the north face, the neo-Gothic spire of 1897 with Fremiet's gilded Saint Michael at about 157 m above the sands), the walled village climbing the Grande Rue on the south-east, the ramparts and towers of the Hundred Years' War, and the 2014 passerelle footbridge (Dietmar Feichtinger) crossing the sands to the south. Scale 1.4 blocks per metre; 4480 blocks a side (half 1600 m), centred 970 m south of the rock: the bay's sands round the Mont, the whole passerelle and the causeway-dike, the Couesnon dam, and the mainland at La Caserne (hotels, car parks, polders).",
  "city": "mont-saint-michel",
  "country": "FR",
  "scale": 1.4,
  "centre": [
-  48.6325,
-  -1.5112
+  48.6275,
+  -1.5105
  ],
- "half": 750,
+ "half": 1600,
  "flats": {
   "belowM": 9,
-  "block": "sand"
+  "flatten": true,
+  "blocks": [
+   [
+    "sand",
+    3
+   ],
+   [
+    "light_gray_concrete_powder",
+    2
+   ]
+  ]
  },
  "dress": {
   "decks": [
@@ -32,5 +42,6 @@
    "block": "stone_bricks",
    "cap": "stone_bricks"
   }
- }
+ },
+ "sparse": true
 }

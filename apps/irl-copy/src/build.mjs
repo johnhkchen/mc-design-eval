@@ -41,6 +41,14 @@ export function buildPlace(place, frame, L) {
     // a ground raster (metres per cell: a national DTM, or a DEM taken down to the ground) is used as it is
     : L.ground?.kind === "raster" ? Float64Array.from(L.ground.data, (m) => m * (frame.scale ?? 1))
     : L.ground ? groundFromContours(frame, L.ground, { field: L.ground.field, unit: L.ground.unit * (frame.scale ?? 1) }) : new Float64Array(N * N);
+  // place.flats.flatten: the tidal flat (open ground below flats.belowM) laid level at its median (or flats.levelM): the
+  // survey's 1-block steps across a bay read as contour lines in a low sun
+  // OSM farmland and meadows: never tidal flat (the polders behind the dike lie as low as the bay)
+  const field = new Uint8Array(N * N); for (const f of L.fields?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) field[I(x, z)] = /meadow/.test(f.properties.landuse) ? 2 : 1;
+  const flat = (i) => lid.ground[i] < place.flats.belowM && !field[i];
+  if (place.flats?.flatten && lid) { const fl = []; for (let i = 0; i < N * N; i++) if (flat(i)) fl.push(lid.ground[i]);
+    fl.sort((a, b) => a - b); const level = (place.flats.levelM ?? fl[fl.length >> 1]) * (frame.scale ?? 1);
+    for (let i = 0; i < N * N; i++) if (flat(i)) H[i] = level; }
   const park = new Uint8Array(N * N), water = new Uint8Array(N * N), path = new Uint8Array(N * N), play = new Uint8Array(N * N);
   for (const f of L.parks?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) park[I(x, z)] = 1;
   for (const f of L.water?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) water[I(x, z)] = 1;
@@ -149,7 +157,15 @@ export function buildPlace(place, frame, L) {
       cover[I(x, z)] = best; } }
   // place.flats { belowM, block }: open ground below that elevation is the tidal flat (wet sand photographs grey and would
   // be paving); vegetation (salt meadow) stays grass
-  if (place.flats && lid) for (let i = 0; i < N * N; i++) if (lid.ground[i] < place.flats.belowM && cover[i] !== "grass_block") cover[i] = place.flats.block ?? "sand";
+  // flats.blocks [[block, weight], ...]: a mix in broad soft zones (value noise over 40-block cells, dithered at the edges), wet and dry sand
+  const fb = place.flats?.blocks, wsum = fb ? fb.reduce((a, b) => a + b[1], 0) : 0;
+  const vn = (x, z) => { const h = (a, b) => { let v = Math.imul(a, 73856093) ^ Math.imul(b, 19349663); v ^= v >>> 13; return (Math.imul(v, 1274126177) >>> 0) / 4294967296; };
+    const S = 40, gx = Math.floor(x / S), gz = Math.floor(z / S), fx = x / S - gx, fz = z / S - gz, sm = (t) => t * t * (3 - 2 * t);
+    const a = h(gx, gz) + (h(gx + 1, gz) - h(gx, gz)) * sm(fx), b = h(gx, gz + 1) + (h(gx + 1, gz + 1) - h(gx, gz + 1)) * sm(fx); return a + (b - a) * sm(fz); };
+  const flatBlock = (i) => { if (!fb) return place.flats.block ?? "sand"; const x = i % N, z = (i / N) | 0, j = ((Math.imul(x, 2654435761) ^ Math.imul(z, 40503)) >>> 0) / 4294967296; let t = Math.min(0.999, Math.max(0, vn(x, z) * 0.75 + j * 0.25)) * wsum; for (const [b, w] of fb) { if ((t -= w) <= 0) return b; } return fb.at(-1)[0]; };
+  if (place.flats && lid) for (let i = 0; i < N * N; i++) if (flat(i) && cover[i] !== "grass_block") cover[i] = flatBlock(i);
+  // fields: a meadow is grass; farmland grass where it's green, else turned earth (the aerial would call it paving)
+  for (let i = 0; i < N * N; i++) if (field[i] && cover[i] !== "grass_block") cover[i] = field[i] === 2 ? "grass_block" : "coarse_dirt";
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {
     const y = ground(x, z), i = I(x, z); let low = y - 3;
     for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const nx = x + dx, nz = z + dz; low = nx < 0 || nz < 0 || nx >= N || nz >= N ? 0 : Math.min(low, ground(nx, nz) - 1); }
@@ -199,6 +215,13 @@ export function buildPlace(place, frame, L) {
       const x = cx + dx, z = cz + dz; if (!/leaves$/.test(name(x, y, z))) continue;
       let held = false; for (let ez = -3; ez <= 3 && !held; ez++) for (let ex = -3; ex <= 3 && !held; ex++) for (let ey = -5; ey <= 2 && !held; ey++) if (/_log$/.test(name(x + ex, y + ey, z + ez))) held = true;
       if (!held) g.set(x, y, z, "air"); } }
+
+  // place.tideM: the sea in at that level over every open cell below it (a high-tide view of a tidal island); decks and
+  // piers stand over it
+  if (Number.isFinite(place.tideM)) { const ty = Math.round(place.tideM * sc) - floor; let n = 0;
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const i = I(x, z); if (isB[i]) continue;
+      for (let y = ground(x, z) + 1; y <= ty; y++) if (!g.get(x, y, z) || /grass$|fern$|flower|poppy|dandelion/.test(g.get(x, y, z).block)) { g.set(x, y, z, "water", { level: "0" }); n++; } }
+    process.stderr.write(`  tide at ${place.tideM} m (y ${ty}): ${n.toLocaleString()} water blocks\n`); }
 
   const manifest = { place: place.id, name: place.name, size: g.size, metresPerBlock: 1 / sc, floorElevation: +(floor / sc).toFixed(1), box: frame.box, ground: [+(lo / sc).toFixed(1), +(hi / sc).toFixed(1)],
     streets: [...new Set((L.streets?.features ?? []).map((f) => f.properties.name))], trees: trees.trees.length, dressing,
