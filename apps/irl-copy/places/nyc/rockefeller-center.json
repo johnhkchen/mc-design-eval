@@ -1,6 +1,6 @@
 {
  "name": "Rockefeller Center, New York City",
- "note": "Rockefeller Center in Midtown Manhattan from the air: 30 Rockefeller Plaza (the Comcast Building, formerly the RCA and GE Building, 1933) over the sunken plaza and skating rink with the gilded Prometheus, the flags and the Channel Gardens running up from Fifth Avenue between La Maison Francaise and the British Empire Building; Radio City Music Hall on Sixth Avenue; the International Building with Atlas on Fifth; St Patrick's Cathedral across Fifth Avenue; and the Fifth and Sixth Avenue frontages from about 46th to 54th Street. Scale 0.9 blocks per metre, so 30 Rock (254 m to its roof) stands about 230 blocks and 53 West 53 (320 m), the tallest tower in the box, about 290, under the 1.21.1 build limit with headroom. Turned -28.9 degrees so the Manhattan grid's avenues run along z (uptown, north-north-east, is low z) and its streets along x. Grown to 1260 blocks a side (half 700 m) so oblique views see city to the horizon, not the world's edge; the blocks past the hero kits and their fill are the lidar massing; towers taller than the build limit (Billionaires' Row) stop at it.",
+ "note": "Rockefeller Center in Midtown Manhattan from the air: 30 Rockefeller Plaza (the Comcast Building, formerly the RCA and GE Building, 1933) over the sunken plaza and skating rink with the gilded Prometheus, the flags and the Channel Gardens running up from Fifth Avenue between La Maison Francaise and the British Empire Building; Radio City Music Hall on Sixth Avenue; the International Building with Atlas on Fifth; St Patrick's Cathedral across Fifth Avenue; and the Fifth and Sixth Avenue frontages from about 46th to 54th Street. Scale 0.9 blocks per metre, so 30 Rock (254 m to its roof) stands about 230 blocks and 53 West 53 (320 m), the tallest tower in the box, about 290, under the 1.21.1 build limit with headroom. Turned -28.9 degrees so the Manhattan grid's avenues run along z (uptown, north-north-east, is low z) and its streets along x. Grown to 1260 blocks a side (half 700 m) so oblique views see city to the horizon, not the world's edge; the blocks past the hero kits and their fill are the lidar massing; towers taller than the build limit (Billionaires' Row) stop at it. maxY 480 (2026-10-25): Billionaires' Row stands at full height (Central Park Tower 472 m = 425 blocks over its base), the world opening past 320 with the tall-world datapack.",
  "city": "new-york",
  "country": "US",
  "scale": 0.9,
@@ -12,5 +12,7 @@
  "rotate": -28.9,
  "rotateFrom": {
   "from": "the Manhattan street grid (the Commissioners' Plan of 1811: avenues 28.9 degrees east of true north)"
- }
+ },
+ "maxY": 480,
+ "sparse": true
 }

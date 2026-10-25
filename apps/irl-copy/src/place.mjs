@@ -82,7 +82,8 @@ function placeAt(g, b, p, { H, skip }, ctx) {
     // rectangular pit to the foundation round the building (the rock round Mont-Saint-Michel's abbey, a hillside's
     // terraces). By default only what stands on the land goes: each column of the box above its own ground (masses,
     // trees, lamps, railings), never the terrain under it, and never a column of another building's footprint
-    if (!p.keep && p.clear === "box") for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
+    // (a landscape module, ground: false, rebuilds the whole ground of its box, so it keeps the box clear)
+    if (!p.keep && (p.clear === "box" || p.ground === false)) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
     else if (!p.keep) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) { const x = ox + tx, z = oz + tz;
       if (x < 0 || z < 0 || x >= g.size[0] || z >= g.size[2] || ctx.other(x, z)) continue;
       for (let y = Math.max(y0 + skip, ctx.ground(x, z) + 1); y < Math.min(g.size[1], y0 + H); y++) g.set(x, y, z, "air"); }
@@ -188,7 +189,7 @@ export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
       const mine = new Set([b.id, ...(p.covers ?? [])]);
       for (const o of manifest.buildings) if (!mine.has(o.id) && !ownPlaced.has(o.id) && o.footprint.filter(([x, z]) => inBox(x, z)).length >= 0.6 * o.footprint.length) mine.add(o.id);
       const other = new Set(); for (const o of manifest.buildings) if (!mine.has(o.id)) for (const [x, z] of o.footprint) if (inBox(x, z)) other.add(I(x, z));
-      if (!p.keep && p.clear !== "box") for (const id of mine) if (!cleared.has(id)) { clear(g, byId.get(id), ground, I); cleared.add(id); }
+      if (!p.keep && p.clear !== "box" && p.ground !== false) for (const id of mine) if (!cleared.has(id)) { clear(g, byId.get(id), ground, I); cleared.add(id); }
       notes.push(placeAt(g, b, p, { H, skip }, { ground, other: (x, z) => other.has(I(x, z)) })); continue; }
     if (p.mode === "centre" || p.clear !== "band") clear(g, b, ground, I);
     if (p.mode === "centre" && p.angle) { notes.push(placeTurned(g, b, p, { H, skip })); continue; }
