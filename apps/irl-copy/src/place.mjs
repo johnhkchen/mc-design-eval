@@ -8,7 +8,7 @@
 //   placements: [{ building, module: <grid>, plot: [x0, z0, x1, z1] (the module's box in its file), mode: "centre"|"arc"|"at",
 //                  at mode: at: [dx, dz] from the footprint box's north-west corner, y?: blocks above the footprint's base,
 //                  quarter?: 0-3 quarter turns clockwise seen from above (its north to east, south, west), repeat?: { count,
-//                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave the mass under it: by default the module's box is cleared first; with trees: false the trees in its box still go), clear?: "all" (the whole footprint first)
+//                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave everything under it; with trees: false the trees in its box still go), clear?: "all" (the whole footprint first) | "box" (the old default: the box emptied from the footprint's lowest ground up, terrain and all); by default the masses it replaces go (its footprint, covers?: [ids], footprints mostly inside its box) and the rest of the box only above each column's own ground
 //                  end?: { module, plot } (the arc's closing piece, at its far end), edge?: "inner"|"outer" (which side of the
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
 //                  ground?: false (drop the module's own bottom course),
@@ -67,7 +67,7 @@ const copyCell = (c, quarter, swap, y) => {
 // a module at an offset in the footprint's box, turned by quarter turns (a rotation: its blocks' facings turn with it),
 // repeated along a step; its box is cleared first unless keep
 // (mirror: true reflects it across its own x first, for the far end of a symmetric building whose kit has one end piece)
-function placeAt(g, b, p, { H, skip }) {
+function placeAt(g, b, p, { H, skip }, ctx) {
   const [x0, z0, x1, z1] = p.plot, W = x1 - x0 + 1, D = z1 - z0 + 1, q = ((p.quarter ?? 0) % 4 + 4) % 4, mir = !!p.mirror;
   const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]), bx = Math.min(...xs), bz = Math.min(...zs);
   const [w2, d2] = q % 2 ? [D, W] : [W, D], y0 = b.base + (p.y ?? 0), n = p.repeat?.count ?? 1, [sx, sz] = p.repeat?.step ?? [0, 0];
@@ -78,7 +78,14 @@ function placeAt(g, b, p, { H, skip }) {
     // keep with trees: false: the land stays (a viaduct over a hillside) but trees inside the module's box go
     if (p.keep && p.trees === false) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + 1; y < g.size[1]; y++) {
       const c = g.get(ox + tx, y, oz + tz); if (c && /leaves$|_log$/.test(c.block)) g.set(ox + tx, y, oz + tz, "air"); }
-    if (!p.keep) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
+    // clear: "box" (the old default) empties the whole box from the footprint's lowest ground up: on a slope that cut a
+    // rectangular pit to the foundation round the building (the rock round Mont-Saint-Michel's abbey, a hillside's
+    // terraces). By default only what stands on the land goes: each column of the box above its own ground (masses,
+    // trees, lamps, railings), never the terrain under it, and never a column of another building's footprint
+    if (!p.keep && p.clear === "box") for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
+    else if (!p.keep) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) { const x = ox + tx, z = oz + tz;
+      if (x < 0 || z < 0 || x >= g.size[0] || z >= g.size[2] || ctx.other(x, z)) continue;
+      for (let y = Math.max(y0 + skip, ctx.ground(x, z) + 1); y < Math.min(g.size[1], y0 + H); y++) g.set(x, y, z, "air"); }
     for (let mz = 0; mz < D; mz++) for (let mx = 0; mx < W; mx++) { const [tx, tz] = turnXZ(mx, mz);
       for (let y = skip; y < H; y++) { const src = p.module.get(x0 + (mir ? W - 1 - mx : mx), y, z0 + mz), cell = mir && src ? { ...src, state: mirrorState(src.state) } : src;
         const c = copyCell(cell, q, p.swap, y); if (c) g.set(ox + tx, y0 + y, oz + tz, ...c); } }
@@ -161,6 +168,7 @@ export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
     return [...notes, `turned ${angle} degrees about ${pivot.map((v) => v.toFixed(1)).join(",")}: ${n} blocks`];
   }
   const notes = [], cleared = new Set(), byId = new Map(manifest.buildings.map((b) => [b.id, b]));
+  const ownPlaced = new Set(placements.map((p) => p.building));       // buildings with a module of their own (a fill)
   // room overhead: a module may stand taller than the lidar massing (a spire the lidar's median softens)
   const need = Math.max(0, ...placements.map((p) => { const b = byId.get(p.building); return b ? b.base + (p.y ?? 0) + p.module.size[1] + 2 : 0; }));
   if (need > g.size[1] && g.growTo) g.growTo(need);
@@ -171,7 +179,17 @@ export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
     // clear: "all" on an "at" placement clears the whole footprint's mass first (once per building), for a kit that covers
     // the building, so no sliver of the placeholder mass is left standing against a front
     if (p.mode === "at") { if (p.clear === "all" && !cleared.has(b.id)) { clear(g, b, ground, I); cleared.add(b.id); }
-      notes.push(placeAt(g, b, p, { H, skip })); continue; }
+      // the masses this placement replaces: its building, the ones it lists (covers), and any footprint mostly (60%+)
+      // inside its box that has no module of its own; every other footprint's columns are left alone
+      const q = ((p.quarter ?? 0) % 4 + 4) % 4, [w2, d2] = q % 2 ? [D, W] : [W, D], bx = Math.min(...b.footprint.map((c) => c[0])), bz = Math.min(...b.footprint.map((c) => c[1]));
+      const n = p.repeat?.count ?? 1, [sx, sz] = p.repeat?.step ?? [0, 0], bxs = [];
+      for (let k = 0; k < n; k++) bxs.push([bx + p.at[0] + k * sx, bz + p.at[1] + k * sz]);
+      const inBox = (x, z) => bxs.some(([ox, oz]) => x >= ox && z >= oz && x < ox + w2 && z < oz + d2);
+      const mine = new Set([b.id, ...(p.covers ?? [])]);
+      for (const o of manifest.buildings) if (!mine.has(o.id) && !ownPlaced.has(o.id) && o.footprint.filter(([x, z]) => inBox(x, z)).length >= 0.6 * o.footprint.length) mine.add(o.id);
+      const other = new Set(); for (const o of manifest.buildings) if (!mine.has(o.id)) for (const [x, z] of o.footprint) if (inBox(x, z)) other.add(I(x, z));
+      if (!p.keep && p.clear !== "box") for (const id of mine) if (!cleared.has(id)) { clear(g, byId.get(id), ground, I); cleared.add(id); }
+      notes.push(placeAt(g, b, p, { H, skip }, { ground, other: (x, z) => other.has(I(x, z)) })); continue; }
     if (p.mode === "centre" || p.clear !== "band") clear(g, b, ground, I);
     if (p.mode === "centre" && p.angle) { notes.push(placeTurned(g, b, p, { H, skip })); continue; }
     if (p.mode === "centre") {
