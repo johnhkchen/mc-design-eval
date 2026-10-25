@@ -83,7 +83,7 @@ if (rerender) {
   const saved = JSON.parse(readFileSync(`${sceneDir}/${name}.json`, "utf8"));
   // the options given on this command line win over the saved scene's (new render settings on an old camera)
   const given = (k) => process.argv.includes(k), fresh = { ...scene, sun: { ...scene.sun }, sky: { ...scene.sky } };
-  Object.keys(scene).forEach((k) => delete scene[k]); Object.assign(scene, saved, { spp: 0, renderTime: 0 });
+  Object.keys(scene).forEach((k) => delete scene[k]); Object.assign(scene, saved, { spp: 0, renderTime: 0, name }); // a copied scene keeps its source's name inside: Chunky would save over that one
   if (given("--sun-sampling")) scene.sunSamplingStrategy = fresh.sunSamplingStrategy;
   if (given("--emitters")) Object.assign(scene, { emittersEnabled: fresh.emittersEnabled, emitterIntensity: fresh.emitterIntensity });
   if (given("--emitter-sampling")) scene.emitterSamplingStrategy = fresh.emitterSamplingStrategy;
