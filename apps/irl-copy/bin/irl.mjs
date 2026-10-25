@@ -25,6 +25,13 @@ import { compose } from "../src/place.mjs";
 import { landmark as sfLandmark } from "../src/sources/datasf.mjs";
 import { landmark as seaLandmark } from "../src/sources/seattle.mjs";
 import { writeWorld } from "../src/anvil.mjs";
+// beside a world: the top block's height in each column (Uint16, z * X + x, after an 8-byte X, Z header), for
+// chunky-fade.mjs to tell how far off each pixel's ground is
+function writeHeights(file, grid) {
+  const [X, Y, Z] = grid.size, h = new Uint16Array(X * Z);
+  grid.forEachCell((i) => { const x = i % X, r = Math.floor(i / X), y = r % Y, z = Math.floor(r / Y); if (y + 1 > h[z * X + x]) h[z * X + x] = y + 1; });
+  const head = Buffer.alloc(8); head.writeUInt32LE(X, 0); head.writeUInt32LE(Z, 4); writeFileSync(file, Buffer.concat([head, Buffer.from(h.buffer)]));
+}
 import { floating, underpin } from "../src/float.mjs";
 import { alignment } from "../src/align.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
@@ -109,7 +116,7 @@ function buildFrom(n, { composeWith, world } = {}) {
       console.warn(`floating: ${h.size} blocks (${[...k].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([b, v]) => `${b} ${v}`).join(", ")}) at ${x0},${y0},${z0}..${x1},${y1},${z1}, ${h.gap} above what is under it${by.length ? ` - ${[...new Set(by)].join(", ")}` : ""}`); }
     if (hung.length) console.warn(`${n}: ${hung.length} floating pieces of 8+ blocks (${hung.reduce((s, h) => s + h.size, 0)} blocks)`);
     mkdirSync(out, { recursive: true }); saveStructure(grid, `${out}/composed.nbt`, place); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`);
-    if (world) { const r = writeWorld(`${out}/world`, grid, { name: place.name }); console.log(`${n}: world -> out/${n}/world (${r.chunks} chunks, ${r.regions} regions${r.datapack ? `; datapack ${r.datapack.name}: the overworld ${r.datapack.height} high, to y ${r.datapack.maxY}` : ""})`); }
+    if (world) { writeHeights(`${out}/heights.bin`, grid); const r = writeWorld(`${out}/world`, grid, { name: place.name }); console.log(`${n}: world -> out/${n}/world (${r.chunks} chunks, ${r.regions} regions${r.datapack ? `; datapack ${r.datapack.name}: the overworld ${r.datapack.height} high, to y ${r.datapack.maxY}` : ""})`); }
     return;
   }
   mkdirSync(out, { recursive: true });
