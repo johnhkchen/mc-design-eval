@@ -1,8 +1,710 @@
 {
  "note": "Mont-Saint-Michel: one hero kit, the abbey on the summit (runs/mont-saint-michel/abbey-kit, built in hybrid mode: Opus and Sonnet sessions through the Message Batches API, Haiku live); batched Haiku fill for the village, the towers and the gates; the ramparts, the tidal flats and the passerelle drawn by irl-copy from the data (place.dress.ramparts, place.flats, place.dress.decks).",
  "modules": {
+  "fill-FR301499665": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499665.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    11
+   ]
+  },
+  "fill-FR301499666": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499666.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    26
+   ]
+  },
+  "fill-FR301499667": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499667.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    10
+   ]
+  },
+  "fill-FR301499668": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499668.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    18
+   ]
+  },
+  "fill-FR301499669": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499669.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    28
+   ]
+  },
+  "fill-FR301499670": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499670.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    30
+   ]
+  },
+  "fill-FR301499671": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499671.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    12
+   ]
+  },
+  "fill-FR301499672": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499672.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    14
+   ]
+  },
+  "fill-FR301499673": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499673.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    16
+   ]
+  },
+  "fill-FR301499675": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499675.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    5
+   ]
+  },
+  "fill-FR301499676": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499676.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    9
+   ]
+  },
+  "fill-FR301499678": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499678.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    28
+   ]
+  },
+  "fill-FR301499683": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499683.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    16
+   ]
+  },
+  "fill-FR301499684": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499684.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    10
+   ]
+  },
+  "fill-FR301499685": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499685.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    27
+   ]
+  },
+  "fill-FR301499686": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499686.nbt",
+   "plot": [
+    0,
+    0,
+    17,
+    12
+   ]
+  },
+  "fill-FR301499687": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499687.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    8
+   ]
+  },
+  "fill-FR301499688": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499688.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    16
+   ]
+  },
+  "fill-FR301499689": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499689.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    13
+   ]
+  },
+  "fill-FR301499690": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499690.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    15
+   ]
+  },
+  "fill-FR301499691": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499691.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    8
+   ]
+  },
+  "fill-FR301499692": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499692.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    21
+   ]
+  },
+  "fill-FR301499693": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499693.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    20
+   ]
+  },
+  "fill-FR301499694": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499694.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    11
+   ]
+  },
+  "fill-FR301499695": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499695.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    12
+   ]
+  },
+  "fill-FR301499696": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499696.nbt",
+   "plot": [
+    0,
+    0,
+    22,
+    8
+   ]
+  },
+  "fill-FR301499697": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499697.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    13
+   ]
+  },
+  "fill-FR301499698": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499698.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    8
+   ]
+  },
+  "fill-FR301499699": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499699.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    8
+   ]
+  },
+  "fill-FR301499700": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499700.nbt",
+   "plot": [
+    0,
+    0,
+    15,
+    18
+   ]
+  },
+  "fill-FR301499701": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499701.nbt",
+   "plot": [
+    0,
+    0,
+    28,
+    21
+   ]
+  },
+  "fill-FR301499702": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499702.nbt",
+   "plot": [
+    0,
+    0,
+    31,
+    16
+   ]
+  },
+  "fill-FR301499703": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499703.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    13
+   ]
+  },
+  "fill-FR301499705": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499705.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    11
+   ]
+  },
+  "fill-FR301499706": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499706.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    7
+   ]
+  },
+  "fill-FR301499707": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499707.nbt",
+   "plot": [
+    0,
+    0,
+    4,
+    8
+   ]
+  },
+  "fill-FR301499708": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499708.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    9
+   ]
+  },
+  "fill-FR301499709": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499709.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    8
+   ]
+  },
+  "fill-FR301499711": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499711.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    12
+   ]
+  },
+  "fill-FR301499712": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499712.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    9
+   ]
+  },
+  "fill-FR301499713": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499713.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    5
+   ]
+  },
+  "fill-FR301499714": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499714.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    12
+   ]
+  },
+  "fill-FR301499716": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499716.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    21
+   ]
+  },
+  "fill-FR301499717": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499717.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    14
+   ]
+  },
+  "fill-FR301499719": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499719.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    35
+   ]
+  },
+  "fill-FR301499720": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499720.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    8
+   ]
+  },
+  "fill-FR301499721": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499721.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    15
+   ]
+  },
+  "fill-FR301499722": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499722.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    18
+   ]
+  },
+  "fill-FR301499723": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499723.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    8
+   ]
+  },
+  "fill-FR301499725": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499725.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    6
+   ]
+  },
+  "fill-FR301499726": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499726.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    6
+   ]
+  },
+  "fill-FR301499727": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499727.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    9
+   ]
+  },
+  "fill-FR301499728": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499728.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    6
+   ]
+  },
+  "fill-FR301499732": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499732.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    10
+   ]
+  },
+  "fill-FR301499735": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499735.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    16
+   ]
+  },
+  "fill-FR301499737": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499737.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    12
+   ]
+  },
+  "fill-FR301499738": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499738.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    10
+   ]
+  },
+  "fill-FR301499739": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499739.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    13
+   ]
+  },
+  "fill-FR301499740": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499740.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    9
+   ]
+  },
+  "fill-FR301499741": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499741.nbt",
+   "plot": [
+    0,
+    0,
+    18,
+    24
+   ]
+  },
+  "fill-FR301499742": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499742.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    20
+   ]
+  },
+  "fill-FR301499743": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499743.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    10
+   ]
+  },
+  "fill-FR301499745": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499745.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    6
+   ]
+  },
+  "fill-FR301499746": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499746.nbt",
+   "plot": [
+    0,
+    0,
+    26,
+    18
+   ]
+  },
+  "fill-FR301499747": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499747.nbt",
+   "plot": [
+    0,
+    0,
+    30,
+    18
+   ]
+  },
+  "fill-FR301499748": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499748.nbt",
+   "plot": [
+    0,
+    0,
+    5,
+    7
+   ]
+  },
+  "fill-FR301499752": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499752.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    8
+   ]
+  },
+  "fill-FR301499753": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499753.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    25
+   ]
+  },
+  "fill-FR301499756": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499756.nbt",
+   "plot": [
+    0,
+    0,
+    53,
+    41
+   ]
+  },
+  "fill-FR301499757": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499757.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    5
+   ]
+  },
+  "fill-FR301499758": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499758.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    4
+   ]
+  },
+  "fill-FR301499759": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499759.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    6
+   ]
+  },
+  "fill-FR301499760": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499760.nbt",
+   "plot": [
+    0,
+    0,
+    6,
+    6
+   ]
+  },
+  "fill-FR301499766": {
+   "file": "work/fr/mont-saint-michel/fill/FR301499766.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    10
+   ]
+  },
+  "fill-FR24585740": {
+   "file": "work/fr/mont-saint-michel/fill/FR24585740.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    17
+   ]
+  },
+  "fill-FR24585744": {
+   "file": "work/fr/mont-saint-michel/fill/FR24585744.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    11
+   ]
+  },
+  "fill-FR24585757": {
+   "file": "work/fr/mont-saint-michel/fill/FR24585757.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    17
+   ]
+  },
+  "fill-FR24585768": {
+   "file": "work/fr/mont-saint-michel/fill/FR24585768.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    11
+   ]
+  },
   "abbey-0": {
-   "file": "../../benchmarks/plugin-baseline/runs/mont-saint-michel/abbey-kit/build.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/mont-saint-michel/abbey-kit/v2.nbt",
    "plot": [
     0,
     0,
@@ -12,6 +714,864 @@
   }
  },
  "placements": [
+  {
+   "building": "FR301499665",
+   "module": "fill-FR301499665",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499666",
+   "module": "fill-FR301499666",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499667",
+   "module": "fill-FR301499667",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499668",
+   "module": "fill-FR301499668",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499669",
+   "module": "fill-FR301499669",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499670",
+   "module": "fill-FR301499670",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499671",
+   "module": "fill-FR301499671",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499672",
+   "module": "fill-FR301499672",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499673",
+   "module": "fill-FR301499673",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499675",
+   "module": "fill-FR301499675",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499676",
+   "module": "fill-FR301499676",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499678",
+   "module": "fill-FR301499678",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499683",
+   "module": "fill-FR301499683",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499684",
+   "module": "fill-FR301499684",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499685",
+   "module": "fill-FR301499685",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499686",
+   "module": "fill-FR301499686",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499687",
+   "module": "fill-FR301499687",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499688",
+   "module": "fill-FR301499688",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499689",
+   "module": "fill-FR301499689",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499690",
+   "module": "fill-FR301499690",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499691",
+   "module": "fill-FR301499691",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499692",
+   "module": "fill-FR301499692",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499693",
+   "module": "fill-FR301499693",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499694",
+   "module": "fill-FR301499694",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499695",
+   "module": "fill-FR301499695",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499696",
+   "module": "fill-FR301499696",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499697",
+   "module": "fill-FR301499697",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499698",
+   "module": "fill-FR301499698",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499699",
+   "module": "fill-FR301499699",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499700",
+   "module": "fill-FR301499700",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499701",
+   "module": "fill-FR301499701",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499702",
+   "module": "fill-FR301499702",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499703",
+   "module": "fill-FR301499703",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499705",
+   "module": "fill-FR301499705",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499706",
+   "module": "fill-FR301499706",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499707",
+   "module": "fill-FR301499707",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499708",
+   "module": "fill-FR301499708",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499709",
+   "module": "fill-FR301499709",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499711",
+   "module": "fill-FR301499711",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499712",
+   "module": "fill-FR301499712",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499713",
+   "module": "fill-FR301499713",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499714",
+   "module": "fill-FR301499714",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499716",
+   "module": "fill-FR301499716",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499717",
+   "module": "fill-FR301499717",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499719",
+   "module": "fill-FR301499719",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499720",
+   "module": "fill-FR301499720",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499721",
+   "module": "fill-FR301499721",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499722",
+   "module": "fill-FR301499722",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499723",
+   "module": "fill-FR301499723",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499725",
+   "module": "fill-FR301499725",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499726",
+   "module": "fill-FR301499726",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499727",
+   "module": "fill-FR301499727",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499728",
+   "module": "fill-FR301499728",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499732",
+   "module": "fill-FR301499732",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499735",
+   "module": "fill-FR301499735",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499737",
+   "module": "fill-FR301499737",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499738",
+   "module": "fill-FR301499738",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499739",
+   "module": "fill-FR301499739",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499740",
+   "module": "fill-FR301499740",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499741",
+   "module": "fill-FR301499741",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499742",
+   "module": "fill-FR301499742",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499743",
+   "module": "fill-FR301499743",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499745",
+   "module": "fill-FR301499745",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499746",
+   "module": "fill-FR301499746",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499747",
+   "module": "fill-FR301499747",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499748",
+   "module": "fill-FR301499748",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499752",
+   "module": "fill-FR301499752",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499753",
+   "module": "fill-FR301499753",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499756",
+   "module": "fill-FR301499756",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499757",
+   "module": "fill-FR301499757",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499758",
+   "module": "fill-FR301499758",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499759",
+   "module": "fill-FR301499759",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499760",
+   "module": "fill-FR301499760",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR301499766",
+   "module": "fill-FR301499766",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR24585740",
+   "module": "fill-FR24585740",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR24585744",
+   "module": "fill-FR24585744",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR24585757",
+   "module": "fill-FR24585757",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "FR24585768",
+   "module": "fill-FR24585768",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
   {
    "building": "FR301499771",
    "module": "abbey-0",

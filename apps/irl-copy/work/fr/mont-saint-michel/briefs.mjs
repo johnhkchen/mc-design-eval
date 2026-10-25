@@ -33,7 +33,7 @@ for (const kit of spec.kits) {
     maps.push(`PLOT ${i} (${p.label}): ${W} x ${D}; y 0 = its lowest ground; the real roofs reach about y ${roof} (surface model)${spire != null ? `, the archangel's top y ${spire}` : ""}; 1 column = ${k}x${k} blocks\n`
       + `FOOTPRINT (# = build here, nothing outside it):\n${mask.join("\n")}\nGROUND above y 0 (highest ground in each cell: the rock; build down to it, never float or bury):\n${gmap.join("\n")}`
       + `\nROOF HEIGHT above y 0 (surface model, median in each cell: the real massing; the spire is too thin for it):\n${rmap.join("\n")}`);
-    modules[key] = { file: `../../benchmarks/plugin-baseline/runs/mont-saint-michel/${kit.key}-kit/build.nbt`, plot: [px, 0, px + W - 1, D - 1] };
+    modules[key] = { file: `../../benchmarks/plugin-baseline/runs/mont-saint-michel/${kit.key}-kit/${kit.file ?? "v1.nbt"}`, plot: [px, 0, px + W - 1, D - 1] };
     const ref = bs[0], [rx, rz] = [Math.min(...ref.footprint.map((c) => c[0])), Math.min(...ref.footprint.map((c) => c[1]))];
     placements.push({ building: ref.id, module: key, mode: "at", at: [x0 - rx, z0 - rz], y: base - ref.base, covers: p.ids });
     px += W + 4;
