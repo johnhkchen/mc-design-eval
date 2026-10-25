@@ -76,6 +76,9 @@ const scene = {
 // fraction of the cost); applied after --rerender so a saved scene can be cropped too
 const crop = opt("--crop")?.split(",").map(Number);
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
+// a shot of the same name done before leaves its render dump, and Chunky resumes from it: the old samples (clouds and all)
+// blend into the new render, so a shot always starts clean
+for (const f of [`${name}.dump`, `${name}.dump.backup`, `${name}.octree2`]) if (existsSync(`${sceneDir}/${f}`)) unlinkSync(`${sceneDir}/${f}`);
 if (rerender) {
   const saved = JSON.parse(readFileSync(`${sceneDir}/${name}.json`, "utf8"));
   // the options given on this command line win over the saved scene's (new render settings on an old camera)
@@ -92,7 +95,6 @@ if (rerender) {
   if (given("--size")) Object.assign(scene, { width: fresh.width, height: fresh.height });
   if (given("--ymax")) for (const k of ["yMin", "yMax", "yClipMin", "yClipMax"]) scene[k] = fresh[k];
   if (given("--water-plane")) for (const k of ["waterWorldEnabled", "waterWorldHeight", "waterWorldClipEnabled", "waterWorldHeightOffsetEnabled"]) scene[k] = fresh[k];
-  for (const f of [`${name}.dump`, `${name}.dump.backup`, `${name}.octree2`]) if (existsSync(`${sceneDir}/${f}`)) unlinkSync(`${sceneDir}/${f}`);
   if (existsSync(`${sceneDir}/snapshots`)) for (const f of readdirSync(`${sceneDir}/snapshots`)) if (new RegExp(`^${name}-\\d+\\.png$`).test(f)) renameSync(`${sceneDir}/snapshots/${f}`, `${sceneDir}/snapshots/pre-fix-${f}`);
   if (existsSync(`${out}/shots/${name}.png`) && !existsSync(`${out}/shots/${name}-pre-fix.png`)) copyFileSync(`${out}/shots/${name}.png`, `${out}/shots/${name}-pre-fix.png`);
 }

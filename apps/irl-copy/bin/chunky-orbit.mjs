@@ -3,7 +3,7 @@
 // octree reused), then ffmpeg makes an MP4 sized to fit an upload limit (Discord's free tier: 10 MB).
 //   node bin/chunky-orbit.mjs <place> <name> --center x,y,z --radius 500 --height 220 [--frames 240] [--fps 24]
 //     [--degrees 360] [--start 0] (the arc, from that bearing: 0 = the camera north of the centre, 90 = east)
-//     [--fade near,far] (the circular distance fade, src/fade.mjs: blocks from the world's middle)
+//     [--fade near,far] (the circular distance fade, src/fade.mjs: blocks from the world's middle) [--lift 1.6] (the shadow lift, src/lift.mjs)
 //     [--size 1280x720] [--spp 100] [--target-mb 9.5] [--codec h264|hevc|av1] [--encode-only]
 //     and any chunky-shot option (--sun, --sun-sampling, --sun-color, --water-plane, --fov, --chunks ...), the same on every frame
 // Frames go to out/<place>/shots/<name>/NNNN.png; a rerun renders only the frames that are missing (resumable overnight).
@@ -14,11 +14,12 @@ import { dirname } from "node:path";
 import { readFileSync, writeFileSync } from "node:fs";
 import { PNG } from "pngjs";
 import { loadHeights, fadeImage } from "../src/fade.mjs";
+import { liftImage } from "../src/lift.mjs";
 
 const HERE = dirname(dirname(fileURLToPath(import.meta.url)));
 const argv = process.argv.slice(2), [place, name] = argv;
 if (!place || !name) throw new Error("usage: chunky-orbit.mjs <place> <name> --center x,y,z --radius r --height y");
-const OWN = new Set(["--center", "--radius", "--height", "--frames", "--fps", "--degrees", "--start", "--target-mb", "--codec", "--size", "--spp", "--chunks", "--fade"]);
+const OWN = new Set(["--center", "--radius", "--height", "--frames", "--fps", "--degrees", "--start", "--target-mb", "--codec", "--size", "--spp", "--chunks", "--fade", "--lift"]);
 const opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
 const [cx, cy, cz] = opt("--center").split(",").map(Number), R = +opt("--radius", 500), eyeY = +opt("--height", cy + 150);
 const N = +opt("--frames", 240), fps = +opt("--fps", 24), arc = +opt("--degrees", 360), start = +opt("--start", 0);
@@ -34,6 +35,7 @@ const pad = (i) => String(i).padStart(4, "0"), first = `${name}-${pad(0)}`;
 // a closed loop (360) leaves out the last frame, which would repeat the first
 const step = arc / (arc % 360 === 0 ? N : Math.max(1, N - 1));
 
+const lift = opt("--lift") != null ? +opt("--lift") : 0;
 const fade = opt("--fade")?.split(",").map(Number), heights = fade ? loadHeights(`${out}/heights.bin`) : null;
 if (!argv.includes("--encode-only")) {
   const t0 = Date.now();
@@ -43,8 +45,9 @@ if (!argv.includes("--encode-only")) {
     const scene = `${name}-${pad(i)}`, reuse = i > 0 && existsSync(`${sceneDir}/${first}.octree2`) ? ["--reuse-octree", first] : [];
     execFileSync("node", [`${HERE}/bin/chunky-shot.mjs`, place, scene, "--eye", eye.join(","), "--look", `${cx},${cy},${cz}`,
       "--size", size, "--spp", spp, "--chunks", chunks, ...reuse, ...pass], { stdio: ["ignore", "ignore", "inherit"] });
-    if (fade) { const img = PNG.sync.read(readFileSync(`${shots}/${scene}.png`)), sc = JSON.parse(readFileSync(`${sceneDir}/${scene}.json`, "utf8"));
-      fadeImage(img, sc, heights, { near: fade[0], far: fade[1], seaY: sc.waterWorldEnabled ? sc.waterWorldHeight : 0 }); writeFileSync(`${shots}/${scene}.png`, PNG.sync.write(img)); }
+    if (fade || lift) { const img = PNG.sync.read(readFileSync(`${shots}/${scene}.png`)), sc = JSON.parse(readFileSync(`${sceneDir}/${scene}.json`, "utf8"));
+      if (fade) fadeImage(img, sc, heights, { near: fade[0], far: fade[1], seaY: sc.waterWorldEnabled ? sc.waterWorldHeight : 0 });
+      if (lift) liftImage(img, lift); writeFileSync(`${shots}/${scene}.png`, PNG.sync.write(img)); }
     renameSync(`${shots}/${scene}.png`, `${frames}/${pad(i)}.png`);
     // each frame's scene files (a dump is ~100 MB) go; frame 0's octree stays for the others
     for (const f of readdirSync(sceneDir)) if (f.startsWith(`${scene}.`) && !(i === 0 && f.endsWith(".octree2")) && !(i === 0 && f.endsWith(".json"))) unlinkSync(`${sceneDir}/${f}`);

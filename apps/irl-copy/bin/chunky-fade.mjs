@@ -16,6 +16,10 @@ const out = `${HERE}/out/${place}`, png = `${out}/shots/${name}.png`, raw = `${o
 if (!existsSync(raw)) copyFileSync(png, raw);
 const scene = JSON.parse(readFileSync(`${out}/chunky/${name}.json`, "utf8")), H = loadHeights(`${out}/heights.bin`);
 const half = Math.min(H.X, H.Z) / 2, img = PNG.sync.read(readFileSync(raw)), t0 = Date.now();
+// the fade is a disc round the centre: a camera outside `near` (at a corner of the world, or past its edge) would fade its own
+// foreground, so such a shot is left as it is
+const c = opt("--center") ? opt("--center").split(",").map(Number) : [H.X / 2, H.Z / 2], near = +opt("--near", half * 0.75);
+if (Math.hypot(scene.camera.position.x - c[0], scene.camera.position.z - c[1]) > near) { console.log(`${place}: ${name} not faded (the camera is outside the fade's inner circle)`); process.exit(0); }
 fadeImage(img, scene, H, { near: +opt("--near", half * 0.75), far: +opt("--far", half * 0.98), seaY: +opt("--sea", scene.waterWorldEnabled ? scene.waterWorldHeight : 0),
   center: opt("--center") ? opt("--center").split(",").map(Number) : undefined, strength: +opt("--strength", 1), scale: +opt("--scale", 4) });
 writeFileSync(png, PNG.sync.write(img));
