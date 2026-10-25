@@ -13,6 +13,10 @@
 //              junctions, zebra crossings on OSM crossings (footway=crossing ways, highway=crossing nodes)
 //   transit    OSM tram rails (not in tunnels) as rails on a stone bed; platforms raised a slab, with a canopy when
 //              shelter/covered (a barrel vault over a tram stop, a white roof over a ferry gate)
+//   decks      place.dress.decks: a footbridge or boardwalk on piles from one OSM way (a band round it) or two (its walkways
+//              along both edges, a lane between), level with the lidar surface along it
+//   ramparts   place.dress.ramparts: an OSM wall the lidar surface stands well above (a curtain wall, not a garden wall)
+//              built to that height, 3 wide, merlons along the top
 //   barriers   OSM fences, railings, walls, hedges
 //   furniture  OSM street lamps (an artwork lamp as a tall pillar), benches facing the water or the street, bins,
 //              bike racks, picnic tables, bollards; and lamps where none are mapped: along both kerbs of every street
@@ -116,7 +120,7 @@ export function railShape(n, s, e, w) {
 const sides = (has, x, z, on, off) => ({ east: has(x + 1, z) ? on : off, west: has(x - 1, z) ? on : off, south: has(x, z + 1) ? on : off, north: has(x, z - 1) ? on : off });
 
 export function dress(g, site) {
-  const { place, frame, L, N, I, sc, ground, road, ROAD, WALK, water, path, isB } = site, opt = place.dress ?? {}, Y = g.size[1];
+  const { place, frame, L, N, I, sc, ground, road, ROAD, WALK, water, path, isB, lid } = site, opt = place.dress ?? {}, Y = g.size[1];
   const m = (v) => Math.max(1, Math.round(v * sc));                                    // metres -> blocks
   const inside = (x, z) => x >= 0 && z >= 0 && x < N && z < N;
   const top = Int16Array.from({ length: N * N }, (_, i) => ground(i % N, (i / N) | 0)), wet = Uint8Array.from(water);
@@ -258,6 +262,58 @@ export function dress(g, site) {
   for (const i of rail) { const x = i % N, z = (i / N) | 0; if (wet[i] || isB[i] || isRoad(i) || raised[i] || !empty(x, top[i] + 1, z)) continue;
     const has = (xx, zz) => inside(xx, zz) && rail.has(I(xx, zz));
     g.set(x, top[i] + 1, z, "rail", { shape: railShape(has(x, z - 1), has(x, z + 1), has(x + 1, z), has(x - 1, z)), waterlogged: "false" }); tally("rail"); }
+
+  // ---- decks: distances to the ways by a 3-4 chamfer over the band's box, each cell carrying its nearest way cell (whose
+  // deck height it takes: the lidar surface over the way, a running median along it)
+  for (const d of opt.decks ?? []) {
+    if (!lid) break;
+    const feats = [...(L.bridges?.features ?? []), ...(L.paths?.features ?? []), ...(L.streets?.features ?? [])];
+    const ways = d.ways.map((w) => feats.find((f) => tags(f).osm === w || tags(f).name === w)).filter(Boolean)
+      .map((f) => trace(along(frame, [f])).filter(([x, z]) => inside(x, z)));
+    if (!ways.length || !ways[0].length) continue;
+    const pad = m(d.widthM ?? 10) + 4, all = ways.flat(), bx0 = Math.max(0, Math.min(...all.map((c) => c[0])) - pad), bz0 = Math.max(0, Math.min(...all.map((c) => c[1])) - pad);
+    const bx1 = Math.min(N - 1, Math.max(...all.map((c) => c[0])) + pad), bz1 = Math.min(N - 1, Math.max(...all.map((c) => c[1])) + pad), W = bx1 - bx0 + 1, D = bz1 - bz0 + 1;
+    const yAt = new Map();
+    for (const w of ways) { const raw = w.map(([x, z]) => { const i = I(x, z); return top[i] + Math.round((lid.surface[i] - lid.ground[i]) * sc); });
+      w.forEach(([x, z], k) => { const win = raw.slice(Math.max(0, k - 12), k + 13).sort((a, b) => a - b); yAt.set(I(x, z), win[win.length >> 1]); }); }
+    const dist = ways.map((w) => { const dd = new Float32Array(W * D).fill(1e9), near = new Int32Array(W * D).fill(-1);
+      for (const [x, z] of w) { const k = (z - bz0) * W + (x - bx0); dd[k] = 0; near[k] = I(x, z); }
+      const pass = (order) => { for (const k of order) { const x = k % W, z = (k / W) | 0;
+        for (const [dx, dz, c] of [[-1, 0, 3], [1, 0, 3], [0, -1, 3], [0, 1, 3], [-1, -1, 4], [1, -1, 4], [-1, 1, 4], [1, 1, 4]]) { const xx = x + dx, zz = z + dz; if (xx < 0 || zz < 0 || xx >= W || zz >= D) continue;
+          const j = zz * W + xx; if (dd[j] + c < dd[k]) { dd[k] = dd[j] + c; near[k] = near[j]; } } } };
+      const fw = Array.from({ length: W * D }, (_, k) => k); pass(fw); pass(fw.reverse()); pass(fw.reverse()); pass(fw.reverse());
+      return { dd: dd.map((v) => v / 3), near }; });
+    const walk = m(d.walkM ?? 1.5), gap = ways.length > 1 ? (() => { const v = ways[0].map(([x, z]) => dist[1].dd[(z - bz0) * W + (x - bx0)]).sort((a, b) => a - b); return v[v.length >> 1]; })() : 0;
+    const deckY = new Map(), wood = d.deck ?? "spruce_planks", lane = d.lane ?? "light_gray_concrete";
+    for (let k = 0; k < W * D; k++) { const ds = dist.map((q) => q.dd[k]), on = ways.length > 1 ? ds[0] + ds[1] <= gap + 2 * walk : ds[0] <= m(d.widthM ?? 4) / 2; if (!on) continue;
+      const x = bx0 + (k % W), z = bz0 + ((k / W) | 0), i = I(x, z); if (isB[i]) continue;
+      const best = ds.indexOf(Math.min(...ds)), y = yAt.get(dist[best].near[k]); if (y == null) continue;
+      const block = ways.length > 1 && Math.min(...ds) > walk ? lane : wood;
+      if (y <= top[i]) { g.set(x, top[i], z, block); continue; }                          // where the ground rises to it (the shore)
+      g.set(x, y, z, block); for (let yy = top[i] + 1; yy < y; yy++) if (!empty(x, yy, z)) g.set(x, yy, z, "air");
+      deckY.set(i, y); raised[i] = 1; }
+    const has = (x, z) => inside(x, z) && deckY.has(I(x, z)), every = m(d.pileEveryM ?? 12), post = { up: "true", east: "none", west: "none", north: "none", south: "none", waterlogged: "false" };
+    let along_ = 0; const edge_ = [];
+    for (const [i, y] of deckY) { const x = i % N, z = (i / N) | 0;
+      if (N4.some(([dx, dz]) => !has(x + dx, z + dz))) { edge_.push(i); g.set(x, y + 1, z, "iron_bars", { ...sides((xx, zz) => has(xx, zz) && N4.some(([a, b]) => !has(xx + a, zz + b)), x, z, "true", "false"), waterlogged: "false" }); } }
+    for (const [x, z] of ways[0]) { if (along_++ % every) continue;
+      for (const i of edge_) { const ex = i % N, ez = (i / N) | 0; if (Math.abs(ex - x) + Math.abs(ez - z) > m(d.widthM ?? 10)) continue;
+        if ((Math.abs(ex - x) <= 1 || Math.abs(ez - z) <= 1)) for (let yy = top[i] + 1; yy < deckY.get(i); yy++) g.set(ex, yy, ez, d.pile ?? "polished_blackstone_wall", post); } }
+    tally("deck cells", deckY.size); }
+
+  // ---- ramparts: each OSM wall whose lidar rise (surface over ground) has a median of at least minRiseM
+  if (opt.ramparts && lid) { const r = opt.ramparts, done = new Map();
+    for (const f of L.barriers?.features ?? []) { if (!/wall/.test(tags(f).barrier ?? "")) continue;
+      const cells = trace(along(frame, [f])).filter(([x, z]) => inside(x, z) && !isB[I(x, z)]); if (cells.length < 3) continue;
+      const rise = cells.map(([x, z]) => lid.surface[I(x, z)] - lid.ground[I(x, z)]), med = [...rise].sort((a, b) => a - b)[rise.length >> 1];
+      if (med < (r.minRiseM ?? 2.5)) continue;
+      cells.forEach(([x, z], k) => { const h = Math.min(med + 2, Math.max(med - 2, rise[k])), ty = top[I(x, z)] + Math.round(h * sc);
+        for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, zz = z + dz; if (!inside(xx, zz)) continue; const j = I(xx, zz); if (isB[j] || wet[j]) continue;
+          let low = top[j]; for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) if (inside(xx + a, zz + b)) low = Math.min(low, top[I(xx + a, zz + b)]);
+          for (let y = low + 1; y <= ty; y++) g.set(xx, y, zz, r.block ?? "stone_bricks"); done.set(j, Math.max(done.get(j) ?? 0, ty)); } }); }
+    for (const [j, ty] of done) { const x = j % N, z = (j / N) | 0; if ((x + z) % 2 || !N4.some(([dx, dz]) => !done.has(I(x + dx, z + dz)))) continue;
+      g.set(x, ty + 1, z, r.cap ?? "stone_bricks"); }
+    tally("rampart cells", done.size); }
 
   // ---- barriers, and a railing along every edge against the water
   const bars = new Set();

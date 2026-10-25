@@ -120,6 +120,14 @@ named from OSM) and `surface_hydrographique` (the Seine is an OSM relation the O
 come from the record (`rec.wall`: dressed limestone for stone or unrecorded, brick only where it says brick). Any French
 place works with no per-city code; `places/fr/notre-dame-test.json` is the smoke test (about 3 minutes to fetch).
 
+Where LiDAR HD isn't published yet (the Bay of Mont-Saint-Michel, 2026) the adapter falls back to RGE ALTI's 1 m terrain
+and the photogrammetric surface model (`HIGHRES.MNS`: roofs yes, thin spires no). Three place keys came with Mont-Saint-Michel
+and work anywhere: `flats` { belowM, block } (open ground below that elevation is tidal flat: wet sand photographs grey),
+`dress.decks` [{ ways: [osm ids or names], walkM, deck, lane, pile, pileEveryM }] (a footbridge on piles at the lidar
+surface's height along its OSM ways: two ways give the walkways on both edges and a lane between; bridge ways are kept
+aside for this as `L.bridges`), and `dress.ramparts` { minRiseM, block, cap } (an OSM wall whose lidar rise has a median
+of at least minRiseM is built to that height, 3 wide, with merlons).
+
 ## Tall worlds
 
 A place taller than vanilla's 320 (Taipei 101 at 1.4 blocks/m is 711): `maxY` lifts build.mjs's cap on building tops

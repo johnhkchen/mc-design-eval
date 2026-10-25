@@ -3,7 +3,8 @@
 //   lidar      LiDAR HD's elevation models (0.5 m, derived from the national point cloud, flown 2021-2025): the MNT
 //              (ground) and MNS (surface: roofs, crowns, anything standing), read through the WMS-R as Lambert-93
 //              GeoTIFF windows of up to 2 km. No point cloud to decode; each block cell takes the mean ground and the
-//              highest surface of the 0.5 m samples in it.
+//              highest surface of the 0.5 m samples in it. Where LiDAR HD isn't published, RGE ALTI (1 m terrain) and
+//              the photogrammetric MNS stand in.
 //   aerial     BD ORTHO (20 cm, the newest flight) in true colour, and its infrared edition (IRC: near-infrared, red,
 //              green) for the near-infrared, read at 0.5 m.
 //   buildings  BD TOPO's batiment: every footprint in France, each with its height (hauteur, from the lidar or
@@ -100,25 +101,35 @@ const wall = (code) => { const c = String(code ?? "");
 
 export default [
   { id: "ign-lidar-hd", layers: ["lidar"], name: "IGN LiDAR HD elevation models (MNT and MNS, 0.5 m)", licence: LO,
-    attribution: "IGN, LiDAR HD (MNT and MNS), Géoplateforme", url: "https://geoservices.ign.fr/lidarhd", covers: inFrance,
+    attribution: "IGN, LiDAR HD (MNT and MNS) and RGE ALTI®, Géoplateforme", url: "https://geoservices.ign.fr/lidarhd", covers: inFrance,
     async fetch(place, frame) {
       const { N, scale } = frame, { c, dx, dz, box } = cellsL93(frame);
       // 0.5 m samples per cell: k x k, spread over the cell
       const k = Math.max(1, Math.round(1 / scale / 0.5)), sub = []; for (let a = 0; a < k; a++) for (let b = 0; b < k; b++) sub.push([(a + 0.5) / k - 0.5, (b + 0.5) / k - 0.5]);
       const ground = new Float32Array(N * N), surface = new Float32Array(N * N).fill(-Infinity), count = new Float32Array(N * N), gN = new Uint16Array(N * N);
-      for (const [layer, isGround] of [["IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93", true], ["IGNF_LIDAR-HD_MNS_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93", false]]) {
-        const wins = await windows(layer, box);
-        for (let i = 0; i < N * N; i++) for (const [u, v] of sub) {
+      // where LiDAR HD isn't published yet (the Bay of Mont-Saint-Michel, 2026), RGE ALTI's 1 m terrain model and the
+      // photogrammetric surface model (HIGHRES.MNS: misses thin spires) fill the cells it leaves empty
+      const pass = async (layer, isGround) => {
+        const wins = await windows(layer, box); let n = 0;
+        for (let i = 0; i < N * N; i++) { if (isGround ? gN[i] : count[i]) continue; for (const [u, v] of sub) {
           const hit = pixel(wins, c[2 * i] + u * dx[0] + v * dz[0], c[2 * i + 1] + u * dx[1] + v * dz[1]); if (!hit) continue;
           const val = hit[0].bands[0][hit[1]]; if (!(val > -100)) continue;                   // nodata (-99999) off the flights
           if (isGround) { ground[i] += val; gN[i]++; } else { if (val > surface[i]) surface[i] = val; count[i]++; }
-        }
+          n++; } }
+        return n;
+      };
+      const used = [];
+      for (const [hd, fallback, isGround] of [["IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93", "ELEVATION.ELEVATIONGRIDCOVERAGE.HIGHRES", true],
+        ["IGNF_LIDAR-HD_MNS_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93", "ELEVATION.ELEVATIONGRIDCOVERAGE.HIGHRES.MNS", false]]) {
+        if (await pass(hd, isGround)) used.push(hd);
+        const have = isGround ? gN : count; let missing = 0; for (let i = 0; i < N * N; i++) if (!have[i]) missing++;
+        if (missing > N * N * 0.01 && await pass(fallback, isGround)) used.push(fallback);
       }
       let mean = 0, nf = 0; for (let i = 0; i < N * N; i++) if (gN[i]) { ground[i] /= gN[i]; mean += ground[i]; nf++; }
-      if (!nf) throw new Error("LiDAR HD: no ground in the box (not flown yet?)");
+      if (!nf) throw new Error("no IGN elevation in the box");
       mean /= nf; for (let i = 0; i < N * N; i++) { if (!gN[i]) ground[i] = mean; if (!Number.isFinite(surface[i])) surface[i] = ground[i]; }
       process.stderr.write(`  lidar hd: ${nf.toLocaleString()} of ${(N * N).toLocaleString()} cells with ground, ${k * k} samples a cell\n`);
-      return { lidar: { kind: "rasters", n: N, rasters: { ground, surface, count }, collection: "IGN LiDAR HD (MNT/MNS 0.5 m)", points: null } };
+      return { lidar: { kind: "rasters", n: N, rasters: { ground, surface, count }, collection: used.join(" + "), points: null } };
     } },
   { id: "ign-ortho", layers: ["aerial"], name: "IGN BD ORTHO (true colour and infrared, read at 0.5 m)", licence: LO,
     attribution: "IGN, BD ORTHO®, Géoplateforme", url: "https://geoservices.ign.fr/bdortho", covers: inFrance,

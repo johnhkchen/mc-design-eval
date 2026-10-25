@@ -33,6 +33,8 @@ export function buildPlace(place, frame, L) {
   // a bridge's deck is not ground: ways tagged bridge (the Golden Gate's sidewalks, a footbridge) would be laid at the level
   // of whatever they cross, the water included; leave them out (a designed module puts the bridge in)
   const onBridge = (f) => { const t = f.properties ?? {}; return (t.bridge && t.bridge !== "no") || (t["min_height"] && parseFloat(t["min_height"]) > 2); };
+  // (kept aside as L.bridges, for the place's own decks: dress.mjs place.dress.decks)
+  L = { ...L, bridges: { type: "FeatureCollection", features: ["streets", "paths"].flatMap((k) => (L[k]?.features ?? []).filter(onBridge)) } };
   for (const k of ["streets", "paths", "barriers", "rails"]) if (L[k]?.features) L = { ...L, [k]: { ...L[k], features: L[k].features.filter((f) => !onBridge(f)) } };
   const parcels = new Map((L.parcels?.features ?? []).map((f) => [f.properties.parcel, f.properties]));
   const H = lid ? Float64Array.from(lid.ground, (m) => m * (frame.scale ?? 1))
@@ -145,6 +147,9 @@ export function buildPlace(place, frame, L) {
       for (let dz = -2; dz <= 2; dz++) for (let dx = -2; dx <= 2; dx++) { const xx = x + dx, zz = z + dz; if (xx < 0 || zz < 0 || xx >= N || zz >= N) continue;
         const v = raw[I(xx, zz)]; if (!v) continue; const c = (n.get(v) ?? 0) + 1; n.set(v, c); if (c > bn) { bn = c; best = v; } }
       cover[I(x, z)] = best; } }
+  // place.flats { belowM, block }: open ground below that elevation is the tidal flat (wet sand photographs grey and would
+  // be paving); vegetation (salt meadow) stays grass
+  if (place.flats && lid) for (let i = 0; i < N * N; i++) if (lid.ground[i] < place.flats.belowM && cover[i] !== "grass_block") cover[i] = place.flats.block ?? "sand";
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {
     const y = ground(x, z), i = I(x, z); let low = y - 3;
     for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const nx = x + dx, nz = z + dz; low = nx < 0 || nz < 0 || nx >= N || nz >= N ? 0 : Math.min(low, ground(nx, nz) - 1); }
@@ -171,7 +176,7 @@ export function buildPlace(place, frame, L) {
     if (rec && wall.kind !== "civic or commercial" || /commercial/.test(wall.kind) && b.cells.length / (sc * sc) < 800) Object.assign(b, fitOut(g, b, { I, ground, road, sc })); }
 
   // the street's dressing (dress.mjs) reads the same layers; palms and specks leave the canopy before the trees grow
-  const site = { place, frame, L, N, I, sc, ground, road, ROAD, WALK, water, park, path, isB }, trimmed = chm ? trimCanopy(chm, site, { green: canopyGreen }) : null;
+  const site = { place, frame, L, N, I, sc, ground, road, ROAD, WALK, water, park, path, isB, lid }, trimmed = chm ? trimCanopy(chm, site, { green: canopyGreen }) : null;
   const open = (x, z) => { const i = I(x, z); return !isB[i] && !water[i] && road[i] > ROAD; };
   let trees;
   if (chm) trees = canopyTrees(g, { chm, n: N, ground, open, scale: sc });

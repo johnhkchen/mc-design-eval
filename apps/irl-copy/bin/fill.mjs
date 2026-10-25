@@ -34,7 +34,7 @@ const dir = `${HERE}/work/${name}/fill`, ledger = resolve(opt("--ledger", `${dir
 mkdirSync(dir, { recursive: true });
 // ground per cell from the lidar raster, as build.mjs rounds it (unsmoothed: offsets within a footprint)
 // (or, with no lidar, the place's ground raster: Taiwan's DTM or its bare-earth DEM, src/sources/taipei.mjs)
-const gfile = [`${HERE}/.cache/${name}/usgs-lidar.lidar.ground.f32`, `${HERE}/.cache/${name}/taiwan-ground.ground.f32`].find((f) => existsSync(f)), G = gfile ? new Float32Array(readFileSync(gfile).buffer.slice(0)) : null;
+const gfile = [`${HERE}/.cache/${name}/usgs-lidar.lidar.ground.f32`, `${HERE}/.cache/${name}/ign-lidar-hd.lidar.ground.f32`, `${HERE}/.cache/${name}/taiwan-ground.ground.f32`].find((f) => existsSync(f)), G = gfile ? new Float32Array(readFileSync(gfile).buffer.slice(0)) : null;
 let lo = Infinity; if (G) for (const v of G) lo = Math.min(lo, v * sc);
 const ground = (x, z) => (G ? Math.round(G[z * N + x] * sc) - (Math.floor(lo) - Math.round(4 * sc)) : 0);
 const parcels = new Map();
@@ -44,7 +44,7 @@ try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${plan(pla
 const placed = new Set(compose.placements.map((p) => p.building));
 const todo = m.buildings.filter((b) => !placed.has(b.id) && (!only || only.includes(b.id)) && b.footprint.length >= +opt("--min-cells", 20));
 // --roofs: the lidar's surface per cell (as build.mjs rounds the ground), capped at the building's top, for the 4th number
-const sfile = `${HERE}/.cache/${name}/usgs-lidar.lidar.surface.f32`, roofs = argv.includes("--roofs") && G && existsSync(sfile) ? new Float32Array(readFileSync(sfile).buffer.slice(0)) : null;
+const sfile = gfile?.replace(/ground\.f32$/, "surface.f32"), roofs = argv.includes("--roofs") && G && existsSync(sfile) ? new Float32Array(readFileSync(sfile).buffer.slice(0)) : null;
 
 // --turn: the footprint in its own square frame. Local cell (lx, lz) of a W x D box whose centre sits at (uc, vc) in the
 // footprint's turned-back coordinates; the world cell under it is the one the placement's inverse map reads from

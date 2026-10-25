@@ -1,0 +1,36 @@
+{
+ "name": "Mont-Saint-Michel, Normandy",
+ "note": "The tidal island of Mont-Saint-Michel in its bay, on the border of Normandy and Brittany: the granite rock (about 80 m) crowned by the Benedictine abbey (abbey church with its Romanesque nave and Flamboyant Gothic choir, the Merveille on the north face, the neo-Gothic spire of 1897 with Fremiet's gilded Saint Michael at about 157 m above the sands), the walled village climbing the Grande Rue on the south-east, the ramparts and towers of the Hundred Years' War, and the 2014 passerelle footbridge (Dietmar Feichtinger) crossing the sands to the south. Scale 1.4 blocks per metre; 2100 blocks a side (half 750 m), centred south of the rock so the footbridge's run fits.",
+ "city": "mont-saint-michel",
+ "country": "FR",
+ "scale": 1.4,
+ "centre": [
+  48.6325,
+  -1.5112
+ ],
+ "half": 750,
+ "flats": {
+  "belowM": 9,
+  "block": "sand"
+ },
+ "dress": {
+  "decks": [
+   {
+    "ways": [
+     "way/691240313",
+     "way/1201543077"
+    ],
+    "walkM": 1.6,
+    "deck": "spruce_planks",
+    "lane": "light_gray_concrete",
+    "pile": "polished_blackstone_wall",
+    "pileEveryM": 12
+   }
+  ],
+  "ramparts": {
+   "minRiseM": 3,
+   "block": "stone_bricks",
+   "cap": "stone_bricks"
+  }
+ }
+}

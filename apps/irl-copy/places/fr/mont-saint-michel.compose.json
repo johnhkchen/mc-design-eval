@@ -1,0 +1,35 @@
+{
+ "note": "Mont-Saint-Michel: one hero kit, the abbey on the summit (runs/mont-saint-michel/abbey-kit, built in hybrid mode: Opus and Sonnet sessions through the Message Batches API, Haiku live); batched Haiku fill for the village, the towers and the gates; the ramparts, the tidal flats and the passerelle drawn by irl-copy from the data (place.dress.ramparts, place.flats, place.dress.decks).",
+ "modules": {
+  "abbey-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/mont-saint-michel/abbey-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    129,
+    120
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "FR301499771",
+   "module": "abbey-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": -1,
+   "covers": [
+    "FR301499771",
+    "FR301499769",
+    "FR301499749",
+    "FR301499750",
+    "FR301499754",
+    "FR301499768",
+    "FR301499767"
+   ]
+  }
+ ]
+}

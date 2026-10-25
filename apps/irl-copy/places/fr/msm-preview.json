@@ -1,0 +1,35 @@
+{
+ "name": "Mont-Saint-Michel preview",
+ "city": "mont-saint-michel",
+ "country": "FR",
+ "scale": 0.7,
+ "centre": [
+  48.6358,
+  -1.5113
+ ],
+ "half": 300,
+ "flats": {
+  "belowM": 9,
+  "block": "sand"
+ },
+ "dress": {
+  "decks": [
+   {
+    "ways": [
+     "way/691240313",
+     "way/1201543077"
+    ],
+    "walkM": 1.6,
+    "deck": "spruce_planks",
+    "lane": "light_gray_concrete",
+    "pile": "polished_blackstone_wall",
+    "pileEveryM": 12
+   }
+  ],
+  "ramparts": {
+   "minRiseM": 3,
+   "block": "stone_bricks",
+   "cap": "stone_bricks"
+  }
+ }
+}
