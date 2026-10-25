@@ -27,6 +27,7 @@ const hash = (s) => { let h = 2166136261; for (const c of String(s)) { h ^= c.ch
 export function wallFor(id, rec, areaM2 = 0) {
   const pick = (list) => list[hash(id) % list.length];
   if (!rec) return { block: "smooth_sandstone", kind: "civic or unrecorded" };                  // park buildings
+  if (rec.wall) return { block: rec.wall, kind: rec.wallKind ?? rec.wall };                     // a source that names the wall (France)
   const home = /resid|dwelling/i.test(rec.use ?? "") && areaM2 < 800;
   if (!home && rec.construction !== "C") return { block: "smooth_sandstone", kind: "civic or commercial" };
   const ct = rec.construction, y = rec.year ?? 1950;

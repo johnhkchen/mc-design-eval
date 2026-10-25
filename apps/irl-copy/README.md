@@ -112,6 +112,14 @@ Taiwan), else Copernicus GLO-30 taken down to the ground (`groundFit` { canopySh
 forest, an opening off the basin's buildings). The aerial is Sentinel-2 L2A (10 m; NLSC's orthophoto tiles carry no open
 licence for derived models); parks from OSM. A small TM projection (TWD97, UTM) and zip / shapefile readers come with it.
 
+France (`country: "FR"`, `src/sources/france.mjs`), all from IGN's Géoplateforme under the Licence Ouverte 2.0: LiDAR HD's
+0.5 m elevation models (MNT ground, MNS surface) read as Lambert-93 GeoTIFF windows through the WMS-R, so no point cloud
+to decode (each cell: the mean ground and highest surface of its 0.5 m samples); BD ORTHO true colour plus its infrared
+edition for the near-infrared; BD TOPO's `batiment` (every footprint, with `hauteur`, floors, use, wall material and year;
+named from OSM) and `surface_hydrographique` (the Seine is an OSM relation the OSM source skips); parks from OSM. Walls
+come from the record (`rec.wall`: dressed limestone for stone or unrecorded, brick only where it says brick). Any French
+place works with no per-city code; `places/fr/notre-dame-test.json` is the smoke test (about 3 minutes to fetch).
+
 ## Tall worlds
 
 A place taller than vanilla's 320 (Taipei 101 at 1.4 blocks/m is 711): `maxY` lifts build.mjs's cap on building tops

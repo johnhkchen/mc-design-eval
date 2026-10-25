@@ -21,6 +21,7 @@ import { spawn } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { plan } from "../src/sources/index.mjs";
 
 const HERE = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PLUGIN = process.env.MCD_PLUGIN || resolve(HERE, "../../../minecraft-design");
@@ -37,7 +38,8 @@ const gfile = [`${HERE}/.cache/${name}/usgs-lidar.lidar.ground.f32`, `${HERE}/.c
 let lo = Infinity; if (G) for (const v of G) lo = Math.min(lo, v * sc);
 const ground = (x, z) => (G ? Math.round(G[z * N + x] * sc) - (Math.floor(lo) - Math.round(4 * sc)) : 0);
 const parcels = new Map();
-try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${({ seattle: "sea", "new-york": "nyc", "washington-dc": "dc", taipei: "taipei-buildings" })[place.city] ?? "sf"}${place.city === "taipei" ? "" : "-parcels"}.json`, "utf8")).layers.parcels.features) parcels.set(f.properties.parcel, f.properties); } catch {}
+// the parcels come from whichever source the place's plan picks for them (its cache file is named by the source's id)
+try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${plan(place).parcels.id}.json`, "utf8")).layers.parcels.features) parcels.set(f.properties.parcel, f.properties); } catch {}
 
 const placed = new Set(compose.placements.map((p) => p.building));
 const todo = m.buildings.filter((b) => !placed.has(b.id) && (!only || only.includes(b.id)) && b.footprint.length >= +opt("--min-cells", 20));
@@ -82,7 +84,7 @@ function brief(b) {
   const cells = local.map(([lx, lz, x, z]) => (roofs ? [lx, lz, ground(x, z) - base, roofAt(x, z)] : [lx, lz, ground(x, z) - base]));
   writeFileSync(`${dir}/${b.id}.cells.json`, JSON.stringify(cells));
   const p = parcels.get(b.parcel) ?? {}, H = b.top - b.base;
-  const what = [b.name, p.name, p.landmark, p.use, p.year && `built ${p.year}`, p.address].filter(Boolean).join("; ") || "no record";
+  const what = [b.name, p.name, p.landmark, p.nature !== "Indifférenciée" && p.nature, p.use, p.year && `built ${p.year}`, p.stories && `${p.stories} storeys`, p.wallKind && `walls: ${p.wallKind}`, p.address].filter(Boolean).join("; ") || "no record";
   return `Build one real building as a Minecraft 1.21.1 module for a city diorama of ${place.name} (${place.note ?? ""}). Scale ${sc} blocks per metre.
 The building: ${what}. Footprint ${W} x ${D} blocks; its roof is about ${H} blocks above its lowest ground (from lidar). Decide from that record what it looks like (era, height in storeys of about ${Math.round(3.3 * sc)} blocks, materials typical of the city and its age) and make it read well at a glance from the air and the street at dusk.
 Write a Node ESM script ${dir}/${b.id}.mjs that builds it and saves ${dir}/${b.id}.nbt:
