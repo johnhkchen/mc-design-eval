@@ -90,6 +90,8 @@ if (rerender) {
   if (given("--sun-color")) scene.sun.color = fresh.sun.color;
   if (given("--sun-intensity")) scene.sun.intensity = fresh.sun.intensity;
   if (given("--clouds")) scene.sky.cloudsEnabled = fresh.sky.cloudsEnabled;
+  if (given("--sky-light")) Object.assign(scene.sky, { skyLight: fresh.sky.skyLight, apparentSkyLight: fresh.sky.apparentSkyLight });
+  if (given("--sun")) Object.assign(scene.sun, { altitude: fresh.sun.altitude, azimuth: fresh.sun.azimuth });
   if (given("--spp")) scene.sppTarget = fresh.sppTarget;
   if (given("--fog")) scene.fog = fresh.fog;
   if (given("--size")) Object.assign(scene, { width: fresh.width, height: fresh.height });
