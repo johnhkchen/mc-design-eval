@@ -104,6 +104,13 @@ if (rerender) {
 // a sequence of frames (bin/chunky-orbit.mjs) pays for the world once
 const reuse = opt("--reuse-octree");
 if (reuse) { scene.chunkList = JSON.parse(readFileSync(`${sceneDir}/${reuse}.json`, "utf8")).chunkList; copyFileSync(`${sceneDir}/${reuse}.octree2`, `${sceneDir}/${name}.octree2`); }
+// the world's tallest block (heights.bin, written beside the world): Chunky clips at 256 by default, which cut the Space
+// Needle's top and spire off; without --ymax a taller world loads to its top (a saved scene too)
+if (opt("--ymax") == null && existsSync(`${out}/heights.bin`)) {
+  const b = readFileSync(`${out}/heights.bin`), h = new Uint16Array(b.buffer.slice(b.byteOffset + 8, b.byteOffset + 8 + b.readUInt32LE(0) * b.readUInt32LE(4) * 2));
+  const top = Math.ceil((h.reduce((m, v) => (v > m ? v : m), 0) + 8) / 16) * 16;
+  if (top > (scene.yClipMax ?? 256)) Object.assign(scene, { yMin: 0, yMax: top, yClipMin: 0, yClipMax: top });
+}
 if (crop) Object.assign(scene, { fullWidth: scene.width, fullHeight: scene.height, cropX: crop[0], cropY: crop[1], width: crop[2], height: crop[3] });
 writeFileSync(`${sceneDir}/${name}.json`, JSON.stringify(scene, null, 1));
 const t0 = Date.now();
