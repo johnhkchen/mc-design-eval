@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+// A rotating dolly shot: chunky-shot renders each frame from a camera circling a point, the world loaded once (frame 0's
+// octree reused), then ffmpeg makes an MP4 sized to fit an upload limit (Discord's free tier: 10 MB).
+//   node bin/chunky-orbit.mjs <place> <name> --center x,y,z --radius 500 --height 220 [--frames 240] [--fps 24]
+//     [--degrees 360] [--start 0] (the arc, from that bearing: 0 = the camera north of the centre, 90 = east)
+//     [--size 1280x720] [--spp 100] [--target-mb 9.5] [--codec h264|hevc|av1] [--encode-only]
+//     and any chunky-shot option (--sun, --sun-sampling, --sun-color, --water-plane, --fov, --chunks ...), the same on every frame
+// Frames go to out/<place>/shots/<name>/NNNN.png; a rerun renders only the frames that are missing (resumable overnight).
+import { existsSync, mkdirSync, renameSync, readdirSync, unlinkSync, statSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+
+const HERE = dirname(dirname(fileURLToPath(import.meta.url)));
+const argv = process.argv.slice(2), [place, name] = argv;
+if (!place || !name) throw new Error("usage: chunky-orbit.mjs <place> <name> --center x,y,z --radius r --height y");
+const OWN = new Set(["--center", "--radius", "--height", "--frames", "--fps", "--degrees", "--start", "--target-mb", "--codec", "--size", "--spp", "--chunks"]);
+const opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
+const [cx, cy, cz] = opt("--center").split(",").map(Number), R = +opt("--radius", 500), eyeY = +opt("--height", cy + 150);
+const N = +opt("--frames", 240), fps = +opt("--fps", 24), arc = +opt("--degrees", 360), start = +opt("--start", 0);
+const size = opt("--size", "1280x720"), spp = opt("--spp", "100");
+// the world box every frame needs: the circle and what lies beyond it (a horizon), unless --chunks says otherwise
+const chunks = opt("--chunks", [cx - R - 1500, cz - R - 1500, cx + R + 1500, cz + R + 1500].map(Math.round).join(","));
+const pass = []; for (let i = 2; i < argv.length; i++) { if (OWN.has(argv[i])) { i++; continue; } if (argv[i] === "--encode-only") continue; pass.push(argv[i]); }
+
+const out = `${HERE}/out/${place}`, shots = `${out}/shots`, frames = `${shots}/${name}`, sceneDir = `${out}/chunky`;
+mkdirSync(frames, { recursive: true });
+const pad = (i) => String(i).padStart(4, "0"), first = `${name}-${pad(0)}`;
+// a closed loop (360) leaves out the last frame, which would repeat the first
+const step = arc / (arc % 360 === 0 ? N : Math.max(1, N - 1));
+
+if (!argv.includes("--encode-only")) {
+  const t0 = Date.now();
+  for (let i = 0; i < N; i++) {
+    if (existsSync(`${frames}/${pad(i)}.png`)) continue;
+    const b = ((start + i * step) * Math.PI) / 180, eye = [cx + R * Math.sin(b), eyeY, cz - R * Math.cos(b)].map((v) => v.toFixed(2));
+    const scene = `${name}-${pad(i)}`, reuse = i > 0 && existsSync(`${sceneDir}/${first}.octree2`) ? ["--reuse-octree", first] : [];
+    execFileSync("node", [`${HERE}/bin/chunky-shot.mjs`, place, scene, "--eye", eye.join(","), "--look", `${cx},${cy},${cz}`,
+      "--size", size, "--spp", spp, "--chunks", chunks, ...reuse, ...pass], { stdio: ["ignore", "ignore", "inherit"] });
+    renameSync(`${shots}/${scene}.png`, `${frames}/${pad(i)}.png`);
+    // each frame's scene files (a dump is ~100 MB) go; frame 0's octree stays for the others
+    for (const f of readdirSync(sceneDir)) if (f.startsWith(`${scene}.`) && !(i === 0 && f.endsWith(".octree2")) && !(i === 0 && f.endsWith(".json"))) unlinkSync(`${sceneDir}/${f}`);
+    const done = i + 1, s = (Date.now() - t0) / 1000;
+    process.stdout.write(`\r${name}: frame ${done}/${N} (${(s / 60).toFixed(1)} min, ~${((s / done) * (N - done) / 60).toFixed(0)} min left)   `);
+  }
+  process.stdout.write("\n");
+}
+
+// encode: two passes at the bitrate that lands the file just under the target size (audio: none)
+const target = +opt("--target-mb", 9.5), secs = readdirSync(frames).filter((f) => /^\d{4}\.png$/.test(f)).length / fps;
+const kbps = Math.floor((target * 8 * 1024 * 1024 * 0.97) / secs / 1000);
+const codec = { h264: ["libx264", "-preset", "slow", "-profile:v", "high"], hevc: ["libx265", "-preset", "slow", "-tag:v", "hvc1"], av1: ["libsvtav1", "-preset", "6"] }[opt("--codec", "h264")];
+const mp4 = `${shots}/${name}.mp4`, log = `${frames}/ffmpeg2pass`;
+const base = ["-y", "-hide_banner", "-loglevel", "error", "-framerate", String(fps), "-i", `${frames}/%04d.png`, "-c:v", ...codec, "-b:v", `${kbps}k`, "-pix_fmt", "yuv420p", "-an"];
+if (opt("--codec", "h264") === "av1") execFileSync("ffmpeg", [...base, "-movflags", "+faststart", mp4], { stdio: "inherit" });
+else {
+  execFileSync("ffmpeg", [...base, "-pass", "1", "-passlogfile", log, "-f", "mp4", "/dev/null"], { stdio: "inherit" });
+  execFileSync("ffmpeg", [...base, "-pass", "2", "-passlogfile", log, "-movflags", "+faststart", mp4], { stdio: "inherit" });
+}
+for (const f of readdirSync(frames)) if (f.startsWith("ffmpeg2pass")) unlinkSync(`${frames}/${f}`);
+console.log(`${place}: ${name}.mp4 (${secs.toFixed(1)} s at ${fps} fps, ${kbps} kb/s, ${(statSync(mp4).size / 1048576).toFixed(2)} MB)`);

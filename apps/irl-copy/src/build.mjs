@@ -16,6 +16,7 @@
 //              shows, open ground green, sand or paving by the aerial photo's colour and near-infrared
 // The manifest lists every building (id, footprint cells, base, height, peak) in the structure's frame, the streets
 // and the sources with their licences, so a kit build can take the footprints as its plots.
+import { writeFileSync } from "node:fs";
 import { Voxels } from "./voxels.mjs";
 import { cellsIn, distanceTo, along } from "./raster.mjs";
 import { groundFromContours } from "./ground.mjs";
@@ -216,11 +217,31 @@ export function buildPlace(place, frame, L) {
       let held = false; for (let ez = -3; ez <= 3 && !held; ez++) for (let ex = -3; ex <= 3 && !held; ex++) for (let ey = -5; ey <= 2 && !held; ey++) if (/_log$/.test(name(x + ex, y + ey, z + ez))) held = true;
       if (!held) g.set(x, y, z, "air"); } }
 
-  // place.tideM: the sea in at that level over every open cell below it (a high-tide view of a tidal island); decks and
+  // place.tideM: the sea in at that level over every open cell below it that the sea can reach (a high-tide view of a
+  // tidal island): flooded outward from the water already there, never over mapped farmland or meadow (the polders behind
+  // the dykes lie below a spring tide too, and their ditches would let it in); decks and
   // piers stand over it
   if (Number.isFinite(place.tideM)) { const ty = Math.round(place.tideM * sc) - floor; let n = 0;
-    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const i = I(x, z); if (isB[i]) continue;
+    // a road between two fields or a street between houses is not the sea's either: dry within GAP cells of farmland or a
+    // building (a chamfer distance), which also leaves a strip of shore along a polder's seaward edge
+    const GAP = Math.round(6 * sc), near = new Float32Array(N * N).fill(1e9);
+    for (let i = 0; i < N * N; i++) if (field[i] || isB[i]) near[i] = 0;
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const i = I(x, z); let d = near[i];
+      if (x > 0) d = Math.min(d, near[i - 1] + 1); if (z > 0) d = Math.min(d, near[i - N] + 1); if (x > 0 && z > 0) d = Math.min(d, near[i - N - 1] + 1.414); if (x < N - 1 && z > 0) d = Math.min(d, near[i - N + 1] + 1.414); near[i] = d; }
+    for (let z = N - 1; z >= 0; z--) for (let x = N - 1; x >= 0; x--) { const i = I(x, z); let d = near[i];
+      if (x < N - 1) d = Math.min(d, near[i + 1] + 1); if (z < N - 1) d = Math.min(d, near[i + N] + 1); if (x < N - 1 && z < N - 1) d = Math.min(d, near[i + N + 1] + 1.414); if (x > 0 && z < N - 1) d = Math.min(d, near[i + N - 1] + 1.414); near[i] = d; }
+    const land = (j) => near[j] <= GAP;
+    const sea = new Uint8Array(N * N), q = [];   // seeded by the water the land already has (the channels, the open sea)
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const b = g.get(x, ground(x, z) + 1, z)?.block ?? g.get(x, ground(x, z), z)?.block ?? "";
+      if (/water/.test(b) && !land(I(x, z))) { sea[I(x, z)] = 1; q.push(x, z); } }
+    while (q.length) { const z = q.pop(), x = q.pop();
+      for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const X = x + dx, Z = z + dz; if (X < 0 || Z < 0 || X >= N || Z >= N) continue;
+        const j = I(X, Z); if (sea[j] || land(j) || ground(X, Z) >= ty) continue; sea[j] = 1; q.push(X, Z); } }
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const i = I(x, z); if (isB[i] || !sea[i]) continue;
       for (let y = ground(x, z) + 1; y <= ty; y++) if (!g.get(x, y, z) || /grass$|fern$|flower|poppy|dandelion/.test(g.get(x, y, z).block)) { g.set(x, y, z, "water", { level: "0" }); n++; } }
+    // IRL_TIDE_MAP=file.pgm: the flood as a picture (white sea, grey farmland, black dry land), to check a dyke holds
+    if (process.env.IRL_TIDE_MAP) { const px = Buffer.alloc(N * N); for (let i = 0; i < N * N; i++) px[i] = sea[i] ? 255 : field[i] ? 110 : ground(i % N, (i / N) | 0) < ty ? 50 : 0;
+      writeFileSync(process.env.IRL_TIDE_MAP, Buffer.concat([Buffer.from(`P5 ${N} ${N} 255\n`), px])); }
     process.stderr.write(`  tide at ${place.tideM} m (y ${ty}): ${n.toLocaleString()} water blocks\n`); }
 
   const manifest = { place: place.id, name: place.name, size: g.size, metresPerBlock: 1 / sc, floorElevation: +(floor / sc).toFixed(1), box: frame.box, ground: [+(lo / sc).toFixed(1), +(hi / sc).toFixed(1)],
