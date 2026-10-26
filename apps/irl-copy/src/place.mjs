@@ -83,6 +83,11 @@ function placeAt(g, b, p, { H, skip }, ctx) {
     // terraces). By default only what stands on the land goes: each column of the box above its own ground (masses,
     // trees, lamps, railings), never the terrain under it, and never a column of another building's footprint
     // (a landscape module, ground: false, rebuilds the whole ground of its box, so it keeps the box clear)
+    // landPaths: [blocks]: the land's walks (their top block one of these) carried across the module's lawn, so the mapped
+    // walks run on to its plaza instead of stopping at the box's edge (the Washington Monument's grounds kit)
+    const walks = []; if (p.landPaths) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) { const x = ox + tx, z = oz + tz;
+      if (x < 0 || z < 0 || x >= g.size[0] || z >= g.size[2]) continue; const y = ctx.ground(x, z), c = g.get(x, y, z);
+      if (c && p.landPaths.includes(c.block.replace(/^minecraft:/, ""))) walks.push([x, z, c.block]); }
     if (!p.keep && (p.clear === "box" || p.ground === false)) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
     else if (!p.keep) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) { const x = ox + tx, z = oz + tz;
       if (x < 0 || z < 0 || x >= g.size[0] || z >= g.size[2] || ctx.other(x, z)) continue;
@@ -90,6 +95,8 @@ function placeAt(g, b, p, { H, skip }, ctx) {
     for (let mz = 0; mz < D; mz++) for (let mx = 0; mx < W; mx++) { const [tx, tz] = turnXZ(mx, mz);
       for (let y = skip; y < H; y++) { const src = p.module.get(x0 + (mir ? W - 1 - mx : mx), y, z0 + mz), cell = mir && src ? { ...src, state: mirrorState(src.state) } : src;
         const c = copyCell(cell, q, p.swap, y); if (c) g.set(ox + tx, y0 + y, oz + tz, ...c); } }
+    for (const [x, z, blk] of walks) for (let y = Math.min(g.size[1], y0 + H) - 1; y >= y0; y--) { const c = g.get(x, y, z); if (!c || /air$/.test(c.block)) continue;
+      if (/(grass_block|dirt|podzol|moss_block)$/.test(c.block) && (!g.get(x, y + 1, z) || /air$/.test(g.get(x, y + 1, z).block))) g.set(x, y, z, blk); break; }
   }
   return `${p.building}: ${W}x${D} module at +${p.at.join(",")}${mir ? ", mirrored" : ""}${q ? `, ${q} quarter turn${q > 1 ? "s" : ""}` : ""}${n > 1 ? `, x${n}` : ""}`;
 }
