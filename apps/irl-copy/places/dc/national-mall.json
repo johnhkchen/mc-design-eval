@@ -5,10 +5,10 @@
  "country": "US",
  "scale": 0.42,
  "centre": [
-  38.8895,
-  -77.02325
+  38.894883,
+  -77.03012
  ],
- "half": 1663,
+ "half": 2258,
  "peaks": {
   "DC86585": 40
  },
@@ -19,5 +19,6 @@
   "width": 5,
   "block": "smooth_sandstone"
  },
- "maxTreeM": 32
+ "maxTreeM": 32,
+ "extended": "2026-10-25: 500 blocks more on the west and north (centre moved 250 blocks north-west, the east and south edges kept), so the White House view from the Tidal Basin doesn't run off the world; old block coordinates +500 x, +500 z"
 }

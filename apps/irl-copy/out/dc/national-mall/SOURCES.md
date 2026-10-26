@@ -20,3 +20,4 @@
 | platforms | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
 | piers | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
 | greens | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
+| fields | [OpenStreetMap (Overpass API)](https://www.openstreetmap.org/copyright) | ODbL 1.0 (credit "© OpenStreetMap contributors") | © OpenStreetMap contributors |
