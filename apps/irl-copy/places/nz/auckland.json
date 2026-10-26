@@ -1,0 +1,11 @@
+{
+ "name": "Auckland from Maungawhau",
+ "note": "Tāmaki Makaurau Auckland from the rim of Maungawhau / Mt Eden (196 m, the city's highest volcanic cone, its crater about 50 m deep): the crater bowl in the foreground, Mt Eden village and Eden Terrace, Newton and Grafton below, and the CBD on its ridge to the north with the Sky Tower (328 m, 1997) among the Commercial Bay, PwC and ANZ towers, down to the Viaduct and Queens Wharf on the Waitematā Harbour. Scale 1.2 blocks per metre (the Sky Tower about 394 blocks: past vanilla's 320, the world opens at full height, maxY 520); 5040 blocks a side (half 2100 m), centred between the crater's south rim and the waterfront; sparse volume. Data: LINZ lidar 2024 (1 m DEM and DSM) and the 2023 6 cm urban aerial photo; OSM buildings, streets and parks, heights from the lidar.",
+ "city": "auckland",
+ "country": "NZ",
+ "scale": 1.2,
+ "centre": [-36.8605, 174.7600],
+ "half": 2100,
+ "maxY": 520,
+ "sparse": true
+}
