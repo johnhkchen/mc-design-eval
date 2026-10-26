@@ -214,11 +214,15 @@ export function dress(g, site) {
   const nearEnd = (x, z, r) => ends.some(([ex, ez]) => (ex - x - 0.5) ** 2 + (ez - z - 0.5) ** 2 < r * r);
   const asphalt = opt.asphalt ?? "polished_deepslate_slab", slab = { type: "bottom", waterlogged: "false" };
   const isRoad = (i) => road[i] <= ROAD && !wet[i] && !isB[i];
+  // lines only on the public roads: a service way (a shuttle loop, a parking aisle, a driveway) is plain asphalt
+  const lined = (L.streets?.features ?? []).filter((f) => tags(f).highway !== "service"), sl = lined.length === (L.streets?.features ?? []).length ? st : lineField(frame, lined, WALK + m(2));
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const i = I(x, z); if (!isRoad(i)) continue;
-    let blk = asphalt; const d = st.d[i];
-    if (d <= ROAD && !nearEnd(x, z, ROAD + m(3))) {
+    let blk = asphalt; const d = sl.d[i];
+    // dress.lines: false leaves the carriageway plain (a shuttle-only causeway); the dashed lane lines only where each side
+    // is wide enough for two lanes (on a narrow road they ran beside the centre line and zig-zagged round every bend)
+    if (opt.lines !== false && d <= ROAD && !nearEnd(x, z, ROAD + m(3))) {
       if (d < 0.6) blk = "smooth_sandstone_slab";                                       // the centre line
-      else if (Math.abs(d - ROAD / 2) < 0.5 && st.s[i] % m(9) < m(3)) blk = "smooth_quartz_slab";   // dashed lanes
+      else if (ROAD >= m(5.5) && Math.abs(d - ROAD / 2) < 0.5 && sl.s[i] % m(9) < m(3)) blk = "smooth_quartz_slab";   // dashed lanes
     }
     g.set(x, top[i], z, blk, slab); }
   // zebras: bars along the traffic, across the walker's way (a bar every other block)

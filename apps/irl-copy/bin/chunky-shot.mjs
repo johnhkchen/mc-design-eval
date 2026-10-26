@@ -129,4 +129,7 @@ const own = new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-(\\d+)\\
 const png = snaps.filter((f) => own.test(f.split("/").pop())).sort((a, b) => +own.exec(a.split("/").pop())[1] - +own.exec(b.split("/").pop())[1]).at(-1);
 if (!png) throw new Error("Chunky wrote no image");
 copyFileSync(`${sceneDir}/snapshots/${png}`, `${out}/shots/${name}.png`);
+// a fresh photograph: the untouched copies the fade and the tone balance keep of the last one (-nofade, -nolift) are
+// stale, and they work from those copies, so a re-render would come out as the old picture re-processed
+for (const k of ["nofade", "nolift"]) if (existsSync(`${out}/shots/${name}-${k}.png`)) unlinkSync(`${out}/shots/${name}-${k}.png`);
 console.log(`${place}: ${name}.png (${scene.width}x${scene.height}, ${scene.sppTarget} spp, ${Math.round((Date.now() - t0) / 1000)} s)`);

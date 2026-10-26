@@ -55,10 +55,12 @@ function clear(g, b, ground, I) {
   for (const [x, z] of b.footprint) for (let y = ground(x, z) + 1; y < g.size[1]; y++) g.set(x, y, z, "air");
 }
 // a module block, its facing turned a number of quarter turns, and recoloured by the placement's swaps
-// (swap: [{ from, to, minY?, maxY? }], exact block names, so the design run's files stay as they are)
+// (swap: [{ from, to, minY?, maxY?, outside? }], exact block names, so the design run's files stay as they are; outside:
+// [x0, z0, x1, z1] in the module's own cells limits a swap to beyond that box: a kit's lawn furniture goes, its plaza's stays)
 const copyCell = (c, quarter, swap, y) => {
   if (!c || /air$/.test(c.block)) return null;
-  const name = c.block.replace(/^minecraft:/, ""), s = swap?.find((w) => w.from === name && (w.minY == null || y >= w.minY) && (w.maxY == null || y <= w.maxY));
+  const out = (w) => !w.outside || !c.pos || c.pos[0] < w.outside[0] || c.pos[2] < w.outside[1] || c.pos[0] > w.outside[2] || c.pos[2] > w.outside[3];
+  const name = c.block.replace(/^minecraft:/, ""), s = swap?.find((w) => w.from === name && (w.minY == null || y >= w.minY) && (w.maxY == null || y <= w.maxY) && out(w));
   // a state value a module's script left "undefined" (a door with no facing) or a facing that is no direction ("e") would stop a world reader: drop it
   const st = c.state && Object.fromEntries(Object.entries(c.state).filter(([k, v]) => v != null && v !== "undefined" && (k !== "facing" || /^(north|south|east|west|up|down)$/.test(v))));
   return [s ? s.to : c.block, st ? { ...st, ...(st.facing ? { facing: turn(st.facing, quarter) } : {}) } : undefined];
