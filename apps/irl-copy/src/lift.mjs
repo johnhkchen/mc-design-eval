@@ -9,7 +9,7 @@ const srgb = (v) => 255 * (v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) -
 const T = new Float64Array(256).map((_, i) => lin(i));
 
 /** balance an image's tones in place: img {width, height, data RGBA}; shadows S, highlights H */
-export function liftImage(img, { shadows = 2.4, highlights = 0.3 } = {}) {
+export function liftImage(img, { shadows = 1.0, highlights = 0.15 } = {}) {
   const d = img.data;
   for (let o = 0; o < d.length; o += 4) {
     const r = T[d[o]], g = T[d[o + 1]], b = T[d[o + 2]], L = 0.2126 * r + 0.7152 * g + 0.0722 * b;
