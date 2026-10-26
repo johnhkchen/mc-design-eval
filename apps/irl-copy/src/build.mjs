@@ -202,7 +202,8 @@ export function buildPlace(place, frame, L) {
   const vn = (x, z) => { const h = (a, b) => { let v = Math.imul(a, 73856093) ^ Math.imul(b, 19349663); v ^= v >>> 13; return (Math.imul(v, 1274126177) >>> 0) / 4294967296; };
     const S = 40, gx = Math.floor(x / S), gz = Math.floor(z / S), fx = x / S - gx, fz = z / S - gz, sm = (t) => t * t * (3 - 2 * t);
     const a = h(gx, gz) + (h(gx + 1, gz) - h(gx, gz)) * sm(fx), b = h(gx, gz + 1) + (h(gx + 1, gz + 1) - h(gx, gz + 1)) * sm(fx); return a + (b - a) * sm(fz); };
-  const flatBlock = (i) => { if (!fb) return place.flats.block ?? "sand"; const x = i % N, z = (i / N) | 0, j = ((Math.imul(x, 2654435761) ^ Math.imul(z, 40503)) >>> 0) / 4294967296; let t = Math.min(0.999, Math.max(0, vn(x, z) * 0.75 + j * 0.25)) * wsum; for (const [b, w] of fb) { if ((t -= w) <= 0) return b; } return fb.at(-1)[0]; };
+  // the dither is a full integer mix: x*k1 ^ z*k2 alone laid the grey in straight diagonal streaks across the bay
+  const flatBlock = (i) => { if (!fb) return place.flats.block ?? "sand"; const x = i % N, z = (i / N) | 0, j = (() => { let v = Math.imul(x, 0x27d4eb2d) ^ Math.imul(z, 0x165667b1); v ^= v >>> 15; v = Math.imul(v, 0x85ebca6b); v ^= v >>> 13; v = Math.imul(v, 0xc2b2ae35); v ^= v >>> 16; return (v >>> 0) / 4294967296; })(); let t = Math.min(0.999, Math.max(0, vn(x, z) * 0.75 + j * 0.25)) * wsum; for (const [b, w] of fb) { if ((t -= w) <= 0) return b; } return fb.at(-1)[0]; };
   if (place.flats && lid) for (let i = 0; i < N * N; i++) if (flat(i) && cover[i] !== "grass_block") cover[i] = flatBlock(i);
   // fields: a meadow is grass; farmland grass where it's green, else turned earth (the aerial would call it paving)
   for (let i = 0; i < N * N; i++) if (field[i] && cover[i] !== "grass_block") cover[i] = field[i] === 2 ? "grass_block" : "coarse_dirt";
