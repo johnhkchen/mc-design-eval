@@ -1,0 +1,23 @@
+# REQUIRED ELEMENTS (Notre-Dame de Paris). Coordinates from plan.md. Parts: P1 massing shell, P2 roofs, P3 west front, P4 chevet+south side+flyers, P5 spire+pinnacles+apostles, P6 glazing, light and grounds.
+
+- [ ] Plinth + ground fit: stone_bricks/polished_andesite from ground (y 1..3) up to y 3 under every mass. P1, `plinthCourse`.
+- [ ] Cream limestone walls: smooth_sandstone body, ~10% sandstone low courses, cut_sandstone string courses. P1, `ashlarWall`.
+- [ ] Two west towers x0..22 z7..27 / 47..67, y3..98 flat deck y96, balustrade y97..98, corner pinnacles. P1 (masses), P3 (belfry lancets, cornice y95, deck), `lancetOpening`, `balustrade`, `pinnacle`.
+- [x] Four facade buttresses (x0..1, y3..92) with set-offs every 8 (smooth_sandstone_stairs). P3, `setoffButtress`.
+- [x] Three west portals (centre z32..42 y3..22; N z13..21, S z53..61 y3..19): 4 stepped archivolt rings x2→6 of cut_sandstone + stairs, chiseled_sandstone tympanum, sandstone_wall trumeau at z37, small gable to y29. Doors left as open arch (spruce-free: dark_oak_door pair at x6). P3, `portal`.
+- [x] Gallery of Kings: 28 niches 1x3 every 2 blocks z8..66 y32..34 at x2 (recess by NOT placing the front block), king = smooth_sandstone body + chiseled_sandstone head, cut_sandstone_slab hood, upside-down smooth_sandstone_stairs courses y30/y38. P3, `kingNiche`.
+- [ ] West rose x3, centre (y49,z37) r7: ring of red pane, field blue, centre purple+yellow, 12 spokes chiseled_sandstone, square cut_sandstone frame with pointed relieving arch. P3 (frame/tracery), P6 (glass), `roseWindow`.
+- [ ] Tower lancet pairs, belfry lancets (dark_oak_trapdoor open louvres), Grande Galerie arcade y60..65 colonnettes every 2, chimeras at tower corners y68. P3, `lancetOpening`, `colonnade`, `gargoyle`.
+- [ ] Nave+choir: clerestory z27..47 with tall lancets y35..43 per bay, balustrade y45..46. P1, P6, `lancetOpening`, `balustrade`.
+- [ ] Aisles, tribunes, chapels per plan bands, round tribune windows y31..33, chapel lancets y6..16, terrace balustrade y19..21. P1, P6.
+- [ ] Steep lead roof (deepslate_tiles, ridge polished_deepslate, iron_bars cresting every other cell), nave+choir y45→59, transept y45→57, apse half-cone, tribune/aisle lean-to slabs. P2, `leadRoof`, `ridgeCrest`.
+- [ ] Transepts with north and south ROSES (centre x95,y34, r7), portals x92..98 y3..17, gallery y43..45, gable triangle y46..57 with small rose r2 and apex pinnacle y60. P4, P6, `roseWindow`, `portal`.
+- [ ] CHEVET: apse r10 clerestory, 2 ambulatory rings, 5 radiating chapels (axial to x185), 6 chevet piers with pinnacles. P4, `ringWall`, `pinnacle`.
+- [x] FLYING BUTTRESSES: every pier (nave 6/side, choir 4/side, chevet 6): 1 block thick arc, upside-down smooth_sandstone_stairs underside, stair coping on top, open air below. P4, `flyer`.
+- [ ] Pinnacles on every pier (3x3 base → 1, end_stone_brick_wall spike + lightning_rod finial) and gargoyles y36 (+2 out). P4, `pinnacle`, `gargoyle`.
+- [x] SPIRE x95 z37 octagonal, stages per plan, dark_oak_log frame lines, crocket rings, cross, chain, gold_block rooster y136, lightning_rod y137 (top, exactly). P5, `spireStage`, `octagonRing`.
+- [x] 12 Apostle statues (oxidized_cut_copper + stairs head) on the ridges. P5, `statue`.
+- [ ] Sacristy (hall, wing, link, south chapel) with hip/gable lead roofs, lancets, door x144. P4, `leadRoof`, `lancetOpening`.
+- [ ] Stained glass in all openings (blue field, purple heads), glowing: shroomlight behind. P6, `glazeOpening`.
+- [ ] Dusk light: ochre_froglight floods at pier feet and paving, lanterns on sandstone_wall posts on paths/roofs. P6, `lampPost`, `floodlight`.
+- [x] Grounds: smooth_stone/polished_andesite paving, Square Jean-XXIII garden patch grass/moss/azalea x105..119 z70..79. P6, `pavePatch`.

@@ -19,7 +19,8 @@
     "widthM": 23,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -28,7 +29,8 @@
     "widthM": 11,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -37,7 +39,8 @@
     "widthM": 20,
     "deck": "stone_bricks",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -46,7 +49,8 @@
     "widthM": 16,
     "deck": "stone_bricks",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -55,7 +59,8 @@
     "widthM": 20,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -64,7 +69,8 @@
     "widthM": 20,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -73,7 +79,8 @@
     "widthM": 20,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -82,7 +89,8 @@
     "widthM": 22,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -91,7 +99,8 @@
     "widthM": 15,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -100,7 +109,8 @@
     "widthM": 20,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -109,7 +119,8 @@
     "widthM": 20,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -118,7 +129,8 @@
     "widthM": 30,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    },
    {
     "ways": [
@@ -127,9 +139,12 @@
     "widthM": 30,
     "deck": "smooth_stone",
     "pile": "stone_brick_wall",
-    "pileEveryM": 30
+    "pileEveryM": 30,
+    "lampEveryM": 20
    }
-  ]
+  ],
+  "lampSpacing": 16,
+  "quayLamps": true
  },
  "canopyFrom": "map"
 }

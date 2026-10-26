@@ -20,7 +20,7 @@
 //   barriers   OSM fences, railings, walls, hedges
 //   furniture  OSM street lamps (an artwork lamp as a tall pillar), benches facing the water or the street, bins,
 //              bike racks, picnic tables, bollards; and lamps where none are mapped: along both kerbs of every street
-//              and along the waterfront, a lamp every ~22 m
+//              and along the waterfront, a lamp every ~22 m (place.dress.lampSpacing; quayLamps: on any quay, not just paving)
 //   palms      OSM trees tagged as palms, drawn as palms at the height the canopy measured over them (their crowns
 //              taken out of the canopy first, trimCanopy, so the canopy grower doesn't also make them round trees)
 // trimCanopy also judges the lidar's canopy patch by patch (green, size, height), so poles, lamp heads, kiosks and
@@ -303,6 +303,15 @@ export function dress(g, site) {
     for (const [x, z] of ways[0]) { if (along_++ % every) continue;
       for (const i of edge_) { const ex = i % N, ez = (i / N) | 0; if (Math.abs(ex - x) + Math.abs(ez - z) > m(d.widthM ?? 10)) continue;
         if ((Math.abs(ex - x) <= 1 || Math.abs(ez - z) <= 1)) for (let yy = top[i] + 1; yy < deckY.get(i); yy++) g.set(ex, yy, ez, d.pile ?? "polished_blackstone_wall", post); } }
+    // lampEveryM: a lamp on each parapet, the cross-section's two farthest edge cells, every so many metres along the way
+    if (d.lampEveryM) { const le = m(d.lampEveryM), h = m(4); let k = 0;
+      for (const [x, z] of ways[0]) { if (k++ % le !== Math.floor(le / 2)) continue;
+        const cross = edge_.filter((i) => { const ex = i % N, ez = (i / N) | 0; return Math.abs(ex - x) + Math.abs(ez - z) <= m(d.widthM ?? 10) && (Math.abs(ex - x) <= 1 || Math.abs(ez - z) <= 1); });
+        let pair = null, far = 0;
+        for (const a of cross) for (const b of cross) { const dd = (a % N - b % N) ** 2 + (((a / N) | 0) - ((b / N) | 0)) ** 2; if (dd > far) { far = dd; pair = [a, b]; } }
+        for (const i of pair ?? []) { const ex = i % N, ez = (i / N) | 0, y = deckY.get(i); if (y + h + 2 >= Y) continue;
+          for (let yy = y + 1; yy <= y + h; yy++) g.set(ex, yy, ez, "polished_blackstone_wall", post);
+          g.set(ex, y + h + 1, ez, "lantern", { hanging: "false", waterlogged: "false" }); tally("bridge lamps"); } } }
     tally("deck cells", deckY.size); }
 
   // ---- ramparts: each OSM wall whose lidar rise (surface over ground) has a median of at least minRiseM
@@ -373,7 +382,7 @@ export function dress(g, site) {
       lamp(x, z, { arm: Math.abs(px) > Math.abs(pz) ? [1, 0] : [0, 1] }); } }
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { if (!edge[I(x, z)]) continue;
     for (const [dx, dz] of N4) { if (!inside(x - dx * 2, z - dz * 2) || !wet[I(x + dx, z + dz)] || wet[I(x - dx * 2, z - dz * 2)]) continue;
-      const lx = x - dx * 2, lz = z - dz * 2; if (free(lx, lz, m(5) + 3) && !lampNear(lx, lz, SP) && PAVING.test(name(lx, top[I(lx, lz)], lz) ?? "")) lamp(lx, lz); break; } }
+      const lx = x - dx * 2, lz = z - dz * 2; if (free(lx, lz, m(5) + 3) && !lampNear(lx, lz, SP) && (opt.quayLamps || PAVING.test(name(lx, top[I(lx, lz)], lz) ?? ""))) lamp(lx, lz); break; } }
 
   // ---- palms from the tree points
   const palms = site.palms ?? (L.trees?.features ?? []).filter((f) => f.geometry?.type === "Point" && isPalm(tags(f))).map((f) => ({ at: frame.toBlock(...f.geometry.coordinates).map(Math.floor), height: m(12) }));
