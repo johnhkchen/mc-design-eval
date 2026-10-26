@@ -1,0 +1,135 @@
+{
+ "name": "Notre-Dame de Paris and the Île de la Cité",
+ "note": "Notre-Dame de Paris (1163-1345, restored and reopened December 2024 with Viollet-le-Duc's spire rebuilt, 96 m) on the Île de la Cité, seen at dusk from the Seine's left bank by the Pont de la Tournelle: the chevet and its flying buttresses over the Square Jean-XXIII, the twin west towers (69 m), the river with its quais, the Pont de l'Archevêché, the Pont au Double and the Pont Saint-Louis, the Île Saint-Louis's hôtels particuliers to the east, the Hôtel-Dieu and the Conciergerie and Sainte-Chapelle beyond, the Latin Quarter's Haussmann blocks on the left bank and the Hôtel de Ville on the right. Scale 1.4 blocks per metre; 1680 blocks a side (half 600 m), centred between the cathedral and the bridge. IGN LiDAR HD, BD ORTHO and BD TOPO (every building's height). Turned -26 degrees so the cathedral's axis (its nave's outline reads 25-28 degrees south of east) runs along x: its long walls are straight, not staircases.",
+ "city": "paris",
+ "country": "FR",
+ "scale": 1.4,
+ "centre": [
+  48.8522,
+  2.352
+ ],
+ "half": 600,
+ "rotate": -26,
+ "dress": {
+  "decks": [
+   {
+    "ways": [
+     "way/22972851"
+    ],
+    "widthM": 23,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/20444537"
+    ],
+    "widthM": 11,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/20444388"
+    ],
+    "widthM": 20,
+    "deck": "stone_bricks",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/20444588"
+    ],
+    "widthM": 16,
+    "deck": "stone_bricks",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/20445190"
+    ],
+    "widthM": 20,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/22964641"
+    ],
+    "widthM": 20,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/744835294"
+    ],
+    "widthM": 20,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/17249305"
+    ],
+    "widthM": 22,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/22972090"
+    ],
+    "widthM": 15,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/4261422"
+    ],
+    "widthM": 20,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/138031419"
+    ],
+    "widthM": 20,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/25344944"
+    ],
+    "widthM": 30,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   },
+   {
+    "ways": [
+     "way/1188170507"
+    ],
+    "widthM": 30,
+    "deck": "smooth_stone",
+    "pile": "stone_brick_wall",
+    "pileEveryM": 30
+   }
+  ]
+ },
+ "canopyFrom": "map"
+}

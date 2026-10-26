@@ -4,8 +4,24 @@
  "city": "auckland",
  "country": "NZ",
  "scale": 1.2,
- "centre": [-36.8605, 174.7600],
+ "centre": [
+  -36.8605,
+  174.76
+ ],
  "half": 2100,
  "maxY": 520,
- "sparse": true
+ "sparse": true,
+ "mossSlopes": true,
+ "addBuildings": [
+  {
+   "id": "sky-tower",
+   "name": "Sky Tower",
+   "centre": [
+    -36.84846,
+    174.76219
+   ],
+   "radiusM": 18,
+   "heightM": 328
+  }
+ ]
 }

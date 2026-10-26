@@ -1,0 +1,21 @@
+{
+ "runs": "auckland",
+ "note": "Auckland from Maungawhau: one hero kit, the Sky Tower (runs/auckland/sky-tower-kit, on the subscription: the batch path waits on an API key); Haiku fill for the CBD towers in view; the crater, the suburbs and the harbour drawn by irl-copy from LINZ lidar and OSM.",
+ "common": "Scale: 1.2 blocks per metre (a storey is about 4 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no \"iron_chain\" (it is \"chain\" in 1.21.1), nothing 1.21.4+). This is the real Sky Tower for a hero render at golden hour: the camera stands on the rim of Maungawhau / Mt Eden, about 4 km to the SOUTH, looking north across the crater at the CBD skyline, so the tower's SILHOUETTE (its proportions, the pod and the mast) and its SOUTH face matter most; it will also be seen at dusk from the harbour to the north-west. Placement code sets the module exactly where the real tower stands, so every dimension, the GROUND map and the heights below are exact; keep to them. Exterior only. No villagers. Nothing may leave its plot or exceed its stated height. Light it for dusk (the pod's glazing glowing, aviation red lights on the mast, warm light at the base) so no mob spawns on a walkable surface.",
+ "closing": "Use the photograph only as inspiration for character and colour; the footprint, the ground and the heights above are exact.",
+ "kits": [
+  {
+   "key": "sky-tower",
+   "concept": "concept-sky-tower.jpg",
+   "intro": "The Sky Tower, Auckland (1997, Craig Craig Moller; 328 m to the mast tip, the tallest freestanding structure in the Southern Hemisphere when built): a slender pale-grey concrete telecommunications and observation tower rising out of the SkyCity complex on the CBD's ridge. It must read, at a glance, as THIS tower: one very tall, thin, smooth shaft (light grey concrete, about 12 m across, round with the eight shallow ribs that run its whole height), flaring slightly at its base where eight tapering concrete legs splay out to the ground; about three quarters of the way up, the POD: a stack of round observation and restaurant levels, wider than the shaft (about 25-30 m across), dark-tinted glass bands between pale grey rings, the Sky Deck at its top under a flat roof; above the pod a short, narrower grey concrete section, then the tall thin steel MAST (white and red bands, a lattice look, aviation lights) tapering to a needle at the very top. Proportions matter more than detail: the shaft is long and thin (it is about 27 times as tall as it is wide), the pod sits at about 0.65-0.8 of the height, the mast is about the top fifth.",
+   "plots": [
+    {
+     "ids": ["sky-tower"],
+     "label": "THE SKY TOWER",
+     "spireTopM": 355,
+     "text": "the whole tower, centred on the plot: the eight splayed legs and base (the round footprint is the reach of the legs at the ground); the shaft rising straight up from the centre; the pod (the widest part, filling most of the plot's width); the upper shaft and the mast. The mast tip at y SPIRE_TOP (the tallest point of the build: it must be exactly there). The ROOF HEIGHT map below is from lidar: it catches the pod and the mast as the tallest points over the centre; the shaft is thin. Round shapes are round (voxel circles, not squares)."
+    }
+   ]
+  }
+ ]
+}

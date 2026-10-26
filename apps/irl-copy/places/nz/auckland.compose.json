@@ -1,1 +1,29 @@
-{"note":"Auckland: kits and fill to come","modules":{},"placements":[]}
+{
+ "note": "Auckland from Maungawhau: one hero kit, the Sky Tower (runs/auckland/sky-tower-kit, on the subscription: the batch path waits on an API key); Haiku fill for the CBD towers in view; the crater, the suburbs and the harbour drawn by irl-copy from LINZ lidar and OSM.",
+ "modules": {
+  "sky-tower-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/auckland/sky-tower-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    36,
+    42
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "sky-tower",
+   "module": "sky-tower-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 1,
+   "covers": [
+    "sky-tower"
+   ]
+  }
+ ]
+}

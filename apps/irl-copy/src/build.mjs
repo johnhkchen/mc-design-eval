@@ -88,6 +88,18 @@ export function buildPlace(place, frame, L) {
         if (wet && comp.length > N) for (const i of comp) if (water[i] !== 2) { water[i] = 2; sea.push(Math.min(lid.ground[i], line)); } } }
     if (sea.length > N) { sea.sort((p, q) => p - q); const level = sea[sea.length >> 1] * sc; for (let i = 0; i < N * N; i++) if (water[i] === 2) H[i] = level; }
     else for (let i = 0; i < N * N; i++) if (water[i] === 2) water[i] = 0;
+    // a mapped river or lake (the hydrography's polygons) lies flat too: each connected body at its own low ground (the
+    // 20th percentile of its cells: the lidar's few water returns scatter high, a bridge's deck higher), not the ground
+    // under each cell, which stepped the Seine in bands from bank to bank
+    { const seen = new Uint8Array(N * N);
+      for (let s = 0; s < N * N; s++) { if (water[s] !== 1 || seen[s]) continue;
+        const comp = [s], stack = [s]; seen[s] = 1;
+        while (stack.length) { const i = stack.pop(), x = i % N, z = (i / N) | 0;
+          for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const nx = x + dx, nz = z + dz; if (nx < 0 || nz < 0 || nx >= N || nz >= N) continue;
+            const j = nz * N + nx; if (water[j] !== 1 || seen[j]) continue; seen[j] = 1; stack.push(j); comp.push(j); } }
+        if (comp.length < 50) continue;
+        const v = comp.map((i) => lid.ground[i]).sort((a, b) => a - b), level = v[Math.floor(v.length * 0.2)] * sc;
+        for (const i of comp) H[i] = level; } }
     // the ground returns carry a few centimetres of noise, and rounding that to blocks on a gentle slope leaves ragged
     // one-block terraces over every plaza and car park: relax it over about 3 m (two box passes), water held level
     const r = Math.max(1, Math.round(2 * sc)), tmp = new Float64Array(N * N);
@@ -134,19 +146,26 @@ export function buildPlace(place, frame, L) {
 
   let lo = Infinity, hi = -Infinity; for (const h of H) { lo = Math.min(lo, h); hi = Math.max(hi, h); }
   const floor = Math.floor(lo) - Math.round(4 * sc), ground = (x, z) => Math.round(H[I(x, z)]) - floor;
+  // place.addBuildings [{ id, name, centre: [lat, lon], radiusM, heightM }]: a landmark the building layer lacks, as a round
+  // footprint for its kit to stand on (OSM maps Auckland's Sky Tower as a tower, not a building)
+  if (place.addBuildings) L = { ...L, buildings: { ...L.buildings, features: [...(L.buildings?.features ?? []), ...place.addBuildings.map((a) => {
+    const [la, lo] = a.centre, kLo = 111000 * Math.cos((la * Math.PI) / 180), ring = [];
+    for (let k = 0; k <= 32; k++) { const t = (2 * Math.PI * k) / 32; ring.push([lo + (a.radiusM * Math.cos(t)) / kLo, la + (a.radiusM * Math.sin(t)) / 111000]); }
+    return { type: "Feature", geometry: { type: "Polygon", coordinates: [ring] }, properties: { id: a.id, name: a.name ?? null, height: a.heightM ?? null, peak: a.heightM ?? null } }; })] } };
   const buildings = (L.buildings?.features ?? []).map((f, k) => {
     const cells = cellsIn(frame, f.geometry).filter(([x, z]) => road[I(x, z)] > ROAD); if (!cells.length) return null;
     // place.peaks { id: metres }: a footprint's real peak where its record has none and the lidar caught something over it
     // (a bird or a crane: a 12-storey block in Washington read 700 m)
     const p = place.peaks?.[f.properties.id] != null ? { ...f.properties, peak: place.peaks[f.properties.id] } : f.properties, base = Math.min(...cells.map(([x, z]) => ground(x, z)));
-    // the footprint's height, from its record, else the lidar surface's median over it (Seattle's outlines carry none)
-    let hm = p.height; if (!Number.isFinite(hm) && lid) { const v = cells.map(([x, z]) => I(x, z)).filter((i) => lid.count[i] > 0).map((i) => lid.surface[i] - lid.ground[i]).sort((a, b) => a - b); hm = v.length ? v[v.length >> 1] : NaN; }
+    // the footprint's height, from its record, else the lidar surface's median over it (Seattle's outlines carry none; an
+    // OSM outline with no height or levels tag carries a guessed 8 m, which the lidar overrules: Auckland's towers)
+    let hm = p.heightGuessed && lid ? NaN : p.height; if (!Number.isFinite(hm) && lid) { const v = cells.map(([x, z]) => I(x, z)).filter((i) => lid.count[i] > 0).map((i) => lid.surface[i] - lid.ground[i]).sort((a, b) => a - b); hm = v.length ? v[v.length >> 1] : NaN; }
     const height = Math.max(3, Math.round((Number.isFinite(hm) ? hm : 6) * sc));
     // each cell's roof: the lidar surface there (3x3 median within the footprint), or the footprint's median height
     const own = new Set(cells.map(([x, z]) => I(x, z))), tops = new Map();
     // where the lidar has no roof over a cell, the recorded height; with no record (the height above is the lidar's own
     // median), a single storey, or a tower's outline would stand its full height wherever it reaches past the tower
-    const fallback = Number.isFinite(p.height) ? base + height : base + Math.round(3 * sc);
+    const fallback = Number.isFinite(p.height) && !p.heightGuessed ? base + height : base + Math.round(3 * sc);
     for (const [x, z] of cells) {
       let t = fallback;
       if (lid) { const v = [];
@@ -165,7 +184,9 @@ export function buildPlace(place, frame, L) {
   // the canopy: from the lidar where there is one (returns 2 m above the ground, a block clear of any building, with at
   // least three canopy neighbours so a lamp post isn't a tree), else the canopy map
   let chm = L.canopy?.data ?? null, canopyGreen = null;
-  if (lid) { chm = new Float32Array(N * N); const near = new Uint8Array(N * N);
+  // place.canopyFrom "map": the canopy map even where there is lidar (Paris's 2024 flight is a winter one round a works
+  // site: bare crowns and the restoration's cranes grew into tall trunks with a tuft on top in the Square Jean-XXIII)
+  if (lid && place.canopyFrom !== "map") { chm = new Float32Array(N * N); const near = new Uint8Array(N * N);
     for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) if (isB[I(x, z)]) for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, zz = z + dz; if (xx >= 0 && zz >= 0 && xx < N && zz < N) near[I(xx, zz)] = 1; }
     // lidar can't tell a crown from a planter box, a lamp post or a cornice past the footprint, but foliage is bright in
     // the aerial photo's near-infrared and stone isn't: trimCanopy (dress.mjs) judges each patch by its green, its size
@@ -214,6 +235,10 @@ export function buildPlace(place, frame, L) {
     const d = road[i];
     if (water[i] && d > WALK && !isB[i]) { const deep = Math.max(2, Math.round(2 * sc)); g.set(x, y - deep, z, "clay"); for (let k = 0; k < deep; k++) g.set(x, y - k, z, "water", { level: "0" }); continue; }
     const seen = cover[i];
+    // place.mossSlopes: on a grassy slope each one-block terrace shows its side, the grass block's dirt face and the dirt under
+    // it, so a hillside reads in orange stripes (Maungawhau's crater); there the step's face is moss, green on every side
+    if (place.mossSlopes && (seen ?? "grass_block") === "grass_block" && d > WALK && !isB[i] && !path[i] && !play[i] && low < y - 1) {
+      for (let yy = Math.max(0, low + 1); yy <= y; yy++) g.set(x, yy, z, "moss_block"); continue; }
     g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? (path[i] === 3 ? place.lanes.block ?? "cobblestone" : path[i] === 2 ? place.parkPaths.block ?? "andesite" : "andesite") : play[i] ? "packed_mud" : seen ?? "grass_block");
   }
   // place.pathStairs: where a lane or path climbs a block from one cell to the next it steps up by a stair, not a full block

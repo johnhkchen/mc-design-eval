@@ -1,0 +1,35 @@
+{
+ "note": "Notre-Dame de Paris: one hero kit, the cathedral (runs/notre-dame/cathedral-kit, on the subscription); Haiku fill for the Île de la Cité and the quais in view; the Seine, the quais and the island's ground drawn by irl-copy from IGN's data.",
+ "modules": {
+  "cathedral-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/notre-dame/cathedral-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    188,
+    110
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "FR305564422",
+   "module": "cathedral-0",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "y": 3,
+   "covers": [
+    "FR305564422",
+    "FR245184816",
+    "FR245184817",
+    "FR245184818",
+    "FR245184819",
+    "FR305564421",
+    "FR245184146"
+   ]
+  }
+ ]
+}

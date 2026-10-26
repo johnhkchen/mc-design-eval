@@ -1,0 +1,21 @@
+{
+ "runs": "notre-dame",
+ "note": "Notre-Dame de Paris: one hero kit, the cathedral (runs/notre-dame/cathedral-kit, on the subscription); Haiku fill for the Île de la Cité and the quais in view; the Seine, the quais and the island's ground drawn by irl-copy from IGN's data.",
+ "common": "Scale: 1.4 blocks per metre (a storey is about 4 blocks). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, no \"iron_chain\" (it is \"chain\" in 1.21.1), nothing 1.21.4+). This is the real cathedral of Notre-Dame de Paris, as restored and reopened in December 2024, for a hero render at DUSK: the camera stands on the Seine's left bank by the Pont de la Tournelle, to the SOUTH-EAST, looking north-west across the river at the cathedral's east end (the chevet) and its south side, with the twin west towers behind; so the CHEVET with its flying buttresses, the SOUTH face, the roofs and the spire matter most. Placement code sets the module exactly where the real cathedral stands, so every dimension, the GROUND map and the heights below are exact; keep to them. The place is turned so the cathedral's axis runs along x: the WEST front (the two towers) is at LOW x, the chevet at HIGH x, north is low z, south (toward the camera's river) is high z. Exterior only, except what shows through the rose windows. No villagers. Nothing may leave its plot or exceed its stated height. Light it for dusk (warm floodlight on the stone from below, glowing stained glass, lanterns along the Square Jean-XXIII paths) so no mob spawns on a walkable surface.",
+ "closing": "Use the photograph only as inspiration for character and colour; the footprint, the ground and the heights above are exact.",
+ "kits": [
+  {
+   "key": "cathedral",
+   "concept": "concept-notre-dame.jpg",
+   "intro": "Notre-Dame de Paris (1163-1345; Viollet-le-Duc's 19th-century restoration; rebuilt after the 2019 fire and reopened in December 2024): the Gothic cathedral on the Île de la Cité. It must read, at a glance, as THIS cathedral: pale cream limestone (smooth sandstone, sandstone and light stone for the walls and their carved detail), a long nave and choir under a steep lead roof (dark blue-grey: the roof is lead, so deepslate tiles or cyan-grey, not red), transepts with their great ROSE windows north and south; at the WEST end the iconic facade: two massive square towers with flat tops (69 m), the three deep portals at the bottom, the Gallery of Kings, the west rose between the towers, a pierced gallery high up; at the crossing the slender, very tall lead-and-oak SPIRE (dark grey, octagonal, with statues of the apostles climbing its base and a rooster at the tip); the EAST end (chevet): a rounded apse ringed by chapels with the famous long, thin FLYING BUTTRESSES arching from the outer piers up to the choir's upper walls, pinnacles on every pier; gargoyles and pinnacles along the roofline. Proportions: the nave roof ridge about 43 m, the towers 69 m, the spire 96 m; the whole about 128 m long and 48 m wide (40 m at the nave).",
+   "plots": [
+    {
+     "ids": ["FR305564422", "FR245184816", "FR245184817", "FR245184818", "FR245184819", "FR305564421", "FR245184146"],
+     "label": "THE CATHEDRAL",
+     "spireTopM": 131,
+     "text": "the whole cathedral over its footprint, following the ROOF HEIGHT map (lidar: it catches the roofs, the towers and the spire's lower part) for the massing of every part: the two WEST TOWERS at low x (their tops flat at the map's height), the NAVE and CHOIR roofs along x with the spire at the crossing, the TRANSEPT arms north and south with their roses, the CHEVET at high x with its ring of chapels and the flying buttresses (thin stone arches, one block thick, springing from pier tops over the side aisles' roofs to the upper walls), the sacristy on the south-east. The SPIRE at the crossing: slender, octagonal, dark grey, its rooster tip at y SPIRE_TOP (the tallest point of the build: it must be exactly there)."
+    }
+   ]
+  }
+ ]
+}
