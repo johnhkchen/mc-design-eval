@@ -10,7 +10,7 @@
  ],
  "half": 1600,
  "flats": {
-  "belowM": 9,
+  "belowM": 9.6,
   "flatten": true,
   "blocks": [
    [
@@ -21,7 +21,9 @@
     "light_gray_concrete_powder",
     2
    ]
-  ]
+  ],
+  "dropPaths": true,
+  "note": "9.6 m, not 9: the old causeway (demolished 2015) still stands 9.3-9.5 m in the lidar, a pale ridge across the sands at a different curve from the passerelle"
  },
  "dress": {
   "decks": [
@@ -43,5 +45,21 @@
    "cap": "stone_bricks"
   }
  },
- "sparse": true
+ "sparse": true,
+ "roads": {
+  "roadM": 3,
+  "walkM": 4.5
+ },
+ "lanes": {
+  "box": [
+   1950,
+   700,
+   2350,
+   1060
+  ],
+  "match": "^service$",
+  "widthM": 3,
+  "block": "cobblestone"
+ },
+ "pathStairs": true
 }

@@ -18,7 +18,7 @@
 // and the sources with their licences, so a kit build can take the footprints as its plots.
 import { writeFileSync } from "node:fs";
 import { Voxels } from "./voxels.mjs";
-import { cellsIn, distanceTo, along } from "./raster.mjs";
+import { cellsIn, distanceTo, along, lines } from "./raster.mjs";
 import { groundFromContours } from "./ground.mjs";
 import { canopyTrees } from "./trees.mjs";
 import { wallFor, roofBlock, groundFrom } from "./materials.mjs";
@@ -29,14 +29,25 @@ import { trimCanopy, dress } from "./dress.mjs";
 const ROAD_M = 6, WALK_M = 10.5;
 
 export function buildPlace(place, frame, L) {
-  const { N } = frame, I = (x, z) => z * N + x, sc = frame.scale ?? 1, ROAD = ROAD_M * sc, WALK = WALK_M * sc;
+  // place.roads { roadM, walkM }: a place's own street widths (a carriageway's half width, and the pavement's outer edge),
+  // where the defaults' 21 m corridor is too wide (a causeway on the sands, a village's lanes)
+  const { N } = frame, I = (x, z) => z * N + x, sc = frame.scale ?? 1, ROAD = (place.roads?.roadM ?? ROAD_M) * sc, WALK = (place.roads?.walkM ?? WALK_M) * sc;
   const lid = L.lidar?.rasters, air = L.aerial?.rasters;
   // a bridge's deck is not ground: ways tagged bridge (the Golden Gate's sidewalks, a footbridge) would be laid at the level
   // of whatever they cross, the water included; leave them out (a designed module puts the bridge in)
-  const onBridge = (f) => { const t = f.properties ?? {}; return (t.bridge && t.bridge !== "no") || (t["min_height"] && parseFloat(t["min_height"]) > 2); };
+  // (likewise a way in a tunnel or under a building, or on a layer below ground: the Mont's lanes under the abbey's vaults)
+  const isBridge = (f) => { const t = f.properties ?? {}; return (t.bridge && t.bridge !== "no") || (t["min_height"] && parseFloat(t["min_height"]) > 2); };
+  const onBridge = (f) => { const t = f.properties ?? {}; return isBridge(f) || (t.tunnel && t.tunnel !== "no") || parseFloat(t.layer) < 0; };
   // (kept aside as L.bridges, for the place's own decks: dress.mjs place.dress.decks)
-  L = { ...L, bridges: { type: "FeatureCollection", features: ["streets", "paths"].flatMap((k) => (L[k]?.features ?? []).filter(onBridge)) } };
+  L = { ...L, bridges: { type: "FeatureCollection", features: ["streets", "paths"].flatMap((k) => (L[k]?.features ?? []).filter(isBridge)) } };
   for (const k of ["streets", "paths", "barriers", "rails"]) if (L[k]?.features) L = { ...L, [k]: { ...L[k], features: L[k].features.filter((f) => !onBridge(f)) } };
+  // place.lanes { box: [x0, z0, x1, z1] (blocks), match ("^service$": the street's highway class, or its name where the
+  // cache kept no class), widthM 3, block "cobblestone" }: streets in the box drawn as narrow paved lanes that follow the
+  // ground (no carriageway, kerb, pavement or lines): a walled village's service lane is not a 6 m road with markings
+  let lanes = [];
+  if (place.lanes) { const [x0, z0, x1, z1] = place.lanes.box, re = new RegExp(place.lanes.match ?? "^service$");
+    const isLane = (f) => re.test(f.properties?.highway ?? f.properties?.name ?? "") && lines(f.geometry).flat().every(([lo, la]) => { const [x, z] = frame.toBlock(lo, la); return x >= x0 && x <= x1 && z >= z0 && z <= z1; });
+    lanes = (L.streets?.features ?? []).filter(isLane); L = { ...L, streets: { ...L.streets, features: L.streets.features.filter((f) => !isLane(f)) } }; }
   const parcels = new Map((L.parcels?.features ?? []).map((f) => [f.properties.parcel, f.properties]));
   const H = lid ? Float64Array.from(lid.ground, (m) => m * (frame.scale ?? 1))
     // a ground raster (metres per cell: a national DTM, or a DEM taken down to the ground) is used as it is
@@ -47,6 +58,11 @@ export function buildPlace(place, frame, L) {
   // OSM farmland and meadows: never tidal flat (the polders behind the dike lie as low as the bay)
   const field = new Uint8Array(N * N); for (const f of L.fields?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) field[I(x, z)] = /meadow/.test(f.properties.landuse) ? 2 : 1;
   const flat = (i) => lid.ground[i] < place.flats.belowM && !field[i];
+  // place.flats.dropPaths: walking routes mapped across the tidal flat (the guided crossings of a bay) leave no trace on the
+  // sand; a path most of whose length lies on the flat is left out (a causeway or jetty stands above the flat, so it stays)
+  if (place.flats?.dropPaths && lid && L.paths) L = { ...L, paths: { ...L.paths, features: L.paths.features.filter((f) => {
+    const pts = along(frame, [f]); let on = 0, n = 0; for (const [fx, fz] of pts) { const x = Math.floor(fx), z = Math.floor(fz); if (x < 0 || z < 0 || x >= N || z >= N) continue; n++; if (flat(I(x, z))) on++; }
+    return !n || on / n < 0.7; }) } };
   if (place.flats?.flatten && lid) { const fl = []; for (let i = 0; i < N * N; i++) if (flat(i)) fl.push(lid.ground[i]);
     fl.sort((a, b) => a - b); const level = (place.flats.levelM ?? fl[fl.length >> 1]) * (frame.scale ?? 1);
     for (let i = 0; i < N * N; i++) if (flat(i)) H[i] = level; }
@@ -85,6 +101,10 @@ export function buildPlace(place, frame, L) {
   // paths 2 m wide
   for (const [fx, fz] of along(frame, L.paths?.features ?? [])) for (let dz = -sc; dz <= sc; dz += 0.5) for (let dx = -sc; dx <= sc; dx += 0.5) {
     if (dx * dx + dz * dz > sc * sc) continue; const x = Math.floor(fx + dx), z = Math.floor(fz + dz); if (x >= 0 && z >= 0 && x < N && z < N) path[I(x, z)] = 1; }
+  // the lanes (place.lanes): paved their own width
+  const laneR = (place.lanes?.widthM ?? 3) * sc / 2;
+  for (const [fx, fz] of along(frame, lanes)) for (let dz = -laneR; dz <= laneR; dz += 0.5) for (let dx = -laneR; dx <= laneR; dx += 0.5) {
+    if (dx * dx + dz * dz > laneR * laneR) continue; const x = Math.floor(fx + dx), z = Math.floor(fz + dz); if (x >= 0 && z >= 0 && x < N && z < N) path[I(x, z)] = 3; }
   // place.parkPaths { width (m), block }: the walks inside parks drawn wider and in their own surface (the National Mall's
   // gravel walks are 6-12 m, and read pale between the elm rows); paths elsewhere (sidewalks mapped as footways) stay 2 m
   if (place.parkPaths) { const r = (place.parkPaths.width ?? 6) * sc / 2;
@@ -174,8 +194,15 @@ export function buildPlace(place, frame, L) {
     const d = road[i];
     if (water[i] && d > WALK && !isB[i]) { const deep = Math.max(2, Math.round(2 * sc)); g.set(x, y - deep, z, "clay"); for (let k = 0; k < deep; k++) g.set(x, y - k, z, "water", { level: "0" }); continue; }
     const seen = cover[i];
-    g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? (path[i] === 2 ? place.parkPaths.block ?? "andesite" : "andesite") : play[i] ? "packed_mud" : seen ?? "grass_block");
+    g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? (path[i] === 3 ? place.lanes.block ?? "cobblestone" : path[i] === 2 ? place.parkPaths.block ?? "andesite" : "andesite") : play[i] ? "packed_mud" : seen ?? "grass_block");
   }
+  // place.pathStairs: where a lane or path climbs a block from one cell to the next it steps up by a stair, not a full block
+  // (the Mont's lanes and the Grande Rue climb the rock in flights; a column of whole blocks reads as a ramp of terraces)
+  if (place.pathStairs) { const STAIR = { cobblestone: "cobblestone_stairs", andesite: "andesite_stairs", stone_bricks: "stone_brick_stairs", smooth_stone: "stone_stairs" };
+    for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z); if (!path[i] || isB[i] || water[i] || road[i] <= WALK) continue;
+      const y = ground(x, z), down = [[0, 1, "north"], [0, -1, "south"], [1, 0, "west"], [-1, 0, "east"]].find(([dx, dz]) => { const j = I(x + dx, z + dz); return path[j] && !isB[j] && ground(x + dx, z + dz) === y - 1; });
+      if (!down) continue; const blk = path[i] === 3 ? place.lanes.block ?? "cobblestone" : path[i] === 2 ? place.parkPaths.block ?? "andesite" : "andesite";
+      if (STAIR[blk]) g.set(x, y, z, STAIR[blk], { facing: down[2], half: "bottom", shape: "straight", waterlogged: "false" }); } }
   // hollow masses (walls and roof): placeholders, and a solid town at 2 blocks a metre is millions of blocks
   // a wall where the footprint ends, and a closed roof: each cell from just above its lowest neighbour's roof to its own
   for (const b of buildings) {

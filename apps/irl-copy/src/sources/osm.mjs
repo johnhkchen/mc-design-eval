@@ -38,7 +38,7 @@ export default [{
       playgrounds: fc(f.filter((e) => /playground|pitch/.test(t(e).leisure ?? ""))),
       buildings: fc(f.filter((e) => t(e).building).map((e) => ({ ...e, properties: { id: t(e).osm, height: levels(t(e)), peak: null, name: t(e).name ?? null } }))),
       streets: fc(f.filter((e) => /^(motorway|trunk|primary|secondary|tertiary|residential|unclassified|living_street|service)$/.test(t(e).highway ?? ""))
-        .map((e) => ({ ...e, properties: { name: t(e).name ?? t(e).highway } }))),
+        .map((e) => ({ ...e, properties: { name: t(e).name ?? t(e).highway, osm: t(e).osm, highway: t(e).highway, ...Object.fromEntries(["bridge", "layer", "min_height", "tunnel", "service", "surface"].filter((k) => t(e)[k] != null).map((k) => [k, t(e)[k]])) } }))),
       // the furnishings, tags kept whole (dress.mjs reads them)
       rails: fc(f.filter((e) => /^(tram|light_rail)$/.test(t(e).railway ?? "") && e.geometry.type === "LineString")),
       furniture: fc(f.filter((e) => e.geometry.type === "Point" && (/^(street_lamp|crossing)$/.test(t(e).highway ?? "") || t(e).amenity || t(e).barrier === "bollard" || t(e).leisure === "picnic_table"))),
