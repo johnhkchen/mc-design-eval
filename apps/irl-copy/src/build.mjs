@@ -97,6 +97,25 @@ export function buildPlace(place, frame, L) {
         let s = 0, n = 0; for (let d = -r; d <= r; d++) { const t = at + d; if (t < 0 || t >= N) continue; const j = i + d * ax; if (water[j]) continue; s += src[j]; n++; }
         dst[i] = s / n; } }
   }
+  // place.roads.level: a street lies level across its width (no camber rolling to the sides over a hillside's lidar) and
+  // smooth along its length: each cell within the sidewalk's reach takes the height of the nearest point of its centreline,
+  // the centreline being the ground's median across the carriageway, averaged over about 8 m along the way. The lanes
+  // (place.lanes) level across their width the same way; their climb stays stepped (pathStairs)
+  if (place.roads?.level) {
+    const best = new Float32Array(N * N).fill(Infinity), to = new Float64Array(N * N).fill(NaN), win = Math.max(2, Math.round(8 * sc));
+    const level = (features, reach) => { for (const f of features) for (const line of lines(f.geometry)) {
+      const pts = along(frame, [{ geometry: { type: "LineString", coordinates: line } }]); if (!pts.length) continue;
+      const c = pts.map(([px, pz]) => { const v = []; for (let dz = -reach; dz <= reach; dz++) for (let dx = -reach; dx <= reach; dx++) { if (dx * dx + dz * dz > reach * reach) continue;
+        const x = Math.floor(px + dx), z = Math.floor(pz + dz); if (x >= 0 && z >= 0 && x < N && z < N && !water[I(x, z)]) v.push(H[I(x, z)]); }
+        v.sort((a, b) => a - b); return v.length ? v[v.length >> 1] : NaN; });
+      const s = c.map((_, k) => { let t = 0, n = 0; for (let j = Math.max(0, k - win); j <= Math.min(c.length - 1, k + win); j++) if (Number.isFinite(c[j])) { t += c[j]; n++; } return n ? t / n : NaN; });
+      pts.forEach(([px, pz], k) => { if (!Number.isFinite(s[k])) return; const R = reach + 1;
+        for (let dz = -R; dz <= R; dz++) for (let dx = -R; dx <= R; dx++) { const x = Math.floor(px + dx), z = Math.floor(pz + dz); if (x < 0 || z < 0 || x >= N || z >= N) continue;
+          const d = Math.hypot(x + 0.5 - px, z + 0.5 - pz), i = I(x, z); if (d <= reach && d < best[i] && !water[i]) { best[i] = d; to[i] = s[k]; } } }); } };
+    level(L.streets?.features ?? [], WALK); level(lanes, (place.lanes?.widthM ?? 3) * sc / 2);
+    let n = 0, moved = 0, most = 0; for (let i = 0; i < N * N; i++) if (Number.isFinite(to[i])) { const m = Math.abs(Math.round(to[i]) - Math.round(H[i])); n++; if (m) moved++; most = Math.max(most, m); H[i] = to[i]; }
+    console.log(`${place.name ?? "place"}: roads levelled: ${n} cells, ${moved} moved (by up to ${most} blocks)`);
+  }
   for (const f of L.playgrounds?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) play[I(x, z)] = 1;
   // paths 2 m wide
   for (const [fx, fz] of along(frame, L.paths?.features ?? [])) for (let dz = -sc; dz <= sc; dz += 0.5) for (let dx = -sc; dx <= sc; dx += 0.5) {

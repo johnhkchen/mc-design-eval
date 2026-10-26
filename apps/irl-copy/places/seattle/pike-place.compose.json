@@ -11,21 +11,21 @@
    ]
   },
   "pike-marketfront-0": {
-   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-marketfront/v2.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-marketfront/v3.nbt",
    "plot": [
+    81,
     0,
-    0,
-    127,
+    208,
     339
    ]
   },
   "pike-marketfront-1": {
-   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-marketfront/v2.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-marketfront/v3.nbt",
    "plot": [
-    132,
     0,
-    212,
-    132
+    140,
+    80,
+    272
    ]
   },
   "pike-corner-0": {
@@ -351,6 +351,24 @@
     62,
     16
    ]
+  },
+  "fill-SEA1270109648": {
+   "file": "work/seattle/pike-place/fill/SEA1270109648.nbt",
+   "plot": [
+    0,
+    0,
+    65,
+    110
+   ]
+  },
+  "fill-SEA1270109650": {
+   "file": "work/seattle/pike-place/fill/SEA1270109650.nbt",
+   "plot": [
+    0,
+    0,
+    62,
+    102
+   ]
   }
  },
  "placements": [
@@ -473,30 +491,6 @@
   {
    "building": "SEA1270107325",
    "module": "pike-waterfront-1",
-   "mode": "at",
-   "at": [
-    0,
-    0
-   ],
-   "y": 0,
-   "quarter": 0,
-   "clear": "all"
-  },
-  {
-   "building": "SEA1270109648",
-   "module": "pike-waterfront-2",
-   "mode": "at",
-   "at": [
-    0,
-    0
-   ],
-   "y": 0,
-   "quarter": 0,
-   "clear": "all"
-  },
-  {
-   "building": "SEA1270109650",
-   "module": "pike-waterfront-3",
    "mode": "at",
    "at": [
     0,
@@ -790,6 +784,28 @@
   {
    "building": "SEA1270120147",
    "module": "fill-SEA1270120147",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109648",
+   "module": "fill-SEA1270109648",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109650",
+   "module": "fill-SEA1270109650",
    "mode": "at",
    "at": [
     0,
