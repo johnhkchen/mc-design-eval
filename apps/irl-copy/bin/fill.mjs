@@ -43,6 +43,7 @@ try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${plan(pla
 
 const placed = new Set(compose.placements.map((p) => p.building));
 const todo = m.buildings.filter((b) => !placed.has(b.id) && (!only || only.includes(b.id)) && b.footprint.length >= +opt("--min-cells", 20));
+const fn = (id) => id.replace(/[^\w-]/g, "_");                // a file-safe name: OSM ids read way/123
 // --roofs: the lidar's surface per cell (as build.mjs rounds the ground), capped at the building's top, for the 4th number
 const sfile = gfile?.replace(/ground\.f32$/, "surface.f32"), roofs = argv.includes("--roofs") && G && existsSync(sfile) ? new Float32Array(readFileSync(sfile).buffer.slice(0)) : null;
 
@@ -82,17 +83,17 @@ function brief(b) {
   const fl = Math.floor(lo) - Math.round(4 * sc), roofAt = (x, z) => Math.max(ground(x, z), Math.min(Math.round(roofs[z * N + x] * sc) - fl, b.top)) - base;
   const local = T ? T.cells : b.footprint.map(([x, z]) => [x - x0, z - z0, x, z]);
   const cells = local.map(([lx, lz, x, z]) => (roofs ? [lx, lz, ground(x, z) - base, roofAt(x, z)] : [lx, lz, ground(x, z) - base]));
-  writeFileSync(`${dir}/${b.id}.cells.json`, JSON.stringify(cells));
+  writeFileSync(`${dir}/${fn(b.id)}.cells.json`, JSON.stringify(cells));
   const p = parcels.get(b.parcel) ?? {}, H = b.top - b.base;
   const what = [b.name, p.name, p.landmark, p.nature !== "Indifférenciée" && p.nature, p.use, p.year && `built ${p.year}`, p.stories && `${p.stories} storeys`, p.wallKind && `walls: ${p.wallKind}`, p.address].filter(Boolean).join("; ") || "no record";
   return `Build one real building as a Minecraft 1.21.1 module for a city diorama of ${place.name} (${place.note ?? ""}). Scale ${sc} blocks per metre.
 The building: ${what}. Footprint ${W} x ${D} blocks; its roof is about ${H} blocks above its lowest ground (from lidar). Decide from that record what it looks like (era, height in storeys of about ${Math.round(3.3 * sc)} blocks, materials typical of the city and its age) and make it read well at a glance from the air and the street at dusk.
-Write a Node ESM script ${dir}/${b.id}.mjs that builds it and saves ${dir}/${b.id}.nbt:
+Write a Node ESM script ${dir}/${fn(b.id)}.mjs that builds it and saves ${dir}/${fn(b.id)}.nbt:
   import { readFileSync } from "node:fs"; import { Voxels } from "${HERE}/src/voxels.mjs";
-  const cells = JSON.parse(readFileSync("${dir}/${b.id}.cells.json", "utf8"));   // [x, z, ground${roofs ? ", roof" : ""}] per footprint cell, x 0..${W - 1}, z 0..${D - 1}
-  const g = new Voxels([${W}, ${H + 12}, ${D}]);  g.set(x, y, z, "white_concrete");  g.set(x, y, z, "oak_stairs", { facing: "north", half: "bottom", shape: "straight", waterlogged: "false" });  g.save(".../${b.id}.nbt");
+  const cells = JSON.parse(readFileSync("${dir}/${fn(b.id)}.cells.json", "utf8"));   // [x, z, ground${roofs ? ", roof" : ""}] per footprint cell, x 0..${W - 1}, z 0..${D - 1}
+  const g = new Voxels([${W}, ${H + 12}, ${D}]);  g.set(x, y, z, "white_concrete");  g.set(x, y, z, "oak_stairs", { facing: "north", half: "bottom", shape: "straight", waterlogged: "false" });  g.save(".../${fn(b.id)}.nbt");
 Rules: build only on the footprint cells; y 0 is the lowest ground under it and each cell's ground is its third number: fill solid from y 0 up to that cell's ground (foundation), so nothing floats on a slope; the downhill side shows its extra storeys.${roofs ? " Each cell's fourth number is the lidar's roof height above y 0 there: follow it for the massing (a tower on a podium, setbacks stepping in as it rises, lower wings), smoothing lidar noise into clean flat tiers." : ""} Every storey, setback tier and roof stands directly on what is below it: no empty course under a tier, nothing hanging in the air. Real articulation: window grids of glass panes with frames, a base course, storey lines, a cornice or parapet, entrances with doors and canopies, shopfronts on the ground floor where it is commercial, roof equipment or terraces; warm lights (lanterns, shroomlights, glowstone behind glass) in some windows. No interiors (an air gap behind the glass and a floor slab per storey). Block ids without "minecraft:", only blocks that exist in 1.21.1.
-Then run, in ${dir}: node ${PLUGIN}/tools/bin/mcd.mjs render ${b.id}.nbt  (writes ${b.id}-sheet.png); Read the sheet once, fix what reads badly (flat walls, stray blocks, holes), re-run the script, and stop. Reply with one line: what you built.`;
+Then run, in ${dir}: node ${PLUGIN}/tools/bin/mcd.mjs render ${fn(b.id)}.nbt  (writes ${fn(b.id)}-sheet.png); Read the sheet once, fix what reads badly (flat walls, stray blocks, holes), re-run the script, and stop. Reply with one line: what you built.`;
 }
 
 // --batch: the same facts as brief(), asked for a script in one reply (the shared rules are the cached system prompt)
@@ -108,7 +109,7 @@ function batchBrief(b) {
   const W = T ? T.W : Math.max(...xs) - Math.min(...xs) + 1, D = T ? T.D : Math.max(...zs) - Math.min(...zs) + 1, H = b.top - b.base;
   const what = full.match(/The building: ([\s\S]*?)\nWrite a Node ESM script/)[1];
   return `The building: ${what}
-Its script: ${dir}/${b.id}.mjs, reading ${dir}/${b.id}.cells.json (x 0..${W - 1}, z 0..${D - 1}), making new Voxels([${W}, ${H + 12}, ${D}]) and saving ${dir}/${b.id}.nbt.`;
+Its script: ${dir}/${fn(b.id)}.mjs, reading ${dir}/${fn(b.id)}.cells.json (x 0..${W - 1}, z 0..${D - 1}), making new Voxels([${W}, ${H + 12}, ${D}]) and saving ${dir}/${fn(b.id)}.nbt.`;
 }
 const codeOf = (t) => { const m = [...t.matchAll(/```(?:js|javascript|mjs)?\s*\n([\s\S]*?)```/g)]; return m.length ? m[m.length - 1][1] : null; };
 const sh = (cmd, args, timeout = 180000) => new Promise((res) => { const c = spawn(cmd, args, { cwd: dir, stdio: ["ignore", "pipe", "pipe"] });
@@ -116,16 +117,16 @@ const sh = (cmd, args, timeout = 180000) => new Promise((res) => { const c = spa
   const t = setTimeout(() => c.kill("SIGKILL"), timeout); c.on("close", (code) => { clearTimeout(t); res({ code, out, err }); }); });
 // run a building's script and render it: { ok, log } (the .nbt and -sheet.png beside it)
 async function runAndRender(b) {
-  const r = await sh(process.execPath, [`${b.id}.mjs`]);
-  if (r.code !== 0 || !existsSync(`${dir}/${b.id}.nbt`)) return { ok: false, log: `node ${b.id}.mjs exited ${r.code}:\n${(r.err || r.out).slice(-1500)}` };
-  const v = await sh(process.execPath, [`${PLUGIN}/tools/bin/mcd.mjs`, "render", `${b.id}.nbt`]);
-  return { ok: true, sheet: v.code === 0 && existsSync(`${dir}/${b.id}-sheet.png`), log: (r.out + r.err).slice(-600) };
+  const r = await sh(process.execPath, [`${fn(b.id)}.mjs`]);
+  if (r.code !== 0 || !existsSync(`${dir}/${fn(b.id)}.nbt`)) return { ok: false, log: `node ${fn(b.id)}.mjs exited ${r.code}:\n${(r.err || r.out).slice(-1500)}` };
+  const v = await sh(process.execPath, [`${PLUGIN}/tools/bin/mcd.mjs`, "render", `${fn(b.id)}.nbt`]);
+  return { ok: true, sheet: v.code === 0 && existsSync(`${dir}/${fn(b.id)}-sheet.png`), log: (r.out + r.err).slice(-600) };
 }
 async function each(list, fn) { let i = 0; await Promise.all(Array.from({ length: Math.min(jobs, list.length) }, async () => { while (i < list.length) { const x = list[i++]; await fn(x); } })); }
 async function batchFill(todo) {
   const { runRound, textOf, imageBlock } = await import(`${PLUGIN}/tools/src/batch.mjs`);
   const sys = [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral", ttl: "1h" } }], conv = new Map(), state = new Map();
-  const req = (b, tag) => ({ custom_id: `${b.id}-${tag}`.replace(/[^a-zA-Z0-9_-]/g, "_"), model, effort: "medium", ledger,
+  const req = (b, tag) => ({ custom_id: `${fn(b.id)}-${tag}`.replace(/[^a-zA-Z0-9_-]/g, "_"), model, effort: "medium", ledger,
     params: { model, max_tokens: 32000, output_config: { effort: "medium" }, system: sys, messages: conv.get(b.id) } });
   for (const b of todo) conv.set(b.id, [{ role: "user", content: [{ type: "text", text: batchBrief(b) }] }]);
   const rounds = +opt("--rounds", 3);
@@ -134,22 +135,22 @@ async function batchFill(todo) {
     const t0 = Date.now(), res = await runRound(active.map((b) => req(b, `r${round}`)), { ledger, label: ` round ${round}` });
     const next = [];
     await each(active, async (b) => {
-      const r = res.get(`${b.id}-r${round}`.replace(/[^a-zA-Z0-9_-]/g, "_"));
-      if (r?.type !== "succeeded") { console.log(`${b.id}: round ${round} ${r?.type ?? "missing"}`); return; }
+      const r = res.get(`${fn(b.id)}-r${round}`.replace(/[^a-zA-Z0-9_-]/g, "_"));
+      if (r?.type !== "succeeded") { console.log(`${fn(b.id)}: round ${round} ${r?.type ?? "missing"}`); return; }
       conv.get(b.id).push({ role: "assistant", content: r.message.content });
       const code = codeOf(textOf(r)), prev = state.get(b.id);
-      if (!code) { console.log(`${b.id}: round ${round} kept (${prev?.ok ? "OK" : "no script"})`); return; }
-      const f = `${dir}/${b.id}.mjs`, nbt = `${dir}/${b.id}.nbt`;
+      if (!code) { console.log(`${fn(b.id)}: round ${round} kept (${prev?.ok ? "OK" : "no script"})`); return; }
+      const f = `${dir}/${fn(b.id)}.mjs`, nbt = `${dir}/${fn(b.id)}.nbt`;
       if (prev?.ok) { copyFileSync(f, `${f}.prev`); copyFileSync(nbt, `${nbt}.prev`); }
       writeFileSync(f, code);
       const got = await runAndRender(b);
       if (!got.ok && prev?.ok) { copyFileSync(`${f}.prev`, f); copyFileSync(`${nbt}.prev`, nbt); await runAndRender(b); }
       state.set(b.id, got.ok ? got : prev?.ok ? prev : got);
-      console.log(`${b.id}: round ${round} ${got.ok ? "built" : "failed"}${!got.ok && prev?.ok ? " (kept the last good one)" : ""}`);
+      console.log(`${fn(b.id)}: round ${round} ${got.ok ? "built" : "failed"}${!got.ok && prev?.ok ? " (kept the last good one)" : ""}`);
       // the next round: round 2 for everyone with a sheet or an error; round 3 only for scripts that still fail
       if (round === 1 || !state.get(b.id).ok) {
         const s2 = state.get(b.id), content = [];
-        if (s2.ok && s2.sheet) content.push(imageBlock(`${dir}/${b.id}-sheet.png`), { type: "text", text: "Your script ran; this is its render sheet. Fix what reads badly (flat walls, stray or floating blocks, holes, a massing that misses the roof heights, no entrance). Reply with the complete fixed script in one ```js block, or with just OK if it reads well." });
+        if (s2.ok && s2.sheet) content.push(imageBlock(`${dir}/${fn(b.id)}-sheet.png`), { type: "text", text: "Your script ran; this is its render sheet. Fix what reads badly (flat walls, stray or floating blocks, holes, a massing that misses the roof heights, no entrance). Reply with the complete fixed script in one ```js block, or with just OK if it reads well." });
         else content.push({ type: "text", text: `Your script failed:
 ${s2.log}
 Reply with the complete fixed script in one \`\`\`js block.` });
@@ -168,7 +169,7 @@ function run(b) {
       "--permission-mode", "bypassPermissions", "--allowedTools", "Bash,Read,Write,Edit"];
     const c = spawn(process.execPath, args, { cwd: dir, env, stdio: ["ignore", "ignore", "pipe"] });
     let err = ""; c.stderr.on("data", (d) => (err += d));
-    c.on("close", (code) => { console.log(`${b.id}: ${existsSync(`${dir}/${b.id}.nbt`) ? "built" : `no module (exit ${code}) ${err.trim().slice(-200)}`}`); res(); });
+    c.on("close", (code) => { console.log(`${fn(b.id)}: ${existsSync(`${dir}/${fn(b.id)}.nbt`) ? "built" : `no module (exit ${code}) ${err.trim().slice(-200)}`}`); res(); });
   });
 }
 
@@ -182,9 +183,9 @@ if (!argv.includes("--place-only") && argv.includes("--batch")) {
 }
 // place every module built: at the footprint's box corner, the placeholder cleared
 let n = 0;
-for (const b of m.buildings.filter((q) => !placed.has(q.id) && existsSync(`${dir}/${q.id}.nbt`))) {
-  const key = `fill-${b.id}`, xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]), T = turned(b);
-  compose.modules[key] = { file: `work/${name}/fill/${b.id}.nbt`, plot: T ? [0, 0, T.W - 1, T.D - 1] : [0, 0, Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs)] };
+for (const b of m.buildings.filter((q) => !placed.has(q.id) && existsSync(`${dir}/${fn(q.id)}.nbt`))) {
+  const key = `fill-${fn(b.id)}`, xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]), T = turned(b);
+  compose.modules[key] = { file: `work/${name}/fill/${fn(b.id)}.nbt`, plot: T ? [0, 0, T.W - 1, T.D - 1] : [0, 0, Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs)] };
   compose.placements.push(T ? { building: b.id, module: key, mode: "centre", angle: T.angle, shift: T.shift }
     : { building: b.id, module: key, mode: "at", at: [0, 0], quarter: 0, clear: "all" }); n++;
 }
