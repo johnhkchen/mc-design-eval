@@ -5,6 +5,8 @@
 //     [--degrees 360] [--start 0] (the arc, from that bearing: 0 = the camera north of the centre, 90 = east)
 //     [--fade near,far] (the circular distance fade, src/fade.mjs: blocks from the world's middle) [--lift] (the tone balance, src/lift.mjs: shadows opened, highlights held)
 //     [--size 1280x720] [--spp 100] [--target-mb 9.5] [--codec h264|hevc|av1] [--encode-only]
+//   or a flight: --path "ex,ey,ez>lx,ly,lz; ..." (keyframes of eye > look point; a Catmull-Rom curve through them, paced by the
+//     eye's distance travelled and eased in and out, so the flight starts and lands gently), no --center needed
 //     and any chunky-shot option (--sun, --sun-sampling, --sun-color, --water-plane, --fov, --chunks ...), the same on every frame
 // Frames go to out/<place>/shots/<name>/NNNN.png; a rerun renders only the frames that are missing (resumable overnight).
 import { existsSync, mkdirSync, renameSync, readdirSync, unlinkSync, statSync } from "node:fs";
@@ -19,9 +21,9 @@ import { liftImage } from "../src/lift.mjs";
 const HERE = dirname(dirname(fileURLToPath(import.meta.url)));
 const argv = process.argv.slice(2), [place, name] = argv;
 if (!place || !name) throw new Error("usage: chunky-orbit.mjs <place> <name> --center x,y,z --radius r --height y");
-const OWN = new Set(["--center", "--radius", "--height", "--frames", "--fps", "--degrees", "--start", "--target-mb", "--codec", "--size", "--spp", "--chunks", "--fade"]);
+const OWN = new Set(["--path", "--center", "--radius", "--height", "--frames", "--fps", "--degrees", "--start", "--target-mb", "--codec", "--size", "--spp", "--chunks", "--fade"]);
 const opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
-const [cx, cy, cz] = opt("--center").split(",").map(Number), R = +opt("--radius", 500), eyeY = +opt("--height", cy + 150);
+const [cx, cy, cz] = (opt("--center") ?? "0,0,0").split(",").map(Number), R = +opt("--radius", 500), eyeY = +opt("--height", cy + 150);
 const N = +opt("--frames", 240), fps = +opt("--fps", 24), arc = +opt("--degrees", 360), start = +opt("--start", 0);
 const size = opt("--size", "1280x720"), spp = opt("--spp", "100");
 // every frame shares frame 0's world, so it is the whole world (each frame looks a different way) unless --chunks says
@@ -35,15 +37,25 @@ const pad = (i) => String(i).padStart(4, "0"), first = `${name}-${pad(0)}`;
 // a closed loop (360) leaves out the last frame, which would repeat the first
 const step = arc / (arc % 360 === 0 ? N : Math.max(1, N - 1));
 
+// --path: eye and look at frame i, along the keyframes' curve
+const keys = opt("--path")?.split(";").map((k) => k.split(">").map((v) => v.split(",").map(Number)));
+const cr = (p0, p1, p2, p3, t) => p1.map((_, j) => 0.5 * (2 * p1[j] + (p2[j] - p0[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t * t + (3 * p1[j] - p0[j] - 3 * p2[j] + p3[j]) * t * t * t));
+const onPath = (k, u) => { const n = keys.length - 1, s = Math.min(n - 1e-9, u * n), i = Math.floor(s), P = (j) => keys[Math.max(0, Math.min(n, j))][k];
+  return cr(P(i - 1), P(i), P(i + 1), P(i + 2), s - i); };
+// the curve's length by sample, so equal steps of time cover equal distance (else it rushes the long legs)
+const arcU = (() => { if (!keys) return null; const M = 2000, L = [0]; for (let m = 1; m <= M; m++) { const a = onPath(0, (m - 1) / M), b = onPath(0, m / M); L.push(L[m - 1] + Math.hypot(...a.map((v, j) => v - b[j]))); }
+  return (f) => { const t = L[M] * f; let m = 1; while (m < M && L[m] < t) m++; return (m - 1 + (t - L[m - 1]) / Math.max(1e-9, L[m] - L[m - 1])) / M; }; })();
+const ease = (f) => f * f * (3 - 2 * f);
 const lift = argv.includes("--lift");
 const fade = opt("--fade")?.split(",").map(Number), heights = fade ? loadHeights(`${out}/heights.bin`) : null;
 if (!argv.includes("--encode-only")) {
   const t0 = Date.now();
   for (let i = 0; i < N; i++) {
     if (existsSync(`${frames}/${pad(i)}.png`)) continue;
-    const b = ((start + i * step) * Math.PI) / 180, eye = [cx + R * Math.sin(b), eyeY, cz - R * Math.cos(b)].map((v) => v.toFixed(2));
+    const b = ((start + i * step) * Math.PI) / 180, u = keys && arcU(ease(i / Math.max(1, N - 1)));
+    const eye = (keys ? onPath(0, u) : [cx + R * Math.sin(b), eyeY, cz - R * Math.cos(b)]).map((v) => v.toFixed(2)), look = keys ? onPath(1, u).map((v) => v.toFixed(2)).join(",") : `${cx},${cy},${cz}`;
     const scene = `${name}-${pad(i)}`, reuse = i > 0 && existsSync(`${sceneDir}/${first}.octree2`) ? ["--reuse-octree", first] : [];
-    execFileSync("node", [`${HERE}/bin/chunky-shot.mjs`, place, scene, "--eye", eye.join(","), "--look", `${cx},${cy},${cz}`,
+    execFileSync("node", [`${HERE}/bin/chunky-shot.mjs`, place, scene, "--eye", eye.join(","), "--look", look,
       "--size", size, "--spp", spp, "--chunks", chunks, ...reuse, ...pass], { stdio: ["ignore", "ignore", "inherit"] });
     if (fade || lift) { const img = PNG.sync.read(readFileSync(`${shots}/${scene}.png`)), sc = JSON.parse(readFileSync(`${sceneDir}/${scene}.json`, "utf8"));
       if (fade) fadeImage(img, sc, heights, { near: fade[0], far: fade[1], seaY: sc.waterWorldEnabled ? sc.waterWorldHeight : 0 });
