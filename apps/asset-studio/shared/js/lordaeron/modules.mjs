@@ -123,6 +123,12 @@ const FITOUT = {
   quench: () => one("enterprise:decor_cauldron[contents=water]"),
   rack: () => one("iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"),
   stall_rail: () => one("spruce_fence[east=false,north=true,south=true,waterlogged=false,west=false]"),
+  goods_hay: () => one("hay_block[axis=y]"), goods_pumpkin: () => one("carved_pumpkin[facing=south]"), goods_wool: () => one("white_wool"),
+  goods_blue: () => one("light_blue_wool"), goods_books: () => one("chiseled_bookshelf[facing=south,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false,slot_3_occupied=true,slot_4_occupied=false,slot_5_occupied=true]"),
+  goods_kelp: () => one("dried_kelp_block"), goods_pickle: () => one("sea_pickle[pickles=3,waterlogged=false]"), goods_stone: () => one("chiseled_stone_bricks"),
+  goods_iron: () => one("iron_block"), goods_bars: () => one("iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"), goods_candle: () => one("candle[candles=3,lit=true,waterlogged=false]"),
+  goods_leather: () => one("brown_wool"), goods_target: () => one("target[power=0]"), goods_pot: () => one("decorated_pot[cracked=false,facing=south,waterlogged=false]"),
+  goods_chain: () => one("chain[axis=y,waterlogged=false]"), goods_meat: () => one("red_terracotta"),
   chimney_stack: () => { const g = new Grid([1, 1, 2]); g.set(0, 0, 0, B.chimney); g.set(0, 0, 1, B.chimney); return g; },
   chimney_stack_party: () => one(B.chimney),
 };

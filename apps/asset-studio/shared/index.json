@@ -66,10 +66,10 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:38:32.860Z",
+    "updated": "2026-10-27T14:44:02.528Z",
     "updated_by": "studio",
-    "note": "batch 007",
-    "bytes": 13499,
+    "note": "batch 009: workshops; plan entries may carry an exact block",
+    "bytes": 13806,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
@@ -106,6 +106,12 @@
         "by": "studio",
         "note": "batch 007",
         "bytes": 13499
+      },
+      {
+        "at": "2026-10-27T14:44:02.528Z",
+        "by": "studio",
+        "note": "batch 009: workshops; plan entries may carry an exact block",
+        "bytes": 13806
       }
     ]
   },
@@ -113,10 +119,10 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:38:32.914Z",
+    "updated": "2026-10-27T14:44:02.615Z",
     "updated_by": "studio",
-    "note": "batch 007",
-    "bytes": 12953,
+    "note": "batch 009: workshops; plan entries may carry an exact block",
+    "bytes": 13973,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
@@ -153,6 +159,12 @@
         "by": "studio",
         "note": "batch 007",
         "bytes": 12953
+      },
+      {
+        "at": "2026-10-27T14:44:02.615Z",
+        "by": "studio",
+        "note": "batch 009: workshops; plan entries may carry an exact block",
+        "bytes": 13973
       }
     ]
   },
@@ -531,6 +543,40 @@
         "by": "studio",
         "note": "batch 007",
         "bytes": 2007
+      }
+    ]
+  },
+  "js/lordaeron/workshops.mjs": {
+    "path": "js/lordaeron/workshops.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:44:02.710Z",
+    "updated_by": "studio",
+    "note": "batch 009: workshops; plan entries may carry an exact block",
+    "bytes": 1712,
+    "history": [
+      {
+        "at": "2026-10-27T14:44:02.710Z",
+        "by": "studio",
+        "note": "batch 009: workshops; plan entries may carry an exact block",
+        "bytes": 1712
+      }
+    ]
+  },
+  "js/lordaeron/stalls.mjs": {
+    "path": "js/lordaeron/stalls.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:44:02.794Z",
+    "updated_by": "studio",
+    "note": "batch 009: workshops; plan entries may carry an exact block",
+    "bytes": 4955,
+    "history": [
+      {
+        "at": "2026-10-27T14:44:02.794Z",
+        "by": "studio",
+        "note": "batch 009: workshops; plan entries may carry an exact block",
+        "bytes": 4955
       }
     ]
   }

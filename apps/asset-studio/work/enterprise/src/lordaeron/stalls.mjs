@@ -4,7 +4,7 @@
 // job site is the mod's twin. Front (the customers' side) faces south.
 import { Grid } from "../grid.mjs";
 
-const WS = {
+export const WS = {
   farmer: "composter[level=0]", librarian: "lectern[facing=south,has_book=false,powered=false]", cartographer: "cartography_table",
   fletcher: "fletching_table", fisherman: "barrel[facing=up,open=false]", shepherd: "loom[facing=south]",
   cleric: "brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", butcher: "smoker[facing=south,lit=false]",
@@ -12,7 +12,7 @@ const WS = {
   toolsmith: "smithing_table", weaponsmith: "grindstone[face=floor,facing=south]",
 };
 // goods on the two counters: [west, east], each a block on the counter top
-const GOODS = {
+export const GOODS = {
   farmer: ["hay_block[axis=y]", "carved_pumpkin[facing=south]"], librarian: ["bookshelf", "chiseled_bookshelf[facing=south,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false,slot_3_occupied=true,slot_4_occupied=false,slot_5_occupied=true]"],
   cartographer: ["white_banner[rotation=8]", "decorated_pot[cracked=false,facing=south,waterlogged=false]"], fletcher: ["target[power=0]", "hay_block[axis=x]"],
   fisherman: ["dried_kelp_block", "sea_pickle[pickles=3,waterlogged=false]"], shepherd: ["white_wool", "light_blue_wool"],
@@ -21,7 +21,7 @@ const GOODS = {
   armorer: ["iron_block", "chain[axis=y,waterlogged=false]"], toolsmith: ["anvil[facing=east]", "iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"],
   weaponsmith: ["anvil[facing=west]", "iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"],
 };
-const AWNING = {
+export const AWNING = {
   farmer: ["green", "white"], librarian: ["brown", "white"], cartographer: ["blue", "white"], fletcher: ["lime", "white"],
   fisherman: ["light_blue", "white"], shepherd: ["pink", "white"], cleric: ["purple", "white"], butcher: ["red", "white"],
   leatherworker: ["orange", "white"], mason: ["gray", "white"], armorer: ["black", "white"], toolsmith: ["cyan", "white"], weaponsmith: ["red", "black"],
