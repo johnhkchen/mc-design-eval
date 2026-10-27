@@ -288,10 +288,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T15:16:50.690Z",
+    "updated": "2026-10-27T16:05:27.719Z",
     "updated_by": "client",
-    "note": "reads circulation_by_storeys; landings off the cap; one-room under 20 skips circulation",
-    "bytes": 32479,
+    "note": "circulation judged over storeys of 2+ rooms (thread 0008)",
+    "bytes": 32633,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -340,6 +340,12 @@
         "by": "client",
         "note": "reads circulation_by_storeys; landings off the cap; one-room under 20 skips circulation",
         "bytes": 32479
+      },
+      {
+        "at": "2026-10-27T16:05:27.719Z",
+        "by": "client",
+        "note": "circulation judged over storeys of 2+ rooms (thread 0008)",
+        "bytes": 32633
       }
     ]
   },
@@ -364,10 +370,10 @@
     "path": "docs/interiors.md",
     "lang": "md",
     "author": "client",
-    "updated": "2026-10-27T14:21:46.300Z",
+    "updated": "2026-10-27T16:05:28.293Z",
     "updated_by": "client",
-    "note": "v0.2 thresholds and definitions",
-    "bytes": 5534,
+    "note": "circulation over multi-room storeys",
+    "bytes": 5906,
     "history": [
       {
         "at": "2026-10-27T14:14:08.088Z",
@@ -380,6 +386,12 @@
         "by": "client",
         "note": "v0.2 thresholds and definitions",
         "bytes": 5534
+      },
+      {
+        "at": "2026-10-27T16:05:28.293Z",
+        "by": "client",
+        "note": "circulation over multi-room storeys",
+        "bytes": 5906
       }
     ]
   },

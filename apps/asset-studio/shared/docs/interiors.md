@@ -34,7 +34,8 @@ number. The studio and we both run it, and a disagreement about a house is a dis
 - **Route:** the shortest walk from the street door to where a villager goes: a bed (from beside its head or its foot),
   a workstation, a chest, the hearth. Shelves, casks and decor are used floor (not idle) but no destination. Routes go
   level, and up or down a block only onto or off a stair or slab.
-- **Circulation:** the floor on any route.
+- **Circulation:** the floor on any route, judged over the storeys of two rooms or more (a one-room storey's routes
+  are its use, not corridors).
 - **Idle floor:** floor neither on a route nor beside anything used. It's space that does nothing: no bed, chest,
   table or hearth beside it, and nobody walks over it.
 - **Made bed:** a bed with free floor along a long side, so it can be got into and made. Two beds pushed together
@@ -65,6 +66,8 @@ number. The studio and we both run it, and a disagreement about a house is a dis
 | Clear height | 3 or more (median) | a storey of 5 gives 4; under 3 reads as a crawlspace |
 | Windows | 1 or more a chamber, about 1 per 8 floor | light, and a reason a room is on the outside wall |
 | Hearth | in the hall, with its chimney | where a house lives |
+| Storeys by width | a 7-wide body is one storey; two or more from 10 wide | a stair core in a 5 x 5 interior leaves no room 3 wide (thread 0008) |
+| The stair's foot | a clear 2-wide approach from the street door | the "spine": nothing shelved or stacked across it |
 
 ## How to build to them (systems, not single houses)
 
