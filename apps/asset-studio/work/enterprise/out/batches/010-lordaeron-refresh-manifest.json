@@ -1,0 +1,2642 @@
+{
+  "batch": "010-lordaeron-refresh",
+  "thread": "0005",
+  "made": "2026-10-27T14:48:23.817Z",
+  "files": [
+    {
+      "path": "assets-src/kingdoms/lordaeron/palettes.json",
+      "kind": "palette",
+      "sha256": "a0e430c407d276e0a43af27c6fbf47a24d12fa6b6a6cfda522c3b0e2842dbeb3",
+      "bytes": 2644
+    },
+    {
+      "path": "assets-src/kingdoms/lordaeron/style.md",
+      "kind": "style",
+      "sha256": "7347fd63fc747ea57e62b569398b3814cc5b4aaa10f25e1690f59abf8553511a",
+      "bytes": 4108
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_head_5x5_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2380c0d3d14f21df83e63441f5195805e75c5a580042d611b8d5771d86c6269d",
+      "bytes": 164156
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_head_5x5_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_pier_3x4_a/front.jpg",
+      "kind": "preview",
+      "sha256": "972063bb92d995926c06d468c1fa8e79ab623fd9c69f946e9c29ce057c2fbb5e",
+      "bytes": 150243
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_pier_3x4_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/forum/market_cross_7x7_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "2d4192de163a751f91d366943040faacb5899c27190534565a6336405ac14ac5",
+      "bytes": 223634
+    },
+    {
+      "path": "assets-src/lordaeron/forum/market_cross_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "af8dcd7af3ef62cf283533afbb54a6583582ab8473325f6e3877498c635f892e",
+      "bytes": 201590
+    },
+    {
+      "path": "assets-src/lordaeron/forum/market_cross_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/hall/caravanserai_12x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "0edfa39df3206fdb5e33d3be39086ae56a9789e8c1a1ed4497287c93c5cb661d",
+      "bytes": 245478
+    },
+    {
+      "path": "assets-src/lordaeron/hall/caravanserai_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0f6776cb1ece37ba08a00922218ecc518168d4d764653520a9bbc635f64f0ffe",
+      "bytes": 221228
+    },
+    {
+      "path": "assets-src/lordaeron/hall/caravanserai_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "aace342b286784ceb889feb6e04b7c5eca9f23ff6f3f7e7e9c21585693178952",
+      "bytes": 76
+    },
+    {
+      "path": "assets-src/lordaeron/hall/counting_house_9x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "fd37af05dd624266f77e7e695bea99a858ec0e8c85aeb626f1f83116412cc643",
+      "bytes": 219235
+    },
+    {
+      "path": "assets-src/lordaeron/hall/counting_house_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "a277ac6a2344a89d0b4471df31c310593949836aaf81e68aaeaa70ebeda98f05",
+      "bytes": 196823
+    },
+    {
+      "path": "assets-src/lordaeron/hall/counting_house_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "edada5b13c25658896f2b9d77bad8d34b6daada1e36a95adc580d409c5691134",
+      "bytes": 90
+    },
+    {
+      "path": "assets-src/lordaeron/hall/granary_9x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "a4935e6227a5ac13836bfbeec8025f53899fb7f75c189c474f92b1c54a8835aa",
+      "bytes": 231275
+    },
+    {
+      "path": "assets-src/lordaeron/hall/granary_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f3fe5b9c25a38947ca1317afda81500ad3f6f2d2be5105b5ed72e4ab14b67ce7",
+      "bytes": 208941
+    },
+    {
+      "path": "assets-src/lordaeron/hall/granary_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "9d31ad5fd53a9f85735a73c755f5823941285294e258887a58a2a972083abfed",
+      "bytes": 90
+    },
+    {
+      "path": "assets-src/lordaeron/hall/library_9x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "4c576435e7fc7511c53c883d2e29fe425f1661be5bd380beb0970fa0f97902b1",
+      "bytes": 231785
+    },
+    {
+      "path": "assets-src/lordaeron/hall/library_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f733db0824badca2bbd630951460d1eff1fd8d638741e7fc431e753f708c225f",
+      "bytes": 209248
+    },
+    {
+      "path": "assets-src/lordaeron/hall/library_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "edb1058962438d9da08d99ac26764e60faf1459641f569ed4cabfc06ac456602",
+      "bytes": 69
+    },
+    {
+      "path": "assets-src/lordaeron/hall/market_hall_12x12_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "028c753a0ee865adf49063e917bfc4c0e3bfbe86538672407ee6eb4c9a8ebc03",
+      "bytes": 229995
+    },
+    {
+      "path": "assets-src/lordaeron/hall/market_hall_12x12_a/front.jpg",
+      "kind": "preview",
+      "sha256": "b32a355e81ab58d6e4fa246e4dd5ac167a73a673fa09fb622d60dd35a7ff6e8f",
+      "bytes": 210561
+    },
+    {
+      "path": "assets-src/lordaeron/hall/market_hall_12x12_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/hall/root_cellar_9x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "12cdd86a203f484247fb2f789e3b0a31fdbdcda3790268e6532bb77e44dc782a",
+      "bytes": 227004
+    },
+    {
+      "path": "assets-src/lordaeron/hall/root_cellar_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "af98a92fc60dcb02870754989c0039e22c055b01c92bcb1e7aedb0a7260626ef",
+      "bytes": 205386
+    },
+    {
+      "path": "assets-src/lordaeron/hall/root_cellar_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "01c2dc902d70dbfaefbd5cd7389c5678be8eff75bb004a2def6763b60b6dd401",
+      "bytes": 67
+    },
+    {
+      "path": "assets-src/lordaeron/hall/smithy_9x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "bd486189e268cfd38162cf4615c959cfbe7c85c385ae95151900e4674f1b9b67",
+      "bytes": 227154
+    },
+    {
+      "path": "assets-src/lordaeron/hall/smithy_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "5b5e0fc2426bbe48b4bef3b6209c21b63c147ab304cb62016988228c57dbc361",
+      "bytes": 205663
+    },
+    {
+      "path": "assets-src/lordaeron/hall/smithy_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "52e813bbb9510d8b1235b4d936819098de76344e945b82d72a469fda5d11ed9b",
+      "bytes": 86
+    },
+    {
+      "path": "assets-src/lordaeron/hall/square_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "5d0425a119a58c03d776db7a92792b1e1ce13ce8ba06cd24cbb16ff57241de61",
+      "bytes": 185901
+    },
+    {
+      "path": "assets-src/lordaeron/hall/square_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/hall/temple_9x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "7b530856052f1c7cea4a654ca8ecc5fd49d6848fc634226fe630705aaba01b0f",
+      "bytes": 229768
+    },
+    {
+      "path": "assets-src/lordaeron/hall/temple_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "c3218940dec41ad5bb2e5b0a13ae4d913e40006ca6b07109a9df52e050edc3fb",
+      "bytes": 208186
+    },
+    {
+      "path": "assets-src/lordaeron/hall/temple_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "72be0df1f973c4bb2564956a4c9b69d47f5c8762d558187ac923248abd28db98",
+      "bytes": 83
+    },
+    {
+      "path": "assets-src/lordaeron/hall/watchtower_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "1dc11f32c93edffb38016516f087cf936ca541a179f9e7288280f0344e116d79",
+      "bytes": 171970
+    },
+    {
+      "path": "assets-src/lordaeron/hall/watchtower_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/home/burgage_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "23a5958615000d920d643f081b52d1867288e1f2dfccacf1fcd5d0e83671462b",
+      "bytes": 107
+    },
+    {
+      "path": "assets-src/lordaeron/home/burgage_9x9_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "07879f9c54702630461fd064dea586de7ea05e992e1edbe4ecd2a014263fcf78",
+      "bytes": 358663
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_5x5_a/notes.md",
+      "kind": "notes",
+      "sha256": "d2fd6c22e4d2841904247cba2049eeca3298b3ff0e1ceb7f7344605e198ba6a5",
+      "bytes": 137
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_5x5_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "b51c1d2ee66f76f004e29797b19f585a2fe1560b66c36f63533fdb0c46710512",
+      "bytes": 159152
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_5x5_b/notes.md",
+      "kind": "notes",
+      "sha256": "d2fd6c22e4d2841904247cba2049eeca3298b3ff0e1ceb7f7344605e198ba6a5",
+      "bytes": 137
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_5x5_b/sheet.jpg",
+      "kind": "preview",
+      "sha256": "f5adb32157d8403a736ff94216b613282df68136a6c3866d638bb9a060841200",
+      "bytes": 149353
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "d2fd6c22e4d2841904247cba2049eeca3298b3ff0e1ceb7f7344605e198ba6a5",
+      "bytes": 137
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_7x7_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "c3be3038bd0cea13d3b0d278cfc8404dc8fdd5b07c2090892526079d1ed02323",
+      "bytes": 173750
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_9x9_b/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "fdc33402fd75bb1a1100107c8c306c027aeb5931ebe3f588f41815c8c8215f00",
+      "bytes": 233193
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_9x9_b/front.jpg",
+      "kind": "preview",
+      "sha256": "cb0f979458410a935557b1560f221598564c34c759768c73ca3e0c54d3e252f0",
+      "bytes": 210758
+    },
+    {
+      "path": "assets-src/lordaeron/home/cottage_9x9_b/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/home/shop_5x5_a/notes.md",
+      "kind": "notes",
+      "sha256": "d2fd6c22e4d2841904247cba2049eeca3298b3ff0e1ceb7f7344605e198ba6a5",
+      "bytes": 137
+    },
+    {
+      "path": "assets-src/lordaeron/home/shop_5x5_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "0d7b2bd93790ab258baa0a7a8a6dc3fd84db20cdbf2ac0c6d5c3adce22445944",
+      "bytes": 141828
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_14x5_a/notes.md",
+      "kind": "notes",
+      "sha256": "d2fd6c22e4d2841904247cba2049eeca3298b3ff0e1ceb7f7344605e198ba6a5",
+      "bytes": 137
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_14x5_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "d5dea786860d65b6c9d0961bd8cd81671486761214bb498cf307bc802af82f22",
+      "bytes": 174656
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_21x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "23a5958615000d920d643f081b52d1867288e1f2dfccacf1fcd5d0e83671462b",
+      "bytes": 107
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_21x9_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "9126ec938ad3c6facf2b6b9989a69c0a8a7abbed91f6571e9304e00e455d2efb",
+      "bytes": 390061
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_21x9_b/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "06a60afd659a3cfad1c9ce49015cfc077cfbe9fc211098add1d11d0ebe62e702",
+      "bytes": 262664
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_21x9_b/front.jpg",
+      "kind": "preview",
+      "sha256": "d0c0dac1f14e724887f677240d8a977a67602f4d878123b779db19747d6bafa2",
+      "bytes": 233618
+    },
+    {
+      "path": "assets-src/lordaeron/home/terrace_21x9_b/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "23a5958615000d920d643f081b52d1867288e1f2dfccacf1fcd5d0e83671462b",
+      "bytes": 107
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_12x9_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "eefe611219233b786aa273ef04ef3d1ddfddc8431719ac3314ed4f576e578044",
+      "bytes": 351688
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_12x9_b/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "579c72cc372b55cc1ebf1e6557c07f6843cd8880aacb7f868fb4b3bea7fd7775",
+      "bytes": 205193
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_12x9_b/front.jpg",
+      "kind": "preview",
+      "sha256": "bba11db44e2dab199dd3acce5505cf36ed2a8ec916f6ac09fbfd1923825f4ec6",
+      "bytes": 187105
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_12x9_b/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "d2fd6c22e4d2841904247cba2049eeca3298b3ff0e1ceb7f7344605e198ba6a5",
+      "bytes": 137
+    },
+    {
+      "path": "assets-src/lordaeron/home/townhouse_7x7_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "70e5b71d0eeaf849eff23037516905f70bfd2043e55406c220a90f479e3c3ebb",
+      "bytes": 161381
+    },
+    {
+      "path": "assets-src/lordaeron/plot/plot_burgage_11x16_a/notes.md",
+      "kind": "notes",
+      "sha256": "b1d50ab03a659fbef5c5ec4d97a1d5b771df6cd860c36f38d17e7dd08737ea22",
+      "bytes": 70
+    },
+    {
+      "path": "assets-src/lordaeron/plot/plot_burgage_11x16_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "ea3eb68ea950a6edc3d6056ac67617d04f3e3d1f15145c45bacf922e4e5c894a",
+      "bytes": 381039
+    },
+    {
+      "path": "assets-src/lordaeron/plot/plot_smith_11x16_a/notes.md",
+      "kind": "notes",
+      "sha256": "b1d50ab03a659fbef5c5ec4d97a1d5b771df6cd860c36f38d17e7dd08737ea22",
+      "bytes": 70
+    },
+    {
+      "path": "assets-src/lordaeron/plot/plot_smith_11x16_a/sheet.jpg",
+      "kind": "preview",
+      "sha256": "f0b9c6d14c15ac63d30afc39b0af717a0af1b01e8bb11ebc9b3dff9f4cc2a815",
+      "bytes": 378402
+    },
+    {
+      "path": "assets-src/lordaeron/stall/set/farmer.jpg",
+      "kind": "preview",
+      "sha256": "578a33dee99f727e372ef18ecee2ad3468c6d0c51384a3952f5e22b27b0e1f3b",
+      "bytes": 252419
+    },
+    {
+      "path": "assets-src/lordaeron/stall/set/notes.md",
+      "kind": "notes",
+      "sha256": "66edf6ea5259d4fb155ed4cee3b4a958c37d154506d0e8ac9087deb256145940",
+      "bytes": 58
+    },
+    {
+      "path": "assets-src/lordaeron/stall/set/row.jpg",
+      "kind": "preview",
+      "sha256": "556a0bbc746ff1f196adbd5c7c2cce916d5f243f1d1106246b63e90c0f5169ff",
+      "bytes": 153416
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_armorer_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e2e1773a04ec04db187ed0d49f52cfa684cc1389f23131b829d0aeb0a303fade",
+      "bytes": 160594
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_butcher_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "8f98eb654ea1126a570415f2237c9b4535ef0110a5e6691a01ebe6af9195f6af",
+      "bytes": 163536
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_cartographer_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d38b68010bac0da5ac65efd558d1965ce8c7c11657aa30d9b35c69f709b8ad89",
+      "bytes": 160875
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_cleric_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "61cea787142deb800ad4835eb687103617f3b2afcb4aa7c3e61207402e520776",
+      "bytes": 165365
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_farmer_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "92cd14aa8ec3181022bb00a4e04bc1270cbd31a97e116f49db741cb5520c4c10",
+      "bytes": 165130
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_fisherman_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e143f7eff015144095f5b562506ba772ed65b59cdb8522eab01e8444cb156f7f",
+      "bytes": 164832
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_fletcher_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d1683e67e6c1645650ee6b29aff97610dd83ec84a41b6b048e5379afe3f51075",
+      "bytes": 167293
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_leatherworker_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "29661ac6da4c83782bd455f83c289038dbecae74e078086d44d6acedd1f65caf",
+      "bytes": 165397
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_librarian_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "92e01355128f43c0d3f91d346bb4a9ddac019f977d274a66d02c9d9c717136ce",
+      "bytes": 166554
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_mason_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "3811a8500df37e618ba977eccf9d7ff0a11c6cd6d843923798a41b232d080e9c",
+      "bytes": 159560
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_shepherd_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0d4eaf81ba8e3af9c9d4d6c0098ec706c0cde705112dec328c036c2f7c73e599",
+      "bytes": 166393
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_toolsmith_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "daaf5563eabc5673b363e44b3f991d672bd70b66efa0c59b76e36f3ed087cc02",
+      "bytes": 162085
+    },
+    {
+      "path": "assets-src/lordaeron/stall/stall_weaponsmith_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "9e4ea6a9036b2c9775300b093adadb5aa4c5e879cf070ba8904653a507c0f23d",
+      "bytes": 162911
+    },
+    {
+      "path": "assets-src/lordaeron/wall/corner_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0974fa62c55d6c18bb595c62011952be4c4dcd4fbcc8aa1ab1a1a71152d7d3ab",
+      "bytes": 190319
+    },
+    {
+      "path": "assets-src/lordaeron/wall/corner_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/wall/curtain_4_a/front.jpg",
+      "kind": "preview",
+      "sha256": "ab233ea32b567c225605ce27557aa2d71fb6006637b427aa42ebd266f64cfecc",
+      "bytes": 171619
+    },
+    {
+      "path": "assets-src/lordaeron/wall/curtain_8_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2ab96b730fd4b86d92256923a937967666b20c191ca58a056c2168a9567dc120",
+      "bytes": 197376
+    },
+    {
+      "path": "assets-src/lordaeron/wall/curtain_8_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/wall/filler_1_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0ccb4af404ab96596d641d97fe7fcea0b772a1fdffe5ee8045ccf498747406f2",
+      "bytes": 153078
+    },
+    {
+      "path": "assets-src/lordaeron/wall/filler_2_a/front.jpg",
+      "kind": "preview",
+      "sha256": "b1372d25fdcda76e76b687f0e4b6f8e9a13a58ce662b5cb90f6621b7bd98f91f",
+      "bytes": 157110
+    },
+    {
+      "path": "assets-src/lordaeron/wall/filler_3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "6c7fde08a4c96db04c75afaadde8095f97084c40bbd79f9e8a482f9f5b30511e",
+      "bytes": 164475
+    },
+    {
+      "path": "assets-src/lordaeron/wall/gatehouse_11x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f5d50dfb64ebed705f4529114cd1287c2db377ea1b9c93bf621746ef3e9d997a",
+      "bytes": 212321
+    },
+    {
+      "path": "assets-src/lordaeron/wall/gatehouse_11x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/wall/kit.jpg",
+      "kind": "preview",
+      "sha256": "294b9aa140c4556a123d9df99e16de432a0f94ba358c73d1ff51fea185f742b8",
+      "bytes": 339662
+    },
+    {
+      "path": "assets-src/lordaeron/wall/tower_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "fd4bd87fff652599d6f773681e0e68def02246a5d055c655c04d80c124671f12",
+      "bytes": 190781
+    },
+    {
+      "path": "assets-src/lordaeron/wall/tower_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_armorer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "04fd7fd48e1bcb6c28e39f96edb89606e11e2ec04adad449808ca4c80f1d07bc",
+      "bytes": 194857
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_armorer_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_butcher_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0bca05fc12711b5d8f4f717dc39a8da095d6ff6f43f783bc8d9c35ee660d8ba3",
+      "bytes": 194318
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_butcher_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cartographer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "6cf6d95406c9877f29fbcf882dd7524baaf4b867e400d348ac1050a01259c6f0",
+      "bytes": 209599
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cartographer_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cleric_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0953158a62811343f5f45be0962e23fd9b083ea7b97f211ef22228288c698ec7",
+      "bytes": 204459
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cleric_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_farmer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d9a32b188da95518988281cb204efd95f4d3381171ac4a7d4e1ba8ceb46b7963",
+      "bytes": 205046
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_farmer_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fisherman_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "da8a583650ef79d9d8338bee527e1f5662384dca005b6ef8a76d623892fade6b",
+      "bytes": 194453
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fisherman_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fletcher_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "9539ae6c35443572fcbd9a20b2add20b3dafd1870a86263bb2ede51565dda698",
+      "bytes": 205082
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fletcher_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_leatherworker_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e459d6fc4fe2fcd5b48bf8e94693c586fae8fa53063db8e5a96a5768219d3916",
+      "bytes": 209596
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_leatherworker_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_librarian_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "62321863e951377685022b4d75bd29f233d0c2c384134dbb8db48daffb1fe17a",
+      "bytes": 195019
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_librarian_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_mason_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "493bb9c7fab8ab6658782084116175c754906d5376c6c7c2a1095429f9d04f31",
+      "bytes": 204193
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_mason_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_shepherd_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2cd0644801924573c8fe8c66e61bf3fb1d31339a916a134838089438c453fd56",
+      "bytes": 210224
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_shepherd_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_toolsmith_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "6c23bb74f7c66f7a7259d4f9bacc3397133b643568d5eae64402862850d6d661",
+      "bytes": 209647
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_toolsmith_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_weaponsmith_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "7a17a42c59fd2e4d1882e610207829b324673ffbfa0f41db6739ebfafce3a704",
+      "bytes": 204628
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_weaponsmith_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_head_5x5_a.json",
+      "kind": "meta",
+      "sha256": "bfe4d8b8493fa7e0eacb39ed4f426495b939afc3fc87c28bf90f5b5ce6c58b81",
+      "bytes": 1059
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_head_5x5_a.nbt",
+      "kind": "structure",
+      "sha256": "d1dc588608b25880bdd9a43c3ce00581c00c71a3807969fc736b77b735de3d02",
+      "bytes": 628,
+      "id": "enterprise:lordaeron/dock/dock_head_5x5_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_pier_3x4_a.json",
+      "kind": "meta",
+      "sha256": "78c520804d2e9e8d4b2cc500d4f8db2878be1269632f91ea46bd72ac1c3215d7",
+      "bytes": 962
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_pier_3x4_a.nbt",
+      "kind": "structure",
+      "sha256": "158c1865faf54d2e6b4aefaf1bee464cb4001d85cc15e453112a39795f494927",
+      "bytes": 378,
+      "id": "enterprise:lordaeron/dock/dock_pier_3x4_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/forum/market_cross_7x7_a.json",
+      "kind": "meta",
+      "sha256": "64e4ee0c76a4aaa853ca3318c658b2996a5a805eccde4d184878e4da9ba8177f",
+      "bytes": 671
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/forum/market_cross_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "a97438d1a319a857736512ff2834f98be1076f6aa605a8b7319f401685f8dbe8",
+      "bytes": 1326,
+      "id": "enterprise:lordaeron/forum/market_cross_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/caravanserai_12x9_a.json",
+      "kind": "meta",
+      "sha256": "a622b00ef1c8e21531ce2b04c8ba822d2743e5bd01886f8ebf8b7363c5ec0e79",
+      "bytes": 7232
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/caravanserai_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "0956d6da25d5a81a152ddd769bcdb378705f7e17f62c13c007cb5ed83f089f08",
+      "bytes": 4759,
+      "id": "enterprise:lordaeron/hall/caravanserai_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/counting_house_9x9_a.json",
+      "kind": "meta",
+      "sha256": "0f907e9738d81fae562b8f11b02b375c75bb5724e2cee82cfd0001c8b5002401",
+      "bytes": 5658
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/counting_house_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "b2ae56b7466653804bdd163d7a150e6b051f05ef3a39d946e92b75fccbd0e233",
+      "bytes": 4006,
+      "id": "enterprise:lordaeron/hall/counting_house_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/granary_9x9_a.json",
+      "kind": "meta",
+      "sha256": "18f9ce4af4f56c0d29701b8a0f2baa9e19e95a9a0467cba48760a68c2797542f",
+      "bytes": 7459
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/granary_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "f014551887ab0a116ea9fd0275d73ad79a878bb42b7cc2362188100a6e4bb169",
+      "bytes": 3697,
+      "id": "enterprise:lordaeron/hall/granary_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/library_9x9_a.json",
+      "kind": "meta",
+      "sha256": "8f0bd71263aeb046876f764b3c25257794018290a51c7fd003986fe29403115b",
+      "bytes": 7484
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/library_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e82c81fb40ccf94c9bae1cbf7e76cbd3a9edde8f86a8db0e0cefc63a7808e95b",
+      "bytes": 3763,
+      "id": "enterprise:lordaeron/hall/library_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/market_hall_12x12_a.json",
+      "kind": "meta",
+      "sha256": "c931c927e954161d875508cf216d2906f32570d71be2dc3ea18184ee44688ef9",
+      "bytes": 14482
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/market_hall_12x12_a.nbt",
+      "kind": "structure",
+      "sha256": "c8fb670626cb57a65fa7ad2e84548a6c81432d96ef78f10fab3b291213f1b561",
+      "bytes": 9212,
+      "id": "enterprise:lordaeron/hall/market_hall_12x12_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/root_cellar_9x9_a.json",
+      "kind": "meta",
+      "sha256": "2a235d2e9bf81716fea470882363bc3a3be1d21edab033f365c602de8e83fc86",
+      "bytes": 6290
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/root_cellar_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "facac768f79a14a772068a40ab85c5f18a0202c6e031fa97605e80e48416966f",
+      "bytes": 3761,
+      "id": "enterprise:lordaeron/hall/root_cellar_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/smithy_9x9_a.json",
+      "kind": "meta",
+      "sha256": "aa2970165ec39403552277c74fbeca3fe71c54f32942695520100721cd88c028",
+      "bytes": 5135
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/smithy_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "6b7d66f1dbcf5d17cf282fd80f320b3a565a10b99ff7f1bdcd7208dd789d17ef",
+      "bytes": 3882,
+      "id": "enterprise:lordaeron/hall/smithy_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/square_9x9_a.json",
+      "kind": "meta",
+      "sha256": "d060e87db2ded5bf6eab9025001c00dfe5b9dca4116597581acbb87735479144",
+      "bytes": 730
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/square_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "7ab05b970325f355b48840a8188d1f17202468b5da703a48e6a7f0c8533d1111",
+      "bytes": 1318,
+      "id": "enterprise:lordaeron/hall/square_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/temple_9x9_a.json",
+      "kind": "meta",
+      "sha256": "c053c757f4efafdef5d97c189c26016ef3b44b8be0493297754fe0dce88432b9",
+      "bytes": 5806
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/temple_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e6347260c6811d708391acdac8b625144fd71ff5e6aa1ab36a703a8aa70484a1",
+      "bytes": 3951,
+      "id": "enterprise:lordaeron/hall/temple_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/watchtower_7x7_a.json",
+      "kind": "meta",
+      "sha256": "262a48a36e9e3d1fc86c08e33a73ee5e8fa5548d6adac5d63db5e44f0376cdb5",
+      "bytes": 745
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/watchtower_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "2f2380b57c4a3ece4c6b0b2d67392ce9e55dfbf173fc4b529b56c92014ae7ab6",
+      "bytes": 4868,
+      "id": "enterprise:lordaeron/hall/watchtower_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/cottage_9x9_b.json",
+      "kind": "meta",
+      "sha256": "cb4a44c5d2f08405f16b9434b7b81eda3b6a3407e2370a149868433ae9ac4035",
+      "bytes": 7453
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/cottage_9x9_b.nbt",
+      "kind": "structure",
+      "sha256": "4c757f28e5d53a1b3d9c25723806a01dbbcc16578f2b20285386e8507f06574e",
+      "bytes": 4015,
+      "id": "enterprise:lordaeron/home/cottage_9x9_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/cottage_9x9_b__brick.json",
+      "kind": "meta",
+      "sha256": "9e0a9ea2792d28d4f1d45c53e4181cb96c1d59f0d9100533df3169cbe6dfb94e",
+      "bytes": 148
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/cottage_9x9_b__brick.nbt",
+      "kind": "structure",
+      "sha256": "5555998d0db5ee2300a9b9c2e7e39ff78465cda1c49af752bc69eb1662b3138f",
+      "bytes": 4060,
+      "id": "enterprise:lordaeron/home/cottage_9x9_b__brick"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/cottage_9x9_b__stone.json",
+      "kind": "meta",
+      "sha256": "22afd96d93d0e9f2b6fb0ca8035f321ddf42a1a20a41add2bdacae49d728bffc",
+      "bytes": 148
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/cottage_9x9_b__stone.nbt",
+      "kind": "structure",
+      "sha256": "0614e6af77b612ce92bf09e15a8221c6073ab89e4b04a244093ba97a82ae2319",
+      "bytes": 4067,
+      "id": "enterprise:lordaeron/home/cottage_9x9_b__stone"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/terrace_21x9_b.json",
+      "kind": "meta",
+      "sha256": "5e6a67ed25892080d89277d954e79e54544514a1cbb9b972414b705e7ae30e38",
+      "bytes": 20441
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/terrace_21x9_b.nbt",
+      "kind": "structure",
+      "sha256": "78fa90e953461aed1ff4fadf48d60c30c1732355287923fb54de13e4ce9277f9",
+      "bytes": 8069,
+      "id": "enterprise:lordaeron/home/terrace_21x9_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/terrace_21x9_b__brick.json",
+      "kind": "meta",
+      "sha256": "d0656879a387a611dd593bff6c851d4c4b61528f4a7ca71e8d30f68c4dd6377e",
+      "bytes": 150
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/terrace_21x9_b__brick.nbt",
+      "kind": "structure",
+      "sha256": "db6e03e32066dd38a947fbd772256893e65a26ecc2cfbb0eb99f51ffefa6c605",
+      "bytes": 8143,
+      "id": "enterprise:lordaeron/home/terrace_21x9_b__brick"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/terrace_21x9_b__stone.json",
+      "kind": "meta",
+      "sha256": "bf0223e20fe890b995c8950cfa83bde63c00efea9e67a09c67f8817aba2a6b58",
+      "bytes": 150
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/terrace_21x9_b__stone.nbt",
+      "kind": "structure",
+      "sha256": "325544d8a562efe91ed5cb275a15028882571c22ebf4bda461086109be774b4b",
+      "bytes": 8142,
+      "id": "enterprise:lordaeron/home/terrace_21x9_b__stone"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b.json",
+      "kind": "meta",
+      "sha256": "f197108b461065fc3a5065ca29a23952104892bc8d9e2678c7929f00e21a8ff9",
+      "bytes": 22701
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b.nbt",
+      "kind": "structure",
+      "sha256": "093c77425b7c7033842ef11e4f7449b99278a9ec20763ae4041d4570c8a23cf3",
+      "bytes": 8619,
+      "id": "enterprise:lordaeron/home/townhouse_12x9_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__daub.json",
+      "kind": "meta",
+      "sha256": "182cdc341a93768d328658c6a9a029481b54a350e2ec689b3ba74f396defad6c",
+      "bytes": 152
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__daub.nbt",
+      "kind": "structure",
+      "sha256": "8b403fc35c3a3364fec1d57a682e5ffe56a09ef280923e1b1471231427f4c52a",
+      "bytes": 8552,
+      "id": "enterprise:lordaeron/home/townhouse_12x9_b__daub"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__stone.json",
+      "kind": "meta",
+      "sha256": "1fa2839bc6b08ab30deb99aad2bb6dc74fbde44beec3e8d00bdacf854125526b",
+      "bytes": 154
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__stone.nbt",
+      "kind": "structure",
+      "sha256": "36a593f2b79131874c2032cc8de1f9872b41f7906f60d0118ae95041632c2337",
+      "bytes": 8626,
+      "id": "enterprise:lordaeron/home/townhouse_12x9_b__stone"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/altar.json",
+      "kind": "meta",
+      "sha256": "f07691e34f4b13458f1c701ba225909e7c7691b77de17535465c377807bae705",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/altar.nbt",
+      "kind": "part",
+      "sha256": "330507fdbfd903f5a0d7bd33f3a57cc25b74a4a85cfff172f3c0d8133a58c7da",
+      "bytes": 201,
+      "id": "enterprise:lordaeron/part/timber_relief/altar"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/anvil.json",
+      "kind": "meta",
+      "sha256": "bbac64c16643d0970797394cbd0966b6ab2e629d1013488062f9a94d0204558f",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/anvil.nbt",
+      "kind": "part",
+      "sha256": "2493f02aa338b28ec318acba860a1190ae8420ed88e3f9d9a8915aca45f1d134",
+      "bytes": 147,
+      "id": "enterprise:lordaeron/part/timber_relief/anvil"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_arcade_ground.json",
+      "kind": "meta",
+      "sha256": "11b3e9c7ca72d7a63c35ce60a13c55fa8f59fc11dc487ccb284b5b6c91b7cdfd",
+      "bytes": 398
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_arcade_ground.nbt",
+      "kind": "part",
+      "sha256": "f075764540e407f9011c84f68e6389df5762a49b4b620c16871ba6d1d4600f8b",
+      "bytes": 349,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_arcade_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_door_ground.json",
+      "kind": "meta",
+      "sha256": "12183567db74b5b27e1a662e92f58002475b3d0a601957bea9404080ed9f281b",
+      "bytes": 392
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_door_ground.nbt",
+      "kind": "part",
+      "sha256": "559514f19c08c849a0e635b143f4d958a74eedd4cb3e0b3c3d5f04f534fd943f",
+      "bytes": 462,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_door_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_landing_ground.json",
+      "kind": "meta",
+      "sha256": "26b67d722454bff44ba871e04cb363ec6109dbd68f1729f571c0921d140750a1",
+      "bytes": 360
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_landing_ground.nbt",
+      "kind": "part",
+      "sha256": "73b0a99a8799208506b335dd47c252d009845877cc73033b84d9dbdfa3cde7f4",
+      "bytes": 384,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_landing_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_landing_upper.json",
+      "kind": "meta",
+      "sha256": "ed54f905f78d1d15d28fee73f8d5bbf188f660f080b3267d347d9bf77e411b26",
+      "bytes": 357
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_landing_upper.nbt",
+      "kind": "part",
+      "sha256": "4f8bfd551f59afa8e55aa9638f6bef735cab161505418583c69582e519f366a8",
+      "bytes": 381,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_landing_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_party_ground.json",
+      "kind": "meta",
+      "sha256": "310a78c048b24442e50dab9d944e445bcd9369906b2b3e61daf5cff0715444c1",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_party_ground.nbt",
+      "kind": "part",
+      "sha256": "46764a2ae3b342ee3ee7fc9d68f3ab003c2774e4bd41bbf8f5a4233110e5aeb4",
+      "bytes": 207,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_party_upper.json",
+      "kind": "meta",
+      "sha256": "eef8f16f6aab25ab280cd12a3e74b0eca498e58c221812311fcc7c872f24249e",
+      "bytes": 343
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_party_upper.nbt",
+      "kind": "part",
+      "sha256": "14ffd0515e201b19de0377c8e736a695937b3dff0788ad07d5a5e03c495b3113",
+      "bytes": 206,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_plain_ground.json",
+      "kind": "meta",
+      "sha256": "3ef5ecc3350f2bbe7fe0df6c08b785b9465bbc75ecb1faadfaa45e60ab4249a3",
+      "bytes": 383
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_plain_ground.nbt",
+      "kind": "part",
+      "sha256": "007962680337f000c49cad7fbf1cdb5accc9e42c468dfef3db6ee9389ae8e802",
+      "bytes": 286,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_plain_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_plain_upper.json",
+      "kind": "meta",
+      "sha256": "195f286032395451bdc2b4d994842077201c1d7ae5a057caf2332d3236459eee",
+      "bytes": 380
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_plain_upper.nbt",
+      "kind": "part",
+      "sha256": "5bed4a8a20a734e7d38df359a68eb22e57445b4b4ae5157aff83e065bb9fc0dc",
+      "bytes": 283,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_plain_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_shop_ground.json",
+      "kind": "meta",
+      "sha256": "a7adcdf4035ca429dc70d2dea9b0910cf1d121ce4abc1153580a62ceb0063999",
+      "bytes": 412
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_shop_ground.nbt",
+      "kind": "part",
+      "sha256": "ca6b62eef4618177660c372d072f32d63143f03e2079a4465ad13c7ae33b9cb9",
+      "bytes": 346,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_shop_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_box_ground.json",
+      "kind": "meta",
+      "sha256": "90d9e6e66f6cf1640464bdfffe4f61331f30c99ab012ae6ee49b600a6b912303",
+      "bytes": 415
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_box_ground.nbt",
+      "kind": "part",
+      "sha256": "c773e622fa1e5ad4b8e6fc6214b77a771f8f6bb1833a921b63e273d83324eb3f",
+      "bytes": 424,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_window_box_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_box_upper.json",
+      "kind": "meta",
+      "sha256": "160795c9094872b9399c9e3878ae2ef0023589c14c6749fee6933d70c213c27d",
+      "bytes": 412
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_box_upper.nbt",
+      "kind": "part",
+      "sha256": "e334e50fa11796a0cfdf760fc3cfe3dc22ae99c81cfa7c03b973fabf5ca8e370",
+      "bytes": 422,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_window_box_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_ground.json",
+      "kind": "meta",
+      "sha256": "105dab9203e11ed6a17d41952b09121e1fe84b3643bbdb9bb0b36bd6e3ed6031",
+      "bytes": 372
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_ground.nbt",
+      "kind": "part",
+      "sha256": "403e940799f86273289dfa9c744e730a754af2daf23d2f1586991b24535da70d",
+      "bytes": 380,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_window_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_upper.json",
+      "kind": "meta",
+      "sha256": "050636087446ca9749d5ee233c8aa00df50bd22c4e1d4f072b354dfba58d7dc2",
+      "bytes": 369
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bay_window_upper.nbt",
+      "kind": "part",
+      "sha256": "197b78312b1b9dc3b9e4a843348f9d5f89032ff2e89ea7f38eda2b7811d033ef",
+      "bytes": 377,
+      "id": "enterprise:lordaeron/part/timber_relief/bay_window_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bed.json",
+      "kind": "meta",
+      "sha256": "a76929fbbad9f80bbe9e202e40a2a6209916dc8fe0eb964a86218401ddb51226",
+      "bytes": 227
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bed.nbt",
+      "kind": "part",
+      "sha256": "82cefbaae505a6b33092f4396ace548964f19913ab769b65f888a07ebc09c059",
+      "bytes": 189,
+      "id": "enterprise:lordaeron/part/timber_relief/bed"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bench.json",
+      "kind": "meta",
+      "sha256": "7a790508a2023547969bbb3486a3ea21642dac5cb3a29ff599e3323397d5c210",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/bench.nbt",
+      "kind": "part",
+      "sha256": "57acd97668679a40e98f524a39c30fc106289112ef2b1b28b17ee1feb6f0a5e6",
+      "bytes": 187,
+      "id": "enterprise:lordaeron/part/timber_relief/bench"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/candles.json",
+      "kind": "meta",
+      "sha256": "28eb7c4e22c5458be3a2c927c3e76d91f44b437876225e6d31f5f78c701d95a2",
+      "bytes": 235
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/candles.nbt",
+      "kind": "part",
+      "sha256": "cf65ba5ab06f2bda4c64f631c236eacf708013cf5311b601471d29b262cf22b1",
+      "bytes": 166,
+      "id": "enterprise:lordaeron/part/timber_relief/candles"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/cask.json",
+      "kind": "meta",
+      "sha256": "139b6c24f54a06c3b79544c05386565ced0504afc86780cc7f42bdac9af638ec",
+      "bytes": 229
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/cask.nbt",
+      "kind": "part",
+      "sha256": "a92962f46b42a9173410b7f39d5c5781b094155720fc2e630b6a102eceaa0450",
+      "bytes": 159,
+      "id": "enterprise:lordaeron/part/timber_relief/cask"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chest.json",
+      "kind": "meta",
+      "sha256": "3a0af9a3e7db5047502d253a09667d26e51190f3ef8337e787cb949301749876",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chest.nbt",
+      "kind": "part",
+      "sha256": "fd30cf508df4db0005e37bd63f7e8e51ed14524b9eebd48d6c1cf95da04fdebc",
+      "bytes": 168,
+      "id": "enterprise:lordaeron/part/timber_relief/chest"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_ground.json",
+      "kind": "meta",
+      "sha256": "0a794bfe59d74c414ba8ce4e1a2eca551f0f5ea1972df977ee49fcf9d7d6ae6c",
+      "bytes": 388
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_ground.nbt",
+      "kind": "part",
+      "sha256": "22e7f52dcc4b28051763edde506b6056e19703122e5cf77df651aabb17a9d7f8",
+      "bytes": 159,
+      "id": "enterprise:lordaeron/part/timber_relief/chimney_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_party_ground.json",
+      "kind": "meta",
+      "sha256": "3782f9bb1b85be6abec1fea8ec88b2b2303f0194c47d25c264d80e84130835a3",
+      "bytes": 387
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_party_ground.nbt",
+      "kind": "part",
+      "sha256": "e708d9170e236991d4dc77476df4a91e326914b1557d755229eedfced392669a",
+      "bytes": 146,
+      "id": "enterprise:lordaeron/part/timber_relief/chimney_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_party_upper.json",
+      "kind": "meta",
+      "sha256": "78b69a364a24bd4ed3981f46bba4a157408354b3bf0000665a1d440fff2f0b1c",
+      "bytes": 384
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_party_upper.nbt",
+      "kind": "part",
+      "sha256": "e708d9170e236991d4dc77476df4a91e326914b1557d755229eedfced392669a",
+      "bytes": 146,
+      "id": "enterprise:lordaeron/part/timber_relief/chimney_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_stack.json",
+      "kind": "meta",
+      "sha256": "13ccc64b559e9ce627dfb22ae5cf15aba90c3944352bf1f787b9ac83925e38b3",
+      "bytes": 247
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_stack.nbt",
+      "kind": "part",
+      "sha256": "f1342b96342468ffa622f3a0c882ff35bfdd2f13c62b3da3aff313b12a4623ee",
+      "bytes": 133,
+      "id": "enterprise:lordaeron/part/timber_relief/chimney_stack"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_stack_party.json",
+      "kind": "meta",
+      "sha256": "568bc30aa80647dce3eeef0e7d0994d37b9125c16cb3ca9bce3a107a867724a3",
+      "bytes": 259
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_stack_party.nbt",
+      "kind": "part",
+      "sha256": "c6bdc25426d8829c96b7c44f3da8eeb501df057ca7805073f47b73d9da535be2",
+      "bytes": 127,
+      "id": "enterprise:lordaeron/part/timber_relief/chimney_stack_party"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_upper.json",
+      "kind": "meta",
+      "sha256": "2fa1e674887ff2355a7fc3bdc0f42fcdb15e40c61f6cfb63feb90d74ff2f57df",
+      "bytes": 385
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/chimney_upper.nbt",
+      "kind": "part",
+      "sha256": "22e7f52dcc4b28051763edde506b6056e19703122e5cf77df651aabb17a9d7f8",
+      "bytes": 159,
+      "id": "enterprise:lordaeron/part/timber_relief/chimney_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_straight_bottom.json",
+      "kind": "meta",
+      "sha256": "e764f4a1d51844517ea787f3641d721645b2214c31b40826f3d5e793b3c887a3",
+      "bytes": 319
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_straight_bottom.nbt",
+      "kind": "part",
+      "sha256": "4f2477fe77039725b83df2d0a6769bafb2a1ad58b142b0cf6fe55760e889d403",
+      "bytes": 366,
+      "id": "enterprise:lordaeron/part/timber_relief/core_straight_bottom"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_straight_mid.json",
+      "kind": "meta",
+      "sha256": "3c1245dd0c9c42ec62216c62dd6f57cadc29e92a214246809afcead42167bd01",
+      "bytes": 310
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_straight_mid.nbt",
+      "kind": "part",
+      "sha256": "3821cc957fdfdd428970f05fe331fc39f5d5eb665987ca67734ba55a64ac4ef9",
+      "bytes": 366,
+      "id": "enterprise:lordaeron/part/timber_relief/core_straight_mid"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_straight_top.json",
+      "kind": "meta",
+      "sha256": "ea1d1642bb84dd6e197af949cda663528934d4a34c7f4ea8f3da0f2a38358c20",
+      "bytes": 310
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_straight_top.nbt",
+      "kind": "part",
+      "sha256": "97aa2493364bbcb9b833fcc3d78b9f7e0c94e35358af1b2dc557dd05258c95e3",
+      "bytes": 357,
+      "id": "enterprise:lordaeron/part/timber_relief/core_straight_top"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_turned_bottom.json",
+      "kind": "meta",
+      "sha256": "4ceb0831f5e76685d8199568507ee4d51b6389f56c1b5e1d6a545c9030e278b4",
+      "bytes": 315
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_turned_bottom.nbt",
+      "kind": "part",
+      "sha256": "17c83962870943ee495089f004c65e968edfd5e100ac567f07faf67e7aba402f",
+      "bytes": 373,
+      "id": "enterprise:lordaeron/part/timber_relief/core_turned_bottom"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_turned_mid.json",
+      "kind": "meta",
+      "sha256": "397b69b202c0cd7d3e8f41a850c0ba870778cf6761fbc1dcf8c6cb07da0addf9",
+      "bytes": 306
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_turned_mid.nbt",
+      "kind": "part",
+      "sha256": "1eebf5ae9424aaf17f20fd0950c222a06b8d25098bfff0997055ba56cd9b0f30",
+      "bytes": 377,
+      "id": "enterprise:lordaeron/part/timber_relief/core_turned_mid"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_turned_top.json",
+      "kind": "meta",
+      "sha256": "30288698246cf1e23b88c000fd7991e21842c796feb47c16ad7c4b12c29c9284",
+      "bytes": 306
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/core_turned_top.nbt",
+      "kind": "part",
+      "sha256": "6c9fd0a355392f1db8c55ca5bb9f839c84a0c5b8c1957541d323e69e3a85211d",
+      "bytes": 346,
+      "id": "enterprise:lordaeron/part/timber_relief/core_turned_top"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_ground.json",
+      "kind": "meta",
+      "sha256": "b165455dc7e83545a6ad59f1e2742cb9ce9a09e93abee9dbb068699e66d9c3f6",
+      "bytes": 322
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_ground.nbt",
+      "kind": "part",
+      "sha256": "8094c0e5fb8f8256a66b1a22be524f9837aa5403ddcc44b7275eb31f923ec866",
+      "bytes": 266,
+      "id": "enterprise:lordaeron/part/timber_relief/corner_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_party_ground.json",
+      "kind": "meta",
+      "sha256": "44dcff90bc0abb79ad895cc6cd6a8ccd70ca27b615f24e085043e121f76a1cde",
+      "bytes": 355
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_party_ground.nbt",
+      "kind": "part",
+      "sha256": "266c587562ecf0fa5bdada9d7fbb017a47eb966b753ae429cb96231df462356d",
+      "bytes": 182,
+      "id": "enterprise:lordaeron/part/timber_relief/corner_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_party_upper.json",
+      "kind": "meta",
+      "sha256": "13a1e8b85f290e0532ed2efee01dcd37c1a9f643ca3de1013e6f8a51e0694c94",
+      "bytes": 352
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_party_upper.nbt",
+      "kind": "part",
+      "sha256": "266c587562ecf0fa5bdada9d7fbb017a47eb966b753ae429cb96231df462356d",
+      "bytes": 182,
+      "id": "enterprise:lordaeron/part/timber_relief/corner_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_upper.json",
+      "kind": "meta",
+      "sha256": "2dae4f7f136606068e2dc224bf2bee21cea47617604b7d1fa38dfde0bb1f8fc8",
+      "bytes": 319
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/corner_upper.nbt",
+      "kind": "part",
+      "sha256": "8094c0e5fb8f8256a66b1a22be524f9837aa5403ddcc44b7275eb31f923ec866",
+      "bytes": 266,
+      "id": "enterprise:lordaeron/part/timber_relief/corner_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/desk.json",
+      "kind": "meta",
+      "sha256": "b119ea4ae5842b64b49d23a7edada53966b85209b184e5d0c23444f4ab48b66f",
+      "bytes": 229
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/desk.nbt",
+      "kind": "part",
+      "sha256": "e83d7484c56744c6458669e9905991b84e149dffe916d425b188daa0a0f044f8",
+      "bytes": 150,
+      "id": "enterprise:lordaeron/part/timber_relief/desk"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/door_inner.json",
+      "kind": "meta",
+      "sha256": "571b40ec4d69f093b297bd39d284b28c2e7ab5bd0660913b025df2b6ecddf9bc",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/door_inner.nbt",
+      "kind": "part",
+      "sha256": "20142fa5dce353235df273a6e46c7c360ca00bef190bdeb88a0643a0ea912762",
+      "bytes": 250,
+      "id": "enterprise:lordaeron/part/timber_relief/door_inner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/floor.json",
+      "kind": "meta",
+      "sha256": "3c39d4e4d21e1ce1e8cba63f721ecd43c387d93f529a58efefc2a71acfd946bf",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/floor.nbt",
+      "kind": "part",
+      "sha256": "e1ee53097c24e248185abf36aadcd62a2635cbbb14a6f8edbeaac6935219f9fb",
+      "bytes": 134,
+      "id": "enterprise:lordaeron/part/timber_relief/floor"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/forge.json",
+      "kind": "meta",
+      "sha256": "fb980401fbdeb4b9aed0d609ea5c38a6dd73e6939025939200d341119efc4c50",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/forge.nbt",
+      "kind": "part",
+      "sha256": "a6d1c5bb264a3258d272ce7b88c478e22cf2883140a56c39957c13b6c3ba1280",
+      "bytes": 157,
+      "id": "enterprise:lordaeron/part/timber_relief/forge"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/foundation.json",
+      "kind": "meta",
+      "sha256": "b50b2480ad8851baa8494e1307cb5cb4be962879e1419a279341ed6d0d8ce1dd",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/foundation.nbt",
+      "kind": "part",
+      "sha256": "27ce84ba12dbca5b3f09bc574dfec7ac83c9c0fcb493c61f8fc3b7232c7a2b4f",
+      "bytes": 138,
+      "id": "enterprise:lordaeron/part/timber_relief/foundation"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_bars.json",
+      "kind": "meta",
+      "sha256": "7fc6460a90408a01c8ccc9269a8bd9be9a327b9e30d1070ad1592b976a148fa7",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_bars.nbt",
+      "kind": "part",
+      "sha256": "0856ee51a0faea5a6fcc8c8d5ae5e6897568e71a558d56297f02d092a61cc960",
+      "bytes": 175,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_bars"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_blue.json",
+      "kind": "meta",
+      "sha256": "8e02aaecb80402c114691edfdd4bd7c57711449c869f4795130aa49138dac162",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_blue.nbt",
+      "kind": "part",
+      "sha256": "ee95f5c41642f2540031d4bddbd49eb813ff8c3f86c974e6b4cde26ce7f95af7",
+      "bytes": 136,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_blue"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_books.json",
+      "kind": "meta",
+      "sha256": "8db6ad010d943012211469eb72ad5da00c1106123541ffc0eb75bb30b1a41935",
+      "bytes": 243
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_books.nbt",
+      "kind": "part",
+      "sha256": "2d2128b6630651e1d9c937cc0e2ecd4604290ffe2a413c6d0fc46f97b7e0b476",
+      "bytes": 204,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_books"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_candle.json",
+      "kind": "meta",
+      "sha256": "6e9cc41ea64fa7daa8016303e4ca6bbeb65f05800b35fe21cfa23320226039ac",
+      "bytes": 245
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_candle.nbt",
+      "kind": "part",
+      "sha256": "cf65ba5ab06f2bda4c64f631c236eacf708013cf5311b601471d29b262cf22b1",
+      "bytes": 166,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_candle"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_chain.json",
+      "kind": "meta",
+      "sha256": "5102219bc623c88423ff163fa6feb95b60a0857870747e1e6455f55053fe2d4e",
+      "bytes": 243
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_chain.nbt",
+      "kind": "part",
+      "sha256": "ab0cd1d75eab8a7b449b67feb29117710f6165831be0641b5eb4cdc4eb39c01a",
+      "bytes": 157,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_chain"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_hay.json",
+      "kind": "meta",
+      "sha256": "904306f35c79c56432b696f3f2b60c2d3b158452cc06e21d4dbd6b064f19761c",
+      "bytes": 239
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_hay.nbt",
+      "kind": "part",
+      "sha256": "4bc63863a3fe23c458c6ba56978af2709c1f563b140dc272e4265f5ee932ab17",
+      "bytes": 145,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_hay"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_iron.json",
+      "kind": "meta",
+      "sha256": "9a2f48421431da93e7ebe56c61c584c37e262510b8101b23473232e00b9b40d3",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_iron.nbt",
+      "kind": "part",
+      "sha256": "b03b8e6837c73f9ba5fe8947285d10e0629987700b54a46a3324e5b328e7ce2a",
+      "bytes": 130,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_iron"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_kelp.json",
+      "kind": "meta",
+      "sha256": "75508760283737a1e28b453befedf7e0fccaf61761dc97fe2339af919c2d1e86",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_kelp.nbt",
+      "kind": "part",
+      "sha256": "02584bdd3970b9da0ac88e5cc787500450dffcdbdf214859e6ac09c2143fd3c0",
+      "bytes": 135,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_kelp"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_leather.json",
+      "kind": "meta",
+      "sha256": "9d8977eb94b5d46d2016de9b4cb6a6ebc23870a215eac02bcb2666f22b313c6a",
+      "bytes": 247
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_leather.nbt",
+      "kind": "part",
+      "sha256": "fb1b8ba314ea58abdee16579e8a4c683ff7c3e4c8aafc2f34f817f81d584f122",
+      "bytes": 133,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_leather"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_meat.json",
+      "kind": "meta",
+      "sha256": "8af10cf80aa3a7cdedbf30c89614c0b5a6ce517b8df326d513f99e3635de0f1c",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_meat.nbt",
+      "kind": "part",
+      "sha256": "50e5a54f66ac0ba2d4b79f82270c9b0fd60f627f6c191a2a1212eb3d86fb2e22",
+      "bytes": 133,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_meat"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_pickle.json",
+      "kind": "meta",
+      "sha256": "83db9ad609cd08a933a24007084714077d08dc2c189b77c446e9b00832492cbe",
+      "bytes": 245
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_pickle.nbt",
+      "kind": "part",
+      "sha256": "d42b3fa6a93df2df1c1832ff837bea57986a0a927bfdf4deff6906d47f818568",
+      "bytes": 163,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_pickle"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_pot.json",
+      "kind": "meta",
+      "sha256": "f773244a3432f25c8598ac8479d039d22579630dc8f9ba5927ea5c65db1ec21a",
+      "bytes": 239
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_pot.nbt",
+      "kind": "part",
+      "sha256": "e164af43aea9a146bab6d66f78a98f7cb5cf2645cafb13a41ea40b0ecbb1f7b6",
+      "bytes": 174,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_pot"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_pumpkin.json",
+      "kind": "meta",
+      "sha256": "85f5f16949888d270b889a9b74bd3497bae839a6ddcf96713c1f28f32643af54",
+      "bytes": 247
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_pumpkin.nbt",
+      "kind": "part",
+      "sha256": "475d0fe8e50d65645d2d8d318d9330a40eed5900b4b91653ff26dc3ddca157b7",
+      "bytes": 155,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_pumpkin"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_stone.json",
+      "kind": "meta",
+      "sha256": "b7db2412239f6337f9dd6be238dd5c9292a4777f1e07987021ea4296cdbdf279",
+      "bytes": 243
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_stone.nbt",
+      "kind": "part",
+      "sha256": "91d2ab0271309074362f35e072648305158a14d743e889466d10f58fd8e94ac4",
+      "bytes": 139,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_stone"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_target.json",
+      "kind": "meta",
+      "sha256": "1b2055dfda4944559f208852dfdcca71a5a7bd83768b96ec5ce8012e8663937f",
+      "bytes": 245
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_target.nbt",
+      "kind": "part",
+      "sha256": "765949c1b8a189a0c9563667a8ec46e6e0019231aabec1ab7973b4be3f18faae",
+      "bytes": 145,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_target"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_wool.json",
+      "kind": "meta",
+      "sha256": "ba61099f491f1f4827fa4fda62cec2cadcc305cab722ad2d5737a67e446ee612",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/goods_wool.nbt",
+      "kind": "part",
+      "sha256": "fd4d82127a40b1b6031f1c60f707956ffa99741ef9160da7970cb297d0f63c80",
+      "bytes": 132,
+      "id": "enterprise:lordaeron/part/timber_relief/goods_wool"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/hay.json",
+      "kind": "meta",
+      "sha256": "d1b962cea7dcdeca453b80e3a299e11b0f7a05f15a4d1fdcdc9322d40e649b82",
+      "bytes": 227
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/hay.nbt",
+      "kind": "part",
+      "sha256": "4bc63863a3fe23c458c6ba56978af2709c1f563b140dc272e4265f5ee932ab17",
+      "bytes": 145,
+      "id": "enterprise:lordaeron/part/timber_relief/hay"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/hearth.json",
+      "kind": "meta",
+      "sha256": "b45ec3c864acef560f38b34388b3ebd1e9e0caa9284b45265b1845509e4fd760",
+      "bytes": 233
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/hearth.nbt",
+      "kind": "part",
+      "sha256": "2661121246863e964dd4b48347ca0a9dd7e9a6918e9f066a72e04e1e930bdbbb",
+      "bytes": 154,
+      "id": "enterprise:lordaeron/part/timber_relief/hearth"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/lantern.json",
+      "kind": "meta",
+      "sha256": "058992efe8adca50f540cce5a496b51666729ed9248908cc91cfe63743b8ea93",
+      "bytes": 235
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/lantern.nbt",
+      "kind": "part",
+      "sha256": "0f7f6fc995f495f3a8c224ba84e920902e991714884f0903e55bad8b6f5989bf",
+      "bytes": 162,
+      "id": "enterprise:lordaeron/part/timber_relief/lantern"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_ground.json",
+      "kind": "meta",
+      "sha256": "40c73e2d11884c29406372a9635005106b3c06d3097b17c9aa20fcb894ec492d",
+      "bytes": 443
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_ground.nbt",
+      "kind": "part",
+      "sha256": "c95c2f4d2b4d29050dd18b6c38139ef0866c7dce54ffe39c54303b18df9c0e48",
+      "bytes": 287,
+      "id": "enterprise:lordaeron/part/timber_relief/post_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_party_ground.json",
+      "kind": "meta",
+      "sha256": "525ea97bdd95c8294e113592bc734d1f13361f6c90a0f508d0e5b685ee2adcfa",
+      "bytes": 349
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_party_ground.nbt",
+      "kind": "part",
+      "sha256": "4449259bb3e30bb8f57087619daaabb69f19c4c09b893ae316d4198c087ddb21",
+      "bytes": 168,
+      "id": "enterprise:lordaeron/part/timber_relief/post_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_party_upper.json",
+      "kind": "meta",
+      "sha256": "94cdc6a504242c9d8995f5a7e6b30eb76bb6fb7927e9e8dd0c7c7bb0377dc77d",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_party_upper.nbt",
+      "kind": "part",
+      "sha256": "4449259bb3e30bb8f57087619daaabb69f19c4c09b893ae316d4198c087ddb21",
+      "bytes": 168,
+      "id": "enterprise:lordaeron/part/timber_relief/post_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_upper.json",
+      "kind": "meta",
+      "sha256": "74f5a44a8521ea0d187fed8f921ffcc6e2a287b5b1639c90cbafe9a1e967bb1f",
+      "bytes": 440
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/post_upper.nbt",
+      "kind": "part",
+      "sha256": "c95c2f4d2b4d29050dd18b6c38139ef0866c7dce54ffe39c54303b18df9c0e48",
+      "bytes": 287,
+      "id": "enterprise:lordaeron/part/timber_relief/post_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/pot.json",
+      "kind": "meta",
+      "sha256": "8ad6e4ef5f5dff4e91319179abd3b51ac301b3cff7c75aa601a8572a170905b5",
+      "bytes": 227
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/pot.nbt",
+      "kind": "part",
+      "sha256": "f1c2ab0e60b31e77475e88ab2cf7606fe1c5f7314da3285c0125f80210128b30",
+      "bytes": 132,
+      "id": "enterprise:lordaeron/part/timber_relief/pot"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/quench.json",
+      "kind": "meta",
+      "sha256": "b5dc2cf4ba4d423fd3d75b91f877ae2410115e0b935adc46f446ce2dda90ebf8",
+      "bytes": 233
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/quench.nbt",
+      "kind": "part",
+      "sha256": "65bcd9455476e3ce51c8d48dceeb98327b91e62cc15ac09798dbafed17f28744",
+      "bytes": 154,
+      "id": "enterprise:lordaeron/part/timber_relief/quench"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/rack.json",
+      "kind": "meta",
+      "sha256": "98c07bb98d71604325b3b257c699ff16cf98f525c2b472d0aa4d9d781d6e8df3",
+      "bytes": 229
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/rack.nbt",
+      "kind": "part",
+      "sha256": "0856ee51a0faea5a6fcc8c8d5ae5e6897568e71a558d56297f02d092a61cc960",
+      "bytes": 175,
+      "id": "enterprise:lordaeron/part/timber_relief/rack"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_bay_12.json",
+      "kind": "meta",
+      "sha256": "12419e57bcb47b44008f5084110055b57064c12d850ba33ed8c3eed1537b7b6c",
+      "bytes": 288
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_bay_12.nbt",
+      "kind": "part",
+      "sha256": "da8343af6a645a8d8f769125c0bc7288f5fb619098dd60e398f6885a6badc5a6",
+      "bytes": 512,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_bay_12"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_bay_15.json",
+      "kind": "meta",
+      "sha256": "69ebf8d77596bd3d5cc2a26b3da405e5b0e145e9324d2562898e18fe0bdca28b",
+      "bytes": 288
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_bay_15.nbt",
+      "kind": "part",
+      "sha256": "9b1aec73c2430aff04f038a7ab2fa91e8b22b8f2b15dd7d7a38a9e22fb2e8b75",
+      "bytes": 652,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_bay_15"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_bay_9.json",
+      "kind": "meta",
+      "sha256": "b87a46d1f30a26acc5e790dee76e5c1f6352ccb67ffd27f74a6ca7cb3885fd05",
+      "bytes": 283
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_bay_9.nbt",
+      "kind": "part",
+      "sha256": "0e281d53d84c3dbc52f0b8c937d74d0893a7d88ac0692d9f641b789759868384",
+      "bytes": 413,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_bay_9"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_gable_12.json",
+      "kind": "meta",
+      "sha256": "26af4616a0c67e256f40b9d76e70d788fe155bd0cc6137f9e62c51d5bd3d375f",
+      "bytes": 294
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_gable_12.nbt",
+      "kind": "part",
+      "sha256": "8ca8d36575edad5ab48348c876e0e70650480eead41f8b3dfcc9065fde4237e8",
+      "bytes": 540,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_gable_12"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_gable_15.json",
+      "kind": "meta",
+      "sha256": "647bb13cbb5e48d302b590f8fa49b0dfa2e10efa3f9e44a9339cb4b4713f0718",
+      "bytes": 294
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_gable_15.nbt",
+      "kind": "part",
+      "sha256": "3b01507c7041114e395390f6d45ea589df2b9d71e8a38b5faba106f45f8d2e30",
+      "bytes": 680,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_gable_15"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_gable_9.json",
+      "kind": "meta",
+      "sha256": "66f6529cf64c89e7312bd739d49fb84da65a0d60092b9101d061787980064392",
+      "bytes": 289
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_gable_9.nbt",
+      "kind": "part",
+      "sha256": "bc8919445973e8176e6e73dac3e4a0907e78afebef3f2eb99c8eec3286af2a5d",
+      "bytes": 447,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_gable_9"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_verge_12.json",
+      "kind": "meta",
+      "sha256": "62f93731d3a8ec26c62cf6c86702b50e316d78dc711e27a77ea24610ce6e2620",
+      "bytes": 294
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_verge_12.nbt",
+      "kind": "part",
+      "sha256": "9648765b877981f4af1aed1689c3114b4f539ff1d1559c4b871cf2887e1ec85e",
+      "bytes": 443,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_verge_12"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_verge_15.json",
+      "kind": "meta",
+      "sha256": "e5df1a2f9f45582cf286473e385f8d99edeb10064d77981125de16158ada5f2b",
+      "bytes": 294
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_verge_15.nbt",
+      "kind": "part",
+      "sha256": "a4f7f46b40a5cab4055add89d3b822e83f0b33fd7f7a0f4290f76f0ee843f57a",
+      "bytes": 475,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_verge_15"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_verge_9.json",
+      "kind": "meta",
+      "sha256": "a2cf647f18466a55cd35f0519843bd4d6ace0052e125e1539796b97d810b8f11",
+      "bytes": 289
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/roof_verge_9.nbt",
+      "kind": "part",
+      "sha256": "3166c6ff911f510f73856c6bed8a9eedc94403cb4d2c57f2cee74e08f2463b6d",
+      "bytes": 379,
+      "id": "enterprise:lordaeron/part/timber_relief/roof_verge_9"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/room_air.json",
+      "kind": "meta",
+      "sha256": "0b58ce2e060470b5cb7a3c4ac10491e53e6b165ebdd3fe00fe823a9ac57c7332",
+      "bytes": 237
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/room_air.nbt",
+      "kind": "part",
+      "sha256": "e89c64f3e014c10dbf126b18b3bd67e1425b76889175732be9565e964f20e939",
+      "bytes": 140,
+      "id": "enterprise:lordaeron/part/timber_relief/room_air"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/shelf.json",
+      "kind": "meta",
+      "sha256": "f5d2c66866d23a3d7c78a6f3b8129f2f4dcfbf409b58381565d76c21f4f36b10",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/shelf.nbt",
+      "kind": "part",
+      "sha256": "6d061a074c504dc4af58a0fb4e448669da050466e12e73cd886a7a4f94deb682",
+      "bytes": 130,
+      "id": "enterprise:lordaeron/part/timber_relief/shelf"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/smith_table.json",
+      "kind": "meta",
+      "sha256": "2674bc2f125e20119ae94713648f658c1697b52e4bbc2287780c15de194f093d",
+      "bytes": 243
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/smith_table.nbt",
+      "kind": "part",
+      "sha256": "c1d2194b1823e34a613297e3717401cfcb58b59918be7de0d2b95294db3a6d04",
+      "bytes": 139,
+      "id": "enterprise:lordaeron/part/timber_relief/smith_table"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/stall_rail.json",
+      "kind": "meta",
+      "sha256": "b6e20a67b0d14c4502b04c671fd3f9f2821a74dc0ae7cf4a3cda5a5df15f19f2",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/stall_rail.nbt",
+      "kind": "part",
+      "sha256": "072510d71e3100c74da849a973c544fb872d621d2c899c5527e17646143b4096",
+      "bytes": 178,
+      "id": "enterprise:lordaeron/part/timber_relief/stall_rail"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/table.json",
+      "kind": "meta",
+      "sha256": "a7759040d524ce0446a27d3983507e026c9f8416ebc215357e69d073a2f44191",
+      "bytes": 231
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/table.nbt",
+      "kind": "part",
+      "sha256": "50ea8fbc6f28931c624148ad684d7d8d5a691dd18ac6f3ed66da833e9115086b",
+      "bytes": 211,
+      "id": "enterprise:lordaeron/part/timber_relief/table"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/wall_inner.json",
+      "kind": "meta",
+      "sha256": "e3a1f1132709161fd326388e735fd6dad9ed60d40744134291f38f8e3cd7bfe9",
+      "bytes": 241
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/wall_inner.nbt",
+      "kind": "part",
+      "sha256": "6a67d91fdccc2fabaa29cd609c368f9650ddd40810cd82dcf4c06e080e45c6d0",
+      "bytes": 183,
+      "id": "enterprise:lordaeron/part/timber_relief/wall_inner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/workstation.json",
+      "kind": "meta",
+      "sha256": "acb1b48105fdd3e857c55480bd33af964c64abba928cf6541a2b6117b741a354",
+      "bytes": 243
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/workstation.nbt",
+      "kind": "part",
+      "sha256": "422b538be7a876c1597b76d5904d58812f120cc3bd6cc70ffbc62ca5dd54d73b",
+      "bytes": 125,
+      "id": "enterprise:lordaeron/part/timber_relief/workstation"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_armorer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "3f4307d75a95180689f349f4d31875c710e059008b31953a25683134699aba24",
+      "bytes": 780
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_armorer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "1f25105d98813d0e9e0f4734ab12b7b800729bd1b485c45fde9ba12e138dbe80",
+      "bytes": 519,
+      "id": "enterprise:lordaeron/stall/stall_armorer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_butcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "9213780bbc28976b2a1d216c42c451452228c55ce27e292e67542039bd3e17c6",
+      "bytes": 773
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_butcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "cde9e6303ea0f75918aea194ff1f3440ba57440e32a81aebca75303fc6479125",
+      "bytes": 509,
+      "id": "enterprise:lordaeron/stall/stall_butcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cartographer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "4a4d003024d661ad42a0ae6d2e3f36a068f8b172ddc7f21ee7872815b7f464e2",
+      "bytes": 794
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cartographer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "07db6c03e28934c0e052f8105bf84a1a148584fd6281e93dace7924c41be0ccd",
+      "bytes": 537,
+      "id": "enterprise:lordaeron/stall/stall_cartographer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cleric_3x3_a.json",
+      "kind": "meta",
+      "sha256": "e9dc5ccb8c5b80660b9e92657438f312a847d331578210db4e526f611bd64b7f",
+      "bytes": 778
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cleric_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "fab31c04b6a2859b3a3dba85c9e4a5f8ff99e5c03b90b3eabb0f9dc054b129c5",
+      "bytes": 548,
+      "id": "enterprise:lordaeron/stall/stall_cleric_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_farmer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "a137655d456ba8ac8941f60a85328b429aadd30f5060bd78f420f72167b62d99",
+      "bytes": 774
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_farmer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "3a90537d750ae9dd3c37e90d6c9989a6e2f7a31bb5ae64ae048f1ed386a2d059",
+      "bytes": 532,
+      "id": "enterprise:lordaeron/stall/stall_farmer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fisherman_3x3_a.json",
+      "kind": "meta",
+      "sha256": "929e17a9b3eb223470e8af9cf5a4b6e97692605c25a9cfcc96ba2143bf1deb6d",
+      "bytes": 777
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fisherman_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "947b891b4f48f521adea3174faf72a4158316afb72f1c38cb1e4f955163b5630",
+      "bytes": 536,
+      "id": "enterprise:lordaeron/stall/stall_fisherman_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fletcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "56451204c8ef9b479a81155d911c3c1a73833d3ced56b660943bae6386778a64",
+      "bytes": 784
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fletcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "21df77716f6e8e6d77c02b906c1647e51278e2c51a1a5a66b7bd0e1ea1876a12",
+      "bytes": 531,
+      "id": "enterprise:lordaeron/stall/stall_fletcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_leatherworker_3x3_a.json",
+      "kind": "meta",
+      "sha256": "40ae192bc22909d95ec093a426879d97cdb3e8c5d18caa4a0b52c4ff677031d0",
+      "bytes": 787
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_leatherworker_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "912052a5382487d20cc633e8a59df8c3bb7e0c44bb425a5af72f858ab6384262",
+      "bytes": 505,
+      "id": "enterprise:lordaeron/stall/stall_leatherworker_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_librarian_3x3_a.json",
+      "kind": "meta",
+      "sha256": "d23a513a69452580ff8784067f4e6101c7b9d6e201536ffdf8ced5f40849ecb5",
+      "bytes": 778
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_librarian_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "cd176448f304ab711e48ab6fd6860f4343e1057fbd66e8296e9540eeac2213cf",
+      "bytes": 566,
+      "id": "enterprise:lordaeron/stall/stall_librarian_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_mason_3x3_a.json",
+      "kind": "meta",
+      "sha256": "6649ee1b651d4210d0971f22b0df2092aec5249baed68f8e1198cbc73b58bca7",
+      "bytes": 774
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_mason_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "b5b771ac66fe5b233a0c33934cb9da3d089f769d386e2b83dfce54dcf1d2522a",
+      "bytes": 527,
+      "id": "enterprise:lordaeron/stall/stall_mason_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_shepherd_3x3_a.json",
+      "kind": "meta",
+      "sha256": "5ef43725d2e1180babdd53bff718bb7113179e28a07c061d73266a49712a3a09",
+      "bytes": 773
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_shepherd_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "99e6c4a847c91d55ba102202c7a78b934852688d1119e30d1dfb80d055e4054b",
+      "bytes": 508,
+      "id": "enterprise:lordaeron/stall/stall_shepherd_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_toolsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "fda367525a07e0f1c97570ef6476d73af8d34a7f98454625b4d66f83a31b20a9",
+      "bytes": 785
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_toolsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "d92bcc30caadbaf8305ffbb375ae7d3f8264c3cc4d0c5a305f8da142ef07d4e0",
+      "bytes": 516,
+      "id": "enterprise:lordaeron/stall/stall_toolsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_weaponsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "485f0f526a939745b284952af7719c4d0c96246e2388088615679d347c9b15cc",
+      "bytes": 785
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_weaponsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "66f1d8597c90c0d7348eac7e69f69d6a5948a891fce9ae6d0c50970e006f28cb",
+      "bytes": 521,
+      "id": "enterprise:lordaeron/stall/stall_weaponsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/corner_7x7_a.json",
+      "kind": "meta",
+      "sha256": "7ce45de552115467cbb7e23342ddb32c8b31922b1ed4d6d0e4742641b77f9ea8",
+      "bytes": 782
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/corner_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "38968e9eef53303f961d4b8377d6e13ea076aedc2ca4711bd07b34fa7a9e8972",
+      "bytes": 3426,
+      "id": "enterprise:lordaeron/wall/corner_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_4_a.json",
+      "kind": "meta",
+      "sha256": "08bfd9a7260ad8ca91ee2661af5cd4ffaa52a26536c3adadc89f04daca0f7db4",
+      "bytes": 543
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_4_a.nbt",
+      "kind": "structure",
+      "sha256": "493dc0f59b8f13fb453fa3645ad2a2316f43de7fba87edce1202dec745f25658",
+      "bytes": 1528,
+      "id": "enterprise:lordaeron/wall/curtain_4_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_8_a.json",
+      "kind": "meta",
+      "sha256": "3c374b07a6a8f74970cc8850840c276b1f0bd33b121020969aa17ed483741e91",
+      "bytes": 543
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_8_a.nbt",
+      "kind": "structure",
+      "sha256": "e8f3c85ec2a3096d2e5912a285488e701915d70b32a4f5b782a200f3d2b62f99",
+      "bytes": 2641,
+      "id": "enterprise:lordaeron/wall/curtain_8_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_1_a.json",
+      "kind": "meta",
+      "sha256": "7ca798f7a44ed273dc5657e827049297620b80e0586dea031760efcd2559eb2b",
+      "bytes": 541
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_1_a.nbt",
+      "kind": "structure",
+      "sha256": "992117be58f0025146b8b58d3e1de4c255070ec5eabf14573ded79b2ef0bb995",
+      "bytes": 586,
+      "id": "enterprise:lordaeron/wall/filler_1_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_2_a.json",
+      "kind": "meta",
+      "sha256": "a52e775997d4f6ba761b4dce209c9e477ea39a3b1a926d2c636afc47c67b349e",
+      "bytes": 541
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_2_a.nbt",
+      "kind": "structure",
+      "sha256": "7466e559d2c8fc6f7ebe717dc4741c9e7d9d48921ff871a0d827af3cddaea44c",
+      "bytes": 934,
+      "id": "enterprise:lordaeron/wall/filler_2_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_3_a.json",
+      "kind": "meta",
+      "sha256": "816e825d1b554b2ce6bd4798165199fa2969c8bc2eb166b52df6be2ef3a13a51",
+      "bytes": 541
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_3_a.nbt",
+      "kind": "structure",
+      "sha256": "51b79e8d677f0f75a68aa3ccb0cb7836903bec6f5b39c92289454ecd3edd5da7",
+      "bytes": 1252,
+      "id": "enterprise:lordaeron/wall/filler_3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/gatehouse_11x7_a.json",
+      "kind": "meta",
+      "sha256": "3d472e6a93a943252f9c28b2f6f8893cfa9f15e14fdf893e0355af8c3babab5c",
+      "bytes": 750
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/gatehouse_11x7_a.nbt",
+      "kind": "structure",
+      "sha256": "5cca56ad8c667e5c1a86fbb2f3e9169dd0dee7e9c71da09c8db608ef6523ed16",
+      "bytes": 4546,
+      "id": "enterprise:lordaeron/wall/gatehouse_11x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/tower_7x7_a.json",
+      "kind": "meta",
+      "sha256": "9b9d9843b1f9aedbae45b7e31ea86f2bda3081b7c6d02309beb4d4b660715b07",
+      "bytes": 677
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/tower_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "779b07efe943217dc8ac7d64a0ea04eca6d9d0e1bdfa11b67d0b73befd8368ed",
+      "bytes": 3421,
+      "id": "enterprise:lordaeron/wall/tower_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_armorer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "af0c17f7e8c4180a5fa17317bd45a47ce874080ec6ce539c10b14c0c84f5ab8e",
+      "bytes": 13533
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_armorer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e9a0ba13a36a4da74b09c96b3a11fe00ab81752e82315baa32d5106d272f5b66",
+      "bytes": 6918,
+      "id": "enterprise:lordaeron/workshop/workshop_armorer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_butcher_12x9_a.json",
+      "kind": "meta",
+      "sha256": "5d546d78983b74d8d6f9f637d6d8bc7199fcc0ecb43c49f0756479c4d9ecdbab",
+      "bytes": 13519
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_butcher_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "0d9384d24367ca1e1d3b6ab65582ec726eb3d1d3d7c97f1aebac0d31ebada59e",
+      "bytes": 6904,
+      "id": "enterprise:lordaeron/workshop/workshop_butcher_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cartographer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "7949064b41ea0baa66d70fcf993f2e79a77a9e3136119a550b8ea6f8fda28b01",
+      "bytes": 13528
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cartographer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "f2c1bdd519bbfb597071291609eadf4e276c7719d3a4981a69972d00522671bd",
+      "bytes": 6922,
+      "id": "enterprise:lordaeron/workshop/workshop_cartographer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cleric_12x9_a.json",
+      "kind": "meta",
+      "sha256": "e57ab63fc3657f7d919e4da838ef368a2e61241336ef656e43d95a85cb1f800c",
+      "bytes": 13564
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cleric_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "ce40e6fa8f508bf69a3545a3ed84fccf48491a78e42650ec3a26d48559a163ac",
+      "bytes": 6961,
+      "id": "enterprise:lordaeron/workshop/workshop_cleric_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_farmer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "39bee4b12c5f5806ff515b1ebd3ca6b857acc9767300b3b270f502fe82dbcaca",
+      "bytes": 13510
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_farmer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "7e99b5fdbaaa0b6ef9ec1ee76c2bac05ee0c983c519ede032128231031840772",
+      "bytes": 6962,
+      "id": "enterprise:lordaeron/workshop/workshop_farmer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fisherman_12x9_a.json",
+      "kind": "meta",
+      "sha256": "009e22103fd391cba2506cedb74321c869352267ba982f50e50f7cfc3454142e",
+      "bytes": 13526
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fisherman_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "b7f48eb324a767cf9dd2b686f2a86da33fd9ea9a5a3dac32e4aca3d293b351da",
+      "bytes": 6910,
+      "id": "enterprise:lordaeron/workshop/workshop_fisherman_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fletcher_12x9_a.json",
+      "kind": "meta",
+      "sha256": "af947f67577e72c2202b7848432d2fb1b5f8521a97dd59afe2d5751f07506f02",
+      "bytes": 13516
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fletcher_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "d39e9dc6624d296b7fbadbaf053dd1ba693259df8fca71b618aff76f268a2cf8",
+      "bytes": 6923,
+      "id": "enterprise:lordaeron/workshop/workshop_fletcher_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_leatherworker_12x9_a.json",
+      "kind": "meta",
+      "sha256": "0d0e5c94815fd420060fbe66cea20cb520585ae8090887a132f2f7a98ac0635f",
+      "bytes": 13522
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_leatherworker_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "d39d3d93a27dabe978998a15e108a892fcd4e630b84e36bdbb079428afe5bfcd",
+      "bytes": 6835,
+      "id": "enterprise:lordaeron/workshop/workshop_leatherworker_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_librarian_12x9_a.json",
+      "kind": "meta",
+      "sha256": "46776f5100f3f1c78354918fcf8c53c494a805e3abc5eb840a4c56a9e30981dc",
+      "bytes": 13552
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_librarian_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "3f1cf6f0b76dde1b04e19fe7d6ad47eb1ae5c0aedb5feeefab4eb63e85d40f96",
+      "bytes": 6984,
+      "id": "enterprise:lordaeron/workshop/workshop_librarian_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_mason_12x9_a.json",
+      "kind": "meta",
+      "sha256": "7f6c15a2cb8e23c8a789323c6a766bd73d2d68627be94399dbfb8125dc0ca678",
+      "bytes": 13516
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_mason_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "58ee8c6cbe60a061ba15cd41122cd916ed080f477ba8717730b433b33a240ab5",
+      "bytes": 6908,
+      "id": "enterprise:lordaeron/workshop/workshop_mason_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_shepherd_12x9_a.json",
+      "kind": "meta",
+      "sha256": "e3c7913676733832b5a470788a4084a0ddfb8ebc3b10cf99ab2183f6ce6f1d89",
+      "bytes": 13504
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_shepherd_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "3f559d41ee1124ff394eeb8e98e63915c5d10a9deafb8544801ac327af941809",
+      "bytes": 6843,
+      "id": "enterprise:lordaeron/workshop/workshop_shepherd_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_toolsmith_12x9_a.json",
+      "kind": "meta",
+      "sha256": "1ce952f03f01c1a1e221f873b4786a00c3f266cfb861765a0b0e8ab428f75e4b",
+      "bytes": 13513
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_toolsmith_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "4297c9d764e8ee0ce5da1418cfd0a4dfa7547848c6ecc0f404699b99f3004305",
+      "bytes": 6846,
+      "id": "enterprise:lordaeron/workshop/workshop_toolsmith_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_weaponsmith_12x9_a.json",
+      "kind": "meta",
+      "sha256": "4ddbd5065374c8f1c7bb6f9e647f9f5dd1058e6a082de3cd8695840ff1de7a0f",
+      "bytes": 13537
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_weaponsmith_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "b6da5dffd7f20593a1b17aa5f6fe6e2aac055bf3d0ac4421a4a91e4cae91899b",
+      "bytes": 6923,
+      "id": "enterprise:lordaeron/workshop/workshop_weaponsmith_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/timber.json",
+      "kind": "kit_rules",
+      "sha256": "0969ace88f369958bf1c63317051978c36426bf48d44eb790f4f4f8e075da54f",
+      "bytes": 7767
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/timber_relief.json",
+      "kind": "kit_rules",
+      "sha256": "648c8ba6198bc1775461b8bc25333bff62c250eb50547da5df452a692b025800",
+      "bytes": 25227
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/wall_stone.json",
+      "kind": "kit_rules",
+      "sha256": "190e6a0700f29adbdd78f9c958371395b6d6958267366f0739199eb6e585b6e1",
+      "bytes": 2095
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/yards.json",
+      "kind": "kit_rules",
+      "sha256": "a1339592cd5d025d62aabaaf85c16dadc157445f56207f95039ba91aef0f2749",
+      "bytes": 9944
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_rules/lordaeron.json",
+      "kind": "town_rules",
+      "sha256": "0159c6ba464315a9db1e93048ff02043720a7b4d1ca801a841bffa1efcbf577b",
+      "bytes": 5528
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/assemble.mjs",
+      "kind": "tool",
+      "sha256": "cb8b83d4a73a5b47a5be4ed174417b71d98433f94217e27aedd780a81bca6209",
+      "bytes": 13127
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/cli.mjs",
+      "kind": "tool",
+      "sha256": "ca75d59fa3eea18290b6998c530f97df81307a94b4b5ad9cce8389d577c5e1d0",
+      "bytes": 1322
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose-cli.mjs",
+      "kind": "tool",
+      "sha256": "9d38cdcba8e2300e4d95f1198d51f4fab42d2abd16abbb69e537890b75810e94",
+      "bytes": 1015
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose.mjs",
+      "kind": "tool",
+      "sha256": "03cfdac71a7c0a04d15b35e1a2085ddb3f8f9479926f5d9e2c1cb2d762646a1c",
+      "bytes": 13896
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/grid.mjs",
+      "kind": "tool",
+      "sha256": "8abb458a3624e5553dd0efacd8c8fbf9a18e081258222d2d85c08d31a816d781",
+      "bytes": 4076
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/modules.mjs",
+      "kind": "tool",
+      "sha256": "83acd7328f981d0959d52157eb71f6725119933c9a2209490bdc75cf865ac913",
+      "bytes": 14412
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/nbt.mjs",
+      "kind": "tool",
+      "sha256": "d6e567e4d2b63ca0e933d244a51fdc14783ca07e08b7445bb59440475465c1c6",
+      "bytes": 6473
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/parts.mjs",
+      "kind": "tool",
+      "sha256": "2f323c6a6e26125bc4bd366e67002e1dff84e3f034410a30f8f888cba66dea6f",
+      "bytes": 6686
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/rotate.mjs",
+      "kind": "tool",
+      "sha256": "bf7391b2fe4bb192b678488743fedab298828e281ca407bca0156d8d5292fe6f",
+      "bytes": 811
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/wall-tiling.mjs",
+      "kind": "tool",
+      "sha256": "811a2fe91fd44f8b4b8c4be462207bce0cbf23a9c403d61e2a688134756143f3",
+      "bytes": 2007
+    }
+  ]
+}

@@ -66,10 +66,10 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:44:02.528Z",
+    "updated": "2026-10-27T14:48:41.334Z",
     "updated_by": "studio",
-    "note": "batch 009: workshops; plan entries may carry an exact block",
-    "bytes": 13806,
+    "note": "set rev 4: gable boards on verges; build-all",
+    "bytes": 13897,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
@@ -112,6 +112,12 @@
         "by": "studio",
         "note": "batch 009: workshops; plan entries may carry an exact block",
         "bytes": 13806
+      },
+      {
+        "at": "2026-10-27T14:48:41.334Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 13897
       }
     ]
   },
@@ -119,10 +125,10 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:44:02.615Z",
+    "updated": "2026-10-27T14:48:41.244Z",
     "updated_by": "studio",
-    "note": "batch 009: workshops; plan entries may carry an exact block",
-    "bytes": 13973,
+    "note": "set rev 4: gable boards on verges; build-all",
+    "bytes": 14413,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
@@ -165,6 +171,12 @@
         "by": "studio",
         "note": "batch 009: workshops; plan entries may carry an exact block",
         "bytes": 13973
+      },
+      {
+        "at": "2026-10-27T14:48:41.244Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 14413
       }
     ]
   },
@@ -195,15 +207,21 @@
     "path": "js/lordaeron/yards.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:13:05.382Z",
+    "updated": "2026-10-27T14:48:42.129Z",
     "updated_by": "studio",
-    "note": "yard tiles (front 3 deep, back 4 deep, widths 1-3)",
+    "note": "set rev 4: gable boards on verges; build-all",
     "bytes": 10984,
     "history": [
       {
         "at": "2026-10-27T14:13:05.382Z",
         "by": "studio",
         "note": "yard tiles (front 3 deep, back 4 deep, widths 1-3)",
+        "bytes": 10984
+      },
+      {
+        "at": "2026-10-27T14:48:42.129Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 10984
       }
     ]
@@ -448,16 +466,22 @@
     "path": "js/gate.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:23:20.899Z",
+    "updated": "2026-10-27T14:48:41.063Z",
     "updated_by": "studio",
-    "note": "the quality gate: contract + relief + interior on any build, thresholds from quality.json, one exit code",
-    "bytes": 3210,
+    "note": "relief_faces: an asset names the faces relief applies to ([] for open ground)",
+    "bytes": 3502,
     "history": [
       {
         "at": "2026-10-27T14:23:20.899Z",
         "by": "studio",
         "note": "the quality gate: contract + relief + interior on any build, thresholds from quality.json, one exit code",
         "bytes": 3210
+      },
+      {
+        "at": "2026-10-27T14:48:41.064Z",
+        "by": "studio",
+        "note": "relief_faces: an asset names the faces relief applies to ([] for open ground)",
+        "bytes": 3502
       }
     ]
   },
@@ -465,15 +489,21 @@
     "path": "js/lordaeron/halls.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:28:51.270Z",
+    "updated": "2026-10-27T14:48:41.424Z",
     "updated_by": "studio",
-    "note": "the seven halls as fit-out plans on the relief shell",
+    "note": "set rev 4: gable boards on verges; build-all",
     "bytes": 4342,
     "history": [
       {
         "at": "2026-10-27T14:28:51.270Z",
         "by": "studio",
         "note": "the seven halls as fit-out plans on the relief shell",
+        "bytes": 4342
+      },
+      {
+        "at": "2026-10-27T14:48:41.424Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 4342
       }
     ]
@@ -482,15 +512,21 @@
     "path": "js/lordaeron/forum.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:38:32.966Z",
+    "updated": "2026-10-27T14:48:41.595Z",
     "updated_by": "studio",
-    "note": "batch 007",
+    "note": "set rev 4: gable boards on verges; build-all",
     "bytes": 4152,
     "history": [
       {
         "at": "2026-10-27T14:38:32.966Z",
         "by": "studio",
         "note": "batch 007",
+        "bytes": 4152
+      },
+      {
+        "at": "2026-10-27T14:48:41.595Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 4152
       }
     ]
@@ -499,15 +535,21 @@
     "path": "js/lordaeron/market.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:38:33.017Z",
+    "updated": "2026-10-27T14:48:41.512Z",
     "updated_by": "studio",
-    "note": "batch 007",
+    "note": "set rev 4: gable boards on verges; build-all",
     "bytes": 1949,
     "history": [
       {
         "at": "2026-10-27T14:38:33.017Z",
         "by": "studio",
         "note": "batch 007",
+        "bytes": 1949
+      },
+      {
+        "at": "2026-10-27T14:48:41.512Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 1949
       }
     ]
@@ -516,16 +558,22 @@
     "path": "js/lordaeron/walls.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:38:33.065Z",
+    "updated": "2026-10-27T14:48:41.774Z",
     "updated_by": "studio",
-    "note": "batch 007",
-    "bytes": 11784,
+    "note": "set rev 4: gable boards on verges; build-all",
+    "bytes": 15548,
     "history": [
       {
         "at": "2026-10-27T14:38:33.065Z",
         "by": "studio",
         "note": "batch 007",
         "bytes": 11784
+      },
+      {
+        "at": "2026-10-27T14:48:41.774Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 15548
       }
     ]
   },
@@ -550,15 +598,21 @@
     "path": "js/lordaeron/workshops.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:44:02.710Z",
+    "updated": "2026-10-27T14:48:42.042Z",
     "updated_by": "studio",
-    "note": "batch 009: workshops; plan entries may carry an exact block",
+    "note": "set rev 4: gable boards on verges; build-all",
     "bytes": 1712,
     "history": [
       {
         "at": "2026-10-27T14:44:02.710Z",
         "by": "studio",
         "note": "batch 009: workshops; plan entries may carry an exact block",
+        "bytes": 1712
+      },
+      {
+        "at": "2026-10-27T14:48:42.042Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 1712
       }
     ]
@@ -567,9 +621,9 @@
     "path": "js/lordaeron/stalls.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:44:02.794Z",
+    "updated": "2026-10-27T14:48:41.950Z",
     "updated_by": "studio",
-    "note": "batch 009: workshops; plan entries may carry an exact block",
+    "note": "set rev 4: gable boards on verges; build-all",
     "bytes": 4955,
     "history": [
       {
@@ -577,6 +631,63 @@
         "by": "studio",
         "note": "batch 009: workshops; plan entries may carry an exact block",
         "bytes": 4955
+      },
+      {
+        "at": "2026-10-27T14:48:41.950Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 4955
+      }
+    ]
+  },
+  "js/lordaeron/build-all.mjs": {
+    "path": "js/lordaeron/build-all.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:48:41.153Z",
+    "updated_by": "studio",
+    "note": "set rev 4: gable boards on verges; build-all",
+    "bytes": 4835,
+    "history": [
+      {
+        "at": "2026-10-27T14:48:41.153Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 4835
+      }
+    ]
+  },
+  "js/lordaeron/square.mjs": {
+    "path": "js/lordaeron/square.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:48:41.685Z",
+    "updated_by": "studio",
+    "note": "set rev 4: gable boards on verges; build-all",
+    "bytes": 2384,
+    "history": [
+      {
+        "at": "2026-10-27T14:48:41.685Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 2384
+      }
+    ]
+  },
+  "js/lordaeron/docks.mjs": {
+    "path": "js/lordaeron/docks.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:48:41.866Z",
+    "updated_by": "studio",
+    "note": "set rev 4: gable boards on verges; build-all",
+    "bytes": 2562,
+    "history": [
+      {
+        "at": "2026-10-27T14:48:41.866Z",
+        "by": "studio",
+        "note": "set rev 4: gable boards on verges; build-all",
+        "bytes": 2562
       }
     ]
   }

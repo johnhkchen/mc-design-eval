@@ -51,12 +51,12 @@ export function compose(L) {
   if (L.roof === "gable_x") {
     for (let x = -rw; x < W + re; x++) {
       const kind = x < 0 || x >= W ? "verge" : (x === 0 && !party[0]) || (x === W - 1 && !party[1]) ? "gable" : "bay";
-      paste(`roof_${kind}_${span}`, x, roofBase, -1);
+      paste(`roof_${kind}_${span}`, x, roofBase, -1, 0, x >= W);
     }
   } else {
     for (let z = -1; z <= D; z++) {
       const kind = z < 0 || z >= D ? "verge" : z === 0 || z === D - 1 ? "gable" : "bay";
-      g.paste(mod(`roof_${kind}_${span}`).grid, 0, roofBase, Z(z), { q: 1 });
+      g.paste(mod(`roof_${kind}_${span}`).grid, 0, roofBase, Z(z), { q: 1, mirror: z >= D });            // the far verge mirrored: its boards face the gable
     }
   }
   // the chimney stack over its breast, one above the ridge

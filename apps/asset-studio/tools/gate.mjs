@@ -3,7 +3,7 @@
 //   contract  check-asset.mjs (version, blocks, points of interest, light where mobs spawn, the stair walk)
 //   relief    relief.mjs (facade depth and detail; skipped for parts and yard tiles)
 //   interior  interior.mjs over the client's floorplan.py (for anything with beds)
-// Thresholds come from quality.json. Metadata is the .json beside each .nbt (a variant's comes from its base).
+// Thresholds come from quality.json. An asset's `relief_faces` (in its JSON) names the faces relief applies to. Metadata is the .json beside each .nbt (a variant's comes from its base).
 //   node tools/gate.mjs <file.nbt | dir>... [--json] [--no-relief] [--no-interior] [--faces south,north,...]
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, basename } from "node:path";
@@ -27,9 +27,11 @@ const rows = [];
 for (const f of files) {
   const meta = metaOf(f), isPart = meta?.kind === "part" || meta?.slot === "part", row = { file: basename(f), ok: true, stages: {} };
   const c = check(f, meta); row.stages.contract = { ok: c.ok, errors: c.errors };
-  if (!isPart && !argv.includes("--no-relief")) {
+  // an asset may name the faces relief applies to (`relief_faces`): a wall piece's two long faces, [] for open ground
+  const fFaces = Array.isArray(meta?.relief_faces) ? meta.relief_faces : faces;
+  if (!isPart && !argv.includes("--no-relief") && fFaces.length) {
     const r = relief(f), party = new Set(meta?.party_faces || []);
-    const bad = faces.filter((k) => !party.has(k) && (r[k].relief < (R.min_relief ?? 0.3) || r[k].detail < (R.min_detail ?? 0.2)));
+    const bad = fFaces.filter((k) => !party.has(k) && (r[k].relief < (R.min_relief ?? 0.3) || r[k].detail < (R.min_detail ?? 0.2)));
     row.stages.relief = { ok: !bad.length, errors: bad.map((k) => `${k} relief ${r[k].relief} detail ${r[k].detail}`), faces: r };
   }
   if (!isPart && (meta?.beds || []).length && !argv.includes("--no-interior")) {

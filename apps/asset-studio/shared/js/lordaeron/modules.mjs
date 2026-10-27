@@ -71,7 +71,13 @@ function roofSlice(span, kind) {
   for (let k = 0; k < m; k++) for (let t = 0; t < PITCH; t++) {
     const y = k * PITCH + t, last = t === PITCH - 1;
     g.set(0, y, k, last ? B.rstair("south") : B.roof); g.set(0, y, span - 1 - k, last ? B.rstair("north") : B.roof);
-    if (kind === "verge") continue;
+    if (kind === "verge") {                                    // boards on the gable behind: a king post and a collar, proud of the daub
+      for (let i = k + 1; i < span - 1 - k; i++) {
+        const centre = Math.abs(i - (span - 1) / 2) < 1, collar = y === PITCH && i > k + 1 && i < span - 2 - k;
+        if (y > 0 && (centre || collar)) g.set(0, y, i, "dark_oak_trapdoor[facing=west,half=bottom,open=true,powered=false,waterlogged=false]");
+      }
+      continue;
+    }
     for (let i = k + 1; i < span - 1 - k; i++) {
       const centre = Math.abs(i - (span - 1) / 2) < 1;
       g.set(0, y, i, y === 0 ? (kind === "gable" ? B.beamZ : B.floor) : kind === "gable" ? (centre ? B.post : B.infill) : B.floor);

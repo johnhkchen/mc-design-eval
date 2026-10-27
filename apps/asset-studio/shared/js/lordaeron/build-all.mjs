@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+// Rebuild every Lordaeron asset from source, gate them all, and (with --pack <name>) pack them as one batch. An
+// improvement to a module, a palette or a rule reaches every asset in one run: run this, read the gate, ship.
+//   node src/lordaeron/build-all.mjs [--pack 010-lordaeron-refresh] [--thread 0005]     (from work/enterprise)
+import fs from "node:fs";
+import { execFileSync } from "node:child_process";
+import { paletteMap } from "./assemble.mjs";
+import { Grid } from "../grid.mjs";
+import { hall, HALLS } from "./halls.mjs";
+import { marketHall } from "./market.mjs";
+import { marketCross } from "./forum.mjs";
+import { masonsSquare } from "./square.mjs";
+import { PIECES, watchtower } from "./walls.mjs";
+import { pierSegment, dockHead } from "./docks.mjs";
+import { stall, TRADES as STALL_TRADES } from "./stalls.mjs";
+import { workshop, TRADES } from "./workshops.mjs";
+
+const argv = process.argv.slice(2), opt = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
+const DATA = "bundle/core/src/main/resources/data/enterprise/structure/lordaeron", PREV = "bundle/assets-src/lordaeron";
+const palettes = JSON.parse(fs.readFileSync("bundle/assets-src/kingdoms/lordaeron/palettes.json", "utf8"));
+const run = (cmd, args) => execFileSync(cmd, args, { stdio: "inherit" });
+const written = [];
+function save(dir, name, grid, meta, palette) {
+  fs.mkdirSync(`${DATA}/${dir}`, { recursive: true });
+  let g = grid;
+  if (palette) { const map = paletteMap(palettes, palette), p = new Grid(grid.size); for (const [x, y, z, s] of grid.each()) p.set(x, y, z, map(s)); g = p; }
+  g.save(`${DATA}/${dir}/${name}.nbt`);
+  const old = fs.existsSync(`${DATA}/${dir}/${name}.json`) ? JSON.parse(fs.readFileSync(`${DATA}/${dir}/${name}.json`, "utf8")) : {};
+  fs.writeFileSync(`${DATA}/${dir}/${name}.json`, JSON.stringify({ ...old, ...meta, id: `enterprise:lordaeron/${dir}/${name}`, rev: (old.rev || 0) + 1, kingdom: "lordaeron",
+    footprint: [g.size[0], g.size[2]], height: g.size[1] }, null, 2) + "\n");
+  written.push(`${dir}/${name}`);
+}
+
+// the module set and golden houses (its own builder: modules, set file, goldens x palettes, reference composer)
+run("node", ["src/lordaeron/build-relief.mjs"]);
+// halls
+for (const kind of Object.keys(HALLS)) { const h = hall(kind), g = h.grid; save("hall", `${kind}_${g.size[0]}x${g.size[2]}_a`, g, { assembly: { set: "lordaeron/timber_relief", layout: h.layout } }, h.spec.palette); }
+{ const r = marketHall(); save("hall", "market_hall_12x12_a", r.grid, { assembly: { set: "lordaeron/timber_relief", layout: r.layout } }, "stone"); }
+{ const r = masonsSquare(); save("hall", "square_9x9_a", r.grid, { ...r.meta, relief_faces: [] }); }
+save("hall", "watchtower_7x7_a", watchtower(), {});
+{ const r = marketCross(); save("forum", "market_cross_7x7_a", r.grid, r.meta); }
+for (const [n, f] of [["dock_pier_3x4_a", pierSegment], ["dock_head_5x5_a", dockHead]]) { const r = f(); save("dock", n, r.grid, { pilings: r.pilings, relief_faces: [] }); }
+for (const [name, f] of Object.entries(PIECES)) save("wall", name.includes("x") ? name.replace(/_(\d+x\d+)$/, "_$1_a") : `${name}_a`, f(), { relief_faces: name.match(/tower|corner|gatehouse/) ? ["north", "south", "east", "west"].slice(0, name.startsWith("gatehouse") ? 2 : 4) : ["north", "south"] });
+for (const t of STALL_TRADES) { const s = stall(t); save("stall", `stall_${t}_3x3_a`, s.grid, { ...s.meta, relief_faces: [] }); }
+const PAL = ["stone", "brick", "daub"];
+TRADES.forEach((t, i) => { const r = workshop(t); save("workshop", `workshop_${t}_12x9_a`, r.grid, { assembly: { set: "lordaeron/timber_relief", layout: r.layout } }, PAL[i % 3]); });
+console.log(`rebuilt ${written.length} structures (plus the module set and golden houses)`);
+
+// previews for everything rebuilt here, then the gate over the whole kingdom's production folders
+for (const w of written) { const d = `${PREV}/${w}`; fs.mkdirSync(d, { recursive: true }); run("node", ["../../tools/preview.mjs", `${DATA}/${w}.nbt`, `${d}/front.jpg`]); }
+const prod = ["hall", "forum", "dock", "wall", "stall", "workshop"].map((d) => `${DATA}/${d}`).concat(["cottage_9x9_b", "townhouse_12x9_b", "terrace_21x9_b"].map((n) => `${DATA}/home/${n}.nbt`));
+try { run("node", ["../../tools/gate.mjs", ...prod, "--no-interior"]); } catch { console.log("GATE: failures above"); process.exitCode = 1; }
+if (opt("--pack") && !process.exitCode) run("node", ["../../tools/pack.mjs", "bundle", opt("--pack"), "--thread", opt("--thread") || "0005", "--out", "out/batches",
+  "--only", ["core/src/main/resources/data/enterprise/structure/lordaeron/", "core/src/main/resources/data/enterprise/town_kits/lordaeron/", "core/src/main/resources/data/enterprise/town_rules/", "assets-src/lordaeron/", "assets-src/kingdoms/", "scripts/assets/lordaeron-ref/"].join(",")]);

@@ -30,7 +30,7 @@ for (const m of mods) {
 
 // 2. the set file (WFC)
 const set = {
-  set: `lordaeron/${SET}`, rev: 3,
+  set: `lordaeron/${SET}`, rev: 4,
   about: "The Lordaeron timber-frame module set with relief, for a WFC assembler. Two layers solved in order: the plan (rooms, cores, fit-out) then the shell (posts, bays, corners) chosen by the room behind; then the roof and the stack. The golden houses beside it are composed from exactly these modules by the layouts in their JSON (golden.layouts); scripts/assets/lordaeron-ref/compose.mjs is the reference composer.",
   grid: { post: 1, bay: 2, storey: H, relief: 1, pitch: PITCH, body: "3n + 1 wide and deep (7, 10, 13); the template adds the relief: +2, or +1 per party wall" },
   palettes: "assets-src/kingdoms/lordaeron/palettes.json (modules are in the base palette; apply a palette by role)",
