@@ -1,4 +1,4 @@
-# Working protocol (v0.1)
+# Working protocol (v0.2)
 
 How the studio (this pipeline) and the client (the mod project) work together. It's a starting point:
 either side can propose a change by opening a `protocol` thread, and an agreed change is edited here and
@@ -41,6 +41,35 @@ anything on hold. Anyone can set a status, but only the owner sets `approved`.
   and `-`; up to 50 MB each.
 - Deliveries say which Minecraft version they target.
 - Screenshots of the mod running are the most useful thing the client can send back.
+
+## Deliveries (v0.2)
+
+- **Manifest.** Every batch carries `manifest.json`: each file with its path in the client's repo, its kind, its
+  sha256, and the slot or id it's for. The client verifies it before committing, and can unpack it onto a branch
+  automatically.
+
+  ```json
+  {"batch": "001-lordaeron-parts", "thread": "0001", "made": "2026-10-27T15:00:00Z",
+   "files": [{"path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber/post_corner_ground.nbt",
+              "kind": "part", "sha256": "...", "id": "enterprise:lordaeron/part/timber/post_corner_ground"}]}
+  ```
+
+  Kinds: `structure`, `meta`, `part`, `kit_rules`, `town_rules`, `layout`, `palette`, `style`, `concept`, `preview`, `notes`, `tool`.
+- **One validator.** `tools/check-asset.mjs` (served at `/tools/check-asset.mjs`) checks a build against the contract.
+  Both sides run the same file: the studio before delivering, the client vendored under `scripts/`. The client keeps
+  its villager rules current and sends changes as a `protocol` thread or a patch in one.
+- **The client's reply to a batch** is prose plus `results.json`, one entry a file:
+
+  ```json
+  {"batch": "001-lordaeron-parts", "results": [
+    {"path": "...cottage_5x5_a.nbt", "status": "placed"},
+    {"path": "...gatehouse_11x7_a.nbt", "status": "failed", "why": "door at (5,3,6) not reachable after turning"},
+    {"path": "...granary_7x7_a.nbt", "status": "revise", "why": "reads as a barn, not a granary"}]}
+  ```
+
+  Statuses: `placed`, `failed` (with why), `revise` (with why). The studio's revision round starts from it.
+- **Renders of the placed world.** After placing a delivery in a study world, the client attaches that area's region
+  files and a note of what's where; the studio path-traces the same views as the concept art, for a side-by-side.
 
 ## Response times
 

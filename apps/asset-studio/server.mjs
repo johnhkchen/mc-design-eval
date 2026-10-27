@@ -160,6 +160,7 @@ createServer(async (req, res) => {
     }
     if (M === "GET" && p.length === 1 && ["brief", "protocol", "readme"].includes(p[0])) return file(res, join(HERE, p[0].toUpperCase() + ".md"));
     if (M === "GET" && p[0] === "studio.mjs") return file(res, join(HERE, "studio.mjs"));
+    if (M === "GET" && p[0] === "tools" && p.length === 2 && safe(p[1]) && p[1].endsWith(".mjs")) return file(res, join(HERE, "tools", p[1]));
     if (M === "GET" && p[0] === "files" && p.length === 3) { const d = dirOf(p[1]); return d && safe(p[2]) ? file(res, join(d, "files", p[2])) : fail(res, 404, "not found"); }
     if (p[0] !== "api") return fail(res, 404, "not found");
 

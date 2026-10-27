@@ -5,15 +5,47 @@
 //   node tools/check-asset.mjs <name>.nbt [--meta <name>.json] [--mass <mass>.json] [--json]
 //   node tools/check-asset.mjs <dir>                      every .nbt under it, each with the .json beside it
 //
-// Checks: DataVersion 3955; size = the JSON's footprint; no blocks from after 1.21.1 or forbidden ones; every bed,
+// Checks: DataVersion 3955; vanilla blocks or the mod's decorative twins (enterprise:cask, vat, bin, stand, anvil_prop); size = the JSON's footprint; no blocks from after 1.21.1 or forbidden ones; every bed,
 // bell, job site and other point of interest declared, and nothing declared that isn't there; beds whole; chests and
 // barrels touching a job site only as declared lockers; entities only frames, paintings and armour stands, listed;
 // block light 8+ on every walkable cell; a villager's walk from the door to every bed and workstation; from a mass,
 // every fixed block at its cell and state. Light and walking are close approximations of the game's rules, so a pass
 // here is a strong sign, and the game test on their side is the final word.
+//
+// Self-contained (Node 18+, no dependencies) so both sides can vendor the same file and judge a build the same way.
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, basename } from "node:path";
-import { parse, simplify } from "../../../../minecraft-design/tools/src/nbt.mjs";
+import { gunzipSync, inflateSync } from "node:zlib";
+
+// a minimal NBT reader (Java edition, big-endian): compounds -> objects, lists -> arrays, longs -> BigInt
+function readNbt(buf) {
+  if (buf[0] === 0x1f && buf[1] === 0x8b) buf = gunzipSync(buf); else if (buf[0] === 0x78) buf = inflateSync(buf);
+  let o = 0;
+  const str = () => { const n = buf.readUInt16BE(o); o += 2; const s = buf.toString("utf8", o, o + n); o += n; return s; };
+  const arr = (n, f) => Array.from({ length: n }, f);
+  const read = (t) => {
+    switch (t) {
+      case 1: return buf.readInt8(o++);
+      case 2: o += 2; return buf.readInt16BE(o - 2);
+      case 3: o += 4; return buf.readInt32BE(o - 4);
+      case 4: o += 8; return buf.readBigInt64BE(o - 8);
+      case 5: o += 4; return buf.readFloatBE(o - 4);
+      case 6: o += 8; return buf.readDoubleBE(o - 8);
+      case 7: { const n = read(3); const v = [...buf.subarray(o, o + n)]; o += n; return v; }
+      case 8: return str();
+      case 9: { const et = buf[o++], n = read(3); return arr(n, () => read(et)); }
+      case 10: { const c = {}; for (let k = buf[o++]; k !== 0; k = buf[o++]) { const name = str(); c[name] = read(k); } return c; }
+      case 11: { const n = read(3); return arr(n, () => read(3)); }
+      case 12: { const n = read(3); return arr(n, () => read(4)); }
+      default: throw new Error(`nbt: tag ${t}`);
+    }
+  };
+  if (buf[o++] !== 10) throw new Error("nbt: root is not a compound");
+  str();
+  return read(10);
+}
+// decorative twins in the mod: look like job sites, but no villager can claim them
+const TWINS = /^enterprise:(cask|vat|bin|stand|anvil_prop)$/;
 
 const DATA_VERSION = 3955;
 const JOB = /^(barrel|blast_furnace|brewing_stand|cartography_table|(water_|lava_|powder_snow_)?cauldron|composter|fletching_table|grindstone|lectern|loom|smithing_table|smoker|stonecutter)$/;
@@ -39,7 +71,7 @@ const propsOf = (s) => Object.fromEntries((s.match(/\[(.*)\]/)?.[1] || "").split
 const nameOf = (s) => bare(s.replace(/\[.*$/, ""));
 
 function load(file) {
-  const root = simplify(parse(readFileSync(file)).tag);
+  const root = readNbt(readFileSync(file));
   const palette = root.palette || root.palettes?.[0] || [];
   const states = palette.map((p) => ({ name: bare(p.Name), props: p.Properties || {} }));
   const cells = new Map();
@@ -60,6 +92,7 @@ export function check(nbtFile, meta, mass) {
   for (const [k, b] of s.cells) {
     const p = k.split(",").map(Number);
     if (FORBIDDEN.test(b.name)) errs.push(`forbidden block ${b.name} at ${k}`);
+    if (b.name.includes(":") && !TWINS.test(b.name)) errs.push(`${b.name} at ${k} is not vanilla or a known decorative twin`);
     if (NEWER.test(b.name)) errs.push(`${b.name} at ${k} is newer than 1.21.1`);
     if (b.name.endsWith("_bed")) beds.push({ p, b });
     else if (JOB.test(b.name)) jobs.push({ p, b });
@@ -128,13 +161,19 @@ export function check(nbtFile, meta, mass) {
   const open = (x, y, z) => { const n = name(x, y, z); return n !== undefined && (OPEN.test(n) || /_door$|_fence_gate$/.test(n) && at(x, y, z).props.open === "true" || /_door$/.test(n)); };
   const standable = (x, y, z) => { const n = name(x, y - 1, z); return y > 0 && n !== undefined && !OPEN.test(n) && !/_fence$|_wall$|_fence_gate$|_door$/.test(n); };
   const walk = (x, y, z) => open(x, y, z) && (y + 1 >= H || open(x, y + 1, z) || name(x, y + 1, z) === undefined) && standable(x, y, z);
-  const dark = [];
+  // the contract's rule: interior cells (something above them) and the outdoor ground (the layer over `ground`).
+  // Open-sky cells higher up (roofs, wall-walks) can spawn mobs at night too: those are a warning.
+  const covered = (x, y, z) => { for (let yy = y + 2; yy < H; yy++) { const n = name(x, yy, z); if (n !== undefined && !OPEN.test(n)) return true; } return false; };
+  const groundY = (meta?.ground ?? 0) + 1;
+  const dark = [], roofs = [];
   for (let x = 0; x < W; x++) for (let y = 1; y < H; y++) for (let z = 0; z < D; z++) {
     const n = name(x, y, z);
     if (n === undefined || n === "structure_void" || /_door$/.test(n)) continue;
-    if (walk(x, y, z) && (light.get(key(x, y, z)) || 0) < 8) dark.push([x, y, z]);
+    if (!walk(x, y, z) || (light.get(key(x, y, z)) || 0) >= 8) continue;
+    (covered(x, y, z) || y <= groundY ? dark : roofs).push([x, y, z]);
   }
   if (dark.length) errs.push(`${dark.length} walkable cell${dark.length > 1 ? "s" : ""} under light 8, e.g. ${dark.slice(0, 5).map((p) => `(${p})`).join(" ")}`);
+  if (roofs.length) warns.push(`${roofs.length} open-sky cell${roofs.length > 1 ? "s" : ""} above the ground (roofs, ledges) a mob could spawn on at night, e.g. ${roofs.slice(0, 3).map((p) => `(${p})`).join(" ")}`);
 
   // reach: from each entrance (or the south edge), a villager's walk (1-block steps up, any drop of 3 or less)
   if (meta) {
@@ -170,7 +209,7 @@ export function check(nbtFile, meta, mass) {
   }
 
   return { file: nbtFile, size: s.size, blocks: s.cells.size, ok: !errs.length, errors: errs, warnings: warns,
-    counts: { beds: heads.length, jobSites: jobs.length, containers: containers.length, entities: ents.length, unlit: dark.length } };
+    counts: { beds: heads.length, jobSites: jobs.length, containers: containers.length, entities: ents.length, unlit: dark.length, openSky: roofs.length } };
 }
 
 // ---- cli
