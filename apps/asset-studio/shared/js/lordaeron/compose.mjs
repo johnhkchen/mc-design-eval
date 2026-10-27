@@ -113,26 +113,46 @@ export function layoutOf(p) {
     if (core === "straight") plan.push({ storey: s, module: `core_straight_${part}`, at: [W - 3, 1] });
     else plan.push({ storey: s, module: `core_turned_${part}`, at: [W - 4, 1] });
   }
-  // fit-out
-  const beds = [], workstations = [];
-  const backHearth = party[0] || D < 7;
-  plan.push({ storey: 0, module: "hearth", at: [1, backHearth ? 1 : chimneyZ], dy: 1 });
-  const ws = backHearth ? [2, 1] : [1, 1];
-  if (p.trade) { plan.push({ storey: 0, module: "workstation", at: ws, dy: 1 }); workstations.push({ storey: 0, at: ws }); }
-  else plan.push({ storey: 0, module: "shelf", at: ws, dy: 1 });
-  const slots = core === "straight" ? [[1, 1], [3, 1], [1, 4], [3, 4], [5, 1], [5, 4]] : [[1, 1], [2, 1]];
-  for (let s = 1; s < S; s++) {
-    let n = 0;
-    for (const [x, z] of slots) {
-      if (n >= (p.beds || (core === "straight" ? 3 : 2))) break;
-      if (x >= W - 1 || z + 1 >= D - 1 || coreCells.has(`${x},${z}`) || coreCells.has(`${x},${z + 1}`)) continue;
-      plan.push({ storey: s, module: "bed", at: [x, z], dy: 1 }); beds.push({ storey: s, head: [x, z] }); n++;
+  // fit-out: the plan layer's rooms and their furniture sets, by body width (rules, not one-off houses):
+  //   every bed a made bed (a free long side), chambers off a landing (never through a bedroom), furniture by use,
+  //   circulation kept clear from the street door to the stair. A 7-wide body holds one chamber floor (2 storeys at
+  //   most); a 10-wide body splits each upper floor into a chamber and a 2-wide landing by the stair.
+  const beds = [], workstations = [], backHearth = party[0] || D < 7;
+  const put = (storey, module, at, dy = 1, q = 0) => plan.push({ storey, module, at, dy, q });
+  const bed = (storey, head, q = 0) => { put(storey, "bed", head, 1, q); beds.push({ storey, head, foot: q === 0 ? [head[0], head[1] + 1] : [head[0] - 1, head[1]] }); };
+  const top = H - 1;
+  const work = (at) => { if (p.trade) { put(0, "workstation", at); workstations.push({ storey: 0, at }); } else put(0, "shelf", at); };
+  // The furnishing rule (tuned with the shared floor-plan tool): a short spine from the street door to the stair is
+  // kept clear; everything a villager walks to (hearth, chest, cask, shelf, workstation) stands beside the spine or
+  // against a wall near it, so routes stay short; corners away from the spine take what nobody walks to (a table and
+  // benches, plants), so no floor sits idle. Upper floors: made beds on the west wall with a chest between.
+  if (core === "turned") {
+    if (S > 2) throw new Error("a 7-wide body holds one chamber floor: 2 storeys at most (no through rooms)");
+    // hall: door (2,5), spine (2,5) (3,5) (3,4), stair from (3,3) north
+    put(0, "hearth", [1, backHearth ? 1 : chimneyZ]);
+    work([1, D - 2]); put(0, "chest", [4, D - 2]); put(0, "cask", [4, 4]);
+    put(0, "table", [2, 2]); put(0, "bench", [2, 1], 1, 2); put(0, "bench", [1, 2], 1, 1);
+    put(0, "shelf", [W - 2, 3]); put(0, "table", [W - 2, 2]); put(0, "pot", [W - 2, 1]);
+    put(0, "lantern", [2, 3], top); put(0, "lantern", [W - 3, 3], top);
+    for (let s = 1; s < S; s++) {
+      bed(s, [1, 1]); bed(s, [1, 4]); put(s, "chest", [1, 3]);
+      put(s, "table", [W - 2, D - 3]); put(s, "bench", [W - 2, D - 2], 1, 2); put(s, "pot", [W - 3, D - 2]);
+      put(s, "lantern", [2, 3], top); put(s, "lantern", [W - 3, 3], top);
     }
-  }
-  for (let s = 0; s < S; s++) {
-    plan.push({ storey: s, module: "lantern", at: [2, D - 2], dy: H - 1 });
-    plan.push({ storey: s, module: "lantern", at: core === "straight" ? [W - 3, 3] : [W - 3, 2], dy: H - 1 });
-    if (W >= 10) { plan.push({ storey: s, module: "lantern", at: [5, 3], dy: H - 1 }); plan.push({ storey: s, module: "lantern", at: [2, 2], dy: H - 1 }); }
+  } else {
+    // hall: door (5,5), spine along z 5 to the stair's foot (W-3, 5)
+    put(0, "hearth", [1, chimneyZ]); put(0, "bench", [2, 2]); put(0, "table", [2, 3]); put(0, "bench", [2, 4], 1, 2);
+    work([4, D - 2]); put(0, "chest", [6, 4]); put(0, "cask", [7, 4]); put(0, "shelf", [1, 1]);
+    put(0, "table", [4, 2]); put(0, "bench", [4, 1], 1, 2); put(0, "bench", [5, 2], 1, 1); put(0, "pot", [1, D - 2]);
+    put(0, "lantern", [2, 3], top); put(0, "lantern", [5, 3], top); put(0, "lantern", [W - 3, 2], top);
+    // upper floors: a chamber x 1..W-6 behind a partition with a door, a 2-wide landing by the stair
+    const wx = W - 5;
+    for (let s = 1; s < S; s++) {
+      for (let z = 1; z < D - 1; z++) put(s, z === 3 ? "door_inner" : "wall_inner", [wx, z]);
+      bed(s, [1, 1]); if ((p.beds || 2) >= 2) bed(s, [1, 4]); if ((p.beds || 2) >= 3) bed(s, [wx - 1, 1]);
+      put(s, "chest", [1, 3]); put(s, "table", [wx - 1, D - 3]); put(s, "bench", [wx - 1, D - 2], 1, 2);
+      put(s, "lantern", [2, 3], top); put(s, "lantern", [W - 3, 3], top);
+    }
   }
   const chimney = westChimney ? [0, chimneyZ] : [0, 1];
   return { body: [W, D], storeys: S, party, roof: p.roof, core, shell, plan, chimney, beds, workstations, doorBay, door: p.door || "right" };
@@ -144,7 +164,7 @@ export function metaOf(L) {
   const doorX = L.doorBay * 3 + 1 + (L.door === "left" ? 0 : 1);
   return {
     entrance: { at: [X(doorX), 3, Z(L.body[1] - 1)], facing: "south", width: 1 },
-    beds: L.beds.map((b) => ({ head: [X(b.head[0]), 3 + H * b.storey, Z(b.head[1])], foot: [X(b.head[0]), 3 + H * b.storey, Z(b.head[1] + 1)] })),
+    beds: L.beds.map((b) => ({ head: [X(b.head[0]), 3 + H * b.storey, Z(b.head[1])], foot: [X(b.foot[0]), 3 + H * b.storey, Z(b.foot[1])] })),
     workstations: L.workstations.map((w) => ({ at: [X(w.at[0]), 3 + H * w.storey, Z(w.at[1])], block: "any" })),
   };
 }

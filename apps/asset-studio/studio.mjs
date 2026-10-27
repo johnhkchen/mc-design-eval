@@ -14,6 +14,11 @@
 //   node studio.mjs get 0001 [dir]                    download a thread's files
 //   node studio.mjs watch                             print a line for each new message from someone else (runs forever)
 //   node studio.mjs brief | protocol                  print the studio's brief or the working protocol
+//   node studio.mjs annotate <asset> <x,y,z> <kind> "text" [--rev n] [--storey n] [--thread id]
+//   node studio.mjs annotate-bulk <floorplan.json> [--rev n] [--thread id]    every note in a floorplan.py --json report
+//   node studio.mjs notes <asset> [--status open]     an asset's notes
+//   node studio.mjs search "words"                    full-text search over every note
+//   node studio.mjs resolve <N-0001> "what fixed it" [--rev n]
 //   node studio.mjs shared                            the shared code tree (both sides' tools, by language)
 //   node studio.mjs pull <shared path> [dest]         fetch a shared file
 //   node studio.mjs push <file> <shared path> --note "why" [--port-of <shared path>] [--lang rust]
@@ -99,6 +104,17 @@ const cmds = {
       } catch (e) { console.error(`watch: ${e.message}`); await new Promise((r) => setTimeout(r, 10000)); }
     }
   },
+  async annotate([asset, at, kind, t]) {
+    if (!asset || !t) throw new Error('annotate <asset> <x,y,z> <kind> "text"');
+    for (const n of await api("POST", "/api/notes", { from: AS, asset, at: at && at !== "-" ? at.split(",").map(Number) : null, kind, text: t, rev: flags.rev != null ? +flags.rev : null, storey: flags.storey != null ? +flags.storey : null, thread: flags.thread })) console.log(n.id);
+  },
+  async "annotate-bulk"([file]) {
+    const r = await api("POST", "/api/notes", { from: AS, floorplan: JSON.parse(readFileSync(file, "utf8")), rev: flags.rev != null ? +flags.rev : null, thread: flags.thread });
+    console.log(`${r.length} notes: ${r.map((n) => n.id).join(" ")}`);
+  },
+  async notes([asset]) { for (const n of await api("GET", `/api/notes?asset=${encodeURIComponent(asset)}${flags.status ? `&status=${flags.status}` : ""}`)) console.log(`${n.id} [${n.status}] ${n.asset}${n.at ? " " + n.at.join(",") : ""} ${n.kind}: ${n.text}${n.resolution ? ` -> ${n.resolution}` : ""}`); },
+  async search([q]) { for (const n of await api("GET", `/api/notes?q=${encodeURIComponent(q)}`)) console.log(`${n.id} [${n.status}] ${n.asset} ${n.kind}: ${n.text}`); },
+  async resolve([id, t]) { console.log(JSON.stringify(await api("POST", `/api/notes/${id}/resolve`, { by: AS, text: t, by_rev: flags.rev != null ? +flags.rev : null }))); },
   async shared() { for (const e of await api("GET", "/api/shared")) console.log(`${e.path}  [${e.lang}]  ${e.bytes} B  ${e.updated_by} ${e.updated.slice(0, 16)}${e.port_of ? `  port of ${e.port_of}` : ""}  ${e.note}`); },
   async pull([path, dest]) {
     const r = await fetch(`${URL_}/shared/${path}`); if (!r.ok) throw new Error(`no shared file ${path}`);

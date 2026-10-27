@@ -3,7 +3,7 @@
 interior spaces ... your own overhead floor plan analysis tool"; "sane interior design, both in terms of room layout,
 walkway length to room volume ratios").
 
-    python3 scripts/assets/floorplan.py STRUCTURE.nbt [...] [--out DIR] [--json]
+    python3 scripts/assets/floorplan.py STRUCTURE.nbt [...] [--out DIR] [--json] [--check]
 
 For each storey: the interior (air no way in from outside but a door), its rooms (floor split at doors), what each room
 is (by what's in it), the routes a villager walks from the street door to every bed, workstation and stair, and an
@@ -42,6 +42,7 @@ USED = ("_bed", "chest", "barrel", "table", "lectern", "loom", "stonecutter", "g
 JOB_SITES = ("lectern", "loom", "stonecutter", "grindstone", "smoker", "blast_furnace", "composter", "cauldron",
              "brewing_stand", "smithing_table", "fletching_table", "cartography_table", "barrel")
 WINDOW = ("glass",)
+HEARTH = ("furnace", "campfire", "fireplace")
 
 
 def load(path):
@@ -146,9 +147,14 @@ def analyse(file):
     def foot(p):
         f = {"north": (0, 1), "south": (0, -1), "east": (-1, 0), "west": (1, 0)}[blocks[p][1].get("facing", "north")]
         return (p[0] + f[0], p[1], p[2] + f[1])
+    # Where villagers go (the studio, thread 0008): beds, workstations, the hearth, chests. Shelves, casks and decor are
+    # used floor for idle but no destination: a route to each of them would make the whole room circulation.
+    def goes_to(n):
+        return n.endswith("_bed") or any(j in n for j in JOB_SITES if j != "barrel") or "chest" in n or any(
+            h in n for h in HEARTH)
     routes, unreached = [], []
     for p, n in sorted(used.items()):
-        if n.endswith("_bed") and p not in beds or n == "lantern":
+        if n.endswith("_bed") and p not in beds or not goes_to(n):
             continue
         # A bed is got into from beside its head or its foot.
         reach = [c for c in beside(p) + (beside(foot(p)) if p in beds else []) if c in dist]
@@ -166,8 +172,11 @@ def analyse(file):
     # Storeys: by feet height, the floor of each.
     levels = sorted({p[1] for p in interior})
     storeys = []
+    def step(p):
+        return "stairs" in name(blocks, (p[0], p[1] - 1, p[2]))
     for y in levels:
-        floor = {p for p in interior if p[1] == y}
+        # A stair's steps belong to no storey.
+        floor = {p for p in interior if p[1] == y and not step(p)}
         if len(floor) < 4:
             continue
         # Rooms: floor cells joined level, split at doors (a door is its own cell between rooms).
@@ -191,6 +200,10 @@ def analyse(file):
             use = ("chamber" if any(n.endswith("_bed") for n in contents) else
                    "work" if any(j in n for n in contents for j in JOB_SITES) else
                    "stair" if all(half(p) for p in room) else
+                   "landing" if not any(abs(e[0] - p[0]) + abs(e[2] - p[2]) == 1 for e in entrances
+                                                         for p in room) and any(
+                       step((p[0] + dx, p[1] + dy, p[2] + dz)) or "stairs" in name(blocks, (p[0] + dx, p[1], p[2] + dz))
+                       for p in room for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)) for dy in (0, 1, -1)) else
                    "hall" if any(abs(e[0] - p[0]) + abs(e[2] - p[2]) == 1 for e in entrances for p in room) else
                    "store" if any("chest" in n or "barrel" in n for n in contents) else
                    "passage" if len(room) <= 4 or min(max(xs) - min(xs), max(zs) - min(zs)) == 0 else "room")
@@ -207,6 +220,10 @@ def analyse(file):
                           "clear_height": sorted(heights)[len(heights) // 2] if heights else 0,
                           "low_cells": sum(1 for h in heights if h < 3),
                           "volume": sum(heights), "contents": sorted(contents), "cells": room})
+        # A landing is designed circulation, counted whole.
+        for r in rooms:
+            if r["use"] == "landing":
+                circulation |= set(r["cells"])
         circ = len(circulation & floor)
         idle = len([c for c in floor if c not in circulation and c not in near_used])
         storeys.append({"feet_y": y, "floor": len(floor), "rooms": rooms, "circulation": circ,
@@ -235,14 +252,86 @@ def analyse(file):
         dest_room = room_of.get(path[-1])
         passed = {room_of[c] for c in path[:-1] if c in room_of and room_of[c][2] == "chamber" and room_of[c] != dest_room}
         through += len(passed)
+    # Annotations (John: "an annotation system so your input is not detached"): each finding pinned to a cell, numbered
+    # on the plan, and written out as text that can be searched.
+    notes = []
+    level_of = {s_["feet_y"]: i for i, s_ in enumerate(storeys)}
+
+    def note(kind, at, words):
+        for old in notes:
+            if old["kind"] == kind and old["at"] == list(at):
+                old["text"] += "; " + words.split("passes through")[0].replace("the way to ", "and to ").strip()
+                return
+        st = level_of.get(at[1], min(level_of.items(), key=lambda kv: abs(kv[0] - at[1]))[1] if level_of else 0)
+        notes.append({"n": len(notes) + 1, "storey": st + 1, "at": list(at), "kind": kind, "text": words})
+    for b in sorted(beds):
+        facing = blocks[b][1].get("facing", "north")
+        f = {"north": (0, 1), "south": (0, -1), "east": (-1, 0), "west": (1, 0)}[facing]
+        side = [(1, 0), (-1, 0)] if facing in ("north", "south") else [(0, 1), (0, -1)]
+        if not any((c[0] + dx, c[1], c[2] + dz) in interior for c in (b, (b[0] + f[0], b[1], b[2] + f[1])) for dx, dz in side):
+            note("unmade-bed", b, "bed with no free long side: it can't be got into or made")
+    for n_, p_, path_ in routes:
+        if not n_.endswith("_bed"):
+            continue
+        dest = room_of.get(path_[-1])
+        for c in path_[:-1]:
+            r_ = room_of.get(c)
+            if r_ and r_[2] == "chamber" and r_ != dest:
+                note("through-room", c, f"the way to the bed at {list(p_)} passes through this chamber")
+                break
+    for si, st in enumerate(storeys):
+        floor = {c for r in st["rooms"] for c in r["cells"]}
+        idle = {c for c in floor if c not in circulation and c not in near_used}
+        if st["idle_share"] > 0.4 and idle:
+            # The largest idle patch: its middle cell.
+            best, seen = [], set()
+            for c in sorted(idle):
+                if c in seen:
+                    continue
+                patch, q2 = [], deque([c])
+                seen.add(c)
+                while q2:
+                    p2 = q2.popleft()
+                    patch.append(p2)
+                    for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                        n2 = (p2[0] + dx, p2[1], p2[2] + dz)
+                        if n2 in idle and n2 not in seen:
+                            seen.add(n2)
+                            q2.append(n2)
+                best = max(best, patch, key=len)
+            mx = sum(c[0] for c in best) / len(best)
+            mz = sum(c[2] for c in best) / len(best)
+            mid = min(best, key=lambda c: (c[0] - mx) ** 2 + (c[2] - mz) ** 2)
+            note("idle-floor", mid, f"{len(idle)} of {len(floor)} cells idle on this storey ({len(best)} here): "
+                                    "no use beside them, no route over them")
+        for r in st["rooms"]:
+            mx = sum(c[0] for c in r["cells"]) / len(r["cells"])
+            mz = sum(c[2] for c in r["cells"]) / len(r["cells"])
+            mid = min(r["cells"], key=lambda c: (c[0] - mx) ** 2 + (c[2] - mz) ** 2)
+            if r["least_width"] < 3 and r["use"] not in ("passage", "stair") and r["floor"] > 4:
+                note("narrow", mid, f"{r['use']} only {r['least_width']} wide across most of it")
+            if r["use"] == "chamber" and r["windows"] == 0:
+                note("dark", mid, "chamber with no window")
+            if r["clear_height"] < 3:
+                note("low", mid, f"{r['use']} with {r['clear_height']} of clear height")
+    for n_, p_ in unreached:
+        note("unreached", p_, f"{n_} no villager can walk to")
+    # Walk: each bed's route over the storeys it crosses, a storey's worth being the root of its floor (a bed on the
+    # third floor may walk three storeys' worth); the mean over the beds.
+    per = math.sqrt(floor_total / max(1, len(storeys)))
+    walks = [len(path_) / (per * (1 + level_of.get(path_[-1][1], 0))) for n_, _, path_ in routes if n_.endswith("_bed")]
+    walk = round(sum(walks) / len(walks), 2) if walks else None
     report = {
         "file": Path(file).name, "size": [sx, sy, sz], "storeys": len(storeys), "floor": floor_total,
         "rooms": sum(len(s["rooms"]) for s in storeys), "beds": len(beds), "made_beds": made,
         "unreached": [f"{n} at {list(p)}" for n, p in unreached],
         "circulation_share": round(sum(s["circulation"] for s in storeys) / floor_total, 2),
         "idle_share": round(sum(s["idle_share"] * s["floor"] for s in storeys) / floor_total, 2),
-        "walk": round(sum(bed_routes) / len(bed_routes) / math.sqrt(floor_total), 2) if bed_routes else None,
+        # The walk to a bed for the size of a storey (thread 0008: over the whole floor, a small two-storey house paid
+        # for its stair with too little floor to divide by).
+        "walk": walk,
         "through_rooms": through,
+        "notes": notes,
         "floor_per_bed": round(sum(r["floor"] for st in storeys for r in st["rooms"] if r["use"] == "chamber")
                                / len(beds), 1) if beds else None,
         "per_storey": [{k: v for k, v in s.items() if k != "rooms"} | {"rooms": [{k: v for k, v in r.items() if k != "cells"}
@@ -271,11 +360,63 @@ def least_width(cells):
     return widths[len(widths) // 10] if widths else 0
 
 
-COLOURS = {"hall": (236, 214, 170), "chamber": (196, 214, 238), "work": (238, 200, 160), "store": (214, 206, 190),
-           "stair": (200, 200, 200), "passage": (232, 228, 214), "room": (226, 226, 210)}
+# The legend: one table, drawn into every plan (John: "a cheap to include and edit legend"). Each key is what the
+# drawing paints; edit a colour or a label here and every plan follows.
+LEGEND = [
+    ("wall", (60, 56, 52), "wall"),
+    ("window", (120, 200, 230), "window"),
+    ("door", (130, 80, 40), "door"),
+    ("entrance", (40, 160, 70), "street door"),
+    ("hall", (236, 214, 170), "hall"),
+    ("chamber", (196, 214, 238), "chamber"),
+    ("work", (238, 200, 160), "work room"),
+    ("store", (214, 206, 190), "store"),
+    ("passage", (232, 228, 214), "passage, landing"),
+    ("room", (226, 226, 210), "room, no use"),
+    ("stair", (150, 150, 150), "stair steps"),
+    ("bed", (70, 110, 200), "bed"),
+    ("job", (230, 140, 50), "workstation"),
+    ("furniture", (150, 110, 70), "furniture"),
+    ("route", (210, 70, 60), "route from the street door"),
+    ("note", (220, 0, 160), "annotation (numbered)"),
+]
+COL = {k: c for k, c, _ in LEGEND}
+COLOURS = {k: COL[k] for k in ("hall", "chamber", "work", "store", "stair", "passage", "room")} | {"landing": COL["passage"]}
+
+# A 3 x 5 pixel font for the legend and the annotations' numbers (no dependencies): each glyph its five rows.
+FONT = {
+    'A': ".#.#.#####.##.#", 'B': "##.#.###.#.###.", 'C': ".###..#..#...##", 'D': "##.#.##.##.###.",
+    'E': "####..##.#..###", 'F': "####..##.#..#..", 'G': ".###..#.##.#.##", 'H': "#.##.#####.##.#",
+    'I': "###.#..#..#.###", 'J': "..#..#..##.#.#.", 'K': "#.##.###.#.##.#", 'L': "#..#..#..#..###",
+    'M': "#.########.##.#", 'N': "##.#.##.##.##.#", 'O': ".#.#.##.##.#.#.", 'P': "##.#.###.#..#..",
+    'Q': ".#.#.##.###..##", 'R': "##.#.###.#.##.#", 'S': ".###...#...###.", 'T': "###.#..#..#..#.",
+    'U': "#.##.##.##.####", 'V': "#.##.##.##.#.#.", 'W': "#.##.########.#", 'X': "#.##.#.#.#.##.#",
+    'Y': "#.##.#.#..#..#.", 'Z': "###..#.#.#..###", '0': "####.##.##.####", '1': ".#.##..#..#.###",
+    '2': "##...#.#.#..###", '3': "##...#.#...###.", '4': "#.##.####..#..#", '5': "####..##...###.",
+    '6': ".###..####.####", '7': "###..#.#..#..#.", '8': "####.#####.####", '9': "####.####..###.",
+    ' ': "...............", '-': "......###......", ':': "....#.....#....", '.': ".............#.",
+    ',': "..........#.#..", '(': ".#.#..#..#...#.", ')': ".#...#..#..#.#.", '/': "..#..#.#.#..#..",
+    '%': "#.#..#.#.#..#.#", '#': "#.#####.#####.#", '+': "....#.###.#....", "'": ".#..#..........",
+}
 
 
-def draw(out, sizes, blocks, storeys, circulation, entrances, interior=frozenset(), scale=14):
+def text(img, x, y, words, col, px=2):
+    """Writes words into an image (rows of pixel tuples) at (x, y), 3 x 5 glyphs scaled by px."""
+    for ch in words.upper():
+        g = FONT.get(ch, FONT[" "])
+        for r in range(5):
+            for c in range(3):
+                if r * 3 + c < len(g) and g[r * 3 + c] == "#":
+                    for a in range(px):
+                        for b in range(px):
+                            yy, xx = y + r * px + a, x + c * px + b
+                            if 0 <= yy < len(img) and 0 <= xx < len(img[0]):
+                                img[yy][xx] = col
+        x += 4 * px
+
+
+
+def draw(out, sizes, blocks, storeys, circulation, entrances, interior=frozenset(), notes=(), scale=14):
     sx, sy, sz = sizes
     sheets = []
     for i, s in enumerate(storeys):
@@ -318,6 +459,14 @@ def draw(out, sizes, blocks, storeys, circulation, entrances, interior=frozenset
             for z in range(sz):
                 if name(blocks, (x, y, z)).endswith("_door"):
                     fill(x, z, (130, 80, 40), inset=scale // 4)
+        for nt in notes:
+            if nt["storey"] == i + 1:
+                x, z = nt["at"][0], nt["at"][2]
+                fill(x, z, COL["note"], inset=1)
+                label = str(nt["n"])
+                text(img, x * scale + (scale - 8 * len(label) + 2) // 2, z * scale + (scale - 10) // 2, label,
+                     (255, 255, 255))
+        text(img, 2, 2, f"{i + 1}", (0, 0, 0))
         sheets.append(img)
     # One sheet: the storeys side by side, ground floor first, a gap between.
     gap = scale
@@ -331,11 +480,52 @@ def draw(out, sizes, blocks, storeys, circulation, entrances, interior=frozenset
             row += bytes(v for px in img[r] for v in px) if 0 <= r < len(img) else bytes((255, 255, 255)) * len(img[0])
             row += bytes((255, 255, 255)) * gap
         rows.append(bytes(row))
+    # The legend under the storeys: a swatch and its label each, from LEGEND.
+    width = max(w, 4 * 2 * 24 * 2)
+    rows = [r + bytes((255, 255, 255)) * (width - w) for r in rows]
+    legend = [[(255, 255, 255)] * width for _ in range(14 * ((len(LEGEND) + 1) // 2) + 8)]
+    for k, (_, col, label) in enumerate(LEGEND):
+        x0, y0 = gap + (k % 2) * (width // 2), 4 + (k // 2) * 14
+        for a in range(10):
+            for b in range(10):
+                legend[y0 + b][x0 + a] = col
+        text(legend, x0 + 14, y0 + 1, label, (40, 40, 40))
+    rows += [bytes(v for px in row for v in px) for row in legend]
+    w, h = width, len(rows)
     for old in out.glob("*.png"):
         old.unlink()
     f = out / "plan.png"
     f.write_bytes(png(w, h, rows))
     return [f.name]
+
+
+# The thresholds (docs/assets/interiors.md, v0.1): `--check` holds a house to them. A shared quality.json (thread
+# 0007) overrides them where it has an "interior" section.
+THRESHOLDS = {"made_beds": "all", "unreached": 0, "through_rooms": 0, "circulation_share": [0.15, 0.45],
+              "idle_share": [0, 0.45], "walk": [0, 2.0], "floor_per_bed": [4, 8.5]}
+
+
+def thresholds():
+    for q in (Path(__file__).with_name("quality.json"), Path(__file__).resolve().parents[2] / "docs/assets/quality.json"):
+        if q.exists():
+            return {**THRESHOLDS, **json.loads(q.read_text()).get("interior", {})}
+    return THRESHOLDS
+
+
+def failures(r, t):
+    """What a report misses of the thresholds, in words."""
+    out = []
+    if t.get("made_beds") == "all" and r["made_beds"] < r["beds"]:
+        out.append(f"{r['beds'] - r['made_beds']} of {r['beds']} beds not made")
+    if len(r["unreached"]) > t.get("unreached", 0):
+        out.append(f"unreached: {r['unreached']}")
+    if r["through_rooms"] > t.get("through_rooms", 0):
+        out.append(f"{r['through_rooms']} routes through chambers")
+    for k in ("circulation_share", "idle_share", "walk", "floor_per_bed"):
+        lo, hi = t[k]
+        if r[k] is not None and not lo <= r[k] <= hi:
+            out.append(f"{k} {r[k]} outside {lo} to {hi}")
+    return out
 
 
 def main():
@@ -347,7 +537,10 @@ def main():
         if out:
             d = out / Path(path).stem
             d.mkdir(parents=True, exist_ok=True)
-            report["plans"] = draw(d, sizes, blocks, storeys, circulation, entrances, interior)
+            report["plans"] = draw(d, sizes, blocks, storeys, circulation, entrances, interior, report["notes"])
+            # The annotations as text beside the plan, to read and to search.
+            (d / "notes.md").write_text(f"# {report['file']}: floor plan notes\n\n" + "".join(
+                f"{n['n']}. storey {n['storey']}, at {n['at']}, {n['kind']}: {n['text']}\n" for n in report["notes"]))
         reports.append(report)
         if "--json" not in sys.argv:
             print(f"{report['file']}: {report['storeys']} storeys, floor {report['floor']}, {report['rooms']} rooms; "
@@ -355,6 +548,8 @@ def main():
                   f"idle {report['idle_share']}, walk {report['walk']}, through rooms {report['through_rooms']}, "
                   f"floor a bed {report['floor_per_bed']}"
                   + (f"; UNREACHED {report['unreached']}" if report["unreached"] else ""))
+            for n in report["notes"]:
+                print(f"  note {n['n']} (storey {n['storey']}, {n['at']}, {n['kind']}): {n['text']}")
             for si, s in enumerate(report["per_storey"]):
                 print(f"  storey {si + 1} (feet y {s['feet_y']}): floor {s['floor']}, circulation {s['circulation_share']},"
                       f" idle {s['idle_share']}")
@@ -364,6 +559,13 @@ def main():
                           f"{', '.join(r['contents'])}")
     if "--json" in sys.argv:
         print(json.dumps(reports, indent=1))
+    if "--check" in sys.argv:
+        t, bad = thresholds(), 0
+        for r in reports:
+            miss = failures(r, t)
+            bad += bool(miss)
+            print(("FAIL  " if miss else "PASS  ") + r["file"] + ("".join(f"\n  {m}" for m in miss)))
+        sys.exit(1 if bad else 0)
 
 
 if __name__ == "__main__":

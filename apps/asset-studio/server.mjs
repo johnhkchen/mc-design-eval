@@ -38,9 +38,9 @@ function scheduleCommit() {
   clearTimeout(commitTimer);
   commitTimer = setTimeout(() => {
     const git = (...a) => spawnSync("git", a, { cwd: HERE, encoding: "utf8" });
-    git("add", "--", "threads", "shared");
-    if (git("diff", "--cached", "--quiet", "--", "threads", "shared").status === 0) return;
-    const r = git("commit", "-q", "-m", `asset studio: desk activity ${now().slice(0, 16)}`, "--", "threads", "shared");
+    git("add", "--", "threads", "shared", "notes");
+    if (git("diff", "--cached", "--quiet", "--", "threads", "shared", "notes").status === 0) return;
+    const r = git("commit", "-q", "-m", `asset studio: desk activity ${now().slice(0, 16)}`, "--", "threads", "shared", "notes");
     if (r.status) { console.error(`commit failed, retrying: ${(r.stderr || "").trim()}`); scheduleCommit(); }
   }, 60000);
 }
@@ -125,7 +125,7 @@ const baseUrl = (req) => `${req.headers["x-forwarded-proto"] || (req.headers.hos
 
 let mcpFn = null;                                                 // built on first use, after everything below is defined
 const mcp = (...a) => (mcpFn ||= makeMcp({ HERE, KINDS, STATUSES, safe, dirOf, readThread, readMessages, allThreads, inbox, summary,
-  createThread, addMessage, setStatus, writeThread, saveFile, markSeen, bump, now, SHARED, safePath, putShared, listShared, readIndex }))(...a);
+  createThread, addMessage, setStatus, writeThread, saveFile, markSeen, bump, now, SHARED, safePath, putShared, listShared, readIndex, addNotes, listNotes, resolveNote, fromFloorplan }))(...a);
 
 // ---- shared code: a tree both sides read and write (shared/<lang>/...), with an index of who, when, why
 const SHARED = join(HERE, "shared"), INDEX = join(SHARED, "index.json");
@@ -143,6 +143,34 @@ function putShared(path, buf, { from, note, lang, port_of }) {
   return idx[path];
 }
 const listShared = () => Object.values(readIndex()).map(({ history, ...e }) => ({ ...e, revisions: history?.length || 0 }));
+
+// ---- notes: findings pinned to a cell of an asset at a revision, searchable, resolved by a later revision
+const NOTES = join(HERE, "notes"), NOTES_FILE = join(NOTES, "notes.json");
+mkdirSync(NOTES, { recursive: true });
+const readNotes = () => (existsSync(NOTES_FILE) ? JSON.parse(readFileSync(NOTES_FILE, "utf8")) : []);
+const writeNotes = (n) => { writeFileSync(NOTES_FILE, JSON.stringify(n, null, 1) + "\n"); bump(); };
+function addNotes(list, from) {
+  const all = readNotes(); let seq = all.reduce((m, n) => Math.max(m, +n.id.slice(2)), 0);
+  const added = list.map((n) => {
+    if (!n.asset || !n.text) throw new Error("a note needs asset and text");
+    return { id: `N-${String(++seq).padStart(4, "0")}`, asset: String(n.asset), rev: n.rev ?? null, at: n.at || null, storey: n.storey ?? null,
+      kind: n.kind || "note", text: String(n.text), author: n.author || from, thread: n.thread || null, created: now(), status: "open" };
+  });
+  writeNotes([...all, ...added]); return added;
+}
+function listNotes({ asset, rev, status, q } = {}) {
+  const words = (q || "").toLowerCase().split(/\s+/).filter(Boolean);
+  return readNotes().filter((n) => (!asset || n.asset === asset || n.asset.endsWith(`/${asset}`) || n.asset.endsWith(asset)) && (rev == null || String(n.rev) === String(rev))
+    && (!status || n.status === status) && words.every((w) => `${n.kind} ${n.text} ${n.asset} ${n.resolution || ""}`.toLowerCase().includes(w)));
+}
+function resolveNote(id, { by_rev, text, by }) {
+  const all = readNotes(), n = all.find((x) => x.id === id);
+  if (!n) throw new Error(`no note ${id}`);
+  Object.assign(n, { status: "resolved", resolved_by_rev: by_rev ?? null, resolution: text || "", resolved_by: by, resolved_at: now() });
+  writeNotes(all); return n;
+}
+// floorplan.py --json output -> notes (each report's `notes`, pinned to its file)
+const fromFloorplan = (reports, { rev, thread }) => reports.flatMap((r) => (r.notes || []).map((n) => ({ asset: r.file, rev, thread, at: n.at, storey: n.storey, kind: n.kind, text: n.text })));
 
 // ---- http
 const send = (res, code, body, type = "application/json") => {
@@ -191,6 +219,17 @@ createServer(async (req, res) => {
       return req.on("close", () => { clearTimeout(tm); waiters.delete(w); });
     }
     if (M === "GET" && p[1] === "inbox") { const as = who(url.searchParams.get("as")); return as ? send(res, 200, inbox(as)) : fail(res, 400, "?as=<name> needed"); }
+    if (p[1] === "notes") {
+      if (M === "GET" && p.length === 2) return send(res, 200, listNotes(Object.fromEntries(url.searchParams)));
+      if (M === "POST" && p.length === 2) {
+        const b = await json(req), from = who(b.from) || who(url.searchParams.get("from"));
+        if (!from) return fail(res, 400, "from needed");
+        const list = b.floorplan ? fromFloorplan(b.floorplan, b) : b.notes || [b];
+        return send(res, 201, addNotes(list, from));
+      }
+      if (M === "POST" && p[3] === "resolve") { const b = await json(req); return send(res, 200, resolveNote(p[2], { by_rev: b.by_rev, text: b.text, by: who(b.by) || "?" })); }
+      return fail(res, 404, "not found");
+    }
     if (p[1] === "shared") {
       if (M === "GET" && p.length === 2) return send(res, 200, listShared());
       if (M === "PUT" && p.length > 2) {

@@ -114,6 +114,22 @@ export function makeMcp(desk) {
       return text(`Saved ${path} (${e.bytes} B, revision ${e.history.length}). ${ctx.base}/shared/${path}`);
     } };
 
+  const noteLine = (n) => `${n.id} [${n.status}] ${n.asset}${n.rev != null ? ` rev ${n.rev}` : ""}${n.at ? ` at ${JSON.stringify(n.at)}` : ""}${n.storey != null ? ` storey ${n.storey}` : ""} ${n.kind}: ${n.text}${n.resolution ? `  -> resolved${n.resolved_by_rev != null ? ` by rev ${n.resolved_by_rev}` : ""}: ${n.resolution}` : ""}  (${n.author}${n.thread ? `, thread ${n.thread}` : ""})`;
+  tools.annotate = { description: "Pin a note (a finding) to a cell of an asset at a revision: what's wrong or worth knowing there. Notes are searchable and resolved by a later revision. For many at once (e.g. floorplan.py --json), pass floorplan instead.",
+    inputSchema: { type: "object", properties: { asset: { type: "string", description: "the structure's id or file name" }, rev: { type: "number" }, at: { type: "array", items: { type: "number" } },
+      storey: { type: "number" }, kind: { type: "string", description: "e.g. unmade-bed, through-room, idle-floor, narrow, dark, flat-wall" }, text: { type: "string" }, thread: { type: "string" },
+      floorplan: { type: "array", description: "floorplan.py --json output: every report's notes, pinned to its file", items: { type: "object" } } } },
+    run: (a, ctx) => { const list = a.floorplan ? desk.fromFloorplan(a.floorplan, a) : [a]; return text(desk.addNotes(list, ctx.as).map(noteLine).join("\n")); } };
+  tools.notes = { description: "An asset's notes (open and resolved), optionally for one revision or status.",
+    inputSchema: { type: "object", properties: { asset: { type: "string" }, rev: { type: "number" }, status: { type: "string", enum: ["open", "resolved"] } }, required: ["asset"] },
+    run: (a) => text(desk.listNotes(a).map(noteLine).join("\n") || "No notes.") };
+  tools.search_notes = { description: "Full-text search over every note: kind, text, asset, resolution. All words must match.",
+    inputSchema: { type: "object", properties: { query: { type: "string" }, status: { type: "string", enum: ["open", "resolved"] } }, required: ["query"] },
+    run: ({ query, status }) => text(desk.listNotes({ q: query, status }).map(noteLine).join("\n") || "No matches.") };
+  tools.resolve_note = { description: "Mark a note resolved by a later revision, with what fixed it.",
+    inputSchema: { type: "object", properties: { id: { type: "string" }, by_rev: { type: "number" }, text: { type: "string" } }, required: ["id", "text"] },
+    run: ({ id, by_rev, text: t }, ctx) => text(noteLine(desk.resolveNote(id, { by_rev, text: t, by: ctx.as }))) };
+
   const instructions = "The asset studio's work desk. Read the brief (read_brief) and protocol (read_protocol) first. " +
     "Open a thread for each piece of work (open_thread), attach pictures and files as base64, and check_inbox for replies. " +
     "Screenshots of deliveries running in your project are the most useful thing to send back. " +

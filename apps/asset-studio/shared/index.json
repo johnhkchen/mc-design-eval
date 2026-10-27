@@ -66,16 +66,22 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:13:05.254Z",
+    "updated": "2026-10-27T14:22:07.344Z",
     "updated_by": "studio",
-    "note": "the reference composer for timber_relief layouts",
-    "bytes": 9522,
+    "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
+    "bytes": 11575,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
         "by": "studio",
         "note": "the reference composer for timber_relief layouts",
         "bytes": 9522
+      },
+      {
+        "at": "2026-10-27T14:22:07.344Z",
+        "by": "studio",
+        "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
+        "bytes": 11575
       }
     ]
   },
@@ -83,16 +89,22 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:13:05.297Z",
+    "updated": "2026-10-27T14:22:07.386Z",
     "updated_by": "studio",
-    "note": "the relief module set as code",
-    "bytes": 10312,
+    "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
+    "bytes": 11385,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
         "by": "studio",
         "note": "the relief module set as code",
         "bytes": 10312
+      },
+      {
+        "at": "2026-10-27T14:22:07.386Z",
+        "by": "studio",
+        "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
+        "bytes": 11385
       }
     ]
   },
@@ -174,10 +186,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T14:19:53.400Z",
+    "updated": "2026-10-27T14:21:45.609Z",
     "updated_by": "client",
-    "note": "legend table drawn into every plan; numbered annotations pinned to cells, also written to notes.md",
-    "bytes": 26953,
+    "note": "v0.2: steps no storey, landings whole, destinations beds/work/hearth/chests, walk per storey crossed, --check",
+    "bytes": 30304,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -196,6 +208,12 @@
         "by": "client",
         "note": "legend table drawn into every plan; numbered annotations pinned to cells, also written to notes.md",
         "bytes": 26953
+      },
+      {
+        "at": "2026-10-27T14:21:45.609Z",
+        "by": "client",
+        "note": "v0.2: steps no storey, landings whole, destinations beds/work/hearth/chests, walk per storey crossed, --check",
+        "bytes": 30304
       }
     ]
   },
@@ -220,16 +238,22 @@
     "path": "docs/interiors.md",
     "lang": "md",
     "author": "client",
-    "updated": "2026-10-27T14:14:08.088Z",
+    "updated": "2026-10-27T14:21:46.300Z",
     "updated_by": "client",
-    "note": "The interior vocabulary and v0.1 thresholds",
-    "bytes": 5069,
+    "note": "v0.2 thresholds and definitions",
+    "bytes": 5534,
     "history": [
       {
         "at": "2026-10-27T14:14:08.088Z",
         "by": "client",
         "note": "The interior vocabulary and v0.1 thresholds",
         "bytes": 5069
+      },
+      {
+        "at": "2026-10-27T14:21:46.300Z",
+        "by": "client",
+        "note": "v0.2 thresholds and definitions",
+        "bytes": 5534
       }
     ]
   },
@@ -254,16 +278,22 @@
     "path": "js/interior.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:19:56.881Z",
+    "updated": "2026-10-27T14:22:07.469Z",
     "updated_by": "studio",
-    "note": "runs py/floorplan.py and holds it to interiors.md v0.1 (to read quality.json once it exists)",
-    "bytes": 2492,
+    "note": "reads quality.json interior; landings and passages 2 wide, stair rooms skipped",
+    "bytes": 2883,
     "history": [
       {
         "at": "2026-10-27T14:19:56.881Z",
         "by": "studio",
         "note": "runs py/floorplan.py and holds it to interiors.md v0.1 (to read quality.json once it exists)",
         "bytes": 2492
+      },
+      {
+        "at": "2026-10-27T14:22:07.469Z",
+        "by": "studio",
+        "note": "reads quality.json interior; landings and passages 2 wide, stair rooms skipped",
+        "bytes": 2883
       }
     ]
   },
@@ -281,6 +311,46 @@
         "by": "studio",
         "note": "preview with decor twins drawn as their vanilla lookalikes (needs the studio's renderer)",
         "bytes": 2083
+      }
+    ]
+  },
+  "js/relief.mjs": {
+    "path": "js/relief.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:20:59.299Z",
+    "updated_by": "studio",
+    "note": "relief census: relief and detail share per facade, from outside; reads quality.json relief",
+    "bytes": 6407,
+    "history": [
+      {
+        "at": "2026-10-27T14:20:59.299Z",
+        "by": "studio",
+        "note": "relief census: relief and detail share per facade, from outside; reads quality.json relief",
+        "bytes": 6407
+      }
+    ]
+  },
+  "quality.json": {
+    "path": "quality.json",
+    "lang": "json",
+    "author": "studio",
+    "updated": "2026-10-27T14:22:07.428Z",
+    "updated_by": "studio",
+    "note": "interior bands v0.2 (circulation 0.15-0.45, idle <0.45, floor a bed 4-8.5)",
+    "bytes": 1824,
+    "history": [
+      {
+        "at": "2026-10-27T14:20:59.341Z",
+        "by": "studio",
+        "note": "the shared thresholds v0.1: contract, relief (calibrated), interior (v0.1 from interiors.md), yards",
+        "bytes": 1558
+      },
+      {
+        "at": "2026-10-27T14:22:07.428Z",
+        "by": "studio",
+        "note": "interior bands v0.2 (circulation 0.15-0.45, idle <0.45, floor a bed 4-8.5)",
+        "bytes": 1824
       }
     ]
   }

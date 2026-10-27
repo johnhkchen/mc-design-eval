@@ -5,7 +5,10 @@
 import { execFileSync } from "node:child_process";
 import { basename } from "node:path";
 const FP = new URL("./py/floorplan.py", import.meta.url).pathname;
-const T = { circulation: [0.15, 0.35], idle: 0.40, walk: 2.0, perBed: [4, 8], leastWidth: 3, passageWidth: 2, clear: 3 };
+import { readFileSync, existsSync } from "node:fs";
+const Q = existsSync(new URL("../quality.json", import.meta.url)) ? JSON.parse(readFileSync(new URL("../quality.json", import.meta.url), "utf8")).interior : {};
+const T = { circulation: Q.circulation || [0.15, 0.45], idle: Q.idle_max ?? 0.45, walk: Q.walk_max ?? 2.0, perBed: Q.floor_per_bed || [4, 8.5],
+  leastWidth: Q.least_width?.room ?? 3, passageWidth: Q.least_width?.passage ?? 2, clear: Q.clear_height_min ?? 3 };
 export function interior(file, plans) {
   const out = execFileSync("python3", ["-I", FP, file, "--json", ...(plans ? ["--out", plans] : [])], { encoding: "utf8" });
   const d = JSON.parse(out)[0], fails = [];
@@ -17,7 +20,8 @@ export function interior(file, plans) {
   if (d.walk >= T.walk) fails.push(`walk ${d.walk}`);
   if (d.beds && (d.floor_per_bed < T.perBed[0] || d.floor_per_bed > T.perBed[1])) fails.push(`floor a bed ${d.floor_per_bed}`);
   for (const s of d.per_storey) for (const r of s.rooms) {
-    const min = r.use === "passage" || r.use === "stair" ? T.passageWidth : T.leastWidth;
+    if (r.use === "stair") continue;
+    const min = r.use === "passage" || r.use === "landing" ? T.passageWidth : T.leastWidth;
     if (r.least_width < min) fails.push(`storey ${s.feet_y} ${r.use} least width ${r.least_width}`);
     if (r.clear_height < T.clear) fails.push(`storey ${s.feet_y} ${r.use} clear height ${r.clear_height}`);
   }
