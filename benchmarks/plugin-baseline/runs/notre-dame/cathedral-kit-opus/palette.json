@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "wall body": ["smooth_sandstone", "smooth_sandstone_stairs", "smooth_sandstone_slab"],
+    "dressed trim": ["cut_sandstone", "cut_sandstone_slab"],
+    "carved detail": ["chiseled_sandstone"],
+    "weathered accent": ["sandstone", "sandstone_stairs", "sandstone_slab"],
+    "tracery": ["sandstone_wall"],
+    "light stone": ["end_stone_bricks", "end_stone_brick_stairs", "end_stone_brick_slab", "end_stone_brick_wall"],
+    "plinth": ["stone_bricks", "cracked_stone_bricks", "smooth_stone", "stone_brick_stairs", "smooth_stone_slab"],
+    "lead roofs": ["deepslate_tiles", "polished_deepslate", "deepslate_tile_stairs", "polished_deepslate_stairs", "deepslate_tile_slab", "polished_deepslate_slab", "iron_bars"],
+    "spire": ["deepslate_tile_wall", "polished_deepslate_wall", "stripped_dark_oak_log"],
+    "apostles": ["oxidized_copper", "oxidized_cut_copper_stairs", "oxidized_cut_copper_slab"],
+    "lancet glass": ["blue_stained_glass_pane", "purple_stained_glass_pane", "red_stained_glass_pane"],
+    "rose glass": ["blue_stained_glass", "red_stained_glass", "magenta_stained_glass", "yellow_stained_glass"],
+    "belfry": ["black_stained_glass_pane"],
+    "dusk light": ["shroomlight", "ochre_froglight"]
+  },
+  "objects": ["dark_oak_door", "spruce_trapdoor", "lantern", "lightning_rod", "end_rod"]
+}
