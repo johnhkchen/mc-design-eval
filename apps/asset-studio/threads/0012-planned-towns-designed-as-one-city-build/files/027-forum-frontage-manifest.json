@@ -1,0 +1,157 @@
+{
+  "batch": "027-forum-frontage",
+  "thread": "0012",
+  "made": "2026-10-27T21:33:39.040Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/hall/guildhall_15x12_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "4b846d0cb149f170b752f616cb0fdf3e6b679ec98d4f11b7dc0f584fd439c74c",
+      "bytes": 240675
+    },
+    {
+      "path": "assets-src/lordaeron/hall/guildhall_15x12_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e1959f50e78690872fc2f75d6a01cd90eb77fd4b131a3574e7d35883ced9e2e8",
+      "bytes": 215412
+    },
+    {
+      "path": "assets-src/lordaeron/hall/inn_15x12_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "133ce958f81faafc69a2b9fd13b31cb9491d0f5321b629ba981e1bccd55cd073",
+      "bytes": 229797
+    },
+    {
+      "path": "assets-src/lordaeron/hall/inn_15x12_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0caaec494889121f3768d38c943a06c67b127cf38f37bb2b086b4c9239faa38d",
+      "bytes": 204768
+    },
+    {
+      "path": "assets-src/lordaeron/hall/moot_hall_12x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "5ffaea2372038efd385ea7883978d3a804271a639378d266916a41375b6f16b6",
+      "bytes": 216976
+    },
+    {
+      "path": "assets-src/lordaeron/hall/moot_hall_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "a970ecfed1e7232966c0c319e7e521a47eaab9e181ca9c1546e009f76b90e84b",
+      "bytes": 194838
+    },
+    {
+      "path": "assets-src/stormwind/hall/guildhall_15x12_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "ecd19e8a0ea8cbea1f4f18895658750e57e9aab55a74d50e30b009833968d552",
+      "bytes": 231455
+    },
+    {
+      "path": "assets-src/stormwind/hall/guildhall_15x12_a/front.jpg",
+      "kind": "preview",
+      "sha256": "3b1532e36bb219b961763b5614e8bc37e6ba29f1af34213dd7825a07d3f85fa5",
+      "bytes": 205968
+    },
+    {
+      "path": "assets-src/stormwind/hall/inn_15x12_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "207d41d531cfb0e8aa4c182ef619114702df8c3a1e113514e401fe1e7c4d5f83",
+      "bytes": 233171
+    },
+    {
+      "path": "assets-src/stormwind/hall/inn_15x12_a/front.jpg",
+      "kind": "preview",
+      "sha256": "07e31652bf920e9576e08736ae14fb36047993a058b5f32e34804b48a9fe6ca0",
+      "bytes": 207292
+    },
+    {
+      "path": "assets-src/stormwind/hall/moot_hall_12x9_a/cutaway.jpg",
+      "kind": "preview",
+      "sha256": "6b5b5f244181c5f22daccae170ccf3095804827a5b9d50c2125430c9d615659a",
+      "bytes": 208162
+    },
+    {
+      "path": "assets-src/stormwind/hall/moot_hall_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "5dcde3709b2764e8304ab6972053a6e082ef7e1de3d8ce84b228e692b6da0e87",
+      "bytes": 186490
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/guildhall_15x12_a.json",
+      "kind": "meta",
+      "sha256": "c0e27acd5ef900d92563100c09dafd23ab913b6b4cdc520ae075113d418d84b5",
+      "bytes": 14928
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/guildhall_15x12_a.nbt",
+      "kind": "structure",
+      "sha256": "dc65107d6aebe4656cbc556761caedb5895dc3d93209ad6bfd35d1c25de62439",
+      "bytes": 11275,
+      "id": "enterprise:lordaeron/hall/guildhall_15x12_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/inn_15x12_a.json",
+      "kind": "meta",
+      "sha256": "9760a03dd1a772367326c235cff9d7337a431394627609d7d811e0f23343fa98",
+      "bytes": 20051
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/inn_15x12_a.nbt",
+      "kind": "structure",
+      "sha256": "e80e4947364976a66f3d3d6cb5856ba4dfa7470b9cf4db6efa172662dda5cc8f",
+      "bytes": 11477,
+      "id": "enterprise:lordaeron/hall/inn_15x12_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/moot_hall_12x9_a.json",
+      "kind": "meta",
+      "sha256": "d1244f6b220650ceae61a8a5dba293e17ae1c7c8b8698138177ce90851eb3f2b",
+      "bytes": 9451
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/moot_hall_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "192adfcfc6c1f77c6927262671df39ca8d6e9b0d9b787dab6d0310e906bccf3f",
+      "bytes": 6787,
+      "id": "enterprise:lordaeron/hall/moot_hall_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/guildhall_15x12_a.json",
+      "kind": "meta",
+      "sha256": "8f3170f16fbbb9e314305b2a01fcedf9b2d7087138db274e257440141616ff39",
+      "bytes": 14928
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/guildhall_15x12_a.nbt",
+      "kind": "structure",
+      "sha256": "7e4698d1aefeff3c86f82a589917b876fab0938ccc803739e4545c515112afad",
+      "bytes": 11321,
+      "id": "enterprise:stormwind/hall/guildhall_15x12_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/inn_15x12_a.json",
+      "kind": "meta",
+      "sha256": "334a8d96f0ab4faf69869adbc3c67cc5aae9b24b5d79f9c51d1658ec7578b74d",
+      "bytes": 20051
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/inn_15x12_a.nbt",
+      "kind": "structure",
+      "sha256": "035d9cd99610dfc2f79b1e66001f6e36f96ee5ec9d29414dd86f1139e9fb8961",
+      "bytes": 11496,
+      "id": "enterprise:stormwind/hall/inn_15x12_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/moot_hall_12x9_a.json",
+      "kind": "meta",
+      "sha256": "a24fb9454c8d71c9089bba51ad8cd5dc06901afb731887c06a2d7f9fd00702e8",
+      "bytes": 9451
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/moot_hall_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "9ab7192a6893f9b4fd8564e8037234b3f7328f3cad47a92730bef6a55b647081",
+      "bytes": 6814,
+      "id": "enterprise:stormwind/hall/moot_hall_12x9_a"
+    }
+  ]
+}
