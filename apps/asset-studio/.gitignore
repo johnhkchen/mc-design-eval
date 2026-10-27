@@ -1,0 +1,2 @@
+# world region files are big and rebuildable from the client; keep them on disk, out of git (as the client does)
+threads/**/*.mca
