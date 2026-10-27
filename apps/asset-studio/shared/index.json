@@ -210,10 +210,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T14:30:23.425Z",
+    "updated": "2026-10-27T14:32:37.589Z",
     "updated_by": "client",
-    "note": "r6: the hall is the room the street door opens into on its own storey",
-    "bytes": 30873,
+    "note": "r7: reads quality.json's interior section in its own keys; one storey under multi_storey_min_width",
+    "bytes": 31757,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -250,6 +250,12 @@
         "by": "client",
         "note": "r6: the hall is the room the street door opens into on its own storey",
         "bytes": 30873
+      },
+      {
+        "at": "2026-10-27T14:32:37.589Z",
+        "by": "client",
+        "note": "r7: reads quality.json's interior section in its own keys; one storey under multi_storey_min_width",
+        "bytes": 31757
       }
     ]
   },
@@ -377,10 +383,10 @@
     "path": "quality.json",
     "lang": "json",
     "author": "studio",
-    "updated": "2026-10-27T14:22:07.428Z",
-    "updated_by": "studio",
-    "note": "interior bands v0.2 (circulation 0.15-0.45, idle <0.45, floor a bed 4-8.5)",
-    "bytes": 1824,
+    "updated": "2026-10-27T14:32:36.638Z",
+    "updated_by": "client",
+    "note": "interior: multi_storey_min_width 10, stair_foot_clear 2 (thread 0008); version 0.2",
+    "bytes": 2028,
     "history": [
       {
         "at": "2026-10-27T14:20:59.341Z",
@@ -393,6 +399,12 @@
         "by": "studio",
         "note": "interior bands v0.2 (circulation 0.15-0.45, idle <0.45, floor a bed 4-8.5)",
         "bytes": 1824
+      },
+      {
+        "at": "2026-10-27T14:32:36.638Z",
+        "by": "client",
+        "note": "interior: multi_storey_min_width 10, stair_foot_clear 2 (thread 0008); version 0.2",
+        "bytes": 2028
       }
     ]
   },
