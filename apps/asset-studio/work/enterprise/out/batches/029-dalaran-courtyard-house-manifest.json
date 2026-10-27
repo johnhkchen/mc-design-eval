@@ -1,0 +1,26 @@
+{
+  "batch": "029-dalaran-courtyard-house",
+  "thread": "0010",
+  "made": "2026-10-27T22:37:37.044Z",
+  "files": [
+    {
+      "path": "assets-src/dalaran/home/courtyard_22x16_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d261940fb5d5647e5bd6f2666e02b6bceb30d0899a6c49735843b63bd481a0cd",
+      "bytes": 223045
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/courtyard_22x16_a.json",
+      "kind": "meta",
+      "sha256": "461d9d4ac532cf47fdddb79f27eda15ba32f10c4211e4f555cc4375fd156f22e",
+      "bytes": 1086
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/courtyard_22x16_a.nbt",
+      "kind": "structure",
+      "sha256": "5fd1d8635566fff6d27db14d2e734deeee1446fa65dcf553c134eea702b98bb7",
+      "bytes": 10162,
+      "id": "enterprise:dalaran/home/courtyard_22x16_a"
+    }
+  ]
+}

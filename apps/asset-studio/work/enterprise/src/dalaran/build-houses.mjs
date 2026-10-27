@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 import { compose, metaOf, dalaranLayout } from "./compose.mjs";
 import { EAVE, allModules } from "./modules.mjs";
 import { check } from "../../../../tools/check-asset.mjs";
+import { courtyardHouse } from "./courtyard.mjs";
 const DATA = "bundle/core/src/main/resources/data/enterprise/structure/dalaran/home", PREV = "bundle/assets-src/dalaran/home";
 fs.mkdirSync(DATA, { recursive: true });
 // the module set: Dalaran's shell and roofs as parts (the shared cores and fit-out are Lordaeron's parts), and its set
@@ -54,4 +55,10 @@ for (const [name, p] of HOUSES) {
   fs.mkdirSync(`${PREV}/${name}_a`, { recursive: true });
   execFileSync("node", ["../../tools/preview.mjs", `${DATA}/${name}_a.nbt`, `${PREV}/${name}_a/front.jpg`], { stdio: "ignore" });
 }
+// the courtyard house, a double plot
+{ const r = courtyardHouse(); r.grid.save(`${DATA}/courtyard_22x16_a.nbt`);
+  fs.writeFileSync(`${DATA}/courtyard_22x16_a.json`, JSON.stringify({ id: "enterprise:dalaran/home/courtyard_22x16_a", rev: 1, kingdom: "dalaran", kind: "home", plots: 2, footprint: [22, 16], height: r.grid.size[1], ground: 2,
+    front: "south (z 15) to the street; z 14-15 the forecourt", court: "open to the sky, walkable (an outside room)", entrances: r.meta.entrances, beds: r.meta.beds, workstations: [], lockers: [], markers: [], entities: [], relief_faces: ["south"] }, null, 2) + "\n");
+  fs.mkdirSync(`${PREV}/courtyard_22x16_a`, { recursive: true });
+  execFileSync("node", ["../../tools/preview.mjs", `${DATA}/courtyard_22x16_a.nbt`, `${PREV}/courtyard_22x16_a/front.jpg`], { stdio: "ignore" }); }
 try { execFileSync("node", ["../../tools/gate.mjs", DATA], { stdio: "inherit" }); } catch { process.exitCode = 1; }
