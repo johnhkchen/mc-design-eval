@@ -1,0 +1,107 @@
+{
+  "batch": "008-lordaeron-square-watchtower-docks",
+  "thread": "0005",
+  "made": "2026-10-27T14:40:15.024Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/dock/dock_head_5x5_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2380c0d3d14f21df83e63441f5195805e75c5a580042d611b8d5771d86c6269d",
+      "bytes": 164156
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_head_5x5_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_pier_3x4_a/front.jpg",
+      "kind": "preview",
+      "sha256": "972063bb92d995926c06d468c1fa8e79ab623fd9c69f946e9c29ce057c2fbb5e",
+      "bytes": 150243
+    },
+    {
+      "path": "assets-src/lordaeron/dock/dock_pier_3x4_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/hall/square_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "5d0425a119a58c03d776db7a92792b1e1ce13ce8ba06cd24cbb16ff57241de61",
+      "bytes": 185901
+    },
+    {
+      "path": "assets-src/lordaeron/hall/square_9x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/hall/watchtower_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "1dc11f32c93edffb38016516f087cf936ca541a179f9e7288280f0344e116d79",
+      "bytes": 171970
+    },
+    {
+      "path": "assets-src/lordaeron/hall/watchtower_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_head_5x5_a.json",
+      "kind": "meta",
+      "sha256": "9180d15e63e1343ef4b011f6880d819fea52917f3932446ab0ead36c3d371ebf",
+      "bytes": 1036
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_head_5x5_a.nbt",
+      "kind": "structure",
+      "sha256": "d1dc588608b25880bdd9a43c3ce00581c00c71a3807969fc736b77b735de3d02",
+      "bytes": 628,
+      "id": "enterprise:lordaeron/dock/dock_head_5x5_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_pier_3x4_a.json",
+      "kind": "meta",
+      "sha256": "8eaea6c42756784ccefa2f2eb4e90ca176a98246d0c1d6ed19432e358b7e024e",
+      "bytes": 939
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/dock/dock_pier_3x4_a.nbt",
+      "kind": "structure",
+      "sha256": "158c1865faf54d2e6b4aefaf1bee464cb4001d85cc15e453112a39795f494927",
+      "bytes": 378,
+      "id": "enterprise:lordaeron/dock/dock_pier_3x4_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/square_9x9_a.json",
+      "kind": "meta",
+      "sha256": "c46fef4cf191bc6879d1647c9c70f8ade131486d134a2dbc3a19bf1b8b317cc5",
+      "bytes": 707
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/square_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "7ab05b970325f355b48840a8188d1f17202468b5da703a48e6a7f0c8533d1111",
+      "bytes": 1318,
+      "id": "enterprise:lordaeron/hall/square_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/watchtower_7x7_a.json",
+      "kind": "meta",
+      "sha256": "621a78a4ff76281466f3838bc49b5183f695c5e93af4187a2a68059b340b64a7",
+      "bytes": 744
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/hall/watchtower_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "2f2380b57c4a3ece4c6b0b2d67392ce9e55dfbf173fc4b529b56c92014ae7ab6",
+      "bytes": 4868,
+      "id": "enterprise:lordaeron/hall/watchtower_7x7_a"
+    }
+  ]
+}

@@ -133,3 +133,48 @@ export const PIECES = {
   curtain_4: () => curtain(4), curtain_8: () => curtain(8), filler_1: () => curtain(1, 1), filler_2: () => curtain(2), filler_3: () => curtain(3),
   tower_7x7: towerPiece, corner_7x7: cornerPiece, gatehouse_11x7: gatehouse,
 };
+
+/** A freestanding watchtower (hall:watchtower): the arcaded stone shaft of a wall tower, a newel stair in two flights
+ *  (ground to a mid floor, mid floor to the lookout), and a timber lookout gallery with a rail under a hipped tile roof. */
+export function watchtower() {
+  const MID = G + 7, LOOK = MID + 7, g = new Grid([7, LOOK + 9, 7]);
+  foundation(g, 0, 6, 0, 6);
+  for (let x = 0; x <= 6; x++) for (let z = 0; z <= 6; z++) for (let y = G; y <= LOOK + 8; y++) g.set(x, y, z, "air");
+  const faces = [
+    Object.assign((u, d) => [u, d], { inward: "south" }), Object.assign((u, d) => [6 - u, 6 - d], { inward: "north" }),
+    Object.assign((u, d) => [d, 6 - u], { inward: "east" }), Object.assign((u, d) => [6 - d, u], { inward: "west" }),
+  ];
+  for (const f of faces) arcade(g, f, 7, G, LOOK - 1);
+  for (let x = 1; x <= 5; x++) for (let z = 1; z <= 5; z++) if (x === 1 || x === 5 || z === 1 || z === 5) g.set(x, G, z, "stone_bricks");
+  for (let x = 2; x <= 4; x++) for (let z = 2; z <= 4; z++) for (const y of [G, MID, LOOK]) g.set(x, y, z, "spruce_planks");
+  for (let y = G + 1; y < LOOK; y++) g.set(3, y, 3, "stripped_spruce_log[axis=y]");                       // the newel
+  const ring = [[3, 4, "west"], [2, 4, "north"], [2, 3, "north"], [2, 2, "east"], [3, 2, "east"], [4, 2, "south"], [4, 3, "south"]];
+  for (const base of [G, MID]) {
+    ring.forEach(([x, z, f], k) => g.set(x, base + 1 + k, z, `spruce_stairs[facing=${f},half=bottom,shape=straight,waterlogged=false]`));
+    for (const [x, z] of [[4, 2], [4, 3], [3, 2]]) g.set(x, base + 7, z, "air");
+    g.set(4, base + 7, 3, "spruce_stairs[facing=south,half=bottom,shape=straight,waterlogged=false]");
+  }
+  // the door on the south side
+  for (const z of [5, 6]) { g.set(3, G + 1, z, "air"); g.set(3, G + 2, z, "air"); }
+  g.set(3, G + 1, 5, "spruce_door[facing=south,half=lower,hinge=left,open=false,powered=false]"); g.set(3, G + 2, 5, "spruce_door[facing=south,half=upper,hinge=left,open=false,powered=false]");
+  g.set(3, G, 6, SLAB("bottom")); g.set(3, G + 3, 6, ST("north", "top"));
+  // the lookout: the floor carried out to the full 7 x 7 on corbels, a rail, posts and a hipped tile roof
+  for (let x = 0; x <= 6; x++) for (let z = 0; z <= 6; z++) {
+    const edge = x === 0 || x === 6 || z === 0 || z === 6;
+    if (!(x >= 2 && x <= 4 && z >= 2 && z <= 4)) g.set(x, LOOK, z, "spruce_planks");
+    if (edge) { g.set(x, LOOK - 1, z, ST(z === 0 ? "south" : z === 6 ? "north" : x === 0 ? "east" : "west", "top")); g.set(x, LOOK + 1, z, "spruce_fence[east=true,north=true,south=true,waterlogged=false,west=true]"); }
+  }
+  for (const [x, z] of [[0, 0], [6, 0], [0, 6], [6, 6]]) for (let y = LOOK + 1; y <= LOOK + 3; y++) g.set(x, y, z, "dark_oak_log[axis=y]");
+  for (let k = 0; k < 4; k++) {
+    const lo = k, hi = 6 - k, y = LOOK + 4 + k;
+    for (let x = lo; x <= hi; x++) { g.set(x, y, lo, `granite_stairs[facing=south,half=bottom,shape=straight,waterlogged=false]`); g.set(x, y, hi, `granite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]`); }
+    for (let z = lo + 1; z < hi; z++) { g.set(lo, y, z, `granite_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]`); g.set(hi, y, z, `granite_stairs[facing=west,half=bottom,shape=straight,waterlogged=false]`); }
+    if (k === 0) for (let x = 1; x < 6; x++) for (let z = 1; z < 6; z++) g.set(x, y, z, "spruce_planks");
+  }
+  g.set(3, LOOK + 8, 3, "granite_slab[type=bottom,waterlogged=false]");
+  // light: inside each flight, the mid floor, the lookout (a lamp on each corner post's foot and under the roof)
+  g.set(2, G + 4, 3, HANG); g.set(4, MID + 4, 4, HANG);
+  for (const [x, z] of [[1, 1], [5, 1], [1, 5], [5, 5]]) g.set(x, LOOK + 1, z, LANTERN);
+  g.set(3, LOOK + 3, 1, HANG);
+  return g;
+}
