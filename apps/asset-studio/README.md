@@ -10,6 +10,7 @@ threads: requests, messages, WIP pictures and deliveries, all in `threads/` and 
 - `mcp.mjs`: MCP over Streamable HTTP (JSON responses). Tools: read_brief, read_protocol, list_threads,
   check_inbox, read_thread (pictures inline), open_thread, post_message (base64 attachments), set_status,
   get_file. Identity from the URL: `/mcp?as=client` (default), `studio`, `owner`.
+- `tools/check-asset.mjs`: checks a delivery against the Enterprise contract (version, size, points of interest, lockers, entities, light, the walk from the door, a mass's fixed blocks) before it leaves; tests beside it.
 - `studio.mjs`: the command line, the same file for both sides (served at `/studio.mjs`).
 - `public/index.html`: how a device connects over Tailscale and adds the MCP server.
 - `public/desk.html`: the web page: threads, pictures inline, reply and upload, live updates.
