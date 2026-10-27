@@ -66,10 +66,10 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:36:13.729Z",
+    "updated": "2026-10-27T14:38:32.860Z",
     "updated_by": "studio",
-    "note": "rev 5 plans: 7-wide one-room cottages; 10-wide landing = the 2x2 in the stair corner, front strip joins the chamber; 2-wide approach to the stair foot; chimney on a party wall at the middle post",
-    "bytes": 13429,
+    "note": "batch 007",
+    "bytes": 13499,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
@@ -100,6 +100,12 @@
         "by": "studio",
         "note": "rev 5 plans: 7-wide one-room cottages; 10-wide landing = the 2x2 in the stair corner, front strip joins the chamber; 2-wide approach to the stair foot; chimney on a party wall at the middle post",
         "bytes": 13429
+      },
+      {
+        "at": "2026-10-27T14:38:32.860Z",
+        "by": "studio",
+        "note": "batch 007",
+        "bytes": 13499
       }
     ]
   },
@@ -107,10 +113,10 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:36:13.772Z",
+    "updated": "2026-10-27T14:38:32.914Z",
     "updated_by": "studio",
-    "note": "rev 5 plans: 7-wide one-room cottages; 10-wide landing = the 2x2 in the stair corner, front strip joins the chamber; 2-wide approach to the stair foot; chimney on a party wall at the middle post",
-    "bytes": 12392,
+    "note": "batch 007",
+    "bytes": 12953,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
@@ -141,6 +147,12 @@
         "by": "studio",
         "note": "rev 5 plans: 7-wide one-room cottages; 10-wide landing = the 2x2 in the stair corner, front strip joins the chamber; 2-wide approach to the stair foot; chimney on a party wall at the middle post",
         "bytes": 12392
+      },
+      {
+        "at": "2026-10-27T14:38:32.914Z",
+        "by": "studio",
+        "note": "batch 007",
+        "bytes": 12953
       }
     ]
   },
@@ -451,6 +463,74 @@
         "by": "studio",
         "note": "the seven halls as fit-out plans on the relief shell",
         "bytes": 4342
+      }
+    ]
+  },
+  "js/lordaeron/forum.mjs": {
+    "path": "js/lordaeron/forum.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:38:32.966Z",
+    "updated_by": "studio",
+    "note": "batch 007",
+    "bytes": 4152,
+    "history": [
+      {
+        "at": "2026-10-27T14:38:32.966Z",
+        "by": "studio",
+        "note": "batch 007",
+        "bytes": 4152
+      }
+    ]
+  },
+  "js/lordaeron/market.mjs": {
+    "path": "js/lordaeron/market.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:38:33.017Z",
+    "updated_by": "studio",
+    "note": "batch 007",
+    "bytes": 1949,
+    "history": [
+      {
+        "at": "2026-10-27T14:38:33.017Z",
+        "by": "studio",
+        "note": "batch 007",
+        "bytes": 1949
+      }
+    ]
+  },
+  "js/lordaeron/walls.mjs": {
+    "path": "js/lordaeron/walls.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:38:33.065Z",
+    "updated_by": "studio",
+    "note": "batch 007",
+    "bytes": 11784,
+    "history": [
+      {
+        "at": "2026-10-27T14:38:33.065Z",
+        "by": "studio",
+        "note": "batch 007",
+        "bytes": 11784
+      }
+    ]
+  },
+  "js/lordaeron/wall-tiling.mjs": {
+    "path": "js/lordaeron/wall-tiling.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:38:33.110Z",
+    "updated_by": "studio",
+    "note": "batch 007",
+    "bytes": 2007,
+    "history": [
+      {
+        "at": "2026-10-27T14:38:33.110Z",
+        "by": "studio",
+        "note": "batch 007",
+        "bytes": 2007
       }
     ]
   }
