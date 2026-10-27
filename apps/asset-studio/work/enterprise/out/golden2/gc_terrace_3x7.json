@@ -37,73 +37,73 @@
     {
       "head": [
         2,
-        8,
+        3,
         2
       ],
       "foot": [
         2,
-        8,
+        3,
         3
       ]
     },
     {
       "head": [
-        2,
-        8,
-        5
-      ],
-      "foot": [
-        2,
-        8,
-        6
-      ]
-    },
-    {
-      "head": [
-        8,
-        8,
+        6,
+        3,
         2
       ],
       "foot": [
-        8,
-        8,
+        6,
+        3,
         3
       ]
     },
     {
       "head": [
         8,
-        8,
-        5
+        3,
+        2
       ],
       "foot": [
         8,
-        8,
-        6
+        3,
+        3
       ]
     },
     {
       "head": [
-        14,
-        8,
+        12,
+        3,
         2
       ],
       "foot": [
-        14,
-        8,
+        12,
+        3,
         3
       ]
     },
     {
       "head": [
         14,
-        8,
-        5
+        3,
+        2
       ],
       "foot": [
         14,
-        8,
-        6
+        3,
+        3
+      ]
+    },
+    {
+      "head": [
+        18,
+        3,
+        2
+      ],
+      "foot": [
+        18,
+        3,
+        3
       ]
     }
   ],
@@ -114,9 +114,8 @@
   "golden": {
     "params": {
       "units": 3,
-      "storeys": 2,
-      "palette": "daub",
-      "beds": 2
+      "storeys": 1,
+      "palette": "daub"
     },
     "palette": "daub",
     "layouts": [
@@ -131,7 +130,7 @@
             7,
             7
           ],
-          "storeys": 2,
+          "storeys": 1,
           "party": [
             false,
             true
@@ -180,7 +179,7 @@
             {
               "face": "back",
               "i": 1,
-              "module": "bay_landing_ground",
+              "module": "bay_window_box_ground",
               "storey": 0,
               "mirror": false
             },
@@ -206,7 +205,7 @@
             {
               "face": "west",
               "i": 1,
-              "module": "bay_landing_ground",
+              "module": "bay_window_ground",
               "storey": 0,
               "mirror": false
             },
@@ -219,7 +218,7 @@
             {
               "face": "west",
               "i": 4,
-              "module": "bay_landing_ground",
+              "module": "bay_window_ground",
               "storey": 0,
               "mirror": false
             },
@@ -242,128 +241,38 @@
               "module": "bay_party_ground",
               "storey": 0,
               "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 0,
-              "module": "corner_upper",
-              "storey": 1
-            },
-            {
-              "face": "front",
-              "i": 1,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "front",
-              "i": 4,
-              "module": "bay_window_box_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 6,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 0,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 1,
-              "module": "bay_landing_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "back",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 4,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "back",
-              "i": 6,
-              "module": "corner_upper",
-              "storey": 1
-            },
-            {
-              "face": "west",
-              "i": 1,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "west",
-              "i": 3,
-              "module": "chimney_upper",
-              "storey": 1
-            },
-            {
-              "face": "west",
-              "i": 4,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "east",
-              "i": 1,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "east",
-              "i": 3,
-              "module": "post_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "east",
-              "i": 4,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
             }
           ],
           "plan": [
             {
               "storey": 0,
-              "module": "core_turned_bottom",
+              "module": "bed",
               "at": [
-                3,
+                1,
                 1
-              ]
+              ],
+              "dy": 1,
+              "q": 0
             },
             {
-              "storey": 1,
-              "module": "core_turned_top",
+              "storey": 0,
+              "module": "bed",
+              "at": [
+                5,
+                1
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "chest",
               "at": [
                 3,
                 1
-              ]
+              ],
+              "dy": 1,
+              "q": 0
             },
             {
               "storey": 0,
@@ -377,10 +286,40 @@
             },
             {
               "storey": 0,
+              "module": "table",
+              "at": [
+                3,
+                3
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "bench",
+              "at": [
+                3,
+                2
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "bench",
+              "at": [
+                4,
+                3
+              ],
+              "dy": 1,
+              "q": 1
+            },
+            {
+              "storey": 0,
               "module": "shelf",
               "at": [
-                1,
-                5
+                5,
+                4
               ],
               "dy": 1,
               "q": 0
@@ -389,58 +328,8 @@
               "storey": 0,
               "module": "cask",
               "at": [
-                3,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "chest",
-              "at": [
-                4,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "table",
-              "at": [
-                2,
-                2
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                2,
-                1
-              ],
-              "dy": 1,
-              "q": 2
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                2,
+                5,
                 3
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "shelf",
-              "at": [
-                4,
-                2
               ],
               "dy": 1,
               "q": 0
@@ -449,8 +338,8 @@
               "storey": 0,
               "module": "pot",
               "at": [
-                3,
-                1
+                1,
+                5
               ],
               "dy": 1,
               "q": 0
@@ -470,87 +359,7 @@
               "module": "lantern",
               "at": [
                 4,
-                3
-              ],
-              "dy": 4,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bed",
-              "at": [
-                1,
-                1
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bed",
-              "at": [
-                1,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "chest",
-              "at": [
-                1,
-                3
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "table",
-              "at": [
-                4,
-                5
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bench",
-              "at": [
-                3,
-                5
-              ],
-              "dy": 1,
-              "q": 1
-            },
-            {
-              "storey": 1,
-              "module": "shelf",
-              "at": [
-                5,
-                5
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "lantern",
-              "at": [
-                2,
-                3
-              ],
-              "dy": 4,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "lantern",
-              "at": [
-                4,
-                3
+                2
               ],
               "dy": 4,
               "q": 0
@@ -562,7 +371,7 @@
           ],
           "beds": [
             {
-              "storey": 1,
+              "storey": 0,
               "head": [
                 1,
                 1
@@ -573,14 +382,14 @@
               ]
             },
             {
-              "storey": 1,
+              "storey": 0,
               "head": [
-                1,
-                4
+                5,
+                1
               ],
               "foot": [
-                1,
-                5
+                5,
+                2
               ]
             }
           ],
@@ -600,7 +409,7 @@
             7,
             7
           ],
-          "storeys": 2,
+          "storeys": 1,
           "party": [
             true,
             true
@@ -649,7 +458,7 @@
             {
               "face": "back",
               "i": 1,
-              "module": "bay_landing_ground",
+              "module": "bay_window_box_ground",
               "storey": 0,
               "mirror": false
             },
@@ -682,7 +491,7 @@
             {
               "face": "west",
               "i": 3,
-              "module": "post_party_ground",
+              "module": "chimney_party_ground",
               "storey": 0
             },
             {
@@ -710,133 +519,13 @@
               "i": 4,
               "module": "bay_party_ground",
               "storey": 0,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 0,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "front",
-              "i": 1,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "front",
-              "i": 4,
-              "module": "bay_window_box_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 6,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 0,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 1,
-              "module": "bay_landing_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "back",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 4,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "back",
-              "i": 6,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "west",
-              "i": 1,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "west",
-              "i": 3,
-              "module": "post_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "west",
-              "i": 4,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "east",
-              "i": 1,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "east",
-              "i": 3,
-              "module": "post_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "east",
-              "i": 4,
-              "module": "bay_party_upper",
-              "storey": 1,
               "mirror": false
             }
           ],
           "plan": [
             {
               "storey": 0,
-              "module": "core_turned_bottom",
-              "at": [
-                3,
-                1
-              ]
-            },
-            {
-              "storey": 1,
-              "module": "core_turned_top",
-              "at": [
-                3,
-                1
-              ]
-            },
-            {
-              "storey": 0,
-              "module": "hearth",
+              "module": "bed",
               "at": [
                 1,
                 1
@@ -846,10 +535,70 @@
             },
             {
               "storey": 0,
-              "module": "shelf",
+              "module": "bed",
+              "at": [
+                5,
+                1
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "chest",
+              "at": [
+                3,
+                1
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "hearth",
               "at": [
                 1,
-                5
+                3
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "table",
+              "at": [
+                3,
+                3
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "bench",
+              "at": [
+                3,
+                2
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "bench",
+              "at": [
+                4,
+                3
+              ],
+              "dy": 1,
+              "q": 1
+            },
+            {
+              "storey": 0,
+              "module": "shelf",
+              "at": [
+                5,
+                4
               ],
               "dy": 1,
               "q": 0
@@ -858,58 +607,8 @@
               "storey": 0,
               "module": "cask",
               "at": [
-                3,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "chest",
-              "at": [
-                4,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "table",
-              "at": [
-                2,
-                2
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                2,
-                1
-              ],
-              "dy": 1,
-              "q": 2
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                2,
+                5,
                 3
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "shelf",
-              "at": [
-                4,
-                2
               ],
               "dy": 1,
               "q": 0
@@ -918,8 +617,8 @@
               "storey": 0,
               "module": "pot",
               "at": [
-                3,
-                1
+                1,
+                5
               ],
               "dy": 1,
               "q": 0
@@ -939,87 +638,7 @@
               "module": "lantern",
               "at": [
                 4,
-                3
-              ],
-              "dy": 4,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bed",
-              "at": [
-                1,
-                1
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bed",
-              "at": [
-                1,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "chest",
-              "at": [
-                1,
-                3
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "table",
-              "at": [
-                4,
-                5
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bench",
-              "at": [
-                3,
-                5
-              ],
-              "dy": 1,
-              "q": 1
-            },
-            {
-              "storey": 1,
-              "module": "shelf",
-              "at": [
-                5,
-                5
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "lantern",
-              "at": [
-                2,
-                3
-              ],
-              "dy": 4,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "lantern",
-              "at": [
-                4,
-                3
+                2
               ],
               "dy": 4,
               "q": 0
@@ -1027,11 +646,11 @@
           ],
           "chimney": [
             0,
-            1
+            3
           ],
           "beds": [
             {
-              "storey": 1,
+              "storey": 0,
               "head": [
                 1,
                 1
@@ -1042,14 +661,14 @@
               ]
             },
             {
-              "storey": 1,
+              "storey": 0,
               "head": [
-                1,
-                4
+                5,
+                1
               ],
               "foot": [
-                1,
-                5
+                5,
+                2
               ]
             }
           ],
@@ -1069,7 +688,7 @@
             7,
             7
           ],
-          "storeys": 2,
+          "storeys": 1,
           "party": [
             true,
             false
@@ -1118,7 +737,7 @@
             {
               "face": "back",
               "i": 1,
-              "module": "bay_landing_ground",
+              "module": "bay_window_box_ground",
               "storey": 0,
               "mirror": false
             },
@@ -1151,7 +770,7 @@
             {
               "face": "west",
               "i": 3,
-              "module": "post_party_ground",
+              "module": "chimney_party_ground",
               "storey": 0
             },
             {
@@ -1164,7 +783,7 @@
             {
               "face": "east",
               "i": 1,
-              "module": "bay_landing_ground",
+              "module": "bay_window_ground",
               "storey": 0,
               "mirror": false
             },
@@ -1177,135 +796,15 @@
             {
               "face": "east",
               "i": 4,
-              "module": "bay_landing_ground",
+              "module": "bay_window_ground",
               "storey": 0,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 0,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "front",
-              "i": 1,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "front",
-              "i": 4,
-              "module": "bay_window_box_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "front",
-              "i": 6,
-              "module": "corner_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 0,
-              "module": "corner_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 1,
-              "module": "bay_landing_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "back",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "back",
-              "i": 4,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "back",
-              "i": 6,
-              "module": "corner_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "west",
-              "i": 1,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "west",
-              "i": 3,
-              "module": "post_party_upper",
-              "storey": 1
-            },
-            {
-              "face": "west",
-              "i": 4,
-              "module": "bay_party_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "east",
-              "i": 1,
-              "module": "bay_window_upper",
-              "storey": 1,
-              "mirror": false
-            },
-            {
-              "face": "east",
-              "i": 3,
-              "module": "post_upper",
-              "storey": 1
-            },
-            {
-              "face": "east",
-              "i": 4,
-              "module": "bay_landing_upper",
-              "storey": 1,
               "mirror": false
             }
           ],
           "plan": [
             {
               "storey": 0,
-              "module": "core_turned_bottom",
-              "at": [
-                3,
-                1
-              ]
-            },
-            {
-              "storey": 1,
-              "module": "core_turned_top",
-              "at": [
-                3,
-                1
-              ]
-            },
-            {
-              "storey": 0,
-              "module": "hearth",
+              "module": "bed",
               "at": [
                 1,
                 1
@@ -1315,10 +814,70 @@
             },
             {
               "storey": 0,
-              "module": "shelf",
+              "module": "bed",
+              "at": [
+                5,
+                1
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "chest",
+              "at": [
+                3,
+                1
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "hearth",
               "at": [
                 1,
-                5
+                3
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "table",
+              "at": [
+                3,
+                3
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "bench",
+              "at": [
+                3,
+                2
+              ],
+              "dy": 1,
+              "q": 0
+            },
+            {
+              "storey": 0,
+              "module": "bench",
+              "at": [
+                4,
+                3
+              ],
+              "dy": 1,
+              "q": 1
+            },
+            {
+              "storey": 0,
+              "module": "shelf",
+              "at": [
+                5,
+                4
               ],
               "dy": 1,
               "q": 0
@@ -1327,58 +886,8 @@
               "storey": 0,
               "module": "cask",
               "at": [
-                3,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "chest",
-              "at": [
-                4,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "table",
-              "at": [
-                2,
-                2
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                2,
-                1
-              ],
-              "dy": 1,
-              "q": 2
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                2,
+                5,
                 3
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "shelf",
-              "at": [
-                4,
-                2
               ],
               "dy": 1,
               "q": 0
@@ -1387,8 +896,8 @@
               "storey": 0,
               "module": "pot",
               "at": [
-                3,
-                1
+                1,
+                5
               ],
               "dy": 1,
               "q": 0
@@ -1408,87 +917,7 @@
               "module": "lantern",
               "at": [
                 4,
-                3
-              ],
-              "dy": 4,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bed",
-              "at": [
-                1,
-                1
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bed",
-              "at": [
-                1,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "chest",
-              "at": [
-                1,
-                3
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "table",
-              "at": [
-                4,
-                5
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "bench",
-              "at": [
-                3,
-                5
-              ],
-              "dy": 1,
-              "q": 1
-            },
-            {
-              "storey": 1,
-              "module": "shelf",
-              "at": [
-                5,
-                5
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "lantern",
-              "at": [
-                2,
-                3
-              ],
-              "dy": 4,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "lantern",
-              "at": [
-                4,
-                3
+                2
               ],
               "dy": 4,
               "q": 0
@@ -1496,11 +925,11 @@
           ],
           "chimney": [
             0,
-            1
+            3
           ],
           "beds": [
             {
-              "storey": 1,
+              "storey": 0,
               "head": [
                 1,
                 1
@@ -1511,14 +940,14 @@
               ]
             },
             {
-              "storey": 1,
+              "storey": 0,
               "head": [
-                1,
-                4
+                5,
+                1
               ],
               "foot": [
-                1,
-                5
+                5,
+                2
               ]
             }
           ],

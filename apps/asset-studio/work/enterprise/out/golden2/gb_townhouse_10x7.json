@@ -578,9 +578,9 @@
             },
             {
               "storey": 0,
-              "module": "cask",
+              "module": "chest",
               "at": [
-                6,
+                3,
                 4
               ],
               "dy": 1,
@@ -588,9 +588,9 @@
             },
             {
               "storey": 0,
-              "module": "chest",
+              "module": "cask",
               "at": [
-                7,
+                6,
                 4
               ],
               "dy": 1,
@@ -615,26 +615,6 @@
               ],
               "dy": 1,
               "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "table",
-              "at": [
-                4,
-                2
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 0,
-              "module": "bench",
-              "at": [
-                4,
-                1
-              ],
-              "dy": 1,
-              "q": 2
             },
             {
               "storey": 0,
@@ -710,16 +690,6 @@
               "storey": 1,
               "module": "wall_inner",
               "at": [
-                5,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 1,
-              "module": "wall_inner",
-              "at": [
                 6,
                 4
               ],
@@ -781,7 +751,7 @@
               "module": "table",
               "at": [
                 4,
-                4
+                1
               ],
               "dy": 1,
               "q": 0
@@ -790,15 +760,15 @@
               "storey": 1,
               "module": "bench",
               "at": [
-                4,
-                5
+                3,
+                1
               ],
               "dy": 1,
-              "q": 2
+              "q": 1
             },
             {
               "storey": 1,
-              "module": "shelf",
+              "module": "chest",
               "at": [
                 8,
                 5
@@ -870,16 +840,6 @@
               "storey": 2,
               "module": "wall_inner",
               "at": [
-                5,
-                4
-              ],
-              "dy": 1,
-              "q": 0
-            },
-            {
-              "storey": 2,
-              "module": "wall_inner",
-              "at": [
                 6,
                 4
               ],
@@ -941,7 +901,7 @@
               "module": "table",
               "at": [
                 4,
-                4
+                1
               ],
               "dy": 1,
               "q": 0
@@ -950,15 +910,15 @@
               "storey": 2,
               "module": "bench",
               "at": [
-                4,
-                5
+                3,
+                1
               ],
               "dy": 1,
-              "q": 2
+              "q": 1
             },
             {
               "storey": 2,
-              "module": "shelf",
+              "module": "chest",
               "at": [
                 8,
                 5

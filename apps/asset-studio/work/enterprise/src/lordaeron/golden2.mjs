@@ -10,7 +10,7 @@ mkdirSync(OUT, { recursive: true });
 
 export function terrace(p) {
   const units = [];
-  for (let u = 0; u < p.units; u++) units.push(layoutOf({ ...p, W: 7, D: 7, core: "turned", roof: "gable_x", party: [u > 0, u < p.units - 1], door: "right" }));
+  for (let u = 0; u < p.units; u++) units.push(layoutOf({ ...p, W: 7, D: 7, noCore: true, roof: "gable_x", party: [u > 0, u < p.units - 1], door: "right" }));
   const grids = units.map(compose), H = Math.max(...grids.map((g) => g.size[1]));
   const g = new Grid([6 * p.units + 3, H, 9]), beds = [], entrances = [], layouts = [];
   units.forEach((L, u) => {
@@ -24,9 +24,9 @@ export function terrace(p) {
 }
 
 export const GOLDEN = {
-  ga_burgage_7x7: { p: { W: 7, D: 7, storeys: 2, roof: "gable_z", palette: "daub", core: "turned", beds: 2 } },
+  ga_burgage_7x7: { p: { W: 7, D: 7, storeys: 1, roof: "gable_z", palette: "daub", noCore: true } },
   gb_townhouse_10x7: { p: { W: 10, D: 7, storeys: 3, roof: "gable_x", palette: "brick", shop: true, trade: "any", beds: 2 } },
-  gc_terrace_3x7: { p: { units: 3, storeys: 2, palette: "daub", beds: 2 }, terrace: true },
+  gc_terrace_3x7: { p: { units: 3, storeys: 1, palette: "daub" }, terrace: true },
 };
 const only = process.argv[2];
 for (const [name, { p, terrace: t }] of Object.entries(GOLDEN)) {
