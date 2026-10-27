@@ -1,0 +1,64 @@
+{
+  "batch": "025-lordaeron-farmsteads",
+  "thread": "0011",
+  "made": "2026-10-27T21:01:51.464Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/farmstead/farmstead_19x18_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e79ae3260ba8360191709498f1cae3c3778ae568b83b9831faa75c03eaca548c",
+      "bytes": 433696
+    },
+    {
+      "path": "assets-src/lordaeron/farmstead/farmstead_19x18_b/front.jpg",
+      "kind": "preview",
+      "sha256": "a1608c50134409668070ae722fa1f3b7c88376455d6d711281812b6f45c51226",
+      "bytes": 401480
+    },
+    {
+      "path": "assets-src/lordaeron/farmstead/farmstead_19x18_c/front.jpg",
+      "kind": "preview",
+      "sha256": "f6784bf9bfb6205f3753c8bc11d688e3896b03c172dd09e45afd696e005af081",
+      "bytes": 410734
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/farmstead/farmstead_19x18_a.json",
+      "kind": "meta",
+      "sha256": "dbb24f70edde81cda458a9f98768155278f290b60dab40b7687d51519c467bf8",
+      "bytes": 821
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/farmstead/farmstead_19x18_a.nbt",
+      "kind": "structure",
+      "sha256": "f089240f1cdb2006e9e6377c52b570c9e4ac6fd7a1688ef5b0070865e9067efe",
+      "bytes": 8139,
+      "id": "enterprise:lordaeron/farmstead/farmstead_19x18_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/farmstead/farmstead_19x18_b.json",
+      "kind": "meta",
+      "sha256": "dbc92f690931dfe2ded9dc0f6efea0bb08761ac02bf6eeac2c01a7b95084dce7",
+      "bytes": 823
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/farmstead/farmstead_19x18_b.nbt",
+      "kind": "structure",
+      "sha256": "9bccb2cbebef360f6625db32395e1aaaa9445feb4aec37ac5e9e0c56e2917f82",
+      "bytes": 11022,
+      "id": "enterprise:lordaeron/farmstead/farmstead_19x18_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/farmstead/farmstead_19x18_c.json",
+      "kind": "meta",
+      "sha256": "a9de5928521ab3d231dd24fa965a41adb9ead1572e6b5c94dc0a00ce53abe5de",
+      "bytes": 827
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/farmstead/farmstead_19x18_c.nbt",
+      "kind": "structure",
+      "sha256": "b3effb62e6cf1b892f35b99f9f1e2829bc3cb5aea80aa0b4b8c62a4e66302711",
+      "bytes": 8227,
+      "id": "enterprise:lordaeron/farmstead/farmstead_19x18_c"
+    }
+  ]
+}
