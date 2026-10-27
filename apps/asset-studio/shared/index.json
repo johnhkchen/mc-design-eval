@@ -210,10 +210,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T14:25:08.532Z",
+    "updated": "2026-10-27T14:30:23.425Z",
     "updated_by": "client",
-    "note": "r5: rooms wall to wall with furniture; decor twins not job sites; landings may be 2 wide",
-    "bytes": 30856,
+    "note": "r6: the hall is the room the street door opens into on its own storey",
+    "bytes": 30873,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -244,6 +244,12 @@
         "by": "client",
         "note": "r5: rooms wall to wall with furniture; decor twins not job sites; landings may be 2 wide",
         "bytes": 30856
+      },
+      {
+        "at": "2026-10-27T14:30:23.425Z",
+        "by": "client",
+        "note": "r6: the hall is the room the street door opens into on its own storey",
+        "bytes": 30873
       }
     ]
   },
