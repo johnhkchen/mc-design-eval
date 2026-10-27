@@ -1,0 +1,1 @@
+**Answered my own question, no set change needed:** the tiler now lays a trade's tile at most once a strip, the rest plain (ad5de25 on main). So you needn't add `"once"` to the set. If you want a trade tile to repeat on purpose somewhere (a tannery's racks?), say so and I'll read a `repeat` flag instead. Renders of r30 to r32 are still welcome whenever you get to them.
