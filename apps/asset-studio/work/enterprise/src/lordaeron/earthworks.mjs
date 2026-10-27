@@ -11,7 +11,12 @@ const stairs = (b, facing, half = "bottom") => `${b}_stairs[facing=${facing},hal
 const slab = (b) => `${b}_slab[type=bottom,waterlogged=false]`;
 const LANTERN_UP = "lantern[hanging=false,waterlogged=false]";
 // a small deterministic hash: the same tile and seed always build the same blocks
-const hash = (...n) => { let h = 2166136261; for (const v of n) { h ^= v + 0x9e3779b9; h = Math.imul(h, 16777619); } return ((h >>> 0) % 1000) / 1000; };
+const hash = (...n) => {
+  // FNV over the inputs, then a murmur finaliser: neighbouring seeds and layers must not give neighbouring values
+  let h = 2166136261; for (const v of n) { h ^= v + 0x9e3779b9; h = Math.imul(h, 16777619); }
+  h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16;
+  return ((h >>> 0) % 1000) / 1000;
+};
 const COURSE = (r) => (r < 0.58 ? "stone_bricks" : r < 0.8 ? "mossy_stone_bricks" : r < 0.94 ? "cracked_stone_bricks" : "andesite");
 const FOOT = (r) => (r < 0.65 ? "cobblestone" : "mossy_cobblestone");
 const LOW = (r) => (r < 0.7 ? GRASS : r < 0.88 ? "coarse_dirt" : "gravel");
@@ -100,11 +105,12 @@ export function steps({ h, seed = 0, flight = 2 }) {
 /** A cut-face finish: the levelled face left natural, not walled: stone and tuff with moss and roots, grass lipping over. */
 export function cutFace({ h, seed = 0 }) {
   const top = 2 + h, g = new Grid([1, top + 1, 3]);
-  const FACE = (r) => (r < 0.3 ? "stone" : r < 0.5 ? "andesite" : r < 0.62 ? "tuff" : r < 0.8 ? "mossy_cobblestone" : r < 0.88 ? "rooted_dirt" : "moss_block");
+  // the face is rock: stone, andesite, tuff and mossy cobble; moss and roots only in its upper half
+  const FACE = (r, upper) => (r < 0.34 ? "stone" : r < 0.56 ? "andesite" : r < 0.72 ? "tuff" : r < 0.88 || !upper ? "mossy_cobblestone" : r < 0.95 ? "moss_block" : "rooted_dirt");
   for (let y = 0; y < top; y++) g.set(0, y, 0, "dirt"); g.set(0, top, 0, "grass_block[snowy=false]");
   for (let y = 0; y < 2; y++) g.set(0, y, 1, "dirt");
-  // the root lip only on faces 3 and up: a low face is all stone and moss, or it reads as a raw cut
-  for (let y = 2; y < top; y++) g.set(0, y, 1, h >= 3 && y === top - 1 ? (hash(seed, y, 9) < 0.5 ? "rooted_dirt" : "moss_block") : FACE(hash(seed, y, 3) * (h >= 3 ? 1 : 0.8)));
+  // the root lip, moss and roots only on faces 3 and up: a low face is all rock, or it reads as a raw cut
+  for (let y = 2; y < top; y++) g.set(0, y, 1, h >= 3 && y === top - 1 ? (hash(seed, y, 9) < 0.5 ? "rooted_dirt" : "mossy_cobblestone") : FACE(hash(seed, y, 3), h >= 3 && y - 2 >= h / 2));
   g.set(0, top, 1, hash(seed, 11) < 0.6 ? "moss_block" : "grass_block[snowy=false]");
   for (let y = 0; y < 2; y++) g.set(0, y, 2, "dirt");
   g.set(0, 2, 2, hash(seed, 12) < 0.5 ? "coarse_dirt" : "grass_block[snowy=false]");

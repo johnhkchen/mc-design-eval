@@ -1,0 +1,776 @@
+{
+  "batch": "019-lordaeron-earthworks-rev5",
+  "thread": "0001",
+  "made": "2026-10-27T19:29:54.534Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/earthworks/demo_cutface_h3.jpg",
+      "kind": "preview",
+      "sha256": "5217dfaa3f9d39f0b2d7ab086ed5130d6538fd867b8f50a3745155e2beddb114",
+      "bytes": 117677
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/demo_cutface_h3.nbt",
+      "kind": "file",
+      "sha256": "bee74872462974c07a56e5a80f0c6eec51284cfccdf3dc1830de0409f67753b9",
+      "bytes": 2320
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/demo_h3.jpg",
+      "kind": "preview",
+      "sha256": "41ac8e6b64c70ef340ab510486bb3ab681af2e61eed6e83ea573a40b66fa436c",
+      "bytes": 191605
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/demo_h3.nbt",
+      "kind": "file",
+      "sha256": "1685f6fa420d1a1840cc0f4e0453ea59387dc55ca6febd19ed72cedc10b34074",
+      "bytes": 6094
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/demo_plinth.jpg",
+      "kind": "preview",
+      "sha256": "6ba3a0fbb06e93607be5e9b858261be94dc07b858ef7b9c9e3fb9186b78e1839",
+      "bytes": 112964
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/demo_plinth.nbt",
+      "kind": "file",
+      "sha256": "8908f55420ecdfa031f165d0ea326fea1bf0a59158882417d14971aac389c4b0",
+      "bytes": 6219
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/steps_h3.jpg",
+      "kind": "preview",
+      "sha256": "bbb13ab91547707f028be2070391dbc5caf69151753b4b9d03f455f6027592df",
+      "bytes": 93658
+    },
+    {
+      "path": "assets-src/lordaeron/earthworks/steps_side_h3.jpg",
+      "kind": "preview",
+      "sha256": "3310cbb5fbad44d4b459748858b7494cab6f90fb4c29dc5ad692ede5fc2a3e79",
+      "bytes": 98189
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h1_1a.json",
+      "kind": "meta",
+      "sha256": "f5c64a0c94a82c67000f96d36699612c10c8a827e74dca8e39042d729b3da260",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h1_1a.nbt",
+      "kind": "structure",
+      "sha256": "48be8730da3776cb5da0d5e8b9acf5ce74eab3e13376249b1eaa645d683d31a6",
+      "bytes": 271,
+      "id": "enterprise:lordaeron/earthworks/cutface_h1_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h1_1b.json",
+      "kind": "meta",
+      "sha256": "aed7edc332ebc6b6e365351594ce79e1d44fc8b5740ad0b6cb5bacc2e55938d1",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h1_1b.nbt",
+      "kind": "structure",
+      "sha256": "0274462d3b5d8c4f098d3aeb3fb7f1bf2f45d718ad08f6a521165935300c1be5",
+      "bytes": 233,
+      "id": "enterprise:lordaeron/earthworks/cutface_h1_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h1_1c.json",
+      "kind": "meta",
+      "sha256": "d8e94829b7be8735224068ca60f426572e8cdeb3e8ce152ec90dfa9bba029c32",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h1_1c.nbt",
+      "kind": "structure",
+      "sha256": "8055a10c3064c3602364b7ca8910acb9d1830e2d2f6046d0a8cc7846ae6e9967",
+      "bytes": 232,
+      "id": "enterprise:lordaeron/earthworks/cutface_h1_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h2_1a.json",
+      "kind": "meta",
+      "sha256": "020b8aee7e17ef35fad2702c1fc30f8597be6cbe5ce18baa688f75b9ce54b57e",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h2_1a.nbt",
+      "kind": "structure",
+      "sha256": "0a67eda90ed5151b662c93e2a750bc4d50d217379d5d39232bbe456b5574428c",
+      "bytes": 279,
+      "id": "enterprise:lordaeron/earthworks/cutface_h2_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h2_1b.json",
+      "kind": "meta",
+      "sha256": "a78e04fbe5fc1bc2083cf8c07a5f0b4d35237dc9f6496313b607cd649d48e7de",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h2_1b.nbt",
+      "kind": "structure",
+      "sha256": "b78ffa9b572fa4c7d4db31960b74527ea5db694e96ccaebd136f5e1e2c9a63a7",
+      "bytes": 279,
+      "id": "enterprise:lordaeron/earthworks/cutface_h2_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h2_1c.json",
+      "kind": "meta",
+      "sha256": "0fd0809c3c54b398290551720524ea71afdb42740e057f4c02f1a95134de02aa",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h2_1c.nbt",
+      "kind": "structure",
+      "sha256": "6129d9ad65f954a787e0cee62cd7d2db93d0f55b671cc5ebd7f0dae03991aad8",
+      "bytes": 273,
+      "id": "enterprise:lordaeron/earthworks/cutface_h2_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h3_1a.json",
+      "kind": "meta",
+      "sha256": "2daccd1b3c37618f71dd3a9511fb3be171edf2d53bd04d8364a8e41f56af360c",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h3_1a.nbt",
+      "kind": "structure",
+      "sha256": "ecf4c8999a9ee23426f4c089f4fee1e2d2cd93130b8ab33216a88d2d81e9e0d2",
+      "bytes": 312,
+      "id": "enterprise:lordaeron/earthworks/cutface_h3_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h3_1b.json",
+      "kind": "meta",
+      "sha256": "c4ab66e15a6cddbfb806d065ddca254ca868bc4f11086e4f3533901ab0c83ac9",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h3_1b.nbt",
+      "kind": "structure",
+      "sha256": "3ad8fe7b677a99a40755aa7cf7df279d4847f59fe1c28b606befa943ae8e3c4e",
+      "bytes": 293,
+      "id": "enterprise:lordaeron/earthworks/cutface_h3_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h3_1c.json",
+      "kind": "meta",
+      "sha256": "a7952babee324c30962984d671b87a6654101060029953c15240873c0f093e20",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h3_1c.nbt",
+      "kind": "structure",
+      "sha256": "8d737a1f61f30d1f8a164a70ef27f3347c019894d159fc442596c4c3929a0782",
+      "bytes": 275,
+      "id": "enterprise:lordaeron/earthworks/cutface_h3_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h4_1a.json",
+      "kind": "meta",
+      "sha256": "6b4dbae040f3906a0c9eeb5e2aaffeaee8a02cea2d943bf7ac3bf837294e2431",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h4_1a.nbt",
+      "kind": "structure",
+      "sha256": "be99a6c573b203fb9bf4780c321fd010ebc0461ce91778d5b0035b744e672620",
+      "bytes": 305,
+      "id": "enterprise:lordaeron/earthworks/cutface_h4_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h4_1b.json",
+      "kind": "meta",
+      "sha256": "8cc8fb590ee6138c77a186eacab8d4212edc376ca149b19b5147a8685d858f06",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h4_1b.nbt",
+      "kind": "structure",
+      "sha256": "2a0cbb3143f4c3d94a0f03e660255a5a2015e17fdf4fe46e6bd3e24f0f2d23af",
+      "bytes": 304,
+      "id": "enterprise:lordaeron/earthworks/cutface_h4_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h4_1c.json",
+      "kind": "meta",
+      "sha256": "d545d4787b9a37c6fc76eb0b0feeb8c4fb212db1ec43271419bd8e488d1973ad",
+      "bytes": 335
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/cutface_h4_1c.nbt",
+      "kind": "structure",
+      "sha256": "2d11854cba30efa40000d3637ce76e377d447b116b4b13181a432309e0c8123a",
+      "bytes": 292,
+      "id": "enterprise:lordaeron/earthworks/cutface_h4_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h1_1.json",
+      "kind": "meta",
+      "sha256": "9913851c35dcc3290727d567396d3aca7bc96d049da69ffecbbc99c2e6de6a88",
+      "bytes": 329
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h1_1.nbt",
+      "kind": "structure",
+      "sha256": "7a42db29dfb40c4300475cfd78bd9e186e908caa0091e04ff87dfb6746329e8a",
+      "bytes": 263,
+      "id": "enterprise:lordaeron/earthworks/plinth_h1_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h1_corner.json",
+      "kind": "meta",
+      "sha256": "4e1220d256344076dee690f20ae4b5ea81ab1aa540ccc9a6af733c8c9dd892ec",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h1_corner.nbt",
+      "kind": "structure",
+      "sha256": "089beeeb8102bfb958723f92cdb892998194e7109fc3d7c3a54bb6f26c500eb8",
+      "bytes": 303,
+      "id": "enterprise:lordaeron/earthworks/plinth_h1_corner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h2_1.json",
+      "kind": "meta",
+      "sha256": "03d9c0e53b831bca6290fa18c618f7718617e8e5a280b00985ed1fd1809c2616",
+      "bytes": 329
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h2_1.nbt",
+      "kind": "structure",
+      "sha256": "502fd2c9cf7e3e8509b0c06d65b5cb505a6e67691c6e9e3e1389453659e837b9",
+      "bytes": 288,
+      "id": "enterprise:lordaeron/earthworks/plinth_h2_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h2_corner.json",
+      "kind": "meta",
+      "sha256": "08942c6358eb81c06a4ce939710974bcd74706b468ba0f9aebd89f4b4e01f1ae",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h2_corner.nbt",
+      "kind": "structure",
+      "sha256": "b84b35a1f0788caf9f46972beadc1ba39ce3092542f81f0e8ca43cb2240e52bf",
+      "bytes": 375,
+      "id": "enterprise:lordaeron/earthworks/plinth_h2_corner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h3_1.json",
+      "kind": "meta",
+      "sha256": "ebcfe40460f2f5f8e7efe2ecb73b506dcefb55b9ae9b1b03f9a38492a9c6e4ef",
+      "bytes": 329
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h3_1.nbt",
+      "kind": "structure",
+      "sha256": "ab916a8a579c3857cdbd20e95ef929b7ff86da8dba0de9f0968681263e78c2ab",
+      "bytes": 308,
+      "id": "enterprise:lordaeron/earthworks/plinth_h3_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h3_corner.json",
+      "kind": "meta",
+      "sha256": "de9a9b1c7be1876060bae79b287dc972e039b2debf86991da18ff1fee59d47a3",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/plinth_h3_corner.nbt",
+      "kind": "structure",
+      "sha256": "1b77802bb2aaa714d55387b10feb19fc3bfc45223a1f79bc833fe54215bbd936",
+      "bytes": 483,
+      "id": "enterprise:lordaeron/earthworks/plinth_h3_corner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_1a.json",
+      "kind": "meta",
+      "sha256": "4cad2a2bab9bcbe001d80ef6be001a19a55f832706ad6b1bc74b62a1c02873ed",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_1a.nbt",
+      "kind": "structure",
+      "sha256": "d758657e7921610c7a5a5140f6bb7aa1771159186a7f0a490e84fb7d67094706",
+      "bytes": 236,
+      "id": "enterprise:lordaeron/earthworks/retain_h1_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_1b.json",
+      "kind": "meta",
+      "sha256": "90990bfc9c83258a24c80d473523f8aa090e76920d74ca36b2a8488f1237a2fa",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_1b.nbt",
+      "kind": "structure",
+      "sha256": "0a16dbd091963c3f57aef7b4e3fda4b8a435c5ef62095007ad6e0f54bd322ef0",
+      "bytes": 233,
+      "id": "enterprise:lordaeron/earthworks/retain_h1_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_1c.json",
+      "kind": "meta",
+      "sha256": "39cc5b05bf8a7dc1a67dfc80e79f8779d8dc79c12e07ec3ba9986bb823c5cbd4",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_1c.nbt",
+      "kind": "structure",
+      "sha256": "c716c72fbd176e15208b0b8a7f91f77f0f0d0b19eca5cde4bd23323bdee3c278",
+      "bytes": 222,
+      "id": "enterprise:lordaeron/earthworks/retain_h1_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_inner_3.json",
+      "kind": "meta",
+      "sha256": "ce5d4f6a9560607bf2a101c969ee449a9539425b6dcbdfa0a7b6aaec2c267dad",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "fddc89db061ef1a8d96a6c5bebe7262651465a3d8d8e3933932b9e5116119b60",
+      "bytes": 312,
+      "id": "enterprise:lordaeron/earthworks/retain_h1_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_lamp_1.json",
+      "kind": "meta",
+      "sha256": "69071a6e78cd73ec04630fbf44d840f9a8da6e22c18eac6bdd848be03007350f",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "2e0a3ab83645e48e54dfeaf9619e826bfe7d85add256e91afba805a70eedcdbd",
+      "bytes": 272,
+      "id": "enterprise:lordaeron/earthworks/retain_h1_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_outer_3.json",
+      "kind": "meta",
+      "sha256": "5d5ba16347cacbde26200a75655c55e120a3828254534105eaf4150132e03486",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h1_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "d397eea8334ce380ee4e904f7a51fe367396d6c588fe4f51823d7d62d1295cb9",
+      "bytes": 313,
+      "id": "enterprise:lordaeron/earthworks/retain_h1_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_1a.json",
+      "kind": "meta",
+      "sha256": "3250cdbe62b3d3a752995a3d96cf3af69e04419c5338ddbdce86965ed2b953bb",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_1a.nbt",
+      "kind": "structure",
+      "sha256": "6380c7a500fc3e79777c8a671500f09db468676784196721800eb7dc39cb1c64",
+      "bytes": 344,
+      "id": "enterprise:lordaeron/earthworks/retain_h2_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_1b.json",
+      "kind": "meta",
+      "sha256": "a77e7b7138552cf6a42a4a80812bfcdc21f5776c1a1394d7aee064956cbce1d8",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_1b.nbt",
+      "kind": "structure",
+      "sha256": "05b91271ed7f85c00d6a941941d9cc78ec7ec2d9e06411d80be46f258e5410f6",
+      "bytes": 350,
+      "id": "enterprise:lordaeron/earthworks/retain_h2_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_1c.json",
+      "kind": "meta",
+      "sha256": "01f1b7f70b54f77060e98f9f17debd1637632835cc912f380afe721069218361",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_1c.nbt",
+      "kind": "structure",
+      "sha256": "6380c7a500fc3e79777c8a671500f09db468676784196721800eb7dc39cb1c64",
+      "bytes": 344,
+      "id": "enterprise:lordaeron/earthworks/retain_h2_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_inner_3.json",
+      "kind": "meta",
+      "sha256": "fcfe3e6e00679413a30b19dc2cd290e0312411bb1ce049cce8a6084482f3f29e",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "5f50fedcf513f7fc32b0f2ac7b2af26ea94c0e1f07031a8a894193ee1127c592",
+      "bytes": 451,
+      "id": "enterprise:lordaeron/earthworks/retain_h2_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_lamp_1.json",
+      "kind": "meta",
+      "sha256": "6efba6f340521f438b0283d7d6030c8f8f7c82bee9dafa7163f2fa0f85fe705d",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "1daa6e190aec44e9422db3175d6aaf3cee1ad31b158874c7bf1e6adc4c38df02",
+      "bytes": 378,
+      "id": "enterprise:lordaeron/earthworks/retain_h2_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_outer_3.json",
+      "kind": "meta",
+      "sha256": "ec961985f8bde086d0992b1c031deccdbbdc30f7e6ff2567704b61fd00e5c3e3",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h2_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "a16df38955806f08ff2499102adc812e7328faaa75fb9f09c5e1cf66d0fed344",
+      "bytes": 498,
+      "id": "enterprise:lordaeron/earthworks/retain_h2_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_1a.json",
+      "kind": "meta",
+      "sha256": "45d3cb2a35a182ab3f8ae7c2e7602bd2b9be29076c9b5d3e8d5cbc30a6338e72",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_1a.nbt",
+      "kind": "structure",
+      "sha256": "b157751fe426b2ef333094ebf5c64c178ef77787ee86d36a96868725ebb0e75e",
+      "bytes": 401,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_1b.json",
+      "kind": "meta",
+      "sha256": "f3e333fb7156ee039bd1aee7d376eba76f52f1696e5cb711cafe0dae309a9d59",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_1b.nbt",
+      "kind": "structure",
+      "sha256": "5f5b0b90323e1b36a1f61fc5b462e3c6560af9319091d9992d25dfdffe873e69",
+      "bytes": 397,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_1c.json",
+      "kind": "meta",
+      "sha256": "1127badfca9a2d38791b1f42ae743f1fbbf56fb2bb2f9b0f623befc5106906db",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_1c.nbt",
+      "kind": "structure",
+      "sha256": "f2d71479dd80a5f25ba7238177ef9fe37bbdf8cba9694d6d9889c8b5b5a73d42",
+      "bytes": 365,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_buttress_1.json",
+      "kind": "meta",
+      "sha256": "7eaa8768c958024715df31fcd5f450582c3a9ef5409492a1b2c5339c615a67cd",
+      "bytes": 358
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_buttress_1.nbt",
+      "kind": "structure",
+      "sha256": "cbc087008cd3af9d1671005ca8bb33c31aff75dbe7421c5c311819862f4cf39a",
+      "bytes": 381,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_buttress_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_inner_3.json",
+      "kind": "meta",
+      "sha256": "6bfc25856520cdc3d9ded569545a4271c56c6cd561d0dc5901bc5c6698086984",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "844443c2cb1febfc2543450e0c1802db33471d13a8e5efd2375d7789878a4ca3",
+      "bytes": 491,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_lamp_1.json",
+      "kind": "meta",
+      "sha256": "fb56982d9b70fe3bbb049bd76a44bcf1a452727b844cb7a7786c9951b48d2b32",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "e17a71149979ce0c81abc8db0831eca1d36f8d9983fc355bce508967c1cc3924",
+      "bytes": 425,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_outer_3.json",
+      "kind": "meta",
+      "sha256": "41a82cabb0b05ca51bc11ef96d0a08c7cbe0cf06c0a28d0ab97faebdfadb86f2",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h3_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "730369a688711c45e04cab396fc9903428e77a44d7edf89a8dc111be2152bbd1",
+      "bytes": 573,
+      "id": "enterprise:lordaeron/earthworks/retain_h3_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_1a.json",
+      "kind": "meta",
+      "sha256": "c1b32f20c719e1efe3190fe136c8ce61c26353c99350ad3aa6f1ed580bf93e5c",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_1a.nbt",
+      "kind": "structure",
+      "sha256": "091c9bbcd5dd4075cccc07a40b17d5931c092a3ba9a06b79998f14099d5abff3",
+      "bytes": 396,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_1b.json",
+      "kind": "meta",
+      "sha256": "bd3bc0100f62cda61681a2c134fc9e9fa70a20b0e0b39d9710041c64f88743e9",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_1b.nbt",
+      "kind": "structure",
+      "sha256": "60fee6ea58409487d4fc434ea9615e4c275624c5fada6c8cee7d7e41bfed0b84",
+      "bytes": 374,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_1c.json",
+      "kind": "meta",
+      "sha256": "bc840c00749636ddf2be9942f4a4839bf09ca13ce0c0c28960a18df1a9ec395a",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_1c.nbt",
+      "kind": "structure",
+      "sha256": "ad5ab3542bc57c78a8c05e2d7b23ab273ce188643a2735541216a6c951dbfc8d",
+      "bytes": 403,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_buttress_1.json",
+      "kind": "meta",
+      "sha256": "b3072ab25f325e1d8c50ebc3fb4308030aabfb26171acbe07912d5ea9eeba5d9",
+      "bytes": 358
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_buttress_1.nbt",
+      "kind": "structure",
+      "sha256": "13ced7bba62a934a788e681c399a918c6b914f650db9c3ed367d6d656a691354",
+      "bytes": 383,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_buttress_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_inner_3.json",
+      "kind": "meta",
+      "sha256": "4b417e9817380817b5575de043cb8b71e327a2f87d2beaf1eae816035e2625cd",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "310290e06ae56a78f93ac588c7472b79752438c17f06b77f41a121dd14fef032",
+      "bytes": 524,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_lamp_1.json",
+      "kind": "meta",
+      "sha256": "a698e4e734a7c812c56ca4d593913fbc006ed1f20110a23cf9f595a6224c4f74",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "af3e7f0e196106c6a201cbb2d51a2d080c81d125c32b038ee8420e39144ce8e0",
+      "bytes": 431,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_outer_3.json",
+      "kind": "meta",
+      "sha256": "320d2bb4f6cbe196b6fbe84f88c9f2af684ba72d4579d4bb517d3e71ce59e225",
+      "bytes": 341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/retain_h4_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "cce48b691323b7487556e25ccbbd66e282a3bb983b42eb21e6b92ab5b4b69ecf",
+      "bytes": 585,
+      "id": "enterprise:lordaeron/earthworks/retain_h4_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h1_3.json",
+      "kind": "meta",
+      "sha256": "62b50dcbae8c3d0a9bf70bf18c2f337ebfd01ee47890aa1d0e008434b986ffb9",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h1_3.nbt",
+      "kind": "structure",
+      "sha256": "d9c5917c1d8491e6a845864ca911c1a061bf3ec2d07cd92d473cf2e9b51210fd",
+      "bytes": 478,
+      "id": "enterprise:lordaeron/earthworks/steps_h1_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h1_4.json",
+      "kind": "meta",
+      "sha256": "ef9855ac1732486ebfd0a2f9a546e419a1a810001a1d397697058ab077261dde",
+      "bytes": 338
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h1_4.nbt",
+      "kind": "structure",
+      "sha256": "62b0c6008f85a33c108e00a5f2719ebbcf675347ae391a67ab1c5f1b05fd77c0",
+      "bytes": 532,
+      "id": "enterprise:lordaeron/earthworks/steps_h1_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h2_3.json",
+      "kind": "meta",
+      "sha256": "deb03362b20def24f42f742f57711cefd93e7be9fd53c919bc42e806d0665439",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h2_3.nbt",
+      "kind": "structure",
+      "sha256": "a089f1b22ce650650b4e3a3f3b52fa6ddb1af652c4db3c040826c00774474de7",
+      "bytes": 608,
+      "id": "enterprise:lordaeron/earthworks/steps_h2_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h2_4.json",
+      "kind": "meta",
+      "sha256": "1ee8f3262ab8815bfe0dfcc78084a4192b967568790908b3144f4170524076de",
+      "bytes": 338
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h2_4.nbt",
+      "kind": "structure",
+      "sha256": "a103adfa6c1b7801c577a7dad9eb48a9de75fad06e72056865173e7c8d50aa8f",
+      "bytes": 698,
+      "id": "enterprise:lordaeron/earthworks/steps_h2_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h3_3.json",
+      "kind": "meta",
+      "sha256": "c64ff50e6ef8785f94bd79a50a388be4b6b198add0f451507678417f3d240b14",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h3_3.nbt",
+      "kind": "structure",
+      "sha256": "3de7a6f58b97264000a806af32bf83264caba47872757195cf396c1010144907",
+      "bytes": 775,
+      "id": "enterprise:lordaeron/earthworks/steps_h3_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h3_4.json",
+      "kind": "meta",
+      "sha256": "8d3ff3f6394b3039b58079f34fac772b2f3d7a64247152b00b1a7fd5b71974b9",
+      "bytes": 338
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h3_4.nbt",
+      "kind": "structure",
+      "sha256": "a1f2df1a55e92d055283aa42e21c67757e864bb0c6db2389cca15c981e503168",
+      "bytes": 884,
+      "id": "enterprise:lordaeron/earthworks/steps_h3_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h4_3.json",
+      "kind": "meta",
+      "sha256": "8bb07a023d72f0fb2ac45fef60112de19c66bc9a8cf8b5023b27965f97ab2018",
+      "bytes": 350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h4_3.nbt",
+      "kind": "structure",
+      "sha256": "08e18285cf27d9745118d32f6b37cd77aba5fa793af12525adb989e5c30397ea",
+      "bytes": 935,
+      "id": "enterprise:lordaeron/earthworks/steps_h4_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h4_4.json",
+      "kind": "meta",
+      "sha256": "f9f3f79109f4471a6f867696bc67491c50da3fec3b35baaf26d838a25ce1a688",
+      "bytes": 338
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_h4_4.nbt",
+      "kind": "structure",
+      "sha256": "3529a5c288ce14a3023a393fe931f65bef2009595ecb4b6e79789bf862da0f58",
+      "bytes": 1103,
+      "id": "enterprise:lordaeron/earthworks/steps_h4_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_side_h2.json",
+      "kind": "meta",
+      "sha256": "46dc66396e59bbd5d2b37e3018108bfee38bf79aba67c49ece9fb57ba3976f39",
+      "bytes": 411
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_side_h2.nbt",
+      "kind": "structure",
+      "sha256": "2cb55957ee55bdc2f8e8b091913ab419561149295e1122351f4e4f0d75c96862",
+      "bytes": 580,
+      "id": "enterprise:lordaeron/earthworks/steps_side_h2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_side_h3.json",
+      "kind": "meta",
+      "sha256": "b2411bca370a30a825ff6d057b8ece8be86adb47f6a3e8b5307d6621f62604af",
+      "bytes": 411
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_side_h3.nbt",
+      "kind": "structure",
+      "sha256": "f8f4923a8f39496e5bc19bdea340de597a922562adee7fe185c5ba47a7fb9eef",
+      "bytes": 720,
+      "id": "enterprise:lordaeron/earthworks/steps_side_h3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_side_h4.json",
+      "kind": "meta",
+      "sha256": "203c0c90fe89a5daa42cdd51ccc47c796c4519b7125f9bb0a8ad2e2737382893",
+      "bytes": 411
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/earthworks/steps_side_h4.nbt",
+      "kind": "structure",
+      "sha256": "2e2adff7d845199579e30a1e24f385fd255c1ff926b0621f16944f255f54fb6a",
+      "bytes": 942,
+      "id": "enterprise:lordaeron/earthworks/steps_side_h4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/earthworks.json",
+      "kind": "kit_rules",
+      "sha256": "41fba009abbf518667cf0e0182a460e385dd5ecad0218ded8e98b2045c64728f",
+      "bytes": 15845
+    }
+  ]
+}
