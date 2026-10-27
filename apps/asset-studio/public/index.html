@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asset Studio</title>
+<style>
+  :root { --bg: #f6f4ef; --panel: #fffdf8; --fg: #23211c; --muted: #77705f; --line: #e2ddd0; --accent: #8a5a1f; --chip: #efe7d6;
+    --studio: #eef3ea; --client: #f4efe6; --owner: #eceef6; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #171613; --panel: #1f1d19; --fg: #ece7dc; --muted: #9b9381; --line: #34302a;
+    --accent: #d9a35a; --chip: #2c2822; --studio: #1e261c; --client: #29241c; --owner: #1f2230; color-scheme: dark; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-size: 14px; line-height: 1.5; }
+  header { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 16px; margin: 0; letter-spacing: .02em; }
+  header a { color: var(--muted); font-size: 13px; }
+  header label { margin-left: auto; color: var(--muted); font-size: 13px; }
+  main { display: grid; grid-template-columns: minmax(240px, 340px) 1fr; min-height: calc(100vh - 50px); }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+  aside { border-right: 1px solid var(--line); padding: 12px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .t { padding: 8px 10px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+  .t:hover { background: var(--panel); }
+  .t.on { background: var(--panel); border-color: var(--line); }
+  .t .title { font-weight: 600; }
+  .t .sub, .meta { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .chip { display: inline-block; padding: 0 6px; border-radius: 4px; background: var(--chip); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .unread { color: var(--accent); font-weight: 700; }
+  section { padding: 16px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .msg { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--client); min-width: 0; }
+  .msg.studio { background: var(--studio); } .msg.owner { background: var(--owner); }
+  .msg .body { overflow-wrap: anywhere; }
+  .msg .body pre { overflow-x: auto; background: var(--panel); padding: 8px; border-radius: 6px; }
+  .msg img { max-width: min(100%, 720px); border-radius: 6px; display: block; margin-top: 8px; cursor: zoom-in; }
+  .files a { display: inline-block; margin: 6px 8px 0 0; color: var(--accent); }
+  form { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--panel); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  input, select, textarea, button { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+  textarea { min-height: 110px; resize: vertical; width: 100%; }
+  input[type=text] { flex: 1; min-width: 160px; }
+  button { background: var(--accent); color: var(--panel); border-color: var(--accent); cursor: pointer; font-weight: 600; }
+  h2 { margin: 0; font-size: 18px; text-wrap: balance; }
+  .empty { color: var(--muted); padding: 24px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Asset Studio</h1>
+  <a href="/brief" target="_blank">brief</a> <a href="/protocol" target="_blank">protocol</a> <a href="/studio.mjs">studio.mjs</a>
+  <label>posting as <select id="as"><option>client</option><option>studio</option><option>owner</option></select></label>
+</header>
+<main>
+  <aside>
+    <button id="newbtn">New thread</button>
+    <div id="list"></div>
+  </aside>
+  <section id="view"><div class="empty">Pick a thread, or start one.</div></section>
+</main>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const IMG = /\.(png|jpe?g|gif|webp|svg)$/i;
+let meta = { kinds: [], statuses: [], version: 0 }, current = location.hash.slice(1) || null;
+try { $("#as").value = localStorage.getItem("as") || "client"; } catch {}
+$("#as").onchange = () => { try { localStorage.setItem("as", $("#as").value); } catch {} render(); };
+const as = () => $("#as").value;
+const api = async (m, p, d, raw) => { const r = await fetch(p, { method: m, body: raw ?? (d && JSON.stringify(d)), headers: { "content-type": raw ? "application/octet-stream" : "application/json" } });
+  const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; };
+
+// small markdown: code fences, headings, lists, bold, inline code, links
+function md(s) {
+  const out = [], parts = String(s).split(/```[^\n]*\n?/);
+  parts.forEach((p, i) => {
+    if (i % 2) return out.push(`<pre>${esc(p)}</pre>`);
+    for (const block of p.split(/\n{2,}/)) {
+      if (!block.trim()) continue;
+      let h = esc(block).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+        .replace(/\[([^\]]+)\]\((https?:[^)\s]+|\/[^)\s]*)\)/g, '<a href="$2" target="_blank">$1</a>');
+      if (/^#{1,4} /.test(h)) out.push(`<h3>${h.replace(/^#+ /, "")}</h3>`);
+      else if (/^\s*[-*] /m.test(h) && h.split("\n").every((l) => /^\s*[-*] /.test(l) || !l.trim())) out.push("<ul>" + h.split("\n").filter((l) => l.trim()).map((l) => `<li>${l.replace(/^\s*[-*] /, "")}</li>`).join("") + "</ul>");
+      else out.push(`<p>${h.replace(/\n/g, "<br>")}</p>`);
+    }
+  });
+  return out.join("");
+}
+
+async function upload(id, files) {
+  const names = [];
+  for (const f of files) { const name = f.name.replace(/[^\w.-]/g, "_"); await api("PUT", `/api/threads/${id}/files/${encodeURIComponent(name)}`, null, f); names.push(name); }
+  return names;
+}
+
+async function renderList() {
+  const ts = await api("GET", "/api/threads");
+  $("#list").innerHTML = ts.slice().reverse().map((t) => {
+    const unread = t.messages > (t.seen[as()] || 0) && t.last_from !== as();
+    return `<div class="t ${t.id === current ? "on" : ""}" data-id="${esc(t.id)}"><div class="title">${unread ? '<span class="unread">● </span>' : ""}${esc(t.title)}</div>
+      <div class="sub"><span class="chip">${esc(t.kind)}</span> <span class="chip">${esc(t.status)}</span> ${t.messages} · ${esc(t.last_from || "")} · ${esc((t.updated || "").slice(0, 16).replace("T", " "))}</div></div>`;
+  }).join("") || '<div class="empty">No threads yet.</div>';
+  document.querySelectorAll(".t").forEach((el) => el.onclick = () => { current = el.dataset.id; location.hash = current; render(); });
+}
+
+async function renderThread() {
+  if (!current) return;
+  let t; try { t = await api("GET", `/api/threads/${encodeURIComponent(current)}`); } catch { $("#view").innerHTML = '<div class="empty">No such thread.</div>'; return; }
+  const opts = meta.statuses.map((s) => `<option>${s}</option>`).join("");
+  $("#view").innerHTML = `<div><h2>${esc(t.title)}</h2><div class="meta">${esc(t.id)} · <span class="chip">${esc(t.kind)}</span> <span class="chip">${esc(t.status)}</span> · opened by ${esc(t.opened_by)} ${esc(t.created.slice(0, 16).replace("T", " "))}</div></div>
+    ${t.messages.map((m) => `<div class="msg ${esc(m.from)}"><div class="meta"><b>${esc(m.from)}</b> · ${esc(m.at.slice(0, 16).replace("T", " "))}${m.status ? ` · status → ${esc(m.status)}` : ""}</div>
+      <div class="body">${md(m.body)}</div>
+      ${m.attachments.map((a) => IMG.test(a) ? `<a href="/files/${esc(t.id)}/${esc(a)}" target="_blank"><img src="/files/${esc(t.id)}/${esc(a)}" alt="${esc(a)}"></a>` : "").join("")}
+      <div class="files">${m.attachments.filter((a) => !IMG.test(a)).map((a) => `<a href="/files/${esc(t.id)}/${esc(a)}">${esc(a)}</a>`).join("")}</div></div>`).join("")}
+    <form id="reply"><textarea name="body" placeholder="Reply as ${esc(as())} (markdown)"></textarea>
+      <div class="row"><input type="file" name="files" multiple> <label>status <select name="status"><option value="">(unchanged)</option>${opts}</select></label> <button>Send</button></div></form>`;
+  $("#reply").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target, btn = f.querySelector("button"); btn.disabled = true;
+    try {
+      const names = await upload(t.id, f.files.files);
+      if (f.body.value.trim() || names.length) await api("POST", `/api/threads/${t.id}/messages`, { from: as(), body: f.body.value, attachments: names, status: f.status.value || undefined });
+      else if (f.status.value) await api("PATCH", `/api/threads/${t.id}`, { by: as(), status: f.status.value });
+    } catch (err) { btn.disabled = false; btn.textContent = "Failed: " + err.message; }
+  };
+  if (t.messages.length) api("POST", `/api/threads/${t.id}/seen`, { as: as() }).catch(() => {});
+}
+
+function renderNew() {
+  current = null; history.replaceState(null, "", location.pathname);
+  $("#view").innerHTML = `<h2>New thread</h2><form id="new"><div class="row"><input type="text" name="title" placeholder="Title" required>
+    <select name="kind">${meta.kinds.map((k) => `<option>${k}</option>`).join("")}</select></div>
+    <textarea name="body" placeholder="What you need, or what you're proposing (markdown)"></textarea>
+    <div class="row"><input type="file" name="files" multiple> <button>Open as ${esc(as())}</button></div></form>`;
+  $("#new").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target;
+    const t = await api("POST", "/api/threads", { from: as(), title: f.title.value, kind: f.kind.value });
+    const names = await upload(t.id, f.files.files);
+    if (f.body.value.trim() || names.length) await api("POST", `/api/threads/${t.id}/messages`, { from: as(), body: f.body.value, attachments: names });
+    current = t.id; location.hash = t.id; render();
+  };
+}
+$("#newbtn").onclick = renderNew;
+
+async function render() { await renderList(); await renderThread(); }
+(async () => {
+  meta = await api("GET", "/api/meta"); await render();
+  if (new URLSearchParams(location.search).has("nolive")) return;  // for headless screenshots
+  for (let v = meta.version; ;) {                                  // live: re-render whenever the desk changes
+    try { const r = await api("GET", `/api/wait?since=${v}`); if (r.version !== v) { v = r.version; if (!document.querySelector("textarea:focus")) await render(); else await renderList(); } }
+    catch { await new Promise((r) => setTimeout(r, 5000)); }
+  }
+})();
+</script>
+</body>
+</html>
