@@ -51,5 +51,9 @@ runParts(g, list, { palette: "palette.json", roof: "roof.json" });
 const { fix: towersV2 } = await import("./parts/towers-v2.mjs");
 towersV2(g);
 
+// v3 fix round (owner): the east end (choir + polygonal apse) rebuilt and the flanks re-dressed; may replace cells.
+const { fix: eastV3 } = await import("./parts/east-v3.mjs");
+eastV3(g);
+
 g.save(out);
 console.log(`saved ${out}: ${g.cells.size} cells`);

@@ -1,0 +1,24 @@
+Owner's fix round for the Notre-Dame kit (v2 -> v3): "this shot of the cathedral seems lacking in detail". The hero camera
+looks at the EAST END and the south flank from the Seine, and from there the chevet reads as a flat, vertically striped
+sandstone wall with a pale lattice on top. Read these photos first (the east end, the side the camera sees):
+  /Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/paris/notre-dame/01-chevet-garden.jpg   (the chevet from Square Jean-XXIII: the hero angle)
+  /Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/paris/notre-dame/02-south-seine.jpg     (the south flank from the river)
+  /Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/paris/notre-dame/03-left-bank-golden.jpg
+Keep the west towers and west front (v2), the spire, the transept roses, the lead roofs' colour, the plot and its size.
+Rebuild the east end (the apse and the choir east of the transept) and make the south and north flanks read:
+1. APSE ROOF. The apse's roof is a polygonal half-cone in dark lead, hipped round the curve from the main ridge, with a
+   balustrade at its foot and a small cross or finial at the ridge's east tip.
+2. CLERESTORY. Tall pointed windows (2 lancets under a round oculus, dark stained glass, deep reveals) in every bay of the
+   upper apse and choir, between slender piers.
+3. FLYING BUTTRESSES. Real ones: from tall outer piers capped with pinnacles (stepped, ending in a spike or a lightning
+   rod), a single long sloping arch (stairs and slabs, one or two blocks thick, open underneath) spans over the aisle roof
+   to the clerestory wall at each bay. Around the apse they radiate. Open air under every arch: you must see sky through
+   them. No lattice grid.
+4. RADIATING CHAPELS at ground level round the apse: a ring of low chapels, each with a large pointed tracery window
+   (dark glass, stone mullions), a small gable over it (a steep stone triangle with a crocket edge), and a lead lean-to roof
+   behind; a pierced parapet runs along their top.
+5. FLANKS. Same bay rhythm along the nave and choir: aisle windows with gables, buttress piers with pinnacles, flyers.
+6. RELIEF. No flat runs of more than 4 blocks on any visible face: string courses, reveals, piers proud by a block,
+   dark recessed glass. Sandstone family as now (sandstone, smooth/cut/chiseled sandstone, a little end stone or birch for
+   highlight), dark lead roofs.
+Work on the east end and flanks only; diff should leave the towers' boxes untouched.
