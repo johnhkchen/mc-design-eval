@@ -66,7 +66,7 @@ const cmds = {
     const t = await api("POST", "/api/threads", { from: AS, title, kind: flags.kind });
     const names = await upload(t.id, files), body = text();
     if (body || names.length) await api("POST", `/api/threads/${t.id}/messages`, { from: AS, body, attachments: names });
-    console.log(`opened ${t.id}  ${URL_}/#${t.id}`);
+    console.log(`opened ${t.id}  ${URL_}/desk#${t.id}`);
   },
   async say([q, ...files]) {
     const id = await resolve(q), names = await upload(id, files);

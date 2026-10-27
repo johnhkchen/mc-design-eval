@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 // Asset studio: a work desk between this pipeline (the studio) and a client project (the mod agent).
 // Everything lives in files under threads/, so git holds the whole history: requests, messages, WIP
-// pictures, deliverables. No dependencies. Binds 127.0.0.1; reach it on the tailnet through
+// pictures, deliverables. Agents connect over MCP at /mcp; people use the desk at /desk; / explains how to
+// connect. No dependencies. Binds 127.0.0.1; reach it on the tailnet through
 //   tailscale serve --bg --https=8650 http://127.0.0.1:5190
 //
 //   node server.mjs [--port 5190] [--commit]
 import { createServer } from "node:http";
 import { spawnSync } from "node:child_process";
+import { makeMcp } from "./mcp.mjs";
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, statSync, createReadStream } from "node:fs";
 import { join, dirname, extname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -92,12 +94,37 @@ function summary(id) {
 }
 const allThreads = () => readdirSync(THREADS).filter((f) => existsSync(join(THREADS, f, "thread.json"))).sort().map(summary);
 
+function createThread({ from, title, kind, body }) {
+  const seq = allThreads().reduce((m, s) => Math.max(m, parseInt(s.id) || 0), 0) + 1;
+  const id = `${String(seq).padStart(4, "0")}-${slug(title)}`, d = join(THREADS, id);
+  mkdirSync(join(d, "files"), { recursive: true });
+  const t = { id, title: String(title).slice(0, 200), kind: KINDS.includes(kind) ? kind : "request", status: "open", opened_by: from,
+    created: now(), updated: now(), history: [{ status: "open", by: from, at: now() }], seen: {} };
+  writeThread(d, t);
+  if (body) addMessage(d, t, { from, body }); else bump();
+  return id;
+}
+
+function saveFile(d, t, name, buf) {
+  if (!safe(name)) throw new Error("file names: letters, digits, . _ -");
+  mkdirSync(join(d, "files"), { recursive: true });
+  writeFileSync(join(d, "files", name), buf); t.updated = now(); writeThread(d, t); bump();
+}
+
+function markSeen(d, t, as) { t.seen = { ...(t.seen || {}), [as]: readMessages(d).at(-1)?.n || 0 }; writeThread(d, t); }
+
 // threads with a message from someone else after `as` last read or wrote
 const inbox = (as) => allThreads().filter((s) => {
   if (!s.messages) return false;
   const msgs = readMessages(join(THREADS, s.id)), seen = s.seen[as] || 0;
   return msgs.some((m) => m.n > seen && m.from !== as);
 });
+
+// the address the caller used (tailscale serve passes the ts.net host through), for links in tool results
+const baseUrl = (req) => `${req.headers["x-forwarded-proto"] || (req.headers.host?.includes(".ts.net") ? "https" : "http")}://${req.headers["x-forwarded-host"] || req.headers.host}`;
+
+const mcp = makeMcp({ HERE, KINDS, STATUSES, safe, dirOf, readThread, readMessages, allThreads, inbox, summary,
+  createThread, addMessage, setStatus, writeThread, saveFile, markSeen, bump, now });
 
 // ---- http
 const send = (res, code, body, type = "application/json") => {
@@ -121,6 +148,16 @@ createServer(async (req, res) => {
   const url = new URL(req.url, "http://x"), p = url.pathname.split("/").filter(Boolean).map(decodeURIComponent), M = req.method;
   try {
     if (M === "GET" && p.length === 0) return file(res, join(HERE, "public", "index.html"));
+    if (M === "GET" && p[0] === "desk" && p.length === 1) return file(res, join(HERE, "public", "desk.html"));
+    if (M === "GET" && p[0] === "health") return send(res, 200, { ok: true, threads: allThreads().length });
+    if (p[0] === "mcp" && p.length === 1) {
+      if (M !== "POST") return send(res, 405, { error: "POST JSON-RPC here (Streamable HTTP, JSON responses; no server stream)" });
+      const raw = await body(req, MAX_UPLOAD * 1.5);
+      const out = await mcp(raw.toString(), { as: who(url.searchParams.get("as")) || "client", base: baseUrl(req) });
+      if (out === null) { res.writeHead(202); return res.end(); }
+      res.writeHead(200, { "content-type": "application/json", "mcp-session-id": req.headers["mcp-session-id"] || "desk" });
+      return res.end(JSON.stringify(out));
+    }
     if (M === "GET" && p.length === 1 && ["brief", "protocol", "readme"].includes(p[0])) return file(res, join(HERE, p[0].toUpperCase() + ".md"));
     if (M === "GET" && p[0] === "studio.mjs") return file(res, join(HERE, "studio.mjs"));
     if (M === "GET" && p[0] === "files" && p.length === 3) { const d = dirOf(p[1]); return d && safe(p[2]) ? file(res, join(d, "files", p[2])) : fail(res, 404, "not found"); }
@@ -141,15 +178,7 @@ createServer(async (req, res) => {
     if (p.length === 2 && M === "POST") {
       const b = await json(req), from = who(b.from);
       if (!from || !b.title) return fail(res, 400, "from and title needed");
-      const kind = KINDS.includes(b.kind) ? b.kind : "request";
-      const seq = allThreads().reduce((m, s) => Math.max(m, parseInt(s.id) || 0), 0) + 1;
-      const id = `${String(seq).padStart(4, "0")}-${slug(b.title)}`, d = join(THREADS, id);
-      mkdirSync(join(d, "files"), { recursive: true });
-      const t = { id, title: String(b.title).slice(0, 200), kind, status: "open", opened_by: from, created: now(), updated: now(),
-        history: [{ status: "open", by: from, at: now() }], seen: {} };
-      writeThread(d, t);
-      if (b.body) addMessage(d, t, { from, body: b.body }); else bump();
-      return send(res, 201, summary(id));
+      return send(res, 201, summary(createThread({ from, title: b.title, kind: b.kind, body: b.body })));
     }
 
     const d = dirOf(p[2]);
@@ -170,14 +199,13 @@ createServer(async (req, res) => {
     }
     if (p[3] === "seen" && M === "POST") {
       const as = who((await json(req)).as); if (!as) return fail(res, 400, "as needed");
-      t.seen = { ...(t.seen || {}), [as]: readMessages(d).at(-1)?.n || 0 }; writeThread(d, t);
+      markSeen(d, t, as);
       return send(res, 200, { ok: true });
     }
     if (p[3] === "files" && p.length === 5 && M === "PUT") {
       if (!safe(p[4])) return fail(res, 400, "file names: letters, digits, . _ -");
       const buf = await body(req, MAX_UPLOAD);
-      mkdirSync(join(d, "files"), { recursive: true });
-      writeFileSync(join(d, "files", p[4]), buf); t.updated = now(); writeThread(d, t); bump();
+      saveFile(d, t, p[4], buf);
       return send(res, 201, { name: p[4], bytes: buf.length, url: `/files/${p[2]}/${p[4]}` });
     }
     return fail(res, 404, "not found");

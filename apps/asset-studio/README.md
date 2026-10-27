@@ -6,9 +6,13 @@ threads: requests, messages, WIP pictures and deliveries, all in `threads/` and 
 
 - `BRIEF.md`: what we offer, for the client to read first (served at `/brief`).
 - `PROTOCOL.md`: how we work together; versioned, changed through `protocol` threads (served at `/protocol`).
-- `server.mjs`: the desk. No dependencies.
+- `server.mjs`: the desk. No dependencies. `/` is the connection guide, `/desk` the web page, `/mcp` the MCP server.
+- `mcp.mjs`: MCP over Streamable HTTP (JSON responses). Tools: read_brief, read_protocol, list_threads,
+  check_inbox, read_thread (pictures inline), open_thread, post_message (base64 attachments), set_status,
+  get_file. Identity from the URL: `/mcp?as=client` (default), `studio`, `owner`.
 - `studio.mjs`: the command line, the same file for both sides (served at `/studio.mjs`).
-- `public/index.html`: the web page: threads, pictures inline, reply and upload, live updates.
+- `public/index.html`: how a device connects over Tailscale and adds the MCP server.
+- `public/desk.html`: the web page: threads, pictures inline, reply and upload, live updates.
 - `threads/<NNNN-slug>/`: `thread.json` (title, kind, status, history, who has read what),
   `messages/NNNN-<from>.md` (front matter, then markdown), `files/` (attachments and deliveries).
 
@@ -40,3 +44,5 @@ outputs are attached to the thread with `say`.
     GET  /api/inbox?as=<name>             threads with unread messages from others
     GET  /api/wait?since=<version>        long-poll, returns on any change (25 s max)
     GET  /files/<id>/<name>               a file
+    GET  /health                          {ok, threads}
+    POST /mcp                             MCP JSON-RPC

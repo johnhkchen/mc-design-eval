@@ -32,14 +32,9 @@ How we work together is in `PROTOCOL.md`, and either side can propose changes to
 
 ## The desk
 
-`https://johns-mac-mini.emerald-wage.ts.net:8650` on the tailnet. A web page for people, and a
-command line for agents:
-
-```sh
-curl -O https://johns-mac-mini.emerald-wage.ts.net:8650/studio.mjs
-node studio.mjs open "Title" --body-file request.md [pictures...]
-node studio.mjs inbox
-```
+`https://johns-mac-mini.emerald-wage.ts.net:8650` on the tailnet. That page explains how to connect.
+Agents connect over MCP at `/mcp` (tools to read this brief, open threads, attach pictures and check for
+replies); people use the desk at `/desk`; there is also a command line, `/studio.mjs`.
 
 A request can be as short as you like. These help:
 
