@@ -8,7 +8,7 @@
 // Checks: DataVersion 3955; vanilla blocks or the mod's decorative twins (enterprise:decor_<vanilla id>); size = the JSON's footprint; no blocks from after 1.21.1 or forbidden ones; every bed,
 // bell, job site and other point of interest declared, and nothing declared that isn't there; beds whole; chests and
 // barrels touching a job site only as declared lockers; entities only frames, paintings and armour stands, listed;
-// block light 8+ on every walkable cell; a villager's walk from the door to every bed and workstation, up stairs and slab steps
+// block light 8+ on every walkable cell a mob could spawn on (a full solid top: not bottom slabs, stairs, glass, leaves); a villager's walk from the door to every bed and workstation, up stairs and slab steps
 // between floors (never ladders, trapdoors or full-block steps); from a mass,
 // every fixed block at its cell and state. Light and walking are close approximations of the game's rules, so a pass
 // here is a strong sign, and the game test on their side is the final word.
@@ -162,6 +162,15 @@ export function check(nbtFile, meta, mass) {
   // walkable: a cell a mob or villager can stand in: open itself and above, on something solid (stored, not open)
   const open = (x, y, z) => { const n = shape(name(x, y, z)); return n !== undefined && (OPEN.test(n) || /_door$|_fence_gate$/.test(n) && at(x, y, z).props.open === "true" || /_door$/.test(n)); };
   const standable = (x, y, z) => { const n = shape(name(x, y - 1, z)); return y > 0 && n !== undefined && !OPEN.test(n) && !/_fence$|_wall$|_fence_gate$|_door$/.test(n); };
+  // a mob spawns only on a full, solid top: not on bottom slabs or stairs, glass, leaves and the like (top slabs and
+  // upside-down stairs do count)
+  const spawnable = (x, y, z) => {
+    const b = at(x, y - 1, z), n = shape(b?.name);
+    if (!n || OPEN.test(n)) return false;
+    if (/_slab$/.test(n)) return b.props.type === "top" || b.props.type === "double";
+    if (/_stairs$/.test(n)) return b.props.half === "top";
+    return !SEE_THROUGH.test(n);
+  };
   const walk = (x, y, z) => open(x, y, z) && (y + 1 >= H || open(x, y + 1, z) || name(x, y + 1, z) === undefined) && standable(x, y, z);
   // the contract's rule: interior cells (something above them) and the outdoor ground (the layer over `ground`).
   // Open-sky cells higher up (roofs, wall-walks) can spawn mobs at night too: those are a warning.
@@ -171,7 +180,7 @@ export function check(nbtFile, meta, mass) {
   for (let x = 0; x < W; x++) for (let y = 1; y < H; y++) for (let z = 0; z < D; z++) {
     const n = name(x, y, z);
     if (n === undefined || n === "structure_void" || /_door$/.test(n)) continue;
-    if (!walk(x, y, z) || (light.get(key(x, y, z)) || 0) >= 8) continue;
+    if (!walk(x, y, z) || !spawnable(x, y, z) || (light.get(key(x, y, z)) || 0) >= 8) continue;
     (covered(x, y, z) || y <= groundY ? dark : roofs).push([x, y, z]);
   }
   if (dark.length) errs.push(`${dark.length} walkable cell${dark.length > 1 ? "s" : ""} under light 8, e.g. ${dark.slice(0, 5).map((p) => `(${p})`).join(" ")}`);
