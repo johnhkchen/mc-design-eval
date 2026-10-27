@@ -1,0 +1,285 @@
+{
+  "batch": "022-lordaeron-fields",
+  "thread": "0011",
+  "made": "2026-10-27T20:26:17.601Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/field/demo_fields.jpg",
+      "kind": "preview",
+      "sha256": "b2d8b0402886301d3639d9c766a1dbf6d45937ce0dbe33ce1a67f6a2a1b929e4",
+      "bytes": 407645
+    },
+    {
+      "path": "assets-src/lordaeron/field/demo_fields.nbt",
+      "kind": "file",
+      "sha256": "4567423ecb1a353e153aef6129b9268b76abd39da3cd240c00c3346f2244e578",
+      "bytes": 8638
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_drystone.json",
+      "kind": "meta",
+      "sha256": "33740f7de010dcc2561cf1fc3243e957905fc53a1d6b612a58d209cbe1310ba1",
+      "bytes": 296
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_drystone.nbt",
+      "kind": "structure",
+      "sha256": "a9f74a1e3b1b48a41a82b629bc6799b412bae2f2b11a2a5aab57f5fef1c7e646",
+      "bytes": 342,
+      "id": "enterprise:lordaeron/field/edge_drystone"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_gate.json",
+      "kind": "meta",
+      "sha256": "f55526f1a931fee2c85924c12a99157344b45fc79da59594adcb01f2e7ff8032",
+      "bytes": 289
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_gate.nbt",
+      "kind": "structure",
+      "sha256": "4a72fdb67918fd4c0eb0eedcc9841f318fb33c19c309912390faf6e831ae0e66",
+      "bytes": 413,
+      "id": "enterprise:lordaeron/field/edge_gate"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_hedgerow.json",
+      "kind": "meta",
+      "sha256": "f04003af4ba7130177e575ae91c999d17eeb944c283ae6f69a4851d2ff97a6e0",
+      "bytes": 297
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_hedgerow.nbt",
+      "kind": "structure",
+      "sha256": "e0ed35a21258e3073df5f7bd272b6fd3c7f02205ed2eeeb212d030b2da6f4922",
+      "bytes": 385,
+      "id": "enterprise:lordaeron/field/edge_hedgerow"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_rail.json",
+      "kind": "meta",
+      "sha256": "fcb6460a57577b1443fb4b9a2df693494118764526b6cb14dafef5da4ed4735d",
+      "bytes": 293
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/edge_rail.nbt",
+      "kind": "structure",
+      "sha256": "b6e25a0922e2da3e31178824249c69c1aea61d5614276bfa9cae0e2a40d7227c",
+      "bytes": 319,
+      "id": "enterprise:lordaeron/field/edge_rail"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_fallow_a.json",
+      "kind": "meta",
+      "sha256": "cbe92c667cc7721ade1cea6ccdf88b72ec367e6b0ceaa880c30301a14c032083",
+      "bytes": 352
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_fallow_a.nbt",
+      "kind": "structure",
+      "sha256": "f71957bd3f696647c1f7c57f9270ea7c74398c6f0ac716786b052feb9d66ed4e",
+      "bytes": 1334,
+      "id": "enterprise:lordaeron/field/field_fallow_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_fallow_b.json",
+      "kind": "meta",
+      "sha256": "a7709c410eb4e8a35ab5353ae6adea84f38003ca458dd308a2ec39d2b517cf4b",
+      "bytes": 352
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_fallow_b.nbt",
+      "kind": "structure",
+      "sha256": "fd561fad0f9c200f9fd6f8fb2c0c6437a485f41e5109471f801d2f33e14822c4",
+      "bytes": 1302,
+      "id": "enterprise:lordaeron/field/field_fallow_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_garden_a.json",
+      "kind": "meta",
+      "sha256": "4b28182b431750844daf458c3a5aa93ffd09b92e2951e869323f14d48a529036",
+      "bytes": 401
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_garden_a.nbt",
+      "kind": "structure",
+      "sha256": "685bfb49c02ade2afd7ee643ec43e4e1d20445ccd1f19db691f14f68283de044",
+      "bytes": 1448,
+      "id": "enterprise:lordaeron/field/field_garden_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_garden_b.json",
+      "kind": "meta",
+      "sha256": "f2949cff84f3ed2a4e46e7c3144e589662f2d2e0c6ddbfe548ab14006c2253f8",
+      "bytes": 401
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_garden_b.nbt",
+      "kind": "structure",
+      "sha256": "c38b9238c1b52d3e7f066c712b3782a163bb2779cbed4bf10ddcec2b09cc1e12",
+      "bytes": 1443,
+      "id": "enterprise:lordaeron/field/field_garden_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_meadow_a.json",
+      "kind": "meta",
+      "sha256": "0f1d0bd907d186355c5ea777c95827f3cb0fcd4503881586cbeb185c114b0924",
+      "bytes": 353
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_meadow_a.nbt",
+      "kind": "structure",
+      "sha256": "e1645397303c314ff43e5080d7f49c9b93b2936810be27b7f5c24d7837808a4b",
+      "bytes": 1236,
+      "id": "enterprise:lordaeron/field/field_meadow_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_meadow_b.json",
+      "kind": "meta",
+      "sha256": "92df79a94d3d0d1984ff82aabf0faf8f8dec4cc32cadf6cf00e06248266a963d",
+      "bytes": 353
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_meadow_b.nbt",
+      "kind": "structure",
+      "sha256": "7d1f90612ba095b81e57146c7dde4f5db73fb069ee4f7094532ee7344c5a293f",
+      "bytes": 1211,
+      "id": "enterprise:lordaeron/field/field_meadow_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_orchard_a.json",
+      "kind": "meta",
+      "sha256": "f0b7a1917cf842e545ccc9ef8f7439898e8a271a06ac4c807ed7ddc6299c2aa5",
+      "bytes": 355
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_orchard_a.nbt",
+      "kind": "structure",
+      "sha256": "dbabf905843a9380afb33b390b801c80c6bb9a57250b638a1edc52cf2ab72218",
+      "bytes": 1442,
+      "id": "enterprise:lordaeron/field/field_orchard_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_orchard_b.json",
+      "kind": "meta",
+      "sha256": "8fdd7d2ed9f05961fb9e23523d5356e9a64d27f206bb8647f8ca2fad300922a4",
+      "bytes": 355
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_orchard_b.nbt",
+      "kind": "structure",
+      "sha256": "3577b0a90f7d65bace19487fff137f208a519e56bef097b0522b3dddc6eacad9",
+      "bytes": 1487,
+      "id": "enterprise:lordaeron/field/field_orchard_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_pumpkins_a.json",
+      "kind": "meta",
+      "sha256": "d661782598ade2140346e9fe497ccc4c494c7fda6ec85206a0cb2610484947fd",
+      "bytes": 369
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_pumpkins_a.nbt",
+      "kind": "structure",
+      "sha256": "ac68fd972f8dc0a7e993d42bfb61db905c3ce1f93ecf73f9415965462909a162",
+      "bytes": 1353,
+      "id": "enterprise:lordaeron/field/field_pumpkins_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_pumpkins_b.json",
+      "kind": "meta",
+      "sha256": "bd4d4ba351bc3b2637966f3c109a94a18098e234f28a8f60a9cc29b849e054a3",
+      "bytes": 369
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_pumpkins_b.nbt",
+      "kind": "structure",
+      "sha256": "12fba5c3d488a1953a5079f3b7c1bf515f57c2a8107d83953cb246981f61cb59",
+      "bytes": 1353,
+      "id": "enterprise:lordaeron/field/field_pumpkins_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_2_a.json",
+      "kind": "meta",
+      "sha256": "b0688b9ef05fd3df8d3b486187b13a22a54504b67fd234ec641478c962017429",
+      "bytes": 371
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_2_a.nbt",
+      "kind": "structure",
+      "sha256": "800e26a0cc43d9cb159d4a8acc448e74139c977d730f6c2428312a618171d629",
+      "bytes": 1276,
+      "id": "enterprise:lordaeron/field/field_strips_2_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_2_b.json",
+      "kind": "meta",
+      "sha256": "72f3552c576cadd343b0036f48f724775d9b66477cf22f8dedca71ccf5614a06",
+      "bytes": 371
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_2_b.nbt",
+      "kind": "structure",
+      "sha256": "2d360da9046a70a20ae75c277158c3714f1bf7434ecf017255e697ce88626000",
+      "bytes": 1286,
+      "id": "enterprise:lordaeron/field/field_strips_2_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_3_a.json",
+      "kind": "meta",
+      "sha256": "69e806eb1e9d90df26d65e7cde85cd93d8ac64e8ec8b2e491c36869fc20467a3",
+      "bytes": 385
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_3_a.nbt",
+      "kind": "structure",
+      "sha256": "2b1f6d43a27848dbb13a431e569a2b1d6eca4a05dc3004b44c79b320deefc668",
+      "bytes": 1315,
+      "id": "enterprise:lordaeron/field/field_strips_3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_3_b.json",
+      "kind": "meta",
+      "sha256": "0482ddc30253f4d7152d1d2324e07a2c4656726087566c48e50586a036b54b2b",
+      "bytes": 385
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_strips_3_b.nbt",
+      "kind": "structure",
+      "sha256": "6ce923b60bd0eece267401dca62c0bf78008da811ef4ae5a6f7198d698a3bd85",
+      "bytes": 1317,
+      "id": "enterprise:lordaeron/field/field_strips_3_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_sunflowers_a.json",
+      "kind": "meta",
+      "sha256": "37829bd96498633ba832a6c27cd92307c8d11cf73384c69313e4a92470ccc14e",
+      "bytes": 371
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_sunflowers_a.nbt",
+      "kind": "structure",
+      "sha256": "ddd53f4ddfec9f9755dae7f21ac38ce95e1536227e1a33b312e5f597eef2d8c2",
+      "bytes": 1337,
+      "id": "enterprise:lordaeron/field/field_sunflowers_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_sunflowers_b.json",
+      "kind": "meta",
+      "sha256": "4bcd19f2cfcc5f93327c05c3030b53de86e63c4063f79a36bc32c9fea84d1123",
+      "bytes": 371
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/field/field_sunflowers_b.nbt",
+      "kind": "structure",
+      "sha256": "599e9a8df873a6c2781bd2a492ea80527bd37948206b0bd0fea422077759130d",
+      "bytes": 1344,
+      "id": "enterprise:lordaeron/field/field_sunflowers_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/fields.json",
+      "kind": "kit_rules",
+      "sha256": "0d1bcb469fc453edf11f5dbc1f2111801791e101716dcc5425cba0d61280b0d7",
+      "bytes": 6381
+    }
+  ]
+}
