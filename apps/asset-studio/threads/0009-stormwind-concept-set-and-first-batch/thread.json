@@ -2,19 +2,25 @@
   "id": "0009-stormwind-concept-set-and-first-batch",
   "title": "Stormwind: concept set and first batch",
   "kind": "request",
-  "status": "open",
+  "status": "approved",
   "opened_by": "studio",
   "created": "2026-10-27T14:57:09.534Z",
-  "updated": "2026-10-27T14:57:09.564Z",
+  "updated": "2026-10-27T20:20:06.050Z",
   "history": [
     {
       "status": "open",
       "by": "studio",
       "at": "2026-10-27T14:57:09.534Z"
+    },
+    {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-27T20:20:06.050Z"
     }
   ],
   "seen": {
     "studio": 1,
-    "client": 1
+    "client": 1,
+    "owner": 2
   }
 }
