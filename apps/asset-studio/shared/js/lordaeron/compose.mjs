@@ -97,7 +97,7 @@ export function layoutOf(p) {
           else if (face === "front" && s === 0 && bay === doorBay) module = "bay_door_ground";
           else if (stair) module = `bay_landing_${st}`;
           else if (face === "front" && s === 0 && p.shop) module = "bay_shop_ground";
-          else if (s === 0 && (face === "west" || face === "east")) module = `bay_landing_${st}`;       // a single window on a ground side
+          else if (s === 0 && (face === "west" || face === "east") && !p.noCore) module = `bay_landing_${st}`;   // a single window on a ground side (a hall's sides get pairs)
           else if (face === "front" && (bay + s) % 2 === 0) module = `bay_window_box_${st}`;
           else module = `bay_window_${st}`;
           shell.push({ face, i, module, storey: s, mirror: module === "bay_door_ground" && mirrorDoor });
@@ -151,7 +151,8 @@ export function layoutOf(p) {
     for (let s = 1; s < S; s++) {
       for (let z = 1; z <= 3; z++) put(s, z === 2 ? "door_inner" : "wall_inner", [cx - 1, z]);   // the partition: x = cx-1 ...
       for (let x = cx - 1; x <= W - 2; x++) put(s, "wall_inner", [x, 4]);                          // ... and along z = 4
-      bed(s, [1, 1]); if ((p.beds || 2) >= 2) bed(s, [1, 4]); if ((p.beds || 2) >= 3) bed(s, [cx - 2, 1]);
+      if ((p.beds || 2) > 2) throw new Error("a 10-wide chamber floor holds 2 made beds (floor a bed 4 to 8.5; the partition door must stay clear)");
+      bed(s, [1, 1]); bed(s, [1, 4]);
       put(s, "chest", [1, 3]); put(s, "table", [cx - 2, D - 3]); put(s, "bench", [cx - 2, D - 2], 1, 2); put(s, "shelf", [W - 2, D - 2]);
       put(s, "lantern", [2, 3], top); put(s, "lantern", [cx, 2], top); put(s, "lantern", [W - 3, D - 2], top);
     }

@@ -47,7 +47,8 @@ const SHELL = {
   bay_door: () => columns(2, (x, y) => {                       // the door on the right, a sidelight on the left
     if (y === 0) return [B.beamX, B.band];
     if (x === 0) return [window("ground", y), y === 1 ? B.ledge : "air"];
-    return [y === 1 ? B.door("lower", "left") : y === 2 ? B.door("upper", "left") : y === 3 ? B.beamX : B.infill_ground, y === 3 ? B.sill : "air"];
+    return [y === 1 ? B.door("lower", "left") : y === 2 ? B.door("upper", "left") : y === 3 ? B.beamX : B.infill_ground,
+      y === 3 ? B.sill : y === 4 ? "lantern[hanging=false,waterlogged=false]" : "air"];                    // the hood, a lamp on it
   }),
   bay_shop: () => columns(2, (x, y) => [y === 0 ? B.beamX : y >= 2 && y <= H - 2 ? B.pane : B.infill_ground, y === 0 ? B.band : y === 1 ? B.counter : "air"]),
   // a corner, 2 x 2 in plan: local x 0 = the side's relief, 1 = the wall corner; z 0 = wall row, 1 = front relief.

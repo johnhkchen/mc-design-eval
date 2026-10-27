@@ -30,7 +30,7 @@ for (const m of mods) {
 
 // 2. the set file (WFC)
 const set = {
-  set: `lordaeron/${SET}`, rev: 1,
+  set: `lordaeron/${SET}`, rev: 2,
   about: "The Lordaeron timber-frame module set with relief, for a WFC assembler. Two layers solved in order: the plan (rooms, cores, fit-out) then the shell (posts, bays, corners) chosen by the room behind; then the roof and the stack. The golden houses beside it are composed from exactly these modules by the layouts in their JSON (golden.layouts); scripts/assets/lordaeron-ref/compose.mjs is the reference composer.",
   grid: { post: 1, bay: 2, storey: H, relief: 1, pitch: PITCH, body: "3n + 1 wide and deep (7, 10, 13); the template adds the relief: +2, or +1 per party wall" },
   palettes: "assets-src/kingdoms/lordaeron/palettes.json (modules are in the base palette; apply a palette by role)",
@@ -60,7 +60,7 @@ write(join(DATA, `town_kits/lordaeron/${SET}.json`), JSON.stringify(set, null, 2
 // 3. golden houses, 3 palettes each
 const GOLD = [
   ["burgage_9x9_a", { W: 7, D: 7, storeys: 2, roof: "gable_z", palette: "daub", core: "turned", beds: 2 }, ["village", "town"], "a 7 x 7 burgage house, 2 storeys, steep thatched gable to the street"],
-  ["townhouse_12x9_a", { W: 10, D: 7, storeys: 3, roof: "gable_x", palette: "brick", shop: true, trade: "any", beds: 3 }, ["town", "city"], "a 10 x 7 town house, 3 storeys, shop front, slate"],
+  ["townhouse_12x9_a", { W: 10, D: 7, storeys: 3, roof: "gable_x", palette: "brick", shop: true, trade: "any", beds: 2 }, ["town", "city"], "a 10 x 7 town house, 3 storeys, shop front, slate"],
   ["terrace_21x9_a", { units: 3, storeys: 2, palette: "daub", beds: 2 }, ["town"], "three 7 x 7 party-walled houses, 2 storeys, turned stairs"],
 ];
 const VAR = { daub: ["brick", "stone"], brick: ["daub", "stone"], stone: ["daub", "brick"] };

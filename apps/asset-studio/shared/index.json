@@ -66,10 +66,10 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:27:06.877Z",
+    "updated": "2026-10-27T14:28:51.312Z",
     "updated_by": "studio",
-    "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
-    "bytes": 13252,
+    "note": "set rev 2: hall furniture modules, door lamp, 10-wide chambers capped at 2 beds",
+    "bytes": 13369,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
@@ -88,6 +88,12 @@
         "by": "studio",
         "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
         "bytes": 13252
+      },
+      {
+        "at": "2026-10-27T14:28:51.312Z",
+        "by": "studio",
+        "note": "set rev 2: hall furniture modules, door lamp, 10-wide chambers capped at 2 beds",
+        "bytes": 13369
       }
     ]
   },
@@ -95,10 +101,10 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:27:06.920Z",
+    "updated": "2026-10-27T14:28:51.354Z",
     "updated_by": "studio",
-    "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
-    "bytes": 12286,
+    "note": "set rev 2: hall furniture modules, door lamp, 10-wide chambers capped at 2 beds",
+    "bytes": 12392,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
@@ -117,6 +123,12 @@
         "by": "studio",
         "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
         "bytes": 12286
+      },
+      {
+        "at": "2026-10-27T14:28:51.354Z",
+        "by": "studio",
+        "note": "set rev 2: hall furniture modules, door lamp, 10-wide chambers capped at 2 beds",
+        "bytes": 12392
       }
     ]
   },
@@ -319,16 +331,22 @@
     "path": "js/preview.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:19:57.008Z",
+    "updated": "2026-10-27T14:28:51.227Z",
     "updated_by": "studio",
-    "note": "preview with decor twins drawn as their vanilla lookalikes (needs the studio's renderer)",
-    "bytes": 2083,
+    "note": "--cut y: a roof-off cutaway (the contract's cutaway.jpg)",
+    "bytes": 2239,
     "history": [
       {
         "at": "2026-10-27T14:19:57.008Z",
         "by": "studio",
         "note": "preview with decor twins drawn as their vanilla lookalikes (needs the studio's renderer)",
         "bytes": 2083
+      },
+      {
+        "at": "2026-10-27T14:28:51.227Z",
+        "by": "studio",
+        "note": "--cut y: a roof-off cutaway (the contract's cutaway.jpg)",
+        "bytes": 2239
       }
     ]
   },
@@ -386,6 +404,23 @@
         "by": "studio",
         "note": "the quality gate: contract + relief + interior on any build, thresholds from quality.json, one exit code",
         "bytes": 3210
+      }
+    ]
+  },
+  "js/lordaeron/halls.mjs": {
+    "path": "js/lordaeron/halls.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:28:51.270Z",
+    "updated_by": "studio",
+    "note": "the seven halls as fit-out plans on the relief shell",
+    "bytes": 4342,
+    "history": [
+      {
+        "at": "2026-10-27T14:28:51.270Z",
+        "by": "studio",
+        "note": "the seven halls as fit-out plans on the relief shell",
+        "bytes": 4342
       }
     ]
   }
