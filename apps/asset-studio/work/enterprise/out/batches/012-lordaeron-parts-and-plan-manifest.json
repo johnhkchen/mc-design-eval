@@ -1,0 +1,32 @@
+{
+  "batch": "012-lordaeron-parts-and-plan",
+  "thread": "0004",
+  "made": "2026-10-27T15:09:37.393Z",
+  "files": [
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/door_inner_z.json",
+      "kind": "meta",
+      "sha256": "89881800a27fdf193fa8886d244f859b75e9677a3bec1ded6102ac0851b01b69",
+      "bytes": 245
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/part/timber_relief/door_inner_z.nbt",
+      "kind": "part",
+      "sha256": "65be8b90b890d48ca09574b6cc2a3796952ce96f8105279a5dca2b25bee56b79",
+      "bytes": 252,
+      "id": "enterprise:lordaeron/part/timber_relief/door_inner_z"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/plan.json",
+      "kind": "kit_rules",
+      "sha256": "f8fb97c716669918688c6e956fab8817740653a6378ecafc660e35bf60c4e7c1",
+      "bytes": 20201
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/timber_relief.json",
+      "kind": "kit_rules",
+      "sha256": "9b2e50d1622be8ff9bd805f262cbdff1dd8e4b3ff3fed2e7372a8ab62775d1df",
+      "bytes": 26523
+    }
+  ]
+}

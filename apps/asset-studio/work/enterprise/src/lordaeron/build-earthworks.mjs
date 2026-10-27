@@ -1,0 +1,51 @@
+// Earthworks props: retaining-wall tiles (straights, lamps, buttresses, corners, steps) for rises 1-4, the set file,
+// and a demo cut (a 3-high bank with all of them) for the preview. All checked as parts.
+import { mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { allEarthworks } from "./earthworks.mjs";
+import { Grid } from "../grid.mjs";
+import { check } from "../../../../tools/check-asset.mjs";
+const HERE = dirname(fileURLToPath(import.meta.url)), BUNDLE = join(HERE, "../../bundle"), DATA = join(BUNDLE, "core/src/main/resources/data/enterprise");
+const E = join(DATA, "structure/lordaeron/earthworks");
+const write = (f, s) => { mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, s); };
+rmSync(E, { recursive: true, force: true }); mkdirSync(E, { recursive: true });
+const tiles = allEarthworks(), report = [];
+for (const t of tiles) {
+  const f = join(E, `${t.id}.nbt`); t.grid.save(f);
+  const meta = { id: `enterprise:lordaeron/earthworks/${t.id}`, rev: 1, kingdom: "lordaeron", kind: "part", slot: "prop:earthworks", palette: "fixed", size: t.grid.size, depth: t.grid.size[2], mirror: true, ground: 2, ...t.meta };
+  write(f.replace(".nbt", ".json"), JSON.stringify(meta, null, 2) + "\n");
+  const c = check(f, meta); report.push([t.id, c.ok, c.errors]);
+}
+write(join(DATA, "town_kits/lordaeron/earthworks.json"), JSON.stringify({
+  set: "lordaeron/earthworks", rev: 1,
+  about: "Retaining walls for the cuts levelling leaves in a slope. Authored with the low ground to the south: z = depth-1 is the low edge and every tile aligns on it; the wall face looks south; the high ground runs north. Layers 0-1 ground, 2 the low surface, 2 + rise the high surface. Rotate and mirror freely (the corners are drawn for high ground to the north-west).",
+  rise: "Each tile is made for one rise, 1 to 4 (retain_h<rise>_*). Use the tile whose rise is the cut's height at that column; at a change of height, let the higher tile's wall run on one column past the step.",
+  tiling: "Straights are 1 wide (variants a, b, c: pick by hash so the coursing never repeats), with a lamp tile at most 5 apart and, from rise 3, a buttress about every 4. Corners are 3 x 3. Steps are 4 wide (two cheek walls and a 2-wide flight) and 2 x rise + 1 deep, so they reach back into the bank; cut the bank behind them to the steps' landing.",
+  walk: "Steps go up by half steps only (bottom slab, full block, ...), as the shared validator's walk requires; the landing is level with the high ground.",
+  detail: "A cobble footing course, mixed coursed stone (stone, mossy and cracked bricks, a little andesite), a battered stair footing from rise 2, a stone coping and a low cobble parapet from rise 2, ivy down faces from rise 3, a coarse drain strip at the foot.",
+  tiles: tiles.map((t) => ({ id: t.id, part: `enterprise:lordaeron/earthworks/${t.id}`, depth: t.grid.size[2], ...t.meta })),
+}, null, 2) + "\n");
+
+// the demo: a 3-high bank, 22 long, turning north at the east end, with steps, buttresses and lamps, on a low street
+const byId = Object.fromEntries(tiles.map((t) => [t.id, t.grid])), h = 3;
+const demo = new Grid([26, 2 + h + 3, 12]);
+const D0 = 12 - 3;                                    // the straights' north edge, so their low edge is the demo's z 11
+const seq = ["lamp", "a", "b", "buttress", "c", "a", "steps", "b", "lamp", "c", "buttress", "a", "b", "c", "lamp", "a", "buttress", "b", "c"];
+let x = 0;
+for (const s of seq) {
+  if (s === "steps") { const g = byId[`steps_h${h}_4`]; demo.paste(g, x, 0, 12 - g.size[2]); x += 4; continue; }
+  demo.paste(byId[`retain_h${h}_${s === "lamp" ? "lamp_1" : s === "buttress" ? "buttress_1" : "1" + s}`], x, 0, D0); x += 1;
+}
+// the outer corner turns the wall north (rotated so its high ground is to the west), then a straight run north
+demo.paste(byId[`retain_h${h}_outer_3`], x, 0, D0);
+for (let z = D0 - 1, i = 0; z >= 0; z--, i++) demo.paste(byId[`retain_h${h}_${i % 4 === 2 ? "lamp_1" : "1" + "abc"[i % 3]}`], x, 0, z, { q: 3 });
+// fill the high ground behind the bank and the low ground east of the turn
+for (let xx = 0; xx < demo.size[0]; xx++) for (let z = 0; z < demo.size[2]; z++) if (!demo.get(xx, 2, z)) {
+  const high = xx < x + 1 && z < D0 + 1;
+  for (let y = 0; y < (high ? 2 + h : 2); y++) demo.set(xx, y, z, "dirt"); demo.set(xx, high ? 2 + h : 2, z, "grass_block[snowy=false]");
+}
+mkdirSync(join(HERE, "../../out/earthworks"), { recursive: true });
+demo.save(join(HERE, "../../out/earthworks/demo_h3.nbt"));
+for (const [id, ok, e] of report) if (!ok) console.log("FAIL", id, e.join(" | "));
+console.log(`${tiles.length} tiles, ${report.filter((r) => r[1]).length}/${report.length} pass; demo out/earthworks/demo_h3.nbt`);
