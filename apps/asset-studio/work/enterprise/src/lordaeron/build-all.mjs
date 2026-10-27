@@ -43,6 +43,8 @@ function save(dir, name, grid, meta, palette) {
 
 // the module set and golden houses (its own builder: modules, set file, goldens x palettes, reference composer)
 if (!OTHER) run("node", ["src/lordaeron/build-relief.mjs"]);
+// the earthworks tiles and their set file (parts; checked by their own builder)
+if (!OTHER) run("node", ["src/lordaeron/build-earthworks.mjs"]);
 // halls
 for (const kind of Object.keys(HALLS)) { const h = hall(kind), g = h.grid; save("hall", `${kind}_${g.size[0]}x${g.size[2]}_a`, g, { assembly: { set: "lordaeron/timber_relief", layout: h.layout } }, h.spec.palette); }
 { const r = marketHall(); save("hall", "market_hall_12x12_a", r.grid, { assembly: { set: "lordaeron/timber_relief", layout: r.layout } }, "stone"); }
