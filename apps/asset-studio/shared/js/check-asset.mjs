@@ -195,6 +195,11 @@ export function check(nbtFile, meta, mass) {
 
   // reach: from each entrance, a villager's walk between floors: up only by half steps (onto a stair, or onto a bottom
   // slab, or off a bottom slab), down any drop of 3 or less; ladders, trapdoors and full-block steps break the route
+  // a door cell is passable only as a doorway: the lower half here, the upper half over it, something to stand on
+  const doorway = (x, y, z) => {
+    const lo = at(x, y, z), hi = at(x, y + 1, z), below = shape(name(x, y - 1, z));
+    return !!lo && /_door$/.test(lo.name) && lo.props.half === "lower" && !!hi && /_door$/.test(hi.name) && hi.props.half === "upper" && !!below && !isOpen(below);
+  };
   const halfStep = (x, y, z, p) => {
     const to = at(p[0], p[1] - 1, p[2]), from = at(x, y - 1, z);
     const tn = shape(to?.name) || "", fn = shape(from?.name) || "";
@@ -214,7 +219,7 @@ export function check(nbtFile, meta, mass) {
         if (p[0] < 0 || p[2] < 0 || p[0] >= W || p[2] >= D || p[1] < 0 || p[1] >= H) continue;
         if (dy === 1 && !open(x, y + 2, z) && name(x, y + 2, z) !== undefined) continue;   // headroom to step up
         if (dy === 1 && !halfStep(x, y, z, p)) continue;                                    // a full block is a jump: no
-        if (!walk(...p) && !/_door$/.test(name(...p) || "")) continue;
+        if (!walk(...p) && !doorway(...p)) continue;
         const k = key(...p);
         if (!seen.has(k)) { seen.add(k); q.push(p); }
         break;

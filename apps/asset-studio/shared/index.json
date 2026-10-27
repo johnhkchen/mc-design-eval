@@ -3,10 +3,10 @@
     "path": "js/check-asset.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:19:56.922Z",
+    "updated": "2026-10-27T14:56:12.865Z",
     "updated_by": "studio",
-    "note": "fix: a potted plant is a flower pot (a block), not an open cell; it was flagging unlit 'walkable' window boxes",
-    "bytes": 19742,
+    "note": "a door cell is passable only as a doorway: lower half, upper half over it, solid under (a sunk 1-high door breaks the walk)",
+    "bytes": 20125,
     "history": [
       {
         "at": "2026-10-27T14:13:05.125Z",
@@ -19,6 +19,12 @@
         "by": "studio",
         "note": "fix: a potted plant is a flower pot (a block), not an open cell; it was flagging unlit 'walkable' window boxes",
         "bytes": 19742
+      },
+      {
+        "at": "2026-10-27T14:56:12.866Z",
+        "by": "studio",
+        "note": "a door cell is passable only as a doorway: lower half, upper half over it, solid under (a sunk 1-high door breaks the walk)",
+        "bytes": 20125
       }
     ]
   },
@@ -26,10 +32,10 @@
     "path": "js/check-asset.test.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:19:56.965Z",
+    "updated": "2026-10-27T14:56:12.908Z",
     "updated_by": "studio",
-    "note": "test for the potted-plant fix (11 tests)",
-    "bytes": 8783,
+    "note": "12 tests: sunk door",
+    "bytes": 9303,
     "history": [
       {
         "at": "2026-10-27T14:13:05.169Z",
@@ -42,6 +48,12 @@
         "by": "studio",
         "note": "test for the potted-plant fix (11 tests)",
         "bytes": 8783
+      },
+      {
+        "at": "2026-10-27T14:56:12.908Z",
+        "by": "studio",
+        "note": "12 tests: sunk door",
+        "bytes": 9303
       }
     ]
   },
@@ -66,10 +78,10 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:48:41.334Z",
+    "updated": "2026-10-27T14:56:12.951Z",
     "updated_by": "studio",
-    "note": "set rev 4: gable boards on verges; build-all",
-    "bytes": 13897,
+    "note": "the plan layer from plan.json (body classes); door_inner_z; chimney on z 6 for 10-deep bodies",
+    "bytes": 15479,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
@@ -118,6 +130,12 @@
         "by": "studio",
         "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 13897
+      },
+      {
+        "at": "2026-10-27T14:56:12.951Z",
+        "by": "studio",
+        "note": "the plan layer from plan.json (body classes); door_inner_z; chimney on z 6 for 10-deep bodies",
+        "bytes": 15479
       }
     ]
   },
@@ -125,10 +143,10 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:48:41.244Z",
+    "updated": "2026-10-27T14:56:12.995Z",
     "updated_by": "studio",
-    "note": "set rev 4: gable boards on verges; build-all",
-    "bytes": 14413,
+    "note": "the plan layer from plan.json (body classes); door_inner_z; chimney on z 6 for 10-deep bodies",
+    "bytes": 15044,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
@@ -177,6 +195,12 @@
         "by": "studio",
         "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 14413
+      },
+      {
+        "at": "2026-10-27T14:56:12.995Z",
+        "by": "studio",
+        "note": "the plan layer from plan.json (body classes); door_inner_z; chimney on z 6 for 10-deep bodies",
+        "bytes": 15044
       }
     ]
   },
@@ -688,6 +712,23 @@
         "by": "studio",
         "note": "set rev 4: gable boards on verges; build-all",
         "bytes": 2562
+      }
+    ]
+  },
+  "data/lordaeron/plan.json": {
+    "path": "data/lordaeron/plan.json",
+    "lang": "json",
+    "author": "studio",
+    "updated": "2026-10-27T14:56:13.037Z",
+    "updated_by": "studio",
+    "note": "the plan layer as data: body classes cottage_7x7, house_10x7, house_10x10, house_13x7",
+    "bytes": 19613,
+    "history": [
+      {
+        "at": "2026-10-27T14:56:13.037Z",
+        "by": "studio",
+        "note": "the plan layer as data: body classes cottage_7x7, house_10x7, house_10x10, house_13x7",
+        "bytes": 19613
       }
     ]
   }

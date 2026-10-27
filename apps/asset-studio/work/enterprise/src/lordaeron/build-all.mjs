@@ -14,6 +14,7 @@ import { PIECES, watchtower } from "./walls.mjs";
 import { pierSegment, dockHead } from "./docks.mjs";
 import { stall, TRADES as STALL_TRADES } from "./stalls.mjs";
 import { workshop, TRADES } from "./workshops.mjs";
+import { comfort, COMFORTS } from "./comforts.mjs";
 
 const argv = process.argv.slice(2), opt = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
 const DATA = "bundle/core/src/main/resources/data/enterprise/structure/lordaeron", PREV = "bundle/assets-src/lordaeron";
@@ -44,11 +45,12 @@ for (const [name, f] of Object.entries(PIECES)) save("wall", name.includes("x") 
 for (const t of STALL_TRADES) { const s = stall(t); save("stall", `stall_${t}_3x3_a`, s.grid, { ...s.meta, relief_faces: [] }); }
 const PAL = ["stone", "brick", "daub"];
 TRADES.forEach((t, i) => { const r = workshop(t); save("workshop", `workshop_${t}_12x9_a`, r.grid, { assembly: { set: "lordaeron/timber_relief", layout: r.layout } }, PAL[i % 3]); });
+for (const k of Object.keys(COMFORTS)) { const r = comfort(k), g = r.grid; save("comfort", `${r.spec.name.replace(/ /g, "_")}_${g.size[0]}x${g.size[2]}_a`, g, { kind: "comfort", slot: `comfort:${k}`, style: `the ${r.spec.name}`, beds: [], workstations: [], lockers: [], markers: [], entities: [], ground: 2, assembly: { set: "lordaeron/timber_relief", layout: r.layout } }, r.spec.palette); }
 console.log(`rebuilt ${written.length} structures (plus the module set and golden houses)`);
 
 // previews for everything rebuilt here, then the gate over the whole kingdom's production folders
 for (const w of written) { const d = `${PREV}/${w}`; fs.mkdirSync(d, { recursive: true }); run("node", ["../../tools/preview.mjs", `${DATA}/${w}.nbt`, `${d}/front.jpg`]); }
-const prod = ["hall", "forum", "dock", "wall", "stall", "workshop"].map((d) => `${DATA}/${d}`).concat(["cottage_9x9_b", "townhouse_12x9_b", "terrace_21x9_b"].map((n) => `${DATA}/home/${n}.nbt`));
+const prod = ["hall", "forum", "dock", "wall", "stall", "workshop", "comfort"].map((d) => `${DATA}/${d}`).concat(["cottage_9x9_b", "townhouse_12x9_b", "terrace_21x9_b"].map((n) => `${DATA}/home/${n}.nbt`));
 try { run("node", ["../../tools/gate.mjs", ...prod, "--no-interior"]); } catch { console.log("GATE: failures above"); process.exitCode = 1; }
 if (opt("--pack") && !process.exitCode) run("node", ["../../tools/pack.mjs", "bundle", opt("--pack"), "--thread", opt("--thread") || "0005", "--out", "out/batches",
   "--only", ["core/src/main/resources/data/enterprise/structure/lordaeron/", "core/src/main/resources/data/enterprise/town_kits/lordaeron/", "core/src/main/resources/data/enterprise/town_rules/", "assets-src/lordaeron/", "assets-src/kingdoms/", "scripts/assets/lordaeron-ref/"].join(",")]);
