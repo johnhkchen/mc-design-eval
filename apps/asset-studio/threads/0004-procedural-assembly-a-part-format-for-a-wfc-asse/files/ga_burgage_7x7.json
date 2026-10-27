@@ -1,0 +1,92 @@
+{
+  "footprint": [
+    9,
+    9
+  ],
+  "ground": 2,
+  "entrances": [
+    {
+      "at": [
+        3,
+        3,
+        7
+      ],
+      "facing": "south",
+      "width": 1
+    }
+  ],
+  "beds": [
+    {
+      "head": [
+        2,
+        8,
+        2
+      ],
+      "foot": [
+        2,
+        8,
+        3
+      ]
+    },
+    {
+      "head": [
+        3,
+        8,
+        2
+      ],
+      "foot": [
+        3,
+        8,
+        3
+      ]
+    }
+  ],
+  "workstations": [],
+  "lockers": [],
+  "markers": [],
+  "entities": [],
+  "golden": {
+    "params": {
+      "W": 7,
+      "D": 7,
+      "storeys": 2,
+      "roof": "gable_z",
+      "palette": "daub",
+      "core": "turned",
+      "beds": 2
+    },
+    "body": [
+      7,
+      7
+    ],
+    "relief": [
+      1,
+      1
+    ],
+    "core": "turned",
+    "plan": [
+      {
+        "storey": 0,
+        "floor_y": 2,
+        "rows": [
+          "HHSSS",
+          "HHSSS",
+          "hHSSS",
+          "HHHHH",
+          "HHHHH"
+        ]
+      },
+      {
+        "storey": 1,
+        "floor_y": 7,
+        "rows": [
+          "bbSSS",
+          "bbSSS",
+          "CCSSS",
+          "CCCCC",
+          "CCCCC"
+        ]
+      }
+    ]
+  }
+}

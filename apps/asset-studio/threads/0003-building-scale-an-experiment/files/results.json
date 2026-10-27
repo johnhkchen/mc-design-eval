@@ -1,0 +1,289 @@
+{
+ "batch": "test-street-2",
+ "street": {
+  "x": 700,
+  "z": 700,
+  "ground": -61,
+  "gap": 1
+ },
+ "results": [
+  {
+   "file": "enterprise:lordaeron/home/cottage_5x5_a",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    700,
+    -61,
+    694
+   ],
+   "facing": "south",
+   "place_us": 1423,
+   "beds": [
+    [
+     701,
+     -60,
+     695
+    ],
+    [
+     703,
+     -60,
+     695
+    ]
+   ],
+   "slept": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/home/cottage_5x5_b",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    700,
+    -61,
+    705
+   ],
+   "facing": "north",
+   "place_us": 866,
+   "beds": [
+    [
+     703,
+     -60,
+     708
+    ],
+    [
+     701,
+     -60,
+     708
+    ]
+   ],
+   "slept": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/home/shop_5x5_a",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    706,
+    -61,
+    694
+   ],
+   "facing": "south",
+   "place_us": 953,
+   "beds": [
+    [
+     707,
+     -60,
+     695
+    ],
+    [
+     709,
+     -60,
+     695
+    ]
+   ],
+   "slept": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/home/cottage_7x7_a",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    706,
+    -61,
+    705
+   ],
+   "facing": "north",
+   "place_us": 948,
+   "beds": [
+    [
+     711,
+     -60,
+     710
+    ],
+    [
+     707,
+     -60,
+     710
+    ]
+   ],
+   "slept": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/home/townhouse_7x7_a",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    712,
+    -61,
+    692
+   ],
+   "facing": "south",
+   "place_us": 1618,
+   "beds": [
+    [
+     713,
+     -60,
+     693
+    ],
+    [
+     717,
+     -60,
+     693
+    ]
+   ],
+   "slept": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/home/terrace_14x5_a",
+   "result": "revise",
+   "why": "2 of 6 beds never slept in over a night: beds [0, 2] in the metadata's order",
+   "corner": [
+    714,
+    -61,
+    705
+   ],
+   "facing": "north",
+   "place_us": 1847,
+   "beds": [
+    [
+     725,
+     -60,
+     708
+    ],
+    [
+     723,
+     -60,
+     708
+    ],
+    [
+     721,
+     -60,
+     708
+    ],
+    [
+     719,
+     -60,
+     708
+    ],
+    [
+     717,
+     -60,
+     708
+    ],
+    [
+     715,
+     -60,
+     708
+    ]
+   ],
+   "slept": [
+    false,
+    true,
+    false,
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/candidate/s3_burgage_7x7",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    720,
+    -61,
+    690
+   ],
+   "facing": "south",
+   "place_us": 3104,
+   "beds": [
+    [
+     722,
+     -55,
+     692
+    ],
+    [
+     724,
+     -55,
+     692
+    ],
+    [
+     722,
+     -55,
+     695
+    ]
+   ],
+   "slept": [
+    true,
+    true,
+    true
+   ]
+  },
+  {
+   "file": "enterprise:lordaeron/candidate/s4_wide_9x7",
+   "result": "placed",
+   "why": "every bed slept in by night",
+   "corner": [
+    728,
+    -61,
+    705
+   ],
+   "facing": "north",
+   "place_us": 6226,
+   "beds": [
+    [
+     736,
+     -55,
+     711
+    ],
+    [
+     734,
+     -55,
+     711
+    ],
+    [
+     736,
+     -55,
+     708
+    ],
+    [
+     736,
+     -50,
+     711
+    ],
+    [
+     734,
+     -50,
+     711
+    ],
+    [
+     736,
+     -50,
+     708
+    ]
+   ],
+   "slept": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  }
+ ]
+}
