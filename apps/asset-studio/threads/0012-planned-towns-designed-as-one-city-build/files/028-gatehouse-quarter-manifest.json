@@ -1,0 +1,181 @@
+{
+  "batch": "028-gatehouse-quarter",
+  "thread": "0012",
+  "made": "2026-10-27T21:35:09.176Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/gate_quarter/stable_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "c8a3138a45b68b89870f564dc4b33b9dfa837978825f5e3f90c7e44f8f1ba8a1",
+      "bytes": 220914
+    },
+    {
+      "path": "assets-src/lordaeron/gate_quarter/toll_house_9x5_a/front.jpg",
+      "kind": "preview",
+      "sha256": "fdbe9b177458c5f32c5bbe1f8e52de00ae30719ca94bd0964f93f394879b2545",
+      "bytes": 252705
+    },
+    {
+      "path": "assets-src/lordaeron/gate_quarter/wagon_yard_13x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "c48c07e0125d6be21ea4cc84905570e72cf2d69abc1cb86ce0c9ab03d12638ac",
+      "bytes": 226701
+    },
+    {
+      "path": "assets-src/stormwind/gate_quarter/stable_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "63edf4436796ad66911ea55c1baa70288aafe113e2d8d2a9073f18c7167b2bca",
+      "bytes": 200764
+    },
+    {
+      "path": "assets-src/stormwind/gate_quarter/toll_house_9x5_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f4e48f1bd3d94be129b628997044045f1ce6b15d521eb4f70d72897781df2eac",
+      "bytes": 241917
+    },
+    {
+      "path": "assets-src/stormwind/gate_quarter/wagon_yard_13x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "4e2d14dfba6bea32ccf3456ea44b42f3ad94b7862a610974f1730501fcc6abf0",
+      "bytes": 222888
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/gate_quarter/stable_12x9_a.json",
+      "kind": "meta",
+      "sha256": "57565f449201cd18894422a210d13d0615218cc77e25b64b1836ede0f863e56a",
+      "bytes": 7943
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/gate_quarter/stable_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "34913942889bf653545c20e4f9d28b93ffbe8d36caab246db63ab6843a8cefac",
+      "bytes": 4726,
+      "id": "enterprise:lordaeron/gate_quarter/stable_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/gate_quarter/toll_house_9x5_a.json",
+      "kind": "meta",
+      "sha256": "38b3cada0709bb6f835edc173b9e28c27a223ab4abff9c08ac18eca821547b87",
+      "bytes": 469
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/gate_quarter/toll_house_9x5_a.nbt",
+      "kind": "structure",
+      "sha256": "3ed72ec4c0bb3d7913ae68ae38b17b23177c8d7d1c3b1ec71087196d16d65ab7",
+      "bytes": 1519,
+      "id": "enterprise:lordaeron/gate_quarter/toll_house_9x5_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/gate_quarter/wagon_yard_13x9_a.json",
+      "kind": "meta",
+      "sha256": "0f5888705540f67a58258895c6bb26eebc51f80ee294b132b1eca9e2bb685a9f",
+      "bytes": 446
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/gate_quarter/wagon_yard_13x9_a.nbt",
+      "kind": "structure",
+      "sha256": "259dd584651b4702599c220c853e90e7fc54ea53e105136dcf3b7cf8ed2e0188",
+      "bytes": 2053,
+      "id": "enterprise:lordaeron/gate_quarter/wagon_yard_13x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/gate_quarter/stable_12x9_a.json",
+      "kind": "meta",
+      "sha256": "314652d8c088becadbff1e95d8d45442d76c31ac8f277ecaee7c3537aee89e90",
+      "bytes": 7948
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/gate_quarter/stable_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "7182f13ff6578a410ccdae58051808502f58a855f5b6d24bfef98f174f5b4161",
+      "bytes": 4783,
+      "id": "enterprise:stormwind/gate_quarter/stable_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/gate_quarter/toll_house_9x5_a.json",
+      "kind": "meta",
+      "sha256": "433edb4eb9b49a9fed9e714f32f6982264ed86c0dcc6fa4c845a9707671072ec",
+      "bytes": 469
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/gate_quarter/toll_house_9x5_a.nbt",
+      "kind": "structure",
+      "sha256": "9beef17b2bcdb92163ed183e91bbcb1ef94efaf62ca895bcac27b251edfc824b",
+      "bytes": 1507,
+      "id": "enterprise:stormwind/gate_quarter/toll_house_9x5_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/gate_quarter/wagon_yard_13x9_a.json",
+      "kind": "meta",
+      "sha256": "3df51d90d2167185ebb8e48c79f17fb52c302d60b05e43b7d32f0528b54be172",
+      "bytes": 446
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/gate_quarter/wagon_yard_13x9_a.nbt",
+      "kind": "structure",
+      "sha256": "537e9b6c3df6cbc253b53b5655ede2b68e98c44ff0bc8b151cfa868d7370c383",
+      "bytes": 2062,
+      "id": "enterprise:stormwind/gate_quarter/wagon_yard_13x9_a"
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/assemble.mjs",
+      "kind": "tool",
+      "sha256": "cb8b83d4a73a5b47a5be4ed174417b71d98433f94217e27aedd780a81bca6209",
+      "bytes": 13127
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/cli.mjs",
+      "kind": "tool",
+      "sha256": "ca75d59fa3eea18290b6998c530f97df81307a94b4b5ad9cce8389d577c5e1d0",
+      "bytes": 1322
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose-cli.mjs",
+      "kind": "tool",
+      "sha256": "9d38cdcba8e2300e4d95f1198d51f4fab42d2abd16abbb69e537890b75810e94",
+      "bytes": 1015
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose.mjs",
+      "kind": "tool",
+      "sha256": "6488760fda75d8841d22ad69c3eaec30a06b28b5ed0535c25574321c45e02d20",
+      "bytes": 16588
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/grid.mjs",
+      "kind": "tool",
+      "sha256": "8abb458a3624e5553dd0efacd8c8fbf9a18e081258222d2d85c08d31a816d781",
+      "bytes": 4076
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/modules.mjs",
+      "kind": "tool",
+      "sha256": "414b9658494fb4ea9757bdbd1e61f1579aa628509a689427932f532a503348a4",
+      "bytes": 15176
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/nbt.mjs",
+      "kind": "tool",
+      "sha256": "d6e567e4d2b63ca0e933d244a51fdc14783ca07e08b7445bb59440475465c1c6",
+      "bytes": 6473
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/parts.mjs",
+      "kind": "tool",
+      "sha256": "2f323c6a6e26125bc4bd366e67002e1dff84e3f034410a30f8f888cba66dea6f",
+      "bytes": 6686
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/rotate.mjs",
+      "kind": "tool",
+      "sha256": "bf7391b2fe4bb192b678488743fedab298828e281ca407bca0156d8d5292fe6f",
+      "bytes": 811
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/wall-tiling.mjs",
+      "kind": "tool",
+      "sha256": "811a2fe91fd44f8b4b8c4be462207bce0cbf23a9c403d61e2a688134756143f3",
+      "bytes": 2007
+    }
+  ]
+}
