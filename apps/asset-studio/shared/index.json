@@ -1,0 +1,235 @@
+{
+  "js/check-asset.mjs": {
+    "path": "js/check-asset.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:05.124Z",
+    "updated_by": "studio",
+    "note": "the shared validator (contract checks, spawn rule, stair walk, parts mode, metaOf)",
+    "bytes": 19607,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.125Z",
+        "by": "studio",
+        "note": "the shared validator (contract checks, spawn rule, stair walk, parts mode, metaOf)",
+        "bytes": 19607
+      }
+    ]
+  },
+  "js/check-asset.test.mjs": {
+    "path": "js/check-asset.test.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:05.169Z",
+    "updated_by": "studio",
+    "note": "its tests, self-contained",
+    "bytes": 8493,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.169Z",
+        "by": "studio",
+        "note": "its tests, self-contained",
+        "bytes": 8493
+      }
+    ]
+  },
+  "js/pack.mjs": {
+    "path": "js/pack.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:05.212Z",
+    "updated_by": "studio",
+    "note": "pack a batch: zip + manifest.json (protocol v0.2)",
+    "bytes": 3276,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.212Z",
+        "by": "studio",
+        "note": "pack a batch: zip + manifest.json (protocol v0.2)",
+        "bytes": 3276
+      }
+    ]
+  },
+  "js/lordaeron/compose.mjs": {
+    "path": "js/lordaeron/compose.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:05.254Z",
+    "updated_by": "studio",
+    "note": "the reference composer for timber_relief layouts",
+    "bytes": 9522,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.254Z",
+        "by": "studio",
+        "note": "the reference composer for timber_relief layouts",
+        "bytes": 9522
+      }
+    ]
+  },
+  "js/lordaeron/modules.mjs": {
+    "path": "js/lordaeron/modules.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:05.297Z",
+    "updated_by": "studio",
+    "note": "the relief module set as code",
+    "bytes": 10312,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.297Z",
+        "by": "studio",
+        "note": "the relief module set as code",
+        "bytes": 10312
+      }
+    ]
+  },
+  "js/grid.mjs": {
+    "path": "js/grid.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:17.854Z",
+    "updated_by": "studio",
+    "note": "self-contained now: imports ./nbt.mjs and ./rotate.mjs beside it",
+    "bytes": 4076,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.340Z",
+        "by": "studio",
+        "note": "sparse block grid, structure file read/write (imports the toolkit's nbt.mjs: see js/lordaeron-ref for the self-contained copy)",
+        "bytes": 4163
+      },
+      {
+        "at": "2026-10-27T14:13:17.854Z",
+        "by": "studio",
+        "note": "self-contained now: imports ./nbt.mjs and ./rotate.mjs beside it",
+        "bytes": 4076
+      }
+    ]
+  },
+  "js/lordaeron/yards.mjs": {
+    "path": "js/lordaeron/yards.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:05.382Z",
+    "updated_by": "studio",
+    "note": "yard tiles (front 3 deep, back 4 deep, widths 1-3)",
+    "bytes": 10984,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:05.382Z",
+        "by": "studio",
+        "note": "yard tiles (front 3 deep, back 4 deep, widths 1-3)",
+        "bytes": 10984
+      }
+    ]
+  },
+  "js/nbt.mjs": {
+    "path": "js/nbt.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:17.897Z",
+    "updated_by": "studio",
+    "note": "dependency-free NBT reader/writer (typed trees, round-trips byte-faithfully)",
+    "bytes": 6473,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:17.897Z",
+        "by": "studio",
+        "note": "dependency-free NBT reader/writer (typed trees, round-trips byte-faithfully)",
+        "bytes": 6473
+      }
+    ]
+  },
+  "js/rotate.mjs": {
+    "path": "js/rotate.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:13:17.940Z",
+    "updated_by": "studio",
+    "note": "block state rotation by quarter turns (facing, axis, sides, sign rotation)",
+    "bytes": 811,
+    "history": [
+      {
+        "at": "2026-10-27T14:13:17.940Z",
+        "by": "studio",
+        "note": "block state rotation by quarter turns (facing, axis, sides, sign rotation)",
+        "bytes": 811
+      }
+    ]
+  },
+  "py/floorplan.py": {
+    "path": "py/floorplan.py",
+    "lang": "py",
+    "author": "client",
+    "updated": "2026-10-27T14:14:22.639Z",
+    "updated_by": "client",
+    "note": "imports world_render.py from beside it",
+    "bytes": 18987,
+    "history": [
+      {
+        "at": "2026-10-27T14:14:06.759Z",
+        "by": "client",
+        "note": "Overhead floor plans and interior metrics (rooms, circulation, idle floor, made beds, through rooms, walk); needs py/world_render.py's NBT reader",
+        "bytes": 18828
+      },
+      {
+        "at": "2026-10-27T14:14:22.639Z",
+        "by": "client",
+        "note": "imports world_render.py from beside it",
+        "bytes": 18987
+      }
+    ]
+  },
+  "py/world_render.py": {
+    "path": "py/world_render.py",
+    "lang": "py",
+    "author": "client",
+    "updated": "2026-10-27T14:14:07.511Z",
+    "updated_by": "client",
+    "note": "Region and NBT reader and PNG writer floorplan.py uses (and the surveyor's map)",
+    "bytes": 20738,
+    "history": [
+      {
+        "at": "2026-10-27T14:14:07.511Z",
+        "by": "client",
+        "note": "Region and NBT reader and PNG writer floorplan.py uses (and the surveyor's map)",
+        "bytes": 20738
+      }
+    ]
+  },
+  "docs/interiors.md": {
+    "path": "docs/interiors.md",
+    "lang": "md",
+    "author": "client",
+    "updated": "2026-10-27T14:14:08.088Z",
+    "updated_by": "client",
+    "note": "The interior vocabulary and v0.1 thresholds",
+    "bytes": 5069,
+    "history": [
+      {
+        "at": "2026-10-27T14:14:08.088Z",
+        "by": "client",
+        "note": "The interior vocabulary and v0.1 thresholds",
+        "bytes": 5069
+      }
+    ]
+  },
+  "java/Wfc.java": {
+    "path": "java/Wfc.java",
+    "lang": "java",
+    "author": "client",
+    "updated": "2026-10-27T14:14:08.665Z",
+    "updated_by": "client",
+    "note": "The WFC solver: modules with sockets on six sides, 3D grid, least-decided first by weight, pinned cells, deterministic for a seed",
+    "bytes": 10596,
+    "history": [
+      {
+        "at": "2026-10-27T14:14:08.665Z",
+        "by": "client",
+        "note": "The WFC solver: modules with sockets on six sides, 3D grid, least-decided first by weight, pinned cells, deterministic for a seed",
+        "bytes": 10596
+      }
+    ]
+  }
+}
