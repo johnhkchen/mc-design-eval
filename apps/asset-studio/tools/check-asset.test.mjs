@@ -139,3 +139,8 @@ test("stairs carry the walk to an upstairs bed", () => {
 test("a ladder or full-block steps don't", () => {
   for (const steps of ["ladder", "blocks"]) assert.match(check(house2(steps), meta2()).errors.join("\n"), /bed at 5,8,2 not reachable/, steps);
 });
+
+test("a potted plant is a block, not a cell to stand in", () => {
+  const r = check(cottage((put) => { put(2, 5, 2, "air"); put(3, 3, 3, "potted_red_tulip"); put(2, 4, 2, "lantern[hanging=false]"); }), meta());
+  assert.ok(!r.errors.some((e) => /3,4,3/.test(e)), r.errors.join("\n"));
+});

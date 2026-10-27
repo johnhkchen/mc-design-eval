@@ -38,9 +38,9 @@ function scheduleCommit() {
   clearTimeout(commitTimer);
   commitTimer = setTimeout(() => {
     const git = (...a) => spawnSync("git", a, { cwd: HERE, encoding: "utf8" });
-    git("add", "--", "threads");
-    if (git("diff", "--cached", "--quiet", "--", "threads").status === 0) return;
-    const r = git("commit", "-q", "-m", `asset studio: desk activity ${now().slice(0, 16)}`, "--", "threads");
+    git("add", "--", "threads", "shared");
+    if (git("diff", "--cached", "--quiet", "--", "threads", "shared").status === 0) return;
+    const r = git("commit", "-q", "-m", `asset studio: desk activity ${now().slice(0, 16)}`, "--", "threads", "shared");
     if (r.status) { console.error(`commit failed, retrying: ${(r.stderr || "").trim()}`); scheduleCommit(); }
   }, 60000);
 }
@@ -123,8 +123,26 @@ const inbox = (as) => allThreads().filter((s) => {
 // the address the caller used (tailscale serve passes the ts.net host through), for links in tool results
 const baseUrl = (req) => `${req.headers["x-forwarded-proto"] || (req.headers.host?.includes(".ts.net") ? "https" : "http")}://${req.headers["x-forwarded-host"] || req.headers.host}`;
 
-const mcp = makeMcp({ HERE, KINDS, STATUSES, safe, dirOf, readThread, readMessages, allThreads, inbox, summary,
-  createThread, addMessage, setStatus, writeThread, saveFile, markSeen, bump, now });
+let mcpFn = null;                                                 // built on first use, after everything below is defined
+const mcp = (...a) => (mcpFn ||= makeMcp({ HERE, KINDS, STATUSES, safe, dirOf, readThread, readMessages, allThreads, inbox, summary,
+  createThread, addMessage, setStatus, writeThread, saveFile, markSeen, bump, now, SHARED, safePath, putShared, listShared, readIndex }))(...a);
+
+// ---- shared code: a tree both sides read and write (shared/<lang>/...), with an index of who, when, why
+const SHARED = join(HERE, "shared"), INDEX = join(SHARED, "index.json");
+mkdirSync(SHARED, { recursive: true });
+const safePath = (p) => typeof p === "string" && /^[\w][\w./-]{0,200}$/.test(p) && !p.split("/").some((s) => s === ".." || s === "" || s.startsWith(".")) && p !== "index.json";
+const readIndex = () => (existsSync(INDEX) ? JSON.parse(readFileSync(INDEX, "utf8")) : {});
+function putShared(path, buf, { from, note, lang, port_of }) {
+  if (!safePath(path)) throw new Error("path: letters, digits, . _ - /, no ..");
+  const f = join(SHARED, path); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, buf);
+  const idx = readIndex(), prev = idx[path];
+  idx[path] = { path, lang: lang || prev?.lang || extname(path).slice(1), author: prev?.author || from, updated: now(), updated_by: from,
+    note: note || prev?.note || "", port_of: port_of || prev?.port_of, bytes: buf.length,
+    history: [...(prev?.history || []), { at: now(), by: from, note: note || "", bytes: buf.length }].slice(-50) };
+  writeFileSync(INDEX, JSON.stringify(idx, null, 2) + "\n"); bump();
+  return idx[path];
+}
+const listShared = () => Object.values(readIndex()).map(({ history, ...e }) => ({ ...e, revisions: history?.length || 0 }));
 
 // ---- http
 const send = (res, code, body, type = "application/json") => {
@@ -160,6 +178,7 @@ createServer(async (req, res) => {
     }
     if (M === "GET" && p.length === 1 && ["brief", "protocol", "readme"].includes(p[0])) return file(res, join(HERE, p[0].toUpperCase() + ".md"));
     if (M === "GET" && p[0] === "studio.mjs") return file(res, join(HERE, "studio.mjs"));
+    if (M === "GET" && p[0] === "shared" && p.length > 1) { const sp = p.slice(1).join("/"); return safePath(sp) ? file(res, join(SHARED, sp)) : fail(res, 404, "not found"); }
     if (M === "GET" && p[0] === "tools" && p.length === 2 && safe(p[1]) && p[1].endsWith(".mjs")) return file(res, join(HERE, "tools", p[1]));
     if (M === "GET" && p[0] === "files" && p.length === 3) { const d = dirOf(p[1]); return d && safe(p[2]) ? file(res, join(d, "files", p[2])) : fail(res, 404, "not found"); }
     if (p[0] !== "api") return fail(res, 404, "not found");
@@ -172,6 +191,16 @@ createServer(async (req, res) => {
       return req.on("close", () => { clearTimeout(tm); waiters.delete(w); });
     }
     if (M === "GET" && p[1] === "inbox") { const as = who(url.searchParams.get("as")); return as ? send(res, 200, inbox(as)) : fail(res, 400, "?as=<name> needed"); }
+    if (p[1] === "shared") {
+      if (M === "GET" && p.length === 2) return send(res, 200, listShared());
+      if (M === "PUT" && p.length > 2) {
+        const sp = p.slice(2).join("/"), from = who(url.searchParams.get("from"));
+        if (!from) return fail(res, 400, "?from=<name> needed");
+        const buf = await body(req, MAX_UPLOAD);
+        return send(res, 201, putShared(sp, buf, { from, note: url.searchParams.get("note"), lang: url.searchParams.get("lang"), port_of: url.searchParams.get("port_of") }));
+      }
+      return fail(res, 404, "not found");
+    }
     if (M === "GET" && p[1] === "meta") return send(res, 200, { kinds: KINDS, statuses: STATUSES, version });
     if (p[1] !== "threads") return fail(res, 404, "not found");
 

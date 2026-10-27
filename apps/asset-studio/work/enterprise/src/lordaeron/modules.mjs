@@ -101,6 +101,13 @@ const FITOUT = {
   bed: () => { const g = new Grid([1, 1, 2]); g.set(0, 0, 0, "white_bed[facing=north,occupied=false,part=head]"); g.set(0, 0, 1, "white_bed[facing=north,occupied=false,part=foot]"); return g; },
   hearth: () => one("furnace[facing=east,lit=false]"), chest: () => one("chest[facing=west,type=single,waterlogged=false]"),
   shelf: () => one("bookshelf"), table: () => one("crafting_table"), lantern: () => one(B.lantern), workstation: () => one("air"),
+  // room furniture and partitions (the plan layer's furniture sets)
+  bench: () => one("spruce_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]"),           // the sitter faces south; turn with q
+  table: () => { const g = new Grid([1, 2, 1]); g.set(0, 0, 0, "spruce_fence[east=false,north=false,south=false,waterlogged=false,west=false]"); g.set(0, 1, 0, "spruce_pressure_plate[powered=false]"); return g; },
+  cask: () => one("enterprise:decor_barrel[facing=up,open=false]"),
+  pot: () => one("potted_fern"),
+  wall_inner: () => { const g = new Grid([1, H - 1, 1]); for (let y = 0; y < H - 1; y++) g.set(0, y, 0, y === H - 2 ? "stripped_spruce_log[axis=z]" : "spruce_planks"); return g; },
+  door_inner: () => { const g = new Grid([1, H - 1, 1]); g.set(0, 0, 0, "spruce_door[facing=east,half=lower,hinge=left,open=false,powered=false]"); g.set(0, 1, 0, "spruce_door[facing=east,half=upper,hinge=left,open=false,powered=false]"); for (let y = 2; y < H - 1; y++) g.set(0, y, 0, y === H - 2 ? "stripped_spruce_log[axis=z]" : "spruce_planks"); return g; },
   chimney_stack: () => { const g = new Grid([1, 1, 2]); g.set(0, 0, 0, B.chimney); g.set(0, 0, 1, B.chimney); return g; },
   chimney_stack_party: () => one(B.chimney),
 };

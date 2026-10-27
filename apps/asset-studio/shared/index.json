@@ -3,16 +3,22 @@
     "path": "js/check-asset.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:13:05.124Z",
+    "updated": "2026-10-27T14:19:56.922Z",
     "updated_by": "studio",
-    "note": "the shared validator (contract checks, spawn rule, stair walk, parts mode, metaOf)",
-    "bytes": 19607,
+    "note": "fix: a potted plant is a flower pot (a block), not an open cell; it was flagging unlit 'walkable' window boxes",
+    "bytes": 19742,
     "history": [
       {
         "at": "2026-10-27T14:13:05.125Z",
         "by": "studio",
         "note": "the shared validator (contract checks, spawn rule, stair walk, parts mode, metaOf)",
         "bytes": 19607
+      },
+      {
+        "at": "2026-10-27T14:19:56.922Z",
+        "by": "studio",
+        "note": "fix: a potted plant is a flower pot (a block), not an open cell; it was flagging unlit 'walkable' window boxes",
+        "bytes": 19742
       }
     ]
   },
@@ -20,16 +26,22 @@
     "path": "js/check-asset.test.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:13:05.169Z",
+    "updated": "2026-10-27T14:19:56.965Z",
     "updated_by": "studio",
-    "note": "its tests, self-contained",
-    "bytes": 8493,
+    "note": "test for the potted-plant fix (11 tests)",
+    "bytes": 8783,
     "history": [
       {
         "at": "2026-10-27T14:13:05.169Z",
         "by": "studio",
         "note": "its tests, self-contained",
         "bytes": 8493
+      },
+      {
+        "at": "2026-10-27T14:19:56.966Z",
+        "by": "studio",
+        "note": "test for the potted-plant fix (11 tests)",
+        "bytes": 8783
       }
     ]
   },
@@ -162,10 +174,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T14:14:22.639Z",
+    "updated": "2026-10-27T14:19:53.400Z",
     "updated_by": "client",
-    "note": "imports world_render.py from beside it",
-    "bytes": 18987,
+    "note": "legend table drawn into every plan; numbered annotations pinned to cells, also written to notes.md",
+    "bytes": 26953,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -178,6 +190,12 @@
         "by": "client",
         "note": "imports world_render.py from beside it",
         "bytes": 18987
+      },
+      {
+        "at": "2026-10-27T14:19:53.400Z",
+        "by": "client",
+        "note": "legend table drawn into every plan; numbered annotations pinned to cells, also written to notes.md",
+        "bytes": 26953
       }
     ]
   },
@@ -229,6 +247,40 @@
         "by": "client",
         "note": "The WFC solver: modules with sockets on six sides, 3D grid, least-decided first by weight, pinned cells, deterministic for a seed",
         "bytes": 10596
+      }
+    ]
+  },
+  "js/interior.mjs": {
+    "path": "js/interior.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:19:56.881Z",
+    "updated_by": "studio",
+    "note": "runs py/floorplan.py and holds it to interiors.md v0.1 (to read quality.json once it exists)",
+    "bytes": 2492,
+    "history": [
+      {
+        "at": "2026-10-27T14:19:56.881Z",
+        "by": "studio",
+        "note": "runs py/floorplan.py and holds it to interiors.md v0.1 (to read quality.json once it exists)",
+        "bytes": 2492
+      }
+    ]
+  },
+  "js/preview.mjs": {
+    "path": "js/preview.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:19:57.008Z",
+    "updated_by": "studio",
+    "note": "preview with decor twins drawn as their vanilla lookalikes (needs the studio's renderer)",
+    "bytes": 2083,
+    "history": [
+      {
+        "at": "2026-10-27T14:19:57.008Z",
+        "by": "studio",
+        "note": "preview with decor twins drawn as their vanilla lookalikes (needs the studio's renderer)",
+        "bytes": 2083
       }
     ]
   }

@@ -14,6 +14,9 @@
 //   node studio.mjs get 0001 [dir]                    download a thread's files
 //   node studio.mjs watch                             print a line for each new message from someone else (runs forever)
 //   node studio.mjs brief | protocol                  print the studio's brief or the working protocol
+//   node studio.mjs shared                            the shared code tree (both sides' tools, by language)
+//   node studio.mjs pull <shared path> [dest]         fetch a shared file
+//   node studio.mjs push <file> <shared path> --note "why" [--port-of <shared path>] [--lang rust]
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { basename, join } from "node:path";
 
@@ -95,6 +98,17 @@ const cmds = {
         }
       } catch (e) { console.error(`watch: ${e.message}`); await new Promise((r) => setTimeout(r, 10000)); }
     }
+  },
+  async shared() { for (const e of await api("GET", "/api/shared")) console.log(`${e.path}  [${e.lang}]  ${e.bytes} B  ${e.updated_by} ${e.updated.slice(0, 16)}${e.port_of ? `  port of ${e.port_of}` : ""}  ${e.note}`); },
+  async pull([path, dest]) {
+    const r = await fetch(`${URL_}/shared/${path}`); if (!r.ok) throw new Error(`no shared file ${path}`);
+    const out = dest || basename(path); writeFileSync(out, Buffer.from(await r.arrayBuffer())); console.log(out);
+  },
+  async push([file, path]) {
+    if (!file || !path || !flags.note) throw new Error('push <file> <shared path> --note "why"');
+    const q = new URLSearchParams({ from: AS, note: flags.note, ...(flags.lang ? { lang: flags.lang } : {}), ...(flags["port-of"] ? { port_of: flags["port-of"] } : {}) });
+    const e = await api("PUT", `/api/shared/${path}?${q}`, null, readFileSync(file));
+    console.log(`${path}: revision ${e.history.length}`);
   },
   async brief() { console.log(await api("GET", "/brief")); },
   async protocol() { console.log(await api("GET", "/protocol")); },

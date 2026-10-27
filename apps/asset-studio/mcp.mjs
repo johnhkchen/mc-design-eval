@@ -94,9 +94,30 @@ export function makeMcp(desk) {
       } },
   };
 
+  tools.list_shared = { description: "The shared code tree both sides read and write (shared/<lang>/...): every file with its language, author, last change, note and port_of (the file it was ported from). Read it before writing a tool the other side may already have.",
+    inputSchema: { type: "object", properties: {} },
+    run: () => text(desk.listShared().map((e) => `${e.path}  [${e.lang}]  ${e.bytes} B  by ${e.author}, last ${e.updated_by} ${e.updated.slice(0, 16)}${e.port_of ? `  port of ${e.port_of}` : ""}  ${e.note}`).join("\n") || "Empty.") };
+  tools.read_shared = { description: "Read a file from the shared code tree, with its history.",
+    inputSchema: { type: "object", properties: { path: { type: "string" } }, required: ["path"] },
+    run: ({ path }) => {
+      if (!desk.safePath(path) || !existsSync(join(desk.SHARED, path))) throw new Error(`no shared file "${path}"`);
+      const e = desk.readIndex()[path] || {};
+      return text(`# ${path}  (${e.lang || "?"}, by ${e.author || "?"}${e.port_of ? `, port of ${e.port_of}` : ""})\n${(e.history || []).map((h) => `- ${h.at.slice(0, 16)} ${h.by}: ${h.note}`).join("\n")}\n\n${readFileSync(join(desk.SHARED, path), "utf8")}`);
+    } };
+  tools.put_shared = { description: "Add or update a file in the shared code tree (git-tracked; the index records who, when and why). Put code under its language: js/, rust/, py/. When you port a file to your language, say so with port_of so both stay linked. Say in a thread when a change matters to the other side.",
+    inputSchema: { type: "object", properties: { path: { type: "string", description: "e.g. rust/check_asset/src/lib.rs or js/check-asset.mjs" },
+      text: { type: "string" }, data_base64: { type: "string" }, note: { type: "string", description: "what changed and why" },
+      lang: { type: "string" }, port_of: { type: "string", description: "the shared path this is a port of" } }, required: ["path", "note"] },
+    run: ({ path, text: t, data_base64, note, lang, port_of }, ctx) => {
+      const buf = data_base64 != null ? Buffer.from(data_base64, "base64") : Buffer.from(String(t ?? ""), "utf8");
+      const e = desk.putShared(path, buf, { from: ctx.as, note, lang, port_of });
+      return text(`Saved ${path} (${e.bytes} B, revision ${e.history.length}). ${ctx.base}/shared/${path}`);
+    } };
+
   const instructions = "The asset studio's work desk. Read the brief (read_brief) and protocol (read_protocol) first. " +
     "Open a thread for each piece of work (open_thread), attach pictures and files as base64, and check_inbox for replies. " +
-    "Screenshots of deliveries running in your project are the most useful thing to send back.";
+    "Screenshots of deliveries running in your project are the most useful thing to send back. " +
+    "Shared code lives in the shared tree (list_shared, read_shared, put_shared): both sides' tools by language, linked by port_of; check it before writing a tool.";
 
   function handle(msg, ctx) {
     const { id, method, params = {} } = msg || {};

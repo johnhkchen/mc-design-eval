@@ -61,7 +61,7 @@ write(join(DATA, `town_kits/lordaeron/${SET}.json`), JSON.stringify(set, null, 2
 const GOLD = [
   ["burgage_9x9_a", { W: 7, D: 7, storeys: 2, roof: "gable_z", palette: "daub", core: "turned", beds: 2 }, ["village", "town"], "a 7 x 7 burgage house, 2 storeys, steep thatched gable to the street"],
   ["townhouse_12x9_a", { W: 10, D: 7, storeys: 3, roof: "gable_x", palette: "brick", shop: true, trade: "any", beds: 3 }, ["town", "city"], "a 10 x 7 town house, 3 storeys, shop front, slate"],
-  ["terrace_21x9_a", { units: 3, storeys: 3, palette: "daub", beds: 2 }, ["town"], "three 7 x 7 party-walled houses, 3 storeys, turned stairs"],
+  ["terrace_21x9_a", { units: 3, storeys: 2, palette: "daub", beds: 2 }, ["town"], "three 7 x 7 party-walled houses, 2 storeys, turned stairs"],
 ];
 const VAR = { daub: ["brick", "stone"], brick: ["daub", "stone"], stone: ["daub", "brick"] };
 for (const [name, p, tiers, style] of GOLD) {
