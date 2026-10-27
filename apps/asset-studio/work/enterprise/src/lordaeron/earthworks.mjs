@@ -164,6 +164,30 @@ export function plinth({ h, seed = 0, corner = false }) {
   return g;
 }
 
+/** A terrace between two courses: 1 wide, 2 deep, laid on the lower course's top. z 0 at the upper course's foot is
+ *  planted (shrubs, ferns, flowers, an azalea), z 1 along the lower course's edge is walkable grass and moss. Layers 0-1
+ *  ground, 2 the terrace's surface. lamp: a lantern on a mossy cobble post at the foot instead of the planting. */
+export function terrace({ seed = 0, lamp = false }) {
+  const g = new Grid([1, 6, 2]);
+  for (let z = 0; z < 2; z++) { g.set(0, 0, z, "dirt"); g.set(0, 1, z, "dirt"); }
+  const r = hash(seed, 1), q = hash(seed, 2);
+  g.set(0, 2, 0, r < 0.3 ? "moss_block" : r < 0.4 ? "rooted_dirt" : "grass_block[snowy=false]");
+  g.set(0, 2, 1, q < 0.25 ? "moss_block" : "grass_block[snowy=false]");
+  if (lamp) {
+    g.set(0, 3, 0, "mossy_cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]");
+    g.set(0, 4, 0, "mossy_cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]");
+    g.set(0, 5, 0, LANTERN_UP);
+  } else {
+    const PLANT = ["azalea", "flowering_azalea", "fern", "large_fern", "oxeye_daisy", "cornflower", "allium", "oak_leaves"];
+    const p = PLANT[Math.floor(hash(seed, 3) * PLANT.length)];
+    if (p === "large_fern") { g.set(0, 3, 0, "large_fern[half=lower]"); g.set(0, 4, 0, "large_fern[half=upper]"); }
+    else if (p === "oak_leaves") g.set(0, 3, 0, "oak_leaves[distance=1,persistent=true,waterlogged=false]");   // a clipped shrub
+    else g.set(0, 3, 0, p);
+    if (q >= 0.25 && hash(seed, 4) < 0.35) g.set(0, 3, 1, "moss_carpet");
+  }
+  return g;
+}
+
 // the tiles: [id, width, rise, rows, opts, tags]
 const STRAIGHT = (w) => ["T".repeat(w), "W".repeat(w), "A".repeat(w)];
 export function allEarthworks() {
@@ -180,5 +204,7 @@ export function allEarthworks() {
     if (h <= 3) for (const [k, c] of [["1", false], ["corner", true]]) out.push({ id: `plinth_h${h}_${k}`, grid: plinth({ h, seed: 80 + h, corner: c }), meta: { width: c ? h + 1 : 1, rise: h, kind_of: c ? "plinth_corner" : "plinth", tags: ["plinth"] } });
     out.push({ id: `steps_h${h}_4`, grid: steps({ h, seed: 20 + h }), meta: { width: 4, rise: h, kind_of: "steps", tags: ["steps", "lamp"] } });
   }
+  for (const v of ["a", "b", "c", "d", "e", "f"]) out.push({ id: `terrace_1${v}`, grid: terrace({ seed: v.charCodeAt(0) * 13 }), meta: { width: 1, rise: 0, kind_of: "terrace", tags: ["terrace"] } });
+  out.push({ id: "terrace_lamp_1", grid: terrace({ seed: 5, lamp: true }), meta: { width: 1, rise: 0, kind_of: "terrace", tags: ["terrace", "lamp"] } });
   return out;
 }
