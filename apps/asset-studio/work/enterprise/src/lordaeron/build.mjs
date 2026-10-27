@@ -20,7 +20,7 @@ rmSync(PARTS, { recursive: true, force: true });
 for (const p of allParts()) {
   p.grid.save((mkdirSync(PARTS, { recursive: true }), join(PARTS, `${p.name}.nbt`)));
   write(join(PARTS, `${p.name}.json`), JSON.stringify({ id: `enterprise:lordaeron/part/timber/${p.name}`, rev: 1, kingdom: "lordaeron",
-    kind: "part", set: "lordaeron/timber", palette: "stone", size: p.grid.size, mirror: true, ...p.json }, null, 2) + "\n");
+    set: "lordaeron/timber", palette: "stone", size: p.grid.size, mirror: true, ...p.json, part: p.json.kind, kind: "part", slot: "part" }, null, 2) + "\n");
 }
 console.log(`${allParts().length} parts`);
 

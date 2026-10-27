@@ -2,7 +2,6 @@
   "id": "enterprise:lordaeron/part/timber/shop_ground",
   "rev": 1,
   "kingdom": "lordaeron",
-  "kind": "column",
   "set": "lordaeron/timber",
   "palette": "stone",
   "size": [
@@ -11,6 +10,7 @@
     1
   ],
   "mirror": true,
+  "kind": "part",
   "column": "shop",
   "storey": "ground",
   "storey_height": 4,
@@ -20,5 +20,7 @@
     "top": "column|roof",
     "bottom": "column|foundation",
     "face": "south (the street, after turning)"
-  }
+  },
+  "part": "column",
+  "slot": "part"
 }

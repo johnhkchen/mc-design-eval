@@ -1,0 +1,161 @@
+{
+  "footprint": [
+    12,
+    9
+  ],
+  "ground": 2,
+  "entrances": [
+    {
+      "at": [
+        6,
+        3,
+        7
+      ],
+      "facing": "south",
+      "width": 1
+    }
+  ],
+  "beds": [
+    {
+      "head": [
+        2,
+        8,
+        2
+      ],
+      "foot": [
+        2,
+        8,
+        3
+      ]
+    },
+    {
+      "head": [
+        4,
+        8,
+        2
+      ],
+      "foot": [
+        4,
+        8,
+        3
+      ]
+    },
+    {
+      "head": [
+        2,
+        8,
+        5
+      ],
+      "foot": [
+        2,
+        8,
+        6
+      ]
+    },
+    {
+      "head": [
+        2,
+        13,
+        2
+      ],
+      "foot": [
+        2,
+        13,
+        3
+      ]
+    },
+    {
+      "head": [
+        4,
+        13,
+        2
+      ],
+      "foot": [
+        4,
+        13,
+        3
+      ]
+    },
+    {
+      "head": [
+        2,
+        13,
+        5
+      ],
+      "foot": [
+        2,
+        13,
+        6
+      ]
+    }
+  ],
+  "workstations": [
+    {
+      "at": [
+        2,
+        3,
+        2
+      ],
+      "block": "any"
+    }
+  ],
+  "lockers": [],
+  "markers": [],
+  "entities": [],
+  "golden": {
+    "params": {
+      "W": 10,
+      "D": 7,
+      "storeys": 3,
+      "roof": "gable_x",
+      "palette": "brick",
+      "shop": true,
+      "trade": "any",
+      "beds": 3
+    },
+    "body": [
+      10,
+      7
+    ],
+    "relief": [
+      1,
+      1
+    ],
+    "core": "straight",
+    "plan": [
+      {
+        "storey": 0,
+        "floor_y": 2,
+        "rows": [
+          "wHHHHHSS",
+          "HHHHHHSS",
+          "hHHHHHSS",
+          "HHHHHHSS",
+          "HHHHHHSS"
+        ]
+      },
+      {
+        "storey": 1,
+        "floor_y": 7,
+        "rows": [
+          "bCbCCCSS",
+          "bCbCCCSS",
+          "CCCCCCSS",
+          "bCCCCCSS",
+          "bCCCCCSS"
+        ]
+      },
+      {
+        "storey": 2,
+        "floor_y": 12,
+        "rows": [
+          "bCbCCCSS",
+          "bCbCCCSS",
+          "CCCCCCSS",
+          "bCCCCCSS",
+          "bCCCCCSS"
+        ]
+      }
+    ]
+  }
+}

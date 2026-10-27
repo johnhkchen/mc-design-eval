@@ -10,7 +10,7 @@
 // barrels touching a job site only as declared lockers; entities only frames, paintings and armour stands, listed;
 // block light 8+ on every walkable cell a mob could spawn on (a full solid top: not bottom slabs, stairs, glass, leaves); a villager's walk from the door to every bed and workstation, up stairs and slab steps
 // between floors (never ladders, trapdoors or full-block steps); from a mass,
-// every fixed block at its cell and state. Light and walking are close approximations of the game's rules, so a pass
+// every fixed block at its cell and state. A part ({"kind": "part"}) skips the building rules (beds, light, walk). Light and walking are close approximations of the game's rules, so a pass
 // here is a strong sign, and the game test on their side is the final word.
 //
 // Self-contained (Node 18+, no dependencies) so both sides can vendor the same file and judge a build the same way.
@@ -83,6 +83,10 @@ function load(file) {
 
 export function check(nbtFile, meta, mass) {
   const errs = [], warns = [], s = load(nbtFile), [W, H, D] = s.size;
+  // a part ({"kind": "part"} or {"slot": "part"}) is checked as a piece, not a building: version, blocks, points of
+  // interest and lockers, but no beds, entrances, light or walk
+  const part = meta?.kind === "part" || meta?.slot === "part";
+  if (part) meta = { ...meta, beds: (meta.beds || []), workstations: meta.workstations || [], lockers: meta.lockers || [], markers: meta.markers || [], entities: meta.entities || [] };
   const at = (x, y, z) => s.cells.get(key(x, y, z));                // undefined = no block stored (acts as void)
   const name = (x, y, z) => at(x, y, z)?.name;
 
@@ -111,7 +115,7 @@ export function check(nbtFile, meta, mass) {
     const d = { north: [0, 0, 1], south: [0, 0, -1], east: [-1, 0, 0], west: [1, 0, 0] }[b.props.facing] || [0, 0, 0];
     const foot = [p[0] + d[0], p[1], p[2] + d[2]];
     if (at(...foot)?.name !== b.name || at(...foot)?.props.part !== "foot") errs.push(`bed at ${p} has no foot at ${foot}`);
-    if (meta && !(meta.beds || []).some((x) => same(x.head, p))) errs.push(`bed at ${p} not declared`);
+    if (meta && !part && !(meta.beds || []).some((x) => same(x.head, p))) errs.push(`bed at ${p} not declared`);
   }
   for (const x of meta?.beds || []) if (!heads.some((h) => same(h.p, x.head))) errs.push(`declared bed head ${x.head} has no bed`);
 
@@ -183,6 +187,7 @@ export function check(nbtFile, meta, mass) {
     if (!walk(x, y, z) || !spawnable(x, y, z) || (light.get(key(x, y, z)) || 0) >= 8) continue;
     (covered(x, y, z) || y <= groundY ? dark : roofs).push([x, y, z]);
   }
+  if (part) dark.length = roofs.length = 0;
   if (dark.length) errs.push(`${dark.length} walkable cell${dark.length > 1 ? "s" : ""} under light 8, e.g. ${dark.slice(0, 5).map((p) => `(${p})`).join(" ")}`);
   if (roofs.length) warns.push(`${roofs.length} open-sky cell${roofs.length > 1 ? "s" : ""} above the ground (roofs, ledges) a mob could spawn on at night, e.g. ${roofs.slice(0, 3).map((p) => `(${p})`).join(" ")}`);
 
@@ -195,7 +200,7 @@ export function check(nbtFile, meta, mass) {
     if (/_slab$/.test(tn) && to.props.type === "bottom") return true;
     return /_slab$/.test(fn) && from.props.type === "bottom";
   };
-  if (meta) {
+  if (meta && !part) {
     const starts = (meta.entrances || []).map((e) => e.at);
     if (!starts.length) warns.push("no entrances declared");
     const seen = new Set(), q = [];
@@ -241,7 +246,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     ? (function walk(d) { return readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : p.endsWith(".nbt") ? [p] : []; }); })(target)
     : [target];
   const readJson = (p) => (p && existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null);
-  const results = files.map((f) => check(f, readJson(opt("--meta") || f.replace(/\.nbt$/, ".json")), readJson(opt("--mass"))));
+  // A palette variant's metadata ({id, base, palette}) is its base's (the base beside it), with its own id and palette.
+  const metaOf = (p) => {
+    const m = readJson(p);
+    if (!m || !m.base || m.footprint) return m;
+    const base = readJson(p.replace(/[^/]*$/, m.base.split("/").pop() + ".json"));
+    return base ? { ...base, id: m.id, palette: m.palette } : m;
+  };
+  const results = files.map((f) => check(f, metaOf(opt("--meta") || f.replace(/\.nbt$/, ".json")), readJson(opt("--mass"))));
   if (argv.includes("--json")) console.log(JSON.stringify(results, null, 2));
   else for (const r of results) {
     console.log(`${r.ok ? "PASS" : "FAIL"}  ${basename(r.file)}  ${r.size.join("x")}, ${r.blocks} blocks, ${r.counts.beds} beds, ${r.counts.jobSites} job sites`);

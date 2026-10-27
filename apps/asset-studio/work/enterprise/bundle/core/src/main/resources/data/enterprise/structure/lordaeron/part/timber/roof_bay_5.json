@@ -2,7 +2,6 @@
   "id": "enterprise:lordaeron/part/timber/roof_bay_5",
   "rev": 1,
   "kingdom": "lordaeron",
-  "kind": "roof",
   "set": "lordaeron/timber",
   "palette": "stone",
   "size": [
@@ -11,6 +10,7 @@
     5
   ],
   "mirror": true,
+  "kind": "part",
   "roof": "bay",
   "span": 5,
   "pitch": 1,
@@ -19,5 +19,7 @@
     "along": "roof_bay|gable_end (x)",
     "bottom": "the top storey's columns",
     "span": "z"
-  }
+  },
+  "part": "roof",
+  "slot": "part"
 }

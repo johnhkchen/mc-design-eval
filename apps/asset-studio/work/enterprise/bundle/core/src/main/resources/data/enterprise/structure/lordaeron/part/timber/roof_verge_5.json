@@ -2,7 +2,6 @@
   "id": "enterprise:lordaeron/part/timber/roof_verge_5",
   "rev": 1,
   "kingdom": "lordaeron",
-  "kind": "roof",
   "set": "lordaeron/timber",
   "palette": "stone",
   "size": [
@@ -11,6 +10,7 @@
     5
   ],
   "mirror": true,
+  "kind": "part",
   "roof": "verge",
   "span": 5,
   "pitch": 1,
@@ -20,5 +20,7 @@
     "bottom": "the top storey's columns",
     "span": "z"
   },
-  "note": "the roof's edge carried past a gable: covering only"
+  "note": "the roof's edge carried past a gable: covering only",
+  "part": "roof",
+  "slot": "part"
 }
