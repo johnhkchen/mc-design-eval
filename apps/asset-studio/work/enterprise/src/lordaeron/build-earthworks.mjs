@@ -18,10 +18,11 @@ for (const t of tiles) {
   const c = check(f, meta); report.push([t.id, c.ok, c.errors]);
 }
 write(join(DATA, "town_kits/lordaeron/earthworks.json"), JSON.stringify({
-  set: "lordaeron/earthworks", rev: 1,
+  set: "lordaeron/earthworks", rev: 2,
   about: "Retaining walls for the cuts levelling leaves in a slope. Authored with the low ground to the south: z = depth-1 is the low edge and every tile aligns on it; the wall face looks south; the high ground runs north. Layers 0-1 ground, 2 the low surface, 2 + rise the high surface. Rotate and mirror freely (the corners are drawn for high ground to the north-west).",
   rise: "Each tile is made for one rise, 1 to 4 (retain_h<rise>_*). Use the tile whose rise is the cut's height at that column; at a change of height, let the higher tile's wall run on one column past the step.",
-  tiling: "Straights are 1 wide (variants a, b, c: pick by hash so the coursing never repeats), with a lamp tile at most 5 apart and, from rise 3, a buttress about every 4. Corners are 3 x 3. Steps are 4 wide (two cheek walls and a 2-wide flight) and 2 x rise + 1 deep, so they reach back into the bank; cut the bank behind them to the steps' landing.",
+  tiling: "Straights are 1 wide (variants a, b, c: pick by hash so the coursing never repeats), with a lamp tile at most 5 apart and, from rise 3, a buttress about every 4. Corners are 3 x 3. Steps are 4 wide (two cheek walls and a 2-wide flight) or 3 wide (a 1-wide flight for a door path) and 2 x rise + 1 deep, so they reach back into the bank; cut the bank behind them to the steps' landing.",
+  cut_face: "cutface_h<rise>_1a/b/c leave a levelled face natural instead of walled: stone, tuff, mossy cobble, rooted dirt and moss, roots hanging from the lip, a little scree at the foot. Same alignment as the straights; mix them with the walls (walls near buildings and streets, cut faces in yards and the open).",
   walk: "Steps go up by half steps only (bottom slab, full block, ...), as the shared validator's walk requires; the landing is level with the high ground.",
   detail: "A cobble footing course, mixed coursed stone (stone, mossy and cracked bricks, a little andesite), a battered stair footing from rise 2, a stone coping and a low cobble parapet from rise 2, ivy down faces from rise 3, a coarse drain strip at the foot.",
   tiles: tiles.map((t) => ({ id: t.id, part: `enterprise:lordaeron/earthworks/${t.id}`, depth: t.grid.size[2], ...t.meta })),
