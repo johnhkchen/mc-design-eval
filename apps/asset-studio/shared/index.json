@@ -3,10 +3,10 @@
     "path": "js/check-asset.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:56:12.865Z",
+    "updated": "2026-10-27T20:29:32.685Z",
     "updated_by": "studio",
-    "note": "a door cell is passable only as a doorway: lower half, upper half over it, solid under (a sunk 1-high door breaks the walk)",
-    "bytes": 20125,
+    "note": "decor_beehive twin (fields' orchard)",
+    "bytes": 20133,
     "history": [
       {
         "at": "2026-10-27T14:13:05.125Z",
@@ -25,6 +25,12 @@
         "by": "studio",
         "note": "a door cell is passable only as a doorway: lower half, upper half over it, solid under (a sunk 1-high door breaks the walk)",
         "bytes": 20125
+      },
+      {
+        "at": "2026-10-27T20:29:32.685Z",
+        "by": "studio",
+        "note": "decor_beehive twin (fields' orchard)",
+        "bytes": 20133
       }
     ]
   },

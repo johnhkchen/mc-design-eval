@@ -18,15 +18,17 @@ for (const t of tiles) {
   const c = check(f, meta); report.push([t.id, c.ok, c.errors]);
 }
 write(join(DATA, "town_kits/lordaeron/fields.json"), JSON.stringify({
-  set: "lordaeron/fields", rev: 1,
+  set: "lordaeron/fields", rev: 2,
   about: "Field plots: 9 x 9 tiles with one water source at (4, 2, 4), which hydrates every cell (the game's reach is 4), and 9 x 1 edges laid between fields or along a headland. Layers 0-1 ground, 2 the surface, 3+ crops and features. Crops are mixed in growth stage so a field never reads as one flat colour.",
   tiling: "Lay fields on a 10-pitch grid (9 + an edge). Edges between fields: hedgerow, drystone or rail, one kind per holding so a farm reads as one; edge_gate where a headland path enters. Mix tile kinds by hash: crop fields mostly, a fallow or meadow every few, an orchard by the farmstead.",
+  crops: "Each field tile names its main crop (crop) and how many cells of it it holds (plots): the town picks fields by main crop, and the census counts those cells. crop null: a garden, orchard, meadow or fallow tile (decor, no census crop).",
+  pastures: "edge_<kind>_1a-c are 1-wide straights (east-west; rotate) and corner_<kind> a corner post for runs leaving east and south (rotate), so a pasture of any size closes exactly.",
   rules: ["no point-of-interest blocks (decorative twins only)", "no beds", "the water source stays where it is: every farmland cell is within 4 of it"],
   tiles: tiles.map((t) => ({ id: t.id, part: `enterprise:lordaeron/field/${t.id}`, ...t.meta })),
 }, null, 2) + "\n");
 // the demo: 3 x 2 fields, edges between, a gated headland along the front
 const by = Object.fromEntries(tiles.map((t) => [t.id, t.grid]));
-const order = [["field_strips_3_a", "field_pumpkins_a", "field_orchard_a"], ["field_sunflowers_b", "field_fallow_a", "field_garden_a"]];
+const order = [["field_wheat_border_a", "field_cane_a", "field_orchard_a"], ["field_carrots_garden_b", "field_berries_hedged_a", "field_wheat_scarecrow_a"]];
 const demo = new Grid([3 * 10 - 1, 10, 2 * 10]);
 order.forEach((row, r) => row.forEach((id, c) => demo.paste(by[id], c * 10, 0, r * 10)));
 for (let c = 0; c < 3; c++) { demo.paste(by.edge_hedgerow, c * 10, 0, 9); demo.paste(by[c === 1 ? "edge_gate" : "edge_rail"], c * 10, 0, 19); }

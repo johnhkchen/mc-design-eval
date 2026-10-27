@@ -53,50 +53,72 @@ function tree(g, x, z, wood = "oak", h = 3) {
   }
 }
 
-// the tiles: id, tags, build(seed)
+// a field of one main crop (the town decides one crop per field; its cells are what the census counts), in a style
+const MAIN = {
+  wheat: (s, x, z) => `wheat[age=${age(7, s, x, z)}]`, carrots: CROP.carrots, potatoes: CROP.potatoes, beetroots: CROP.beetroots,
+};
+function cropField(main, style, s) {
+  const g = base(); well(g);
+  const skip = (x, z) => (style === "border" && z === 0) || (style === "scarecrow" && x <= 2 && z <= 2) || (style === "garden" && z % 3 === 2);
+  for (let x = 0; x < N; x++) for (let z = 0; z < N; z++) {
+    if (x === MID && z === MID) continue;
+    if (skip(x, z)) continue;
+    g.set(x, 2, z, FARM); g.set(x, 3, z, MAIN[main](s, x, z));
+  }
+  if (style === "border") for (let x = 0; x < N; x++) { if (hash(s, x) < 0.7) { g.set(x, 3, 0, "sunflower[half=lower]"); g.set(x, 4, 0, "sunflower[half=upper]"); } else g.set(x, 3, 0, hash(s, x, 1) < 0.5 ? "cornflower" : "poppy"); }
+  if (style === "scarecrow") { scarecrow(g, 1, 1); g.set(0, 3, 0, "hay_block[axis=y]"); g.set(2, 3, 2, "oxeye_daisy"); }
+  if (style === "garden") for (let x = 0; x < N; x++) { g.set(x, 2, 2, "dirt_path"); g.set(x, 2, 8, x % 2 ? "dirt_path" : "coarse_dirt");
+    g.set(x, 2, 5, x % 2 ? "dirt_path" : FARM); if (!(x % 2)) { g.set(x, 3, 5, "spruce_fence[east=false,north=false,south=false,waterlogged=false,west=false]"); g.set(x, 4, 5, LEAVES("azalea")); } }
+  return g;
+}
+// sugar cane: water channels on rows 1, 4 and 7, the cane on every other row (each cell beside a channel)
+function caneField(style, s) {
+  const g = base();
+  for (let x = 0; x < N; x++) for (let z = 0; z < N; z++) {
+    if (z % 3 === 1) { g.set(x, 2, z, "water"); g.set(x, 1, z, "clay"); if (style === "reeds" && hash(s, x, z) < 0.2) g.set(x, 3, z, "lily_pad"); continue; }
+    g.set(x, 2, z, hash(s, x, z, 1) < 0.5 ? "sand" : GRASS);
+    const h = style === "reeds" ? 1 + Math.floor(hash(s, x, z, 2) * 3) : 2 + (hash(s, x, z, 3) < 0.3 ? 1 : 0);
+    for (let y = 3; y < 3 + h; y++) g.set(x, y, z, "sugar_cane[age=0]");
+  }
+  return g;
+}
+// sweet berries: rows of bushes on grass, a walk between every pair of rows (the thorns: villagers keep to the walks)
+function berryField(style, s) {
+  const g = base(); well(g);
+  for (let x = 0; x < N; x++) for (let z = 0; z < N; z++) {
+    if (x === MID && z === MID) continue;
+    if (z % 3 === 2) { g.set(x, 2, z, "dirt_path"); continue; }
+    if (style === "hedged" && (x === 0 || x === 8)) { g.set(x, 3, z, LEAVES()); continue; }
+    g.set(x, 3, z, `sweet_berry_bush[age=${2 + Math.floor(hash(s, x, z) * 2)}]`);
+  }
+  return g;
+}
+// the tiles: id, crop (null: not a crop field), tags, build(seed)
 const TILES = [
-  ["field_strips_3", ["crop", "wheat", "carrots", "potatoes"], (s) => {
-    const g = base(); well(g); crops(g, s, (x, z) => (z < 3 ? "wheat" : z < 6 ? "carrots" : "potatoes")); return g;
-  }],
-  ["field_strips_2", ["crop", "wheat", "beetroots"], (s) => {
-    const g = base(); well(g); crops(g, s, (x, z) => (x < 4 ? "wheat" : x > 4 ? "beetroots" : z === MID ? null : "wheat"));
-    // a balk: one row left in grass between the two crops, a few poppies in it
-    for (let z = 0; z < N; z++) if (z !== MID) { g.set(4, 2, z, GRASS); g.set(4, 3, z, hash(s, z) < 0.3 ? "poppy" : hash(s, z, 1) < 0.5 ? "short_grass" : null); }
-    return g;
-  }],
-  ["field_pumpkins", ["crop", "pumpkin", "melon"], (s) => {
+  ["field_wheat_border", "wheat", ["crop", "sunflowers"], (s) => cropField("wheat", "border", s)],
+  ["field_wheat_scarecrow", "wheat", ["crop", "scarecrow"], (s) => cropField("wheat", "scarecrow", s)],
+  ["field_carrots", "carrot", ["crop"], (s) => cropField("carrots", "plain", s)],
+  ["field_carrots_garden", "carrot", ["crop", "garden"], (s) => cropField("carrots", "garden", s)],
+  ["field_potatoes", "potato", ["crop", "scarecrow"], (s) => cropField("potatoes", "scarecrow", s)],
+  ["field_potatoes_garden", "potato", ["crop", "garden"], (s) => cropField("potatoes", "garden", s)],
+  ["field_beetroots", "beetroot", ["crop", "sunflowers"], (s) => cropField("beetroots", "border", s)],
+  ["field_beetroots_garden", "beetroot", ["crop", "garden"], (s) => cropField("beetroots", "garden", s)],
+  ["field_cane", "sugar_cane", ["crop", "channels"], (s) => caneField("rows", s)],
+  ["field_cane_reeds", "sugar_cane", ["crop", "channels"], (s) => caneField("reeds", s)],
+  ["field_berries", "sweet_berries", ["crop"], (s) => berryField("rows", s)],
+  ["field_berries_hedged", "sweet_berries", ["crop", "hedge"], (s) => berryField("hedged", s)],
+  ["garden_pumpkins", null, ["garden", "decor", "pumpkin", "melon"], (s) => {
     const g = base("coarse_dirt"); well(g);
     for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {
       if (x === MID && z === MID) continue;
       const fruit = x < MID ? "pumpkin" : "melon", r = z % 3;
-      if (r === 0) { if (hash(s, x, z) < 0.55) g.set(x, 3, z, fruit); g.set(x, 2, z, hash(s, x, z, 2) < 0.4 ? "grass_block[snowy=false]" : "coarse_dirt"); }
+      if (r === 0) { if (hash(s, x, z) < 0.55) g.set(x, 3, z, fruit); g.set(x, 2, z, hash(s, x, z, 2) < 0.4 ? GRASS : "coarse_dirt"); }
       else if (r === 1) { g.set(x, 2, z, FARM); g.set(x, 3, z, g.get(x, 3, z - 1) ? `attached_${fruit}_stem[facing=north]` : `${fruit}_stem[age=${age(7, s, x, z)}]`); }
       else { g.set(x, 2, z, FARM); g.set(x, 3, z, `${fruit}_stem[age=${age(7, s, x, z)}]`); }
     }
     return g;
   }],
-  ["field_garden", ["crop", "garden", "carrots", "potatoes", "beetroots"], (s) => {
-    // a market garden: 2-wide beds between paths, a pea row on poles, a water butt
-    const g = base(); well(g, false);
-    const BEDS = ["carrots", "potatoes", "beetroots"];
-    for (let x = 0; x < N; x++) for (let z = 0; z < N; z++) {
-      if (x === MID && z === MID) continue;
-      if (z % 3 === 2) { g.set(x, 2, z, "dirt_path"); continue; }
-      if (x === 8 && z < 2) continue;
-      g.set(x, 2, z, FARM); g.set(x, 3, z, CROP[BEDS[Math.floor(z / 3) % 3]](s, x, z));
-    }
-    for (let x = 0; x < N; x += 2) { g.set(x, 2, 6, FARM); g.set(x, 3, 6, "spruce_fence[east=false,north=false,south=false,waterlogged=false,west=false]"); g.set(x, 4, 6, LEAVES("azalea")); }
-    g.set(8, 3, 0, "enterprise:decor_barrel[facing=up,open=true]"); g.set(8, 3, 1, "enterprise:decor_composter[level=4]");
-    g.set(MID, 3, MID, "lily_pad");
-    return g;
-  }],
-  ["field_sunflowers", ["crop", "wheat", "flowers"], (s) => {
-    const g = base(); well(g); crops(g, s, (x, z) => (z === 0 ? null : "wheat"));
-    for (let x = 0; x < N; x++) { g.set(x, 2, 0, GRASS); if (hash(s, x) < 0.75) { g.set(x, 3, 0, "sunflower[half=lower]"); g.set(x, 4, 0, "sunflower[half=upper]"); } else g.set(x, 3, 0, "cornflower"); }
-    return g;
-  }],
-  ["field_fallow", ["fallow", "hay"], (s) => {
-    // a field resting: grass and clover, a haystack, a scarecrow keeping watch over the next field
+  ["field_fallow", null, ["fallow", "hay"], (s) => {
     const g = base(); well(g);
     for (let x = 0; x < N; x++) for (let z = 0; z < N; z++) {
       if (x === MID && z === MID) continue;
@@ -106,15 +128,14 @@ const TILES = [
     haystack(g, 1, 1); scarecrow(g, 6, 6);
     return g;
   }],
-  ["field_orchard", ["orchard", "bees"], (s) => {
+  ["field_orchard", null, ["orchard", "bees"], (s) => {
     const g = base(); well(g);
     for (const [x, z] of [[1, 1], [4, 1], [7, 1], [1, 7], [4, 7], [7, 7]]) tree(g, x, z, hash(s, x, z) < 0.7 ? "oak" : "birch", 3);
-    // a bee skep on a stump (a real beehive is a point of interest; ask for a decor twin if bees are wanted)
-    g.set(2, 3, 2, "stripped_oak_log[axis=y]"); g.set(2, 4, 2, "honeycomb_block");
-    for (let x = 0; x < N; x++) for (let z = 2; z <= 6; z++) if (!(x === MID && z === MID) && hash(s, x, z, 5) < 0.4) g.set(x, 3, z, hash(s, x, z, 6) < 0.8 ? "short_grass" : "oxeye_daisy");
+    g.set(2, 3, 2, "enterprise:decor_beehive[facing=south]"); g.set(5, 3, 6, "enterprise:decor_beehive[facing=north]");
+    for (let x = 0; x < N; x++) for (let z = 2; z <= 6; z++) if (!(x === MID && z === MID) && !g.get(x, 3, z) && hash(s, x, z, 5) < 0.4) g.set(x, 3, z, hash(s, x, z, 6) < 0.8 ? "short_grass" : "oxeye_daisy");
     return g;
   }],
-  ["field_meadow", ["meadow", "pond"], (s) => {
+  ["field_meadow", null, ["meadow", "pond"], (s) => {
     // a water meadow: a pond with reeds, lily pads, long grass and flowers round it
     const g = base();
     for (let x = 2; x <= 6; x++) for (let z = 2; z <= 6; z++) {
@@ -172,9 +193,30 @@ const EDGES = [
   }],
 ];
 
+// 1-wide edges and corner posts, so a pasture of any size closes: straights run east-west (rotate for north-south),
+// a corner is drawn for runs leaving east and south (a pasture's north-west corner; rotate for the others)
+const ONE = {
+  hedgerow: (s) => [GRASS, LEAVES(hash(s) < 0.85 ? "oak" : "birch"), hash(s, 1) < 0.4 ? LEAVES() : null],
+  drystone: (s) => [hash(s) < 0.6 ? "cobblestone" : "mossy_cobblestone", wall(true, true, false), null],
+  rail: (s) => [GRASS, "spruce_fence[east=true,north=false,south=false,waterlogged=false,west=true]", null],
+};
+const CORNER = {
+  hedgerow: () => [GRASS, LEAVES(), LEAVES()],
+  drystone: () => ["mossy_cobblestone", "cobblestone_wall[east=low,north=none,south=low,up=true,waterlogged=false,west=none]", null],
+  rail: () => [GRASS, "spruce_fence[east=true,north=false,south=true,waterlogged=false,west=false]", "lantern[hanging=false,waterlogged=false]"],
+};
+const cell = ([ground, a, b]) => { const g = new Grid([1, 8, 1]); g.set(0, 0, 0, "dirt"); g.set(0, 1, 0, "dirt"); g.set(0, 2, 0, ground); if (a) g.set(0, 3, 0, a); if (b) g.set(0, 4, 0, b); return g; };
+
 export function allFields() {
   const out = [];
-  for (const [id, tags, build] of TILES) for (const v of ["a", "b"]) out.push({ id: `${id}_${v}`, grid: build(v.charCodeAt(0) * 101 + id.length), meta: { width: N, depth: N, kind_of: "field", tags, water: [MID, 2, MID] } });
+  for (const [id, crop, tags, build] of TILES) for (const v of ["a", "b"]) {
+    const grid = build(v.charCodeAt(0) * 101 + id.length);
+    const CELL = { wheat: "wheat", carrot: "carrots", potato: "potatoes", beetroot: "beetroots", sugar_cane: "sugar_cane", sweet_berries: "sweet_berry_bush" };
+    let plots = 0; if (crop) for (const [, y, , st] of grid.each()) if (y === 3 && st.replace("minecraft:", "").split("[")[0] === CELL[crop]) plots++;
+    out.push({ id: `${id}_${v}`, grid, meta: { width: N, depth: N, kind_of: "field", crop, plots, tags, water: id.startsWith("field_cane") ? "channels on rows 1, 4, 7" : [MID, 2, MID] } });
+  }
   for (const [id, socket, build] of EDGES) out.push({ id, grid: build(id.length * 7), meta: { width: N, depth: 1, kind_of: "edge", socket } });
+  for (const k of Object.keys(ONE)) for (const v of ["a", "b", "c"]) out.push({ id: `edge_${k}_1${v}`, grid: cell(ONE[k](v.charCodeAt(0) * 7 + k.length)), meta: { width: 1, depth: 1, kind_of: "edge", socket: k === "hedgerow" ? "hedge" : k === "drystone" ? "wall" : "fence" } });
+  for (const k of Object.keys(CORNER)) out.push({ id: `corner_${k}`, grid: cell(CORNER[k]()), meta: { width: 1, depth: 1, kind_of: "corner", socket: k === "hedgerow" ? "hedge" : k === "drystone" ? "wall" : "fence", runs: ["east", "south"] } });
   return out;
 }
