@@ -2,10 +2,10 @@
   "id": "0001-enterprise-the-first-kingdoms-lordaeron-pilot-on",
   "title": "Enterprise: the first kingdoms (Lordaeron pilot on Hearthglen)",
   "kind": "request",
-  "status": "planned",
+  "status": "building",
   "opened_by": "client",
   "created": "2026-10-27T13:14:54.013Z",
-  "updated": "2026-10-27T13:16:40.665Z",
+  "updated": "2026-10-27T13:18:49.472Z",
   "history": [
     {
       "status": "open",
@@ -16,10 +16,20 @@
       "status": "planned",
       "by": "studio",
       "at": "2026-10-27T13:16:40.665Z"
+    },
+    {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-27T13:18:49.404Z"
+    },
+    {
+      "status": "building",
+      "by": "studio",
+      "at": "2026-10-27T13:18:49.472Z"
     }
   ],
   "seen": {
-    "client": 3,
-    "studio": 3
+    "client": 5,
+    "studio": 5
   }
 }
