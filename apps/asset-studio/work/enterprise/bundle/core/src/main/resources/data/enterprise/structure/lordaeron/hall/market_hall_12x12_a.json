@@ -1,6 +1,6 @@
 {
   "id": "enterprise:lordaeron/hall/market_hall_12x12_a",
-  "rev": 4,
+  "rev": 5,
   "kingdom": "lordaeron",
   "kind": "hall",
   "slot": "desk",
@@ -200,7 +200,7 @@
         {
           "face": "west",
           "i": 3,
-          "module": "chimney_ground",
+          "module": "post_ground",
           "storey": 0
         },
         {
@@ -213,7 +213,7 @@
         {
           "face": "west",
           "i": 6,
-          "module": "post_ground",
+          "module": "chimney_ground",
           "storey": 0
         },
         {
@@ -356,7 +356,7 @@
         {
           "face": "west",
           "i": 3,
-          "module": "chimney_upper",
+          "module": "post_upper",
           "storey": 1
         },
         {
@@ -369,7 +369,7 @@
         {
           "face": "west",
           "i": 6,
-          "module": "post_upper",
+          "module": "chimney_upper",
           "storey": 1
         },
         {
@@ -783,7 +783,7 @@
       ],
       "chimney": [
         0,
-        3
+        6
       ],
       "beds": [],
       "workstations": [],
