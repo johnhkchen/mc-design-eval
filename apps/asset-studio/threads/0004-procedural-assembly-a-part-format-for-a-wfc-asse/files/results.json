@@ -1,0 +1,465 @@
+{
+ "sheet": "generated houses, Houses.java + module set rev 2",
+ "results": [
+  {
+   "file": "house_10x10_s2_01.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.56 outside 0 to 0.45",
+    "floor_per_bed 20.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.31,
+   "idle": 0.56,
+   "walk": 1.36,
+   "floor_per_bed": 20.0
+  },
+  {
+   "file": "house_10x10_s2_02.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.57 outside 0 to 0.45",
+    "floor_per_bed 20.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.31,
+   "idle": 0.57,
+   "walk": 1.36,
+   "floor_per_bed": 20.0
+  },
+  {
+   "file": "house_10x10_s2_03.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.56 outside 0 to 0.45",
+    "floor_per_bed 20.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.31,
+   "idle": 0.56,
+   "walk": 1.36,
+   "floor_per_bed": 20.0
+  },
+  {
+   "file": "house_10x10_s2_04.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.57 outside 0 to 0.45",
+    "floor_per_bed 20.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.31,
+   "idle": 0.57,
+   "walk": 1.36,
+   "floor_per_bed": 20.0
+  },
+  {
+   "file": "house_10x7_s2_01.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.47 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.47,
+   "idle": 0.36,
+   "walk": 1.62,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s2_02.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.48 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.48,
+   "idle": 0.36,
+   "walk": 1.6,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s2_03.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.47 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.47,
+   "idle": 0.36,
+   "walk": 1.62,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s2_04.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.48 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.48,
+   "idle": 0.36,
+   "walk": 1.6,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s3_01.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.51 outside 0.15 to 0.45"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.51,
+   "idle": 0.34,
+   "walk": 1.59,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s3_02.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.52 outside 0.15 to 0.45"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.52,
+   "idle": 0.34,
+   "walk": 1.58,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s3_03.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.51 outside 0.15 to 0.45"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.51,
+   "idle": 0.34,
+   "walk": 1.59,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_10x7_s3_04.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.52 outside 0.15 to 0.45"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.52,
+   "idle": 0.34,
+   "walk": 1.58,
+   "floor_per_bed": 6.5
+  },
+  {
+   "file": "house_13x10_s3_01.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "3 walkable cells under light 8, e.g. (7,13,9) (8,8,7) (8,13,7)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.57 outside 0 to 0.45",
+    "floor_per_bed 24.5 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.36,
+   "idle": 0.57,
+   "walk": 1.34,
+   "floor_per_bed": 24.5
+  },
+  {
+   "file": "house_13x10_s3_02.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "3 walkable cells under light 8, e.g. (7,13,9) (8,8,7) (8,13,7)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.58 outside 0 to 0.45",
+    "floor_per_bed 24.5 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.36,
+   "idle": 0.58,
+   "walk": 1.34,
+   "floor_per_bed": 24.5
+  },
+  {
+   "file": "house_13x10_s3_03.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "3 walkable cells under light 8, e.g. (7,13,9) (8,8,7) (8,13,7)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.57 outside 0 to 0.45",
+    "floor_per_bed 24.5 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.36,
+   "idle": 0.57,
+   "walk": 1.34,
+   "floor_per_bed": 24.5
+  },
+  {
+   "file": "house_13x10_s3_04.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "3 walkable cells under light 8, e.g. (7,13,9) (8,8,7) (8,13,7)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.58 outside 0 to 0.45",
+    "floor_per_bed 24.5 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.36,
+   "idle": 0.58,
+   "walk": 1.34,
+   "floor_per_bed": 24.5
+  },
+  {
+   "file": "house_13x7_s2_01.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "1 walkable cell under light 8, e.g. (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.54 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.37,
+   "idle": 0.54,
+   "walk": 1.64,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s2_02.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "1 walkable cell under light 8, e.g. (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.53 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.39,
+   "idle": 0.53,
+   "walk": 1.63,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s2_03.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "1 walkable cell under light 8, e.g. (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.54 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.37,
+   "idle": 0.54,
+   "walk": 1.64,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s2_04.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "1 walkable cell under light 8, e.g. (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.53 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.39,
+   "idle": 0.53,
+   "walk": 1.63,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s3_01.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "2 walkable cells under light 8, e.g. (8,14,8) (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.51 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.4,
+   "idle": 0.51,
+   "walk": 1.59,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s3_02.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "2 walkable cells under light 8, e.g. (5,14,8) (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.51 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.42,
+   "idle": 0.51,
+   "walk": 1.58,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s3_03.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "1 walkable cell under light 8, e.g. (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.51 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.4,
+   "idle": 0.51,
+   "walk": 1.59,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_13x7_s3_04.nbt",
+   "contract": "fail",
+   "contract_errors": [
+    "2 walkable cells under light 8, e.g. (8,14,8) (9,3,6)"
+   ],
+   "interior": "fail",
+   "interior_misses": [
+    "idle_share 0.51 outside 0 to 0.45",
+    "floor_per_bed 14.0 outside 4 to 8.5"
+   ],
+   "beds": 4,
+   "made": 4,
+   "circulation": 0.42,
+   "idle": 0.51,
+   "walk": 1.58,
+   "floor_per_bed": 14.0
+  },
+  {
+   "file": "house_7x7_s1_01.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.67 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.67,
+   "idle": 0.07,
+   "walk": 1.29,
+   "floor_per_bed": 7.5
+  },
+  {
+   "file": "house_7x7_s1_02.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.62 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.62,
+   "idle": 0.06,
+   "walk": 1.25,
+   "floor_per_bed": 8.0
+  },
+  {
+   "file": "house_7x7_s1_03.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.67 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.67,
+   "idle": 0.07,
+   "walk": 1.29,
+   "floor_per_bed": 7.5
+  },
+  {
+   "file": "house_7x7_s1_04.nbt",
+   "contract": "pass",
+   "contract_errors": [],
+   "interior": "fail",
+   "interior_misses": [
+    "circulation_share 0.62 outside 0.15 to 0.45"
+   ],
+   "beds": 2,
+   "made": 2,
+   "circulation": 0.62,
+   "idle": 0.06,
+   "walk": 1.25,
+   "floor_per_bed": 8.0
+  }
+ ]
+}
