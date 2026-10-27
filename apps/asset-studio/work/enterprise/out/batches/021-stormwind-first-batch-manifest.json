@@ -1,0 +1,1115 @@
+{
+  "batch": "021-stormwind-first-batch",
+  "thread": "0009",
+  "made": "2026-10-27T20:20:46.805Z",
+  "files": [
+    {
+      "path": "assets-src/kingdoms/lordaeron/palettes.json",
+      "kind": "palette",
+      "sha256": "81e88c41f64097dc5dace0e23db116fa505d20665707de947259dd19748c3242",
+      "bytes": 2874
+    },
+    {
+      "path": "assets-src/kingdoms/lordaeron/style.md",
+      "kind": "style",
+      "sha256": "7347fd63fc747ea57e62b569398b3814cc5b4aaa10f25e1690f59abf8553511a",
+      "bytes": 4108
+    },
+    {
+      "path": "assets-src/kingdoms/stormwind/palettes.json",
+      "kind": "palette",
+      "sha256": "0dc809ff23131f7972989f0e9e9c649d7495e7fdad6cd8eb61cd8bca4d6c1814",
+      "bytes": 2313
+    },
+    {
+      "path": "assets-src/stormwind/comfort/bakery_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0fa08b3fd6ee8ce9a61614e306c7e30b7d61b9680e6a3531792668633e004008",
+      "bytes": 200073
+    },
+    {
+      "path": "assets-src/stormwind/comfort/chandler_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "ecb26c1837e4ed6e999e221121b1bd46999d5897729bdf83aacdf60e67d08fa4",
+      "bytes": 201937
+    },
+    {
+      "path": "assets-src/stormwind/comfort/reading_room_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e9c4b0d28f2b263acc4711a2622cdec0ea7c409c85ff23f1b342c67a4613562b",
+      "bytes": 200022
+    },
+    {
+      "path": "assets-src/stormwind/comfort/tailor_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "bb88559ea096bb2febbf0cddd5122765bdd36a95fb243e2f40106bce7c8d751e",
+      "bytes": 201110
+    },
+    {
+      "path": "assets-src/stormwind/comfort/tavern_15x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2ea7677159b9891fcdaa3723fb910e23e9048ec13fa7da55b91c976efffd342a",
+      "bytes": 206036
+    },
+    {
+      "path": "assets-src/stormwind/dock/dock_head_5x5_a/front.jpg",
+      "kind": "preview",
+      "sha256": "7288fb1e43a2fe066f9dd45cc4efc4f4bcaf3b1a4938b7f5c2e0d6cc0a479511",
+      "bytes": 164579
+    },
+    {
+      "path": "assets-src/stormwind/dock/dock_pier_3x4_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f13c4f169f0f5ddfa12770ba25fb9a349dee4713a37ec2713d15e1591864687a",
+      "bytes": 156360
+    },
+    {
+      "path": "assets-src/stormwind/forum/market_cross_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f8c4069b33678eec95a965c76370c964fb19467e7aca1d1d101b83c895daa7c3",
+      "bytes": 188492
+    },
+    {
+      "path": "assets-src/stormwind/hall/caravanserai_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "99bce6e01616c82464b60107e27f2e80b6c655ca79534b375a9e35337fcf9dea",
+      "bytes": 201352
+    },
+    {
+      "path": "assets-src/stormwind/hall/counting_house_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "a946760a4f8a14e0feaa6e0af249504f5d5c46d5525cc40eaf5b24ae242738b0",
+      "bytes": 193995
+    },
+    {
+      "path": "assets-src/stormwind/hall/granary_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d8f1a1ae76505cc86d9172ab7255035a46d1e02e5f8bc4baff9e25a8c7ae78fb",
+      "bytes": 192170
+    },
+    {
+      "path": "assets-src/stormwind/hall/library_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "61ceb326e65b9ece1ef1f241346bc9a04847485fbebcf7b101a3f32d0fd31caa",
+      "bytes": 192479
+    },
+    {
+      "path": "assets-src/stormwind/hall/market_hall_12x12_a/front.jpg",
+      "kind": "preview",
+      "sha256": "de4d9a2af6ff5c0cf63b5ba4501c36591bcf177852d4c11ffa0b7131eaf40258",
+      "bytes": 202346
+    },
+    {
+      "path": "assets-src/stormwind/hall/root_cellar_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "189b4940ed514ed302056c20e3295ab3b98c5605047ea835829cacca165c5187",
+      "bytes": 190697
+    },
+    {
+      "path": "assets-src/stormwind/hall/smithy_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f60b56b7b0275ab641ef1b2f5e97d84dfd1c3e63b410e3fa0a820bf937fd314d",
+      "bytes": 190868
+    },
+    {
+      "path": "assets-src/stormwind/hall/square_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "111311bc3980df7726b04d2ef110d0a1f308510b2b9c7a493e8ee9ddec3931b7",
+      "bytes": 187110
+    },
+    {
+      "path": "assets-src/stormwind/hall/temple_9x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d60a8dac26c2e02dea3ce7ce56b18f9ce785118920645bbbd3880a10077f4970",
+      "bytes": 194049
+    },
+    {
+      "path": "assets-src/stormwind/hall/watchtower_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "4bc1b8be1ba9e9241bf17e5c67a2b78f855a4835eadb05d38de2852caa62d155",
+      "bytes": 177615
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_armorer_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e2e1773a04ec04db187ed0d49f52cfa684cc1389f23131b829d0aeb0a303fade",
+      "bytes": 160594
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_butcher_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "8f98eb654ea1126a570415f2237c9b4535ef0110a5e6691a01ebe6af9195f6af",
+      "bytes": 163536
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_cartographer_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d38b68010bac0da5ac65efd558d1965ce8c7c11657aa30d9b35c69f709b8ad89",
+      "bytes": 160875
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_cleric_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "61cea787142deb800ad4835eb687103617f3b2afcb4aa7c3e61207402e520776",
+      "bytes": 165365
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_farmer_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "92cd14aa8ec3181022bb00a4e04bc1270cbd31a97e116f49db741cb5520c4c10",
+      "bytes": 165130
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_fisherman_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "e143f7eff015144095f5b562506ba772ed65b59cdb8522eab01e8444cb156f7f",
+      "bytes": 164832
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_fletcher_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d1683e67e6c1645650ee6b29aff97610dd83ec84a41b6b048e5379afe3f51075",
+      "bytes": 167293
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_leatherworker_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "29661ac6da4c83782bd455f83c289038dbecae74e078086d44d6acedd1f65caf",
+      "bytes": 165397
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_librarian_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "92e01355128f43c0d3f91d346bb4a9ddac019f977d274a66d02c9d9c717136ce",
+      "bytes": 166554
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_mason_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "3811a8500df37e618ba977eccf9d7ff0a11c6cd6d843923798a41b232d080e9c",
+      "bytes": 159560
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_shepherd_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0d4eaf81ba8e3af9c9d4d6c0098ec706c0cde705112dec328c036c2f7c73e599",
+      "bytes": 166393
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_toolsmith_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "daaf5563eabc5673b363e44b3f991d672bd70b66efa0c59b76e36f3ed087cc02",
+      "bytes": 162085
+    },
+    {
+      "path": "assets-src/stormwind/stall/stall_weaponsmith_3x3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "9e4ea6a9036b2c9775300b093adadb5aa4c5e879cf070ba8904653a507c0f23d",
+      "bytes": 162911
+    },
+    {
+      "path": "assets-src/stormwind/wall/corner_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "7744d4e5b01f7aa560a7cacede365aa3855bddd19d01c60647a2fc25de48a8f5",
+      "bytes": 197804
+    },
+    {
+      "path": "assets-src/stormwind/wall/curtain_4_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f75289bc000235ba32ab7da0014a10acc849c0d774641024f5e61b733ef401a0",
+      "bytes": 175033
+    },
+    {
+      "path": "assets-src/stormwind/wall/curtain_8_a/front.jpg",
+      "kind": "preview",
+      "sha256": "94a1d1d61612b44381ad1fce641afebe833e324cca91862afc810b5e3649972e",
+      "bytes": 203401
+    },
+    {
+      "path": "assets-src/stormwind/wall/filler_1_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2240e8b08d680eb4ac87e87e68988ab3601877d268574919a00d2df57aba7b22",
+      "bytes": 155730
+    },
+    {
+      "path": "assets-src/stormwind/wall/filler_2_a/front.jpg",
+      "kind": "preview",
+      "sha256": "b85a0e13e82be3f38d6b953db34517738e556daa14c9da2598f6dbd0f76b2e51",
+      "bytes": 160102
+    },
+    {
+      "path": "assets-src/stormwind/wall/filler_3_a/front.jpg",
+      "kind": "preview",
+      "sha256": "24d20d49c6dcf85b5ab04bcda53303bec1335b28fea93cadc58b1baef5c73403",
+      "bytes": 168073
+    },
+    {
+      "path": "assets-src/stormwind/wall/gatehouse_11x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "26bb0a947d1b3603c0230ad6486ee1e21b2a6ba394d80dfc6d011e21b3378a57",
+      "bytes": 223619
+    },
+    {
+      "path": "assets-src/stormwind/wall/tower_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "d99165a305cdbff1d56f28ebae973a99645312316fd2a8ca3ec12c6951b1941a",
+      "bytes": 198068
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_armorer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "1175750a161e846271a2abcfd13d994b2c0357bf19b1a633c3528b42a5301d54",
+      "bytes": 194387
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_butcher_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "934627af10d51124af752a95e53c03b6b3d8c95c0171cc3c37b855e7ca8bd558",
+      "bytes": 194351
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_cartographer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "19b6ac2083457f9bc1f6442e6167e44551131f865919ea836d218e0f5698987d",
+      "bytes": 196245
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_cleric_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "60b9499cf150e0da6d641566b6edea182e0e2e35d434ebe85928a7d4ab22ccfc",
+      "bytes": 194491
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_farmer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "c24f503b987dc55b0600584a08279805ffe0c19afad39f46f523389dbc25fde8",
+      "bytes": 194990
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_fisherman_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "ca2f95a436cd9655f54d49ff292121e636a63705584fe35d1932c6e2d2083754",
+      "bytes": 194554
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_fletcher_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2b30dc88de2b0942924cc79128b8489d2bc2aff8d13fd24a22658205cd8dfeab",
+      "bytes": 194888
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_leatherworker_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "9e4a2e0149a22982e479b623de0026e933d6782eb79795718a4baa26ec6101ae",
+      "bytes": 196267
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_librarian_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "3aed0d43ccdb91d5941634246ddab6f00e1c19ac1ee39707eaccea8e0b1431b7",
+      "bytes": 194824
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_mason_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "95e7548c6320c97df1b6a97f1e4d9996767516f296497fb70ab50bd8a1e2f6e4",
+      "bytes": 194019
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_shepherd_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "7b820db60cbe68a2ce169c7342fd9e33484539b53bc83d1c5fb15a4bf9b541b7",
+      "bytes": 196873
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_toolsmith_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "c7e96c92326d0fbde911fc20d7149e3a9907abe80efe11ae18fbcc34e26b337d",
+      "bytes": 196338
+    },
+    {
+      "path": "assets-src/stormwind/workshop/workshop_weaponsmith_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "fdc6fd9ab74a58970c329c44d96cc6faf18eb7d5055994a55c766c11025c9358",
+      "bytes": 194341
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/bakery_12x9_a.json",
+      "kind": "meta",
+      "sha256": "805f32174fe4ab80aa06cf72ba03b86161a5d83e49c490ccec8ee76b07cda6c0",
+      "bytes": 6076
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/bakery_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "3c5cf6d77ea268bcf80d43c0743a17482b9d39301d9ae0e8ac7374c4cbbc4880",
+      "bytes": 4857,
+      "id": "enterprise:stormwind/comfort/bakery_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/chandler_12x9_a.json",
+      "kind": "meta",
+      "sha256": "93965fb1e12732f8ad9205db526f1f50469af964b7cfcec08f207bec46de3db4",
+      "bytes": 6094
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/chandler_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "9cbf9ad00710c47e3479070c39055b165ac5c64318cbe261346d0818f9fccc18",
+      "bytes": 4835,
+      "id": "enterprise:stormwind/comfort/chandler_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/reading_room_12x9_a.json",
+      "kind": "meta",
+      "sha256": "29fbcf341d1f0337bf528fed4218227cf3a9d09ee8c3e498e3e77329c06e7d38",
+      "bytes": 7095
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/reading_room_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "06ba5a628aa5b0b84e9c6660c43e68b929c8eee5f62df48b8c4736aca344074b",
+      "bytes": 4868,
+      "id": "enterprise:stormwind/comfort/reading_room_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/tailor_12x9_a.json",
+      "kind": "meta",
+      "sha256": "59838e6978a94a03b6391d49ac3d6942157193396985c70bb1a817a9a6595479",
+      "bytes": 5909
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/tailor_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "5ddcc64d29c688be7947c71356d5731c9bcf9f906a75c709fc36d87f4360ec75",
+      "bytes": 4824,
+      "id": "enterprise:stormwind/comfort/tailor_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/tavern_15x9_a.json",
+      "kind": "meta",
+      "sha256": "0249bfc5e787e45d4464b2c6fc5ab9f6a880814e33838a5fbe8433774d14a8eb",
+      "bytes": 8791
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/comfort/tavern_15x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e719af9e8f0b26ce37fdc0be30c4f8ebf2601a0037fe2aec9bd248ec8c8eb335",
+      "bytes": 5920,
+      "id": "enterprise:stormwind/comfort/tavern_15x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/dock/dock_head_5x5_a.json",
+      "kind": "meta",
+      "sha256": "bf6601d427e338b8f2e18c6be5f1eeea4a02386b2e97fa88084f007b443bdcb2",
+      "bytes": 692
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/dock/dock_head_5x5_a.nbt",
+      "kind": "structure",
+      "sha256": "4830af23fc98765eef066ee3bd4481953a035ce5507266f27f85ff20bd983f4d",
+      "bytes": 648,
+      "id": "enterprise:stormwind/dock/dock_head_5x5_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/dock/dock_pier_3x4_a.json",
+      "kind": "meta",
+      "sha256": "a3e13a16367a2d7616250061ea0501d9bbaac3582d503d4b0bd81e1eab2a3dca",
+      "bytes": 595
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/dock/dock_pier_3x4_a.nbt",
+      "kind": "structure",
+      "sha256": "d3c779a068f8bb8f831bab385ec3abeb884f5ec3315ffc10bcd29463f0321741",
+      "bytes": 387,
+      "id": "enterprise:stormwind/dock/dock_pier_3x4_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/forum/market_cross_7x7_a.json",
+      "kind": "meta",
+      "sha256": "5e2b9c44fcef5f1c11ee8a6ec33f2f9651647a3e92a23d5f98d11c2c9dffe494",
+      "bytes": 531
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/forum/market_cross_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "0460d9030233b627d3e14bad9fad21941ba3b4cb98de3e409f5872d4f387f704",
+      "bytes": 1309,
+      "id": "enterprise:stormwind/forum/market_cross_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/caravanserai_12x9_a.json",
+      "kind": "meta",
+      "sha256": "e7fa1e02483c92fd4a996cf269ed6a0627ab0726889de6bf4de0ecab16bae998",
+      "bytes": 6804
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/caravanserai_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "478df89f23bd303ba8fe4354e5f133c27dde0b0e0dd5fc7199b0ecc81a38ed94",
+      "bytes": 4816,
+      "id": "enterprise:stormwind/hall/caravanserai_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/counting_house_9x9_a.json",
+      "kind": "meta",
+      "sha256": "ef01cf8ae3daead8c7a853730dd7ede59a1beae95c0ed399635c4b50f2c622d2",
+      "bytes": 5209
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/counting_house_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "d422d0e63a0c22addcbc72aabdb6c8abb1f0027f54f86bc3a69599784b5a6fd8",
+      "bytes": 4017,
+      "id": "enterprise:stormwind/hall/counting_house_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/granary_9x9_a.json",
+      "kind": "meta",
+      "sha256": "65c2b0b16ea56ffc2f63b85fa17d88bde4641012b3cb9b87290a8426f41fc083",
+      "bytes": 7022
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/granary_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "5ab9fee2d61532d7d6eb59a9385c23d1a16d2c9da86afc773d01d824a86544e2",
+      "bytes": 3755,
+      "id": "enterprise:stormwind/hall/granary_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/library_9x9_a.json",
+      "kind": "meta",
+      "sha256": "3b33f4e674bb1c58cbf29f3177e8ea681ed00537d96e6a10c9efa6279b760ea8",
+      "bytes": 7068
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/library_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e20c65bcdf1f1d4ce1b76a111d0a991628fe22d764fcff5764a91211d33849e6",
+      "bytes": 3813,
+      "id": "enterprise:stormwind/hall/library_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/market_hall_12x12_a.json",
+      "kind": "meta",
+      "sha256": "46df866eb6b0055e45cb1c203eadaf02cf806b4e9bc62e1b789724ed96bc8d7c",
+      "bytes": 13507
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/market_hall_12x12_a.nbt",
+      "kind": "structure",
+      "sha256": "9f80e3614a4ba7805a4e253e9a476b19015c5cb9e162f1ed1d6e0cc76c3064c4",
+      "bytes": 9237,
+      "id": "enterprise:stormwind/hall/market_hall_12x12_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/root_cellar_9x9_a.json",
+      "kind": "meta",
+      "sha256": "95493639f77047503bb7288505e4cdd100a8e7431aaf2568cfcac8298d059bae",
+      "bytes": 5867
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/root_cellar_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "f476a0d4b19a6fa91898860a27e4ebdd0e37c52432959771113170efa84fd0a6",
+      "bytes": 3756,
+      "id": "enterprise:stormwind/hall/root_cellar_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/smithy_9x9_a.json",
+      "kind": "meta",
+      "sha256": "95de6e011cccfd5b60a1b5de83be1721368f950b4972cbc54289ed141e20a54a",
+      "bytes": 4698
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/smithy_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "98df63b50d823a680ceb52216b3ff06b48debe011ffecd62b098855a8fa157b9",
+      "bytes": 3886,
+      "id": "enterprise:stormwind/hall/smithy_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/square_9x9_a.json",
+      "kind": "meta",
+      "sha256": "de682a2ac8a7daea9f0561ea3c90287c96ff5b609816b6d43fe6d6e98425690f",
+      "bytes": 527
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/square_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "afb33404aed713b296d0b4b4e6cc5387b9ab15b120cba988676f5487fb9c07ac",
+      "bytes": 1301,
+      "id": "enterprise:stormwind/hall/square_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/temple_9x9_a.json",
+      "kind": "meta",
+      "sha256": "4333986edca08c67176e5d7cefe42ebc937bb707543923a3200dc91f65b89955",
+      "bytes": 5372
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/temple_9x9_a.nbt",
+      "kind": "structure",
+      "sha256": "c5527740144186067b170e202a67ed35e16953a06a260a98dc1f0a8404978f12",
+      "bytes": 3952,
+      "id": "enterprise:stormwind/hall/temple_9x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/watchtower_7x7_a.json",
+      "kind": "meta",
+      "sha256": "84457c2d87b512de0fe5f10202f15b013cc42f942965d34a889419f5d5a9ffa8",
+      "bytes": 168
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/hall/watchtower_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "6e8c57663295e08bb81f7a96894334a63311c88f4d969a7c61206d3d11fa7e8e",
+      "bytes": 4896,
+      "id": "enterprise:stormwind/hall/watchtower_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_armorer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "106714973244312876adb986adba1627fa2942bd6d8652d4e8764ffe578adaa8",
+      "bytes": 698
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_armorer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "1f25105d98813d0e9e0f4734ab12b7b800729bd1b485c45fde9ba12e138dbe80",
+      "bytes": 519,
+      "id": "enterprise:stormwind/stall/stall_armorer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_butcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "f62e41fd837d6c3bb4b5bf7ffbaa4ebdecbd8b7d22ce20b6bec967174668a6a2",
+      "bytes": 691
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_butcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "cde9e6303ea0f75918aea194ff1f3440ba57440e32a81aebca75303fc6479125",
+      "bytes": 509,
+      "id": "enterprise:stormwind/stall/stall_butcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_cartographer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "214a0b20d0ec45d2fbf8110dfdb4eb754e403aca41aa1908ffa403628b516dd1",
+      "bytes": 707
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_cartographer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "07db6c03e28934c0e052f8105bf84a1a148584fd6281e93dace7924c41be0ccd",
+      "bytes": 537,
+      "id": "enterprise:stormwind/stall/stall_cartographer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_cleric_3x3_a.json",
+      "kind": "meta",
+      "sha256": "a800b359e4eaab52734764acb97b3541b6639c809956f33cc18f112c6517cfba",
+      "bytes": 697
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_cleric_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "fab31c04b6a2859b3a3dba85c9e4a5f8ff99e5c03b90b3eabb0f9dc054b129c5",
+      "bytes": 548,
+      "id": "enterprise:stormwind/stall/stall_cleric_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_farmer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "ed94beacf1def4618a9e2ab5e19d72c21cf724a27f1618a33ff38c056a746dea",
+      "bytes": 693
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_farmer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "3a90537d750ae9dd3c37e90d6c9989a6e2f7a31bb5ae64ae048f1ed386a2d059",
+      "bytes": 532,
+      "id": "enterprise:stormwind/stall/stall_farmer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_fisherman_3x3_a.json",
+      "kind": "meta",
+      "sha256": "d8fa4fc99010058f5304442c7f21d0e5f2065a06aaa4e4541393607b4783757b",
+      "bytes": 693
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_fisherman_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "947b891b4f48f521adea3174faf72a4158316afb72f1c38cb1e4f955163b5630",
+      "bytes": 536,
+      "id": "enterprise:stormwind/stall/stall_fisherman_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_fletcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "cc7caa4ad5c8a0edaac84485525547ef0e1a372a2859be5e77c1dcb8531882b8",
+      "bytes": 701
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_fletcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "21df77716f6e8e6d77c02b906c1647e51278e2c51a1a5a66b7bd0e1ea1876a12",
+      "bytes": 531,
+      "id": "enterprise:stormwind/stall/stall_fletcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_leatherworker_3x3_a.json",
+      "kind": "meta",
+      "sha256": "aa5c3e5edb7bef973ce431045f3ee67ac78d4ca8c0fec36b962aa87c9094f92b",
+      "bytes": 699
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_leatherworker_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "912052a5382487d20cc633e8a59df8c3bb7e0c44bb425a5af72f858ab6384262",
+      "bytes": 505,
+      "id": "enterprise:stormwind/stall/stall_leatherworker_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_librarian_3x3_a.json",
+      "kind": "meta",
+      "sha256": "985f39de401e3100aeb95504707b7dffa54d92b3617fc120ea9d61f7fd2b5817",
+      "bytes": 694
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_librarian_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "cd176448f304ab711e48ab6fd6860f4343e1057fbd66e8296e9540eeac2213cf",
+      "bytes": 566,
+      "id": "enterprise:stormwind/stall/stall_librarian_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_mason_3x3_a.json",
+      "kind": "meta",
+      "sha256": "00fa2896e5f06792483901b1dfa00defe519e79589ffb6f35d58f66b63f71621",
+      "bytes": 694
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_mason_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "b5b771ac66fe5b233a0c33934cb9da3d089f769d386e2b83dfce54dcf1d2522a",
+      "bytes": 527,
+      "id": "enterprise:stormwind/stall/stall_mason_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_shepherd_3x3_a.json",
+      "kind": "meta",
+      "sha256": "e0c3068cc6158d2dd08a9feca88cdfb1091efd43c7a274ff1c2a918ec18771ca",
+      "bytes": 690
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_shepherd_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "99e6c4a847c91d55ba102202c7a78b934852688d1119e30d1dfb80d055e4054b",
+      "bytes": 508,
+      "id": "enterprise:stormwind/stall/stall_shepherd_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_toolsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "1621dc72cff236d8fbe5d49916b6b50d079859d3e1bcc329790cfcf6c6ce46fa",
+      "bytes": 701
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_toolsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "d92bcc30caadbaf8305ffbb375ae7d3f8264c3cc4d0c5a305f8da142ef07d4e0",
+      "bytes": 516,
+      "id": "enterprise:stormwind/stall/stall_toolsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_weaponsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "8c4b1571585e1535abfbda91fc3b5df55ab8700ab95d5fedb699878bede360cc",
+      "bytes": 699
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/stall/stall_weaponsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "66f1d8597c90c0d7348eac7e69f69d6a5948a891fce9ae6d0c50970e006f28cb",
+      "bytes": 521,
+      "id": "enterprise:stormwind/stall/stall_weaponsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/corner_7x7_a.json",
+      "kind": "meta",
+      "sha256": "85081ab0ebe817f8211565071c563f124db960733d4c22de6498a4631dd39cb6",
+      "bytes": 238
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/corner_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "364b608ec5c9764f31a7fea2f8453ceb7bc103dfa9d0d9b5315bc9817e2b2c3f",
+      "bytes": 3437,
+      "id": "enterprise:stormwind/wall/corner_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/curtain_4_a.json",
+      "kind": "meta",
+      "sha256": "0a020f9df6aca1da8260fa366ae99583413b23e8fe83069909df7870e15fd73a",
+      "bytes": 213
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/curtain_4_a.nbt",
+      "kind": "structure",
+      "sha256": "e6247abace49ec999f91bade1432326970b1da63daf24f56a8895f80a49ab9e7",
+      "bytes": 1520,
+      "id": "enterprise:stormwind/wall/curtain_4_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/curtain_8_a.json",
+      "kind": "meta",
+      "sha256": "6da96542a49aa4561f02338196146795206413c7fbf24f23efc6c3ae9c29d0ea",
+      "bytes": 213
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/curtain_8_a.nbt",
+      "kind": "structure",
+      "sha256": "2c10da144a181936c616a6b7b5eac96191b339deee402f3f5535b9c0536618d2",
+      "bytes": 2621,
+      "id": "enterprise:stormwind/wall/curtain_8_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/filler_1_a.json",
+      "kind": "meta",
+      "sha256": "51cd41c944ac22698c78724119f752e587d3a175ad248f939563eb42e89c23be",
+      "bytes": 212
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/filler_1_a.nbt",
+      "kind": "structure",
+      "sha256": "3207f7f3fcb4c304d35d44f5e657aabca0999f34cfdd6a782bd47e31f3ce92d3",
+      "bytes": 588,
+      "id": "enterprise:stormwind/wall/filler_1_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/filler_2_a.json",
+      "kind": "meta",
+      "sha256": "4dae1a75f7a40a477306bd12d8d2a7601107da20c4d588187e97023e8acbb2a8",
+      "bytes": 212
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/filler_2_a.nbt",
+      "kind": "structure",
+      "sha256": "f22758569091c7b36131c08c2a6f5a02ef013e2403fb93c4433112127e156750",
+      "bytes": 934,
+      "id": "enterprise:stormwind/wall/filler_2_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/filler_3_a.json",
+      "kind": "meta",
+      "sha256": "9ff39a80e0969aa54633904f488a84818a950f1ece645b5634f39b8052bcc44d",
+      "bytes": 212
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/filler_3_a.nbt",
+      "kind": "structure",
+      "sha256": "285622e92075b7cca842455c0c6355f9cb2e29e0fdbcfd7d9587b2c813dbcd73",
+      "bytes": 1248,
+      "id": "enterprise:stormwind/wall/filler_3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/gatehouse_11x7_a.json",
+      "kind": "meta",
+      "sha256": "262cc031bc10123f243110b3db7e0a3be9749d3bda3cfa336a98bab0efb0871c",
+      "bytes": 219
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/gatehouse_11x7_a.nbt",
+      "kind": "structure",
+      "sha256": "d748cd8902a54e838b821144f08d13212f55da378f767ac793fa34ad067af128",
+      "bytes": 4565,
+      "id": "enterprise:stormwind/wall/gatehouse_11x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/tower_7x7_a.json",
+      "kind": "meta",
+      "sha256": "d8e547393ebe9620108c45619bf0f308ea506265407d496e7fa1532d69373eeb",
+      "bytes": 237
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/wall/tower_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "374f6c043aeeb1823684afe837f2c47086fb56543242982fd780caf60872165d",
+      "bytes": 3433,
+      "id": "enterprise:stormwind/wall/tower_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_armorer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "f4e4c7e76c2e21c20b90098f4c026f3dc0a4f8da717f49abb776bbe9e170e688",
+      "bytes": 13364
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_armorer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "2f57974ce91d77b830c4d1f8d7859e9d887472dd76e2c48f56335a9d48d381ef",
+      "bytes": 6935,
+      "id": "enterprise:stormwind/workshop/workshop_armorer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_butcher_12x9_a.json",
+      "kind": "meta",
+      "sha256": "ba84119314e9c4b0aad4ae53b2c6719decc3e3abc7ed8ce195df867b48743831",
+      "bytes": 13350
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_butcher_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "8584a5d9309b0b742b785c7a9f16ba91abc39be387dec49b26bdcedfd2ab6fbf",
+      "bytes": 6939,
+      "id": "enterprise:stormwind/workshop/workshop_butcher_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_cartographer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "c4b7b5ab5f9cbb887f0006d82083a27f5247346088788b9ba6cf2d36acd66262",
+      "bytes": 13359
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_cartographer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "26c4be25250f762742dc4f324814a0afa592e407c6636e990b899d4eae7f4885",
+      "bytes": 6961,
+      "id": "enterprise:stormwind/workshop/workshop_cartographer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_cleric_12x9_a.json",
+      "kind": "meta",
+      "sha256": "3d789b394f3a7e0c33167261d6d599e550953f64b9672f52df215e43dcc84518",
+      "bytes": 13396
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_cleric_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "29949184e07ea7fbf4db8525866cd34cfa0c679a3bf195c0a5ecc4e52e8f519d",
+      "bytes": 6993,
+      "id": "enterprise:stormwind/workshop/workshop_cleric_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_farmer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "0dc6ab3bf31fdab7b405a72e659b6f3e0b3af974e44b9af2d9abb181fa21b4fa",
+      "bytes": 13342
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_farmer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "733a74794c73dd5f747264d9bd44e6ca2cde946dc1b5e4dde447cdaf0ad1edaa",
+      "bytes": 6955,
+      "id": "enterprise:stormwind/workshop/workshop_farmer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_fisherman_12x9_a.json",
+      "kind": "meta",
+      "sha256": "ebed3095cd69d394347bb336f215977020495d18acb8104de4ccf01b510eb1af",
+      "bytes": 13355
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_fisherman_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "59fdd23a746bc8fbbc0efedc6f32b8531dc26f62542233d3ba2bad2fd1c8913a",
+      "bytes": 6945,
+      "id": "enterprise:stormwind/workshop/workshop_fisherman_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_fletcher_12x9_a.json",
+      "kind": "meta",
+      "sha256": "85996ca35e836997352b615db5ea6eb5482f83973586196a70cda5f978527411",
+      "bytes": 13346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_fletcher_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "8c9cd245470cd7bc439ff4a349f669ffabadea70e859ba582a391724e7dd6b2c",
+      "bytes": 6946,
+      "id": "enterprise:stormwind/workshop/workshop_fletcher_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_leatherworker_12x9_a.json",
+      "kind": "meta",
+      "sha256": "c8f965bc5d93a46c62c252dd868e5d4b81c04f71f9a29a46aad83b00e6471ac8",
+      "bytes": 13352
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_leatherworker_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "1907b1b9b7dcfa81b141b1849e159f7e3162376e07dd76b970a866e90bc2ec85",
+      "bytes": 6896,
+      "id": "enterprise:stormwind/workshop/workshop_leatherworker_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_librarian_12x9_a.json",
+      "kind": "meta",
+      "sha256": "36911f212f11d08f02de0f24bd5771f89ab2f0797b7363909b94f88d97d79726",
+      "bytes": 13381
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_librarian_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "f729d3f23c7ceac0e404dd6f4bc161faceeda1b62562501b4e16295b2ab3233e",
+      "bytes": 7003,
+      "id": "enterprise:stormwind/workshop/workshop_librarian_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_mason_12x9_a.json",
+      "kind": "meta",
+      "sha256": "c7e598243f72b43623bb5d4d4c6b9df727cf035bbb8d4fe2da600251689def45",
+      "bytes": 13349
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_mason_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "7df8fc6f432badac9aae4f14af8488b188cc239acd19313c1a98ae7c2cde67c8",
+      "bytes": 6913,
+      "id": "enterprise:stormwind/workshop/workshop_mason_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_shepherd_12x9_a.json",
+      "kind": "meta",
+      "sha256": "35cc909a6e6233f536b8b1dc0c98d5080b0993696452d292bc1735fbab415356",
+      "bytes": 13339
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_shepherd_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "9283481a1abc51cdab3d35b34f973b9bed2107255670cea98e4d9577828b1045",
+      "bytes": 6889,
+      "id": "enterprise:stormwind/workshop/workshop_shepherd_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_toolsmith_12x9_a.json",
+      "kind": "meta",
+      "sha256": "4f25549f334bf3a70002bd9665fd1e9364dbc4dfa485795ff714f9f2143cc236",
+      "bytes": 13347
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_toolsmith_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "b58c2b5bf6cdb2e1ba2de3d085105fcb989bc94a3fb01dcacba02d9cb8589577",
+      "bytes": 6890,
+      "id": "enterprise:stormwind/workshop/workshop_toolsmith_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_weaponsmith_12x9_a.json",
+      "kind": "meta",
+      "sha256": "1edaf30fb18225b07e81163bd45f7fc49a8384fdc11f9317974b189bb4f85e1e",
+      "bytes": 13364
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/workshop/workshop_weaponsmith_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "9258a9c7e224614b85393e96f341def591503f46d4682c6e54f3834304762baf",
+      "bytes": 6939,
+      "id": "enterprise:stormwind/workshop/workshop_weaponsmith_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/earthworks.json",
+      "kind": "kit_rules",
+      "sha256": "89017173f041db67024e136aedd4f89eefa32030221aa8037b83e567323eca5b",
+      "bytes": 17879
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/plan.json",
+      "kind": "kit_rules",
+      "sha256": "a498cf4f0452b21ef0f8163ee60eedaccd9e9f1ddb74e2dde70b2196d4ba5828",
+      "bytes": 20201
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/timber.json",
+      "kind": "kit_rules",
+      "sha256": "0969ace88f369958bf1c63317051978c36426bf48d44eb790f4f4f8e075da54f",
+      "bytes": 7767
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/timber_relief.json",
+      "kind": "kit_rules",
+      "sha256": "9b2e50d1622be8ff9bd805f262cbdff1dd8e4b3ff3fed2e7372a8ab62775d1df",
+      "bytes": 26523
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/wall_stone.json",
+      "kind": "kit_rules",
+      "sha256": "190e6a0700f29adbdd78f9c958371395b6d6958267366f0739199eb6e585b6e1",
+      "bytes": 2095
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/yards.json",
+      "kind": "kit_rules",
+      "sha256": "0500ede0028a8c1106dc19198d9832ad972574aee6a15e31642c766152678032",
+      "bytes": 10784
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_rules/lordaeron.json",
+      "kind": "town_rules",
+      "sha256": "0159c6ba464315a9db1e93048ff02043720a7b4d1ca801a841bffa1efcbf577b",
+      "bytes": 5528
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/assemble.mjs",
+      "kind": "tool",
+      "sha256": "cb8b83d4a73a5b47a5be4ed174417b71d98433f94217e27aedd780a81bca6209",
+      "bytes": 13127
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/cli.mjs",
+      "kind": "tool",
+      "sha256": "ca75d59fa3eea18290b6998c530f97df81307a94b4b5ad9cce8389d577c5e1d0",
+      "bytes": 1322
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose-cli.mjs",
+      "kind": "tool",
+      "sha256": "9d38cdcba8e2300e4d95f1198d51f4fab42d2abd16abbb69e537890b75810e94",
+      "bytes": 1015
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose.mjs",
+      "kind": "tool",
+      "sha256": "5006adeceb1d847e55b571c273baba6ba0835550c9a82df33fec4d43f98092c5",
+      "bytes": 15478
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/grid.mjs",
+      "kind": "tool",
+      "sha256": "8abb458a3624e5553dd0efacd8c8fbf9a18e081258222d2d85c08d31a816d781",
+      "bytes": 4076
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/modules.mjs",
+      "kind": "tool",
+      "sha256": "ba914a0551a408b3fda5f1f0d7ef3e3f9cc3ad17e3c575d3e68d3732c7ca1b9e",
+      "bytes": 15043
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/nbt.mjs",
+      "kind": "tool",
+      "sha256": "d6e567e4d2b63ca0e933d244a51fdc14783ca07e08b7445bb59440475465c1c6",
+      "bytes": 6473
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/parts.mjs",
+      "kind": "tool",
+      "sha256": "2f323c6a6e26125bc4bd366e67002e1dff84e3f034410a30f8f888cba66dea6f",
+      "bytes": 6686
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/rotate.mjs",
+      "kind": "tool",
+      "sha256": "bf7391b2fe4bb192b678488743fedab298828e281ca407bca0156d8d5292fe6f",
+      "bytes": 811
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/wall-tiling.mjs",
+      "kind": "tool",
+      "sha256": "811a2fe91fd44f8b4b8c4be462207bce0cbf23a9c403d61e2a688134756143f3",
+      "bytes": 2007
+    }
+  ]
+}
