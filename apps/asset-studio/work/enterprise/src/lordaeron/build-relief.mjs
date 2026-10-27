@@ -85,7 +85,9 @@ for (const [name, p, tiers, style] of GOLD) {
 // 4. the reference composer, self-contained beside the assembler
 const REF = join(BUNDLE, "scripts/assets/lordaeron-ref");
 for (const f of ["modules.mjs", "compose.mjs"]) {
-  const src = readFileSync(join(HERE, f), "utf8").replace('from "../grid.mjs"', 'from "./grid.mjs"');
+  // in the client's repo the ref sits at scripts/assets/lordaeron-ref/, three up from the repo root
+  const src = readFileSync(join(HERE, f), "utf8").replace('from "../grid.mjs"', 'from "./grid.mjs"')
+    .replace('"../../bundle/core/src/main/resources/', '"../../../core/src/main/resources/');
   write(join(REF, f), src);
 }
 write(join(REF, "compose-cli.mjs"), `#!/usr/bin/env node

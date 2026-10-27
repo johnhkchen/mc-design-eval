@@ -15,11 +15,14 @@ const B = {
   skirt: "purpur_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]",
   bracket: "dark_oak_stairs[facing=north,half=top,shape=straight,waterlogged=false]",
   lattice: "dark_oak_trapdoor[facing=south,half=bottom,open=true,powered=false,waterlogged=false]",
-  sill: "dark_oak_slab[type=top,waterlogged=false]", counter: "mangrove_slab[type=top,waterlogged=false]",
+  sill: "dark_oak_trapdoor[facing=south,half=top,open=false,powered=false,waterlogged=false]",       // a ledge: nothing spawns on it
+  potsill: "dark_oak_stairs[facing=north,half=top,shape=straight,waterlogged=false]", counter: "mangrove_slab[type=top,waterlogged=false]",
   door: (half, hinge) => `dark_oak_door[facing=south,half=${half},hinge=${hinge},open=false,powered=false]`,
   lantern: "lantern[hanging=true,waterlogged=false]", lamp: "lantern[hanging=false,waterlogged=false]",
 };
 // the bottom layer of a storey: on the ground the plinth with its lip, above it the beam under a tile skirt
+// the column: red lacquer on the ground storey, dark timber framing the plaster above
+const col = (st) => (st === "ground" ? B.col : "dark_oak_log[axis=y]");
 const base = (st) => (st === "ground" ? [B.plinth, B.lip] : [B.beamX, B.skirt]);
 
 function columns(w, fill, party = false) {
@@ -33,15 +36,16 @@ function columns(w, fill, party = false) {
 }
 // a bay's wall: the base, plaster, the beam at the top (layer H-1)
 const bayWall = (st, y, mid) => (y === 0 ? base(st)[0] : y === H - 1 ? B.beamX : mid);
-const lattice = (y) => (y >= 2 && y <= H - 2 ? B.lattice : B.infill);
+// a lattice window: one column of the bay, two high, the rest white plaster (so the wall reads white, the lattice dark)
+const lattice = (y, x = 0) => (x === 0 && y >= 2 && y <= H - 2 ? B.lattice : B.infill);
 
 const SHELL = {
-  post: (st) => columns(1, (x, y) => [y === 0 ? base(st)[0] : B.col, y === 0 ? base(st)[1] : y === H - 1 ? B.bracket : "air"]),
+  post: (st) => columns(1, (x, y) => [y === 0 ? base(st)[0] : col(st), y === 0 ? base(st)[1] : y === H - 1 ? B.bracket : "air"]),
   chimney: (st) => columns(1, (x, y) => [y === 0 ? base(st)[0] : y === H - 1 ? B.beamX : B.infill, y === 0 ? base(st)[1] : "air"]),
   bay_plain: (st) => columns(2, (x, y) => [bayWall(st, y, B.infill), y === 0 ? base(st)[1] : "air"]),
-  bay_window: (st) => columns(2, (x, y) => [bayWall(st, y, lattice(y)), y === 0 ? base(st)[1] : y === 1 ? B.sill : "air"]),
-  bay_window_box: (st) => columns(2, (x, y) => [bayWall(st, y, lattice(y)),
-    y === 0 ? base(st)[1] : y === 1 ? B.sill : y === 2 && x === 0 ? "potted_azalea_bush" : "air"]),
+  bay_window: (st) => columns(2, (x, y) => [bayWall(st, y, lattice(y, x)), y === 0 ? base(st)[1] : y === 1 && x === 0 ? B.sill : "air"]),
+  bay_window_box: (st) => columns(2, (x, y) => [bayWall(st, y, lattice(y, x)),
+    y === 0 ? base(st)[1] : y === 1 ? (x === 0 ? B.potsill : B.sill) : y === 2 && x === 0 ? "potted_azalea_bush" : "air"]),
   bay_landing: (st) => columns(2, (x, y) => [bayWall(st, y, x === 0 ? lattice(y) : B.infill), y === 0 ? base(st)[1] : y === 1 && x === 0 ? B.sill : "air"]),
   bay_door: () => columns(2, (x, y) => {                       // the door on the right, a lattice sidelight on the left
     if (y === 0) return [B.plinth, B.lip];
@@ -53,13 +57,17 @@ const SHELL = {
     y === 0 ? B.lip : "air"]),
   bay_shop: () => columns(2, (x, y) => [y === 0 ? B.plinth : y === H - 1 ? B.beamX : y === 2 ? "glass_pane[east=true,north=false,south=false,waterlogged=false,west=true]" : y === 3 ? B.lattice : B.infill,
     y === 0 ? B.lip : y === 1 ? B.counter : "air"]),
+  // the corner, 2 x 2: x 0 the side's relief, x 1 the wall corner; z 0 the wall row, z 1 the front relief. Columns at the
+  // wall corner and proud on the side; the base steps down on both faces and at the diagonal (nothing full to stand on)
   corner: (st) => { const g = new Grid([2, H, 2]); for (let y = 0; y < H; y++) {
-    const c = y === 0 ? base(st)[0] : B.col;
-    g.set(1, y, 0, c); g.set(0, y, 0, c); g.set(1, y, 1, y === 0 ? base(st)[0] : y === H - 1 ? B.bracket.replace("north", "south") : "air");
+    const ground = st === "ground";
+    g.set(1, y, 0, y === 0 ? base(st)[0] : col(st));
+    g.set(0, y, 0, y === 0 ? (ground ? B.lip.replace("north", "east") : B.skirt.replace("north", "east")) : col(st));
+    g.set(1, y, 1, y === 0 ? (ground ? "andesite_slab[type=bottom,waterlogged=false]" : "purpur_slab[type=bottom,waterlogged=false]") : y === H - 1 ? B.bracket.replace("north", "south") : "air");
     g.set(0, y, 1, y === 0 ? base(st)[1] : "air");
   } return g; },
-  corner_party: (st) => { const g = new Grid([1, H, 2]); for (let y = 0; y < H; y++) { g.set(0, y, 0, y === 0 ? base(st)[0] : B.col); g.set(0, y, 1, y === 0 ? base(st)[1] : y === H - 1 ? B.bracket : "air"); } return g; },
-  post_party: (st) => columns(1, (x, y) => [y === 0 ? base(st)[0] : B.col], true),
+  corner_party: (st) => { const g = new Grid([1, H, 2]); for (let y = 0; y < H; y++) { g.set(0, y, 0, y === 0 ? base(st)[0] : col(st)); g.set(0, y, 1, y === 0 ? base(st)[1] : y === H - 1 ? B.bracket : "air"); } return g; },
+  post_party: (st) => columns(1, (x, y) => [y === 0 ? base(st)[0] : col(st)], true),
   bay_party: (st) => columns(2, (x, y) => [bayWall(st, y, B.infill)], true),
   chimney_party: (st) => columns(1, (x, y) => [bayWall(st, y, B.infill)], true),
 };

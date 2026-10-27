@@ -12,20 +12,29 @@ import { allModules, H, roofLayers } from "./modules.mjs";
 import { readFileSync, existsSync } from "node:fs";
 
 // the plan layer as data (town_kits/lordaeron/plan.json): body classes -> core, partitions, furniture per storey
-const PLAN_FILE = new URL("../../bundle/core/src/main/resources/data/enterprise/town_kits/lordaeron/plan.json", import.meta.url);
+const PLAN_FILE = new URL("../../../core/src/main/resources/data/enterprise/town_kits/lordaeron/plan.json", import.meta.url);
 const PLAN = existsSync(PLAN_FILE) ? JSON.parse(readFileSync(PLAN_FILE, "utf8")) : null;
 export const planBody = (W, D) => PLAN && Object.entries(PLAN.bodies).find(([, b]) => b.when.W === W && b.when.D === D);
 const expr = (e, v) => (typeof e === "number" ? e : Function(...Object.keys(v), `"use strict"; return (${e});`)(...Object.values(v)));
 
-let LIB = null;
-const mod = (id) => { LIB ||= new Map(allModules().map((m) => [m.id, m])); const m = LIB.get(id); if (!m) throw new Error(`no module ${id}`); return m; };
+// module libraries by set: Lordaeron's by default; another kingdom's shell family registers its own (same ids)
+const LIBS = new Map(), SOURCES = new Map([["lordaeron", allModules]]);
+export const registerSet = (name, modulesFn) => { SOURCES.set(name, modulesFn); LIBS.delete(name); };
+let SET = "lordaeron";
+const mod = (id) => {
+  if (!LIBS.has(SET)) LIBS.set(SET, new Map(SOURCES.get(SET)().map((m) => [m.id, m])));
+  const m = LIBS.get(SET).get(id); if (!m) throw new Error(`no module ${id} in ${SET}`); return m;
+};
 
 export function compose(L) {
+  SET = L.set || "lordaeron";
   const [W, D] = L.body, S = L.storeys, party = L.party || [false, false];
   const rw = party[0] ? 0 : 1, re = party[1] ? 0 : 1, roofBase = 2 + H * S;
-  const span = L.roof === "gable_x" ? D + 2 : W + rw + re, layers = roofLayers(span);
-  const g = new Grid([W + rw + re, roofBase + layers + 1, D + 2]);
-  const X = (x) => x + rw, Z = (z) => z + 1;
+  // a hipped roof is one module over the whole relief outline, its eaves overhanging by `margin` all round
+  const E = L.roof === "hip" ? L.margin || 0 : 0;
+  const span = L.roof === "gable_x" ? D + 2 : W + rw + re, layers = L.roof === "hip" ? mod(`roof_hip_${W}x${D}`).grid.size[1] : roofLayers(span);
+  const g = new Grid([W + rw + re + 2 * E, roofBase + layers + 1, D + 2 + 2 * E]);
+  const X = (x) => x + rw + E, Z = (z) => z + 1 + E;
   const paste = (id, x, y, z, q = 0, mirror = false) => g.paste(mod(id).grid, X(x), y, Z(z), { q, mirror });
 
   // foundation, floors, room air
@@ -54,8 +63,9 @@ export function compose(L) {
     if (p.block) g.set(X(p.at[0]), 2 + H * p.storey + (p.dy || 0), Z(p.at[1]), p.block);              // an exact block (a declared vanilla workstation)
     else paste(p.module, p.at[0], 2 + H * p.storey + (p.dy || 0), p.at[1], p.q || 0);
   }
-  // roof slices over the relief
-  if (L.roof === "gable_x") {
+  // roof slices over the relief (or the one hipped roof, eaves and all)
+  if (L.roof === "hip") g.paste(mod(`roof_hip_${W}x${D}`).grid, X(-rw) - E, roofBase, Z(-1) - E);
+  else if (L.roof === "gable_x") {
     for (let x = -rw; x < W + re; x++) {
       const kind = x < 0 || x >= W ? "verge" : (x === 0 && !party[0]) || (x === W - 1 && !party[1]) ? "gable" : "bay";
       paste(`roof_${kind}_${span}`, x, roofBase, -1, 0, x >= W);
@@ -63,11 +73,11 @@ export function compose(L) {
   } else {
     for (let z = -1; z <= D; z++) {
       const kind = z < 0 || z >= D ? "verge" : z === 0 || z === D - 1 ? "gable" : "bay";
-      g.paste(mod(`roof_${kind}_${span}`).grid, 0, roofBase, Z(z), { q: 1, mirror: z >= D });            // the far verge mirrored: its boards face the gable
+      g.paste(mod(`roof_${kind}_${span}`).grid, E, roofBase, Z(z), { q: 1, mirror: z >= D });            // the far verge mirrored: its boards face the gable
     }
   }
   // the chimney stack over its breast, one above the ridge
-  if (L.chimney) {
+  if (L.chimney && L.roof !== "hip") {
     const [cx, cz] = L.chimney, top = roofBase + layers - 1 + 1;
     for (let y = roofBase; y <= top; y++) party[0] && cx === 0 ? paste("chimney_stack_party", 0, y, cz) : g.paste(mod("chimney_stack").grid, X(cx) - 1, y, Z(cz), { q: 1 });
   }
@@ -206,7 +216,8 @@ export function layoutOf(p) {
 
 /** Metadata (beds, workstations, entrance) for a composed layout, in template coordinates. */
 export function metaOf(L) {
-  const rw = (L.party || [])[0] ? 0 : 1, X = (x) => x + rw, Z = (z) => z + 1;
+  const E = L.roof === "hip" ? L.margin || 0 : 0;
+  const rw = (L.party || [])[0] ? 0 : 1, X = (x) => x + rw + E, Z = (z) => z + 1 + E;
   const doorX = L.doorBay * 3 + 1 + (L.door === "left" ? 0 : 1);
   return {
     entrance: { at: [X(doorX), 3, Z(L.body[1] - 1)], facing: "south", width: 1 },

@@ -1,0 +1,557 @@
+{
+  "batch": "024-dalaran-first-houses",
+  "thread": "0010",
+  "made": "2026-10-27T20:33:26.991Z",
+  "files": [
+    {
+      "path": "assets-src/dalaran/home/cottage_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "744009917267c3fdad00497af783c08c17e8b0b202567a381302aa6bb4afb8b8",
+      "bytes": 198614
+    },
+    {
+      "path": "assets-src/dalaran/home/house_10x10_a/front.jpg",
+      "kind": "preview",
+      "sha256": "93102e8b2838e472b568dc7f38e0cc3d4c79f3bf9a06b58c9bbda9c781aa5829",
+      "bytes": 211674
+    },
+    {
+      "path": "assets-src/dalaran/home/house_10x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "168a8c06f936d4bb7b648df8264c29a45b43601498d795d72664ccd03a8d47a7",
+      "bytes": 199797
+    },
+    {
+      "path": "assets-src/dalaran/home/house_13x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "211d803268213fe5e93cbfe9164314f09eb93080d5c2977bbf8e718534413341",
+      "bytes": 207032
+    },
+    {
+      "path": "assets-src/dalaran/home/shophouse_10x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "8a0a1194252cc116ded9003061e35f301fc833b1a998ea179fb59c0f1bd8986c",
+      "bytes": 199515
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/cottage_7x7_a.json",
+      "kind": "meta",
+      "sha256": "a5b247766e122bc82daab0eca09dfdefe41dfd2882acd01c4644bb66d10b1137",
+      "bytes": 5900
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/cottage_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "0dd5a4114e6d918572cdeed2cf48bf6922bcaa3f360eccaea6aae480919b7443",
+      "bytes": 3750,
+      "id": "enterprise:dalaran/home/cottage_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/house_10x10_a.json",
+      "kind": "meta",
+      "sha256": "ee10bfde6c9ff5cadeb0eba12c0f588a012cfc487269dcc13ae5e95c6a45fb5e",
+      "bytes": 17876
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/house_10x10_a.nbt",
+      "kind": "structure",
+      "sha256": "b437812797d797c6b7f1d59ebd4919b869617ab56c3e756fad39beb01b14d457",
+      "bytes": 8385,
+      "id": "enterprise:dalaran/home/house_10x10_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/house_10x7_a.json",
+      "kind": "meta",
+      "sha256": "78e9ccf06e8c85a4294719a57a4119e41efa2202e758cc0fcbb6cccf46970ba8",
+      "bytes": 12269
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/house_10x7_a.nbt",
+      "kind": "structure",
+      "sha256": "b75744501b6b961f06efb09ad4fbcee4f0e14205225c4128db4ab1c3882cca96",
+      "bytes": 6532,
+      "id": "enterprise:dalaran/home/house_10x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/house_13x7_a.json",
+      "kind": "meta",
+      "sha256": "f89155116d3ccddab7710b968f8c4cc5bb17846f44b5bcf87e15170350935b18",
+      "bytes": 14991
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/house_13x7_a.nbt",
+      "kind": "structure",
+      "sha256": "3d3e84b2fd33436a512bc6b2295f8b18747908bba689fa9d8ea90f7211038a79",
+      "bytes": 7878,
+      "id": "enterprise:dalaran/home/house_13x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/shophouse_10x7_a.json",
+      "kind": "meta",
+      "sha256": "41c2f94c909cc26f4c656a7315ec230ff126384dc04c35e2109becc6c9365293",
+      "bytes": 12358
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/home/shophouse_10x7_a.nbt",
+      "kind": "structure",
+      "sha256": "99e9cd23b1af3115e2d03f43de6ac7ebb6b5eeaecb5f0f756254b3c34cf9befc",
+      "bytes": 6559,
+      "id": "enterprise:dalaran/home/shophouse_10x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_arcade_ground.json",
+      "kind": "meta",
+      "sha256": "e37ce5413db613575eee792538b34dd2c08df56bccabcab32e069173721495cf",
+      "bytes": 333
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_arcade_ground.nbt",
+      "kind": "part",
+      "sha256": "481686db0106e9e63c23850390f83af0e869cd83ba245e7d3da29a46870b65b4",
+      "bytes": 349,
+      "id": "enterprise:dalaran/part/platform_hall/bay_arcade_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_door_ground.json",
+      "kind": "meta",
+      "sha256": "fcd729d6d11f7351c1ef254f991209bcfe48620061bdccf24cff4e35b010aa53",
+      "bytes": 366
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_door_ground.nbt",
+      "kind": "part",
+      "sha256": "2e9bc801209594245d16c32e1da64376d21232d8858c6ec0dbfab83f25a1c80d",
+      "bytes": 437,
+      "id": "enterprise:dalaran/part/platform_hall/bay_door_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_landing_ground.json",
+      "kind": "meta",
+      "sha256": "08cc687b92f6fdd2109fd2c25ca25e37ca73e5cfc2206716bc50824ae46ffdc0",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_landing_ground.nbt",
+      "kind": "part",
+      "sha256": "950871ec48bddc1f74c273ba35c0d560be87a9d24f3fd0b1b39ab320b45581c2",
+      "bytes": 373,
+      "id": "enterprise:dalaran/part/platform_hall/bay_landing_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_landing_upper.json",
+      "kind": "meta",
+      "sha256": "27db62eb7ba074c24025a2bb262b2f6ae7f19b5da29c538f6f3bfc278c3b51f8",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_landing_upper.nbt",
+      "kind": "part",
+      "sha256": "8cf17777d0300de52871bad9f8e015c4d6fd09b31728fe4fac5c9762ff29ef22",
+      "bytes": 360,
+      "id": "enterprise:dalaran/part/platform_hall/bay_landing_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_party_ground.json",
+      "kind": "meta",
+      "sha256": "7ab6be298e9d3e6a399ec9e22aa5a832af0c05762dc0dc60b1b9203e1e654bd1",
+      "bytes": 320
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_party_ground.nbt",
+      "kind": "part",
+      "sha256": "c0faf1e50f654f800fa5514dbe52090355dd4bf041d904a63466e6ab7cdda05a",
+      "bytes": 216,
+      "id": "enterprise:dalaran/part/platform_hall/bay_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_party_upper.json",
+      "kind": "meta",
+      "sha256": "f2e0b7b2a874e0b337d18e433e9621ab500b098ec1d67c98c06c957e124d8150",
+      "bytes": 317
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_party_upper.nbt",
+      "kind": "part",
+      "sha256": "cf2fbe4039350bbb06580e1d0b0e7d490070d6e18c5fd764bcab50371e93239b",
+      "bytes": 197,
+      "id": "enterprise:dalaran/part/platform_hall/bay_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_plain_ground.json",
+      "kind": "meta",
+      "sha256": "18a8b72204224be34395a81c0d8ddc43e1f1935fee761c653c1d8d75c8c26eca",
+      "bytes": 357
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_plain_ground.nbt",
+      "kind": "part",
+      "sha256": "6925a4cbb0092f858bac111ebc841ffa074d59adb8a54d95fdeba4a20abdf1d1",
+      "bytes": 320,
+      "id": "enterprise:dalaran/part/platform_hall/bay_plain_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_plain_upper.json",
+      "kind": "meta",
+      "sha256": "b65132df5b0b2ed8383fbfea58911285841a66789d19f4ea9cae398303476a9e",
+      "bytes": 354
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_plain_upper.nbt",
+      "kind": "part",
+      "sha256": "dbb216f161da0b981d7df7563dff8a1f29c2cea79e3b973d52581bf5730a093a",
+      "bytes": 304,
+      "id": "enterprise:dalaran/part/platform_hall/bay_plain_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_shop_ground.json",
+      "kind": "meta",
+      "sha256": "be54b29e1ab46e0b27cb38b115fe7716bb32c6ef304a4fbb687ba2dc963eee60",
+      "bytes": 386
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_shop_ground.nbt",
+      "kind": "part",
+      "sha256": "4c7d646c24a846b2eedb4cae6cc14eeb90964441f2f191ced31fc6f04351355a",
+      "bytes": 416,
+      "id": "enterprise:dalaran/part/platform_hall/bay_shop_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_box_ground.json",
+      "kind": "meta",
+      "sha256": "40b00e44217f492c0f8d743d13199cab97ff62e7f1d169033462d5c73ad0bfd9",
+      "bytes": 389
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_box_ground.nbt",
+      "kind": "part",
+      "sha256": "95cdd811dc80d7e1dcd0dec1bc9a7fa31b064f72fd68f41037d29dd16c4623a9",
+      "bytes": 402,
+      "id": "enterprise:dalaran/part/platform_hall/bay_window_box_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_box_upper.json",
+      "kind": "meta",
+      "sha256": "e773079f08ad690f1d09bcf903ccad4f7d4a0744c7209825940f35005060d6ff",
+      "bytes": 386
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_box_upper.nbt",
+      "kind": "part",
+      "sha256": "d45196665751322473f9ae8bb4ec107cb410f8b9180f7786602c4cc13d3428a8",
+      "bytes": 398,
+      "id": "enterprise:dalaran/part/platform_hall/bay_window_box_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_ground.json",
+      "kind": "meta",
+      "sha256": "9cc2c842e26f4ab4628cef9f158d983c259bd9d762f3ba2366bed93e07f79434",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_ground.nbt",
+      "kind": "part",
+      "sha256": "950871ec48bddc1f74c273ba35c0d560be87a9d24f3fd0b1b39ab320b45581c2",
+      "bytes": 373,
+      "id": "enterprise:dalaran/part/platform_hall/bay_window_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_upper.json",
+      "kind": "meta",
+      "sha256": "39a7a783459ddf30dc19b8bce54e5c94515e45a60427f4118d0de3aaa58cae0d",
+      "bytes": 343
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/bay_window_upper.nbt",
+      "kind": "part",
+      "sha256": "8cf17777d0300de52871bad9f8e015c4d6fd09b31728fe4fac5c9762ff29ef22",
+      "bytes": 360,
+      "id": "enterprise:dalaran/part/platform_hall/bay_window_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_ground.json",
+      "kind": "meta",
+      "sha256": "b8f9773cfce205ba62313b411ec38098cf90492247a34c0846ca97fab50d5e9d",
+      "bytes": 362
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_ground.nbt",
+      "kind": "part",
+      "sha256": "756504a52d9a60808c708ca1a3ef2722bd0234ebdabce30823b3c7a8286c7638",
+      "bytes": 286,
+      "id": "enterprise:dalaran/part/platform_hall/chimney_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_party_ground.json",
+      "kind": "meta",
+      "sha256": "6ee36602916dee39f35c8c3ae55b62a62372c05e502acf217da223ae674e49fb",
+      "bytes": 361
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_party_ground.nbt",
+      "kind": "part",
+      "sha256": "310bc0e2deb2da8c62c2e975f58c03ac8149d676f2dd68762ef219d441c8abbe",
+      "bytes": 200,
+      "id": "enterprise:dalaran/part/platform_hall/chimney_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_party_upper.json",
+      "kind": "meta",
+      "sha256": "11f33b8aaa76a281b18e0e5398cd5cc2d247d0040790d5457a6644173b395124",
+      "bytes": 358
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_party_upper.nbt",
+      "kind": "part",
+      "sha256": "7ac3c3ef72b3483b470fb03a7aa48aa3cc6d1b6e48800e5769bd4c2a06a85367",
+      "bytes": 182,
+      "id": "enterprise:dalaran/part/platform_hall/chimney_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_upper.json",
+      "kind": "meta",
+      "sha256": "1affed59453a85fbb5203b694ca39ce8639370c1e680d21e997286af8c1bd048",
+      "bytes": 359
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/chimney_upper.nbt",
+      "kind": "part",
+      "sha256": "ab126343188c6482fbf3f906721d9f495516bf2481d34e4376ad24d8ad5b09e5",
+      "bytes": 271,
+      "id": "enterprise:dalaran/part/platform_hall/chimney_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_ground.json",
+      "kind": "meta",
+      "sha256": "cdfa191db90a6c6b83fb930f99c607df7cf140d19abe28e18280fdb389b56ae2",
+      "bytes": 296
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_ground.nbt",
+      "kind": "part",
+      "sha256": "9bad77c6f003263711736a873597f29c66e04b5283b204b73a0543783f145261",
+      "bytes": 359,
+      "id": "enterprise:dalaran/part/platform_hall/corner_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_party_ground.json",
+      "kind": "meta",
+      "sha256": "704585a1d7c2eba9ed911e7683187b69b94df4457ecbff115d8550a6e188b893",
+      "bytes": 329
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_party_ground.nbt",
+      "kind": "part",
+      "sha256": "11cd6bb8809d9bc9c19913a7d5fa65ff3e0e14db47d562ae213e95a7295ee7c2",
+      "bytes": 297,
+      "id": "enterprise:dalaran/part/platform_hall/corner_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_party_upper.json",
+      "kind": "meta",
+      "sha256": "bba392720c43dfd1c4089a8cdc8ffb2fa3eb77b6646d7619a5d052ca926b49ac",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_party_upper.nbt",
+      "kind": "part",
+      "sha256": "3c248039b2352630a695d8cfe5ab78f7f97190e28590fc7b0ef62d63a8609c9a",
+      "bytes": 279,
+      "id": "enterprise:dalaran/part/platform_hall/corner_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_upper.json",
+      "kind": "meta",
+      "sha256": "d40eb7093b0936835b4f16707e515a49d5229309630c7b778702a5aa3d9cfd7e",
+      "bytes": 293
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/corner_upper.nbt",
+      "kind": "part",
+      "sha256": "e255e5a5f617b415f7b3426f1f70d40990972b20df36ccb645c785af07d8312d",
+      "bytes": 350,
+      "id": "enterprise:dalaran/part/platform_hall/corner_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_ground.json",
+      "kind": "meta",
+      "sha256": "bd1c112f26d5abd9a4fb14811e791227aec819a0c83ea0211ee6b62a1261c011",
+      "bytes": 290
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_ground.nbt",
+      "kind": "part",
+      "sha256": "11cd6bb8809d9bc9c19913a7d5fa65ff3e0e14db47d562ae213e95a7295ee7c2",
+      "bytes": 297,
+      "id": "enterprise:dalaran/part/platform_hall/post_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_party_ground.json",
+      "kind": "meta",
+      "sha256": "bcb888b934d9e246ceaa56e77e6f8e38652916a463a04b0b7abd01379ccd30f7",
+      "bytes": 323
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_party_ground.nbt",
+      "kind": "part",
+      "sha256": "eeeab8a038ae1834328b8fe23964b47011def46b68167627ed9b9341ed2bff03",
+      "bytes": 198,
+      "id": "enterprise:dalaran/part/platform_hall/post_party_ground"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_party_upper.json",
+      "kind": "meta",
+      "sha256": "f25d660d794ed2f21e6547d9dec7c66b8740b5c5211a32029f69f94276a35b18",
+      "bytes": 320
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_party_upper.nbt",
+      "kind": "part",
+      "sha256": "bc54ac81112e1af55db610a22460700d84f02a4b4e54bdd3e345895bd3713433",
+      "bytes": 177,
+      "id": "enterprise:dalaran/part/platform_hall/post_party_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_upper.json",
+      "kind": "meta",
+      "sha256": "4f9c63083122aaf7ae63c2dc1d9bbeafa8417e24f7038c121cea4fe4b15a3912",
+      "bytes": 287
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/post_upper.nbt",
+      "kind": "part",
+      "sha256": "3c248039b2352630a695d8cfe5ab78f7f97190e28590fc7b0ef62d63a8609c9a",
+      "bytes": 279,
+      "id": "enterprise:dalaran/part/platform_hall/post_upper"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_10x10.json",
+      "kind": "meta",
+      "sha256": "a795d5974d8c096edbe2daec1acf494aed92358c0148b65d05cd3da347ac4bda",
+      "bytes": 267
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_10x10.nbt",
+      "kind": "part",
+      "sha256": "1e16c6cb0b17fef887ebf9ba3714438a8692b5e325e7b16554f93432b1b75f59",
+      "bytes": 2038,
+      "id": "enterprise:dalaran/part/platform_hall/roof_hip_10x10"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_10x7.json",
+      "kind": "meta",
+      "sha256": "e9fb89202947caba1f5d01ee0b2c9c855eed738ec05e3ec55d3e5d84d15470d4",
+      "bytes": 264
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_10x7.nbt",
+      "kind": "part",
+      "sha256": "109b27c6833ad08c3e17cd58a94a874971dd6a7c20b88e31c36357421017e7b9",
+      "bytes": 1609,
+      "id": "enterprise:dalaran/part/platform_hall/roof_hip_10x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_13x7.json",
+      "kind": "meta",
+      "sha256": "98d37a117222587bb233cd00d4c1a212008c0451f887f7673530f7b1a0d0b7e6",
+      "bytes": 264
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_13x7.nbt",
+      "kind": "part",
+      "sha256": "f3719d05cdd7f90d567dbc324773ba378343db4153334cba9797fa7d5e9f5b09",
+      "bytes": 1888,
+      "id": "enterprise:dalaran/part/platform_hall/roof_hip_13x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_7x7.json",
+      "kind": "meta",
+      "sha256": "b0b44a12487b34711586c987b5cf8b408f0c055827041d6ac8fcc2a101f7ad53",
+      "bytes": 261
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/part/platform_hall/roof_hip_7x7.nbt",
+      "kind": "part",
+      "sha256": "1bd4f283383c08ea12dba1278b3d64ff24df74c8182fce84d9cd65bb9af94dfe",
+      "bytes": 1317,
+      "id": "enterprise:dalaran/part/platform_hall/roof_hip_7x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/dalaran/platform_hall.json",
+      "kind": "kit_rules",
+      "sha256": "7af7336bbf00dd69930005d3a81b6c6fcfd9343794ef3d7d798f6be6668d3a24",
+      "bytes": 24910
+    },
+    {
+      "path": "scripts/assets/dalaran-ref/compose.mjs",
+      "kind": "tool",
+      "sha256": "a3a952065fd57a5d2007daaee682db60582bcc8abf04da603b8515569661c0cd",
+      "bytes": 580
+    },
+    {
+      "path": "scripts/assets/dalaran-ref/modules.mjs",
+      "kind": "tool",
+      "sha256": "2a9f88288b700efd55d08092c51d4dd4b33d5f1407cbf6b75e780aa584d74551",
+      "bytes": 11006
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/assemble.mjs",
+      "kind": "tool",
+      "sha256": "cb8b83d4a73a5b47a5be4ed174417b71d98433f94217e27aedd780a81bca6209",
+      "bytes": 13127
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/cli.mjs",
+      "kind": "tool",
+      "sha256": "ca75d59fa3eea18290b6998c530f97df81307a94b4b5ad9cce8389d577c5e1d0",
+      "bytes": 1322
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose-cli.mjs",
+      "kind": "tool",
+      "sha256": "9d38cdcba8e2300e4d95f1198d51f4fab42d2abd16abbb69e537890b75810e94",
+      "bytes": 1015
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/compose.mjs",
+      "kind": "tool",
+      "sha256": "2c74675fc1bb1c187cdc73cbbd517658d441f71225efc81624b30c56df9c831a",
+      "bytes": 16317
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/grid.mjs",
+      "kind": "tool",
+      "sha256": "8abb458a3624e5553dd0efacd8c8fbf9a18e081258222d2d85c08d31a816d781",
+      "bytes": 4076
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/modules.mjs",
+      "kind": "tool",
+      "sha256": "ba914a0551a408b3fda5f1f0d7ef3e3f9cc3ad17e3c575d3e68d3732c7ca1b9e",
+      "bytes": 15043
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/nbt.mjs",
+      "kind": "tool",
+      "sha256": "d6e567e4d2b63ca0e933d244a51fdc14783ca07e08b7445bb59440475465c1c6",
+      "bytes": 6473
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/parts.mjs",
+      "kind": "tool",
+      "sha256": "2f323c6a6e26125bc4bd366e67002e1dff84e3f034410a30f8f888cba66dea6f",
+      "bytes": 6686
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/rotate.mjs",
+      "kind": "tool",
+      "sha256": "bf7391b2fe4bb192b678488743fedab298828e281ca407bca0156d8d5292fe6f",
+      "bytes": 811
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/wall-tiling.mjs",
+      "kind": "tool",
+      "sha256": "811a2fe91fd44f8b4b8c4be462207bce0cbf23a9c403d61e2a688134756143f3",
+      "bytes": 2007
+    }
+  ]
+}
