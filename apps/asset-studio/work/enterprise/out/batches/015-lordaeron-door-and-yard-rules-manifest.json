@@ -1,0 +1,643 @@
+{
+  "batch": "015-lordaeron-door-and-yard-rules",
+  "thread": "0001",
+  "made": "2026-10-27T16:41:59.625Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_armorer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "abf470971f20586ddbb81cf0aab7c840aa32f10c0da64a34daa9439425239d7d",
+      "bytes": 194847
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_armorer_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_butcher_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "6f5cc7d42f5c3aba833b8879aec66ed79a067dac4b824ea0b847681882468b47",
+      "bytes": 194308
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_butcher_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cartographer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "40482d9dd20b0cdfeeaf264fa773b3a214c694271536f5ae1bfe00ede0fad313",
+      "bytes": 209607
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cartographer_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cleric_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "cb639c42f69b3e7d1bdb4eeb9e8481fa9c3a857700c6fb8649b105f05b44f3cc",
+      "bytes": 204467
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_cleric_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_farmer_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0cac4e5cd8e7fee76f96e9d77ae7bb9110c0a51ac73975a0c104d8dc1655008a",
+      "bytes": 205054
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_farmer_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fisherman_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "9a14b3a6cab52ab1c7d64225ee124db70b9f863497409b86ec30cad5c02160e5",
+      "bytes": 194443
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fisherman_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fletcher_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "9dca2cb0611e06e15056781516bfb4937ec2910ffdf26badac22408a83942ab5",
+      "bytes": 205090
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_fletcher_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_leatherworker_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "23e589f321560abbe1fcdd2ce72081046bf2e38643beb0e83ed5f872911981f7",
+      "bytes": 209604
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_leatherworker_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_librarian_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "5c54cf0500bf6886d64a21d87c22edaead212d9278a60b62f39368ef8f58b41d",
+      "bytes": 195009
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_librarian_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_mason_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "b20528d53df7ecfb5a7565566845acc9f4becd4f513947e4f6e3b8139bb326b3",
+      "bytes": 204201
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_mason_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_shepherd_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "34947f78b836ef0b606af895a6a599349381fa9a57c08e55369405c7b67eab7a",
+      "bytes": 210232
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_shepherd_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_toolsmith_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "8f7e480d19cc51d375a4706d89c1c802c023be2caab092a30006d0eaa090ff60",
+      "bytes": 209655
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_toolsmith_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_weaponsmith_12x9_a/front.jpg",
+      "kind": "preview",
+      "sha256": "ba0feeae8fdd5268a01c7903db7b85c4e633de752ce9a81757deaabfb3068270",
+      "bytes": 204636
+    },
+    {
+      "path": "assets-src/lordaeron/workshop/workshop_weaponsmith_12x9_a/notes.md",
+      "kind": "notes",
+      "sha256": "e8f5bd18abb94e0f9633fb11588b61ce7d112caba1bf635174725f21b0d9974f",
+      "bytes": 18
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b.json",
+      "kind": "meta",
+      "sha256": "8fc902a81a43cc88fa5404ea2b7efd423f5594045f5042713bd062687ece590f",
+      "bytes": 22701
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b.nbt",
+      "kind": "structure",
+      "sha256": "1526440670dab3515108c7ae4cf4e85b33e9ccf9cdacba35000ae684e7223386",
+      "bytes": 8618,
+      "id": "enterprise:lordaeron/home/townhouse_12x9_b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__daub.json",
+      "kind": "meta",
+      "sha256": "182cdc341a93768d328658c6a9a029481b54a350e2ec689b3ba74f396defad6c",
+      "bytes": 152
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__daub.nbt",
+      "kind": "structure",
+      "sha256": "777ea3e0222b241f733d0c4a172581e24b15d7a7dbfd243d34499f00f8d2bbfc",
+      "bytes": 8549,
+      "id": "enterprise:lordaeron/home/townhouse_12x9_b__daub"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__stone.json",
+      "kind": "meta",
+      "sha256": "1fa2839bc6b08ab30deb99aad2bb6dc74fbde44beec3e8d00bdacf854125526b",
+      "bytes": 154
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/home/townhouse_12x9_b__stone.nbt",
+      "kind": "structure",
+      "sha256": "e5e7d56ee9f85dfca295f56a43a040d8a919e100ee846697bccb55b5ab5b809a",
+      "bytes": 8627,
+      "id": "enterprise:lordaeron/home/townhouse_12x9_b__stone"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_armorer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "c33257fbf9e24a689d6d04649ab828f81474d9481b3465ce1fba545b87f6a146",
+      "bytes": 13533
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_armorer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "c95da49af596a7f74f5e9eea1a52190c5b3de3409faca1b0156568c301a6fad5",
+      "bytes": 6921,
+      "id": "enterprise:lordaeron/workshop/workshop_armorer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_butcher_12x9_a.json",
+      "kind": "meta",
+      "sha256": "5140afaaed51b31043b108e21cbd5ad3d5c70b15e8e3f64cd80078f33d1fa65b",
+      "bytes": 13519
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_butcher_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e8b30c4c450153546e29bd9c25a2f4db2eda4513a3ed4c1d82a56b422cf99983",
+      "bytes": 6907,
+      "id": "enterprise:lordaeron/workshop/workshop_butcher_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cartographer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "4ee614ba0935cdd6a3e9712ae2a1f0b7e00c32ad3d84d3e2d106d284b8123084",
+      "bytes": 13528
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cartographer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "cc7910cff035064ce09b62750f7e08359886e053d3965348f52ef9bbb08c6e3c",
+      "bytes": 6924,
+      "id": "enterprise:lordaeron/workshop/workshop_cartographer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cleric_12x9_a.json",
+      "kind": "meta",
+      "sha256": "e7ed19ef7db2a7cff65f5a9dadd25b575ed871ddba8f697001a8fcf17d0c6dca",
+      "bytes": 13564
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_cleric_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "fb48e01f1994e02a84b604c8a303f755fc982c49428619a306ec8a34a9a816e6",
+      "bytes": 6964,
+      "id": "enterprise:lordaeron/workshop/workshop_cleric_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_farmer_12x9_a.json",
+      "kind": "meta",
+      "sha256": "c125652da22b0ab996d324878f9f44213a91b2150ecbf1e252b673ca2f8936ae",
+      "bytes": 13510
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_farmer_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "33f6c7c5d18a47bdab89821bf7b661c3854974cb1c8a716aea5070de04ab5184",
+      "bytes": 6965,
+      "id": "enterprise:lordaeron/workshop/workshop_farmer_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fisherman_12x9_a.json",
+      "kind": "meta",
+      "sha256": "cfc896b08d9dc6ba417f5e0a12a01b55ab0de8d9d18af831276b15b9354ce3ca",
+      "bytes": 13526
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fisherman_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "56dba19a1f43884baa69550503aa199210d8d5845a8e7d8791835c27e0eab175",
+      "bytes": 6913,
+      "id": "enterprise:lordaeron/workshop/workshop_fisherman_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fletcher_12x9_a.json",
+      "kind": "meta",
+      "sha256": "fa554937cd1ccebc03d74afed2129e4725c570601cd5732d3e027bc58150bf62",
+      "bytes": 13516
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_fletcher_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "1e4e22e8926d8a27370c8ac6f2ff5ab79f617d788dd014f4fdc02813ba0e0780",
+      "bytes": 6926,
+      "id": "enterprise:lordaeron/workshop/workshop_fletcher_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_leatherworker_12x9_a.json",
+      "kind": "meta",
+      "sha256": "5584eb26429f1d23e47b10187575785911c28be6de3916f9098961d5a04578ee",
+      "bytes": 13522
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_leatherworker_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "09f75cc91d50dcc34e86a5b680a092094c3a51740c42a62d114d2236ad4a5278",
+      "bytes": 6837,
+      "id": "enterprise:lordaeron/workshop/workshop_leatherworker_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_librarian_12x9_a.json",
+      "kind": "meta",
+      "sha256": "d528f54d39708ac506c5ae8d285dd90eff7dd5e589341e3708669645c879026f",
+      "bytes": 13552
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_librarian_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "2be5063421691dfd8481860b981db8be93fa2a12d702bcd71988d0c21e08ec75",
+      "bytes": 6988,
+      "id": "enterprise:lordaeron/workshop/workshop_librarian_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_mason_12x9_a.json",
+      "kind": "meta",
+      "sha256": "312b6d1ee9de9d389223f33d99c70b130cc89cc866a1b04ba771ab6b515b3858",
+      "bytes": 13516
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_mason_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "787f3cf30e45463ac01e170036dbb12a5ad0754f6caeff801378de1fb77e8f0e",
+      "bytes": 6911,
+      "id": "enterprise:lordaeron/workshop/workshop_mason_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_shepherd_12x9_a.json",
+      "kind": "meta",
+      "sha256": "10a7bbd2b8528bafd4656aef09d52806b7520dd92f22671b543a05d256ddc691",
+      "bytes": 13504
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_shepherd_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "a8c185e03943818a4906fba9d94723524d62416b938bfd227c133a286f45f412",
+      "bytes": 6846,
+      "id": "enterprise:lordaeron/workshop/workshop_shepherd_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_toolsmith_12x9_a.json",
+      "kind": "meta",
+      "sha256": "00876e2a7846d1171956aaef47549dd8a02fcda7899f9565104ddaf63a1de70d",
+      "bytes": 13513
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_toolsmith_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "e26851e61b9482d359a83b1104213644ff59b5e2e5e11b61fc2b585e6d2809c0",
+      "bytes": 6849,
+      "id": "enterprise:lordaeron/workshop/workshop_toolsmith_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_weaponsmith_12x9_a.json",
+      "kind": "meta",
+      "sha256": "e518db74cce79c31ff9ba719e1ac49fb5a40b4e4b9b5dea5b6d65bfe4ffb9cf5",
+      "bytes": 13537
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/workshop/workshop_weaponsmith_12x9_a.nbt",
+      "kind": "structure",
+      "sha256": "2f1e463bdd4d821569905e7695939f778cc305daec54143ba97a7416caf393fe",
+      "bytes": 6926,
+      "id": "enterprise:lordaeron/workshop/workshop_weaponsmith_12x9_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_dyer_2.json",
+      "kind": "meta",
+      "sha256": "869f352d4ad00e0f5536f5c99229213e8a7cad5245d4bfa501c57a1f95cb5393",
+      "bytes": 467
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_dyer_2.nbt",
+      "kind": "structure",
+      "sha256": "6efff12d978eed5bf2da3b3b0a9f557643c6bc78bf63cf22aaaf827605aa8bdd",
+      "bytes": 461,
+      "id": "enterprise:lordaeron/yard/back_dyer_2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_hedge_1.json",
+      "kind": "meta",
+      "sha256": "b12ec2fdbacf720e5161c3d47bb442c660d295acb6313703dda5e5d1e2dddd1e",
+      "bytes": 417
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_hedge_1.nbt",
+      "kind": "structure",
+      "sha256": "5468eab3529aff302669b7a887110fb2b63ec8f732cea23478851ffda8c38dda",
+      "bytes": 271,
+      "id": "enterprise:lordaeron/yard/back_hedge_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_hens_3.json",
+      "kind": "meta",
+      "sha256": "d4e19dc665f2a3f8312d526c31f1bc47f6cba76fa78bbea119dada394a29dab0",
+      "bytes": 423
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_hens_3.nbt",
+      "kind": "structure",
+      "sha256": "c4e19173c28f61d41504126316737a03a869ac28a8c00e52c3841083927369c7",
+      "bytes": 457,
+      "id": "enterprise:lordaeron/yard/back_hens_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_kitchen_3.json",
+      "kind": "meta",
+      "sha256": "a63f2ea2b07fe60a98aa3a1ed469e74ab44b7230b1fc978cfc823a6944d8e784",
+      "bytes": 418
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_kitchen_3.nbt",
+      "kind": "structure",
+      "sha256": "ecef0b7c3b3f695eddd2f96c68b369dc59a2c09f58a0a7ec92ba3ee59ae30a7d",
+      "bytes": 451,
+      "id": "enterprise:lordaeron/yard/back_kitchen_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_lamp_1.json",
+      "kind": "meta",
+      "sha256": "72790731b5fb7707a06d537957436fde5f61c0dea2680fff7b0f77bb379aa130",
+      "bytes": 415
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "c24639e00ceb4e3edd543d1668928ab4babca7af8ff730de7a80a97014e408ed",
+      "bytes": 326,
+      "id": "enterprise:lordaeron/yard/back_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_tree_3.json",
+      "kind": "meta",
+      "sha256": "7f68f22dbf37f9679af51f4b84504168c0ded5d6bc8f85b269b4b3e7f9fc4013",
+      "bytes": 412
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_tree_3.nbt",
+      "kind": "structure",
+      "sha256": "3998029c99374c1d38de03e7899b5fc1c1462f9179ab061796bfeb51f11b404b",
+      "bytes": 430,
+      "id": "enterprise:lordaeron/yard/back_tree_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_wash_3.json",
+      "kind": "meta",
+      "sha256": "302532e2e8a964ec0baaee01355883747df281becff8f97a54dd39bd0d46f821",
+      "bytes": 423
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_wash_3.nbt",
+      "kind": "structure",
+      "sha256": "9d788ad7b6ad45cd4b3ea60e4e393e5b3430c286f561eee9e076366c4fcd2771",
+      "bytes": 514,
+      "id": "enterprise:lordaeron/yard/back_wash_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_well_2.json",
+      "kind": "meta",
+      "sha256": "c72392d2db90c66f7b77915c725cfcf9f74bf543d138c9685399be502ad0f5dc",
+      "bytes": 423
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_well_2.nbt",
+      "kind": "structure",
+      "sha256": "daac2f74e5d9665bb41172f0993b651fcf45ab9f75470baee056a98dcb9b5a41",
+      "bytes": 465,
+      "id": "enterprise:lordaeron/yard/back_well_2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_woodpile_2.json",
+      "kind": "meta",
+      "sha256": "5d73f817b43fb99c31ab0450a115463fd031ad45d78ec3f510318d33c184bdbb",
+      "bytes": 420
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/back_woodpile_2.nbt",
+      "kind": "structure",
+      "sha256": "a0845c4f96ece75a85b8574494f67b7ff66f818f61e63519fcaffa373809a9d0",
+      "bytes": 363,
+      "id": "enterprise:lordaeron/yard/back_woodpile_2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_baker_3.json",
+      "kind": "meta",
+      "sha256": "a7f48b8a54918904a9bda30d6cb222663dfb093d4c58d47576f07984c7f607da",
+      "bytes": 530
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_baker_3.nbt",
+      "kind": "structure",
+      "sha256": "9f1dcb2941a978b2889d8a7d08eb14d3947bd2d8e8b04aad13e92848ae21188d",
+      "bytes": 514,
+      "id": "enterprise:lordaeron/yard/front_baker_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_bench_2.json",
+      "kind": "meta",
+      "sha256": "2a0a4b4eb2da4d5d1d7ef52707ee27d06e7e52014109b40969abe73acaff0297",
+      "bytes": 461
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_bench_2.nbt",
+      "kind": "structure",
+      "sha256": "2b775fe27b6d3987e8831662016253c28dd9c32dceceb3a8c33067b72516770b",
+      "bytes": 429,
+      "id": "enterprise:lordaeron/yard/front_bench_2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_cottage_2.json",
+      "kind": "meta",
+      "sha256": "e38e3e9f4b68620e4fda1e01d5fae949cbeeae2b92cb632317301c4459665263",
+      "bytes": 547
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_cottage_2.nbt",
+      "kind": "structure",
+      "sha256": "c57cdcb730e6f209e7f6033b84ae1c02abb83fde0756f73304008d34707ed1ff",
+      "bytes": 331,
+      "id": "enterprise:lordaeron/yard/front_cottage_2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_dyer_3.json",
+      "kind": "meta",
+      "sha256": "fafec8a3b15ca164831a109f7b220f973f146801c77c2ee338b6a81923c642bc",
+      "bytes": 536
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_dyer_3.nbt",
+      "kind": "structure",
+      "sha256": "4f0825fce49b0a907b60736aabb4eb4ebbd32e3e1e91f128a1a803b00ab9554c",
+      "bytes": 441,
+      "id": "enterprise:lordaeron/yard/front_dyer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_forecourt_3.json",
+      "kind": "meta",
+      "sha256": "b1b7c0d1f64521a3c4f6e10dc55fd7a18a6735aee7290bbf136eaff09d065d79",
+      "bytes": 624
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_forecourt_3.nbt",
+      "kind": "structure",
+      "sha256": "0b5804b1e46dbfeee4b54b16b070a8a41dbb7ca05a007a241365a87a1f95f0f5",
+      "bytes": 404,
+      "id": "enterprise:lordaeron/yard/front_forecourt_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_garden_3.json",
+      "kind": "meta",
+      "sha256": "f0a0b9830a1746cd54f547bc74661bc18a5a727e8e3ce9a3f5f0502ccdc701ad",
+      "bytes": 557
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_garden_3.nbt",
+      "kind": "structure",
+      "sha256": "7cc39541a522dea5eea708ea3e20e19cef475ffc2ad1ad8a83dcd96a5cb7a32f",
+      "bytes": 440,
+      "id": "enterprise:lordaeron/yard/front_garden_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_hedge_1.json",
+      "kind": "meta",
+      "sha256": "f1ec991ef95707e3a03ad387f7c40f37909c331bab66e797c59364d2a20f3fe8",
+      "bytes": 483
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_hedge_1.nbt",
+      "kind": "structure",
+      "sha256": "ea88bd6d75c83c86b141ab7d63c47aacb56f7e68880acdfcc9edf441ecd691dd",
+      "bytes": 258,
+      "id": "enterprise:lordaeron/yard/front_hedge_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_lamp_1.json",
+      "kind": "meta",
+      "sha256": "9136f6c7a2b86ffe05741d04d99aff2a24b1500c5fb96796f345d74ee48bfe49",
+      "bytes": 419
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "1476a6351f01469fc033a7e2e2b86944a5fe1a8f9847683d7cb1577b51525103",
+      "bytes": 290,
+      "id": "enterprise:lordaeron/yard/front_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_path_1.json",
+      "kind": "meta",
+      "sha256": "eb42ddc0e6f5035dbecce8b069bf6a36a10527b4d7c26a28bbbe3ce9350ec42d",
+      "bytes": 514
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_path_1.nbt",
+      "kind": "structure",
+      "sha256": "64dc08992b019d5845484e0bb87c7a8f2058e926f2c3aa3e23a1993c83acf68e",
+      "bytes": 169,
+      "id": "enterprise:lordaeron/yard/front_path_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_picket_1.json",
+      "kind": "meta",
+      "sha256": "b72dc76178030c08393dde951d218de2cf9fa23c7479182a882e9ef4063fc5cf",
+      "bytes": 489
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_picket_1.nbt",
+      "kind": "structure",
+      "sha256": "39f95fa9453a7148c3f9c45f18e8a1575bfdcee806b2e6a22d693286d3d2d255",
+      "bytes": 266,
+      "id": "enterprise:lordaeron/yard/front_picket_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_smith_3.json",
+      "kind": "meta",
+      "sha256": "c8ae05eeadf0fac993a23e8f47270c87a3de294dcd0dd032432a4219667c2cdc",
+      "bytes": 579
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/yard/front_smith_3.nbt",
+      "kind": "structure",
+      "sha256": "9cbe05cc1bfbb7f835c2270cc1c39ed08e6730336ac2d671475fc89d5b6cf2ff",
+      "bytes": 471,
+      "id": "enterprise:lordaeron/yard/front_smith_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/plan.json",
+      "kind": "kit_rules",
+      "sha256": "a498cf4f0452b21ef0f8163ee60eedaccd9e9f1ddb74e2dde70b2196d4ba5828",
+      "bytes": 20201
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/yards.json",
+      "kind": "kit_rules",
+      "sha256": "0500ede0028a8c1106dc19198d9832ad972574aee6a15e31642c766152678032",
+      "bytes": 10784
+    }
+  ]
+}

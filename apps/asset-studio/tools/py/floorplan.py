@@ -80,6 +80,9 @@ def support(n):
         u in n for u in OBSTACLE)
 
 
+LAST = {}  # the last analysis's walk (for looking into a route)
+
+
 def analyse(file):
     (sx, sy, sz), blocks = load(file)
     inside = lambda p: 0 <= p[0] < sx and 0 <= p[1] < sy and 0 <= p[2] < sz
@@ -144,6 +147,7 @@ def analyse(file):
                 dist[n] = dist[p] + 1
                 prev[n] = p
                 q.append(n)
+    LAST["dist"], LAST["interior"] = dist, interior
     # Destinations: a cell beside each bed, workstation, chest, hearth: the nearest reached.
     used = {p: name(blocks, p) for p in blocks if any(w in name(blocks, p) for w in USED)}
     beds = {p for p, n in used.items() if n.endswith("_bed") and blocks[p][1].get("part") == "head"}
@@ -231,11 +235,14 @@ def analyse(file):
                           "clear_height": sorted(heights)[len(heights) // 2] if heights else 0,
                           "low_cells": sum(1 for h in heights if h < 3),
                           "volume": sum(heights), "contents": sorted(contents), "cells": room})
-        # A landing is designed circulation, counted whole.
+        # A landing is designed circulation, counted whole, but not toward the share's cap (thread 0004): the share
+        # judges the routes left over, not the landing a stair needs.
+        landing = set()
         for r in rooms:
             if r["use"] == "landing":
                 circulation |= set(r["cells"])
-        circ = len(circulation & floor)
+                landing |= set(r["cells"])
+        circ = len((circulation & floor) - landing)
         idle = len([c for c in floor if c not in circulation and c not in near_used])
         storeys.append({"feet_y": y, "floor": len(floor), "rooms": rooms, "circulation": circ,
                         "circulation_share": round(circ / len(floor), 2), "idle_share": round(idle / len(floor), 2)})
@@ -338,7 +345,11 @@ def analyse(file):
         "file": Path(file).name, "size": [sx, sy, sz], "storeys": len(storeys), "floor": floor_total,
         "rooms": sum(len(s["rooms"]) for s in storeys), "beds": len(beds), "made_beds": made,
         "unreached": [f"{n} at {list(p)}" for n, p in unreached],
-        "circulation_share": round(sum(s["circulation"] for s in storeys) / floor_total, 2),
+        # Circulation over the storeys of two rooms or more: a one-room storey's routes are its use, not corridors
+        # (thread 0008); none such, no share to judge.
+        "circulation_share": (round(sum(s["circulation"] for s in storeys if len(s["rooms"]) > 1)
+                                    / sum(s["floor"] for s in storeys if len(s["rooms"]) > 1), 2)
+                              if any(len(s["rooms"]) > 1 for s in storeys) else None),
         "idle_share": round(sum(s["idle_share"] * s["floor"] for s in storeys) / floor_total, 2),
         # The walk to a bed for the size of a storey (thread 0008: over the whole floor, a small two-storey house paid
         # for its stair with too little floor to divide by).
@@ -531,7 +542,7 @@ def thresholds():
                 t["idle_share"] = [0, i["idle_max"]]
             if "walk_max" in i:
                 t["walk"] = [0, i["walk_max"]]
-            for k in ("floor_per_bed", "made_beds", "through_rooms", "multi_storey_min_width"):
+            for k in ("floor_per_bed", "made_beds", "through_rooms", "multi_storey_min_width", "circulation_by_storeys"):
                 if k in i:
                     t[k] = i[k]
             return t
@@ -552,6 +563,8 @@ def failures(r, t):
         out.append(f"a {r['size'][0] - 2}-wide body of {r['storeys']} storeys: under {narrowest} wide is one storey")
     for k in ("circulation_share", "idle_share", "walk", "floor_per_bed"):
         lo, hi = t[k]
+        if k == "circulation_share" and str(r["storeys"]) in t.get("circulation_by_storeys", {}):
+            lo, hi = t["circulation_by_storeys"][str(r["storeys"])]
         if r[k] is not None and not lo <= r[k] <= hi:
             out.append(f"{k} {r[k]} outside {lo} to {hi}")
     return out
