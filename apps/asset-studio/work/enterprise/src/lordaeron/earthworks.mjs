@@ -113,6 +113,50 @@ export function cutFace({ h, seed = 0 }) {
   return g;
 }
 
+/** A side flight inside a 3-deep front yard: the landing at the door's column (x 0), the flight running along the yard
+ *  (+x) down to the street, half steps only. z 0 against the house (plot level, a guard wall past the landing), z 1 the
+ *  flight, z 2 the street edge (a retaining wall with a parapet, open at the flight's foot). Mirror for a flight to -x. */
+export function sideSteps({ h, seed = 0 }) {
+  const L = 2 * h + 1, top = 2 + h, g = new Grid([L, top + 3, 3]);
+  const wall = (x, e, w) => `cobblestone_wall[east=${e ? "low" : "none"},north=none,south=none,up=${!e || !w},waterlogged=false,west=${w ? "low" : "none"}]`;
+  for (let x = 0; x < L; x++) {
+    // z 0: the strip against the house, at plot level; past the landing a guard wall over the flight
+    for (let y = 0; y < top; y++) g.set(x, y, 0, "dirt"); g.set(x, top, 0, x === 0 ? "stone_bricks" : "grass_block[snowy=false]");
+    if (x > 0) g.set(x, top + 1, 0, wall(x, x < L - 1, x > 1));
+    // z 1: the landing, then the flight: the walking surface at cell x is h - x/2 above the street
+    g.set(x, 0, 1, "dirt"); g.set(x, 1, 1, "dirt");
+    const t = h - x / 2, whole = Math.floor(t), half = t !== whole;
+    g.set(x, 2, 1, whole === 0 && !half ? "stone_bricks" : FOOT(hash(seed, x, 1)));
+    for (let y = 3; y <= 2 + whole; y++) g.set(x, y, 1, "stone_bricks");
+    if (half) g.set(x, 3 + whole, 1, slab("stone_brick"));
+    // z 2: the street edge: a coursed retaining wall to plot level with a parapet, open at the foot of the flight
+    g.set(x, 0, 2, "dirt"); g.set(x, 1, 2, "dirt");
+    if (x === L - 1) { g.set(x, 2, 2, "stone_bricks"); continue; }
+    g.set(x, 2, 2, FOOT(hash(seed, x, 2)));
+    for (let y = 3; y <= top; y++) g.set(x, y, 2, y === 3 ? FOOT(hash(seed, x, y, 4)) : y === top ? "stone_bricks" : COURSE(hash(seed, x, y, 3)));
+    g.set(x, top + 1, 2, wall(x, x < L - 2, x > 0));
+    if (x === 0) g.set(x, top + 2, 2, LANTERN_UP);
+  }
+  return g;
+}
+
+/** A stepped stone plinth at a house's foot on a fill: rise r (1-3), r + 1 deep, run along the wall (z 0 touches it).
+ *  Row 0 is coped flush with the house's ground; each row out is a course lower, topped with a stair (the water table
+ *  stepping down); the low ground is layer 2. corner: the outer corner, the house to the north-west. */
+export function plinth({ h, seed = 0, corner = false }) {
+  const d = h + 1, w = corner ? d : 1, g = new Grid([w, 2 + h + 1, d]);
+  for (let z = 0; z < d; z++) for (let x = 0; x < w; x++) {
+    const i = corner ? Math.max(x, z) : z, top = 2 + h - i;   // the course's top layer
+    g.set(x, 0, z, "dirt"); g.set(x, 1, z, "dirt"); g.set(x, 2, z, i === h ? "coarse_dirt" : FOOT(hash(seed, x, z, 1)));
+    for (let y = 3; y <= top; y++) {
+      const face = corner && x > z ? "west" : "north";
+      g.set(x, y, z, y < top ? (y === 3 ? FOOT(hash(seed, x, y, z, 2)) : COURSE(hash(seed, x, y, z, 3))) : i === 0 ? "stone_bricks" : stairs("stone_brick", face));
+    }
+    if (i === h) g.set(x, 3, z, stairs("stone_brick", corner && x > z ? "west" : "north"));   // the toe
+  }
+  return g;
+}
+
 // the tiles: [id, width, rise, rows, opts, tags]
 const STRAIGHT = (w) => ["T".repeat(w), "W".repeat(w), "A".repeat(w)];
 export function allEarthworks() {
@@ -125,6 +169,8 @@ export function allEarthworks() {
     out.push({ id: `retain_h${h}_inner_3`, grid: retain(["TTT", "TWW", "TWA"], { h, seed: 70 + h }), meta: { width: 3, rise: h, kind_of: "corner_inner", tags: ["corner"] } });
     for (const v of ["a", "b", "c"]) out.push({ id: `cutface_h${h}_1${v}`, grid: cutFace({ h, seed: v.charCodeAt(0) * 17 + h }), meta: { width: 1, rise: h, kind_of: "cut_face", tags: ["cut_face"] } });
     out.push({ id: `steps_h${h}_3`, grid: steps({ h, seed: 40 + h, flight: 1 }), meta: { width: 3, rise: h, kind_of: "steps", tags: ["steps", "path", "lamp"] } });
+    if (h >= 2) out.push({ id: `steps_side_h${h}`, grid: sideSteps({ h, seed: 60 + h }), meta: { width: 2 * h + 1, rise: h, kind_of: "steps_side", tags: ["steps", "path", "lamp"], landing: [0, 1], door_column: 0 } });
+    if (h <= 3) for (const [k, c] of [["1", false], ["corner", true]]) out.push({ id: `plinth_h${h}_${k}`, grid: plinth({ h, seed: 80 + h, corner: c }), meta: { width: c ? h + 1 : 1, rise: h, kind_of: c ? "plinth_corner" : "plinth", tags: ["plinth"] } });
     out.push({ id: `steps_h${h}_4`, grid: steps({ h, seed: 20 + h }), meta: { width: 4, rise: h, kind_of: "steps", tags: ["steps", "lamp"] } });
   }
   return out;
