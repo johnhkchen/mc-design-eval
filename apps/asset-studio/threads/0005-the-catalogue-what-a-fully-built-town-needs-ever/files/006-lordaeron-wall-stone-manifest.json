@@ -1,0 +1,177 @@
+{
+  "batch": "006-lordaeron-wall-stone",
+  "thread": "0005",
+  "made": "2026-10-27T14:33:29.596Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/wall/corner_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "0974fa62c55d6c18bb595c62011952be4c4dcd4fbcc8aa1ab1a1a71152d7d3ab",
+      "bytes": 190319
+    },
+    {
+      "path": "assets-src/lordaeron/wall/corner_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/wall/curtain_8_a/front.jpg",
+      "kind": "preview",
+      "sha256": "2ab96b730fd4b86d92256923a937967666b20c191ca58a056c2168a9567dc120",
+      "bytes": 197376
+    },
+    {
+      "path": "assets-src/lordaeron/wall/curtain_8_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/wall/gatehouse_11x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "f5d50dfb64ebed705f4529114cd1287c2db377ea1b9c93bf621746ef3e9d997a",
+      "bytes": 212321
+    },
+    {
+      "path": "assets-src/lordaeron/wall/gatehouse_11x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "assets-src/lordaeron/wall/kit.jpg",
+      "kind": "preview",
+      "sha256": "294b9aa140c4556a123d9df99e16de432a0f94ba358c73d1ff51fea185f742b8",
+      "bytes": 339662
+    },
+    {
+      "path": "assets-src/lordaeron/wall/tower_7x7_a/front.jpg",
+      "kind": "preview",
+      "sha256": "fd4bd87fff652599d6f773681e0e68def02246a5d055c655c04d80c124671f12",
+      "bytes": 190781
+    },
+    {
+      "path": "assets-src/lordaeron/wall/tower_7x7_a/notes.md",
+      "kind": "notes",
+      "sha256": "c491e285ce95cf7c41b704ee02be2dfaad43ef14bb22758e8f2f2a61c93a9f4c",
+      "bytes": 34
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/corner_7x7_a.json",
+      "kind": "meta",
+      "sha256": "ad2e1aab15fff46fe13dab4eb168305b1c3ed9a243c7b9c59a3f4d9561b82830",
+      "bytes": 692
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/corner_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "38968e9eef53303f961d4b8377d6e13ea076aedc2ca4711bd07b34fa7a9e8972",
+      "bytes": 3426,
+      "id": "enterprise:lordaeron/wall/corner_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_4_a.json",
+      "kind": "meta",
+      "sha256": "3057fc9b5d2a5ffd77950dbb91d165ef9e2c0eba0ea64a3e4d1459891f2f1ed3",
+      "bytes": 477
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_4_a.nbt",
+      "kind": "structure",
+      "sha256": "493dc0f59b8f13fb453fa3645ad2a2316f43de7fba87edce1202dec745f25658",
+      "bytes": 1528,
+      "id": "enterprise:lordaeron/wall/curtain_4_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_8_a.json",
+      "kind": "meta",
+      "sha256": "0918151bdb93765fb082e3536eba1d9cbf726bd1ea7eab97baf7e7a99f905cde",
+      "bytes": 477
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/curtain_8_a.nbt",
+      "kind": "structure",
+      "sha256": "e8f3c85ec2a3096d2e5912a285488e701915d70b32a4f5b782a200f3d2b62f99",
+      "bytes": 2641,
+      "id": "enterprise:lordaeron/wall/curtain_8_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_1_a.json",
+      "kind": "meta",
+      "sha256": "b5919ed513d02510c8a6474ef41ff1d6a7b22cf1f57110ac578dd0bb7be525d8",
+      "bytes": 475
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_1_a.nbt",
+      "kind": "structure",
+      "sha256": "992117be58f0025146b8b58d3e1de4c255070ec5eabf14573ded79b2ef0bb995",
+      "bytes": 586,
+      "id": "enterprise:lordaeron/wall/filler_1_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_2_a.json",
+      "kind": "meta",
+      "sha256": "a8f1981d16871ff5ac059237b0f17ab19309e3f030ce787d8d6ce51f64eae493",
+      "bytes": 475
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_2_a.nbt",
+      "kind": "structure",
+      "sha256": "7466e559d2c8fc6f7ebe717dc4741c9e7d9d48921ff871a0d827af3cddaea44c",
+      "bytes": 934,
+      "id": "enterprise:lordaeron/wall/filler_2_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_3_a.json",
+      "kind": "meta",
+      "sha256": "86ab2303dd26be6af5f916e5152e656c98f65e5234f490aa7b6bbbc43f258069",
+      "bytes": 475
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/filler_3_a.nbt",
+      "kind": "structure",
+      "sha256": "51b79e8d677f0f75a68aa3ccb0cb7836903bec6f5b39c92289454ecd3edd5da7",
+      "bytes": 1252,
+      "id": "enterprise:lordaeron/wall/filler_3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/gatehouse_11x7_a.json",
+      "kind": "meta",
+      "sha256": "d3cfe0e341a8d7722dc522b58888ac17301641982692c99c2107c9b8ace9ccc1",
+      "bytes": 684
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/gatehouse_11x7_a.nbt",
+      "kind": "structure",
+      "sha256": "5cca56ad8c667e5c1a86fbb2f3e9169dd0dee7e9c71da09c8db608ef6523ed16",
+      "bytes": 4546,
+      "id": "enterprise:lordaeron/wall/gatehouse_11x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/tower_7x7_a.json",
+      "kind": "meta",
+      "sha256": "522d4aec0fdaf33a082e1369b1620437a5be293fc4ccad177f9425203bf3d3d9",
+      "bytes": 587
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/wall/tower_7x7_a.nbt",
+      "kind": "structure",
+      "sha256": "779b07efe943217dc8ac7d64a0ea04eca6d9d0e1bdfa11b67d0b73befd8368ed",
+      "bytes": 3421,
+      "id": "enterprise:lordaeron/wall/tower_7x7_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/wall_stone.json",
+      "kind": "kit_rules",
+      "sha256": "190e6a0700f29adbdd78f9c958371395b6d6958267366f0739199eb6e585b6e1",
+      "bytes": 2095
+    },
+    {
+      "path": "scripts/assets/lordaeron-ref/wall-tiling.mjs",
+      "kind": "tool",
+      "sha256": "811a2fe91fd44f8b4b8c4be462207bce0cbf23a9c403d61e2a688134756143f3",
+      "bytes": 2007
+    }
+  ]
+}

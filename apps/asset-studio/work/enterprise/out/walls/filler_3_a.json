@@ -1,0 +1,27 @@
+{
+  "id": "enterprise:lordaeron/wall/filler_3_a",
+  "rev": 1,
+  "kingdom": "lordaeron",
+  "kind": "wall",
+  "slot": "wall:filler",
+  "tiers": [
+    "town"
+  ],
+  "palette": "fixed",
+  "footprint": [
+    3,
+    7
+  ],
+  "height": 15,
+  "ground": 4,
+  "mirror": true,
+  "entrances": [],
+  "beds": [],
+  "workstations": [],
+  "lockers": [],
+  "markers": [],
+  "pilings": [],
+  "entities": [],
+  "wall_line_z": 3,
+  "notes": "wall runs along x; outside to the north (z 0); the town to the south"
+}
