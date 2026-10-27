@@ -1,0 +1,194 @@
+{
+  "batch": "004-lordaeron-stalls",
+  "thread": "0005",
+  "made": "2026-10-27T14:24:12.225Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/stall/set/farmer.jpg",
+      "kind": "preview",
+      "sha256": "578a33dee99f727e372ef18ecee2ad3468c6d0c51384a3952f5e22b27b0e1f3b",
+      "bytes": 252419
+    },
+    {
+      "path": "assets-src/lordaeron/stall/set/notes.md",
+      "kind": "notes",
+      "sha256": "66edf6ea5259d4fb155ed4cee3b4a958c37d154506d0e8ac9087deb256145940",
+      "bytes": 58
+    },
+    {
+      "path": "assets-src/lordaeron/stall/set/row.jpg",
+      "kind": "preview",
+      "sha256": "556a0bbc746ff1f196adbd5c7c2cce916d5f243f1d1106246b63e90c0f5169ff",
+      "bytes": 153416
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_armorer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "e26aad7b6b0e5123a9042b29cb53fd19da1b8e2215aa769db8eddaacf1e4fa33",
+      "bytes": 757
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_armorer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "1f25105d98813d0e9e0f4734ab12b7b800729bd1b485c45fde9ba12e138dbe80",
+      "bytes": 519,
+      "id": "enterprise:lordaeron/stall/stall_armorer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_butcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "8047beb3be7c28c9378162eb3947684ec52b96c12b5a2a0b564384dc6cd14be3",
+      "bytes": 750
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_butcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "cde9e6303ea0f75918aea194ff1f3440ba57440e32a81aebca75303fc6479125",
+      "bytes": 509,
+      "id": "enterprise:lordaeron/stall/stall_butcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cartographer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "410d49e329368dbb35075e48bfd21afeb6097934f175f330eefc663f91fd77d4",
+      "bytes": 771
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cartographer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "07db6c03e28934c0e052f8105bf84a1a148584fd6281e93dace7924c41be0ccd",
+      "bytes": 537,
+      "id": "enterprise:lordaeron/stall/stall_cartographer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cleric_3x3_a.json",
+      "kind": "meta",
+      "sha256": "6e2b889c2be566e379da3f58878ac40115ef6aa4371288ce19f89d60bdfc0462",
+      "bytes": 755
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_cleric_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "fab31c04b6a2859b3a3dba85c9e4a5f8ff99e5c03b90b3eabb0f9dc054b129c5",
+      "bytes": 548,
+      "id": "enterprise:lordaeron/stall/stall_cleric_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_farmer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "35d9b4afdfeae7e63c872229b2fa085586b0dd7c2a091f7e5210e97b98ad7285",
+      "bytes": 751
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_farmer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "3a90537d750ae9dd3c37e90d6c9989a6e2f7a31bb5ae64ae048f1ed386a2d059",
+      "bytes": 532,
+      "id": "enterprise:lordaeron/stall/stall_farmer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fisherman_3x3_a.json",
+      "kind": "meta",
+      "sha256": "d9e67f5da96249ff53eb747917e601ecbf13dd5cc9786a716a177174b0f972ad",
+      "bytes": 754
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fisherman_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "947b891b4f48f521adea3174faf72a4158316afb72f1c38cb1e4f955163b5630",
+      "bytes": 536,
+      "id": "enterprise:lordaeron/stall/stall_fisherman_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fletcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "f33f6b8cbb01a503d0f381af4f369d8aff700b56aa8e36df452f7d684be67b93",
+      "bytes": 761
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_fletcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "21df77716f6e8e6d77c02b906c1647e51278e2c51a1a5a66b7bd0e1ea1876a12",
+      "bytes": 531,
+      "id": "enterprise:lordaeron/stall/stall_fletcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_leatherworker_3x3_a.json",
+      "kind": "meta",
+      "sha256": "e8c0a71eda93693732af0e5b720d02ce3a4ca30444925700ad220bd2426678e1",
+      "bytes": 764
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_leatherworker_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "912052a5382487d20cc633e8a59df8c3bb7e0c44bb425a5af72f858ab6384262",
+      "bytes": 505,
+      "id": "enterprise:lordaeron/stall/stall_leatherworker_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_librarian_3x3_a.json",
+      "kind": "meta",
+      "sha256": "af5a1385f2cd83bae6ad4f19663f0dd9e4d56ffc78d1875caaf9d7ae153bc93d",
+      "bytes": 755
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_librarian_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "cd176448f304ab711e48ab6fd6860f4343e1057fbd66e8296e9540eeac2213cf",
+      "bytes": 566,
+      "id": "enterprise:lordaeron/stall/stall_librarian_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_mason_3x3_a.json",
+      "kind": "meta",
+      "sha256": "075760a06da3ecda2d594f049e680186e63c63ecbc3fbbc3cfaaa06a0823efbc",
+      "bytes": 751
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_mason_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "b5b771ac66fe5b233a0c33934cb9da3d089f769d386e2b83dfce54dcf1d2522a",
+      "bytes": 527,
+      "id": "enterprise:lordaeron/stall/stall_mason_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_shepherd_3x3_a.json",
+      "kind": "meta",
+      "sha256": "fb9f301f87295e2ed609553906ec33db8880b9fafbf847ffc806ebe569588d18",
+      "bytes": 750
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_shepherd_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "99e6c4a847c91d55ba102202c7a78b934852688d1119e30d1dfb80d055e4054b",
+      "bytes": 508,
+      "id": "enterprise:lordaeron/stall/stall_shepherd_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_toolsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "31db6198793e29c17916951ac253b62423204eaaeb24c8f22db11a018df949b3",
+      "bytes": 762
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_toolsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "d92bcc30caadbaf8305ffbb375ae7d3f8264c3cc4d0c5a305f8da142ef07d4e0",
+      "bytes": 516,
+      "id": "enterprise:lordaeron/stall/stall_toolsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_weaponsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "a95489e7fd8989895e2f3240348f6077fef27905c78575737f813e24b2132674",
+      "bytes": 762
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/stall/stall_weaponsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "66f1d8597c90c0d7348eac7e69f69d6a5948a891fce9ae6d0c50970e006f28cb",
+      "bytes": 521,
+      "id": "enterprise:lordaeron/stall/stall_weaponsmith_3x3_a"
+    }
+  ]
+}

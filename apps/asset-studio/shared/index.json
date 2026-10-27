@@ -353,5 +353,22 @@
         "bytes": 1824
       }
     ]
+  },
+  "js/gate.mjs": {
+    "path": "js/gate.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-27T14:23:20.899Z",
+    "updated_by": "studio",
+    "note": "the quality gate: contract + relief + interior on any build, thresholds from quality.json, one exit code",
+    "bytes": 3210,
+    "history": [
+      {
+        "at": "2026-10-27T14:23:20.899Z",
+        "by": "studio",
+        "note": "the quality gate: contract + relief + interior on any build, thresholds from quality.json, one exit code",
+        "bytes": 3210
+      }
+    ]
   }
 }
