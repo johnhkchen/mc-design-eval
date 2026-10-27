@@ -100,10 +100,11 @@ export function steps({ h, seed = 0, flight = 2 }) {
 /** A cut-face finish: the levelled face left natural, not walled: stone and tuff with moss and roots, grass lipping over. */
 export function cutFace({ h, seed = 0 }) {
   const top = 2 + h, g = new Grid([1, top + 1, 3]);
-  const FACE = (r) => (r < 0.3 ? "stone" : r < 0.5 ? "andesite" : r < 0.62 ? "tuff" : r < 0.78 ? "mossy_cobblestone" : r < 0.9 ? "rooted_dirt" : "moss_block");
+  const FACE = (r) => (r < 0.3 ? "stone" : r < 0.5 ? "andesite" : r < 0.62 ? "tuff" : r < 0.8 ? "mossy_cobblestone" : r < 0.88 ? "rooted_dirt" : "moss_block");
   for (let y = 0; y < top; y++) g.set(0, y, 0, "dirt"); g.set(0, top, 0, "grass_block[snowy=false]");
   for (let y = 0; y < 2; y++) g.set(0, y, 1, "dirt");
-  for (let y = 2; y < top; y++) g.set(0, y, 1, y === top - 1 ? (hash(seed, y, 9) < 0.5 ? "rooted_dirt" : "dirt") : FACE(hash(seed, y, 3)));
+  // the root lip only on faces 3 and up: a low face is all stone and moss, or it reads as a raw cut
+  for (let y = 2; y < top; y++) g.set(0, y, 1, h >= 3 && y === top - 1 ? (hash(seed, y, 9) < 0.5 ? "rooted_dirt" : "moss_block") : FACE(hash(seed, y, 3) * (h >= 3 ? 1 : 0.8)));
   g.set(0, top, 1, hash(seed, 11) < 0.6 ? "moss_block" : "grass_block[snowy=false]");
   for (let y = 0; y < 2; y++) g.set(0, y, 2, "dirt");
   g.set(0, 2, 2, hash(seed, 12) < 0.5 ? "coarse_dirt" : "grass_block[snowy=false]");
