@@ -186,10 +186,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T14:21:45.609Z",
+    "updated": "2026-10-27T14:25:08.532Z",
     "updated_by": "client",
-    "note": "v0.2: steps no storey, landings whole, destinations beds/work/hearth/chests, walk per storey crossed, --check",
-    "bytes": 30304,
+    "note": "r5: rooms wall to wall with furniture; decor twins not job sites; landings may be 2 wide",
+    "bytes": 30856,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -214,6 +214,12 @@
         "by": "client",
         "note": "v0.2: steps no storey, landings whole, destinations beds/work/hearth/chests, walk per storey crossed, --check",
         "bytes": 30304
+      },
+      {
+        "at": "2026-10-27T14:25:08.532Z",
+        "by": "client",
+        "note": "r5: rooms wall to wall with furniture; decor twins not job sites; landings may be 2 wide",
+        "bytes": 30856
       }
     ]
   },
