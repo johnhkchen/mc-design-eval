@@ -288,10 +288,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T14:32:37.589Z",
+    "updated": "2026-10-27T15:16:50.690Z",
     "updated_by": "client",
-    "note": "r7: reads quality.json's interior section in its own keys; one storey under multi_storey_min_width",
-    "bytes": 31757,
+    "note": "reads circulation_by_storeys; landings off the cap; one-room under 20 skips circulation",
+    "bytes": 32479,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -334,6 +334,12 @@
         "by": "client",
         "note": "r7: reads quality.json's interior section in its own keys; one storey under multi_storey_min_width",
         "bytes": 31757
+      },
+      {
+        "at": "2026-10-27T15:16:50.690Z",
+        "by": "client",
+        "note": "reads circulation_by_storeys; landings off the cap; one-room under 20 skips circulation",
+        "bytes": 32479
       }
     ]
   },
@@ -461,10 +467,10 @@
     "path": "quality.json",
     "lang": "json",
     "author": "studio",
-    "updated": "2026-10-27T14:32:36.638Z",
+    "updated": "2026-10-27T15:16:49.811Z",
     "updated_by": "client",
-    "note": "interior: multi_storey_min_width 10, stair_foot_clear 2 (thread 0008); version 0.2",
-    "bytes": 2028,
+    "note": "interior.circulation_by_storeys: 3 storeys capped at 0.5 (thread 0004)",
+    "bytes": 2217,
     "history": [
       {
         "at": "2026-10-27T14:20:59.341Z",
@@ -483,6 +489,12 @@
         "by": "client",
         "note": "interior: multi_storey_min_width 10, stair_foot_clear 2 (thread 0008); version 0.2",
         "bytes": 2028
+      },
+      {
+        "at": "2026-10-27T15:16:49.811Z",
+        "by": "client",
+        "note": "interior.circulation_by_storeys: 3 storeys capped at 0.5 (thread 0004)",
+        "bytes": 2217
       }
     ]
   },
