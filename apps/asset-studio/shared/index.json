@@ -288,10 +288,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T16:05:27.719Z",
+    "updated": "2026-10-27T16:56:30.465Z",
     "updated_by": "client",
-    "note": "circulation judged over storeys of 2+ rooms (thread 0008)",
-    "bytes": 32633,
+    "note": "rev 10: dwellings by street door; circulation judged per dwelling's storey of 2+ rooms",
+    "bytes": 33766,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -346,6 +346,12 @@
         "by": "client",
         "note": "circulation judged over storeys of 2+ rooms (thread 0008)",
         "bytes": 32633
+      },
+      {
+        "at": "2026-10-27T16:56:30.465Z",
+        "by": "client",
+        "note": "rev 10: dwellings by street door; circulation judged per dwelling's storey of 2+ rooms",
+        "bytes": 33766
       }
     ]
   },

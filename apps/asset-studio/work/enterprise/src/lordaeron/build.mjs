@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Batch 001 (wiring) homes: retired 2026-10-27 to structure/lordaeron/_retired/ (thread 0008). Not part of build-all.
 // Build batch 001 for Enterprise: the Lordaeron timber part set, and homes assembled from it by the reference
 // assembler, each with its metadata, checked by the shared validator.
 //   node src/lordaeron/build.mjs            (from work/enterprise)
