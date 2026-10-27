@@ -761,5 +761,22 @@
         "bytes": 19613
       }
     ]
+  },
+  "py/plot_map.py": {
+    "path": "py/plot_map.py",
+    "lang": "py",
+    "author": "studio",
+    "updated": "2026-10-27T19:36:17.937Z",
+    "updated_by": "studio",
+    "note": "An ASCII height map round a plot from your region files (uses world_render.py's reader): heights over a base, retaining courses marked R. How I found r35's drops to frame them.",
+    "bytes": 1727,
+    "history": [
+      {
+        "at": "2026-10-27T19:36:17.937Z",
+        "by": "studio",
+        "note": "An ASCII height map round a plot from your region files (uses world_render.py's reader): heights over a base, retaining courses marked R. How I found r35's drops to frame them.",
+        "bytes": 1727
+      }
+    ]
   }
 }
