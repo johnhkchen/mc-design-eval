@@ -66,10 +66,10 @@
     "path": "js/lordaeron/compose.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:22:07.344Z",
+    "updated": "2026-10-27T14:27:06.877Z",
     "updated_by": "studio",
-    "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
-    "bytes": 11575,
+    "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
+    "bytes": 13252,
     "history": [
       {
         "at": "2026-10-27T14:13:05.254Z",
@@ -82,6 +82,12 @@
         "by": "studio",
         "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
         "bytes": 11575
+      },
+      {
+        "at": "2026-10-27T14:27:06.877Z",
+        "by": "studio",
+        "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
+        "bytes": 13252
       }
     ]
   },
@@ -89,10 +95,10 @@
     "path": "js/lordaeron/modules.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:22:07.386Z",
+    "updated": "2026-10-27T14:27:06.920Z",
     "updated_by": "studio",
-    "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
-    "bytes": 11385,
+    "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
+    "bytes": 12286,
     "history": [
       {
         "at": "2026-10-27T14:13:05.297Z",
@@ -105,6 +111,12 @@
         "by": "studio",
         "note": "plan layer v2: made beds, landing behind a partition (wall_inner, door_inner), furniture around a door-to-stair spine (table, bench, cask, pot)",
         "bytes": 11385
+      },
+      {
+        "at": "2026-10-27T14:27:06.920Z",
+        "by": "studio",
+        "note": "turned core hugs the side and back walls; 10-wide bodies take it (option A) with an L partition and a 2x2 landing; straight core only at 13+",
+        "bytes": 12286
       }
     ]
   },

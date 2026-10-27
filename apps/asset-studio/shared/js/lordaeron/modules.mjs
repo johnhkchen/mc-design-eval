@@ -87,10 +87,10 @@ function core(type, part) {
     if (run) for (let k = 0; k < 4; k++) g.set(1, 1 + k, 4 - k, B.step("north"));                       // 4 steps; the 5th is the next storey's
     return g;
   }
-  const g = new Grid([3, H, 3]);                               // turned: up 3 north from (0,2), a corner, 2 east
-  for (let z = 0; z < 3; z++) for (let x = 0; x < 3; x++) { g.set(x, 0, z, B.floor); for (let y = 1; y < H; y++) g.set(x, y, z, "air"); }
-  if (below) { g.set(0, 0, 0, "air"); g.set(0, 0, 1, "air"); g.set(1, 0, 0, "air"); g.set(2, 0, 0, B.step("east")); }
-  if (run) { g.set(0, 1, 2, B.step("north")); g.set(0, 2, 1, B.step("north")); g.set(0, 3, 0, B.step("east", "outer_left")); g.set(1, 4, 0, B.step("east")); }
+  const g = new Grid([3, H, 3]);                               // turned, hugging the walls: up the east side northward,
+  for (let z = 0; z < 3; z++) for (let x = 0; x < 3; x++) { g.set(x, 0, z, B.floor); for (let y = 1; y < H; y++) g.set(x, y, z, "air"); }   // round the corner, west along the back
+  if (below) { g.set(2, 0, 1, "air"); g.set(2, 0, 0, "air"); g.set(1, 0, 0, "air"); g.set(0, 0, 0, B.step("west")); }
+  if (run) { g.set(2, 1, 2, B.step("north")); g.set(2, 2, 1, B.step("north")); g.set(2, 3, 0, B.step("west", "outer_right")); g.set(1, 4, 0, B.step("west")); }
   return g;
 }
 
@@ -108,6 +108,17 @@ const FITOUT = {
   pot: () => one("potted_fern"),
   wall_inner: () => { const g = new Grid([1, H - 1, 1]); for (let y = 0; y < H - 1; y++) g.set(0, y, 0, y === H - 2 ? "stripped_spruce_log[axis=z]" : "spruce_planks"); return g; },
   door_inner: () => { const g = new Grid([1, H - 1, 1]); g.set(0, 0, 0, "spruce_door[facing=east,half=lower,hinge=left,open=false,powered=false]"); g.set(0, 1, 0, "spruce_door[facing=east,half=upper,hinge=left,open=false,powered=false]"); for (let y = 2; y < H - 1; y++) g.set(0, y, 0, y === H - 2 ? "stripped_spruce_log[axis=z]" : "spruce_planks"); return g; },
+  // hall furniture (decorative lookalikes of job sites are the mod's twins)
+  hay: () => one("hay_block[axis=y]"),
+  desk: () => one("enterprise:decor_lectern[facing=east]"),
+  altar: () => { const g = new Grid([1, 2, 1]); g.set(0, 0, 0, "chiseled_stone_bricks"); g.set(0, 1, 0, "candle[candles=4,lit=true,waterlogged=false]"); return g; },
+  candles: () => one("candle[candles=3,lit=true,waterlogged=false]"),
+  anvil: () => one("anvil[facing=north]"),
+  smith_table: () => one("enterprise:decor_smithing_table"),
+  forge: () => one("enterprise:decor_blast_furnace[facing=east]"),
+  quench: () => one("enterprise:decor_cauldron[contents=water]"),
+  rack: () => one("iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"),
+  stall_rail: () => one("spruce_fence[east=false,north=true,south=true,waterlogged=false,west=false]"),
   chimney_stack: () => { const g = new Grid([1, 1, 2]); g.set(0, 0, 0, B.chimney); g.set(0, 0, 1, B.chimney); return g; },
   chimney_stack_party: () => one(B.chimney),
 };
