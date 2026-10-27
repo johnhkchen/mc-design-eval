@@ -45,12 +45,12 @@
       "roof_slab": "minecraft:hay_block"
     },
     "brick": {
-      "note": "the town's better houses and halls: brick nogging, red tile",
+      "note": "the town's better houses and halls: brick nogging, slate roof",
       "infill": "minecraft:bricks",
       "infill_ground": "minecraft:bricks",
-      "roof": "minecraft:bricks",
-      "roof_stair": "minecraft:brick_stairs",
-      "roof_slab": "minecraft:brick_slab",
+      "roof": "minecraft:deepslate_tiles",
+      "roof_stair": "minecraft:deepslate_tile_stairs",
+      "roof_slab": "minecraft:deepslate_tile_slab",
       "chimney": "minecraft:stone_bricks",
       "door": "minecraft:dark_oak_door",
       "step": "minecraft:brick_slab"
