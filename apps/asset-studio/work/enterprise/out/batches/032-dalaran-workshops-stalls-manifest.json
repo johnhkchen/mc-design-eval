@@ -1,0 +1,357 @@
+{
+  "batch": "032-dalaran-workshops-stalls",
+  "thread": "0010",
+  "made": "2026-10-28T04:05:56.073Z",
+  "files": [
+    {
+      "path": "assets-src/dalaran/stall/market_row.jpg",
+      "kind": "preview",
+      "sha256": "98fddb7f3b5440b9f665d3e58100f693f0a894049d10cda5ef40eb640fa2d31e",
+      "bytes": 153235
+    },
+    {
+      "path": "assets-src/dalaran/workshop/workshop_cleric_16x13_a.jpg",
+      "kind": "preview",
+      "sha256": "e5e402d8dfa9c8a7f87086b720ca441bce19a0cbdaaaecff7c701eeeb74e93b3",
+      "bytes": 199659
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_armorer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "1a1c5725b0aa43dc2988515e5c7fb3d3e02de039a61533a18b277d1d32c95825",
+      "bytes": 776
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_armorer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "4d0d3c155ecc343052554c7cdf4ea32518bab45cd3b70d7e5cc3390c363b88d7",
+      "bytes": 648,
+      "id": "enterprise:dalaran/stall/stall_armorer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_butcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "514c7af658290d85988a8034885f15967ecafd5b9443263fd56c669db98e7540",
+      "bytes": 769
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_butcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "62151a3bac7e30f02008cae869d1d991b5d1914516e715fefc3068de55ad5f23",
+      "bytes": 640,
+      "id": "enterprise:dalaran/stall/stall_butcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_cartographer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "a7f17b2dc0077c60e21aed219a2995f7305f4e9c1846f4b0250cb27cad31b530",
+      "bytes": 790
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_cartographer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "37aa3d0a98a8080dfa4a237a52ebdf7fbfcca350e9cd4e0b2c808f10e8704352",
+      "bytes": 672,
+      "id": "enterprise:dalaran/stall/stall_cartographer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_cleric_3x3_a.json",
+      "kind": "meta",
+      "sha256": "2bf3f45cb15d4db7826300fed798983ad78a69186bd3de6edb1ad22fd3ca5fe6",
+      "bytes": 774
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_cleric_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "281f7bfab9d70c9f7c215b1fe21f94ff822f6bfab7927f8543aecbe1962c06d5",
+      "bytes": 682,
+      "id": "enterprise:dalaran/stall/stall_cleric_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_farmer_3x3_a.json",
+      "kind": "meta",
+      "sha256": "1932666495f9626fbf508daa365b984587aaaba79ca9368767415b535394d5c7",
+      "bytes": 770
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_farmer_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "9360b1e6d0ec94aa7be7cdfa4b670a71ef03e2eee5fdfb0cc6b3e14198d0b967",
+      "bytes": 664,
+      "id": "enterprise:dalaran/stall/stall_farmer_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_fisherman_3x3_a.json",
+      "kind": "meta",
+      "sha256": "275d91f03d36c0f7066626840bceb6cf541bda74d6213dabdd63377b160fe0e1",
+      "bytes": 773
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_fisherman_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "6dcfbf09c74edcda3c39043cbc97bd07a3317faeab7fa83b114975029a362d0e",
+      "bytes": 667,
+      "id": "enterprise:dalaran/stall/stall_fisherman_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_fletcher_3x3_a.json",
+      "kind": "meta",
+      "sha256": "712a639b4b11f7bc33c555afee3ff926831ef97b1c3603bdfcd18815986c0dc8",
+      "bytes": 780
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_fletcher_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "9dbc6be240f1825d1c9c614a5a17891ef41d996271df523d5ab0ff677b66b64b",
+      "bytes": 657,
+      "id": "enterprise:dalaran/stall/stall_fletcher_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_leatherworker_3x3_a.json",
+      "kind": "meta",
+      "sha256": "3f7f846ba453ab310e66baa985795ec0e643244a76b43960708d74a760ee913b",
+      "bytes": 783
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_leatherworker_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "756223fc91ea3a75b6ff82ce46cc47bf85a4a4d0e5375d674dc945e4d45d8716",
+      "bytes": 646,
+      "id": "enterprise:dalaran/stall/stall_leatherworker_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_librarian_3x3_a.json",
+      "kind": "meta",
+      "sha256": "9f3fb41648e1c753044f1f7d4d51f84d540f4dd953f0ccd4101ff6dc0cc3588a",
+      "bytes": 774
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_librarian_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "c04e85bcef9402605df0c51dc5b2fca25c34e60e83ed212b23101b9a931f33be",
+      "bytes": 699,
+      "id": "enterprise:dalaran/stall/stall_librarian_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_mason_3x3_a.json",
+      "kind": "meta",
+      "sha256": "168704d7f75625859035f27dd045cd80bde258bbadf756723fa4a5ffb40a74e5",
+      "bytes": 770
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_mason_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "6236190f64f8c90935552f4ae85b6320e5f8b5b314d13f8a080daf4f3745ba72",
+      "bytes": 665,
+      "id": "enterprise:dalaran/stall/stall_mason_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_shepherd_3x3_a.json",
+      "kind": "meta",
+      "sha256": "f4cf7eeb6d67e7bbbc11115d5fce19ade50edc08a6aac43e217071b111b9398f",
+      "bytes": 769
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_shepherd_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "ab1e531c418c6d68fced3c53561f7fb626b6184b919cabbb6dc90b455bcba752",
+      "bytes": 645,
+      "id": "enterprise:dalaran/stall/stall_shepherd_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_toolsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "a141e62b470954fb18d52219ff2cfbe83216d91099b72a581803b5bb8a57e81d",
+      "bytes": 781
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_toolsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "2a69b429a4f509560641fc11b186476c8edb82974427c8fb12e01d83024bdbe8",
+      "bytes": 647,
+      "id": "enterprise:dalaran/stall/stall_toolsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_weaponsmith_3x3_a.json",
+      "kind": "meta",
+      "sha256": "12c78ad67fa2f04ef80a8d8bf06b6cd187375e6fe9b721bd423a54c46ae30d1e",
+      "bytes": 781
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/stall/stall_weaponsmith_3x3_a.nbt",
+      "kind": "structure",
+      "sha256": "c3b8600399276a4e3be1306129fcc3dd5c5a37bc1fe975596595636e7bcc53dc",
+      "bytes": 662,
+      "id": "enterprise:dalaran/stall/stall_weaponsmith_3x3_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_armorer_16x13_a.json",
+      "kind": "meta",
+      "sha256": "3ad397419c2d59dadf50833b814fe732a7d3dbe78c8d48f63890d96198d80cf5",
+      "bytes": 13771
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_armorer_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "34091c819d157c54ff091b343da10691d58054cad0b6a2dceb21fec5c020999a",
+      "bytes": 6643,
+      "id": "enterprise:dalaran/workshop/workshop_armorer_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_butcher_16x13_a.json",
+      "kind": "meta",
+      "sha256": "b6b36edd26311f1021308c6f8b8c6dd345b5ae479f40d690c17f5d7c73487924",
+      "bytes": 13757
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_butcher_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "3ecfe27605f2d02d11875400c154afd2a18e2646df4efbf335e8bf3fad58f1ca",
+      "bytes": 6643,
+      "id": "enterprise:dalaran/workshop/workshop_butcher_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_cartographer_16x13_a.json",
+      "kind": "meta",
+      "sha256": "5e9de62c7d315cfcf390cf93c847b34bd063ba1926bed80f65dde12619382407",
+      "bytes": 13767
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_cartographer_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "0641d80079afff8ef18be53b3fc5ec28f8e2a73a32107fde7fd4988b97d40ff8",
+      "bytes": 6710,
+      "id": "enterprise:dalaran/workshop/workshop_cartographer_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_cleric_16x13_a.json",
+      "kind": "meta",
+      "sha256": "0f522ace160abd1a381a626a2cb943958431e8d09095314ece97b1cf65a585ed",
+      "bytes": 13802
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_cleric_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "1eb40152eff4e4ee763a228207332e138b25ede8e04ec8da01b8cbb149d90443",
+      "bytes": 6708,
+      "id": "enterprise:dalaran/workshop/workshop_cleric_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_farmer_16x13_a.json",
+      "kind": "meta",
+      "sha256": "c5154aa12afd651b578cb85f7409e36a606bc5a8f535343032706593371045ed",
+      "bytes": 13748
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_farmer_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "47c39d5f93cef7eb3b89c4f788e4590a672bdadacc50e0aa42166f089e950566",
+      "bytes": 6656,
+      "id": "enterprise:dalaran/workshop/workshop_farmer_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_fisherman_16x13_a.json",
+      "kind": "meta",
+      "sha256": "36069ffe0b501a4c3eb1937e0c98c909aef4736b7549cbbd005f0029acf50180",
+      "bytes": 13764
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_fisherman_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "f00525f883e56aa4ea12cea9cd323a5def7f4d45bb679f97cc254ab1086530b2",
+      "bytes": 6647,
+      "id": "enterprise:dalaran/workshop/workshop_fisherman_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_fletcher_16x13_a.json",
+      "kind": "meta",
+      "sha256": "0b7b077275ba246c92506b688c9838c9d790f09f72a16180cd34cfb5aff9bccf",
+      "bytes": 13754
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_fletcher_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "7771cc2e8c63686faf1fef518b939e06bbb1040cd089e44d1cf238b2cb92c8ae",
+      "bytes": 6627,
+      "id": "enterprise:dalaran/workshop/workshop_fletcher_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_leatherworker_16x13_a.json",
+      "kind": "meta",
+      "sha256": "e21bfee87c1880175b832351981bf2720f48a94754efa819f5afcff2d4d5a5ec",
+      "bytes": 13761
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_leatherworker_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "a38ef1e762dd6ba031d0c80c6d327f5150a63d9a06cbdbff18d71be48b819643",
+      "bytes": 6646,
+      "id": "enterprise:dalaran/workshop/workshop_leatherworker_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_librarian_16x13_a.json",
+      "kind": "meta",
+      "sha256": "0463b3e2df8d7fe2a2f97199906879336a6ab381f3bc67f49732c38001f297a6",
+      "bytes": 13790
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_librarian_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "0af697c47690f7c5ecc68c713c51ddd355208666c824cbec0a5a228b89c7abf3",
+      "bytes": 6707,
+      "id": "enterprise:dalaran/workshop/workshop_librarian_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_mason_16x13_a.json",
+      "kind": "meta",
+      "sha256": "1a9c413601ad38031b149294cae290547db6c7ca57e2381496ee300af63cc825",
+      "bytes": 13754
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_mason_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "d34370c77302592c995dc31d7bb2899a0b60856c56b790619542f949f1205784",
+      "bytes": 6623,
+      "id": "enterprise:dalaran/workshop/workshop_mason_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_shepherd_16x13_a.json",
+      "kind": "meta",
+      "sha256": "e0deaa0afd28a01b37bd302dd801a4af98b5257c1a5601bd7f48ba1e553125c4",
+      "bytes": 13743
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_shepherd_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "b676856a1cf8ce34e2a01aac8b05df249b9092af1842e84f9b09d70ad74e62bb",
+      "bytes": 6610,
+      "id": "enterprise:dalaran/workshop/workshop_shepherd_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_toolsmith_16x13_a.json",
+      "kind": "meta",
+      "sha256": "cf4f04feebd2f75689df17db2e4de28c527ed11b3a0e570b1fa5994f4aae00b4",
+      "bytes": 13752
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_toolsmith_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "f201e59ac127fef8efc1667878bdc780eac923e2ca8a38d643fe618300068844",
+      "bytes": 6613,
+      "id": "enterprise:dalaran/workshop/workshop_toolsmith_16x13_a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_weaponsmith_16x13_a.json",
+      "kind": "meta",
+      "sha256": "cf4834ab9e369ad7c28251acbe827ca8fe5278602d5060b7e3873df6a17be142",
+      "bytes": 13775
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/workshop/workshop_weaponsmith_16x13_a.nbt",
+      "kind": "structure",
+      "sha256": "0f1784e243c916bfda35140eeab00e19e5f45f537426d6d3ead789b7e5d86542",
+      "bytes": 6621,
+      "id": "enterprise:dalaran/workshop/workshop_weaponsmith_16x13_a"
+    }
+  ]
+}

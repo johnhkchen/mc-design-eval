@@ -4,7 +4,7 @@
 import { compose, layoutOf, metaOf } from "./compose.mjs";
 import { WS } from "./stalls.mjs";
 
-const SHOW = {   // two goods for the shop window, by trade (modules goods_*)
+export const SHOW = {   // two goods for the shop window, by trade (modules goods_*)
   farmer: ["hay", "pumpkin"], librarian: ["books", "candle"], cartographer: ["pot", "books"], fletcher: ["target", "hay"],
   fisherman: ["kelp", "pickle"], shepherd: ["wool", "blue"], cleric: ["candle", "pot"], butcher: ["meat", "chain"],
   leatherworker: ["leather", "wool"], mason: ["stone", "stone"], armorer: ["iron", "chain"], toolsmith: ["iron", "bars"], weaponsmith: ["bars", "iron"],
