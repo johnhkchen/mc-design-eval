@@ -963,10 +963,10 @@
     "path": "js/terrain/paint.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T10:33:19.145Z",
+    "updated": "2026-10-28T11:05:53.191Z",
     "updated_by": "studio",
-    "note": "rev 6: --style picks the kingdom's bridge (BRIDGE[k]) and passes its over() to the grade",
-    "bytes": 16961,
+    "note": "rev 7: on an already-bridged world (a run's regions): a built column standing in water is water (judged against the water as found, ground 2+ under its surface); a dropped crossing's old deck cleared; no landing where a dropped crossing is 3 or less (a puddle ends the street plainly)",
+    "bytes": 18761,
     "history": [
       {
         "at": "2026-10-28T05:58:10.249Z",
@@ -1003,6 +1003,12 @@
         "by": "studio",
         "note": "rev 6: --style picks the kingdom's bridge (BRIDGE[k]) and passes its over() to the grade",
         "bytes": 16961
+      },
+      {
+        "at": "2026-10-28T11:05:53.191Z",
+        "by": "studio",
+        "note": "rev 7: on an already-bridged world (a run's regions): a built column standing in water is water (judged against the water as found, ground 2+ under its surface); a dropped crossing's old deck cleared; no landing where a dropped crossing is 3 or less (a puddle ends the street plainly)",
+        "bytes": 18761
       }
     ]
   },
