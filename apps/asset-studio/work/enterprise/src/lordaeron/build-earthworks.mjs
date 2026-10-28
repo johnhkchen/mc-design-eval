@@ -11,17 +11,19 @@ const HERE = dirname(fileURLToPath(import.meta.url)), BUNDLE = join(HERE, "../..
 // --kingdom dalaran builds the same tiles in Dalaran's dress (default lordaeron)
 const ki = process.argv.indexOf("--kingdom"), K = ki > 0 ? process.argv[ki + 1] : "lordaeron";
 const STYLES = { lordaeron: { style: LORDAERON, rev: 6, demo: "demo_h3.nbt",
+  cut_face: "cutface_h<rise>_1a/b/c leave a levelled face natural instead of walled: stone, tuff, mossy cobble, rooted dirt and moss, roots hanging from the lip, a little scree at the foot. Same alignment as the straights; mix them with the walls (walls near buildings and streets, cut faces in yards and the open).",
   detail: "A cobble footing course, mixed coursed stone (stone, mossy and cracked bricks, a little andesite), a battered stair footing from rise 2, a stone coping and a low cobble parapet from rise 2, ivy down faces from rise 3, a coarse drain strip at the foot." },
-  dalaran: { style: DALARAN, rev: 1, demo: "dalaran_demo_h3.nbt",
-  detail: "Dalaran's dress on Lordaeron's geometry: a polished andesite footing and coping, dressed stone brick courses (a little cracked, mossy and chiselled), a battered polished andesite footing from rise 2, a dark oak balustrade on red mangrove fence posts from rise 2 (a post wherever it ends, turns or carries a lamp), ivy down faces from rise 3, polished andesite flights lit on both cheeks, terraces paved to walk on with flowering beds (azalea, peony, lilac, rose, bamboo, pink petals) and lanterns on dark oak posts. Cut faces are the shared natural rock." } };
-const { style, rev, demo: DEMO, detail } = STYLES[K];
+  dalaran: { style: DALARAN, rev: 2, demo: "dalaran_demo_h3.nbt", tile_rev: (t) => (t.meta.kind_of === "cut_face" ? 2 : 1),   // rev 2: its own cut face
+  cut_face: "cutface_h<rise>_1a/b/c finish a levelled face that is not walled: in Dalaran an old terrace's dressed stone gone green, not raw rock: stone brick courses (cracked, a little polished andesite) below, mossy brick and moss in the upper half, a moss lip with ivy hanging from it, a fallen polished slab or moss at the foot. Same alignment as the straights; mix them with the walls (walls near buildings and streets, cut faces in yards and the open).",
+  detail: "Dalaran's dress on Lordaeron's geometry: a polished andesite footing and coping, dressed stone brick courses (a little cracked, mossy and chiselled), a battered polished andesite footing from rise 2, a dark oak balustrade on red mangrove fence posts from rise 2 (a post wherever it ends, turns or carries a lamp), ivy down faces from rise 3, polished andesite flights lit on both cheeks, terraces paved to walk on with flowering beds (azalea, peony, lilac, rose, bamboo, pink petals) and lanterns on dark oak posts. Cut faces are dressed stone gone mossy (rev 2)." } };
+const { style, rev, demo: DEMO, detail, cut_face, tile_rev = () => 1 } = STYLES[K];
 const E = join(DATA, `structure/${K}/earthworks`);
 const write = (f, s) => { mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, s); };
 rmSync(E, { recursive: true, force: true }); mkdirSync(E, { recursive: true });
 const tiles = allEarthworks(style), report = [];
 for (const t of tiles) {
   const f = join(E, `${t.id}.nbt`); t.grid.save(f);
-  const meta = { id: `enterprise:${K}/earthworks/${t.id}`, rev: 1, kingdom: K, kind: "part", slot: "prop:earthworks", palette: "fixed", size: t.grid.size, depth: t.grid.size[2], mirror: true, ground: 2, ...t.meta };
+  const meta = { id: `enterprise:${K}/earthworks/${t.id}`, rev: tile_rev(t), kingdom: K, kind: "part", slot: "prop:earthworks", palette: "fixed", size: t.grid.size, depth: t.grid.size[2], mirror: true, ground: 2, ...t.meta };
   write(f.replace(".nbt", ".json"), JSON.stringify(meta, null, 2) + "\n");
   const c = check(f, meta); report.push([t.id, c.ok, c.errors]);
 }
@@ -30,7 +32,7 @@ write(join(DATA, `town_kits/${K}/earthworks.json`), JSON.stringify({
   about: "Retaining walls for the cuts levelling leaves in a slope. Authored with the low ground to the south: z = depth-1 is the low edge and every tile aligns on it; the wall face looks south; the high ground runs north. Layers 0-1 ground, 2 the low surface, 2 + rise the high surface. Rotate and mirror freely (the corners are drawn for high ground to the north-west).",
   rise: "Each tile is made for one rise, 1 to 4 (retain_h<rise>_*). Use the tile whose rise is the cut's height at that column; at a change of height, let the higher tile's wall run on one column past the step.",
   tiling: "Straights are 1 wide (variants a, b, c: pick by hash so the coursing never repeats), with a lamp tile at most 5 apart and, from rise 3, a buttress about every 4. Corners are 3 x 3. Steps are 4 wide (two cheek walls and a 2-wide flight) or 3 wide (a 1-wide flight for a door path) and 2 x rise + 1 deep, so they reach back into the bank; cut the bank behind them to the steps' landing.",
-  cut_face: "cutface_h<rise>_1a/b/c leave a levelled face natural instead of walled: stone, tuff, mossy cobble, rooted dirt and moss, roots hanging from the lip, a little scree at the foot. Same alignment as the straights; mix them with the walls (walls near buildings and streets, cut faces in yards and the open).",
+  cut_face,
   steps_side: "steps_side_h<rise> (rise 2-4) fit a 3-deep front yard: 2 x rise + 1 long, 3 deep. The landing is at x 0, z 1, beside the door's column (z 0 touches the house). The flight runs along the yard to +x, down to the street at the far end, where the street-edge wall is open. Mirror it for a flight to -x. The rest of the street edge carries on as retain_h<rise> tiles.",
   plinth: "plinth_h<rise>_1 (rise 1-3) is a stepped stone plinth at a house's foot where the house stands on a fill above its yard: rise + 1 deep, run along each wall, row 0 against the wall coped flush with the house's ground, each row out a course lower under a stair. plinth_h<rise>_corner is the outer corner (house to the north-west; rotate). Over 3, use the retaining courses.",
   terrace: "terrace_1a-f and terrace_lamp_1 dress the terrace between two courses: 1 wide, 2 deep, laid on the lower course's top with z 0 at the upper course's foot (planted: azalea, fern, flowers, allium, a clipped shrub) and z 1 along the lower course's edge (grass and moss, walkable). Pick variants by hash; a lamp tile at most every 5th column. Layers 0-1 ground, 2 the terrace surface. If your terrace is wider than 2, fill the rest with grass.",

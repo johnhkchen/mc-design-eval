@@ -39,6 +39,12 @@ export const LORDAERON = {
   terrace_plants: ["azalea", "flowering_azalea", "fern", "large_fern", "oxeye_daisy", "cornflower", "allium", "oak_leaves"],
   terrace_carpet: (q) => q >= 0.25,
   lamp_post: ["mossy_cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]", "mossy_cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"],
+  // the natural cut face: rock (stone, andesite, tuff, mossy cobble), moss and roots only in its upper half, roots hanging
+  cut: {
+    face: (r, upper) => (r < 0.34 ? "stone" : r < 0.56 ? "andesite" : r < 0.72 ? "tuff" : r < 0.88 || !upper ? "mossy_cobblestone" : r < 0.95 ? "moss_block" : "rooted_dirt"),
+    lip_course: (r) => (r < 0.5 ? "rooted_dirt" : "mossy_cobblestone"), lip: (r) => (r < 0.6 ? "moss_block" : GRASS),
+    hang: "hanging_roots[waterlogged=false]", scree: (r) => (r < 0.5 ? "moss_carpet" : "cobblestone_slab[type=bottom,waterlogged=false]"),
+  },
 };
 // a plant name to its blocks, bottom up
 const PLANT_BLOCKS = {
@@ -131,21 +137,20 @@ export function steps({ h, seed = 0, flight = 2, style: S = LORDAERON }) {
   return g;
 }
 
-/** A cut-face finish: the levelled face left natural, not walled: stone and tuff with moss and roots, grass lipping over. */
-export function cutFace({ h, seed = 0 }) {
-  const top = 2 + h, g = new Grid([1, top + 1, 3]);
-  // the face is rock: stone, andesite, tuff and mossy cobble; moss and roots only in its upper half
-  const FACE = (r, upper) => (r < 0.34 ? "stone" : r < 0.56 ? "andesite" : r < 0.72 ? "tuff" : r < 0.88 || !upper ? "mossy_cobblestone" : r < 0.95 ? "moss_block" : "rooted_dirt");
+/** A cut-face finish: the levelled face left natural, not walled: stone and tuff with moss and roots, grass lipping over.
+ *  The style's cut gives the face, the lip course on faces 3 and up, the lip, what hangs from it and the foot's scree. */
+export function cutFace({ h, seed = 0, style: S = LORDAERON }) {
+  const top = 2 + h, g = new Grid([1, top + 1, 3]), C = S.cut;
   for (let y = 0; y < top; y++) g.set(0, y, 0, "dirt"); g.set(0, top, 0, "grass_block[snowy=false]");
   for (let y = 0; y < 2; y++) g.set(0, y, 1, "dirt");
-  // the root lip, moss and roots only on faces 3 and up: a low face is all rock, or it reads as a raw cut
-  for (let y = 2; y < top; y++) g.set(0, y, 1, h >= 3 && y === top - 1 ? (hash(seed, y, 9) < 0.5 ? "rooted_dirt" : "mossy_cobblestone") : FACE(hash(seed, y, 3), h >= 3 && y - 2 >= h / 2));
-  g.set(0, top, 1, hash(seed, 11) < 0.6 ? "moss_block" : "grass_block[snowy=false]");
+  // the lip course, moss and roots only on faces 3 and up: a low face is all rock, or it reads as a raw cut
+  for (let y = 2; y < top; y++) g.set(0, y, 1, h >= 3 && y === top - 1 ? C.lip_course(hash(seed, y, 9)) : C.face(hash(seed, y, 3), h >= 3 && y - 2 >= h / 2));
+  g.set(0, top, 1, C.lip(hash(seed, 11)));
   for (let y = 0; y < 2; y++) g.set(0, y, 2, "dirt");
   g.set(0, 2, 2, hash(seed, 12) < 0.5 ? "coarse_dirt" : "grass_block[snowy=false]");
-  // roots hang from the lip and a scree of stone at the foot
-  if (h >= 2) g.set(0, top - 1, 2, "hanging_roots[waterlogged=false]");
-  if (hash(seed, 13) < 0.5) g.set(0, 3, 2, hash(seed, 14) < 0.5 ? "moss_carpet" : "cobblestone_slab[type=bottom,waterlogged=false]");
+  // something hangs from the lip and a scree lies at the foot
+  if (h >= 2) g.set(0, top - 1, 2, C.hang);
+  if (hash(seed, 13) < 0.5) g.set(0, 3, 2, C.scree(hash(seed, 14)));
   return g;
 }
 
@@ -222,7 +227,7 @@ export function allEarthworks(style = LORDAERON) {
     if (h >= 3) out.push({ id: `retain_h${h}_buttress_1`, grid: retain(STRAIGHT(1), { h, seed: 90 + h, buttress: [[0, 2]], style }), meta: { width: 1, rise: h, kind_of: "straight", tags: ["straight", "buttress"] } });
     out.push({ id: `retain_h${h}_outer_3`, grid: retain(["TWA", "WWA", "AAA"], { h, seed: 50 + h, style }), meta: { width: 3, rise: h, kind_of: "corner_outer", tags: ["corner"] } });
     out.push({ id: `retain_h${h}_inner_3`, grid: retain(["TTT", "TWW", "TWA"], { h, seed: 70 + h, style }), meta: { width: 3, rise: h, kind_of: "corner_inner", tags: ["corner"] } });
-    for (const v of ["a", "b", "c"]) out.push({ id: `cutface_h${h}_1${v}`, grid: cutFace({ h, seed: v.charCodeAt(0) * 17 + h }), meta: { width: 1, rise: h, kind_of: "cut_face", tags: ["cut_face"] } });
+    for (const v of ["a", "b", "c"]) out.push({ id: `cutface_h${h}_1${v}`, grid: cutFace({ h, seed: v.charCodeAt(0) * 17 + h, style }), meta: { width: 1, rise: h, kind_of: "cut_face", tags: ["cut_face"] } });
     out.push({ id: `steps_h${h}_3`, grid: steps({ h, seed: 40 + h, flight: 1, style }), meta: { width: 3, rise: h, kind_of: "steps", tags: ["steps", "path", "lamp"] } });
     if (h >= 2) out.push({ id: `steps_side_h${h}`, grid: sideSteps({ h, seed: 60 + h, style }), meta: { width: 2 * h + 1, rise: h, kind_of: "steps_side", tags: ["steps", "path", "lamp"], landing: [0, 1], door_column: 0 } });
     if (h <= 3) for (const [k, c] of [["1", false], ["corner", true]]) out.push({ id: `plinth_h${h}_${k}`, grid: plinth({ h, seed: 80 + h, corner: c, style }), meta: { width: c ? h + 1 : 1, rise: h, kind_of: c ? "plinth_corner" : "plinth", tags: ["plinth"] } });
