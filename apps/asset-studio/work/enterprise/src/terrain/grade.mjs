@@ -31,7 +31,7 @@ export const ROLE = { wild: 0, blend: 1, free: 2, street: 3, plot: 4, fixed: 5, 
 const DIRS = [[0, -1, "north"], [0, 1, "south"], [1, 0, "east"], [-1, 0, "west"]];
 const median = (a) => { if (!a.length) return NaN; const s = [...a].sort((p, q) => p - q); return s[s.length >> 1]; };
 
-export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, serves = [], blend = 16, step = 3, maxRise = 4, grade = 1 / 3, near = 3, keepAway = 4, keepFall = 0.4 }) {
+export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, serves = [], archClear = 5, blend = 16, step = 3, maxRise = 4, grade = 1 / 3, near = 3, keepAway = 4, keepFall = 0.4 }) {
   const N = X * Z, at = (x, z) => (x < 0 || z < 0 || x >= X || z >= Z ? -1 : z * X + x);
   const role = new Uint8Array(N), target = new Int16Array(N).fill(NONE), owner = new Int32Array(N).fill(-1);
   const bridge = new Uint8Array(N);                                // a street over water: 1 along z, 2 along x
@@ -67,13 +67,23 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
     // smooth the natural profile (a 9-sample mean), then hold it under the grade from every pinned sample both ways
     const n = samples.length, p = nat.map((_, i) => { let a = 0, w = 0; for (let j = Math.max(0, i - 4); j <= Math.min(n - 1, i + 4); j++) if (!Number.isNaN(nat[j])) { a += nat[j]; w++; } return w ? a / w : NaN; });
     for (let i = 0; i < n; i++) if (Number.isNaN(p[i])) p[i] = i ? p[i - 1] : (pinned.find((v) => v !== null) ?? forum.level);
-    const h = p.map((v, i) => (pinned[i] !== null ? pinned[i] : v));
-    for (let pass = 0; pass < 4; pass++) {
-      for (let i = 1; i < n; i++) if (pinned[i] === null) h[i] = Math.min(h[i - 1] + grade, Math.max(h[i - 1] - grade, h[i]));
-      for (let i = n - 2; i >= 0; i--) if (pinned[i] === null) h[i] = Math.min(h[i + 1] + grade, Math.max(h[i + 1] - grade, h[i]));
+    // over water the street is a bridge, its deck high enough for its arches (bridges.mjs): a run of water of 3 or less
+    // is a causeway (a block over the water); to 8, a channel arch of 5 wants the deck 6 over; to 20, an arch of 7, 7
+    // over; longer, an arch of 9, 8 over. A floor, held inside the grade passes, so the banks ramp up to it by half steps
+    const wetK = cells.map((c) => c.some((i) => water[i])), need = new Array(n).fill(-Infinity);
+    for (let a = 0; a < n; a++) {
+      if (!wetK[a] || (a && wetK[a - 1])) continue;
+      let b = a; while (b + 1 < n && wetK[b + 1]) b++;
+      const sp = b - a + 1, over = sp <= 3 ? 1 : sp <= 8 ? archClear + 1 : sp <= 20 ? archClear + 2 : archClear + 3;
+      for (let k = a; k <= b; k++) need[k] = Math.max(...cells[k].filter((i) => water[i]).map((i) => top[i])) + over;
+      a = b;
     }
-    // over water the street is a bridge: its deck at least 2 over the water
-    const level = h.map((v, k) => { const wet = cells[k].filter((i) => water[i]); return Math.round(wet.length ? Math.max(v, Math.max(...wet.map((i) => top[i])) + 2) : v); });
+    const h = p.map((v, i) => Math.max(need[i], pinned[i] !== null ? pinned[i] : v));
+    for (let pass = 0; pass < 6; pass++) {
+      for (let i = 1; i < n; i++) if (pinned[i] === null) h[i] = Math.max(need[i], Math.min(h[i - 1] + grade, Math.max(h[i - 1] - grade, h[i])));
+      for (let i = n - 2; i >= 0; i--) if (pinned[i] === null) h[i] = Math.max(need[i], Math.min(h[i + 1] + grade, Math.max(h[i + 1] - grade, h[i])));
+    }
+    const level = h.map((v) => Math.round(v));
     // the street's steepest stretch (rise over 6 samples), for the report
     const g = n > 1 ? Math.max(...level.map((v, i) => (i >= 6 ? Math.abs(v - level[i - 6]) / 6 : 0))) : 0;
     if (g > steepest.grade) steepest = { grade: +g.toFixed(2), street: si, kind: s.kind };

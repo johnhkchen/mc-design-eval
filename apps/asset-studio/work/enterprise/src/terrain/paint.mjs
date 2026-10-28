@@ -9,7 +9,8 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { Voxels } from "../../../../../irl-copy/src/voxels.mjs";
 import { writeWorld } from "../../../../../irl-copy/src/anvil.mjs";
 import { townGrade, trimStreets, NONE, ROLE } from "./grade.mjs";
-import { bridgeBlocks, landingBlocks } from "./bridge.mjs";
+import { landingBlocks } from "./bridge.mjs";
+import { crossingBlocks, causewayBlocks, ferryStageBlocks } from "./bridges.mjs";
 import { retain, cutFace, hash, LORDAERON } from "../lordaeron/earthworks.mjs";
 import { DALARAN } from "../dalaran/earthworks.mjs";
 import { splitState } from "../grid.mjs";
@@ -107,10 +108,36 @@ for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
   if (up) put(x, target[i] + 1, z, "polished_andesite_slab[type=bottom,waterlogged=false]");
 }
 
-// ---- bridges where a street crosses water (bridge.mjs: deck, piers every 6, parapet, lanterns)
-const bedAt = (x, z) => { let y = target[z * X + x] - 1; while (y > 0 && (WATERY.test(nameOf(V, x, y, z)) || nameOf(V, x, y, z) === "air" || !TERRAIN.test(nameOf(V, x, y, z)) && !/stone|brick|plank|log/.test(nameOf(V, x, y, z)))) y--; return y; };
-for (const [x, y, z, b] of bridgeBlocks({ X, Z, target, bridge, role, style: S, bedAt, pave: PAVE })) put(x, y, z, b);
-for (const c of g.dropped || []) if (c.landing) for (const [x, y, z, b] of landingBlocks({ at: c.landing.at, facing: c.landing.facing, level: target[c.landing.at[1] * X + c.landing.at[0]], water: c.water, width: c.width, style: S, pave: PAVE })) put(x, y, z, b);
+// ---- crossings, assembled from the kingdom's bridge parts (bridges.mjs): arches on piers, or a causeway for 3 or less;
+// a crossing not built ends its street at a landing, or a ferry stage where it would have been a ferry. Each part is
+// drawn in its own frame (i along the street from the near bank, o across; i runs south and o east there) and laid here
+// along the crossing's way, its facings turned to match
+const bedAt0 = (x, z) => { let y = Y - 1; while (y > 0 && (nameOf(V, x, y, z) === "air" || WATERY.test(nameOf(V, x, y, z)) || PLANT.test(nameOf(V, x, y, z)))) y--; return y; };
+const OPP = { north: "south", south: "north", east: "west", west: "east" };
+function frame(c) {
+  const [nx, nz] = c.near_bank, [tx, tz] = c.from, d = [Math.sign(tx - nx), Math.sign(tz - nz)], p = d[0] ? [0, 1] : [1, 0], off = Math.floor((c.width - 1) / 2);
+  return { at: (i, o) => [nx + d[0] * i + p[0] * (o - off), nz + d[1] * i + p[1] * (o - off)], d, p };
+}
+function lay(c, blocks) {
+  const { at, d, p } = frame(c), dir = (v) => (v[0] > 0 ? "east" : v[0] < 0 ? "west" : v[1] > 0 ? "south" : "north"), D = dir(d), P = dir(p);
+  const map = { south: D, north: OPP[D], east: P, west: OPP[P] };
+  const turnF = (b) => { const { name, props } = splitState(b); if (!Object.keys(props).length) return b; const o = {}; for (const [k, v] of Object.entries(props)) o[map[k] ?? k] = k === "facing" ? (map[v] ?? v) : v; return name.replace(/^minecraft:/, "") + "[" + Object.entries(o).map(([k, v]) => `${k}=${v}`).join(",") + "]"; };
+  for (const [i, o, y, b] of blocks) { const [x, z] = at(i, o); if (x >= 0 && z >= 0 && x < X && z < Z) put(x, y, z, b === "air" ? "air" : turnF(b)); }
+}
+for (const c of g.crossings.filter((c) => c.near_bank && c.far_bank)) {
+  const { at } = frame(c), bedAt = (i, o) => bedAt0(...at(i, o));
+  lay(c, (c.kind === "causeway" ? causewayBlocks : crossingBlocks)({ span: c.span, width: c.width, deck: c.deck, water: c.water, bedAt, style: S }));
+}
+for (const c of g.dropped || []) if (c.landing) {
+  const lv = target[c.landing.at[1] * X + c.landing.at[0]];
+  for (const [x, y, z, b] of landingBlocks({ at: c.landing.at, facing: c.landing.facing, level: lv, water: c.water, width: c.width, style: S, pave: PAVE, jetty: c.kind === "ferry" ? 0 : 4 })) put(x, y, z, b);
+  if (c.kind === "ferry") {
+    // the ferry's stage beyond the landing's steps: frame along the landing's way, from where the steps reach the water
+    const steps = Math.max(1, Math.round((lv + 0.5 - (c.water + 2)) * 2)), [fx, fz] = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }[c.landing.facing];
+    const start = [c.landing.at[0] + fx * steps, c.landing.at[1] + fz * steps];
+    lay({ ...c, near_bank: start, from: [start[0] + fx, start[1] + fz] }, ferryStageBlocks({ width: c.width, level: lv, water: c.water, style: S }));
+  }
+}
 const parapet = [];
 
 // ---- an earthworks tile at every step: the tile is drawn with its low side south; turn it to the edge's way down
