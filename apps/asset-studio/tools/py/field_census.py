@@ -1,10 +1,10 @@
-# census.py <world> x0 z0 x1 z1: in 32-block bins, farmland, hedge (persistent leaves at ground+1), water, tree logs;
+# field_census.py <world> x0 z0 x1 z1 [--json]: in 32-block bins, farmland, hedge (persistent leaves at ground+1), water, tree logs;
 # then the whole box's totals and field metrics for comparing with the demo
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from world_render import chunks_in, Chunk
-world, x0, z0, x1, z1 = sys.argv[1], *map(int, sys.argv[2:6])
+world, x0, z0, x1, z1 = sys.argv[1], *map(int, [a for a in sys.argv[2:] if not a.startswith("--")][:4])
 ch = {}
 for r in Path(world, "region").glob("*.mca"):
     for n in chunks_in(r):
@@ -33,5 +33,11 @@ for x in range(x0, x1 + 1):
         else: k = "other:" + top.replace("minecraft:", "").split("[")[0]
         T[k] = T.get(k, 0) + 1
         b = ((x - x0) // 32, (z - z0) // 32); bins.setdefault(b, {}); bins[b][k] = bins[b].get(k, 0) + 1
+farm = T.get("farmland", 0) or 1
+metrics = {"farmland": T.get("farmland", 0), "walls_per_1000_farmland": round(1000 * T.get("wall", 0) / farm), "hedge_leaves_per_1000_farmland": round(1000 * T.get("leaves_low", 0) / farm),
+           "trunks_per_1000_farmland": round(1000 * T.get("trunk", 0) / farm), "planted_share": round(T.get("farmland", 0) / max(1, sum(v for k, v in T.items() if k in ("farmland", "other:grass_block", "other:coarse_dirt"))), 2)}
+if "--json" in sys.argv:
+    import json; print(json.dumps(metrics)); sys.exit(0)
+print(metrics)
 print(sorted(T.items(), key=lambda kv: -kv[1])[:16])
 print("farmland by 32-bin (x,z):", sorted([(b, d.get("farmland", 0)) for b, d in bins.items() if d.get("farmland", 0) > 150], key=lambda t: -t[1])[:12])
