@@ -841,16 +841,22 @@
     "path": "py/field_census.py",
     "lang": "py",
     "author": "studio",
-    "updated": "2026-10-28T01:52:04.461Z",
+    "updated": "2026-10-28T02:30:39.071Z",
     "updated_by": "studio",
-    "note": "Field metrics from a region: walls, hedge leaves and trunks per 1000 farmland, planted share (--json for the study). Our demo: walls 45, hedge 283, trunks 17.",
-    "bytes": 2784,
+    "note": "rev 2: --near n gives planted_share_fields, over field ground only (grass within n of farmland); planted_share stays the whole box. Negative coordinates parse.",
+    "bytes": 3799,
     "history": [
       {
         "at": "2026-10-28T01:52:04.461Z",
         "by": "studio",
         "note": "Field metrics from a region: walls, hedge leaves and trunks per 1000 farmland, planted share (--json for the study). Our demo: walls 45, hedge 283, trunks 17.",
         "bytes": 2784
+      },
+      {
+        "at": "2026-10-28T02:30:39.071Z",
+        "by": "studio",
+        "note": "rev 2: --near n gives planted_share_fields, over field ground only (grass within n of farmland); planted_share stays the whole box. Negative coordinates parse.",
+        "bytes": 3799
       }
     ]
   },
