@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { Voxels } from "../../../../../irl-copy/src/voxels.mjs";
 import { writeWorld } from "../../../../../irl-copy/src/anvil.mjs";
 import { townGrade, NONE, ROLE } from "./grade.mjs";
+import { bridgeBlocks } from "./bridge.mjs";
 import { retain, cutFace, hash, LORDAERON } from "../lordaeron/earthworks.mjs";
 import { DALARAN } from "../dalaran/earthworks.mjs";
 import { splitState } from "../grid.mjs";
@@ -103,18 +104,10 @@ for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
   if (up) put(x, target[i] + 1, z, "polished_andesite_slab[type=bottom,waterlogged=false]");
 }
 
-// ---- bridges where a street crosses water: a paved deck at the street's level, piers every 6 down to the bed, the
-// kingdom's parapet along both sides, a lantern over each pier
+// ---- bridges where a street crosses water (bridge.mjs: deck, piers every 6, parapet, lanterns)
+const bedAt = (x, z) => { let y = target[z * X + x] - 1; while (y > 0 && (WATERY.test(nameOf(V, x, y, z)) || nameOf(V, x, y, z) === "air" || !TERRAIN.test(nameOf(V, x, y, z)) && !/stone|brick|plank|log/.test(nameOf(V, x, y, z)))) y--; return y; };
+for (const [x, y, z, b] of bridgeBlocks({ X, Z, target, bridge, role, style: S, bedAt, pave: PAVE })) put(x, y, z, b);
 const parapet = [];
-for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
-  const i = z * X + x; if (!bridge[i]) continue;
-  const t = target[i], alongZ = bridge[i] === 1, pier = (alongZ ? z : x) % 6 === 0;
-  for (let y = t + 1; y <= t + 3; y++) put(x, y, z, "air");
-  put(x, t, z, PAVE(x, z)); put(x, t - 1, z, "stone_bricks");
-  if (pier) for (let y = t - 2; y > 0 && !TERRAIN.test(nameOf(V, x, y, z)); y--) put(x, y, z, S.course(hash(x, y, z, 3)));
-  const side = (alongZ ? [[1, 0], [-1, 0]] : [[0, 1], [0, -1]]).some(([dx, dz]) => { const j = (z + dz) * X + x + dx; return !(bridge[j] || role[j] === ROLE.street); });
-  if (side) { parapet.push([x, t + 1, z]); put(x, t + 1, z, S.parapet({ north: "none", south: "none", east: "none", west: "none" }, true)); if (pier) put(x, t + 2, z, "lantern[hanging=false,waterlogged=false]"); }
-}
 
 // ---- an earthworks tile at every step: the tile is drawn with its low side south; turn it to the edge's way down
 const TURN = { south: 0, west: 1, north: 2, east: 3 }, CW = { north: "east", east: "south", south: "west", west: "north" };
@@ -128,8 +121,18 @@ function turn(s, q) {
   return name.replace(/^minecraft:/, "") + (body ? `[${body}]` : "");
 }
 const tiles = { wall: 0, cut_face: 0, quay: 0 };
+const DIAG = { "south-east": 0, "south-west": 1, "north-west": 2, "north-east": 3 };
 for (const e of g.edges) {
   if (e.kind === "street_step" || e.kind === "slope") continue;
+  if (e.corner === "inner") {
+    // the inner corner's own column: the inner-corner tile's corner wall (its low side to the south-east), turned
+    const h = Math.min(4, e.rise), low = target[e.z * X + e.x] - e.rise, seed = e.x * 7349 + e.z * 31 + 23, q = DIAG[e.dir];
+    const tile = e.kind === "cut_face" ? cutFace({ h, seed, style: S }) : retain(["TTT", "TWW", "TWA"], { h, seed, style: S }), cx = e.kind === "cut_face" ? 0 : 1;
+    for (let y = low + 1; y <= low + e.rise - h; y++) put(e.x, y, e.z, S.course(hash(seed, y, 3)));
+    const base = low + e.rise - h;
+    for (let ty = 2; ty < tile.size[1]; ty++) { const b = tile.get(cx, ty, 1); if (b) { put(e.x, base - 2 + ty, e.z, turn(b, q)); if (/_fence|cobblestone_wall/.test(b) && ty === 2 + h + 1) parapet.push([e.x, base - 2 + ty, e.z]); } }
+    tiles.inner = (tiles.inner || 0) + 1; continue;
+  }
   const [dx, dz] = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }[e.dir], j = (e.z + dz) * X + e.x + dx;
   const h = Math.min(4, e.rise), low = target[e.z * X + e.x] - e.rise, seed = e.x * 7349 + e.z * 31 + 17;
   const lamp = e.kind !== "cut_face" && hash(e.x, e.z, 5) < 0.2;
