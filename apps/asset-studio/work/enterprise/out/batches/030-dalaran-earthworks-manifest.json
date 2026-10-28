@@ -1,0 +1,831 @@
+{
+  "batch": "030-dalaran-earthworks",
+  "thread": "0010",
+  "made": "2026-10-28T04:00:48.208Z",
+  "files": [
+    {
+      "path": "assets-src/dalaran/earthworks/dalaran_demo_terrace.jpg",
+      "kind": "preview",
+      "sha256": "650ca0bc6613b1826f1afd8e6fd58a30ec515a43f2874167a97038af63c7fedb",
+      "bytes": 230798
+    },
+    {
+      "path": "assets-src/dalaran/earthworks/dalaran_demo_terrace.nbt",
+      "kind": "file",
+      "sha256": "d6e7bc2ba89ac2909fbed9697cea63a8e71518bc2c10b5204fa62705dc0e6de2",
+      "bytes": 8142
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h1_1a.json",
+      "kind": "meta",
+      "sha256": "240196388d3943eeaf82110e41ca555ee643a9b26a3f661790816b67e03323a5",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h1_1a.nbt",
+      "kind": "structure",
+      "sha256": "48be8730da3776cb5da0d5e8b9acf5ce74eab3e13376249b1eaa645d683d31a6",
+      "bytes": 271,
+      "id": "enterprise:dalaran/earthworks/cutface_h1_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h1_1b.json",
+      "kind": "meta",
+      "sha256": "53e818ebe181ad4b2217705732e2efd72c78088d5c2b117bb5f14fbd951abbfc",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h1_1b.nbt",
+      "kind": "structure",
+      "sha256": "0274462d3b5d8c4f098d3aeb3fb7f1bf2f45d718ad08f6a521165935300c1be5",
+      "bytes": 233,
+      "id": "enterprise:dalaran/earthworks/cutface_h1_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h1_1c.json",
+      "kind": "meta",
+      "sha256": "8de5d2f617bd000abe4df14e28aee0abac40352c8ade5e6835a9dcec1faf6abb",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h1_1c.nbt",
+      "kind": "structure",
+      "sha256": "8055a10c3064c3602364b7ca8910acb9d1830e2d2f6046d0a8cc7846ae6e9967",
+      "bytes": 232,
+      "id": "enterprise:dalaran/earthworks/cutface_h1_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h2_1a.json",
+      "kind": "meta",
+      "sha256": "14f08d57ced2db7e34724063f6c675b2582b9db3b2bd95bf7ccce52c3bcbd0e4",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h2_1a.nbt",
+      "kind": "structure",
+      "sha256": "0a67eda90ed5151b662c93e2a750bc4d50d217379d5d39232bbe456b5574428c",
+      "bytes": 279,
+      "id": "enterprise:dalaran/earthworks/cutface_h2_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h2_1b.json",
+      "kind": "meta",
+      "sha256": "1d198a2ab6e1805592af43d16c0193ab41fe83ac584fe708518e87ae809b8f82",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h2_1b.nbt",
+      "kind": "structure",
+      "sha256": "b78ffa9b572fa4c7d4db31960b74527ea5db694e96ccaebd136f5e1e2c9a63a7",
+      "bytes": 279,
+      "id": "enterprise:dalaran/earthworks/cutface_h2_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h2_1c.json",
+      "kind": "meta",
+      "sha256": "391660a5007849b93141083de3b2fc1b367566b41291c9bc121eba7ed831e333",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h2_1c.nbt",
+      "kind": "structure",
+      "sha256": "6129d9ad65f954a787e0cee62cd7d2db93d0f55b671cc5ebd7f0dae03991aad8",
+      "bytes": 273,
+      "id": "enterprise:dalaran/earthworks/cutface_h2_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h3_1a.json",
+      "kind": "meta",
+      "sha256": "36681a350fcff54edceeae77c9c5e7719591a954afc93703ee05ed0c6e4a64e5",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h3_1a.nbt",
+      "kind": "structure",
+      "sha256": "ecf4c8999a9ee23426f4c089f4fee1e2d2cd93130b8ab33216a88d2d81e9e0d2",
+      "bytes": 312,
+      "id": "enterprise:dalaran/earthworks/cutface_h3_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h3_1b.json",
+      "kind": "meta",
+      "sha256": "66905cd3a0e82db7f7ae3e2b5551499a3bd3b1e4e91d3d5d5a6fcaffec4f50ba",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h3_1b.nbt",
+      "kind": "structure",
+      "sha256": "3ad8fe7b677a99a40755aa7cf7df279d4847f59fe1c28b606befa943ae8e3c4e",
+      "bytes": 293,
+      "id": "enterprise:dalaran/earthworks/cutface_h3_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h3_1c.json",
+      "kind": "meta",
+      "sha256": "2225572d7bee2b0faabf5fe7e96c2baf9abe746e8f7dabbf0ded7de21d4c7742",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h3_1c.nbt",
+      "kind": "structure",
+      "sha256": "8d737a1f61f30d1f8a164a70ef27f3347c019894d159fc442596c4c3929a0782",
+      "bytes": 275,
+      "id": "enterprise:dalaran/earthworks/cutface_h3_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h4_1a.json",
+      "kind": "meta",
+      "sha256": "175c6c68640a388813b477bd26dbb6df59fd93858f2f90577d4f75d5f3303446",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h4_1a.nbt",
+      "kind": "structure",
+      "sha256": "be99a6c573b203fb9bf4780c321fd010ebc0461ce91778d5b0035b744e672620",
+      "bytes": 305,
+      "id": "enterprise:dalaran/earthworks/cutface_h4_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h4_1b.json",
+      "kind": "meta",
+      "sha256": "79d060c76f6e8d88636d8c4e6e43b6ee55360afd5d2592859cf873ffbd641a91",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h4_1b.nbt",
+      "kind": "structure",
+      "sha256": "2a0cbb3143f4c3d94a0f03e660255a5a2015e17fdf4fe46e6bd3e24f0f2d23af",
+      "bytes": 304,
+      "id": "enterprise:dalaran/earthworks/cutface_h4_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h4_1c.json",
+      "kind": "meta",
+      "sha256": "e9fb7e41d02367f1a346dfef82bb582352d75d46e633431e56280f0956f1199a",
+      "bytes": 331
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/cutface_h4_1c.nbt",
+      "kind": "structure",
+      "sha256": "2d11854cba30efa40000d3637ce76e377d447b116b4b13181a432309e0c8123a",
+      "bytes": 292,
+      "id": "enterprise:dalaran/earthworks/cutface_h4_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h1_1.json",
+      "kind": "meta",
+      "sha256": "f83f4fcca64f956e835a5fc710e743aca0a45e8c28f3e68f01c223b1e43a7cd1",
+      "bytes": 325
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h1_1.nbt",
+      "kind": "structure",
+      "sha256": "ef8f119557e2302004601e82c72faf5b1c555b9e7c75e9b3508b9ea9c5af7370",
+      "bytes": 257,
+      "id": "enterprise:dalaran/earthworks/plinth_h1_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h1_corner.json",
+      "kind": "meta",
+      "sha256": "8d35d43d57f9cb30765a5b713f02ac865ac88ebe2f81605157dcf45c76546df6",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h1_corner.nbt",
+      "kind": "structure",
+      "sha256": "5c77d24b9caedb2c8a848f8942b54c1dd1b1bc23ffb6d7035c946ee686e56fff",
+      "bytes": 299,
+      "id": "enterprise:dalaran/earthworks/plinth_h1_corner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h2_1.json",
+      "kind": "meta",
+      "sha256": "367527d0f30b1340c64eb3cc3f0d7f920620d1f1b6df4b1db5687ac2f39f3a4a",
+      "bytes": 325
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h2_1.nbt",
+      "kind": "structure",
+      "sha256": "b2605d787ac51741f1c2d2d4c84febabc6130925f1f2d9296731dd596285b301",
+      "bytes": 273,
+      "id": "enterprise:dalaran/earthworks/plinth_h2_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h2_corner.json",
+      "kind": "meta",
+      "sha256": "a15d540b98f056aadad016c2e114561dbaec131271b0221b7ca8ab86df85f3a7",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h2_corner.nbt",
+      "kind": "structure",
+      "sha256": "40fb9d845ded891661dda890944c91538fd7a6e83e8eb4929765268542161fca",
+      "bytes": 357,
+      "id": "enterprise:dalaran/earthworks/plinth_h2_corner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h3_1.json",
+      "kind": "meta",
+      "sha256": "d3dd8535f4a7c6444ecf2913b575491ffabd04e62d368386842b0d48435cf325",
+      "bytes": 325
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h3_1.nbt",
+      "kind": "structure",
+      "sha256": "c6338c8ebc6ecd541253a1a822de8ed87e0824914fef0ede19fabeb6c7e6e0fb",
+      "bytes": 315,
+      "id": "enterprise:dalaran/earthworks/plinth_h3_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h3_corner.json",
+      "kind": "meta",
+      "sha256": "b76229ebe53399d9ca22dcda12c1c380dd46a6c43ac79bbaa671c6a2e2026dd5",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/plinth_h3_corner.nbt",
+      "kind": "structure",
+      "sha256": "f6ec10c248d8556d18bd7971895e3911e78c24430f6f5363e78146ea92f7280f",
+      "bytes": 491,
+      "id": "enterprise:dalaran/earthworks/plinth_h3_corner"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_1a.json",
+      "kind": "meta",
+      "sha256": "4b94dccf80d6dc182b986789a62ecf1ce009814003219794b9e4fb777e5a9b7c",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_1a.nbt",
+      "kind": "structure",
+      "sha256": "7caafc7c4ba595f94e69645172f8689439aad05cf44f293f40fe34374279db05",
+      "bytes": 220,
+      "id": "enterprise:dalaran/earthworks/retain_h1_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_1b.json",
+      "kind": "meta",
+      "sha256": "6c4c7c0521e02d2c097cdbf9a26e94e4a28b3c46baed05550d26e027481896bb",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_1b.nbt",
+      "kind": "structure",
+      "sha256": "44de6887394c7442532d17f364a3dbe4b2addd933fe0544fa610a44cc32a95af",
+      "bytes": 229,
+      "id": "enterprise:dalaran/earthworks/retain_h1_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_1c.json",
+      "kind": "meta",
+      "sha256": "4a4698b43303fd23935ded906287966137b1ba67106362a73949f87e5e329324",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_1c.nbt",
+      "kind": "structure",
+      "sha256": "7caafc7c4ba595f94e69645172f8689439aad05cf44f293f40fe34374279db05",
+      "bytes": 220,
+      "id": "enterprise:dalaran/earthworks/retain_h1_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_inner_3.json",
+      "kind": "meta",
+      "sha256": "4da35577c14466d35c9bc0cd624f067fccf5a1149bd5b0213a2f0b210a15e443",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "6948684984071ecf95271debe33c3b02aa9491b5d9b98ea889ee7a72c82a49c0",
+      "bytes": 303,
+      "id": "enterprise:dalaran/earthworks/retain_h1_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_lamp_1.json",
+      "kind": "meta",
+      "sha256": "33d78472dd635ae833eeb6b09fb0132633b7fa2f6bf13ba683f393dc5adfd1cc",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "40f8cad9dba391d382ced44284093170d042174be749865fbb4533fa58f90854",
+      "bytes": 266,
+      "id": "enterprise:dalaran/earthworks/retain_h1_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_outer_3.json",
+      "kind": "meta",
+      "sha256": "d7a61230797798e784e890e28629a2958adbb2bd014338a477552bb4f55a567f",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h1_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "d2c803a188d564931dec398a79757fbfa7078af22755afee1563186c641e8ffe",
+      "bytes": 306,
+      "id": "enterprise:dalaran/earthworks/retain_h1_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_1a.json",
+      "kind": "meta",
+      "sha256": "a3ac7d541d4267dd2c2eb03be26f19e8550b66406314cf079daf8d1cf20354e5",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_1a.nbt",
+      "kind": "structure",
+      "sha256": "ef193de0c360017a1aa6eeb0c1e5adef692a2d85ef846e8bc70cc943cd3096a2",
+      "bytes": 341,
+      "id": "enterprise:dalaran/earthworks/retain_h2_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_1b.json",
+      "kind": "meta",
+      "sha256": "16d541115bebf402ffc68c91cae83abd783227d5009684d0df3813d4632de011",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_1b.nbt",
+      "kind": "structure",
+      "sha256": "ef193de0c360017a1aa6eeb0c1e5adef692a2d85ef846e8bc70cc943cd3096a2",
+      "bytes": 341,
+      "id": "enterprise:dalaran/earthworks/retain_h2_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_1c.json",
+      "kind": "meta",
+      "sha256": "9387c148e34414d620c99d4522866d80b6ddfb0f5d63fcac06c4d4637c65e5f5",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_1c.nbt",
+      "kind": "structure",
+      "sha256": "ef193de0c360017a1aa6eeb0c1e5adef692a2d85ef846e8bc70cc943cd3096a2",
+      "bytes": 341,
+      "id": "enterprise:dalaran/earthworks/retain_h2_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_inner_3.json",
+      "kind": "meta",
+      "sha256": "1c97490328cce010c4c482fe0199e6863dcb1cab953d38143abd052dca8b4752",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "316301014c54b0b5863001be56d8cba1431168e86d306d22bdcdf5c8a01cecb3",
+      "bytes": 436,
+      "id": "enterprise:dalaran/earthworks/retain_h2_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_lamp_1.json",
+      "kind": "meta",
+      "sha256": "cb203c2f87583a8da933119c0940fd1560f9fbde60004547f4c99c66139154e9",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "be0bd8042b45420bf79757a85a07acab50e78aa9028ed3797bf7e28db4dff3f7",
+      "bytes": 356,
+      "id": "enterprise:dalaran/earthworks/retain_h2_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_outer_3.json",
+      "kind": "meta",
+      "sha256": "b16395239402181dcfb8f6cd96ca96f01a46fe420e4007194ff4090d42271145",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h2_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "346e724ec1181f2c81aa131cc6724fba962946ac4b5c6ef75ca68e40a7cd2872",
+      "bytes": 489,
+      "id": "enterprise:dalaran/earthworks/retain_h2_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_1a.json",
+      "kind": "meta",
+      "sha256": "5d48a4a26161874e113cec984644ab13a99123bc4362b188f7137ce260cab588",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_1a.nbt",
+      "kind": "structure",
+      "sha256": "c700073c605d9e889a78f838c92176e896590ea597d035bc9414b3e402cdcc8c",
+      "bytes": 400,
+      "id": "enterprise:dalaran/earthworks/retain_h3_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_1b.json",
+      "kind": "meta",
+      "sha256": "30727d65f71f3780d970c76f4890d5a463b7fc52e565a4b40b9647ffb805b0eb",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_1b.nbt",
+      "kind": "structure",
+      "sha256": "a60997c57494036bcdf322f1124ff8c457202d896864baea7571b0da88faacb2",
+      "bytes": 382,
+      "id": "enterprise:dalaran/earthworks/retain_h3_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_1c.json",
+      "kind": "meta",
+      "sha256": "df5663b2db59ea032e6233a51f3ce91940ff2b7b2cb5ef2aaa8e0f8952b283b7",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_1c.nbt",
+      "kind": "structure",
+      "sha256": "c9bda0e92f76b98a790089ca5632738fda37c0918fd4ce1fdb577b6ed6040b0a",
+      "bytes": 368,
+      "id": "enterprise:dalaran/earthworks/retain_h3_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_buttress_1.json",
+      "kind": "meta",
+      "sha256": "66193f6f0fc79694a5f148a097e5870a064fef10174e0cc8767694ade5b5ac41",
+      "bytes": 354
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_buttress_1.nbt",
+      "kind": "structure",
+      "sha256": "3003352113cfb2d24c1840f383e9334638271ac7c6d91eb0394a3e976483bf10",
+      "bytes": 362,
+      "id": "enterprise:dalaran/earthworks/retain_h3_buttress_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_inner_3.json",
+      "kind": "meta",
+      "sha256": "fe2e953a898937711d86129bbbd422ef7b63248a8da88c521140c5e8b58b9a22",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "2c8de103073ae5a733f19eaa9ba31d30ce69387847da7741d94b054f2f5e2021",
+      "bytes": 483,
+      "id": "enterprise:dalaran/earthworks/retain_h3_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_lamp_1.json",
+      "kind": "meta",
+      "sha256": "2e8ea8273586fd305f5b0d2b483f24810ff5069b53e706649f7e536a24721947",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "7f8dfdba381378ecde9aeec481bbef04430d0758c9af300419719a4f3de9546a",
+      "bytes": 416,
+      "id": "enterprise:dalaran/earthworks/retain_h3_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_outer_3.json",
+      "kind": "meta",
+      "sha256": "547e6da7a4c0cceacd8024d384ddea07addf3bfa79e8abbc9176dd1ab47c08ff",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h3_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "79c54441d24691443bf0279b9d1bb1c210ad589a04253d0eba5dbe928bf09d5c",
+      "bytes": 553,
+      "id": "enterprise:dalaran/earthworks/retain_h3_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_1a.json",
+      "kind": "meta",
+      "sha256": "d53a24aa5b1a93e6bf9f8d47798fcd92f1f9ce9b69cf14ff84fc844c14f38fb6",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_1a.nbt",
+      "kind": "structure",
+      "sha256": "8a237f26aced28620a26091c03b8df6e49bdaf4845e7ddfcc5329a8ef62a74cd",
+      "bytes": 372,
+      "id": "enterprise:dalaran/earthworks/retain_h4_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_1b.json",
+      "kind": "meta",
+      "sha256": "e192d659f7844473af5320be1d27655e8af5044b7881d653464f51000f88ed17",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_1b.nbt",
+      "kind": "structure",
+      "sha256": "9101bbcc98521690213b61552b2c3bf8f1582eb6e3f29b5d2709932fc8f08891",
+      "bytes": 394,
+      "id": "enterprise:dalaran/earthworks/retain_h4_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_1c.json",
+      "kind": "meta",
+      "sha256": "0e361432d9e7dc42e777e1681bfdae6277ca3b3f6616372d14ebba33fa9d855c",
+      "bytes": 330
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_1c.nbt",
+      "kind": "structure",
+      "sha256": "7be9ef6c324a846f616802e4fc0b72a0827b4f446dce74b374b54f1351efa8a1",
+      "bytes": 398,
+      "id": "enterprise:dalaran/earthworks/retain_h4_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_buttress_1.json",
+      "kind": "meta",
+      "sha256": "a6e265ca9a8ca21cad9bc80da46fe0bc4ecc89e074b086e8eb884ae696e263a0",
+      "bytes": 354
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_buttress_1.nbt",
+      "kind": "structure",
+      "sha256": "2cdea6bdd4e9d2863a2fe9a3994d14fc4bb7a113eaf1267ba434dedb1f6cc9dd",
+      "bytes": 390,
+      "id": "enterprise:dalaran/earthworks/retain_h4_buttress_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_inner_3.json",
+      "kind": "meta",
+      "sha256": "6f7a936ef91df461044efde852258d03691788bb1c210e6dea971c89ce274b62",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_inner_3.nbt",
+      "kind": "structure",
+      "sha256": "c48e683ba2673437537a5ed4ee807c15c9151d3b76495dec2f59f138a130cf32",
+      "bytes": 514,
+      "id": "enterprise:dalaran/earthworks/retain_h4_inner_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_lamp_1.json",
+      "kind": "meta",
+      "sha256": "2bf2f494376b1f76ba70d4116feebe3052af9e69cacc82c3b1147f8d8f49bedd",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "e4dc95bd170884c99bea26dc9a6b32c63ddd52fed2e26a37fedb83941c4c2eef",
+      "bytes": 413,
+      "id": "enterprise:dalaran/earthworks/retain_h4_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_outer_3.json",
+      "kind": "meta",
+      "sha256": "9a4a647b965e9e181a3d9e6b08a7fc4cae1aae275e161db847110e99dff72f87",
+      "bytes": 337
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/retain_h4_outer_3.nbt",
+      "kind": "structure",
+      "sha256": "34f8ab2e7468afa37068a247390daf33d7c32cc0db394a84ec4c78f0876daa79",
+      "bytes": 562,
+      "id": "enterprise:dalaran/earthworks/retain_h4_outer_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h1_3.json",
+      "kind": "meta",
+      "sha256": "8d0636c62f0024cfb8904e3664beee19ede45ca160cfffdf44f0c4f2f8bbc331",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h1_3.nbt",
+      "kind": "structure",
+      "sha256": "5a26ff21c30081c45af59a747a4ccbf602e569e4560576643b2589f67a023ef2",
+      "bytes": 490,
+      "id": "enterprise:dalaran/earthworks/steps_h1_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h1_4.json",
+      "kind": "meta",
+      "sha256": "6a49c0dc5fbdb33e75b068b336efc2e1bb79d03b11a18b32026887803fae1765",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h1_4.nbt",
+      "kind": "structure",
+      "sha256": "b01270bf236b2db20b82457e2f369f8bfc23a51d719d3fe8c5aa3ca27b7e3faf",
+      "bytes": 532,
+      "id": "enterprise:dalaran/earthworks/steps_h1_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h2_3.json",
+      "kind": "meta",
+      "sha256": "62a5046a27815258991f9ed716eda303e170f4b7e125f2637f3710d462a25dc5",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h2_3.nbt",
+      "kind": "structure",
+      "sha256": "1f350268f6637c27cbd3da83c7dfb9e56ee0c8876e6601fa9c15e037dd0ed041",
+      "bytes": 613,
+      "id": "enterprise:dalaran/earthworks/steps_h2_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h2_4.json",
+      "kind": "meta",
+      "sha256": "ecc238dc6af01e63b6e199a2510d60419e2d86c385c539aa1f26ff8470d06855",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h2_4.nbt",
+      "kind": "structure",
+      "sha256": "ad068ae11ff1f2b0ec12aa4017537bc2a1b3fc18c7c7fecb5df3eda0bc992c33",
+      "bytes": 693,
+      "id": "enterprise:dalaran/earthworks/steps_h2_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h3_3.json",
+      "kind": "meta",
+      "sha256": "494d4b6ddb2d29050abde9cd0f0de4a98d5ce1c2948be4c4472edfc98a6c8fe5",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h3_3.nbt",
+      "kind": "structure",
+      "sha256": "0ed5c744c85618854c925c4a65e45bc57f552a8119b31b629a531e16a93c547f",
+      "bytes": 784,
+      "id": "enterprise:dalaran/earthworks/steps_h3_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h3_4.json",
+      "kind": "meta",
+      "sha256": "1befcf6bc485919015e5088272f9779aad3934317a5c21ba47bbcef7ba46d02a",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h3_4.nbt",
+      "kind": "structure",
+      "sha256": "3ff276de449995b1c97193a4a6e48e0367dc7edccb60fd9bf873a6906e95715e",
+      "bytes": 897,
+      "id": "enterprise:dalaran/earthworks/steps_h3_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h4_3.json",
+      "kind": "meta",
+      "sha256": "c9b25bd1ecbe8f95020da05e742b65afe1324c0562d70b2d71aacd4df259ba08",
+      "bytes": 346
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h4_3.nbt",
+      "kind": "structure",
+      "sha256": "9e0e25199f5cbd80a2a352a1a0d6b1cece8bca29eec4cef4cbd5df68bcecd6a9",
+      "bytes": 942,
+      "id": "enterprise:dalaran/earthworks/steps_h4_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h4_4.json",
+      "kind": "meta",
+      "sha256": "194d53426245a93155afbb2e97c41bfdcaebba230944949f9cba3f4dedc2e76d",
+      "bytes": 334
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_h4_4.nbt",
+      "kind": "structure",
+      "sha256": "e07ccb2f43a7a6b42d157902459d2aeb15bd510e77010d19a2be9ef17906081f",
+      "bytes": 1112,
+      "id": "enterprise:dalaran/earthworks/steps_h4_4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_side_h2.json",
+      "kind": "meta",
+      "sha256": "cc4ea2e3a6e508c7a4d7230a0d675563150b53aef1dcbb709f48b7ddd95ee288",
+      "bytes": 407
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_side_h2.nbt",
+      "kind": "structure",
+      "sha256": "9f580e3742a2b7441696ddfb0b76ced44e1b3393b631164b946432c500f02b70",
+      "bytes": 567,
+      "id": "enterprise:dalaran/earthworks/steps_side_h2"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_side_h3.json",
+      "kind": "meta",
+      "sha256": "e081e6b6c7aecd0af736a9738def90b06ec7de311376242ef4ec79ab24d6c80d",
+      "bytes": 407
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_side_h3.nbt",
+      "kind": "structure",
+      "sha256": "4cb125df68065bc347429c9728095975c18a024945a36ce916cfc2eb51b5198a",
+      "bytes": 706,
+      "id": "enterprise:dalaran/earthworks/steps_side_h3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_side_h4.json",
+      "kind": "meta",
+      "sha256": "12ec048f7faf7a64b4c82e48f3225a4b551ce6fe6c0bd51b03350c25df62d428",
+      "bytes": 407
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/steps_side_h4.nbt",
+      "kind": "structure",
+      "sha256": "79d78d42a9d55caff82867626e9d178e87df5eee7a6a9418ed592b062cd99272",
+      "bytes": 927,
+      "id": "enterprise:dalaran/earthworks/steps_side_h4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1a.json",
+      "kind": "meta",
+      "sha256": "bd709ec6f0bf3e82d24d63f69f62533579fbedfa9be895a7ae727ad0df669094",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1a.nbt",
+      "kind": "structure",
+      "sha256": "e2d976e11ffbbc713f59cfcb68e23a6501e9a46a3905ed2a3e8220532f561b51",
+      "bytes": 236,
+      "id": "enterprise:dalaran/earthworks/terrace_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1b.json",
+      "kind": "meta",
+      "sha256": "d80dac1ca635e2cbff4c9a170cd82f4d0c662c81dc6644bf02f07e4babd98c64",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1b.nbt",
+      "kind": "structure",
+      "sha256": "40ef738c117ba2407ab63f4cd2e5dc0ef7dc3b791d2e8332666adafd641dd925",
+      "bytes": 253,
+      "id": "enterprise:dalaran/earthworks/terrace_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1c.json",
+      "kind": "meta",
+      "sha256": "971e9d2b35d18aa2575efa278da8e7d9241147c051eceb7d6a808edf606301c7",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1c.nbt",
+      "kind": "structure",
+      "sha256": "d20ce611617bcc6693ca390b66794519aaec174534f2a417c6a486c0ebc6127a",
+      "bytes": 245,
+      "id": "enterprise:dalaran/earthworks/terrace_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1d.json",
+      "kind": "meta",
+      "sha256": "2ed64c90c0f95f1b1ae808687c70ca3dba1ea68da532fef61f092b1eb8a3e05e",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1d.nbt",
+      "kind": "structure",
+      "sha256": "e6490bde799069db5769039c7f569ff14d286dd1c4178f31e28eb75795ed3a47",
+      "bytes": 199,
+      "id": "enterprise:dalaran/earthworks/terrace_1d"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1e.json",
+      "kind": "meta",
+      "sha256": "199c531cf632b716bbaf060f0441f199e519697f4ac6cb57b20566f0ce296948",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1e.nbt",
+      "kind": "structure",
+      "sha256": "951093ce80a0a1e1d3ffb151ce11fa8b01046496aa62f2e9ba387d889dd3e747",
+      "bytes": 220,
+      "id": "enterprise:dalaran/earthworks/terrace_1e"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1f.json",
+      "kind": "meta",
+      "sha256": "f6eda84701297f10b3d6ca173d8631c922777ac5ec6ab663818629d523320d4f",
+      "bytes": 326
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_1f.nbt",
+      "kind": "structure",
+      "sha256": "2ac4ba6f7875363dfd33630b74c1b56caca9f421ebeb5664790e84cc11c3c2b1",
+      "bytes": 236,
+      "id": "enterprise:dalaran/earthworks/terrace_1f"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_lamp_1.json",
+      "kind": "meta",
+      "sha256": "c4da4ea6d91962a7e7f7460fe03ee6664d9918cecb81b99063e5705690d6dcb4",
+      "bytes": 342
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/earthworks/terrace_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "388cbd2b433195946365354360bc4eef746e5f16c75d9b4465a6186af5c4c7e1",
+      "bytes": 283,
+      "id": "enterprise:dalaran/earthworks/terrace_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/dalaran/earthworks.json",
+      "kind": "kit_rules",
+      "sha256": "456a6d9e410d53a395aa2b3d9a45573e322fe2b3c21e3c03dd8bcbe87353c835",
+      "bytes": 18056
+    }
+  ]
+}
