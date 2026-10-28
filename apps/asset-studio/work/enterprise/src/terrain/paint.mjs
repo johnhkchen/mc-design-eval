@@ -43,7 +43,7 @@ const TERRAIN = /^(grass_block|dirt|coarse_dirt|podzol|rooted_dirt|mud|moss_bloc
 const WATERY = /^(water|bubble_column|seagrass|tall_seagrass|kelp|kelp_plant)$/;
 // a tree, for finding the ground: any leaves and any natural log or wood (a building always has its roof above them)
 const isTree = (n) => /_leaves$/.test(n) || (/_(log|wood)$/.test(n) && !/^stripped_/.test(n)) || n === "cocoa" || n === "mangrove_roots";
-const standing = {}, N = X * Z, top = new Int16Array(N), water = new Uint8Array(N), fixed = new Int16Array(N).fill(NONE);
+const standing = {}, standingIn = [], N = X * Z, top = new Int16Array(N), water = new Uint8Array(N), fixed = new Int16Array(N).fill(NONE);
 for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
   const i = z * X + x; let y = Y - 1;
   for (; y > 0; y--) { const n = nameOf(V, x, y, z); if (n === "air" || PLANT.test(n) || isTree(n)) continue; break; }
@@ -54,7 +54,18 @@ for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
   // it, it is a dock or a bridge, and the column is water (at the water's surface)
   let g = y, wet = -1; while (g > 0 && !TERRAIN.test(nameOf(V, x, g, z))) { if (wet < 0 && WATERY.test(nameOf(V, x, g, z))) wet = g; g--; }
   if (wet >= 0) { water[i] = 1; top[i] = wet; continue; }
+  standingIn.push(i);                                            // checked below: a pier standing in water is water
   top[i] = g + 1; fixed[i] = g + 1; standing[n] = (standing[n] || 0) + 1;
+}
+// a built column standing in water (a pier, a bridge's abutment set in the river): its ground is below the water's
+// surface beside it, so the column is water at that surface (the grade bridges it again with the kingdom's parts)
+// (judged against the water as found, so it never chains along a paved street; and only where the column's own ground
+// is at least 2 under that surface, as a pier's footing is, never paving beside a pond)
+const wet0 = Uint8Array.from(water), top0 = Int16Array.from(top);
+for (const i of standingIn) {
+  const x = i % X, z = (i - x) / X;
+  const wetBy = [[1, 0], [-1, 0], [0, 1], [0, -1]].filter(([dx, dz]) => x + dx >= 0 && x + dx < X && z + dz >= 0 && z + dz < Z).map(([dx, dz]) => (z + dz) * X + x + dx).filter((j) => wet0[j] && top0[i] - 1 <= top0[j] - 2);
+  if (wetBy.length) { water[i] = 1; fixed[i] = NONE; top[i] = Math.max(...wetBy.map((j) => top0[j])); }
 }
 if (argv.includes("--why")) console.log(Object.entries(standing).sort((a, b) => b[1] - a[1]).slice(0, 25));
 
@@ -128,7 +139,15 @@ for (const c of g.crossings.filter((c) => c.near_bank && c.far_bank)) {
   const { at } = frame(c), bedAt = (i, o) => bedAt0(...at(i, o));
   lay(c, kingdomCrossing({ span: c.span, width: c.width, deck: c.deck, water: c.water, bedAt, style: B }));
 }
-for (const c of g.dropped || []) if (c.landing) {
+// a dropped crossing's old deck (a world already bridged, as a demo on a run's regions): cleared to the water along it
+for (const c of g.dropped || []) if (c.from && c.to) {
+  const [ax, az] = c.from, [bx, bz] = c.to, half = Math.floor((c.width - 1) / 2) + 1;
+  for (let x = Math.min(ax, bx) - (az === bz ? 0 : half); x <= Math.max(ax, bx) + (az === bz ? 0 : half); x++) for (let z = Math.min(az, bz) - (ax === bx ? 0 : half); z <= Math.max(az, bz) + (ax === bx ? 0 : half); z++) {
+    if (x < 0 || z < 0 || x >= X || z >= Z || !water[z * X + x]) continue;
+    for (let y = top[z * X + x] + 1; y <= top[z * X + x] + 8 && y < Y; y++) if (nameOf(V, x, y, z) !== "air") put(x, y, z, "air");
+  }
+}
+for (const c of g.dropped || []) if (c.landing && c.span > 3) {                      // a puddle ends the street plainly
   const lv = target[c.landing.at[1] * X + c.landing.at[0]];
   for (const [x, y, z, b] of landingBlocks({ at: c.landing.at, facing: c.landing.facing, level: lv, water: c.water, width: c.width, style: S, pave: PAVE, jetty: c.kind === "ferry" ? 0 : 4 })) put(x, y, z, b);
   if (c.kind === "ferry") {
