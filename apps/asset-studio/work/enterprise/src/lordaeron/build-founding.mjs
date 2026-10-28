@@ -4,11 +4,12 @@ import { mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { lordaeronFounding } from "./founding.mjs";
+import { foundingKit } from "../founding/kits.mjs";
 import { Grid } from "../grid.mjs";
 import { check } from "../../../../tools/check-asset.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url)), DATA = join(HERE, "../../bundle/core/src/main/resources/data/enterprise");
 const ki = process.argv.indexOf("--kingdom"), K = ki > 0 ? process.argv[ki + 1] : "lordaeron";
-const KITS = { lordaeron: lordaeronFounding };
+const KITS = { lordaeron: lordaeronFounding, dalaran: () => foundingKit("dalaran"), stormwind: () => foundingKit("stormwind") };
 const F = join(DATA, `structure/${K}/founding`);
 const write = (f, s) => { mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, s); };
 rmSync(F, { recursive: true, force: true }); mkdirSync(F, { recursive: true });
@@ -28,9 +29,9 @@ write(join(DATA, `town_kits/${K}/founding.json`), JSON.stringify({
 }, null, 2) + "\n");
 // the demo: a founded square, 25 x 21: the cross in the middle, the stone and the board at its north edge, the well,
 // the main street running south through the gate posts, the camp at its end, a stake line along the wall's line
-const W = 25, D = 21, demo = new Grid([W, 12, D]), byId = Object.fromEntries(parts.map((t) => [t.id, t.grid]));
+const W = 25, D = 21, demo = new Grid([W, K === "lordaeron" ? 12 : 14, D]), byId = Object.fromEntries(parts.map((t) => [t.id, t.grid]));
 for (let x = 0; x < W; x++) for (let z = 0; z < D; z++) { demo.set(x, 0, z, "dirt"); demo.set(x, 1, z, "dirt"); demo.set(x, 2, z, (Math.abs(x - 12) <= 5 && z >= 2 && z <= 12) ? ((x + z) % 3 ? "cobblestone" : "gravel") : Math.abs(x - 12) <= 1 ? "dirt_path" : "grass_block[snowy=false]"); }
-demo.paste(byId.market_cross_5, 10, 0, 5);
+demo.paste(byId.market_cross_5 || byId.well_pavilion_5 || byId.fountain_5, 10, 0, 5);
 demo.paste(byId.founding_stone_3, 7, 0, 1); demo.paste(byId.notice_board_3, 14, 0, 2);
 demo.paste(byId.well_3, 15, 0, 8);
 demo.paste(byId.gate_posts_5, 10, 0, 16);

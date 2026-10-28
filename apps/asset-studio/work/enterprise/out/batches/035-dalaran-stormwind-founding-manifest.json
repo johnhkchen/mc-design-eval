@@ -1,0 +1,225 @@
+{
+  "batch": "035-dalaran-stormwind-founding",
+  "thread": "0012",
+  "made": "2026-10-28T12:06:28.096Z",
+  "files": [
+    {
+      "path": "assets-src/dalaran/founding/dalaran_founding_demo.jpg",
+      "kind": "preview",
+      "sha256": "477ff9bed7067a4b3ead9e2d453f23a5cd599e043e2406bd30ef3c23254b5ead",
+      "bytes": 379785
+    },
+    {
+      "path": "assets-src/dalaran/founding/dalaran_founding_demo.nbt",
+      "kind": "file",
+      "sha256": "69840f4917dbce7043e051f7572571bedc93066683d0b189d182129f030064bc",
+      "bytes": 6952
+    },
+    {
+      "path": "assets-src/stormwind/founding/stormwind_founding_demo.jpg",
+      "kind": "preview",
+      "sha256": "b54d42fcfc8c968db67bd8d14a364361b2d8247add9d210f2708b39dbf22acdb",
+      "bytes": 384801
+    },
+    {
+      "path": "assets-src/stormwind/founding/stormwind_founding_demo.nbt",
+      "kind": "file",
+      "sha256": "56ebdd3c9fab66fb794ada3b0000d22f252bccdf7590be3212bfd0a191d04d81",
+      "bytes": 6652
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/camp_9x7.json",
+      "kind": "meta",
+      "sha256": "37ade91b4b74a7e5a6acf6752e2b654d5d64838bacee97f1a754c4ad97c99d7d",
+      "bytes": 438
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/camp_9x7.nbt",
+      "kind": "structure",
+      "sha256": "b980a7036a85600f4c4443051cd583f6d299424ea6d9e5f7e8587b4276007474",
+      "bytes": 1421,
+      "id": "enterprise:dalaran/founding/camp_9x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/founding_stone_3.json",
+      "kind": "meta",
+      "sha256": "ffe363a188fb855485b26c04959e5cda59cee59d93112e605e5c02ad33b45a95",
+      "bytes": 385
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/founding_stone_3.nbt",
+      "kind": "structure",
+      "sha256": "e1ead4df5a96c88f03bd2c07540848822e05724f1f0c88f748373ec5c98860e7",
+      "bytes": 445,
+      "id": "enterprise:dalaran/founding/founding_stone_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/gate_posts_5.json",
+      "kind": "meta",
+      "sha256": "6cb03f2684b749b9f071c9b9a7050ed32483f0eaefc425daf188a57ab44ff973",
+      "bytes": 424
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/gate_posts_5.nbt",
+      "kind": "structure",
+      "sha256": "b8979f6addd731388dcb4bfb7caffd84209f7c08a9f4a43792c541f827d9d420",
+      "bytes": 346,
+      "id": "enterprise:dalaran/founding/gate_posts_5"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/notice_board_3.json",
+      "kind": "meta",
+      "sha256": "d854e06931ae7cf3140bbadd5d6edc3758284431e51e56bb011f1eeb7254d682",
+      "bytes": 361
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/notice_board_3.nbt",
+      "kind": "structure",
+      "sha256": "6f87ca2af59a9fd6e3744ef04d533fd8d931ec401abc3a1bccb218197252a69f",
+      "bytes": 399,
+      "id": "enterprise:dalaran/founding/notice_board_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/stake_1.json",
+      "kind": "meta",
+      "sha256": "3d17457696606ff0e64eb13850408b07d003689d965707814b692f5cec24a1fd",
+      "bytes": 387
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/stake_1.nbt",
+      "kind": "structure",
+      "sha256": "742afca7dfc35629acb7cb568fd23d3c483f6ab0dd2752f03812aa7591171d0e",
+      "bytes": 251,
+      "id": "enterprise:dalaran/founding/stake_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/well_3.json",
+      "kind": "meta",
+      "sha256": "c477a4897c6ffb1b7d2149710c6bb135642fd7464f97e23edf22df0eba6553fa",
+      "bytes": 380
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/well_3.nbt",
+      "kind": "structure",
+      "sha256": "0d7fe4d0ed4cfe2d11399aef8172188bffc77b4311db03addc2cc8c6b1f22135",
+      "bytes": 573,
+      "id": "enterprise:dalaran/founding/well_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/well_pavilion_5.json",
+      "kind": "meta",
+      "sha256": "e8ce3477f4da9a546367e14f111e28524dfcc3f87b8ec2139298562ac216feb3",
+      "bytes": 525
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/founding/well_pavilion_5.nbt",
+      "kind": "structure",
+      "sha256": "3650db0988fdeb30449e958853ea73eb3c60d665bbc8b1d25cb85f77d83b9544",
+      "bytes": 1003,
+      "id": "enterprise:dalaran/founding/well_pavilion_5"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/camp_9x7.json",
+      "kind": "meta",
+      "sha256": "7638be0de83084de2430a290fc8736268e17b7c38154ac47f40c7900a3c6f89f",
+      "bytes": 442
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/camp_9x7.nbt",
+      "kind": "structure",
+      "sha256": "b975352cea20065092943e3d9d36f2923bf386893fbd6d3a76b7c445bcde4a20",
+      "bytes": 1411,
+      "id": "enterprise:stormwind/founding/camp_9x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/founding_stone_3.json",
+      "kind": "meta",
+      "sha256": "0adc6e1cb886c2dd7c8f9fffd781bac44f516aee8cf35487765f3d245f59cc33",
+      "bytes": 389
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/founding_stone_3.nbt",
+      "kind": "structure",
+      "sha256": "b6dc6feb02e24cb132a0e76c9bbc6c6cca4479f81eb31bd0e98eb35d8011bf61",
+      "bytes": 461,
+      "id": "enterprise:stormwind/founding/founding_stone_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/fountain_5.json",
+      "kind": "meta",
+      "sha256": "a4cf2a82223c73540c9930cae2898ad2bcd9c2af8934a7b51d9045217eeab477",
+      "bytes": 539
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/fountain_5.nbt",
+      "kind": "structure",
+      "sha256": "7db8cc56cf5765c9aa6c1f179f8d266fbd102b3897ab14acacb3021a3faa268c",
+      "bytes": 743,
+      "id": "enterprise:stormwind/founding/fountain_5"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/gate_posts_5.json",
+      "kind": "meta",
+      "sha256": "dd6cd7c10a6f1bc3a602def545741863ced0b0bb6d4f65b9c5daca023769f834",
+      "bytes": 428
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/gate_posts_5.nbt",
+      "kind": "structure",
+      "sha256": "c76a20017df4e79de13712689294ae09214368a2c344e79384d1cd5e3184c467",
+      "bytes": 355,
+      "id": "enterprise:stormwind/founding/gate_posts_5"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/notice_board_3.json",
+      "kind": "meta",
+      "sha256": "97142e513309cfcc09085b29ec855d68e205f4da8fb8c71af85dd36d00d7b4fe",
+      "bytes": 365
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/notice_board_3.nbt",
+      "kind": "structure",
+      "sha256": "c87f8363f4427193c42be5fcc5995923e04ef347c446fa341609182aa9316fc1",
+      "bytes": 388,
+      "id": "enterprise:stormwind/founding/notice_board_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/stake_1.json",
+      "kind": "meta",
+      "sha256": "cd8fd2fc59ffd369c1b13924ebfb226735534020a5221f477f778bad46b0ab2a",
+      "bytes": 391
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/stake_1.nbt",
+      "kind": "structure",
+      "sha256": "3604d9fe101eb3ab213e266dcb2638fc28dc5052c2e63861d50b2f92b4f571d6",
+      "bytes": 246,
+      "id": "enterprise:stormwind/founding/stake_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/well_3.json",
+      "kind": "meta",
+      "sha256": "53e05c8880afad4110fa7723931db88f23ef382c363a7de7715690ec7f579135",
+      "bytes": 384
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/stormwind/founding/well_3.nbt",
+      "kind": "structure",
+      "sha256": "72bf6b8595c620dfe0cec8986242ea8e0e119338f20e8b4e8511ceced3125e57",
+      "bytes": 577,
+      "id": "enterprise:stormwind/founding/well_3"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/dalaran/founding.json",
+      "kind": "kit_rules",
+      "sha256": "860c056910140d9b0250903fb1cbaee92e54b798554026f575652952a284e640",
+      "bytes": 3707
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/stormwind/founding.json",
+      "kind": "kit_rules",
+      "sha256": "101fc430547fef6ee17f4e112b7a3c3239d33f9091b237b7461e1c2627b89c9a",
+      "bytes": 3728
+    }
+  ]
+}
