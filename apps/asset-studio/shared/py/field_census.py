@@ -36,10 +36,14 @@ for x in range(x0, x1 + 1):
         if not c: continue
         # --ring: a field's own boundary (hedges, walls, gates) lies outside its cells; take cells beside a field too
         if mask and field_of(x, z) < 0 and not ("--ring" in sys.argv and any(field_of(x + dx, z + dz) >= 0 for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)))): continue
-        if c.ground: g = c.ground[(z & 15) * 16 + (x & 15)] - 65
-        else:
-            g = 90
+        # the ground by a column scan from just above the stored heightmap (a placer may not update heightmaps, so a
+        # trunk can stand above them): scan down from 24 over it to the first block that isn't a plant, leaf or post
+        if True:
+            g = (c.ground[(z & 15) * 16 + (x & 15)] - 65 + 24) if c.ground else 120
             while g > 0 and any(s in c.block(x & 15, g, z & 15) for s in ("air", "leaves", "log", "wheat", "carrots", "potatoes", "beetroots", "short_grass", "tall_grass", "fern", "flower", "wall", "fence", "gate", "cane", "lantern", "slab", "cauldron", "hay", "poppy", "dandelion", "tulip", "orchid", "bluet", "daisy", "cornflower")): g -= 1
+            if any(w in c.block(x & 15, g, z & 15) for w in ("_log",)):
+                while g > 0 and "_log" in c.block(x & 15, g - 1, z & 15): g -= 1
+                g -= 1
         top = c.block(x & 15, g, z & 15); a1 = c.block(x & 15, g + 1, z & 15); a2 = c.block(x & 15, g + 2, z & 15)
         k = None
         if "farmland" in top or "farmland" in c.block(x & 15, g - 1, z & 15): k = "farmland"

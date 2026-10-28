@@ -841,10 +841,10 @@
     "path": "py/field_census.py",
     "lang": "py",
     "author": "studio",
-    "updated": "2026-10-28T02:40:03.969Z",
+    "updated": "2026-10-28T02:40:23.018Z",
     "updated_by": "studio",
-    "note": "rev 4: --ring takes the cells beside a field too (its hedges, walls and gates lie outside its own cells).",
-    "bytes": 5520,
+    "note": "rev 5: ground by a column scan from above the stored heightmap (a placer may not update heightmaps), so trunks count.",
+    "bytes": 5933,
     "history": [
       {
         "at": "2026-10-28T01:52:04.461Z",
@@ -869,6 +869,12 @@
         "by": "studio",
         "note": "rev 4: --ring takes the cells beside a field too (its hedges, walls and gates lie outside its own cells).",
         "bytes": 5520
+      },
+      {
+        "at": "2026-10-28T02:40:23.018Z",
+        "by": "studio",
+        "note": "rev 5: ground by a column scan from above the stored heightmap (a placer may not update heightmaps), so trunks count.",
+        "bytes": 5933
       }
     ]
   },
