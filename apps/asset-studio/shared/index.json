@@ -836,5 +836,39 @@
         "bytes": 21434
       }
     ]
+  },
+  "py/field_census.py": {
+    "path": "py/field_census.py",
+    "lang": "py",
+    "author": "studio",
+    "updated": "2026-10-28T01:52:04.461Z",
+    "updated_by": "studio",
+    "note": "Field metrics from a region: walls, hedge leaves and trunks per 1000 farmland, planted share (--json for the study). Our demo: walls 45, hedge 283, trunks 17.",
+    "bytes": 2784,
+    "history": [
+      {
+        "at": "2026-10-28T01:52:04.461Z",
+        "by": "studio",
+        "note": "Field metrics from a region: walls, hedge leaves and trunks per 1000 farmland, planted share (--json for the study). Our demo: walls 45, hedge 283, trunks 17.",
+        "bytes": 2784
+      }
+    ]
+  },
+  "py/field_stats.py": {
+    "path": "py/field_stats.py",
+    "lang": "py",
+    "author": "studio",
+    "updated": "2026-10-28T01:52:04.508Z",
+    "updated_by": "studio",
+    "note": "Crops by kind, log and leaf kinds, water beside farmland, mean crop band run along x.",
+    "bytes": 2339,
+    "history": [
+      {
+        "at": "2026-10-28T01:52:04.508Z",
+        "by": "studio",
+        "note": "Crops by kind, log and leaf kinds, water beside farmland, mean crop band run along x.",
+        "bytes": 2339
+      }
+    ]
   }
 }
