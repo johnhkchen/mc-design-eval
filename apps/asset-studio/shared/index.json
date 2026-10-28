@@ -916,10 +916,10 @@
     "path": "js/terrain/grade.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T07:09:09.163Z",
+    "updated": "2026-10-28T09:57:47.386Z",
     "updated_by": "studio",
-    "note": "rev 3: a street meets a street within a half step (a lane gives way to the avenue it meets, a block at a time back along it); street-to-street rises of 2+ are kind street_stair (never a wall tile; none on Darkshire)",
-    "bytes": 20340,
+    "note": "rev 4: crossings (span, banks, deck, water, what the street serves past the far bank, keep, kind by span, narrowest within 12, landing) and trimStreets(streets, crossings, build) to cut a street back to its landing where a crossing isn't built; serves = [[x,z]] for farm tracks and roads out",
+    "bytes": 26359,
     "history": [
       {
         "at": "2026-10-28T05:58:10.204Z",
@@ -938,6 +938,12 @@
         "by": "studio",
         "note": "rev 3: a street meets a street within a half step (a lane gives way to the avenue it meets, a block at a time back along it); street-to-street rises of 2+ are kind street_stair (never a wall tile; none on Darkshire)",
         "bytes": 20340
+      },
+      {
+        "at": "2026-10-28T09:57:47.386Z",
+        "by": "studio",
+        "note": "rev 4: crossings (span, banks, deck, water, what the street serves past the far bank, keep, kind by span, narrowest within 12, landing) and trimStreets(streets, crossings, build) to cut a street back to its landing where a crossing isn't built; serves = [[x,z]] for farm tracks and roads out",
+        "bytes": 26359
       }
     ]
   },
@@ -945,10 +951,10 @@
     "path": "js/terrain/paint.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T07:09:09.205Z",
+    "updated": "2026-10-28T09:57:47.474Z",
     "updated_by": "studio",
-    "note": "rev 3: never lays a tile on a street_stair edge",
-    "bytes": 13739,
+    "note": "rev 4: --trim (grade, trim the crossings that serve nothing, grade again, lay landings); crossings in grade.json in world coordinates",
+    "bytes": 14751,
     "history": [
       {
         "at": "2026-10-28T05:58:10.249Z",
@@ -967,6 +973,12 @@
         "by": "studio",
         "note": "rev 3: never lays a tile on a street_stair edge",
         "bytes": 13739
+      },
+      {
+        "at": "2026-10-28T09:57:47.474Z",
+        "by": "studio",
+        "note": "rev 4: --trim (grade, trim the crossings that serve nothing, grade again, lay landings); crossings in grade.json in world coordinates",
+        "bytes": 14751
       }
     ]
   },
@@ -1025,16 +1037,22 @@
     "path": "js/terrain/bridge.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T06:10:11.120Z",
+    "updated": "2026-10-28T09:57:47.430Z",
     "updated_by": "studio",
-    "note": "the bridge as a part: bridgeBlocks({X,Z,target,bridge,role,style,bedAt,pave}) -> blocks: deck, piers every 6 to the bed, the kingdom's parapet joined, a lantern over each pier",
-    "bytes": 2694,
+    "note": "rev 2: landingBlocks: a street's end at the shore (half steps down on coursed stone, a timber jetty on posts, lanterns at the head)",
+    "bytes": 5122,
     "history": [
       {
         "at": "2026-10-28T06:10:11.120Z",
         "by": "studio",
         "note": "the bridge as a part: bridgeBlocks({X,Z,target,bridge,role,style,bedAt,pave}) -> blocks: deck, piers every 6 to the bed, the kingdom's parapet joined, a lantern over each pier",
         "bytes": 2694
+      },
+      {
+        "at": "2026-10-28T09:57:47.430Z",
+        "by": "studio",
+        "note": "rev 2: landingBlocks: a street's end at the shore (half steps down on coursed stone, a timber jetty on posts, lanterns at the head)",
+        "bytes": 5122
       }
     ]
   }
