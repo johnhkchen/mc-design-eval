@@ -916,10 +916,10 @@
     "path": "js/terrain/grade.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T09:57:47.386Z",
+    "updated": "2026-10-28T10:08:58.903Z",
     "updated_by": "studio",
-    "note": "rev 4: crossings (span, banks, deck, water, what the street serves past the far bank, keep, kind by span, narrowest within 12, landing) and trimStreets(streets, crossings, build) to cut a street back to its landing where a crossing isn't built; serves = [[x,z]] for farm tracks and roads out",
-    "bytes": 26359,
+    "note": "rev 5: a crossing's deck held high enough for its arches (causeway 1 over the water; channel arch 5/7/9: 6/7/8 over, archClear), inside the grade passes so the banks ramp up by half steps",
+    "bytes": 27078,
     "history": [
       {
         "at": "2026-10-28T05:58:10.204Z",
@@ -944,6 +944,12 @@
         "by": "studio",
         "note": "rev 4: crossings (span, banks, deck, water, what the street serves past the far bank, keep, kind by span, narrowest within 12, landing) and trimStreets(streets, crossings, build) to cut a street back to its landing where a crossing isn't built; serves = [[x,z]] for farm tracks and roads out",
         "bytes": 26359
+      },
+      {
+        "at": "2026-10-28T10:08:58.903Z",
+        "by": "studio",
+        "note": "rev 5: a crossing's deck held high enough for its arches (causeway 1 over the water; channel arch 5/7/9: 6/7/8 over, archClear), inside the grade passes so the banks ramp up by half steps",
+        "bytes": 27078
       }
     ]
   },
@@ -951,10 +957,10 @@
     "path": "js/terrain/paint.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T09:57:47.474Z",
+    "updated": "2026-10-28T10:08:58.946Z",
     "updated_by": "studio",
-    "note": "rev 4: --trim (grade, trim the crossings that serve nothing, grade again, lay landings); crossings in grade.json in world coordinates",
-    "bytes": 14751,
+    "note": "rev 5: crossings assembled from bridges.mjs parts in each crossing's frame; landings and ferry stages for dropped crossings",
+    "bytes": 16930,
     "history": [
       {
         "at": "2026-10-28T05:58:10.249Z",
@@ -979,6 +985,12 @@
         "by": "studio",
         "note": "rev 4: --trim (grade, trim the crossings that serve nothing, grade again, lay landings); crossings in grade.json in world coordinates",
         "bytes": 14751
+      },
+      {
+        "at": "2026-10-28T10:08:58.946Z",
+        "by": "studio",
+        "note": "rev 5: crossings assembled from bridges.mjs parts in each crossing's frame; landings and ferry stages for dropped crossings",
+        "bytes": 16930
       }
     ]
   },
@@ -1053,6 +1065,23 @@
         "by": "studio",
         "note": "rev 2: landingBlocks: a street's end at the shore (half steps down on coursed stone, a timber jetty on posts, lanterns at the head)",
         "bytes": 5122
+      }
+    ]
+  },
+  "js/terrain/bridges.mjs": {
+    "path": "js/terrain/bridges.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T10:08:58.860Z",
+    "updated_by": "studio",
+    "note": "bridge parts (Dalaran first): planCrossing (channel arch 9/7/5 in the middle, arches of 5 on piers, abutments), crossingBlocks, causewayBlocks (fill + culvert), ferryStageBlocks; crossing-frame coords (i along, o across), the kingdom's style",
+    "bytes": 8468,
+    "history": [
+      {
+        "at": "2026-10-28T10:08:58.860Z",
+        "by": "studio",
+        "note": "bridge parts (Dalaran first): planCrossing (channel arch 9/7/5 in the middle, arches of 5 on piers, abutments), crossingBlocks, causewayBlocks (fill + culvert), ferryStageBlocks; crossing-frame coords (i along, o across), the kingdom's style",
+        "bytes": 8468
       }
     ]
   }
