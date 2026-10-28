@@ -795,16 +795,22 @@
     "path": "js/farmland/layout.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T00:49:17.836Z",
+    "updated": "2026-10-28T01:01:28.641Z",
     "updated_by": "studio",
-    "note": "Farm layout on real terrain, the algorithm alone (no Minecraft, no I/O): contour-stretched parcels, least-climb lanes, farmstead siting, land use by slope rank, contour crop bands. Ports to Rust/Java.",
-    "bytes": 8902,
+    "note": "rev 2: holding mix (mixed | livestock) and each pasture's stock by its ground (horses by the farmstead, pigs against woodland, sheep high and steep, cattle low)",
+    "bytes": 10959,
     "history": [
       {
         "at": "2026-10-28T00:49:17.836Z",
         "by": "studio",
         "note": "Farm layout on real terrain, the algorithm alone (no Minecraft, no I/O): contour-stretched parcels, least-climb lanes, farmstead siting, land use by slope rank, contour crop bands. Ports to Rust/Java.",
         "bytes": 8902
+      },
+      {
+        "at": "2026-10-28T01:01:28.641Z",
+        "by": "studio",
+        "note": "rev 2: holding mix (mixed | livestock) and each pasture's stock by its ground (horses by the farmstead, pigs against woodland, sheep high and steep, cattle low)",
+        "bytes": 10959
       }
     ]
   },
@@ -812,16 +818,22 @@
     "path": "js/farmland/farmland.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T00:49:17.884Z",
+    "updated": "2026-10-28T01:01:28.725Z",
     "updated_by": "studio",
-    "note": "The demo's painter: reads irl-copy land (IGN LiDAR ground), runs layout.mjs, lays hedges, walls, gates, crops in contour bands, orchards in contour rows, terraces with stone risers, pasture shelters, our farmstead; writes a 1.21.1 world.",
-    "bytes": 13768,
+    "note": "rev 2: pastures by stock, closed enclosures (one-sided 8-neighbour boundary, fence and wall states joined, a gate onto the lane), sheepfolds, dew ponds, shelters with troughs, shade trees, jumps, mud wallows and pig arks; --holding livestock",
+    "bytes": 21434,
     "history": [
       {
         "at": "2026-10-28T00:49:17.884Z",
         "by": "studio",
         "note": "The demo's painter: reads irl-copy land (IGN LiDAR ground), runs layout.mjs, lays hedges, walls, gates, crops in contour bands, orchards in contour rows, terraces with stone risers, pasture shelters, our farmstead; writes a 1.21.1 world.",
         "bytes": 13768
+      },
+      {
+        "at": "2026-10-28T01:01:28.725Z",
+        "by": "studio",
+        "note": "rev 2: pastures by stock, closed enclosures (one-sided 8-neighbour boundary, fence and wall states joined, a gate onto the lane), sheepfolds, dew ponds, shelters with troughs, shade trees, jumps, mud wallows and pig arks; --holding livestock",
+        "bytes": 21434
       }
     ]
   }

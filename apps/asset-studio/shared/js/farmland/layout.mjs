@@ -10,8 +10,11 @@
 //             band orchard where it faces south (terraces or pasture where it doesn't), the valley floor (mean
 //             distance to water < 10) meadow, the rest arable
 //   crops     each arable parcel 2 to 4 crops, chosen per band of 3 blocks of height, so strips follow the contours
+//   stock     each pasture's animals by its ground: horses in paddocks near the farmstead, pigs in small runs against
+//             woodland, sheep on the high and steep ground, cattle on the low ground and the rest; holding:
+//             "livestock" makes grazing the larger share (and grazes the water meadows)
 //   import { farmLayout } from "./layout.mjs";   const L = farmLayout({ top, water, X, Z, seed: 7 });
-export function farmLayout({ top, water, X, Z, seed: SEED = 7 }) {
+export function farmLayout({ top, water, X, Z, seed: SEED = 7, holding = "mixed" }) {
   const hash = (...n) => { let h = 2166136261 ^ SEED; for (const v of n) { h ^= v + 0x9e3779b9; h = Math.imul(h, 16777619); } h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; return ((h >>> 0) % 100000) / 100000; };
   const blur = (a, r) => { const b = new Float32Array(X * Z); for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) { let s = 0, n = 0; for (let dz = -r; dz <= r; dz++) for (let dx = -r; dx <= r; dx++) { const xx = x + dx, zz = z + dz; if (xx < 0 || zz < 0 || xx >= X || zz >= Z) continue; s += a[zz * X + xx]; n++; } b[z * X + x] = s / n; } return b; };
   const Hs = blur(blur(top, 2), 2);                      // smooth (the stream keeps its own cells)
@@ -69,20 +72,39 @@ export function farmLayout({ top, water, X, Z, seed: SEED = 7 }) {
   for (const [p, s] of stats) if (p !== FARM) list.push({ p, sl: s.slope / s.n, so: s.south / s.n, dw: s.dw / s.n, rel: (s.h / s.n - hMin) / (hMax - hMin) });
   use.set(FARM, "farmstead");
   list.sort((a, b) => b.sl - a.sl);
+  // the mix by holding: a mixed farm (arable first) or a livestock farm (grazing first); thresholds on the slope rank
+  const MIX = { mixed: { wood: 0.08, pasture: 0.22, band: 0.45, meadow: "meadow" }, livestock: { wood: 0.06, pasture: 0.62, band: 0.74, meadow: "pasture" } }[holding];
   list.forEach((o, k) => {
     const q = k / list.length; let u;
-    if (o.dw < 10 && q > 0.5) u = "meadow";
-    else if (q < 0.08) u = "woodland";
-    else if (q < 0.22) u = "pasture";
-    else if (q < 0.45) u = o.so > 0 ? "orchard" : hash(o.p, 21) < 0.5 ? "terraces" : "pasture";
+    if (o.dw < 10 && q > 0.5) u = MIX.meadow;
+    else if (q < MIX.wood) u = "woodland";
+    else if (q < MIX.pasture) u = "pasture";
+    else if (q < MIX.band) u = o.so > 0 ? "orchard" : hash(o.p, 21) < 0.5 ? "terraces" : "pasture";
     else u = o.rel > 0.75 && hash(o.p, 9) < 0.3 ? "pasture" : "arable";
     use.set(o.p, u);
   });
+  // each pasture's stock, by its ground: horses in paddocks by the farmstead, sheep on the high and steep ground,
+  // pigs in small runs against the woodland, cattle on the low ground by the water and everywhere else
+  const neighbours = new Map();
+  for (let z = 0; z < Z - 1; z++) for (let x = 0; x < X - 1; x++) { const a = parcel[z * X + x]; for (const b of [parcel[z * X + x + 1], parcel[(z + 1) * X + x]]) if (a >= 0 && b >= 0 && a !== b) { if (!neighbours.has(a)) neighbours.set(a, new Set()); if (!neighbours.has(b)) neighbours.set(b, new Set()); neighbours.get(a).add(b); neighbours.get(b).add(a); } }
+  const stock = new Map(), fc = [farm[0] + 10, farm[1] + 10];
+  for (const o of list) {
+    if (use.get(o.p) !== "pasture") continue;
+    const s = stats.get(o.p); let cx = 0, cz = 0, n = 0;
+    for (let z = 0; z < Z; z += 3) for (let x = 0; x < X; x += 3) if (parcel[z * X + x] === o.p) { cx += x; cz += z; n++; }
+    const d = Math.hypot(cx / n - fc[0], cz / n - fc[1]), woody = [...(neighbours.get(o.p) || [])].some((q) => use.get(q) === "woodland");
+    let k;
+    if (d < 60 && o.sl < 0.3 && [...stock.values()].filter((v) => v === "horses").length < 3) k = "horses";
+    else if (woody && s.n < 700 && [...stock.values()].filter((v) => v === "pigs").length < 2) k = "pigs";
+    else if (o.rel > 0.55 || o.sl > 0.35) k = "sheep";
+    else k = "cattle";
+    stock.set(o.p, k);
+  }
   // each arable parcel's crops: 2 or 3, in contour bands
   // each arable parcel's crops: wheat and one or two others, alternating band by band so the contours show
   const CROPS = [["wheat", 7], ["carrots", 7], ["potatoes", 7], ["beetroots", 3]];
   const cropsOf = (p) => { const o = [CROPS[0], CROPS[1 + Math.floor(hash(p, 4) * 3)]]; if (hash(p, 3) < 0.35) o.push(CROPS[0]), o.push(CROPS[1 + Math.floor(hash(p, 5) * 3)]); return o; };
 
 
-  return { Hs, H, slope, southness, wet, dWater, road, parcel, FARM, farm, stats, use, cropsOf, hMin, hMax, hash };
+  return { Hs, H, slope, southness, wet, dWater, road, parcel, FARM, farm, stats, use, stock, neighbours, cropsOf, hMin, hMax, hash };
 }
