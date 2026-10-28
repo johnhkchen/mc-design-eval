@@ -916,10 +916,10 @@
     "path": "js/terrain/grade.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T06:10:11.076Z",
+    "updated": "2026-10-28T07:09:09.163Z",
     "updated_by": "studio",
-    "note": "rev 2: steep land away from the town left natural (role natural, a slope like the blend band); a plot 1 off its frontage where that closes a step over 4 (plotLevels offset/over, report.plots_over); corners: outer flagged on edges sharing a column, inner corners as edges of their own (diagonal dir)",
-    "bytes": 19287,
+    "note": "rev 3: a street meets a street within a half step (a lane gives way to the avenue it meets, a block at a time back along it); street-to-street rises of 2+ are kind street_stair (never a wall tile; none on Darkshire)",
+    "bytes": 20340,
     "history": [
       {
         "at": "2026-10-28T05:58:10.204Z",
@@ -932,6 +932,12 @@
         "by": "studio",
         "note": "rev 2: steep land away from the town left natural (role natural, a slope like the blend band); a plot 1 off its frontage where that closes a step over 4 (plotLevels offset/over, report.plots_over); corners: outer flagged on edges sharing a column, inner corners as edges of their own (diagonal dir)",
         "bytes": 19287
+      },
+      {
+        "at": "2026-10-28T07:09:09.163Z",
+        "by": "studio",
+        "note": "rev 3: a street meets a street within a half step (a lane gives way to the avenue it meets, a block at a time back along it); street-to-street rises of 2+ are kind street_stair (never a wall tile; none on Darkshire)",
+        "bytes": 20340
       }
     ]
   },
@@ -939,10 +945,10 @@
     "path": "js/terrain/paint.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T06:10:11.162Z",
+    "updated": "2026-10-28T07:09:09.205Z",
     "updated_by": "studio",
-    "note": "rev 2: bridges via bridge.mjs; inner corners from the inner-corner tile turned to the diagonal",
-    "bytes": 13710,
+    "note": "rev 3: never lays a tile on a street_stair edge",
+    "bytes": 13739,
     "history": [
       {
         "at": "2026-10-28T05:58:10.249Z",
@@ -955,6 +961,12 @@
         "by": "studio",
         "note": "rev 2: bridges via bridge.mjs; inner corners from the inner-corner tile turned to the diagonal",
         "bytes": 13710
+      },
+      {
+        "at": "2026-10-28T07:09:09.205Z",
+        "by": "studio",
+        "note": "rev 3: never lays a tile on a street_stair edge",
+        "bytes": 13739
       }
     ]
   },

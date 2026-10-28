@@ -123,7 +123,7 @@ function turn(s, q) {
 const tiles = { wall: 0, cut_face: 0, quay: 0 };
 const DIAG = { "south-east": 0, "south-west": 1, "north-west": 2, "north-east": 3 };
 for (const e of g.edges) {
-  if (e.kind === "street_step" || e.kind === "slope") continue;
+  if (e.kind === "street_step" || e.kind === "street_stair" || e.kind === "slope") continue;
   if (e.corner === "inner") {
     // the inner corner's own column: the inner-corner tile's corner wall (its low side to the south-east), turned
     const h = Math.min(4, e.rise), low = target[e.z * X + e.x] - e.rise, seed = e.x * 7349 + e.z * 31 + 23, q = DIAG[e.dir];
