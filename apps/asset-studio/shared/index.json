@@ -916,10 +916,10 @@
     "path": "js/terrain/grade.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T10:08:58.903Z",
+    "updated": "2026-10-28T10:33:19.101Z",
     "updated_by": "studio",
-    "note": "rev 5: a crossing's deck held high enough for its arches (causeway 1 over the water; channel arch 5/7/9: 6/7/8 over, archClear), inside the grade passes so the banks ramp up by half steps",
-    "bytes": 27078,
+    "note": "rev 6: deckOver(span) input (the kingdom bridge's over); defaults as rev 5",
+    "bytes": 27121,
     "history": [
       {
         "at": "2026-10-28T05:58:10.204Z",
@@ -950,6 +950,12 @@
         "by": "studio",
         "note": "rev 5: a crossing's deck held high enough for its arches (causeway 1 over the water; channel arch 5/7/9: 6/7/8 over, archClear), inside the grade passes so the banks ramp up by half steps",
         "bytes": 27078
+      },
+      {
+        "at": "2026-10-28T10:33:19.101Z",
+        "by": "studio",
+        "note": "rev 6: deckOver(span) input (the kingdom bridge's over); defaults as rev 5",
+        "bytes": 27121
       }
     ]
   },
@@ -957,10 +963,10 @@
     "path": "js/terrain/paint.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T10:08:58.946Z",
+    "updated": "2026-10-28T10:33:19.145Z",
     "updated_by": "studio",
-    "note": "rev 5: crossings assembled from bridges.mjs parts in each crossing's frame; landings and ferry stages for dropped crossings",
-    "bytes": 16930,
+    "note": "rev 6: --style picks the kingdom's bridge (BRIDGE[k]) and passes its over() to the grade",
+    "bytes": 16961,
     "history": [
       {
         "at": "2026-10-28T05:58:10.249Z",
@@ -991,6 +997,12 @@
         "by": "studio",
         "note": "rev 5: crossings assembled from bridges.mjs parts in each crossing's frame; landings and ferry stages for dropped crossings",
         "bytes": 16930
+      },
+      {
+        "at": "2026-10-28T10:33:19.145Z",
+        "by": "studio",
+        "note": "rev 6: --style picks the kingdom's bridge (BRIDGE[k]) and passes its over() to the grade",
+        "bytes": 16961
       }
     ]
   },
@@ -1072,16 +1084,22 @@
     "path": "js/terrain/bridges.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-28T10:08:58.860Z",
+    "updated": "2026-10-28T10:33:19.058Z",
     "updated_by": "studio",
-    "note": "bridge parts (Dalaran first): planCrossing (channel arch 9/7/5 in the middle, arches of 5 on piers, abutments), crossingBlocks, causewayBlocks (fill + culvert), ferryStageBlocks; crossing-frame coords (i along, o across), the kingdom's style",
-    "bytes": 8468,
+    "note": "rev 2: BRIDGE styles per kingdom (dalaran arch, stormwind arch in white stone with quartz rings and a stone-brick parapet, lordaeron timber on fieldstone piers), beamCrossingBlocks, kingdomCrossing (causeway <= 3, else the kingdom's kind), each style's over(span) for the grade; arch ring separate from the coping",
+    "bytes": 13589,
     "history": [
       {
         "at": "2026-10-28T10:08:58.860Z",
         "by": "studio",
         "note": "bridge parts (Dalaran first): planCrossing (channel arch 9/7/5 in the middle, arches of 5 on piers, abutments), crossingBlocks, causewayBlocks (fill + culvert), ferryStageBlocks; crossing-frame coords (i along, o across), the kingdom's style",
         "bytes": 8468
+      },
+      {
+        "at": "2026-10-28T10:33:19.058Z",
+        "by": "studio",
+        "note": "rev 2: BRIDGE styles per kingdom (dalaran arch, stormwind arch in white stone with quartz rings and a stone-brick parapet, lordaeron timber on fieldstone piers), beamCrossingBlocks, kingdomCrossing (causeway <= 3, else the kingdom's kind), each style's over(span) for the grade; arch ring separate from the coping",
+        "bytes": 13589
       }
     ]
   }

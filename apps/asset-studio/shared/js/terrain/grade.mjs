@@ -31,7 +31,7 @@ export const ROLE = { wild: 0, blend: 1, free: 2, street: 3, plot: 4, fixed: 5, 
 const DIRS = [[0, -1, "north"], [0, 1, "south"], [1, 0, "east"], [-1, 0, "west"]];
 const median = (a) => { if (!a.length) return NaN; const s = [...a].sort((p, q) => p - q); return s[s.length >> 1]; };
 
-export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, serves = [], archClear = 5, blend = 16, step = 3, maxRise = 4, grade = 1 / 3, near = 3, keepAway = 4, keepFall = 0.4 }) {
+export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, serves = [], archClear = 5, deckOver = null, blend = 16, step = 3, maxRise = 4, grade = 1 / 3, near = 3, keepAway = 4, keepFall = 0.4 }) {
   const N = X * Z, at = (x, z) => (x < 0 || z < 0 || x >= X || z >= Z ? -1 : z * X + x);
   const role = new Uint8Array(N), target = new Int16Array(N).fill(NONE), owner = new Int32Array(N).fill(-1);
   const bridge = new Uint8Array(N);                                // a street over water: 1 along z, 2 along x
@@ -74,7 +74,7 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
     for (let a = 0; a < n; a++) {
       if (!wetK[a] || (a && wetK[a - 1])) continue;
       let b = a; while (b + 1 < n && wetK[b + 1]) b++;
-      const sp = b - a + 1, over = sp <= 3 ? 1 : sp <= 8 ? archClear + 1 : sp <= 20 ? archClear + 2 : archClear + 3;
+      const sp = b - a + 1, over = deckOver ? deckOver(sp) : sp <= 3 ? 1 : sp <= 8 ? archClear + 1 : sp <= 20 ? archClear + 2 : archClear + 3;
       for (let k = a; k <= b; k++) need[k] = Math.max(...cells[k].filter((i) => water[i]).map((i) => top[i])) + over;
       a = b;
     }
