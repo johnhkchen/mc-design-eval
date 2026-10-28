@@ -32,3 +32,31 @@ export function bridgeBlocks({ X, Z, target, bridge, role, style: S, bedAt, pave
   }
   return out;
 }
+
+/** Where a street ends at the shore (a crossing not built): steps down from the street's level to a block over the
+ *  water by half steps, the street's width, then a timber jetty on posts out over the water (`jetty` long), with a
+ *  lantern on a post at each side of the landing. Pure: blocks out.
+ *    landingBlocks({ at: [x, z], facing, level, water, width, style, jetty }) -> [[x, y, z, block], ...]
+ *    at       the street's last cell on its line at the near bank; facing: the way out over the water */
+export function landingBlocks({ at: [x0, z0], facing, level, water, width = 3, style: S, jetty = 4, pave = (x, z) => ((x + z) % 2 ? "stone_bricks" : "polished_andesite") }) {
+  const out = [], [fx, fz] = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }[facing], [sx, sz] = [fz, fx];
+  const half = Math.floor((width - 1) / 2), across = [...Array(width).keys()].map((k) => k - half);
+  const deck = water + 1;                                          // the jetty's deck, a block over the water
+  // the steps, out from the bank: the walking surface drops half a block a cell (a slab, then a block, ...) from the
+  // street's (its level + 1) to the jetty's (water + 2); each step stands on coursed stone down into the water
+  let k = 1;
+  for (let walk = level + 0.5; walk > deck + 1; walk -= 0.5, k++) for (const o of across) {
+    const x = x0 + fx * k + sx * o, z = z0 + fz * k + sz * o, whole = Number.isInteger(walk), y = whole ? walk - 1 : Math.floor(walk);
+    for (let yy = y + 1; yy <= level + 3; yy++) out.push([x, yy, z, "air"]);
+    for (let yy = (whole ? y - 1 : y - 1); yy >= water - 2; yy--) out.push([x, yy, z, S.course(hash(x, yy, z, 3))]);
+    out.push([x, y, z, whole ? pave(x, z) : `${S.tread_slab}_slab[type=bottom,waterlogged=false]`]);
+  }
+  for (let j = 0; j < jetty; j++) for (const o of across) {
+    const x = x0 + fx * (k + j) + sx * o, z = z0 + fz * (k + j) + sz * o;
+    out.push([x, deck, z, "spruce_planks"]);
+    if ((j === jetty - 1 || j % 3 === 0) && Math.abs(o) === half) for (let y = deck - 1; y >= water - 3; y--) out.push([x, y, z, "spruce_log[axis=y]"]);
+  }
+  // lanterns at the head of the steps
+  for (const o of [-half - 1, half + 1]) { const x = x0 + sx * o, z = z0 + sz * o; out.push([x, level + 1, z, S.lamp_post[0]], [x, level + 2, z, S.lamp_post[1] ?? S.lamp_post[0]], [x, level + 3, z, "lantern[hanging=false,waterlogged=false]"]); }
+  return out;
+}

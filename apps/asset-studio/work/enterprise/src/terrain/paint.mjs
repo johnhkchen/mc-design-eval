@@ -8,8 +8,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { Voxels } from "../../../../../irl-copy/src/voxels.mjs";
 import { writeWorld } from "../../../../../irl-copy/src/anvil.mjs";
-import { townGrade, NONE, ROLE } from "./grade.mjs";
-import { bridgeBlocks } from "./bridge.mjs";
+import { townGrade, trimStreets, NONE, ROLE } from "./grade.mjs";
+import { bridgeBlocks, landingBlocks } from "./bridge.mjs";
 import { retain, cutFace, hash, LORDAERON } from "../lordaeron/earthworks.mjs";
 import { DALARAN } from "../dalaran/earthworks.mjs";
 import { splitState } from "../grid.mjs";
@@ -63,7 +63,10 @@ const R = ([x0, z0, x1, z1]) => [x0 - ox, z0 - oz, x1 - ox, z1 - oz];
 const streets = plan.streets.map((s) => ({ ...s, line: s.line.map(L) }));
 const plots = plan.plots.map((p) => ({ ...p, x: p.x - ox, z: p.z - oz }));
 const forum = { centre: L(plan.forum.centre), reach: plan.forum.reach, level: plan.bell[1] - 1 };
-const g = townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer: R(plan.edge.outer), blend: BLEND });
+let g = townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer: R(plan.edge.outer), blend: BLEND });
+// --trim: the crossings that serve nothing past them are not built; their streets end at the shore with a landing
+const TRIM = argv.includes("--trim"), first = g.crossings;
+if (TRIM) g = { ...townGrade({ X, Z, top, water, fixed, streets: trimStreets(streets, first), plots, forum, outer: R(plan.edge.outer), blend: BLEND }), dropped: first.filter((c) => !c.keep) };
 const { target, role, bridge } = g;
 
 // ---- fell the trees that stand where the ground moves: a trunk on a street or plot, or on land cut or filled by 2 or
@@ -107,6 +110,7 @@ for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
 // ---- bridges where a street crosses water (bridge.mjs: deck, piers every 6, parapet, lanterns)
 const bedAt = (x, z) => { let y = target[z * X + x] - 1; while (y > 0 && (WATERY.test(nameOf(V, x, y, z)) || nameOf(V, x, y, z) === "air" || !TERRAIN.test(nameOf(V, x, y, z)) && !/stone|brick|plank|log/.test(nameOf(V, x, y, z)))) y--; return y; };
 for (const [x, y, z, b] of bridgeBlocks({ X, Z, target, bridge, role, style: S, bedAt, pave: PAVE })) put(x, y, z, b);
+for (const c of g.dropped || []) if (c.landing) for (const [x, y, z, b] of landingBlocks({ at: c.landing.at, facing: c.landing.facing, level: target[c.landing.at[1] * X + c.landing.at[0]], water: c.water, width: c.width, style: S, pave: PAVE })) put(x, y, z, b);
 const parapet = [];
 
 // ---- an earthworks tile at every step: the tile is drawn with its low side south; turn it to the edge's way down
@@ -160,5 +164,6 @@ const W = (d, v) => { mkdirSync(d, { recursive: true }); return writeWorld(d, v,
 W(`${OUT}/before/world`, before); W(`${OUT}/graded/world`, V);
 const b64 = (a) => Buffer.from(a.buffer, a.byteOffset, a.byteLength).toString("base64");
 writeFileSync(`${OUT}/grade.json`, JSON.stringify({ origin: [ox, oz], size: [X, Z], target: b64(target), role: b64(role), roles: ROLE,
-  plot_levels: g.plotLevels.map((p) => ({ ...p, plot: plan.plots[p.plot] })), edges: g.edges.map((e) => ({ ...e, x: e.x + ox, z: e.z + oz })), report: { ...g.report, felled, tiles } }));
+  plot_levels: g.plotLevels.map((p) => ({ ...p, plot: plan.plots[p.plot] })),
+  crossings: [...g.crossings, ...(g.dropped || []).map((c) => ({ ...c, dropped: true }))].map((c) => { const W = (p) => p && [p[0] + ox, p[1] + oz]; return { ...c, street_line: plan.streets[c.street]?.line, near_bank: W(c.near_bank), far_bank: W(c.far_bank), from: W(c.from), to: W(c.to), landing: c.landing && { ...c.landing, at: W(c.landing.at) } }; }), edges: g.edges.map((e) => ({ ...e, x: e.x + ox, z: e.z + oz })), report: { ...g.report, felled, tiles } }));
 console.log(JSON.stringify({ ...g.report, felled, tiles, origin: [ox, oz] }, null, 1));

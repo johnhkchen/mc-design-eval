@@ -11,7 +11,10 @@
 //                 a slope, never a cliff
 // Pure: grids in, grids out, no world access. Columns are indexed z * X + x in the caller's frame (any origin).
 //
-//   townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, blend }) -> { target, role, edges, report }
+//   townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, serves, blend }) -> { target, role, bridge, edges, plotLevels, crossings, report }
+//     serves  [[x, z], ...]: points the town's streets lead to that the plan doesn't hold (farm tracks, roads out)
+//   crossings [{ street, span, near_bank, far_bank, deck, water, beyond: { plots, streets, serves, length }, keep, kind:
+//            causeway (3 or less) | single (to 8) | piers (to 40) | ferry, narrowest: { offset, span }, landing }]
 //     top     Int16Array: natural ground height per column        water  Uint8Array: 1 where the column is water
 //     fixed   Int16Array: a standing building's ground height, or NONE where nothing stands (kept as it is)
 //     streets [{ kind, width, line: [[x, z], ...] }]     plots [{ x, z, sx, sz, door: north|south|east|west }]
@@ -28,7 +31,7 @@ export const ROLE = { wild: 0, blend: 1, free: 2, street: 3, plot: 4, fixed: 5, 
 const DIRS = [[0, -1, "north"], [0, 1, "south"], [1, 0, "east"], [-1, 0, "west"]];
 const median = (a) => { if (!a.length) return NaN; const s = [...a].sort((p, q) => p - q); return s[s.length >> 1]; };
 
-export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, blend = 16, step = 3, maxRise = 4, grade = 1 / 3, near = 3, keepAway = 4, keepFall = 0.4 }) {
+export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer, serves = [], blend = 16, step = 3, maxRise = 4, grade = 1 / 3, near = 3, keepAway = 4, keepFall = 0.4 }) {
   const N = X * Z, at = (x, z) => (x < 0 || z < 0 || x >= X || z >= Z ? -1 : z * X + x);
   const role = new Uint8Array(N), target = new Int16Array(N).fill(NONE), owner = new Int32Array(N).fill(-1);
   const bridge = new Uint8Array(N);                                // a street over water: 1 along z, 2 along x
@@ -49,6 +52,7 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
   // ---- 1. streets: avenues first (they meet the forum), then lanes (they meet the avenues)
   const order = [...streets.keys()].sort((a, b) => (streets[a].kind === "avenue" ? 0 : 1) - (streets[b].kind === "avenue" ? 0 : 1));
   let steepest = { grade: 0 };
+  const runs = [];                                                 // each street's samples, for the crossings report
   for (const si of order) {
     const s = streets[si], half = (s.width - 1) / 2, samples = [];
     // the centreline at one block a sample
@@ -73,6 +77,7 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
     // the street's steepest stretch (rise over 6 samples), for the report
     const g = n > 1 ? Math.max(...level.map((v, i) => (i >= 6 ? Math.abs(v - level[i - 6]) / 6 : 0))) : 0;
     if (g > steepest.grade) steepest = { grade: +g.toFixed(2), street: si, kind: s.kind };
+    runs.push({ si, samples, cells, level, wet: cells.map((c) => c.some((i) => water[i])) });
     cells.forEach((c, k) => c.forEach((i) => {
       if (role[i] === ROLE.water) { role[i] = ROLE.street; bridge[i] = samples[k][2] ? 1 : 2; }
       if (claim(i, ROLE.street) || (role[i] === ROLE.street && owner[i] === -1)) { target[i] = level[k]; owner[i] = si; }
@@ -232,5 +237,67 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
   let cut = 0, fill = 0;
   for (let i = 0; i < N; i++) if (role[i] !== ROLE.wild && role[i] !== ROLE.water && role[i] !== ROLE.fixed) { const d = target[i] - top[i]; if (d > 0) fill += d; else cut -= d; }
   const count = (k) => edges.filter((e) => e.kind === k || e.corner === k).length;
-  return { target, role, bridge, edges, plotLevels, report: { natural, plots_off_frontage: plotLevels.filter((e) => e.offset).length, plots_over: plotLevels.filter((e) => e.over > 0).map((e) => ({ plot: e.plot, over: e.over })), corners: { outer: edges.filter((e) => e.corner === "outer").length, inner: count("inner") }, bridges: bridge.reduce((a, b) => a + (b ? 1 : 0), 0), cut, fill, steepest, edges: { wall: count("wall"), cut_face: count("cut_face"), quay: count("quay"), street_step: count("street_step"), street_stair: count("street_stair"), slope: count("slope") }, conflicts: conflicts.length, conflict_sample: conflicts.slice(0, 12) } };
+  // ---- crossings: every run of a street over water, as the plan needs it to decide which to build (thread 0014): its
+  // span and banks, its deck and water, what the street serves past the far bank (the town's plots and streets, and any
+  // `serves` points the caller knows: farm tracks, roads to other towns), a kind by span, the narrowest crossing within
+  // 12 of the line, and where the street would end at the shore (a landing) if the crossing isn't built
+  const crossings = [];
+  const [fcx, fcz] = forum.centre;
+  for (const { si, samples, cells, level, wet } of runs) {
+    for (let a = 0; a < samples.length; a++) {
+      if (!wet[a] || (a > 0 && wet[a - 1])) continue;
+      let b = a; while (b + 1 < samples.length && wet[b + 1]) b++;
+      const d2 = (k) => (samples[k][0] - fcx) ** 2 + (samples[k][1] - fcz) ** 2;
+      const nearIsStart = a === 0 ? false : b === samples.length - 1 ? true : d2(a - 1) <= d2(b + 1);
+      const farKs = nearIsStart ? [...Array(samples.length - b - 1).keys()].map((k) => b + 1 + k) : [...Array(a).keys()];
+      const nearK = nearIsStart ? a - 1 : b + 1, farK = nearIsStart ? b + 1 : a - 1;
+      // what lies past the far bank, along the rest of the street's line
+      const farCells = new Set(farKs.flatMap((k) => cells[k])), plotsBeyond = new Set(), streetsBeyond = new Set();
+      for (const i of farCells) { const x = i % X, z = (i - x) / X; for (let ddz = -2; ddz <= 2; ddz++) for (let ddx = -2; ddx <= 2; ddx++) { const j = at(x + ddx, z + ddz); if (j < 0) continue; if (plotOf[j] >= 0) plotsBeyond.add(plotOf[j]); if (role[j] === ROLE.street && owner[j] !== si && owner[j] >= 0) streetsBeyond.add(owner[j]); } }
+      const servesBeyond = serves.filter(([sx, sz]) => [...farCells].some((i) => { const x = i % X, z = (i - x) / X; return Math.abs(x - sx) <= 3 && Math.abs(z - sz) <= 3; })).length;
+      const span = b - a + 1, waterLevel = Math.max(...cells.slice(a, b + 1).flat().filter((i) => water[i]).map((i) => top[i]));
+      // the narrowest water along lines parallel to the street, up to 12 either side, over the same stretch
+      let narrowest = { offset: 0, span };
+      const alongZ = samples[a][2];
+      for (let o = -12; o <= 12; o++) {
+        if (!o) continue;
+        let best = Infinity, run = 0, touches = false;
+        for (let k = Math.max(0, a - 12); k <= Math.min(samples.length - 1, b + 12); k++) {
+          const [x, z] = samples[k], i = alongZ ? at(x + o, z) : at(x, z + o);
+          if (i >= 0 && water[i]) { run++; if (k >= a && k <= b) touches = true; }
+          else { if (run && touches) best = Math.min(best, run); run = 0; touches = false; }
+        }
+        if (best < narrowest.span) narrowest = { offset: o, span: best };
+      }
+      const kind = span <= 3 ? "causeway" : span <= 8 ? "single" : span <= 40 ? "piers" : "ferry";
+      const P = (k) => (k >= 0 && k < samples.length ? [samples[k][0], samples[k][1]] : null);
+      crossings.push({ street: si, kind_of_street: streets[si].kind, span, width: streets[si].width, runs_along: alongZ ? "z" : "x",
+        near_bank: P(nearK), far_bank: P(farK), from: P(a), to: P(b), deck: Math.max(...level.slice(a, b + 1)), water: waterLevel,
+        beyond: { plots: plotsBeyond.size, streets: streetsBeyond.size, serves: servesBeyond, length: farKs.length },
+        keep: plotsBeyond.size + streetsBeyond.size + servesBeyond > 0, kind, narrowest,
+        landing: P(nearK) && { at: P(nearK), facing: nearIsStart ? (alongZ ? (samples[a][1] > samples[nearK][1] ? "south" : "north") : (samples[a][0] > samples[nearK][0] ? "east" : "west")) : (alongZ ? (samples[b][1] < samples[nearK][1] ? "north" : "south") : (samples[b][0] < samples[nearK][0] ? "west" : "east")) } });
+      a = b;
+    }
+  }
+
+  return { target, role, bridge, edges, plotLevels, crossings, report: { crossings: crossings.map((c) => ({ street: c.street, span: c.span, keep: c.keep, kind: c.kind, beyond: c.beyond, narrowest: c.narrowest })), natural, plots_off_frontage: plotLevels.filter((e) => e.offset).length, plots_over: plotLevels.filter((e) => e.over > 0).map((e) => ({ plot: e.plot, over: e.over })), corners: { outer: edges.filter((e) => e.corner === "outer").length, inner: count("inner") }, bridges: bridge.reduce((a, b) => a + (b ? 1 : 0), 0), cut, fill, steepest, edges: { wall: count("wall"), cut_face: count("cut_face"), quay: count("quay"), street_step: count("street_step"), street_stair: count("street_stair"), slope: count("slope") }, conflicts: conflicts.length, conflict_sample: conflicts.slice(0, 12) } };
+}
+
+/** The plan's streets cut back at the near bank of every crossing not built (`build` decides; by default a crossing is
+ *  built when the street serves something past it), so a second townGrade lays no bridge to nowhere: the street ends
+ *  at its landing. Each street keeps the part of its line from its start to the first crossing it drops. */
+export function trimStreets(streets, crossings, build = (c) => c.keep) {
+  return streets.map((s, si) => {
+    const drop = crossings.filter((c) => c.street === si && !build(c));
+    if (!drop.length) return s;
+    // the first dropped crossing along the line from its start: the line is cut at that crossing's near bank
+    const pts = [], seg = s.line;
+    for (let k = 0; k + 1 < seg.length; k++) { const [ax, az] = seg[k], [bx, bz] = seg[k + 1], L = Math.max(Math.abs(bx - ax), Math.abs(bz - az)); for (let t = k ? 1 : 0; t <= L; t++) pts.push([ax + Math.round((bx - ax) * t / L), az + Math.round((bz - az) * t / L)]); }
+    const idx = (p) => pts.findIndex(([x, z]) => x === p[0] && z === p[1]);
+    const cut = Math.min(...drop.map((c) => (c.near_bank ? idx(c.near_bank) : -1)).filter((k) => k >= 0));
+    if (!Number.isFinite(cut)) return s;
+    const far = drop.find((c) => idx(c.near_bank) === cut), start = idx(far.to) < cut || idx(far.from) < cut;
+    const kept = start ? pts.slice(cut) : pts.slice(0, cut + 1);
+    return kept.length > 1 ? { ...s, line: [kept[0], kept[kept.length - 1]], landing: far.landing } : null;
+  }).filter(Boolean);
 }
