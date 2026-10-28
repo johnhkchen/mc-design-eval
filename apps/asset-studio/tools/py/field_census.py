@@ -34,7 +34,8 @@ for x in range(x0, x1 + 1):
     for z in range(z0, z1 + 1):
         c = ch.get((x >> 4, z >> 4))
         if not c: continue
-        if mask and field_of(x, z) < 0: continue
+        # --ring: a field's own boundary (hedges, walls, gates) lies outside its cells; take cells beside a field too
+        if mask and field_of(x, z) < 0 and not ("--ring" in sys.argv and any(field_of(x + dx, z + dz) >= 0 for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)))): continue
         if c.ground: g = c.ground[(z & 15) * 16 + (x & 15)] - 65
         else:
             g = 90

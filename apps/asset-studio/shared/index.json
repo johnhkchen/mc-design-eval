@@ -841,10 +841,10 @@
     "path": "py/field_census.py",
     "lang": "py",
     "author": "studio",
-    "updated": "2026-10-28T02:37:58.358Z",
+    "updated": "2026-10-28T02:40:03.969Z",
     "updated_by": "studio",
-    "note": "rev 3: --mask fields.json --town id counts only that town's field cells (fields_mask.py's RLE) and adds planted_share_crop_fields (arable and terraces), field_cells and cells by use.",
-    "bytes": 5283,
+    "note": "rev 4: --ring takes the cells beside a field too (its hedges, walls and gates lie outside its own cells).",
+    "bytes": 5520,
     "history": [
       {
         "at": "2026-10-28T01:52:04.461Z",
@@ -863,6 +863,12 @@
         "by": "studio",
         "note": "rev 3: --mask fields.json --town id counts only that town's field cells (fields_mask.py's RLE) and adds planted_share_crop_fields (arable and terraces), field_cells and cells by use.",
         "bytes": 5283
+      },
+      {
+        "at": "2026-10-28T02:40:03.969Z",
+        "by": "studio",
+        "note": "rev 4: --ring takes the cells beside a field too (its hedges, walls and gates lie outside its own cells).",
+        "bytes": 5520
       }
     ]
   },
