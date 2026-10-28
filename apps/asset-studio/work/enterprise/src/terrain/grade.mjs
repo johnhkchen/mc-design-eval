@@ -79,6 +79,22 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
     }));
   }
 
+  // streets meet streets within a half step: where a later street (a lane) stands 2 or more off an earlier one (an
+  // avenue) at a junction, the later street's cells give way, a block at a time back along it, until every step
+  // between street cells is 1 (a slab); an avenue never moves for a lane
+  for (let it = 0; it < 64; it++) {
+    let moved = 0;
+    for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
+      const i = z * X + x; if (role[i] !== ROLE.street || bridge[i]) continue;
+      for (const [ddx, ddz] of DIRS) {
+        const j = at(x + ddx, z + ddz); if (j < 0 || (role[j] !== ROLE.street && role[j] !== ROLE.forum)) continue;
+        const senior = role[j] === ROLE.forum || order.indexOf(owner[j]) < order.indexOf(owner[i]) || (owner[j] === owner[i]);
+        if (senior && Math.abs(target[i] - target[j]) > 1) { target[i] += Math.sign(target[j] - target[i]); moved++; }
+      }
+    }
+    if (!moved) break;
+  }
+
   // ---- 2. frontages: plots holding a standing building first (they keep its ground), then the rest
   const out = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] };
   const plotOrder = [...plots.keys()].sort((a, b) => holds(plots[b]) - holds(plots[a]));
@@ -190,7 +206,7 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
       const j = at(x + ddx, z + ddz); if (j < 0 || role[j] === ROLE.wild || role[j] === ROLE.fixed || bridge[j]) continue;
       const rise = target[i] - (role[j] === ROLE.water ? top[j] : target[j]); if (rise <= 0) continue;
       const kind = role[j] === ROLE.water ? "quay" : role[i] === ROLE.blend || role[j] === ROLE.blend || (role[i] === ROLE.natural && role[j] === ROLE.natural) ? "slope"
-        : role[i] === ROLE.street && role[j] === ROLE.street && rise === 1 ? "street_step"
+        : (role[i] === ROLE.street || role[i] === ROLE.forum) && (role[j] === ROLE.street || role[j] === ROLE.forum) ? (rise === 1 ? "street_step" : "street_stair")
         : nearPlanned[i] || nearPlanned[j] || role[i] === ROLE.plot || role[j] === ROLE.plot ? "wall" : "cut_face";
       if (kind === "slope" && rise <= 1) continue;
       edges.push({ x, z, dir, rise, kind });
@@ -216,5 +232,5 @@ export function townGrade({ X, Z, top, water, fixed, streets, plots, forum, oute
   let cut = 0, fill = 0;
   for (let i = 0; i < N; i++) if (role[i] !== ROLE.wild && role[i] !== ROLE.water && role[i] !== ROLE.fixed) { const d = target[i] - top[i]; if (d > 0) fill += d; else cut -= d; }
   const count = (k) => edges.filter((e) => e.kind === k || e.corner === k).length;
-  return { target, role, bridge, edges, plotLevels, report: { natural, plots_off_frontage: plotLevels.filter((e) => e.offset).length, plots_over: plotLevels.filter((e) => e.over > 0).map((e) => ({ plot: e.plot, over: e.over })), corners: { outer: edges.filter((e) => e.corner === "outer").length, inner: count("inner") }, bridges: bridge.reduce((a, b) => a + (b ? 1 : 0), 0), cut, fill, steepest, edges: { wall: count("wall"), cut_face: count("cut_face"), quay: count("quay"), street_step: count("street_step"), slope: count("slope") }, conflicts: conflicts.length, conflict_sample: conflicts.slice(0, 12) } };
+  return { target, role, bridge, edges, plotLevels, report: { natural, plots_off_frontage: plotLevels.filter((e) => e.offset).length, plots_over: plotLevels.filter((e) => e.over > 0).map((e) => ({ plot: e.plot, over: e.over })), corners: { outer: edges.filter((e) => e.corner === "outer").length, inner: count("inner") }, bridges: bridge.reduce((a, b) => a + (b ? 1 : 0), 0), cut, fill, steepest, edges: { wall: count("wall"), cut_face: count("cut_face"), quay: count("quay"), street_step: count("street_step"), street_stair: count("street_stair"), slope: count("slope") }, conflicts: conflicts.length, conflict_sample: conflicts.slice(0, 12) } };
 }
