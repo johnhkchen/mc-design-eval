@@ -790,5 +790,39 @@
         "bytes": 1727
       }
     ]
+  },
+  "js/farmland/layout.mjs": {
+    "path": "js/farmland/layout.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T00:49:17.836Z",
+    "updated_by": "studio",
+    "note": "Farm layout on real terrain, the algorithm alone (no Minecraft, no I/O): contour-stretched parcels, least-climb lanes, farmstead siting, land use by slope rank, contour crop bands. Ports to Rust/Java.",
+    "bytes": 8902,
+    "history": [
+      {
+        "at": "2026-10-28T00:49:17.836Z",
+        "by": "studio",
+        "note": "Farm layout on real terrain, the algorithm alone (no Minecraft, no I/O): contour-stretched parcels, least-climb lanes, farmstead siting, land use by slope rank, contour crop bands. Ports to Rust/Java.",
+        "bytes": 8902
+      }
+    ]
+  },
+  "js/farmland/farmland.mjs": {
+    "path": "js/farmland/farmland.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T00:49:17.884Z",
+    "updated_by": "studio",
+    "note": "The demo's painter: reads irl-copy land (IGN LiDAR ground), runs layout.mjs, lays hedges, walls, gates, crops in contour bands, orchards in contour rows, terraces with stone risers, pasture shelters, our farmstead; writes a 1.21.1 world.",
+    "bytes": 13768,
+    "history": [
+      {
+        "at": "2026-10-28T00:49:17.884Z",
+        "by": "studio",
+        "note": "The demo's painter: reads irl-copy land (IGN LiDAR ground), runs layout.mjs, lays hedges, walls, gates, crops in contour bands, orchards in contour rows, terraces with stone risers, pasture shelters, our farmstead; writes a 1.21.1 world.",
+        "bytes": 13768
+      }
+    ]
   }
 }
