@@ -15,7 +15,8 @@
 // channel arch of 5 leaves 3 clear under its crown; the deck sits a ring and a course over the crown: an arch of n
 // wants the deck at water + 6 (5), + 7 (7), + 8 (9). The middle arch, the
 // largest the deck allows, takes the channel; the rest are arches of 5 on piers 1 thick; what's left is abutment.
-import { hash } from "../lordaeron/earthworks.mjs";
+import { hash, LORDAERON } from "../lordaeron/earthworks.mjs";
+import { DALARAN } from "../dalaran/earthworks.mjs";
 
 export const ARCH = { 5: [1, 2, 3, 2, 1], 7: [1, 2, 3, 4, 3, 2, 1], 9: [1, 3, 4, 5, 5, 5, 4, 3, 1] };
 const NEED = (n) => Math.max(...ARCH[n]) + 3;                     // deck over water an arch of n needs
@@ -52,11 +53,11 @@ export function crossingBlocks({ span, width, deck, water, bedAt, style: S, pave
         put(i, o, deck, edge ? S.coping : pave(i, o));
         for (let y = deck + 1; y <= deck + 3; y++) put(i, o, y, "air");
         if (sg.part === "abutment" || sg.part === "pier") {
-          for (let y = bedAt(i, o) + 1; y < deck; y++) put(i, o, y, y === deck - 1 && edge ? S.coping : course(i, o, y));
+          for (let y = bedAt(i, o) + 1; y < deck; y++) put(i, o, y, course(i, o, y));
         } else if (sg.part === "arch") {
           const k = i - sg.i0, h = ARCH[sg.n][k], ring = spring + h;
           // the ring (its ends turned on upside-down stairs toward the pier), spandrels filled to the deck
-          for (let y = ring; y < deck; y++) put(i, o, y, y === ring ? S.coping : course(i, o, y));
+          for (let y = ring; y < deck; y++) put(i, o, y, y === ring ? (S.ring || S.coping) : course(i, o, y));
           // the soffit's step: where the next cell toward the crown rises, an upside-down stair under this ring, its
           // high side toward the springing (north on the near half, south on the far)
           const nb = ARCH[sg.n], mid = (nb.length - 1) / 2, inward = k < mid ? 1 : k > mid ? -1 : 0;
@@ -107,4 +108,60 @@ export function ferryStageBlocks({ width, level, water, style: S }) {
   for (let i = 2; i <= 4; i++) { put(i, w - 1, water, "spruce_slab[type=top,waterlogged=true]"); put(i, w, water + 1, "spruce_trapdoor[facing=east,half=bottom,open=true,powered=false,waterlogged=false]"); }
   put(3, w - 1, water + 1, "spruce_slab[type=bottom,waterlogged=false]");
   return out;
+}
+
+// ---- the kingdoms' bridges ----------------------------------------------------------------------------------------
+// A bridge style is an earthworks style (course, coping, stair, parapet, lamp_post, tread_slab) with `kind`: arch (the
+// parts above) or beam (timber spans on fieldstone piers, below), and `over(span)`: how far over the water its deck
+// stands, which the grade holds as the crossing's floor (townGrade's deckOver).
+const wallOf = (name) => (p, up) => `${name}[east=${p.east},north=${p.north},south=${p.south},up=${up},waterlogged=false,west=${p.west}]`;
+const archOver = (span) => (span <= 3 ? 1 : span <= 8 ? 6 : span <= 20 ? 7 : 8);
+export const BRIDGE = {
+  // Dalaran (approved): pale dressed stone, polished andesite coping and ring, the dark oak rail on red posts
+  dalaran: { ...DALARAN, kind: "arch", over: archOver },
+  // Stormwind: white stone, the arch rings in smooth quartz (its pilasters' stone), a stone-brick parapet
+  stormwind: { ...DALARAN, kind: "arch", over: archOver,
+    course: (r) => (r < 0.82 ? "stone_bricks" : r < 0.94 ? "cracked_stone_bricks" : "chiseled_stone_bricks"),
+    coping: "polished_andesite", ring: "smooth_quartz", stair: "quartz", tread_slab: "stone_brick", parapet: wallOf("stone_brick_wall"),
+    lamp_post: ["stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]", "stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"] },
+  // Lordaeron: a timber bridge on fieldstone piers: spruce beams and plank deck, a spruce rail, braces under the beams
+  lordaeron: { ...LORDAERON, kind: "beam", over: (span) => (span <= 3 ? 1 : 5), bay: 4,
+    course: (r) => (r < 0.45 ? "cobblestone" : r < 0.75 ? "mossy_cobblestone" : r < 0.9 ? "stone" : "andesite"),
+    coping: "stone_bricks", parapet: (p, post) => `spruce_fence[east=${p.east === "low"},north=${p.north === "low"},south=${p.south === "low"},waterlogged=false,west=${p.west === "low"}]`,
+    lamp_post: ["spruce_fence[east=false,north=false,south=false,waterlogged=false,west=false]", "spruce_fence[east=false,north=false,south=false,waterlogged=false,west=false]"] },
+};
+
+/** A timber crossing (Lordaeron): fieldstone piers every `bay` cells (and abutments at the banks) up to the beams;
+ *  spruce beams running along the street under each edge and its middle, braced off the piers with upturned stairs; a
+ *  plank deck across them; the rail on posts over each pier, lanterns at the ends and every other pier. */
+export function beamCrossingBlocks({ span, width, deck, water, bedAt, style: S }) {
+  const out = [], put = (i, o, y, b) => out.push([i, o, y, b]), bay = S.bay || 4, beam = deck - 1;
+  const isPier = (i) => i === 0 || i === span + 1 || (i % bay === 0 && i < span + 1 - 1);
+  const under = [-1, Math.floor((width - 1) / 2), width];           // the beams' lines: both edges and the middle
+  for (let i = 0; i <= span + 1; i++) {
+    for (let o = -1; o <= width; o++) {
+      for (let y = deck + 1; y <= deck + 3; y++) put(i, o, y, "air");
+      put(i, o, deck, o === -1 || o === width ? "spruce_slab[type=top,waterlogged=false]" : "spruce_planks");
+      // a pier: fieldstone from the bed, battered out a cell at the waterline's foot, a crosswise spruce cap under the beams
+      if (isPier(i)) for (let y = bedAt(i, o) + 1; y < beam; y++) put(i, o, y, y === beam - 1 ? "stripped_spruce_log[axis=x]" : S.course(hash(i * 31 + o, y, 9)));
+      if (under.includes(o)) put(i, o, beam, "stripped_spruce_log[axis=z]");
+    }
+    // the piers' cutwaters: fieldstone a cell out each side to a stair at the water
+    if (isPier(i) && i > 0 && i < span + 1) for (const [o, f] of [[-2, "east"], [width + 1, "west"]]) { for (let y = bedAt(i, o) + 1; y <= water; y++) put(i, o, y, S.course(hash(i, o, y, 4))); put(i, o, water + 1, `cobblestone_stairs[facing=${f},half=bottom,shape=straight,waterlogged=false]`); }
+    // the braces: off each pier's face, an upside-down stair under the beam either side, toward the span
+    if (isPier(i) && i > 0 && i < span + 1) for (const o of under) { put(i - 1, o, beam - 1, "spruce_stairs[facing=south,half=top,shape=straight,waterlogged=false]"); put(i + 1, o, beam - 1, "spruce_stairs[facing=north,half=top,shape=straight,waterlogged=false]"); }
+  }
+  // the rail on the deck's edges: posts over the piers, rails between; lanterns at the ends and every other pier
+  for (let i = 0; i <= span + 1; i++) for (const o of [-1, width]) {
+    const along = { north: i > 0 ? "low" : "none", south: i <= span ? "low" : "none", east: "none", west: "none" };
+    put(i, o, deck + 1, S.parapet(along, isPier(i)));
+    if (i === 0 || i === span + 1 || (isPier(i) && (i / bay) % 2 === 0)) put(i, o, deck + 2, "lantern[hanging=false,waterlogged=false]");
+  }
+  return out;
+}
+
+/** A crossing in its kingdom's kind: a causeway for 3 or less, else arches (crossingBlocks) or timber (beam). */
+export function kingdomCrossing(args) {
+  if (args.span <= 3) return causewayBlocks(args);
+  return args.style.kind === "beam" ? beamCrossingBlocks(args) : crossingBlocks(args);
 }

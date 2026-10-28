@@ -10,14 +10,14 @@ import { Voxels } from "../../../../../irl-copy/src/voxels.mjs";
 import { writeWorld } from "../../../../../irl-copy/src/anvil.mjs";
 import { townGrade, trimStreets, NONE, ROLE } from "./grade.mjs";
 import { landingBlocks } from "./bridge.mjs";
-import { crossingBlocks, causewayBlocks, ferryStageBlocks } from "./bridges.mjs";
+import { kingdomCrossing, ferryStageBlocks, BRIDGE } from "./bridges.mjs";
 import { retain, cutFace, hash, LORDAERON } from "../lordaeron/earthworks.mjs";
 import { DALARAN } from "../dalaran/earthworks.mjs";
 import { splitState } from "../grid.mjs";
 
 const argv = process.argv.slice(2), [BOX, PLAN, OUT] = argv.filter((a, i) => !a.startsWith("--") && !argv[i - 1]?.startsWith("--"));
 const opt = (k, d) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : d);
-const S = { dalaran: DALARAN, lordaeron: LORDAERON }[opt("--style", "dalaran")], BLEND = +opt("--blend", 16);
+const K = opt("--style", "dalaran"), S = { dalaran: DALARAN, lordaeron: LORDAERON, stormwind: LORDAERON }[K], B = BRIDGE[K], BLEND = +opt("--blend", 16);
 
 // ---- the box into a Voxels from world y 0 (stone below the dump), so the written world keeps the game's heights
 const meta = JSON.parse(readFileSync(BOX + ".json", "utf8")), raw = readFileSync(BOX + ".bin");
@@ -64,10 +64,10 @@ const R = ([x0, z0, x1, z1]) => [x0 - ox, z0 - oz, x1 - ox, z1 - oz];
 const streets = plan.streets.map((s) => ({ ...s, line: s.line.map(L) }));
 const plots = plan.plots.map((p) => ({ ...p, x: p.x - ox, z: p.z - oz }));
 const forum = { centre: L(plan.forum.centre), reach: plan.forum.reach, level: plan.bell[1] - 1 };
-let g = townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer: R(plan.edge.outer), blend: BLEND });
+let g = townGrade({ X, Z, top, water, fixed, streets, plots, forum, outer: R(plan.edge.outer), blend: BLEND, deckOver: B.over });
 // --trim: the crossings that serve nothing past them are not built; their streets end at the shore with a landing
 const TRIM = argv.includes("--trim"), first = g.crossings;
-if (TRIM) g = { ...townGrade({ X, Z, top, water, fixed, streets: trimStreets(streets, first), plots, forum, outer: R(plan.edge.outer), blend: BLEND }), dropped: first.filter((c) => !c.keep) };
+if (TRIM) g = { ...townGrade({ X, Z, top, water, fixed, streets: trimStreets(streets, first), plots, forum, outer: R(plan.edge.outer), blend: BLEND, deckOver: B.over }), dropped: first.filter((c) => !c.keep) };
 const { target, role, bridge } = g;
 
 // ---- fell the trees that stand where the ground moves: a trunk on a street or plot, or on land cut or filled by 2 or
@@ -126,7 +126,7 @@ function lay(c, blocks) {
 }
 for (const c of g.crossings.filter((c) => c.near_bank && c.far_bank)) {
   const { at } = frame(c), bedAt = (i, o) => bedAt0(...at(i, o));
-  lay(c, (c.kind === "causeway" ? causewayBlocks : crossingBlocks)({ span: c.span, width: c.width, deck: c.deck, water: c.water, bedAt, style: S }));
+  lay(c, kingdomCrossing({ span: c.span, width: c.width, deck: c.deck, water: c.water, bedAt, style: B }));
 }
 for (const c of g.dropped || []) if (c.landing) {
   const lv = target[c.landing.at[1] * X + c.landing.at[0]];
@@ -135,7 +135,7 @@ for (const c of g.dropped || []) if (c.landing) {
     // the ferry's stage beyond the landing's steps: frame along the landing's way, from where the steps reach the water
     const steps = Math.max(1, Math.round((lv + 0.5 - (c.water + 2)) * 2)), [fx, fz] = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }[c.landing.facing];
     const start = [c.landing.at[0] + fx * steps, c.landing.at[1] + fz * steps];
-    lay({ ...c, near_bank: start, from: [start[0] + fx, start[1] + fz] }, ferryStageBlocks({ width: c.width, level: lv, water: c.water, style: S }));
+    lay({ ...c, near_bank: start, from: [start[0] + fx, start[1] + fz] }, ferryStageBlocks({ width: c.width, level: lv, water: c.water, style: B }));
   }
 }
 const parapet = [];
