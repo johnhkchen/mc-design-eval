@@ -911,5 +911,90 @@
         "bytes": 2173
       }
     ]
+  },
+  "js/terrain/grade.mjs": {
+    "path": "js/terrain/grade.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T05:58:10.204Z",
+    "updated_by": "studio",
+    "note": "the town grader: streets (graded, bridged over water), frontages, the land between (terraced, risers 1-4, never two side by side), the blend band; pure: grids in, target height + role + edge classes out",
+    "bytes": 14283,
+    "history": [
+      {
+        "at": "2026-10-28T05:58:10.204Z",
+        "by": "studio",
+        "note": "the town grader: streets (graded, bridged over water), frontages, the land between (terraced, risers 1-4, never two side by side), the blend band; pure: grids in, target height + role + edge classes out",
+        "bytes": 14283
+      }
+    ]
+  },
+  "js/terrain/paint.mjs": {
+    "path": "js/terrain/paint.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T05:58:10.249Z",
+    "updated_by": "studio",
+    "note": "the demo painter: grades a world box with grade.mjs and paints it (cut/fill, felling, paving with half steps, bridges, earthworks tiles turned to each edge, parapets joined). Reference: imports our irl-copy Voxels/writeWorld, the earthworks styles and grid.mjs",
+    "bytes": 13259,
+    "history": [
+      {
+        "at": "2026-10-28T05:58:10.249Z",
+        "by": "studio",
+        "note": "the demo painter: grades a world box with grade.mjs and paints it (cut/fill, felling, paving with half steps, bridges, earthworks tiles turned to each edge, parapets joined). Reference: imports our irl-copy Voxels/writeWorld, the earthworks styles and grid.mjs",
+        "bytes": 13259
+      }
+    ]
+  },
+  "py/world_box.py": {
+    "path": "py/world_box.py",
+    "lang": "py",
+    "author": "studio",
+    "updated": "2026-10-28T05:58:10.294Z",
+    "updated_by": "studio",
+    "note": "a box of a world's blocks with full states (uint16 + palette), the painter's input; uses world_render.py's reader",
+    "bytes": 2459,
+    "history": [
+      {
+        "at": "2026-10-28T05:58:10.294Z",
+        "by": "studio",
+        "note": "a box of a world's blocks with full states (uint16 + palette), the painter's input; uses world_render.py's reader",
+        "bytes": 2459
+      }
+    ]
+  },
+  "js/lordaeron/earthworks.mjs": {
+    "path": "js/lordaeron/earthworks.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T05:58:15.757Z",
+    "updated_by": "studio",
+    "note": "the earthworks tile builders (retain, steps, cutFace, sideSteps, plinth, terrace) with a style per kingdom (LORDAERON here); the grader's painter lays these",
+    "bytes": 17630,
+    "history": [
+      {
+        "at": "2026-10-28T05:58:15.757Z",
+        "by": "studio",
+        "note": "the earthworks tile builders (retain, steps, cutFace, sideSteps, plinth, terrace) with a style per kingdom (LORDAERON here); the grader's painter lays these",
+        "bytes": 17630
+      }
+    ]
+  },
+  "js/dalaran/earthworks.mjs": {
+    "path": "js/dalaran/earthworks.mjs",
+    "lang": "mjs",
+    "author": "studio",
+    "updated": "2026-10-28T05:58:15.801Z",
+    "updated_by": "studio",
+    "note": "Dalaran's earthworks style (batches 030 and 033): dressed stone, balustrade, dressed cut face",
+    "bytes": 3275,
+    "history": [
+      {
+        "at": "2026-10-28T05:58:15.801Z",
+        "by": "studio",
+        "note": "Dalaran's earthworks style (batches 030 and 033): dressed stone, balustrade, dressed cut face",
+        "bytes": 3275
+      }
+    ]
   }
 }
