@@ -4,8 +4,23 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from world_render import chunks_in, Chunk
-args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith("--") and sys.argv[i - 1] != "--near"]  # "--" flags only: a coordinate may be negative
-world, x0, z0, x1, z1 = args[0], *map(int, args[1:5])
+args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith("--") and sys.argv[i - 1] not in ("--near", "--mask", "--town")]  # "--" flags only: a coordinate may be negative
+world, x0, z0, x1, z1 = (args[0], *map(int, args[1:5])) if len(args) >= 5 else (args[0], 0, 0, 0, 0)
+# --mask fields.json --town id: count only the cells of that town's fields (py/fields_mask.py's run-length mask), and
+# report the planted share over its crop fields (use arable/terraces) exactly
+mask = None
+if "--mask" in sys.argv:
+    import json
+    M = json.load(open(sys.argv[sys.argv.index("--mask") + 1]))["towns"][sys.argv[sys.argv.index("--town") + 1] if "--town" in sys.argv else "0"]
+    ids, rle = [], M["field"]
+    for k in range(0, len(rle), 2): ids.extend([rle[k]] * rle[k + 1])
+    use = {f.get("id", i): f.get("use") for i, f in enumerate(M.get("fields", []))}
+    mask = (M["x0"], M["z0"], M["sx"], M["sz"], ids, use)
+    x0, z0, x1, z1 = M["x0"], M["z0"], M["x0"] + M["sx"] - 1, M["z0"] + M["sz"] - 1
+def field_of(x, z):
+    if not mask: return 0
+    mx, mz, sx, sz, ids, _ = mask
+    return ids[(z - mz) * sx + (x - mx)] if 0 <= x - mx < sx and 0 <= z - mz < sz else -1
 ch = {}
 for r in Path(world, "region").glob("*.mca"):
     for n in chunks_in(r):
@@ -13,11 +28,13 @@ for r in Path(world, "region").glob("*.mca"):
         if cx * 16 + 15 < x0 or cx * 16 > x1 or cz * 16 + 15 < z0 or cz * 16 > z1: continue
         c = Chunk(n); ch[(c.cx, c.cz)] = c
 T, kinds = {}, {}
+
 bins = {}
 for x in range(x0, x1 + 1):
     for z in range(z0, z1 + 1):
         c = ch.get((x >> 4, z >> 4))
         if not c: continue
+        if mask and field_of(x, z) < 0: continue
         if c.ground: g = c.ground[(z & 15) * 16 + (x & 15)] - 65
         else:
             g = 90
@@ -40,6 +57,11 @@ farm = T.get("farmland", 0) or 1
 near = int(sys.argv[sys.argv.index("--near") + 1]) if "--near" in sys.argv else 0
 metrics = {"farmland": T.get("farmland", 0), "walls_per_1000_farmland": round(1000 * T.get("wall", 0) / farm), "hedge_leaves_per_1000_farmland": round(1000 * T.get("leaves_low", 0) / farm),
            "trunks_per_1000_farmland": round(1000 * T.get("trunk", 0) / farm), "planted_share": round(T.get("farmland", 0) / max(1, sum(v for k, v in T.items() if k in ("farmland", "other:grass_block", "other:coarse_dirt"))), 2)}
+if mask:
+    crop = {p for p in kinds if mask[5].get(field_of(*p)) in ("arable", "terraces")}
+    ground = [p for p in crop if kinds[p] in ("farmland", "other:grass_block", "other:coarse_dirt")]
+    metrics["planted_share_crop_fields"] = round(sum(1 for p in ground if kinds[p] == "farmland") / max(1, len(ground)), 2)
+    metrics["field_cells"] = len(kinds); metrics["uses"] = {u: sum(1 for p in kinds if mask[5].get(field_of(*p)) == u) for u in set(mask[5].values())}
 if near:
     fl = {p for p, k in kinds.items() if k == "farmland"}
     from collections import deque
