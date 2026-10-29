@@ -1,0 +1,67 @@
+{
+  "id": "dwarf",
+  "name": "Dwarven mountain town",
+  "faction": "Alliance",
+  "status": "draft",
+  "concept": {
+    "setting": "a dwarven mountain town in snowy peaks under a cold blue sky, warm light glowing everywhere",
+    "buildings": "squat heavy stone houses with walls a metre thick at the base, steep dark slate roofs with huge smoking chimneys, round arched doors and windows glowing orange, bronze and gold trim on gables and doors, carved runes and knotwork, massive buttresses, timber balconies, everything broad, low and immovable",
+    "landmark": "an enormous carved stone gate into the mountain at the town's head, a colossal statue of a dwarf king with a hammer guarding it, the arch lit by forge glow from within, smoke vents in the cliff above",
+    "street_life": "open forges with glowing lava and anvils, mine carts on rails through the town, a cable gondola between peaks, ale barrels outside a tavern, hanging iron lanterns, steam vents, a brewery with copper vats",
+    "greenery": "dark spruce and fir heavy with snow, snowy terraces, a frozen stream under an arched stone bridge",
+    "materials": "stone bricks, deepslate tiles and bricks, polished blackstone, chiselled stone, copper and gold trim, spruce timber, lava behind iron bars, snow and packed ice, lanterns",
+    "colours": [
+      "granite grey",
+      "slate blue-black",
+      "forge orange",
+      "bronze",
+      "snow white"
+    ],
+    "avoid": [
+      "thin walls",
+      "tall narrow towers",
+      "bright painted plaster"
+    ],
+    "ground": "snow over grey stone"
+  },
+  "build": {
+    "shell": null,
+    "roles": null,
+    "earthworks": null,
+    "bridge": null,
+    "harbour": null,
+    "founding": null
+  },
+  "factions": {
+    "about": "Holds of one race, the same contract as orc: one canonical palette per hold, the swaps from the authored base; the land chooses which hold settles where (styles/settlement.json).",
+    "base": "the authored base materials (dwarf parts are built in these): stone_bricks walls, deepslate_tiles roofs, polished_blackstone plinths and buttresses, chiseled_stone_bricks runes, spruce timber, gold_block trim, lanterns",
+    "default": "deepforge",
+    "clans": {
+      "deepforge": {
+        "name": "Deepforge hold",
+        "feel": "the mountain hold: grey stone brick under dark slate, gold trim, forge glow; the canonical dwarf look",
+        "palette": []
+      },
+      "redcrag": {
+        "name": "Redcrag hold",
+        "feel": "a hold cut from red rock: polished granite walls, brick-red roofs, dark oak timber",
+        "palette": [
+          "stone_brick_wall=granite_wall",
+          "stone_bricks=polished_granite",
+          "deepslate_tiles=bricks",
+          "spruce=dark_oak"
+        ]
+      },
+      "brasshammer": {
+        "name": "Brasshammer hold",
+        "feel": "engineers and smiths: tuff brick walls, roofs of waxed copper, copper for the gold trim",
+        "palette": [
+          "deepslate_tile_wall=tuff_brick_wall",
+          "stone_bricks=tuff_bricks",
+          "deepslate_tiles=waxed_cut_copper",
+          "gold_block=waxed_copper_block"
+        ]
+      }
+    }
+  }
+}

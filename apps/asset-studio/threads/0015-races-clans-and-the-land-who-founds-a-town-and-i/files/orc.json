@@ -1,0 +1,80 @@
+{
+  "id": "orc",
+  "name": "Orc war-town",
+  "faction": "Horde",
+  "status": "draft",
+  "concept": {
+    "setting": "an orc war-town in a red rock canyon desert under a hot orange sky",
+    "buildings": "round and oval huts on low red sandstone and terracotta walls, roofs of stretched brown and tan hides over curved timber ribs, great curved tusk-like timbers and iron spikes jutting from every roof ridge and doorway, rusted iron plates bolted over the walls, bone and skull ornaments, heavy log palisades with sharpened tops",
+    "landmark": "a towering great hall fortress on a rock outcrop: tiers of spiked hide-and-timber roofs over thick red stone walls, giant curved tusks framing its gate, smoke rising from braziers on every tier",
+    "street_life": "fire braziers and torches along the paths, war drums on wooden stands, weapon racks and training dummies, tanning racks with drying hides, a wolf kennel with gnawed bones, cookfire spits, spiky wagons at a dusty market",
+    "greenery": "sparse and harsh: thorny scrub, dry yellow grass, twisted dead trees, barrel cactus, a muddy oasis pool with reeds",
+    "materials": "red sandstone, orange, red and brown terracotta, acacia and dark oak logs, brown and orange wool for hides, iron bars and chains, bone blocks, campfires, lanterns",
+    "colours": [
+      "rust red",
+      "burnt orange",
+      "tan hide",
+      "charred black",
+      "bone white"
+    ],
+    "avoid": [
+      "neat rectangular houses",
+      "glass windows",
+      "pastel colours"
+    ],
+    "ground": "red sand and orange terracotta desert ground with a few dry bushes"
+  },
+  "build": {
+    "shell": null,
+    "roles": null,
+    "earthworks": null,
+    "bridge": null,
+    "harbour": null,
+    "founding": null
+  },
+  "factions": {
+    "about": "Clans of one race. Each clan has one canonical palette: the swaps from the style's authored base (what its parts are built in) to that clan's primary materials, applied in one pass, first match wins (mcd reskin). A clan never changes its palette; the land chooses which clan settles where (styles/settlement.json).",
+    "base": "the authored base materials: red_sandstone hide roof, red_terracotta walls, orange_terracotta and acacia trim, dark_oak and spruce timber, polished_blackstone_bricks, bone, red banners",
+    "default": "mudhide",
+    "clans": {
+      "mudhide": {
+        "name": "Mudhide clan",
+        "feel": "river and marsh orcs: mud-brick hide roofs, brown daub walls, spruce trim; earthy and low",
+        "palette": [
+          "red_sandstone=mud_bricks",
+          "red_terracotta=brown_terracotta",
+          "orange=brown",
+          "acacia=spruce"
+        ]
+      },
+      "sunscar": {
+        "name": "Sunscar clan",
+        "feel": "desert orcs: pale sandstone hides bleached by the sun over red walls",
+        "palette": [
+          "red_sandstone=sandstone",
+          "orange=brown",
+          "acacia=spruce"
+        ]
+      },
+      "ashfang": {
+        "name": "Ashfang clan",
+        "feel": "black-rock orcs of the hills: deepslate roofs, grey trim, all dark iron and stone",
+        "palette": [
+          "red_sandstone=cobbled_deepslate",
+          "orange=gray",
+          "acacia=dark_oak"
+        ]
+      },
+      "bleakbone": {
+        "name": "Bleakbone clan",
+        "feel": "frost orcs: bone-pale roofs and grey walls against the snow",
+        "palette": [
+          "red_sandstone=smooth_sandstone",
+          "red_terracotta=light_gray_terracotta",
+          "orange=white",
+          "acacia=birch"
+        ]
+      }
+    }
+  }
+}
