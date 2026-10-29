@@ -1,0 +1,405 @@
+{
+  "batch": "036-lordaeron-harbour",
+  "thread": "0012",
+  "made": "2026-10-29T01:06:56.915Z",
+  "files": [
+    {
+      "path": "assets-src/lordaeron/harbour/customs_house_13x10.jpg",
+      "kind": "preview",
+      "sha256": "193de8a067361bcf4059b4aee263273573b51eef91595312a40df120e716b14e",
+      "bytes": 193995
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/fish_market_10x7.jpg",
+      "kind": "preview",
+      "sha256": "76cb1625dad628ddb86beae7859e3b20d67cffd317a34a88c5008e94455b23ca",
+      "bytes": 216234
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/river-air.jpg",
+      "kind": "preview",
+      "sha256": "1f1cda96df95b7951b18e9de8ab9b29319a6c9683749679640d27a98ace06909",
+      "bytes": 317635
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/river_customs_7x5.jpg",
+      "kind": "preview",
+      "sha256": "2cecd813db297e178a27ca644ade647189a7c787401123384e7af42011535a10",
+      "bytes": 211750
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/sea-air.jpg",
+      "kind": "preview",
+      "sha256": "2f58c5690ee564ce4ae245fda749f2bf46fa309e844fd30f1981ea4b796618ef",
+      "bytes": 323316
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/sea-mole.jpg",
+      "kind": "preview",
+      "sha256": "b93c42b76c4cfc3dec35248b3002e64ea506f1dde1b289319af597d6163e3be9",
+      "bytes": 322822
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/sea-quay.jpg",
+      "kind": "preview",
+      "sha256": "89792dc9d5c8b853e4aa1cadd29ea8770e8358a3863a74132c0e7a968fa2e922",
+      "bytes": 376377
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/warehouse_10x7.jpg",
+      "kind": "preview",
+      "sha256": "d59826b0910aa9ca07faff5cb331f2fb8a65cf92f900f87704d9a247bd803554",
+      "bytes": 197361
+    },
+    {
+      "path": "assets-src/lordaeron/harbour/warehouse_13x7.jpg",
+      "kind": "preview",
+      "sha256": "76c7f8434fb963f91becb6c18aac0d44b1120694ee47fc82e24315a0cc00a1d4",
+      "bytes": 195300
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/boat_barge_4x11.json",
+      "kind": "meta",
+      "sha256": "fa4f2d10683735de157b1dc0017e978155008a7573109b4d9f374113f4467b75",
+      "bytes": 455
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/boat_barge_4x11.nbt",
+      "kind": "structure",
+      "sha256": "7a4628e1c7c648eba0339a6cf8ab48b965c7c62875328406afebed9dea03d460",
+      "bytes": 820,
+      "id": "enterprise:lordaeron/harbour/boat_barge_4x11"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/boat_cog_7x19.json",
+      "kind": "meta",
+      "sha256": "97462349508007a24106076fb2944a26ef352d6c1589cf356ac9cc6b476f5edf",
+      "bytes": 480
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/boat_cog_7x19.nbt",
+      "kind": "structure",
+      "sha256": "4ee382dc516711d4b31d038958ac979513ff2c1b7d044e4d3bd8992dca523ce3",
+      "bytes": 2285,
+      "id": "enterprise:lordaeron/harbour/boat_cog_7x19"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/boat_fishing_3x8.json",
+      "kind": "meta",
+      "sha256": "5c5df5f4af16adb485722d4774ab7c80cdc5dfbbb46eec6507de44ebd31165c6",
+      "bytes": 447
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/boat_fishing_3x8.nbt",
+      "kind": "structure",
+      "sha256": "b98a29246c4745df8046fbf960fd8d80c0609d0b2278b00de2c9207fcc039dc8",
+      "bytes": 514,
+      "id": "enterprise:lordaeron/harbour/boat_fishing_3x8"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/customs_house_13x10.json",
+      "kind": "meta",
+      "sha256": "512feaaefd9689565cf742b54020264a16f1066a64ae4cd08cc48bc031242a4f",
+      "bytes": 14356
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/customs_house_13x10.nbt",
+      "kind": "structure",
+      "sha256": "3f97b26e8b22b6fbd10d00f5fef206b8138b8539990381c66aa0be7996a0ff30",
+      "bytes": 11815,
+      "id": "enterprise:lordaeron/harbour/customs_house_13x10"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/fish_market_10x7.json",
+      "kind": "meta",
+      "sha256": "e303c5b3bb12445d6e569dfa93893e8aaebd1b7cbddb4dfa32fea3e6aacb3957",
+      "bytes": 6299
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/fish_market_10x7.nbt",
+      "kind": "structure",
+      "sha256": "2a7403284dfaccac27eb1d9a248345323c226db279cc982404d3ce5f844cc981",
+      "bytes": 4749,
+      "id": "enterprise:lordaeron/harbour/fish_market_10x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/jetty_head_timber_5x5.json",
+      "kind": "meta",
+      "sha256": "4bd4aaaf18d756ca6a3368dd702f1b2da87b9729fc709707dc3ec7253a921174",
+      "bytes": 942
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/jetty_head_timber_5x5.nbt",
+      "kind": "structure",
+      "sha256": "78d63f523ba5bc5bf5efdcb3a6a9a5e397056ba14b13291d5a07a1d65161206a",
+      "bytes": 421,
+      "id": "enterprise:lordaeron/harbour/jetty_head_timber_5x5"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/jetty_timber_3x4.json",
+      "kind": "meta",
+      "sha256": "152f99a3cac8af7e063cae32db1df784bd478e083fd7f9564ad7e6940c3cb5f9",
+      "bytes": 875
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/jetty_timber_3x4.nbt",
+      "kind": "structure",
+      "sha256": "5962c2d608f10ede0d718f2eebae20248c0ad232364620f1bed97b082599fa0a",
+      "bytes": 349,
+      "id": "enterprise:lordaeron/harbour/jetty_timber_3x4"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/mole_7x4a.json",
+      "kind": "meta",
+      "sha256": "a53fc639611ed9a84aca31b8c57bac381be9c33be03ab006e19edc976c370f45",
+      "bytes": 1817
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/mole_7x4a.nbt",
+      "kind": "structure",
+      "sha256": "d4f0acb3ed1b8780a6f1b63568d95f2a7f92df8c873c7c8e775c7747424dee8f",
+      "bytes": 752,
+      "id": "enterprise:lordaeron/harbour/mole_7x4a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/mole_7x4b.json",
+      "kind": "meta",
+      "sha256": "ea610cdc3ab8f72c632402e0ad444faf28861002a0ab65a45bfb1e9b93519bf1",
+      "bytes": 1817
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/mole_7x4b.nbt",
+      "kind": "structure",
+      "sha256": "710401bd6f2abd9e671b1e325b40938179a8aa4487560796c3fb6d0427672eb0",
+      "bytes": 752,
+      "id": "enterprise:lordaeron/harbour/mole_7x4b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/mole_head_lighthouse_9x9.json",
+      "kind": "meta",
+      "sha256": "e691803c737eba9e14464130be7d7d66203502373ced5641d87de4e8dfd20111",
+      "bytes": 942
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/mole_head_lighthouse_9x9.nbt",
+      "kind": "structure",
+      "sha256": "72f4a1e89507224d102f30fbdd550d629d1bfb684217e439c5302b3b2fa35d81",
+      "bytes": 3197,
+      "id": "enterprise:lordaeron/harbour/mole_head_lighthouse_9x9"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_1a.json",
+      "kind": "meta",
+      "sha256": "fee373656fee7c6ae38456e3a375a257d39998b09da3131e4eb53ff9c412651b",
+      "bytes": 615
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_1a.nbt",
+      "kind": "structure",
+      "sha256": "b6a52ab3372da8beab76c63980134740e30b3bd4886f0e7b557e98b552a59322",
+      "bytes": 200,
+      "id": "enterprise:lordaeron/harbour/quay_stone_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_1b.json",
+      "kind": "meta",
+      "sha256": "7246cf3bb725b08a48fc8a989abe76ad8f930bf6e16d4362943a45305f139a3b",
+      "bytes": 615
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_1b.nbt",
+      "kind": "structure",
+      "sha256": "c02d1bd009f11c8781024a6ec6c02337bacc4a1348a581261b94c2e27db644ac",
+      "bytes": 188,
+      "id": "enterprise:lordaeron/harbour/quay_stone_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_1c.json",
+      "kind": "meta",
+      "sha256": "686a279a75b7f12560c17edd71d578a7e25be1a19e1010aa05b6673515dbe879",
+      "bytes": 615
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_1c.nbt",
+      "kind": "structure",
+      "sha256": "6a0b469274e4cb232e1886e44bafd24ce642c38bafde77c5ef02e1b7cea0c8fb",
+      "bytes": 226,
+      "id": "enterprise:lordaeron/harbour/quay_stone_1c"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_bollard_1.json",
+      "kind": "meta",
+      "sha256": "bf033dfd807abccb207e0648d12a3dd7d52ea9f438bdc3c5571fe05924c170fa",
+      "bytes": 637
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_bollard_1.nbt",
+      "kind": "structure",
+      "sha256": "76044f7eb5e434defd0fe5cdcadab6543d2adbea27fad3e0079d6e7f8a54713e",
+      "bytes": 272,
+      "id": "enterprise:lordaeron/harbour/quay_stone_bollard_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_crane_1.json",
+      "kind": "meta",
+      "sha256": "5f6e9d1cebcfd0ddddce9d2030ad1e1781cd8fceaa0f01603ec0d6ac4b6a0d3e",
+      "bytes": 632
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_crane_1.nbt",
+      "kind": "structure",
+      "sha256": "a0402406d5a5579a96612251fb8e1420efce18f598d4ad0842d7781677c93d59",
+      "bytes": 459,
+      "id": "enterprise:lordaeron/harbour/quay_stone_crane_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_ladder_1.json",
+      "kind": "meta",
+      "sha256": "bdfa0fcd42be156169dea046e694468cdd9ad9037fa2cd96a0b19e0d28e49d55",
+      "bytes": 635
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_ladder_1.nbt",
+      "kind": "structure",
+      "sha256": "251b58b685e5392f023b59f0d218e8d3ede1995614a7ffd2964dc8dbf66ebf71",
+      "bytes": 239,
+      "id": "enterprise:lordaeron/harbour/quay_stone_ladder_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_lamp_1.json",
+      "kind": "meta",
+      "sha256": "79c15241635e49d1888dc3d90cebd17428a57ade598a14f69251c608b5b2b6d3",
+      "bytes": 631
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "78645a8fffaf21fb0f52c68c920f830aa555e2af9cf6208ff138f8075a5edf00",
+      "bytes": 334,
+      "id": "enterprise:lordaeron/harbour/quay_stone_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_steps_1.json",
+      "kind": "meta",
+      "sha256": "7cf21302ed2bd5aeb845417a3d2ddf7a0ba5aafb29f4c2103e84fed664940858",
+      "bytes": 633
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_stone_steps_1.nbt",
+      "kind": "structure",
+      "sha256": "ac2aafc49209200943b7cd239708c7b1d3bc66b4663bad5860e3ffde02941cd7",
+      "bytes": 273,
+      "id": "enterprise:lordaeron/harbour/quay_stone_steps_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_1a.json",
+      "kind": "meta",
+      "sha256": "06d29cb03188fd7a43635791f89beab6235b342a4bdf76abb0421b56d7db6996",
+      "bytes": 615
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_1a.nbt",
+      "kind": "structure",
+      "sha256": "508d773a50eadc88023065f93d203ea4919055ad9cef8837028075a2c8185b14",
+      "bytes": 200,
+      "id": "enterprise:lordaeron/harbour/quay_timber_1a"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_1b.json",
+      "kind": "meta",
+      "sha256": "735a4af07003486bfd52e576d214dd383ae369bb54e0baec270a023173abe672",
+      "bytes": 615
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_1b.nbt",
+      "kind": "structure",
+      "sha256": "508d773a50eadc88023065f93d203ea4919055ad9cef8837028075a2c8185b14",
+      "bytes": 200,
+      "id": "enterprise:lordaeron/harbour/quay_timber_1b"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_crane_1.json",
+      "kind": "meta",
+      "sha256": "9182f0ddebed17d37d4291c1cb181994bced33c1e97af2f66d639a814e15f9eb",
+      "bytes": 645
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_crane_1.nbt",
+      "kind": "structure",
+      "sha256": "e14ef00ed23bebc809be67bfe512f7ec5ae83f2031fed972b959e945d56ba0cf",
+      "bytes": 442,
+      "id": "enterprise:lordaeron/harbour/quay_timber_crane_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_ladder_1.json",
+      "kind": "meta",
+      "sha256": "b430c3072d536f89b3dd2f97599bf095bf3f62904fc2f48e79ccdfd427b797d8",
+      "bytes": 635
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_ladder_1.nbt",
+      "kind": "structure",
+      "sha256": "a5eb342f4a488252f5e6b4abd7a4453b13b4969ac769ccfd6d9c7d6dbd572374",
+      "bytes": 255,
+      "id": "enterprise:lordaeron/harbour/quay_timber_ladder_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_lamp_1.json",
+      "kind": "meta",
+      "sha256": "1671ca87d8805b65a62aafceb7e205533c22ed948661efaf8beb0ae993f58b76",
+      "bytes": 631
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/quay_timber_lamp_1.nbt",
+      "kind": "structure",
+      "sha256": "f4c74461ca7b3716d210fad18587cf14b45e0127b520c1acaaadfd66eaa868a8",
+      "bytes": 284,
+      "id": "enterprise:lordaeron/harbour/quay_timber_lamp_1"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/river_customs_7x5.json",
+      "kind": "meta",
+      "sha256": "9df2dae5e2d577196eb233a73c2c430ec4010844e0145a785993fe85770f4b5c",
+      "bytes": 562
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/river_customs_7x5.nbt",
+      "kind": "structure",
+      "sha256": "7158d1bfdcc7e9645ecdba5bc8b1341f499c05522fcb236600cdf3035f806710",
+      "bytes": 1243,
+      "id": "enterprise:lordaeron/harbour/river_customs_7x5"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/warehouse_10x7.json",
+      "kind": "meta",
+      "sha256": "232a848315644f6105eeea5f30b386b4799a8d5639f1b993080456ac0dbbeb4a",
+      "bytes": 6110
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/warehouse_10x7.nbt",
+      "kind": "structure",
+      "sha256": "49a913f78d606e7a367129b1c78c36d1569546131e75c096ad41645ea551cc2c",
+      "bytes": 4779,
+      "id": "enterprise:lordaeron/harbour/warehouse_10x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/warehouse_13x7.json",
+      "kind": "meta",
+      "sha256": "84f3653900d6f5902a32667dd4d91e451270f24aae0e85338c1f3db52e8f8a7a",
+      "bytes": 13383
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/lordaeron/harbour/warehouse_13x7.nbt",
+      "kind": "structure",
+      "sha256": "a61a30a02ac8039c22e95f7eca58829ba6e29eeaa45fb08d9caa545b44931182",
+      "bytes": 8238,
+      "id": "enterprise:lordaeron/harbour/warehouse_13x7"
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/town_kits/lordaeron/harbour.json",
+      "kind": "kit_rules",
+      "sha256": "68be9ade021ce0d29ab7b59ba6051c54ecb2762516c23a839dab3b9757890c65",
+      "bytes": 13286
+    }
+  ]
+}
