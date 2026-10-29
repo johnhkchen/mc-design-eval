@@ -45,10 +45,24 @@ export const PROMPTS = {
     view: "The one asset alone on a flat square of GROUND, three-quarter view from the front-left about 30 degrees above, against a plain pale sky with no landscape, mountains or other buildings, clean even daylight, a path-traced Minecraft screenshot, not a painting.",
     keep: "Keep EVERY signature feature of the reference, in block form, even if smaller: if it has tusks, horns, skulls, spikes, banners, runes, gold trim, a battered or sloped base, a forge glow, keep each of them, at roughly the same count and place. The ornament is what makes the style; cut plain wall, not ornament.",
   },
+  // v4 (after v3): v3 won back ground and ornament, but "keep every feature" pulled the dwarf stall back into a small
+  // building, and no version would draw a wall piece cut off flat. v4 puts the kind FIRST (ornament only where it fits
+  // the kind) and shows repeating pieces as one piece in a run of three identical pieces.
+  v4: {
+    intent: "Redraw the attached concept art as a real Minecraft build made in vanilla Minecraft 1.21. Three things, in this order of priority: (1) WHAT IT IS: the kind of object, below, decides its form; (2) its SIZE, fixed by the game; (3) the STYLE from the reference: materials, colours, ornament, mood. Where the reference shows a different kind or size of object, follow (1) and (2) and carry only the style over.",
+    grid: GRID,
+    scale: "Its size is fixed by the game: SIZE. Build exactly that footprint, outlined on the ground by a ring of path blocks. A door is 2 blocks tall and 1 wide; a storey is about 5 blocks. Simplify the body to fit; never enlarge.",
+    view: "Alone on a flat square of GROUND, three-quarter view from the front-left about 30 degrees above, against a plain pale sky with no landscape, mountains or other buildings, clean even daylight, a path-traced Minecraft screenshot, not a painting.",
+    keep: "Keep the reference's signature ornament (tusks, horns, skulls, spikes, banners, runes, gold trim, glow) at roughly the same count, in block form, BUT only placed on the parts this kind of object has: never add walls, rooms, roofs or chimneys the kind doesn't have to make room for ornament.",
+  },
+};
+// v4: repeating pieces are drawn in a run of three, the middle one the asset
+export const RUN = {
+  wall_curtain: "Draw THREE identical copies of this 8-block wall piece joined end to end in one straight line (24 blocks of wall, seamless, the same pattern repeating three times), the run cropped by the frame at both ends so the wall clearly continues beyond. No towers, corners or end walls anywhere in the run.",
 };
 // per-kind shape rules: what this kind of asset is, whatever the reference drew
 export const KIND = {
-  stall: "A market stall, not a building: a 3 x 3 timber floor, a counter across the front with goods on it, four corner posts, and a small roof or awning on top. Open on the customer's side, no walls, no door.",
+  stall: "A market stall, not a building: a 3 x 3 timber floor, a counter across the front with goods on it, four corner posts, and a small roof or awning on top. Open on the customer's side and on both sides, no walls, no back room, no door, no chimney: you can see through it. Its ornament goes on the four posts and the awning.",
   wall_curtain: "A straight piece of town wall built to repeat end to end: a solid wall 8 blocks long and 3 thick with a walkway along its top behind a parapet. Both ends are CUT OFF flat like a slice through the wall, the cross-section of stone and walkway visible at each end, as if the wall continues out of frame on both sides. No towers, bastions, corners, end posts or end walls. No interior.",
   wall_gatehouse: "A gate through the town wall: the wall's thickness, a gate passage 3 wide and 4 high through its middle, the wall's ends cut off flat to join the curtain on both sides.",
   cottage_7x7: "A small one-storey cottage, 7 x 7 blocks: about as big as a room, roof ridge about 8 blocks up.",
@@ -59,6 +73,7 @@ export function mcPrompt(v, asset, ground = "grass") {
   const P = PROMPTS[v], [W, D] = asset.footprint;
   const size = asset.storeys ? `${W} blocks wide by ${D} blocks deep, ${asset.storeys} storey${asset.storeys > 1 ? "s" : ""}` : `${W} blocks wide by ${D} blocks long`;
   const kind = v !== "v1" && KIND[asset.id] ? ["", `WHAT IT IS: ${KIND[asset.id]}`] : [];
+  if (v === "v4" && RUN[asset.id]) kind.push(`HOW TO SHOW IT: ${RUN[asset.id]}`);
   return [P.intent, "", "RULES:", ...P.grid.map((r) => `- ${r}`), "", `SCALE: ${P.scale.replace("SIZE", size)}`, ...kind, "", `VIEW: ${P.view.replace("GROUND", ground)}`, "", `KEEP: ${P.keep}`, "", `THIS ASSET: ${asset.what}.`].join("\n");
 }
 
