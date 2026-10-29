@@ -1,0 +1,28 @@
+{
+  "id": "enterprise:lordaeron/harbour/boat_cog_7x19",
+  "rev": 1,
+  "kingdom": "lordaeron",
+  "kind": "part",
+  "slot": "prop:boat",
+  "palette": "fixed",
+  "size": [
+    7,
+    20,
+    19
+  ],
+  "mirror": true,
+  "ground": 1,
+  "relief_faces": [],
+  "contract": "boat",
+  "water_line": 1,
+  "width": 7,
+  "depth": 19,
+  "use": [
+    "sea"
+  ],
+  "tags": [
+    "boat",
+    "trader"
+  ],
+  "moor": "alongside a quay or pier, its side 1 off the edge, bow toward the open water"
+}

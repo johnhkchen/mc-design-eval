@@ -42,7 +42,7 @@ export const FRONTS = {
 };
 
 // a lantern cupola astride the ridge's middle: four posts, a pyramid cap of the roof's stairs, a lantern hung within
-function cupola(g0) {
+export function cupola(g0) {
   const g = new Grid([g0.size[0], g0.size[1] + 5, g0.size[2]]); g.paste(g0, 0, 0, 0);
   const cx = Math.floor(g.size[0] / 2), cz = Math.floor(g.size[2] / 2);
   let top = g.size[1] - 1; while (top > 0 && !g.get(cx, top, cz)) top--;
