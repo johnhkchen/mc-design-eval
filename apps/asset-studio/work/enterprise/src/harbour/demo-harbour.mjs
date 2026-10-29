@@ -2,7 +2,7 @@
 // customs house, warehouses and the fish market behind it, a jetty, the mole and its lighthouse, a cog and fishing
 // boats) and a river wharf (a timber wharf, the river warehouse and customs booth, a jetty, a barge and a boat). Each
 // part is laid as the placer would: its water line at the water's surface, its pilings run down to the bed.
-//   node src/harbour/demo-harbour.mjs <out dir>      -> <out>/sea/world, <out>/river/world
+//   node src/harbour/demo-harbour.mjs <out dir> [kingdom]      -> <out>/<kingdom>-sea/world, <out>/<kingdom>-river/world
 import { Voxels } from "../../../../../irl-copy/src/voxels.mjs";
 import { writeWorld } from "../../../../../irl-copy/src/anvil.mjs";
 import { Grid, splitState } from "../grid.mjs";
@@ -10,11 +10,13 @@ import { harbourParts, harbourBuildings } from "./harbour.mjs";
 import { paletteMap } from "../lordaeron/assemble.mjs";
 import fs from "node:fs";
 
-const OUT = process.argv[2], WY = 62, BED = 56;
-const palettes = JSON.parse(fs.readFileSync("bundle/assets-src/kingdoms/lordaeron/palettes.json", "utf8"));
-const PAL = { customs_house_13x10: "stone", warehouse_13x7: "brick", warehouse_10x7: "brick", fish_market_10x7: "stone" };
-const P = Object.fromEntries(harbourParts().map((t) => [t.id, t]));
-const B = Object.fromEntries(harbourBuildings().map((b) => { const m = PAL[b.id] ? paletteMap(palettes, PAL[b.id]) : (s) => s, g = new Grid(b.grid.size); for (const [x, y, z, s] of b.grid.each()) g.set(x, y, z, m(s)); return [b.id, g]; }));
+const OUT = process.argv[2], KING = process.argv[3] || "lordaeron", WY = 62, BED = 56;
+const lord = JSON.parse(fs.readFileSync("bundle/assets-src/kingdoms/lordaeron/palettes.json", "utf8"));
+const kp = KING === "stormwind" ? JSON.parse(fs.readFileSync("bundle/assets-src/kingdoms/stormwind/palettes.json", "utf8")) : null;
+const palettes = kp ? { base: lord.base, palettes: { [lord.base]: lord.palettes[lord.base], ...Object.fromEntries(Object.entries(kp.palettes).map(([k, v]) => [`k:${k}`, v])) } } : lord;
+const palOf = (n) => (kp ? `k:${kp.aliases[n] || n}` : n);
+const P = Object.fromEntries(harbourParts(KING).map((t) => [t.id, t]));
+const B = Object.fromEntries(harbourBuildings(KING).map((b) => { const m = b.pal ? paletteMap(palettes, palOf(b.pal)) : (s) => s, g = new Grid(b.grid.size); for (const [x, y, z, s] of b.grid.each()) g.set(x, y, z, m(s)); return [b.id.replace(/_13x(7|10)$/, (t) => (b.id.startsWith("customs") ? "" : t)), g]; }));
 
 function scene(X, Z, Y = 100) {
   const v = new Voxels([X, Y, Z]);
@@ -44,18 +46,18 @@ function scene(X, Z, Y = 100) {
     paste(P[id].grid, x, WY, 37, { pilings: P[id].meta.pilings });
   }
   // the buildings on the quay street's land side, fronts to the water (their ground layer 2 at the quay's deck)
-  paste(B.customs_house_13x10, 6, WY, 18);
-  paste(B.warehouse_13x7, 28, WY, 21); paste(B.warehouse_13x7, 50, WY, 21);
-  paste(B.fish_market_10x7, 80, WY, 21);
+  // each building's front row on the quay street's back edge (z 29), whatever its depth (Dalaran's eaves add 2 a side)
+  const front = (g, x) => paste(g, x, WY, 30 - g.size[2]);
+  front(B.customs_house, 4); front(B.warehouse_13x7, 26); front(B.warehouse_13x7, 49); front(B.fish_market_10x7, 78);
   // a jetty out from the quay: segments, then the head
   for (const j of jetties) { for (let k = 0; k < 4; k++) paste(P.jetty_timber_3x4.grid, j, WY, 40 + 4 * k, { pilings: P.jetty_timber_3x4.meta.pilings }); paste(P.jetty_head_timber_5x5.grid, j - 1, WY, 56, { pilings: P.jetty_head_timber_5x5.meta.pilings }); }
   // the mole out from the shore at the harbour's east side, the lighthouse at its head
   for (let k = 0; k < 7; k++) { const id = `mole_7x4${"ab"[k % 2]}`; paste(P[id].grid, 100, WY, 40 + 4 * k, { pilings: P[id].meta.pilings }); }
   paste(P.mole_head_lighthouse_9x9.grid, 99, WY, 68, { pilings: P.mole_head_lighthouse_9x9.meta.pilings });
   // boats: the cog alongside the quay by the customs house (turned to lie along x), fishing boats by the jetty
-  paste(P.boat_cog_7x19.grid, 10, WY - 1, 41, { q: 1 });
+  paste(P.boat_trader_9x25.grid, 6, WY - 1, 41, { q: 1 });
   paste(P.boat_fishing_3x8.grid, 76, WY - 1, 45); paste(P.boat_fishing_3x8.grid, 68, WY - 1, 47);
-  fs.mkdirSync(`${OUT}/sea/world`, { recursive: true }); writeWorld(`${OUT}/sea/world`, v, { name: "harbour-sea" });
+  fs.mkdirSync(`${OUT}/${KING}-sea/world`, { recursive: true }); writeWorld(`${OUT}/${KING}-sea/world`, v, { name: "harbour-sea" });
 }
 
 // ---- the river wharf: land north (z < 29), the river z 29-46, the far bank south --------------------------------------
@@ -72,12 +74,12 @@ function scene(X, Z, Y = 100) {
     const id = x === 27 ? "quay_timber_crane_1" : x % 6 === 3 ? "quay_timber_lamp_1" : x === 33 ? "quay_timber_ladder_1" : `quay_timber_1${"ab"[x % 2]}`;
     if (x >= 14 && x <= 48) paste(P[id].grid, x, WY, 27, { pilings: P[id].meta.pilings });
   }
-  paste(B.warehouse_10x7, 18, WY, 13);
+  paste(B.warehouse_10x7, 18, WY, 22 - B.warehouse_10x7.size[2]);
   paste(B.river_customs_7x5, 37, WY, 19, { q: 1 });          // turned: its counter and boom face the river (south)
   for (let k = 0; k < 2; k++) paste(P.jetty_timber_3x4.grid, 50, WY, 30 + 4 * k, { pilings: P.jetty_timber_3x4.meta.pilings });
   paste(P.jetty_head_timber_5x5.grid, 49, WY, 38, { pilings: P.jetty_head_timber_5x5.meta.pilings });
   paste(P.boat_barge_4x11.grid, 19, WY - 1, 31, { q: 1 });
   paste(P.boat_fishing_3x8.grid, 54, WY - 1, 31);
-  fs.mkdirSync(`${OUT}/river/world`, { recursive: true }); writeWorld(`${OUT}/river/world`, v, { name: "harbour-river" });
+  fs.mkdirSync(`${OUT}/${KING}-river/world`, { recursive: true }); writeWorld(`${OUT}/${KING}-river/world`, v, { name: "harbour-river" });
 }
 console.log("sea and river scenes written");

@@ -1,6 +1,6 @@
 {
   "id": "enterprise:lordaeron/harbour/customs_house_13x10",
-  "rev": 1,
+  "rev": 2,
   "kingdom": "lordaeron",
   "kind": "hall",
   "slot": "harbour:customs_house",
@@ -9,13 +9,13 @@
   ],
   "storeys": 2,
   "faces": "the quay (front, south)",
-  "note": "the arcade on the quay where cargo is inspected and weighed, the collector's office above, a cupola with the harbour flag",
+  "note": "the arcade on the quay where cargo is inspected and weighed, the collector's office above, the harbour flag",
   "palette": "stone",
   "footprint": [
     15,
     12
   ],
-  "height": 31,
+  "height": 32,
   "ground": 2,
   "mirror": true,
   "beds": [],
@@ -655,16 +655,6 @@
           "module": "table",
           "at": [
             5,
-            4
-          ],
-          "dy": 1,
-          "q": 0
-        },
-        {
-          "storey": 1,
-          "module": "bench",
-          "at": [
-            5,
             3
           ],
           "dy": 1,
@@ -675,7 +665,7 @@
           "module": "candles",
           "at": [
             5,
-            4
+            3
           ],
           "dy": 2,
           "q": 0
@@ -695,7 +685,7 @@
           "module": "lantern",
           "at": [
             6,
-            3
+            2
           ],
           "dy": 4,
           "q": 0
@@ -715,7 +705,7 @@
           "module": "lantern",
           "at": [
             6,
-            6
+            7
           ],
           "dy": 4,
           "q": 0

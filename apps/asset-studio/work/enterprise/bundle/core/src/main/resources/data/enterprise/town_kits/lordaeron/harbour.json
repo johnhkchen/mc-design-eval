@@ -1,6 +1,6 @@
 {
   "set": "lordaeron/harbour",
-  "rev": 1,
+  "rev": 2,
   "about": "The harbour district: what a town on the sea or on a river builds at its water. Waterside parts on the dock contract (layer water_line at the water's surface; the deck at layer `deck`; each declared piling run down from the water line to the bed); boats on the boat contract (water_line at the surface, solid hull below it, nothing floods); buildings on the relief module set (ground 2, front south, facing the quay). No point-of-interest blocks (decorative twins only), no beds; every walkable cell lit. `use` says whether a part is for the sea, a river, or both.",
   "district": {
     "when": "A town whose plan meets water: `sea` where the water body is open (it reaches the plan's outer edge, or holds 2,000 columns or more); `river` where it's narrower (a river, a lake's inlet). Some towns have both.",
@@ -21,7 +21,7 @@
       "the fish market where the town has no sea, by the wharf"
     ],
     "growth": "hamlet: a jetty and a fishing boat (river or sea). village: the wharf (river) or the quay's first run and the customs house (sea), a warehouse, the fish market. town: the full quay, warehouses, the mole and lighthouse (sea), cogs and barges.",
-    "plots": "The customs house is 15 x 12 with its cupola and flag (13 x 10 body), a warehouse 17 x 9 (13 x 7 and its hoist), the river warehouse 14 x 9, the fish market 12 x 9, the river booth 7 x 5: all fit a 16-wide plot except the customs house, which takes a forum-front plot at the quay's head."
+    "plots": "Sizes are in each part's metadata (Dalaran's halls are 2 wider each side for their eaves, the customs house 13 x 7 under one hipped roof). All fit a 16-wide plot except the customs house, which takes a forum-front plot at the quay's head; a warehouse's hoist reaches 2 past its east wall."
   },
   "parts": [
     {
@@ -420,17 +420,17 @@
       ]
     },
     {
-      "id": "boat_cog_7x19",
-      "part": "enterprise:lordaeron/harbour/boat_cog_7x19",
+      "id": "boat_trader_9x25",
+      "part": "enterprise:lordaeron/harbour/boat_trader_9x25",
       "size": [
-        7,
-        20,
-        19
+        9,
+        24,
+        25
       ],
       "contract": "boat",
       "water_line": 1,
-      "width": 7,
-      "depth": 19,
+      "width": 9,
+      "depth": 25,
       "use": [
         "sea"
       ],
@@ -495,7 +495,7 @@
       ],
       "storeys": 2,
       "faces": "the quay (front, south)",
-      "note": "the arcade on the quay where cargo is inspected and weighed, the collector's office above, a cupola with the harbour flag"
+      "note": "the arcade on the quay where cargo is inspected and weighed, the collector's office above, the harbour flag"
     },
     {
       "id": "warehouse_13x7",
@@ -507,7 +507,7 @@
       ],
       "storeys": 2,
       "faces": "the quay (front, south)",
-      "note": "open loading bays to the quay, stock inside, a hoist from the loft's east gable (2 past the wall)"
+      "note": "open loading bays to the quay, stock inside, a hoist from the east gable"
     },
     {
       "id": "warehouse_10x7",
