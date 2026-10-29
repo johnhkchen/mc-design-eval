@@ -31,5 +31,50 @@
     "bridge": null,
     "harbour": null,
     "founding": null
+  },
+  "factions": {
+    "about": "Clans of one race. Each clan has one canonical palette: the swaps from the style's authored base (what its parts are built in) to that clan's primary materials, applied in one pass, first match wins (mcd reskin). A clan never changes its palette; the land chooses which clan settles where (styles/settlement.json).",
+    "base": "the authored base materials: red_sandstone hide roof, red_terracotta walls, orange_terracotta and acacia trim, dark_oak and spruce timber, polished_blackstone_bricks, bone, red banners",
+    "default": "mudhide",
+    "clans": {
+      "mudhide": {
+        "name": "Mudhide clan",
+        "feel": "river and marsh orcs: mud-brick hide roofs, brown daub walls, spruce trim; earthy and low",
+        "palette": [
+          "red_sandstone=mud_bricks",
+          "red_terracotta=brown_terracotta",
+          "orange=brown",
+          "acacia=spruce"
+        ]
+      },
+      "sunscar": {
+        "name": "Sunscar clan",
+        "feel": "desert orcs: pale sandstone hides bleached by the sun over red walls",
+        "palette": [
+          "red_sandstone=sandstone",
+          "orange=brown",
+          "acacia=spruce"
+        ]
+      },
+      "ashfang": {
+        "name": "Ashfang clan",
+        "feel": "black-rock orcs of the hills: deepslate roofs, grey trim, all dark iron and stone",
+        "palette": [
+          "red_sandstone=cobbled_deepslate",
+          "orange=gray",
+          "acacia=dark_oak"
+        ]
+      },
+      "bleakbone": {
+        "name": "Bleakbone clan",
+        "feel": "frost orcs: bone-pale roofs and grey walls against the snow",
+        "palette": [
+          "red_sandstone=smooth_sandstone",
+          "red_terracotta=light_gray_terracotta",
+          "orange=white",
+          "acacia=birch"
+        ]
+      }
+    }
   }
 }
