@@ -30,7 +30,7 @@ export function settle(biome, seed = 0, { drafts = false } = {}) {
 /** the swaps for a part of `style` built by `clan` on `biome`: the clan's palette, then the yard to the land */
 export function swapsFor(style, clan, biome) {
   const S = json("styles/settlement.json"), st = json(`styles/${style}.json`), e = biomeEntry(biome, S);
-  const pal = st.factions ? st.factions.clans[clan || st.factions.default].palette : [];
+  const c = st.factions?.clans[clan || st.factions.default], pal = c ? c.swaps || c.palette : [];      // the expanded block ids when generated
   const yard = [e.ground !== S.yard.surface && `${S.yard.surface}=${e.ground}`, e.plant !== S.yard.plant && `${S.yard.plant}=${e.plant}`].filter(Boolean);
   return [...pal, ...yard];
 }
