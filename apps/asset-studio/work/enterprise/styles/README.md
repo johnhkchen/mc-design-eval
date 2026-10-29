@@ -12,6 +12,6 @@ One file per style (`<id>.json`). A style is how a faction or race builds. Addin
 
 ## Clans and the land
 
-- `factions` (optional): clans of one race. Each clan has one canonical palette, a list of `mcd reskin` swaps from the style's authored base to the clan's primary materials. A clan never changes its palette. `default` is the clan used when none is named. Orc: mudhide (the owner's pick), sunscar, ashfang, bleakbone.
+- `factions` (optional): clans of one race. Each clan has one canonical palette, a list of `mcd reskin` swaps from the style's authored base to the clan's primary materials. A clan never changes its palette. `default` is the clan used when none is named. Orc: mudhide (the owner's pick), sunscar, ashfang, bleakbone. Dwarf: deepforge (the base itself), redcrag, brasshammer.
 - `settlement.json` lets the land pick the people. The biome at a town's centre (its `c:` tags) chooses a weighted candidate list of style and clan, and the town's seed draws one. A clan settles where its materials are local, for example sandstone in the desert and mud brick in the marsh. Only the yard follows the land: the authored `red_sand` and `dead_bush` become the biome's ground and plant.
 - `src/styles/settle.mjs`: `settle(biome, seed)`, `swapsFor(style, clan, biome)`, plus a CLI that reskins a part.

@@ -31,5 +31,37 @@
     "bridge": null,
     "harbour": null,
     "founding": null
+  },
+  "factions": {
+    "about": "Holds of one race, the same contract as orc: one canonical palette per hold, the swaps from the authored base; the land chooses which hold settles where (styles/settlement.json).",
+    "base": "the authored base materials (dwarf parts are built in these): stone_bricks walls, deepslate_tiles roofs, polished_blackstone plinths and buttresses, chiseled_stone_bricks runes, spruce timber, gold_block trim, lanterns",
+    "default": "deepforge",
+    "clans": {
+      "deepforge": {
+        "name": "Deepforge hold",
+        "feel": "the mountain hold: grey stone brick under dark slate, gold trim, forge glow; the canonical dwarf look",
+        "palette": []
+      },
+      "redcrag": {
+        "name": "Redcrag hold",
+        "feel": "a hold cut from red rock: polished granite walls, brick-red roofs, dark oak timber",
+        "palette": [
+          "stone_brick_wall=granite_wall",
+          "stone_bricks=polished_granite",
+          "deepslate_tiles=bricks",
+          "spruce=dark_oak"
+        ]
+      },
+      "brasshammer": {
+        "name": "Brasshammer hold",
+        "feel": "engineers and smiths: tuff brick walls, roofs of waxed copper, copper for the gold trim",
+        "palette": [
+          "deepslate_tile_wall=tuff_brick_wall",
+          "stone_bricks=tuff_bricks",
+          "deepslate_tiles=waxed_cut_copper",
+          "gold_block=waxed_copper_block"
+        ]
+      }
+    }
   }
 }
