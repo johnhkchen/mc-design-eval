@@ -1,0 +1,32 @@
+{
+  "batch": "038-dalaran-lighthouse-cap",
+  "thread": "0012",
+  "made": "2026-10-29T02:00:39.724Z",
+  "files": [
+    {
+      "path": "assets-src/dalaran/harbour/dalaran-cap-before-after.jpg",
+      "kind": "preview",
+      "sha256": "ddb91f9cf1f8db5b36683ec67b39adb0f828a40d74f44529a941eb8cc8202df5",
+      "bytes": 183385
+    },
+    {
+      "path": "assets-src/dalaran/harbour/dalaran-lighthouse.jpg",
+      "kind": "preview",
+      "sha256": "fe22058a210ca18e29d164d687a368850d117f6c499d9ba7e225088bd0429fdc",
+      "bytes": 281243
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/harbour/mole_head_lighthouse_9x9.json",
+      "kind": "meta",
+      "sha256": "6b90a3c72c97acaf88bafed06af74576c9ccdc1e2c8a8b64b610f0fa874c11a3",
+      "bytes": 938
+    },
+    {
+      "path": "core/src/main/resources/data/enterprise/structure/dalaran/harbour/mole_head_lighthouse_9x9.nbt",
+      "kind": "structure",
+      "sha256": "3d83ed0e2e926d0506b453494da348493985a11d7350b7de82e463ac886724e6",
+      "bytes": 3158,
+      "id": "enterprise:dalaran/harbour/mole_head_lighthouse_9x9"
+    }
+  ]
+}
