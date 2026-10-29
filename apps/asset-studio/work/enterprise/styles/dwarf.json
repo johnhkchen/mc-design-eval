@@ -45,10 +45,9 @@
       },
       "redcrag": {
         "name": "Redcrag hold",
-        "feel": "a hold cut from red rock: polished granite walls, brick-red roofs, dark oak timber",
+        "feel": "a hold cut from red rock: brick-red roofs over brown mud-brick walls, dark oak timber",
         "palette": [
-          "stone_brick_wall=granite_wall",
-          "stone_bricks=polished_granite",
+          "stone_bricks=mud_bricks",
           "deepslate_tiles=bricks",
           "spruce=dark_oak"
         ],
@@ -75,29 +74,29 @@
           "minecraft:spruce_wall_hanging_sign=minecraft:dark_oak_wall_hanging_sign",
           "minecraft:spruce_wall_sign=minecraft:dark_oak_wall_sign",
           "minecraft:spruce_wood=minecraft:dark_oak_wood",
-          "minecraft:stone_brick_slab=minecraft:polished_granite_slab",
-          "minecraft:stone_brick_stairs=minecraft:polished_granite_stairs",
-          "minecraft:stone_brick_wall=minecraft:granite_wall",
-          "minecraft:stone_bricks=minecraft:polished_granite",
+          "minecraft:stone_brick_slab=minecraft:mud_brick_slab",
+          "minecraft:stone_brick_stairs=minecraft:mud_brick_stairs",
+          "minecraft:stone_brick_wall=minecraft:mud_brick_wall",
+          "minecraft:stone_bricks=minecraft:mud_bricks",
           "minecraft:stripped_spruce_log=minecraft:stripped_dark_oak_log",
           "minecraft:stripped_spruce_wood=minecraft:stripped_dark_oak_wood"
         ]
       },
       "brasshammer": {
         "name": "Brasshammer hold",
-        "feel": "engineers and smiths: tuff brick walls, roofs of waxed copper, copper for the gold trim",
+        "feel": "engineers and smiths: tuff brick walls under green weathered-copper roofs, copper for the gold trim",
         "palette": [
           "deepslate_tile_wall=tuff_brick_wall",
           "stone_bricks=tuff_bricks",
-          "deepslate_tiles=waxed_cut_copper",
-          "gold_block=waxed_copper_block"
+          "deepslate_tiles=waxed_weathered_cut_copper",
+          "gold_block=waxed_weathered_copper"
         ],
         "swaps": [
-          "minecraft:deepslate_tile_slab=minecraft:waxed_cut_copper_slab",
-          "minecraft:deepslate_tile_stairs=minecraft:waxed_cut_copper_stairs",
+          "minecraft:deepslate_tile_slab=minecraft:waxed_weathered_cut_copper_slab",
+          "minecraft:deepslate_tile_stairs=minecraft:waxed_weathered_cut_copper_stairs",
           "minecraft:deepslate_tile_wall=minecraft:tuff_brick_wall",
-          "minecraft:deepslate_tiles=minecraft:waxed_cut_copper",
-          "minecraft:gold_block=minecraft:waxed_copper_block",
+          "minecraft:deepslate_tiles=minecraft:waxed_weathered_cut_copper",
+          "minecraft:gold_block=minecraft:waxed_weathered_copper",
           "minecraft:stone_brick_slab=minecraft:tuff_brick_slab",
           "minecraft:stone_brick_stairs=minecraft:tuff_brick_stairs",
           "minecraft:stone_brick_wall=minecraft:tuff_brick_wall",

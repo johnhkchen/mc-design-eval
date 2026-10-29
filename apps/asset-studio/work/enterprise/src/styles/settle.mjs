@@ -1,7 +1,7 @@
 // Who founds a town, and in what materials: the land picks the people, the people keep their materials. A town's biome
 // tags choose a candidate list (styles/settlement.json); one race (and clan) is drawn by weight from the town's seed.
 // A clan's palette is canonical (styles/<race>.json factions); only the yard follows the land (its ground and plants).
-//   node src/styles/settle.mjs <in.nbt> <out.nbt> --biome desert [--clan sunscar] [--seed 7]
+//   node src/styles/settle.mjs <in.nbt> <out.nbt> --biome desert [--style orc --clan sunscar] [--seed 7]
 //     -> the part re-materialled for the clan drawn there (or the one named), by `mcd reskin`, one pass
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
@@ -38,7 +38,7 @@ export function swapsFor(style, clan, biome) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const argv = process.argv.slice(2), opt = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
   const [inp, out] = argv.filter((a, i) => !a.startsWith("--") && !argv[i - 1]?.startsWith("--"));
-  const biome = opt("--biome") || "badlands", who = opt("--clan") ? { style: "orc", clan: opt("--clan") } : settle(biome, +(opt("--seed") || 0), { drafts: true });
+  const biome = opt("--biome") || "badlands", who = opt("--clan") ? { style: opt("--style") || "orc", clan: opt("--clan") } : settle(biome, +(opt("--seed") || 0), { drafts: true });
   const swaps = swapsFor(who.style, who.clan, biome);
   console.log(`${biome}: ${who.style}${who.clan ? `/${who.clan}` : ""}  ${swaps.join(",")}`);
   execFileSync("node", [MCD, "reskin", inp, out, "--swap", swaps.join(","), "--version", "1.21.1"], { stdio: "inherit" });
