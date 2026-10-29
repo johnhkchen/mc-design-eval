@@ -1,5 +1,5 @@
 {
-  "rev": 2,
+  "rev": 3,
   "about": "Which race and clan founds a town, decided by the land. The town's biome is read at its centre (its tags, 1.21.1 conventional `c:` tags first); the first entry whose tags match gives the candidates, and one is drawn by weight from the town's seed. A candidate names a style (styles/<id>.json) and, for a style with clans, a clan whose canonical palette suits what that land has: the sandstone clan in the desert, the mud-brick clan in the marsh. Palettes never mix: the land picks the people, the people keep their materials. Only the yard follows the land: `ground` replaces the parts' authored yard surface (`yard`), and `plant` their authored dry bushes.",
   "yard": {
     "surface": "red_sand",
@@ -29,6 +29,11 @@
           "style": "dwarf",
           "clan": "redcrag",
           "weight": 1
+        },
+        {
+          "style": "goblin",
+          "clan": "brassgut",
+          "weight": 1
         }
       ]
     },
@@ -43,6 +48,11 @@
         {
           "style": "orc",
           "clan": "sunscar",
+          "weight": 2
+        },
+        {
+          "style": "goblin",
+          "clan": "brassgut",
           "weight": 1
         }
       ]
@@ -104,6 +114,56 @@
       ]
     },
     {
+      "id": "beach",
+      "tags": [
+        "c:is_beach"
+      ],
+      "ground": "sand",
+      "plant": "dead_bush",
+      "candidates": [
+        {
+          "style": "goblin",
+          "clan": "rustbolt",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "stony_shore",
+      "tags": [
+        "c:is_stony_shores"
+      ],
+      "ground": "stone",
+      "plant": "dead_bush",
+      "candidates": [
+        {
+          "style": "goblin",
+          "clan": "sootvein",
+          "weight": 2
+        },
+        {
+          "style": "dwarf",
+          "clan": "brasshammer",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "jungle",
+      "tags": [
+        "c:is_jungle"
+      ],
+      "ground": "grass_block",
+      "plant": "fern",
+      "candidates": [
+        {
+          "style": "goblin",
+          "clan": "rustbolt",
+          "weight": 1
+        }
+      ]
+    },
+    {
       "id": "mountain",
       "tags": [
         "c:is_mountain",
@@ -126,6 +186,11 @@
         {
           "style": "orc",
           "clan": "ashfang",
+          "weight": 1
+        },
+        {
+          "style": "goblin",
+          "clan": "sootvein",
           "weight": 1
         }
       ]
@@ -203,5 +268,5 @@
       }
     ]
   },
-  "note": "Only approved styles found towns (orc and dwarf are drafts: until approved the client skips them and redraws from the rest of the list, else the fallback)."
+  "note": "Only approved styles found towns (orc, dwarf and goblin are drafts: until approved the client skips them and redraws from the rest of the list, else the fallback)."
 }
