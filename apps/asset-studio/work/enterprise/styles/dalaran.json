@@ -1,0 +1,31 @@
+{
+  "id": "dalaran",
+  "name": "Dalaran (as approved)",
+  "faction": "Alliance (mage)",
+  "status": "approved",
+  "note": "Approved in the East Asian hall style; in the game Dalaran is a violet city of mage spires. Kept as approved until the owner says otherwise.",
+  "concept": {
+    "setting": "a walled hill town of terraced halls under a clear sky",
+    "buildings": "timber halls on stepped stone platforms, red columns below and white plaster in dark timber above, deep eaves on brackets, concave violet tile hipped roofs with upturned corners",
+    "landmark": "a many-eaved violet pagoda over the central square",
+    "street_life": "paper lanterns on red posts, gate arches over the avenues, courtyard gardens, tea stalls, bell pavilions",
+    "greenery": "willows, gold ginkgo, flowering cherry, bamboo groves, lily ponds",
+    "materials": "stripped mangrove, dark oak, calcite, polished andesite, stone bricks, purpur tile",
+    "colours": [
+      "violet",
+      "lacquer red",
+      "white plaster",
+      "dark timber",
+      "grey stone"
+    ],
+    "avoid": []
+  },
+  "build": {
+    "shell": "platform_hall",
+    "roles": null,
+    "earthworks": "dalaran",
+    "bridge": "dalaran",
+    "harbour": "dalaran",
+    "founding": "dalaran"
+  }
+}

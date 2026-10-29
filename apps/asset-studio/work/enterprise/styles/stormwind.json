@@ -1,0 +1,33 @@
+{
+  "id": "stormwind",
+  "name": "Stormwind",
+  "faction": "Alliance (human)",
+  "status": "approved",
+  "concept": {
+    "setting": "a white-stone human city by the sea under a bright blue sky",
+    "buildings": "thick white stone walls, deep blue-grey slate roofs swept steep and oversized, chunky timber-and-plaster upper storeys in the outer streets, round towers with tall conical blue roofs, heavy arched gateways, gold trim",
+    "landmark": "a great white cathedral with blue spires and a gold-domed bell tower, lion statues at its steps",
+    "street_life": "blue and gold lion banners on every tower, canal bridges, market stalls with striped awnings, guards' posts, lamp posts, flower planters",
+    "greenery": "tall elms along the avenues, a park with a fountain, climbing roses on white walls",
+    "materials": "stone bricks, smooth quartz, polished diorite, deepslate tile roofs, oak and spruce timber, blue and yellow wool",
+    "colours": [
+      "white stone",
+      "royal blue",
+      "gold",
+      "slate",
+      "green"
+    ],
+    "avoid": [
+      "red roofs",
+      "dark timber everywhere"
+    ]
+  },
+  "build": {
+    "shell": "timber_relief",
+    "roles": "assets-src/kingdoms/stormwind/palettes.json",
+    "earthworks": "lordaeron",
+    "bridge": "stormwind",
+    "harbour": "stormwind",
+    "founding": "stormwind"
+  }
+}

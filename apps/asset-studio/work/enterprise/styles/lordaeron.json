@@ -1,0 +1,33 @@
+{
+  "id": "lordaeron",
+  "name": "Lordaeron",
+  "faction": "Alliance (human)",
+  "status": "approved",
+  "concept": {
+    "setting": "a human market town in green rolling farmland under a soft gold sky",
+    "buildings": "heavy dark timber frames over cream plaster on thick grey stone ground storeys, jettied upper floors bulging over the street, steep oversized red-brown tile roofs with deep eaves, chunky brick chimneys, round-topped doors, flower boxes",
+    "landmark": "a stout grey stone abbey church with a square bell tower and a huge slate spire on a rise over the town",
+    "street_life": "a market cross with striped stalls, hanging trade signs, carts of hay and barrels, washing lines across lanes, a well at the junction, lamp posts",
+    "greenery": "big round oaks, hedged fields and orchards, ivy on the oldest walls, a village green",
+    "materials": "dark oak and spruce timber, calcite plaster, stone bricks and cobblestone, granite tile roofs, bricks",
+    "colours": [
+      "dark oak brown",
+      "cream",
+      "brick red",
+      "moss green",
+      "slate grey"
+    ],
+    "avoid": [
+      "flat facades",
+      "thin roofs"
+    ]
+  },
+  "build": {
+    "shell": "timber_relief",
+    "roles": "assets-src/kingdoms/lordaeron/palettes.json#stone",
+    "earthworks": "lordaeron",
+    "bridge": "lordaeron",
+    "harbour": "lordaeron",
+    "founding": "lordaeron"
+  }
+}
