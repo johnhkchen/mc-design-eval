@@ -34,21 +34,32 @@ export const PROMPTS = {
     view: "The one asset alone on a flat square of grass or its biome's ground, three-quarter view from the front-left about 30 degrees above, against a plain pale sky with no landscape, mountains or other buildings, clean even daylight, a path-traced Minecraft screenshot, not a painting.",
     keep: "Keep what makes the design: its colour blocking and its signature features, in block form, at this asset's size.",
   },
+  // v3 (after v2): v2 fixed size and kind (stalls, scale) but simplified away signature ornament (orc wall's tusks and
+  // skulls, dwarf tower's battered base), set orc assets on green grass, and the orc wall still closed its ends. v3
+  // keeps v2's footprint-first rule, protects the signature features, takes the ground from the style, and makes a
+  // repeating piece's cut ends unmistakable.
+  v3: {
+    intent: "Redraw the attached concept art as a real Minecraft build made in vanilla Minecraft 1.21. The reference gives the STYLE (materials, colours, ornament, mood); the game fixes the SIZE and the KIND of thing. Where the reference is larger or a different kind of object than this asset, follow the asset and carry the style over.",
+    grid: GRID,
+    scale: "Its size is fixed by the game: SIZE. Build exactly that footprint, outlined on the ground by a ring of path blocks, and nothing beyond it. A door is 2 blocks tall and 1 wide; a storey is about 5 blocks. Simplify the BODY to fit (fewer windows, plainer wall runs); never enlarge.",
+    view: "The one asset alone on a flat square of GROUND, three-quarter view from the front-left about 30 degrees above, against a plain pale sky with no landscape, mountains or other buildings, clean even daylight, a path-traced Minecraft screenshot, not a painting.",
+    keep: "Keep EVERY signature feature of the reference, in block form, even if smaller: if it has tusks, horns, skulls, spikes, banners, runes, gold trim, a battered or sloped base, a forge glow, keep each of them, at roughly the same count and place. The ornament is what makes the style; cut plain wall, not ornament.",
+  },
 };
 // per-kind shape rules: what this kind of asset is, whatever the reference drew
 export const KIND = {
   stall: "A market stall, not a building: a 3 x 3 timber floor, a counter across the front with goods on it, four corner posts, and a small roof or awning on top. Open on the customer's side, no walls, no door.",
-  wall_curtain: "A straight piece of town wall built to repeat end to end: a solid wall 8 blocks long and 3 thick with a walkway along its top behind a parapet. Both ends are CUT OFF flat and open (they join the next piece), with no towers, corners or end walls. No interior.",
+  wall_curtain: "A straight piece of town wall built to repeat end to end: a solid wall 8 blocks long and 3 thick with a walkway along its top behind a parapet. Both ends are CUT OFF flat like a slice through the wall, the cross-section of stone and walkway visible at each end, as if the wall continues out of frame on both sides. No towers, bastions, corners, end posts or end walls. No interior.",
   wall_gatehouse: "A gate through the town wall: the wall's thickness, a gate passage 3 wide and 4 high through its middle, the wall's ends cut off flat to join the curtain on both sides.",
   cottage_7x7: "A small one-storey cottage, 7 x 7 blocks: about as big as a room, roof ridge about 8 blocks up.",
   house_10x7: "A two-storey house, 10 x 7 blocks, clearly taller and longer than a 7 x 7 cottage.",
 };
 
-export function mcPrompt(v, asset) {
+export function mcPrompt(v, asset, ground = "grass") {
   const P = PROMPTS[v], [W, D] = asset.footprint;
   const size = asset.storeys ? `${W} blocks wide by ${D} blocks deep, ${asset.storeys} storey${asset.storeys > 1 ? "s" : ""}` : `${W} blocks wide by ${D} blocks long`;
   const kind = v !== "v1" && KIND[asset.id] ? ["", `WHAT IT IS: ${KIND[asset.id]}`] : [];
-  return [P.intent, "", "RULES:", ...P.grid.map((r) => `- ${r}`), "", `SCALE: ${P.scale.replace("SIZE", size)}`, ...kind, "", `VIEW: ${P.view}`, "", `KEEP: ${P.keep}`, "", `THIS ASSET: ${asset.what}.`].join("\n");
+  return [P.intent, "", "RULES:", ...P.grid.map((r) => `- ${r}`), "", `SCALE: ${P.scale.replace("SIZE", size)}`, ...kind, "", `VIEW: ${P.view.replace("GROUND", ground)}`, "", `KEEP: ${P.keep}`, "", `THIS ASSET: ${asset.what}.`].join("\n");
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -69,7 +80,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       const [id, a, src] = jobs[i++], OUT = `${ROOT}/out/concept/styles/${id}/mc/${v}`; mkdirSync(OUT, { recursive: true });
       const out = `${OUT}/${a.id}.png`;
       if (existsSync(out)) { if (redo !== a.id) continue; renameSync(out, `${OUT}/${a.id}.${Date.now()}.png`); }
-      const p = mcPrompt(v, a) + (note && redo === a.id ? `\n\nREVISION NOTE: ${note}` : "");
+      const style = JSON.parse(readFileSync(`${ROOT}/styles/${id}.json`, "utf8")), ground = style.concept.ground || style.concept.greenery.split(",")[0];
+      const p = mcPrompt(v, a, ground) + (note && redo === a.id ? `\n\nREVISION NOTE: ${note}` : "");
       writeFileSync(`${OUT}/${a.id}.prompt.txt`, p + "\n");
       const size = a.footprint[1] > a.footprint[0] * 1.6 ? "1024x1536" : "1536x1024";
       try { const r = await codexImage({ prompt: p, images: [{ base64: readFileSync(src).toString("base64"), mediaType: "image/png" }], size });
