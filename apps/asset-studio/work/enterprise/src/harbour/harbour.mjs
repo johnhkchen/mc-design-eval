@@ -156,8 +156,6 @@ function lighthouse(K) {
     const dx = Math.abs(x - c), dz = Math.abs(z - c); if (dx + dz > 3) continue;
     g.set(x, G + 4, z, dx === 2 || dz === 2 ? stairs(T.cap, dx === 2 ? (x < c ? "east" : "west") : (z < c ? "south" : "north")) : capFull);
   }
-  // Dalaran's cap turns up at its tips (upside-down tile stairs over the eaves), as its roofs do
-  if (T.cap === "purpur") for (const [x, z, f] of [[c - 2, c, "west"], [c + 2, c, "east"], [c, c - 2, "north"], [c, c + 2, "south"]]) g.set(x, G + 5, z, stairs("purpur", f, "top"));
   g.set(c, G + 5, c, slab(T.cap)); g.set(c, G + 6, c, "end_rod[facing=up]");
   return { grid: g, pilings: [[0, 0], [W - 1, 0], [0, W - 1], [W - 1, W - 1], [c, c]].map(([x, z]) => ({ at: [x, z], block: "minecraft:cobblestone" })) };
 }
