@@ -18,3 +18,13 @@ export function prompt(style, view) {
   const avoid = c.avoid?.length ? ` Avoid: ${c.avoid.join("; ")}.` : "";
   return `${LOOK.medium}: ${LOOK.form}. ${LOOK.blocks}. Materials: ${c.materials}. ${LOOK.light}. ${LOOK.rules}${avoid}\n\nVIEW: ${v.text(c)}`;
 }
+
+/** One asset of the town generator in a style: the building alone on its plot, three-quarter view, at its real size. */
+export function assetPrompt(style, asset) {
+  const c = style.concept, [W, D] = asset.footprint;
+  const size = asset.storeys ? `about ${W} blocks wide and ${D} deep, ${asset.storeys} storey${asset.storeys > 1 ? "s" : ""} (a storey is about 5 blocks)` : `about ${W} blocks wide and ${D} long`;
+  const avoid = c.avoid?.length ? ` Avoid: ${c.avoid.join("; ")}.` : "";
+  return `${LOOK.medium}: ${LOOK.form}. ${LOOK.blocks}. Materials: ${c.materials}. ${LOOK.light}. ${LOOK.rules}${avoid}\n\n` +
+    `ASSET: the ${style.name} version of ${asset.what}. Its size is fixed by the game: ${size}; draw it at that block scale, filling its plot, not larger. ` +
+    `The style's buildings: ${c.buildings}. Show this one building alone on a small square of its ground (${c.greenery.split(",")[0]}), three-quarter view from the front-left at about 30 degrees above, its front door or open front clearly visible, against a soft plain sky. One building, the whole of it in frame, nothing else.`;
+}

@@ -1,0 +1,329 @@
+{
+  "about": "The assets the client's town generator lays (town_rules zoning, the town_kits sets, the structure folders), one entry per kind. Each style's concept art draws every entry at its real footprint and storeys, so the art maps 1:1 to a build. `core` entries are what a town needs from hamlet to town tier.",
+  "assets": [
+    {
+      "id": "cottage_7x7",
+      "family": "home",
+      "slot": "home (hamlet, village): the plan's 7 x 7 body",
+      "footprint": [
+        7,
+        7
+      ],
+      "storeys": 1,
+      "core": true,
+      "what": "a small family cottage: one room with a hearth and two beds, a front door to the street, a small front garden"
+    },
+    {
+      "id": "house_10x7",
+      "family": "home",
+      "slot": "home (village, town): the 10 x 7 body",
+      "footprint": [
+        10,
+        7
+      ],
+      "storeys": 2,
+      "core": true,
+      "what": "a two-storey family house: hall below with hearth and table, a chamber above with two beds, the stair inside, front door to the street"
+    },
+    {
+      "id": "townhouse_10x7_3",
+      "family": "home",
+      "slot": "home (town, city): the 10 x 7 body at 3 storeys",
+      "footprint": [
+        10,
+        7
+      ],
+      "storeys": 3,
+      "core": false,
+      "what": "a tall narrow town house of three storeys in a street front, shop-like ground floor, chambers above"
+    },
+    {
+      "id": "terrace_3x7",
+      "family": "home",
+      "slot": "home (town): a terrace of three 7 x 7 houses",
+      "footprint": [
+        21,
+        7
+      ],
+      "storeys": 1,
+      "core": false,
+      "what": "a row of three joined small houses sharing walls, each with its own door and chimney, varied but clearly one row"
+    },
+    {
+      "id": "corner_house",
+      "family": "home",
+      "slot": "home: the corner body (two street fronts)",
+      "footprint": [
+        11,
+        9
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a corner house facing two streets, an entrance on the corner, windows on both fronts"
+    },
+    {
+      "id": "courtyard_house",
+      "family": "home",
+      "slot": "home: courtyard house on a double plot",
+      "footprint": [
+        22,
+        16
+      ],
+      "storeys": 1,
+      "core": false,
+      "what": "a walled compound: a main hall across the back, two side wings, an open court with a tree and a pond, a gate on the street"
+    },
+    {
+      "id": "workshop_smith",
+      "family": "workshop",
+      "slot": "workshop:armorer/toolsmith/weaponsmith (12 x 9 template)",
+      "footprint": [
+        12,
+        9
+      ],
+      "storeys": 2,
+      "core": true,
+      "what": "a smith's house and workshop: an open forge front with anvil and quench trough on the street, the smith's chamber above, the trade's goods displayed"
+    },
+    {
+      "id": "workshop_farmer",
+      "family": "workshop",
+      "slot": "workshop:farmer (12 x 9 template)",
+      "footprint": [
+        12,
+        9
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a farmer's house and barn-workshop: open front with hay, pumpkins and tools, a chamber above"
+    },
+    {
+      "id": "workshop_librarian",
+      "family": "workshop",
+      "slot": "workshop:librarian/cartographer (12 x 9 template)",
+      "footprint": [
+        12,
+        9
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a scholar's house: a reading room with shelves of books and maps behind a shop window, a chamber above"
+    },
+    {
+      "id": "stall",
+      "family": "forum",
+      "slot": "stall:<trade> (3 x 3, the forum's ring)",
+      "footprint": [
+        3,
+        3
+      ],
+      "storeys": 1,
+      "core": true,
+      "what": "a small market stall: a counter showing the trade's goods, the trade's workstation behind it, posts and a roof or awning"
+    },
+    {
+      "id": "forum_centre",
+      "family": "forum",
+      "slot": "forum centre (market cross, 7 x 7)",
+      "footprint": [
+        7,
+        7
+      ],
+      "storeys": 1,
+      "core": true,
+      "what": "the town square's centrepiece round the town bell: a monument, shrine or totem the town gathers at"
+    },
+    {
+      "id": "market_hall",
+      "family": "hall",
+      "slot": "forum front: the market hall (12 x 12)",
+      "footprint": [
+        12,
+        12
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a market hall facing the square: an open arcade below for trading, a meeting room above"
+    },
+    {
+      "id": "tavern",
+      "family": "hall",
+      "slot": "comfort: tavern (15 x 9)",
+      "footprint": [
+        15,
+        9
+      ],
+      "storeys": 2,
+      "core": true,
+      "what": "the town's tavern or mead hall: a taproom with a long bar, casks and a hearth, a hanging sign, rooms above"
+    },
+    {
+      "id": "temple",
+      "family": "hall",
+      "slot": "hall: temple (9 x 9)",
+      "footprint": [
+        9,
+        9
+      ],
+      "storeys": 1,
+      "core": true,
+      "what": "the town's temple or shrine: a sacred hall with an altar, the faith's symbols, candles or braziers"
+    },
+    {
+      "id": "granary",
+      "family": "hall",
+      "slot": "hall: granary (9 x 9)",
+      "footprint": [
+        9,
+        9
+      ],
+      "storeys": 1,
+      "core": false,
+      "what": "a granary or storehouse raised off the ground: sacks, barrels and grain bins, a hoist"
+    },
+    {
+      "id": "watchtower",
+      "family": "hall",
+      "slot": "hall: watchtower (7 x 7)",
+      "footprint": [
+        7,
+        7
+      ],
+      "storeys": 4,
+      "core": true,
+      "what": "a watchtower: tall and strong, a lookout platform with a brazier or bell at the top, a ladder or stair inside"
+    },
+    {
+      "id": "guildhall",
+      "family": "hall",
+      "slot": "forum front: guildhall (15 x 12)",
+      "footprint": [
+        15,
+        12
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a guildhall facing the square: an arcade on the square for the guild's market, a great hall above with a long table"
+    },
+    {
+      "id": "wall_curtain",
+      "family": "wall",
+      "slot": "wall: curtain 8 (tiled along the town's wall)",
+      "footprint": [
+        8,
+        3
+      ],
+      "storeys": 2,
+      "core": true,
+      "what": "a stretch of the town wall 8 blocks long: a walkway along the top with a parapet, buttresses, built to repeat"
+    },
+    {
+      "id": "wall_gatehouse",
+      "family": "wall",
+      "slot": "wall: gatehouse (11 x 7)",
+      "footprint": [
+        11,
+        7
+      ],
+      "storeys": 3,
+      "core": true,
+      "what": "the town's gatehouse: a strong gate passage 3 wide through the wall, towers or posts either side, the town's banners over it"
+    },
+    {
+      "id": "wall_tower",
+      "family": "wall",
+      "slot": "wall: tower (7 x 7)",
+      "footprint": [
+        7,
+        7
+      ],
+      "storeys": 3,
+      "core": false,
+      "what": "a wall tower at a corner of the town wall, taller than the wall, a lookout at the top"
+    },
+    {
+      "id": "stable",
+      "family": "gate_quarter",
+      "slot": "gate quarter: stable (12 x 9)",
+      "footprint": [
+        12,
+        9
+      ],
+      "storeys": 1,
+      "core": false,
+      "what": "a stable for mounts: open stalls to the street with rails, hay and troughs"
+    },
+    {
+      "id": "farmstead",
+      "family": "farm",
+      "slot": "farmstead (19 x 18 lot)",
+      "footprint": [
+        19,
+        18
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a farmstead on its lot: farmhouse, barn, a fenced yard with haystack and well, a kitchen garden"
+    },
+    {
+      "id": "customs_house",
+      "family": "harbour",
+      "slot": "harbour: customs house (13 x 10)",
+      "footprint": [
+        13,
+        10
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "the harbour's customs house on the quay: an open arcade where cargo is weighed, the collector's office above, a flag"
+    },
+    {
+      "id": "warehouse",
+      "family": "harbour",
+      "slot": "harbour: warehouse (13 x 7)",
+      "footprint": [
+        13,
+        7
+      ],
+      "storeys": 2,
+      "core": false,
+      "what": "a warehouse on the quay: open loading bays, stacked goods, a hoist beam from the gable"
+    },
+    {
+      "id": "trader_ship",
+      "family": "harbour",
+      "slot": "harbour: trader (9 x 25 boat)",
+      "footprint": [
+        9,
+        25
+      ],
+      "storeys": 0,
+      "core": false,
+      "what": "the faction's trading ship moored at the quay: two masts, sails in the faction's colours, cargo on deck"
+    },
+    {
+      "id": "lighthouse",
+      "family": "harbour",
+      "slot": "harbour: mole head with lighthouse (9 x 9)",
+      "footprint": [
+        9,
+        9
+      ],
+      "storeys": 5,
+      "core": false,
+      "what": "a lighthouse at the end of a breakwater: a tall tower with a lit lantern room at the top"
+    },
+    {
+      "id": "camp",
+      "family": "founding",
+      "slot": "founding: settlers' camp (9 x 7)",
+      "footprint": [
+        9,
+        7
+      ],
+      "storeys": 1,
+      "core": false,
+      "what": "the founders' first camp: two tents, a covered cart with supplies, a cookfire, lamps"
+    }
+  ]
+}
