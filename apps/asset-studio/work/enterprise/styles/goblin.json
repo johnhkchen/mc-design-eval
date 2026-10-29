@@ -1,0 +1,35 @@
+{
+  "id": "goblin",
+  "name": "Goblin trade-port",
+  "faction": "neutral (cartels)",
+  "status": "draft",
+  "concept": {
+    "setting": "a goblin trade-port in a cove of jagged sea cliffs on a hot tropical coast, a town crammed up the cliffs and out over the water on stilts",
+    "buildings": "ramshackle narrow houses stacked on each other at odd angles, patched together from riveted iron plates, weathered green copper sheets and salvaged timber, lopsided roofs with smokestacks and spinning fans, round porthole windows, cargo cranes and pulleys on every gable, rope-and-plank walkways between buildings, pipes running down the walls, everything bolted on and a little crooked",
+    "landmark": "a towering bank and trading house at the top of the cliff: a top-heavy tower of brass and iron with a huge clock face and a gold coin sign, cranes and a zeppelin mooring mast on its roof, lit by green and gold lamps",
+    "street_life": "market stalls of crates and barrels piled with goods, a zeppelin and a rocket on a launch pad, mine carts and conveyor belts, signboards everywhere, steam vents and dripping pipes, a shredder robot in a scrapyard, lanterns on chains strung across the alleys",
+    "greenery": "palm trees and jungle scrub clinging to the cliffs, vines over the rusted walls, a sandy beach below the piers",
+    "materials": "iron blocks and iron bars, chains, weathered and oxidized copper, cut copper, jungle and dark oak planks, spruce scaffolding, barrels, polished blackstone, smooth stone, gold blocks, lanterns, green-glowing sea lanterns and verdant froglights",
+    "colours": [
+      "rust brown",
+      "verdigris green",
+      "brass gold",
+      "soot black",
+      "goblin green glow"
+    ],
+    "avoid": [
+      "neat symmetrical buildings",
+      "clean whitewashed walls",
+      "bright orange"
+    ],
+    "ground": "sand and wet stone of a cove, with piers over the water"
+  },
+  "build": {
+    "shell": null,
+    "roles": null,
+    "earthworks": null,
+    "bridge": null,
+    "harbour": null,
+    "founding": null
+  }
+}
