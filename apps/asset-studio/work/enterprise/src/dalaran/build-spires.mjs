@@ -18,8 +18,7 @@ const SLOT_OF = { blast_furnace: "armorer", smithing_table: "toolsmith", grindst
 const SIX = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
 const PANE = "purple_stained_glass_pane[east=true,west=true,north=false,south=false,waterlogged=false]";
 const SET = [
-  // the hall's east side was idle floor (13 of 29 cells idle, on the cap): two barrels along that wall
-  { src: "cottage_7x7", tiles: [3, 3], kind: "home", id: "tower_house_10x10_a", keep: [], fill: [[6, 4, 3, "barrel[facing=up,open=false]"], [6, 4, 5, "barrel[facing=up,open=false]"]] },
+  { src: "cottage_7x7", tiles: [3, 3], kind: "home", id: "tower_house_10x10_a", keep: [] },
   { src: "house_10x7", tiles: [4, 3], kind: "home", id: "townhouse_14x10_a", keep: [] },
   // the smithy's workroom opened straight into the forge bay, so the interior walk counted it (and the stair up to the
   // beds) as outdoors: a shopfront of quartz and violet panes closes it under the awning, the door beside it
