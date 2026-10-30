@@ -15,6 +15,7 @@ const SRC = "out/builds/dalaran", DATA = "bundle/core/src/main/resources/data/en
 const JOB = /^minecraft:(barrel|blast_furnace|brewing_stand|cartography_table|(water_|lava_|powder_snow_)?cauldron|composter|fletching_table|grindstone|lectern|loom|smithing_table|smoker|stonecutter)$/;
 const SLOT_OF = { blast_furnace: "armorer", smithing_table: "toolsmith", grindstone: "weaponsmith", brewing_stand: "cleric" };
 // what each build is in the town: its folder, id, slot, tiers, and which job block (if any) it keeps as the workstation
+const SIX = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
 const PANE = "purple_stained_glass_pane[east=true,west=true,north=false,south=false,waterlogged=false]";
 const SET = [
   // the hall's east side was idle floor (13 of 29 cells idle, on the cap): two barrels along that wall
@@ -33,7 +34,7 @@ const SET = [
       [11, 8, 2, "barrel[facing=west,open=false]"], [11, 8, 6, "barrel[facing=west,open=false]"]] },
   { src: "stall", kind: "stall", id: "stall_3x3_a", marker: "anvil", tiers: ["hamlet", "village", "town"] },
   { src: "forum_centre", kind: "forum", id: "fountain_7x7_a", open: true },
-  { src: "tavern", tiles: [5, 4], kind: "hall", id: "inn_18x14_a", keep: [], tiers: ["village", "town"] },
+  { src: "tavern", tiles: [5, 4], kind: "hall", id: "inn_18x14_a", keep: [], tiers: ["village", "town"], attic: 13 },
   { src: "temple", kind: "hall", id: "sanctum_9x9_a", keep: ["brewing_stand", "lectern"], tiers: ["village", "town"] },
   { src: "watchtower", kind: "wall", id: "watchtower_7x7_a", keep: [], tiers: ["town"] },
   { src: "wall_curtain", kind: "wall", id: "curtain_8_a", part: true, tiers: ["town"] },
@@ -91,7 +92,8 @@ for (const a of LIVE) {
       }
     }
     for (let x = 0; x < W; x++) for (let y = a.attic; y < H + 2; y++) for (let z = 0; z < D; z++)
-      if (!out.has(k(x, y, z)) && g.get(x, y, z) === "minecraft:air") g.set(x, y, z, "minecraft:dark_oak_planks");
+      if (!out.has(k(x, y, z)) && g.get(x, y, z) === "minecraft:air" && !SIX.some(([dx, dy, dz]) => /glass|pane|bars|trapdoor|_door|fence/.test(g.get(x + dx, y + dy, z + dz) || "")))
+        g.set(x, y, z, "minecraft:dark_oak_planks");   // (behind a window it stays air, so the window still looks in)
   }
   // decoration that shuts the entry off from the room is left out
   for (const p of a.clear || []) g.set(...p, "air");
