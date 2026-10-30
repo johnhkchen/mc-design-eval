@@ -1,0 +1,36 @@
+{
+  "id": "tauren",
+  "name": "Tauren plains village",
+  "faction": "Horde",
+  "status": "draft",
+  "concept": {
+    "setting": "a tauren village on golden rolling grassland under a vast open sky, gentle hills and mesas on the horizon, warm late-afternoon light, smoke rising from cookfires",
+    "buildings": "large conical and domed tents and round longhouses of painted hide stretched over thick log frames, the frame poles crossing and sticking out at the peak, hides painted with bold geometric bands and zigzags, broad low doorways with hide flaps, wooden decks and ramps on stout posts, carved wooden totems at the corners, feathers, horns and bone trim, everything big, sturdy and rounded to suit huge folk",
+    "landmark": "a great tall totem pole of stacked carved animal heads with painted wings spread at the top, beside a wind-rider tower: a tall wooden lookout with a round hide-roofed platform and roosts for winged mounts",
+    "street_life": "cookfires and drying racks, kodo beast pens with log fences, woven baskets and clay pots, drums, hide banners on tall poles, stone circles, totems along a wide dirt path",
+    "greenery": "tall golden grass and scattered wildflowers, a few lone trees, hay bales",
+    "materials": "spruce and oak logs for frames and totems, oak and birch planks for decks, white, yellow, orange-brown and brown wool and terracotta for painted hide, red and light blue accents in the painted bands, bone blocks and bone trim, hay bales, mud bricks and packed mud for hearths, campfires, lanterns",
+    "colours": [
+      "cream hide",
+      "ochre",
+      "earth red",
+      "turquoise",
+      "log brown"
+    ],
+    "avoid": [
+      "square boxy houses",
+      "stone castles",
+      "bright saturated rainbow colours",
+      "thin spindly frames"
+    ],
+    "ground": "golden grass and a wide dirt path"
+  },
+  "build": {
+    "shell": null,
+    "roles": null,
+    "earthworks": null,
+    "bridge": null,
+    "harbour": null,
+    "founding": null
+  }
+}
