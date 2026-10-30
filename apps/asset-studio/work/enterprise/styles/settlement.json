@@ -1,5 +1,5 @@
 {
-  "rev": 4,
+  "rev": 5,
   "about": "Which race and clan founds a town, decided by the land. The town's biome is read at its centre (its tags, 1.21.1 conventional `c:` tags first); the first entry whose tags match gives the candidates, and one is drawn by weight from the town's seed. A candidate names a style (styles/<id>.json) and, for a style with clans, a clan whose canonical palette suits what that land has: the sandstone clan in the desert, the mud-brick clan in the marsh. Palettes never mix: the land picks the people, the people keep their materials. Only the yard follows the land: `ground` replaces the parts' authored yard surface (`yard`), and `plant` their authored dry bushes.",
   "yard": {
     "surface": "red_sand",
@@ -33,6 +33,11 @@
         {
           "style": "goblin",
           "clan": "brassgut",
+          "weight": 1
+        },
+        {
+          "style": "tauren",
+          "clan": "mesarunner",
           "weight": 1
         }
       ]
@@ -73,6 +78,11 @@
         {
           "style": "orc",
           "clan": "sunscar",
+          "weight": 1
+        },
+        {
+          "style": "tauren",
+          "clan": "mesarunner",
           "weight": 1
         }
       ]
@@ -119,6 +129,11 @@
         {
           "style": "nightelf",
           "clan": "frostsong",
+          "weight": 1
+        },
+        {
+          "style": "tauren",
+          "clan": "ravenhorn",
           "weight": 1
         }
       ]
@@ -226,6 +241,11 @@
           "style": "nightelf",
           "clan": "frostsong",
           "weight": 1
+        },
+        {
+          "style": "tauren",
+          "clan": "ravenhorn",
+          "weight": 1
         }
       ]
     },
@@ -293,6 +313,11 @@
         {
           "style": "stormwind",
           "weight": 1
+        },
+        {
+          "style": "tauren",
+          "clan": "bloodhoof",
+          "weight": 2
         }
       ]
     }
@@ -307,5 +332,5 @@
       }
     ]
   },
-  "note": "Only approved styles found towns (orc, dwarf, goblin and night elf are drafts: until approved the client skips them and redraws from the rest of the list, else the fallback)."
+  "note": "Only approved styles found towns (orc, dwarf, goblin, night elf and tauren are drafts: until approved the client skips them and redraws from the rest of the list, else the fallback)."
 }

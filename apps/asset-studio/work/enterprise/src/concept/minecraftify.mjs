@@ -92,7 +92,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   let i = 0;
   await Promise.all(Array.from({ length: 3 }, async () => {
     while (i < jobs.length) {
-      const [id, a, src] = jobs[i++], OUT = `${ROOT}/out/concept/styles/${id}/mc/${v}`; mkdirSync(OUT, { recursive: true });
+      const [id, a0, src] = jobs[i++], a = { ...a0, ...(JSON.parse(readFileSync(`${ROOT}/styles/${id}.json`, "utf8")).assets?.[a0.id] || {}) }, OUT = `${ROOT}/out/concept/styles/${id}/mc/${v}`; mkdirSync(OUT, { recursive: true });
       const out = `${OUT}/${a.id}.png`;
       if (existsSync(out)) { if (redo !== a.id) continue; renameSync(out, `${OUT}/${a.id}.${Date.now()}.png`); }
       const style = JSON.parse(readFileSync(`${ROOT}/styles/${id}.json`, "utf8")), ground = style.concept.ground || style.concept.greenery.split(",")[0];

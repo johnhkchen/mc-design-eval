@@ -1,5 +1,6 @@
 // Per-asset concept art: every asset the client's town generator lays (styles/assets.json), in a style, at its real
-// footprint and storeys, so each picture maps 1:1 to a build. Files are named by asset id under the style.
+// footprint and storeys, so each picture maps 1:1 to a build. Files are named by asset id under the style. A style may
+// override an asset (its storeys, what it is) in its own `assets` (the tauren lodge is one storey).
 //   node src/concept/asset-concept.mjs <style ...> [--core] [--only id,id] [--redo id --note "..."]
 import { codexImage } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/codex-image.mjs";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, renameSync } from "node:fs";
@@ -16,7 +17,7 @@ for (const id of ids) for (const a of pick) jobs.push([JSON.parse(readFileSync(`
 let i = 0;
 await Promise.all(Array.from({ length: 3 }, async () => {
   while (i < jobs.length) {
-    const [s, a] = jobs[i++], OUT = `${ROOT}/out/concept/styles/${s.id}/assets`; mkdirSync(OUT, { recursive: true });
+    const [s, a0] = jobs[i++], a = { ...a0, ...(s.assets?.[a0.id] || {}) }, OUT = `${ROOT}/out/concept/styles/${s.id}/assets`; mkdirSync(OUT, { recursive: true });
     const out = `${OUT}/${a.id}.png`;
     if (existsSync(out)) { if (redo !== a.id) continue; renameSync(out, `${OUT}/${a.id}.${Date.now()}.png`); }
     const p = assetPrompt(s, a) + (note && redo === a.id ? `\n\nREVISION NOTE: ${note}` : "");
