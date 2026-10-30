@@ -2,7 +2,7 @@
 // The quality gate: every stage both sides agreed on, on any build, one line a file, one exit code.
 //   contract  check-asset.mjs (version, blocks, points of interest, light where mobs spawn, the stair walk)
 //   relief    relief.mjs (facade depth and detail; skipped for parts and yard tiles)
-//   interior  interior.mjs over the client's floorplan.py (for anything with beds)
+//   interior  interior.mjs over the client's floorplan.py (for anything with beds; a home with no beds fails it outright)
 //   support   support.mjs (no block hanging in the air: each reaches the ground by faces or edges; skipped for parts)
 // Thresholds come from quality.json. An asset's `relief_faces` (in its JSON) names the faces relief applies to. Metadata is the .json beside each .nbt (a variant's comes from its base).
 //   node tools/gate.mjs <file.nbt | dir>... [--json] [--no-relief] [--no-interior] [--faces south,north,...]
@@ -36,8 +36,10 @@ for (const f of files) {
     const bad = fFaces.filter((k) => !party.has(k) && (r[k].relief < (R.min_relief ?? 0.3) || r[k].detail < (R.min_detail ?? 0.2)));
     row.stages.relief = { ok: !bad.length, errors: bad.map((k) => `${k} relief ${r[k].relief} detail ${r[k].detail}`), faces: r };
   }
-  if (!isPart && (meta?.beds || []).length && !argv.includes("--no-interior")) {
-    try { const i = interior(f); row.stages.interior = { ok: i.ok, errors: i.fails }; }
+  // a home is somewhere to sleep: without beds the interior check would be skipped and the house would pass empty
+  if (meta?.kind === "home" && !(meta.beds || []).length) row.stages.interior = { ok: false, errors: ["a home with no beds"] };
+  else if (!isPart && (meta?.beds || []).length && !argv.includes("--no-interior")) {
+    try { const i = interior(f, null, meta.kind); row.stages.interior = { ok: i.ok, errors: i.fails }; }
     catch (e) { row.stages.interior = { ok: false, errors: [`floorplan.py failed: ${e.message.split("\n")[0]}`] }; }
   }
   if (!isPart) { const s = support(f); row.stages.support = { ok: s.ok, errors: s.loose.length ? [`${s.loose.length} loose: ${s.loose.slice(0, 6).map((l) => `${l.block}@${l.at.join(",")}`).join(" ")}`] : [] }; }

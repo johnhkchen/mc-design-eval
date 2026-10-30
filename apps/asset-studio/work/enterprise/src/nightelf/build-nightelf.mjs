@@ -16,17 +16,21 @@ const SLOT_OF = { blast_furnace: "armorer", smithing_table: "toolsmith", grindst
 // what each build is in the town: its folder, id, slot, tiers, and which job block (if any) it keeps as the workstation
 const SET = [
   { src: "cottage_7x7", kind: "home", id: "cottage_7x7_a", keep: [] },
-  { src: "house_10x7", kind: "home", id: "house_10x7_a", keep: [] },
-  { src: "workshop_smith", hold: "interior: attic passage with 2 of clear height; 12.5 floor cells per bed (cap 8.5), after three fix rounds", kind: "workshop", id: "workshop_smith_12x9_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"] },
+  // its roof void (feet 11) read as an idle storey
+  { src: "house_10x7", kind: "home", id: "house_10x7_a", keep: [], attic: 11,
+    // a chest stood on the one cell the stair is stepped onto from: it moves to the wall beside the hearth
+    clear: [[9, 3, 4]], fill: [[2, 3, 4, "barrel[facing=up,open=false]"]] },
+  { src: "workshop_smith", kind: "workshop", id: "workshop_smith_12x9_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"] },
   { src: "stall", kind: "stall", id: "stall_3x3_a", marker: "anvil", tiers: ["hamlet", "village", "town"] },
   { src: "forum_centre", kind: "forum", id: "forum_centre_7x7_a", open: true },
-  { src: "tavern", hold: "contract: a guest bed not reachable from the door; interior circulation 0.12 (floor 0.15), after three fix rounds", kind: "hall", id: "tavern_15x9_a", keep: [], tiers: ["village", "town"] },
+  { src: "tavern", kind: "hall", id: "tavern_15x9_a", keep: [], tiers: ["village", "town"] },
   { src: "temple", kind: "hall", id: "temple_9x9_a", keep: ["brewing_stand"], tiers: ["village", "town"] },
   { src: "watchtower", kind: "wall", id: "watchtower_7x7_a", keep: [], tiers: ["town"] },
   { src: "wall_curtain", kind: "wall", id: "curtain_8_a", part: true, tiers: ["town"] },
   { src: "wall_gatehouse", ends: true, kind: "wall", id: "gatehouse_11x7_a", keep: [], tiers: ["town"] },
 ];
 
+const SIX = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
 const empty = (s) => !s || /:(cave_|void_)?air$/.test(s) || /(dead_bush|short_grass|fern)$/.test(s);
 const bare = (s) => splitState(s).name.replace(/^minecraft:/, "");
 const report = [], names = [];
@@ -58,6 +62,28 @@ for (const a of LIVE) {
     }
     if (k >= H + 2 && top && top[0] > y + 2) g.set(x, top[0], z, top[1]);
   }
+  // a steep roof is hollow, and the interior walk counts the floor of a sealed roof void as an idle storey: from layer
+  // `attic` up, air that no door or opening reaches (not joined to the outside air) is filled solid, out of sight
+  if (a.attic) {
+    const out = new Set(), q = [], k = (x, y, z) => `${x},${y},${z}`;
+    for (let x = 0; x < W; x++) for (let y = 2; y < H + 2; y++) for (let z = 0; z < D; z++)
+      if ((x === 0 || z === 0 || x === W - 1 || z === D - 1 || y === H + 1) && empty(g.get(x, y, z))) { out.add(k(x, y, z)); q.push([x, y, z]); }
+    while (q.length) {
+      const [x, y, z] = q.pop();
+      for (const [dx, dy, dz] of [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]) {
+        const p = [x + dx, y + dy, z + dz];
+        if (p[0] < 0 || p[2] < 0 || p[0] >= W || p[2] >= D || p[1] < 2 || p[1] >= H + 2 || out.has(k(...p)) || !empty(g.get(...p))) continue;
+        out.add(k(...p)); q.push(p);
+      }
+    }
+    for (let x = 0; x < W; x++) for (let y = a.attic; y < H + 2; y++) for (let z = 0; z < D; z++)
+      if (!out.has(k(x, y, z)) && g.get(x, y, z) === "minecraft:air" && !SIX.some(([dx, dy, dz]) => /glass|pane|bars|trapdoor|_door|fence/.test(g.get(x + dx, y + dy, z + dz) || "")))
+        g.set(x, y, z, "minecraft:dark_oak_planks");   // (behind a window it stays air, so the window still looks in)
+  }
+
+  // per-build edits on the finished grid (coordinates as delivered), before beds and job blocks are read
+  for (const p of a.clear || []) g.set(...p, "air");
+  for (const [x, y, z, st] of a.fill || []) g.set(x, y, z, st);
   const meta = { id: `enterprise:nightelf/${a.kind}/${a.id}`, rev: 1, style: "nightelf", kind: a.part ? "part" : a.kind, ...(a.part ? { slot: "wall:curtain" } : {}),
     ...(a.tiers ? { tiers: a.tiers } : {}), palette: "base", footprint: [W, D], height: H + 2, ground: 2, mirror: true,
     entrances: [], beds: [], workstations: [], lockers: [], markers: [], entities: [], relief_faces: a.part || a.ends ? ["south", "north"] : ["south", "north", "east", "west"] };

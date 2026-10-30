@@ -38,7 +38,11 @@
     "clear_height_min": 3,
     "status": "v0.2 (thread 0008)",
     "walk": "each bed's route over the storeys it crosses (a storey = sqrt of a storey's floor); max 2.0",
-    "destinations": "beds, workstations, hearth, chests; shelves, casks and decor are used floor without routes"
+    "destinations": "beds, workstations, hearth, chests; shelves, casks and decor are used floor without routes",
+    "walk_max_by_kind": {
+      "hall": 2.5
+    },
+    "walk_by_kind": "a hall (kind: hall, a tavern or lodge) walks guests round its hearth: 2.5 (thread 0015, the client's answer 2026-10-30); homes keep walk_max"
   },
   "yards": {
     "lamp_spacing_max": 5,

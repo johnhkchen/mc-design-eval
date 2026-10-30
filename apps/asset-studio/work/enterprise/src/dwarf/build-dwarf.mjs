@@ -17,16 +17,25 @@ const SLOT_OF = { blast_furnace: "armorer", smithing_table: "toolsmith", grindst
 const SET = [
   { src: "cottage_7x7", kind: "home", id: "cottage_7x7_a", keep: [], roof: { from: 4, full: true } },
   { src: "house_10x7", kind: "home", id: "house_10x7_a", keep: [], roof: { from: 7 } },
-  { src: "workshop_smith", hold: "interior: circulation 0.62 (cap 0.45)", kind: "workshop", id: "workshop_smith_12x9_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"] },
+  // two of its three chests stood in the far corners (each a destination, so routes crossed the whole room): to barrels
+  { src: "workshop_smith", kind: "workshop", id: "workshop_smith_12x9_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"],
+    fill: [[3, 3, 5, "barrel[facing=east,open=false]"], [5, 3, 3, "barrel[facing=west,open=false]"]] },
   { src: "stall", kind: "stall", id: "stall_3x3_a", marker: "anvil", tiers: ["hamlet", "village", "town"] },
   { src: "forum_centre", kind: "forum", id: "forum_centre_7x7_a", open: true },
-  { src: "tavern", hold: "interior: 4 guest rooms reached through another room", kind: "hall", id: "tavern_15x9_a", keep: [], tiers: ["village", "town"] },
+  // the four beds along the guest floor's back wall made its corridor a bedroom the alcoves were reached through: they
+  // go (shelves and casks in their place), so the corridor is a passage and the four alcoves keep a bed each
+  { src: "tavern", kind: "hall", id: "tavern_15x9_a", keep: [], tiers: ["village", "town"],
+    fill: [[2, 7, 2, "barrel[facing=up,open=false]"], [3, 7, 2, "bookshelf"], [4, 7, 2, "bookshelf"], [5, 7, 2, "barrel[facing=up,open=false]"],
+      [11, 7, 2, "barrel[facing=up,open=false]"], [12, 7, 2, "bookshelf"], [13, 7, 2, "bookshelf"], [14, 7, 2, "barrel[facing=up,open=false]"],
+      // the slab sill outside the front door hid the door from the floor-plan walk (no level ground beside it): cleared
+      [7, 3, 10, "air"], [8, 3, 10, "air"], [9, 3, 10, "air"]] },
   { src: "temple", kind: "hall", id: "temple_9x9_a", keep: ["brewing_stand"], tiers: ["village", "town"] },
   { src: "watchtower", kind: "wall", id: "watchtower_7x7_a", keep: [], tiers: ["town"] },
   { src: "wall_curtain", kind: "wall", id: "curtain_8_a", part: true, tiers: ["town"] },
   { src: "wall_gatehouse", kind: "wall", id: "gatehouse_11x7_a", keep: [], tiers: ["town"] },
 ];
 
+const SIX = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
 const empty = (s) => !s || /:(cave_|void_)?air$/.test(s) || /(dead_bush|short_grass|fern)$/.test(s);
 const bare = (s) => splitState(s).name.replace(/^minecraft:/, "");
 const report = [], names = [];
@@ -48,6 +57,28 @@ for (const a of LIVE) {
   g.paste(src, 0, 2, 0, { q: 2, map: (s) => s.replace(/^minecraft:iron_chain/, "minecraft:chain") });
   // every cell stored: an unstored cell is void to the placer and the walk check (a structure block keeps air as air)
   for (let x = 0; x < W; x++) for (let y = 2; y < H + 2; y++) for (let z = 0; z < D; z++) if (!g.get(x, y, z)) g.set(x, y, z, "air");
+  // a steep roof is hollow, and the interior walk counts the floor of a sealed roof void as an idle storey: from layer
+  // `attic` up, air that no door or opening reaches (not joined to the outside air) is filled solid, out of sight
+  if (a.attic) {
+    const out = new Set(), q = [], k = (x, y, z) => `${x},${y},${z}`;
+    for (let x = 0; x < W; x++) for (let y = 2; y < H + 2; y++) for (let z = 0; z < D; z++)
+      if ((x === 0 || z === 0 || x === W - 1 || z === D - 1 || y === H + 1) && empty(g.get(x, y, z))) { out.add(k(x, y, z)); q.push([x, y, z]); }
+    while (q.length) {
+      const [x, y, z] = q.pop();
+      for (const [dx, dy, dz] of [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]) {
+        const p = [x + dx, y + dy, z + dz];
+        if (p[0] < 0 || p[2] < 0 || p[0] >= W || p[2] >= D || p[1] < 2 || p[1] >= H + 2 || out.has(k(...p)) || !empty(g.get(...p))) continue;
+        out.add(k(...p)); q.push(p);
+      }
+    }
+    for (let x = 0; x < W; x++) for (let y = a.attic; y < H + 2; y++) for (let z = 0; z < D; z++)
+      if (!out.has(k(x, y, z)) && g.get(x, y, z) === "minecraft:air" && !SIX.some(([dx, dy, dz]) => /glass|pane|bars|trapdoor|_door|fence/.test(g.get(x + dx, y + dy, z + dz) || "")))
+        g.set(x, y, z, "minecraft:dark_oak_planks");   // (behind a window it stays air, so the window still looks in)
+  }
+
+  // per-build edits on the finished grid (coordinates as delivered), before beds and job blocks are read
+  for (const p of a.clear || []) g.set(...p, "air");
+  for (const [x, y, z, st] of a.fill || []) g.set(x, y, z, st);
   const meta = { id: `enterprise:dwarf/${a.kind}/${a.id}`, rev: 1, style: "dwarf", kind: a.part ? "part" : a.kind, ...(a.part ? { slot: "wall:curtain" } : {}),
     ...(a.tiers ? { tiers: a.tiers } : {}), palette: "deepforge", footprint: [W, D], height: H + 2, ground: 2, mirror: true,
     entrances: [], beds: [], workstations: [], lockers: [], markers: [], entities: [], relief_faces: a.part ? ["south", "north"] : ["south", "north", "east", "west"] };

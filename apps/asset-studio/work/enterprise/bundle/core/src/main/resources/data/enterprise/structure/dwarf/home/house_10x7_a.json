@@ -22,7 +22,32 @@
       "width": 1
     }
   ],
-  "beds": [],
+  "beds": [
+    {
+      "head": [
+        8,
+        7,
+        6
+      ],
+      "foot": [
+        8,
+        7,
+        5
+      ]
+    },
+    {
+      "head": [
+        5,
+        7,
+        6
+      ],
+      "foot": [
+        5,
+        7,
+        5
+      ]
+    }
+  ],
   "workstations": [],
   "lockers": [],
   "markers": [],
