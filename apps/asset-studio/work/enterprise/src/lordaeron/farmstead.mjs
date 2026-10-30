@@ -29,6 +29,7 @@ export function barn() {
   // inside: hay stacked along the back, a cart, a lantern
   for (let x = 1; x < W - 1; x++) { g.set(x, 3, 1, "hay_block[axis=x]"); if (x % 2) g.set(x, 4, 1, "hay_block[axis=z]"); }
   g.set(1, 3, 3, "hay_block[axis=y]"); g.set(7, 3, 3, "enterprise:decor_barrel[facing=up,open=false]"); g.set(4, 6, 3, "lantern[hanging=true,waterlogged=false]");
+  for (let y = 7; y <= 9; y++) g.set(4, y, 3, "chain[axis=y,waterlogged=false]");      // the lantern hangs from the ridge slab (y 10) on a chain
   // the roof: granite, gable along x, flush with the walls (the lot is tight); a stair course at the eave
   for (let k = 0; k <= 3; k++) {
     const y = 7 + k, za = k, zb = D - 1 - k;
