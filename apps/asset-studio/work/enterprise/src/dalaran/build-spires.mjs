@@ -58,10 +58,12 @@ for (const a of LIVE) {
     src = body;
   }
   const [W, H, D] = src.size;
-  // turn to face south, lift onto two dirt layers, the 1.21.1 chain, a lightning rod (a point of interest) to an end rod
+  // turn to face south, lift onto two dirt layers, the 1.21.1 chain, a lightning rod (a point of interest) to an end rod,
+  // and the roofs' purple terracotta band (it renders a muddy brown) to purpur, the lilac of the eaves
   const g = new Grid([W, H + 2, D]);
   for (let x = 0; x < W; x++) for (let z = 0; z < D; z++) { g.set(x, 0, z, "dirt"); g.set(x, 1, z, "dirt"); }
-  g.paste(src, 0, 2, 0, { q: 2, map: (s) => s.replace(/^minecraft:iron_chain/, "minecraft:chain").replace(/^minecraft:lightning_rod/, "minecraft:end_rod") });
+  g.paste(src, 0, 2, 0, { q: 2, map: (s) => s.replace(/^minecraft:iron_chain/, "minecraft:chain").replace(/^minecraft:lightning_rod/, "minecraft:end_rod")
+    .replace(/^minecraft:purple_terracotta$/, "minecraft:purpur_block") });
   // every cell stored: an unstored cell is void to the placer and the walk check (a structure block keeps air as air)
   for (let x = 0; x < W; x++) for (let y = 2; y < H + 2; y++) for (let z = 0; z < D; z++) if (!g.get(x, y, z)) g.set(x, y, z, "air");
   // a hearth flue walled to the roof but open to the sky makes the whole room "outside" to the interior walk: cap its
