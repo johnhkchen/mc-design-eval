@@ -2,7 +2,8 @@
   "id": "orc",
   "name": "Orc war-town",
   "faction": "Horde",
-  "status": "draft",
+  "status": "approved",
+  "note": "2026-10-30 the owner asked for every race planned so far to be completed (\"get all the races planned thus far complete\"): the core set delivered whole and town_rules/orc.json written, so the race founds towns.",
   "concept": {
     "setting": "an orc war-town in a red rock canyon desert under a hot orange sky",
     "buildings": "round and oval huts on low red sandstone and terracotta walls, roofs of stretched brown and tan hides over curved timber ribs, great curved tusk-like timbers and iron spikes jutting from every roof ridge and doorway, rusted iron plates bolted over the walls, bone and skull ornaments, heavy log palisades with sharpened tops",
@@ -239,6 +240,294 @@
           "minecraft:stripped_acacia_wood=minecraft:stripped_birch_wood"
         ]
       }
+    }
+  },
+  "assets": {
+    "cottage_7x7": {
+      "tiles": [
+        3,
+        3
+      ],
+      "footprint": [
+        12,
+        12
+      ],
+      "storeys": 1,
+      "what": "an orc family hut: one round hut on a low wall of red terracotta over a blackstone footing, a domed roof of stretched hide on curved dark timber ribs, two great curved tusk timbers crossing over the door, iron spikes and a bone skull on the crown, a low broad door under a hide flap, a fire brazier and a weapon rack outside; two beds and a hearth inside",
+      "form": "One round hut on a 12 x 12 plot (3 x 3 tiles of 4 blocks): about 10 across at the foot, a low wall 3 high, a stepped hide dome to a crown about 9 up. The roof is NOT a box: a low stone and terracotta wall (the skirt, 2-3 blocks) and then hide leaning in on curved timber ribs, stepping in every one or two blocks, so the outline is a curve from the wall top to the crown; the ribs stand proud and the great curved timbers (tusks) and iron spikes jut from the crown and the door.",
+      "shell": {
+        "fn": "yurt",
+        "opts": {
+          "box": [
+            1,
+            2,
+            10,
+            10
+          ],
+          "y": 1,
+          "height": 9,
+          "skirt": 3,
+          "bands": [
+            [
+              "polished_blackstone_bricks",
+              1
+            ],
+            [
+              "red_terracotta",
+              2
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              6
+            ]
+          ],
+          "poles": 4,
+          "log": "dark_oak_log",
+          "door": {
+            "face": "north",
+            "width": 2,
+            "wood": "dark_oak",
+            "frame": "dark_oak_log"
+          },
+          "floor": "spruce_planks",
+          "hide": "red_sandstone"
+        }
+      }
+    },
+    "house_10x7": {
+      "tiles": [
+        4,
+        3
+      ],
+      "footprint": [
+        16,
+        12
+      ],
+      "storeys": 1,
+      "what": "an orc longhut: one broad oval hut on a low red terracotta wall, a long hide roof on curved dark timber ribs, iron plates bolted over the walls, tusks over the double door, bone ornaments and spikes along the ridge, a tanning rack and a cookfire spit beside it; four beds round a central hearth inside on one floor",
+      "form": "One broad oval hut on a 16 x 12 plot (4 x 3 tiles): about 13 x 9 at the foot, a low wall 3 high, a stepped hide dome to a crown about 9 up. The roof is NOT a box: a low stone and terracotta wall (the skirt, 2-3 blocks) and then hide leaning in on curved timber ribs, stepping in every one or two blocks, so the outline is a curve from the wall top to the crown; the ribs stand proud and the great curved timbers (tusks) and iron spikes jut from the crown and the door.",
+      "shell": {
+        "fn": "yurt",
+        "opts": {
+          "box": [
+            2,
+            2,
+            13,
+            10
+          ],
+          "y": 1,
+          "height": 9,
+          "skirt": 3,
+          "bands": [
+            [
+              "polished_blackstone_bricks",
+              1
+            ],
+            [
+              "red_terracotta",
+              2
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              6
+            ]
+          ],
+          "poles": 4,
+          "log": "dark_oak_log",
+          "door": {
+            "face": "north",
+            "width": 2,
+            "wood": "dark_oak",
+            "frame": "dark_oak_log"
+          },
+          "floor": "spruce_planks",
+          "hide": "red_sandstone"
+        }
+      }
+    },
+    "workshop_smith": {
+      "tiles": [
+        4,
+        3
+      ],
+      "footprint": [
+        16,
+        12
+      ],
+      "storeys": 1,
+      "what": "an orc forge: an open-fronted smithy under a hide awning on dark timber posts with an anvil, a blast furnace glowing, a quench trough and racks of axes, joined at the back to a round sleeping hut with its own door and two beds",
+      "form": "A forge and a round sleeping hut on a 16 x 12 plot (4 x 3 tiles): at the front a smithy under a broad hide awning on dark timber posts, its job blocks reachable from the street; at the back a round hut (low wall, hide dome on ribs) with its own door. The roof is NOT a box: a low stone and terracotta wall (the skirt, 2-3 blocks) and then hide leaning in on curved timber ribs, stepping in every one or two blocks, so the outline is a curve from the wall top to the crown; the ribs stand proud and the great curved timbers (tusks) and iron spikes jut from the crown and the door.",
+      "shell": {
+        "fn": "yurt",
+        "opts": {
+          "box": [
+            7,
+            3,
+            14,
+            10
+          ],
+          "y": 1,
+          "height": 8,
+          "skirt": 3,
+          "bands": [
+            [
+              "polished_blackstone_bricks",
+              1
+            ],
+            [
+              "red_terracotta",
+              2
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              6
+            ]
+          ],
+          "poles": 4,
+          "log": "dark_oak_log",
+          "door": {
+            "face": "west",
+            "width": 1,
+            "wood": "dark_oak",
+            "frame": "dark_oak_log"
+          },
+          "floor": "spruce_planks",
+          "hide": "red_sandstone"
+        }
+      }
+    },
+    "tavern": {
+      "tiles": [
+        5,
+        4
+      ],
+      "footprint": [
+        20,
+        16
+      ],
+      "storeys": 1,
+      "what": "the war-town's great feast hall (its tavern): one long hall under a broad hide roof on curved timber ribs, war drums and a long feast table with casks round a central fire pit, three small sleeping alcoves for guests each with a door off the hall, giant tusks framing the door, braziers outside",
+      "form": "A long hide hall on a 20 x 16 plot (5 x 4 tiles): about 17 x 11, a low wall 3 high, a stepped barrel vault of hide to a ridge about 10 up, rounded at both ends, ribs arching over it. The roof is NOT a box: a low stone and terracotta wall (the skirt, 2-3 blocks) and then hide leaning in on curved timber ribs, stepping in every one or two blocks, so the outline is a curve from the wall top to the crown; the ribs stand proud and the great curved timbers (tusks) and iron spikes jut from the crown and the door.",
+      "shell": {
+        "fn": "vault",
+        "opts": {
+          "box": [
+            1,
+            3,
+            18,
+            13
+          ],
+          "y": 1,
+          "height": 10,
+          "skirt": 3,
+          "bands": [
+            [
+              "polished_blackstone_bricks",
+              1
+            ],
+            [
+              "red_terracotta",
+              2
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              3
+            ],
+            [
+              "orange_terracotta",
+              1
+            ],
+            [
+              "red_sandstone",
+              6
+            ]
+          ],
+          "ribs": 3,
+          "log": "dark_oak_log",
+          "door": {
+            "face": "north",
+            "width": 2,
+            "wood": "dark_oak",
+            "frame": "dark_oak_log"
+          },
+          "floor": "spruce_planks",
+          "hide": "red_sandstone"
+        }
+      }
+    },
+    "temple": {
+      "what": "a spirit lodge: a round hide-roofed lodge on red stone walls with a ring of totem poles, braziers at the door, skulls and bone charms, a shaman's altar with a brewing stand inside"
+    },
+    "watchtower": {
+      "what": "an orc lookout: a tall log tower on a red stone base, a spiked timber platform under a hide canopy at the top with a war drum and a brazier, tusks at its corners, a red war banner"
+    },
+    "wall_curtain": {
+      "what": "a stretch of the orc palisade 8 blocks long: sharpened dark oak logs on a red stone footing, a walkway behind on posts, iron spikes and a skull on a pike"
+    },
+    "wall_gatehouse": {
+      "what": "the orc gate: a gate 3 wide between two spiked log towers on red stone bases, giant curved tusks arching over the gateway, hide canopies, braziers and red war banners"
+    },
+    "forum_centre": {
+      "what": "the town's war square centrepiece: a great fire brazier on a stepped red stone dais ringed by tusks and spikes, war drums on stands, the town bell hung from a timber frame beside it"
+    },
+    "stall": {
+      "what": "an orc market stall: a timber counter under a stretched hide awning on spiked posts, showing hides, meat and axes, a lantern"
     }
   }
 }
