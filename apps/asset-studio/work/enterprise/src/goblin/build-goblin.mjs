@@ -24,7 +24,7 @@ const SET = [
   { src: "temple", kind: "hall", id: "temple_9x9_a", keep: ["brewing_stand"], tiers: ["village", "town"] },
   { src: "watchtower", kind: "wall", id: "watchtower_7x7_a", keep: [], tiers: ["town"] },
   { src: "wall_curtain", kind: "wall", id: "curtain_8_a", part: true, tiers: ["town"] },
-  { src: "wall_gatehouse", kind: "wall", id: "gatehouse_11x7_a", keep: [], tiers: ["town"] },
+  { src: "wall_gatehouse", ends: true, kind: "wall", id: "gatehouse_11x7_a", keep: [], tiers: ["town"] },
 ];
 
 const empty = (s) => !s || /:(cave_|void_)?air$/.test(s) || /(dead_bush|short_grass|fern)$/.test(s);
@@ -50,7 +50,7 @@ for (const a of LIVE) {
   for (let x = 0; x < W; x++) for (let y = 2; y < H + 2; y++) for (let z = 0; z < D; z++) if (!g.get(x, y, z)) g.set(x, y, z, "air");
   const meta = { id: `enterprise:goblin/${a.kind}/${a.id}`, rev: 1, style: "goblin", kind: a.part ? "part" : a.kind, ...(a.part ? { slot: "wall:curtain" } : {}),
     ...(a.tiers ? { tiers: a.tiers } : {}), palette: "base", footprint: [W, D], height: H + 2, ground: 2, mirror: true,
-    entrances: [], beds: [], workstations: [], lockers: [], markers: [], entities: [], relief_faces: a.part ? ["south", "north"] : ["south", "north", "east", "west"] };
+    entrances: [], beds: [], workstations: [], lockers: [], markers: [], entities: [], relief_faces: a.part || a.ends ? ["south", "north"] : ["south", "north", "east", "west"] };
   const cands = [];
   for (const [x, y, z, s] of [...g.each()]) {
     const n = splitState(s).name;
@@ -102,6 +102,7 @@ fs.writeFileSync(`${DATA}/town_kits/goblin/core.json`, JSON.stringify({
     "stall_3x3_a has a workstation marker (block any, air) behind its counter: the placer sets the trade's job block there, so one stall serves every trade.",
     "forum_centre_7x7_a carries the town bell as a marker.",
     "curtain_8_a is a part: an 8-long wall piece, both ends cut to join the next.",
+    "gatehouse_11x7_a joins the curtain at its east and west ends (cut flat), so only its south and north faces carry relief.",
   ],
 }, null, 2) + "\n");
 for (const [id, ok, e] of report) console.log(ok ? "ok  " : "FAIL", id, ok ? "" : e.slice(0, 6).join(" | "));

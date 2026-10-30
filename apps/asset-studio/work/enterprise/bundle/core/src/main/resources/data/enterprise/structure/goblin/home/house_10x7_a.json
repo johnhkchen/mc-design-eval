@@ -1,0 +1,36 @@
+{
+  "id": "enterprise:goblin/home/house_10x7_a",
+  "rev": 1,
+  "style": "goblin",
+  "kind": "home",
+  "palette": "base",
+  "footprint": [
+    12,
+    9
+  ],
+  "height": 22,
+  "ground": 2,
+  "mirror": true,
+  "entrances": [
+    {
+      "at": [
+        5,
+        3,
+        8
+      ],
+      "facing": "south",
+      "width": 1
+    }
+  ],
+  "beds": [],
+  "workstations": [],
+  "lockers": [],
+  "markers": [],
+  "entities": [],
+  "relief_faces": [
+    "south",
+    "north",
+    "east",
+    "west"
+  ]
+}
