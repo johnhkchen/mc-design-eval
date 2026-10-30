@@ -1,25 +1,32 @@
 {
   "id": "dalaran",
-  "name": "Dalaran (as approved)",
+  "name": "Dalaran, city of the Kirin Tor",
   "faction": "Alliance (mage)",
   "status": "approved",
-  "note": "Approved in the East Asian hall style; in the game Dalaran is a violet city of mage spires. Kept as approved until the owner says otherwise.",
+  "note": "2026-10-30 the owner moved Dalaran from the approved East Asian hall style to the Warcraft mage city of violet spires. The hall-style kits already delivered (build section) stay as they are until the new set replaces them. The owner approved the mage-city concept sheet the same day (\"I like it a lot\").",
   "concept": {
-    "setting": "a walled hill town of terraced halls under a clear sky",
-    "buildings": "timber halls on stepped stone platforms, red columns below and white plaster in dark timber above, deep eaves on brackets, concave violet tile hipped roofs with upturned corners",
-    "landmark": "a many-eaved violet pagoda over the central square",
-    "street_life": "paper lanterns on red posts, gate arches over the avenues, courtyard gardens, tea stalls, bell pavilions",
-    "greenery": "willows, gold ginkgo, flowering cherry, bamboo groves, lily ponds",
-    "materials": "stripped mangrove, dark oak, calcite, polished andesite, stone bricks, purpur tile",
+    "setting": "a walled mage city on a green hill under a clear sky, white towers rising in tiers to a great citadel, soft violet glow in windows and lamps, crisp morning light",
+    "buildings": "tall slender houses and halls of white and cream dressed stone with gold trim, steep conical and spired violet roofs with flared eaves, round corner turrets with their own violet cone caps, tall arched windows of violet and white stained glass, small balconies on carved brackets, arched doorways with a gold keystone, everything vertical and elegant: roofs as tall as the walls below them",
+    "landmark": "the Violet Citadel: a cluster of tall round white towers capped with steep violet spires and gold finials, joined by arched bridges, on a broad stepped plinth",
+    "street_life": "arcane street lamps of glowing violet crystal on slender dark iron posts, violet and gold Kirin Tor banners with an eye sigil, marble fountains, book and reagent stalls under violet awnings, potted lavender and topiary",
+    "greenery": "manicured lawns, clipped hedges, lavender and lilac beds, a few cherry trees, ivy on the old walls",
+    "materials": "smooth quartz, quartz bricks, polished diorite and calcite for white stone walls, stone bricks for plinths and walls, purple concrete and purple terracotta stepped steeply for spire caps with purpur stairs and slabs at the eaves, gold blocks and yellow accents used sparingly as trim and finials, amethyst, end rods and sea lanterns for arcane lights, purple and magenta stained glass, dark oak for doors and brackets",
     "colours": [
       "violet",
-      "lacquer red",
-      "white plaster",
-      "dark timber",
-      "grey stone"
+      "white stone",
+      "gold",
+      "pale cream",
+      "slate grey"
     ],
-    "avoid": [],
-    "ground": "green grass"
+    "avoid": [
+      "East Asian pagoda roofs",
+      "squat boxy houses with flat fronts",
+      "low pitched roofs",
+      "floating islands",
+      "neon saturated colours",
+      "dark gothic black stone"
+    ],
+    "ground": "green lawns and pale cobbled streets"
   },
   "build": {
     "shell": "platform_hall",
@@ -28,5 +35,77 @@
     "bridge": "dalaran",
     "harbour": "dalaran",
     "founding": "dalaran"
+  },
+  "assets": {
+    "cottage_7x7": {
+      "tiles": [
+        3,
+        3
+      ],
+      "footprint": [
+        12,
+        12
+      ],
+      "storeys": 2,
+      "what": "a small mage's house: a tall narrow white stone house of two storeys with one round corner turret, a steep violet cone roof with flared eaves and a gold finial, a tall arched violet glass window, an arched dark oak door with a gold keystone up two steps, an arcane lamp beside it; a hearth and table below, two beds above",
+      "form": "One tall narrow house on a 12 x 12 plot (3 x 3 tiles of 4 blocks): the body about 7 x 8 blocks, walls about 9 high, a steep pyramid-cone roof about 8 more, one round turret about 4 across on a front corner rising past the eaves to its own cone. Lean rule: walls go up straight and tall, the roof is a steep cone or spire at least as tall as the wall under it, never a low pitch."
+    },
+    "house_10x7": {
+      "tiles": [
+        4,
+        3
+      ],
+      "footprint": [
+        16,
+        12
+      ],
+      "storeys": 3,
+      "what": "a Dalaran townhouse: a three-storey white stone house with gold trim, a steep violet roof with one gabled dormer, a round turret on one corner with its own cone cap, a carved balcony on brackets over the door, tall arched violet glass windows, window boxes of lavender; a hall below, a study, four beds in two chambers above",
+      "form": "A tall house on a 16 x 12 plot (4 x 3 tiles): the body about 12 x 8, walls about 13 high in three storeys, a steep hipped violet roof about 8 more, one round corner turret about 4-5 across rising to a cone above the roof. Lean rule: walls go up straight and tall, the roof is a steep cone or spire at least as tall as the wall under it, never a low pitch."
+    },
+    "workshop_smith": {
+      "tiles": [
+        4,
+        3
+      ],
+      "footprint": [
+        16,
+        12
+      ],
+      "storeys": 2,
+      "what": "an arcane smithy: a white stone workshop whose ground floor opens to the street under a violet awning on dark oak posts, an anvil, a forge glowing violet with amethyst, a quench trough, racks of enchanted blades; a steep violet roof with a slim chimney and a small corner turret; the smith's two beds upstairs",
+      "form": "A workshop on a 16 x 12 plot (4 x 3 tiles): the body about 12 x 8, an open forge bay across the front under a lean-to awning, walls about 10 high, a steep violet roof about 7 more, one slim turret on a back corner. Lean rule: walls go up straight and tall, the roof is a steep cone or spire at least as tall as the wall under it, never a low pitch."
+    },
+    "tavern": {
+      "tiles": [
+        5,
+        4
+      ],
+      "footprint": [
+        20,
+        16
+      ],
+      "storeys": 2,
+      "what": "the city's inn: a broad white stone inn of two storeys plus a tall attic, a hanging gold-and-violet sign over an arched double door, a round turret at each front corner with violet cone caps, tall violet glass windows glowing warm, a terrace with tables and arcane lamps; a taproom with a long bar, casks and a hearth below, guest rooms above",
+      "form": "A broad inn on a 20 x 16 plot (5 x 4 tiles): the body about 16 x 11, walls about 10 high, a steep violet roof about 9 more with dormers, two round front-corner turrets about 4-5 across rising above the eaves to cones. Lean rule: walls go up straight and tall, the roof is a steep cone or spire at least as tall as the wall under it, never a low pitch."
+    },
+    "stall": {
+      "what": "a small market stall of the mage city: a dark oak counter under a violet and gold striped awning on slim posts, showing books, scrolls and glowing reagents, a small arcane lamp"
+    },
+    "forum_centre": {
+      "what": "the square's centrepiece: a marble fountain of white quartz in tiers with a glowing violet crystal on a gold pedestal at its top, water falling into a round basin, the town bell hung from a small gilded arch beside it"
+    },
+    "temple": {
+      "what": "a small mage's sanctum: a white stone chapel with one tall violet spire and a gold finial, a rose window of violet glass over an arched door, inside an altar with a glowing crystal, bookshelves and candles"
+    },
+    "watchtower": {
+      "what": "a round white stone watchtower with a stone brick base, four storeys, a lookout ring with a parapet under a steep violet cone cap with a gold finial, a bell or a glowing crystal at the top, arrow-slit windows, a violet banner"
+    },
+    "wall_curtain": {
+      "what": "a stretch of the city wall 8 blocks long: white stone with a stone brick base, crenellated parapet and walkway on top, a violet Kirin Tor banner with a gold eye on the outer face, an arcane lamp"
+    },
+    "wall_gatehouse": {
+      "what": "the city gatehouse: an arched gate passage 3 wide with a dark oak portcullis, a round tower each side with steep violet cone caps and gold finials, crenellations between, violet banners with the gold eye, arcane lamps either side"
+    }
   }
 }
