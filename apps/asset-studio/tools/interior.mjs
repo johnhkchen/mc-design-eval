@@ -16,12 +16,15 @@ export function interior(file, plans, kind) {
   if (d.made_beds < d.beds) fails.push(`made beds ${d.made_beds}/${d.beds}`);
   if (d.through_rooms) fails.push(`through rooms ${d.through_rooms}`);
   // null: no storey with two rooms or more, so nothing to judge (floorplan.py rev 9, thread 0008)
-  if (d.circulation_share != null && (d.circulation_share < T.circulation[0] || d.circulation_share > T.circulation[1])) fails.push(`circulation ${d.circulation_share}`);
+  const circ = Q.circulation_by_storeys?.[String(d.storeys)] || T.circulation;
+  if (d.circulation_share != null && (d.circulation_share < circ[0] || d.circulation_share > circ[1])) fails.push(`circulation ${d.circulation_share}`);
   if (d.idle_share >= T.idle) fails.push(`idle ${d.idle_share}`);
   // a hall's guests walk round its hearth: its own cap (quality.json walk_max_by_kind, thread 0015)
   const walkMax = Q.walk_max_by_kind?.[kind] ?? T.walk;
   if (d.walk >= walkMax) fails.push(`walk ${d.walk}`);
   if (d.beds && (d.floor_per_bed < T.perBed[0] || d.floor_per_bed > T.perBed[1])) fails.push(`floor a bed ${d.floor_per_bed}`);
+  // a narrow body is one storey (thread 0008, quality.json multi_storey_min_width): the template's width less its relief
+  if (Q.multi_storey_min_width && d.storeys > 1 && d.size && d.size[0] - 2 < Q.multi_storey_min_width) fails.push(`a ${d.size[0] - 2}-wide body of ${d.storeys} storeys (under ${Q.multi_storey_min_width} wide is one storey)`);
   for (const s of d.per_storey) for (const r of s.rooms) {
     if (r.use === "stair") continue;
     const min = r.use === "passage" || r.use === "landing" ? T.passageWidth : T.leastWidth;

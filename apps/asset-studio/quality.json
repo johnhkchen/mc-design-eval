@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "about": "One set of thresholds both pipelines read: the studio's (check-asset, relief, interior) and the client's (floorplan --check, the solver's acceptance). Change by protocol thread; each section names the tool that reads it.",
   "contract": {
     "tool": "js/check-asset.mjs",
@@ -39,6 +39,16 @@
     "status": "v0.2 (thread 0008)",
     "walk": "each bed's route over the storeys it crosses (a storey = sqrt of a storey's floor); max 2.0",
     "destinations": "beds, workstations, hearth, chests; shelves, casks and decor are used floor without routes",
+    "multi_storey_min_width": 10,
+    "stair_foot_clear": 2,
+    "storeys": "a body under multi_storey_min_width wide is one storey (thread 0008); the template's width less its relief (2) is the body's",
+    "circulation_by_storeys": {
+      "3": [
+        0.15,
+        0.5
+      ]
+    },
+    "circulation_note": "3 storeys: the stair's run through the middle storey (thread 0004): cap 0.5",
     "walk_max_by_kind": {
       "hall": 2.5
     },
