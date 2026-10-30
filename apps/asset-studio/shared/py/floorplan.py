@@ -168,7 +168,12 @@ def analyse(file):
         # A bed is got into from beside its head or its foot.
         reach = [c for c in beside(p) + (beside(foot(p)) if p in beds else []) if c in dist]
         if not reach:
-            if n.endswith("_bed") or job(n):
+            # A workstation is also reached from the street (thread 0015): outdoor standing ground beside it, as the
+            # contract walk counts it (an open-fronted forge). It takes no route through the house. Beds never are.
+            street = job(n) and any(abs(c[0] - p[0]) + abs(c[2] - p[2]) == 1 and c[1] in (p[1], p[1] + 1)
+                                    and c in stand and c in outside for c in
+                                    [(p[0] + dx, p[1] + dy, p[2] + dz) for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)) for dy in (0, 1)])
+            if (n.endswith("_bed") or job(n)) and not street:
                 unreached.append((n, p))
             continue
         end = min(reach, key=lambda c: dist[c])

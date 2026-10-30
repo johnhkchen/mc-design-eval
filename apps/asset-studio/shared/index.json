@@ -300,10 +300,10 @@
     "path": "py/floorplan.py",
     "lang": "py",
     "author": "client",
-    "updated": "2026-10-27T16:56:30.465Z",
-    "updated_by": "client",
-    "note": "rev 10: dwellings by street door; circulation judged per dwelling's storey of 2+ rooms",
-    "bytes": 33766,
+    "updated": "2026-10-30T15:09:48.203Z",
+    "updated_by": "studio",
+    "note": "rev 11: a workstation not reached through the house counts as reached when outdoor standing ground beside it can be walked to (thread 0015, your answer 1); no route through the house, beds never",
+    "bytes": 34338,
     "history": [
       {
         "at": "2026-10-27T14:14:06.759Z",
@@ -364,6 +364,12 @@
         "by": "client",
         "note": "rev 10: dwellings by street door; circulation judged per dwelling's storey of 2+ rooms",
         "bytes": 33766
+      },
+      {
+        "at": "2026-10-30T15:09:48.203Z",
+        "by": "studio",
+        "note": "rev 11: a workstation not reached through the house counts as reached when outdoor standing ground beside it can be walked to (thread 0015, your answer 1); no route through the house, beds never",
+        "bytes": 34338
       }
     ]
   },
@@ -434,10 +440,10 @@
     "path": "js/interior.mjs",
     "lang": "mjs",
     "author": "studio",
-    "updated": "2026-10-27T14:22:07.469Z",
+    "updated": "2026-10-30T15:09:48.250Z",
     "updated_by": "studio",
-    "note": "reads quality.json interior; landings and passages 2 wide, stair rooms skipped",
-    "bytes": 2883,
+    "note": "halls take quality.json walk_max_by_kind (2.5, thread 0015); multi_storey_min_width and circulation_by_storeys now checked, as floorplan.py --check does",
+    "bytes": 3721,
     "history": [
       {
         "at": "2026-10-27T14:19:56.881Z",
@@ -450,6 +456,12 @@
         "by": "studio",
         "note": "reads quality.json interior; landings and passages 2 wide, stair rooms skipped",
         "bytes": 2883
+      },
+      {
+        "at": "2026-10-30T15:09:48.250Z",
+        "by": "studio",
+        "note": "halls take quality.json walk_max_by_kind (2.5, thread 0015); multi_storey_min_width and circulation_by_storeys now checked, as floorplan.py --check does",
+        "bytes": 3721
       }
     ]
   },
@@ -497,10 +509,10 @@
     "path": "quality.json",
     "lang": "json",
     "author": "studio",
-    "updated": "2026-10-27T15:16:49.811Z",
-    "updated_by": "client",
-    "note": "interior.circulation_by_storeys: 3 storeys capped at 0.5 (thread 0004)",
-    "bytes": 2217,
+    "updated": "2026-10-30T15:09:48.295Z",
+    "updated_by": "studio",
+    "note": "interior.walk_max_by_kind {hall: 2.5} added on your v0.2 (thread 0015); nothing else changed",
+    "bytes": 2432,
     "history": [
       {
         "at": "2026-10-27T14:20:59.341Z",
@@ -525,6 +537,12 @@
         "by": "client",
         "note": "interior.circulation_by_storeys: 3 storeys capped at 0.5 (thread 0004)",
         "bytes": 2217
+      },
+      {
+        "at": "2026-10-30T15:09:48.295Z",
+        "by": "studio",
+        "note": "interior.walk_max_by_kind {hall: 2.5} added on your v0.2 (thread 0015); nothing else changed",
+        "bytes": 2432
       }
     ]
   },

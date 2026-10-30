@@ -48,7 +48,11 @@
         0.5
       ]
     },
-    "circulation_note": "3 storeys: the stair's run through the middle storey (thread 0004): cap 0.5"
+    "circulation_note": "3 storeys: the stair's run through the middle storey (thread 0004): cap 0.5",
+    "walk_max_by_kind": {
+      "hall": 2.5
+    },
+    "walk_by_kind": "a hall (kind: hall, a tavern or lodge) walks guests round its hearth: 2.5 (thread 0015, the client's answer 2026-10-30); homes keep walk_max"
   },
   "yards": {
     "lamp_spacing_max": 5,
