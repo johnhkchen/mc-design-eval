@@ -111,31 +111,14 @@
       },
       "mossbough": {
         "name": "Mossbough",
-        "feel": "the marsh groves: mangrove wood under moss-grown stone roofs, teal cloth",
+        "feel": "the marsh groves: dark living wood under moss-grown stone roofs, teal cloth",
         "palette": [
-          "dark_oak=mangrove",
           "purpur_pillar=mossy_stone_bricks",
           "purpur_block=mossy_stone_bricks",
           "purple=cyan",
           "magenta=green"
         ],
         "swaps": [
-          "minecraft:dark_oak_button=minecraft:mangrove_button",
-          "minecraft:dark_oak_door=minecraft:mangrove_door",
-          "minecraft:dark_oak_fence=minecraft:mangrove_fence",
-          "minecraft:dark_oak_fence_gate=minecraft:mangrove_fence_gate",
-          "minecraft:dark_oak_hanging_sign=minecraft:mangrove_hanging_sign",
-          "minecraft:dark_oak_leaves=minecraft:mangrove_leaves",
-          "minecraft:dark_oak_log=minecraft:mangrove_log",
-          "minecraft:dark_oak_planks=minecraft:mangrove_planks",
-          "minecraft:dark_oak_pressure_plate=minecraft:mangrove_pressure_plate",
-          "minecraft:dark_oak_sign=minecraft:mangrove_sign",
-          "minecraft:dark_oak_slab=minecraft:mangrove_slab",
-          "minecraft:dark_oak_stairs=minecraft:mangrove_stairs",
-          "minecraft:dark_oak_trapdoor=minecraft:mangrove_trapdoor",
-          "minecraft:dark_oak_wall_hanging_sign=minecraft:mangrove_wall_hanging_sign",
-          "minecraft:dark_oak_wall_sign=minecraft:mangrove_wall_sign",
-          "minecraft:dark_oak_wood=minecraft:mangrove_wood",
           "minecraft:magenta_banner=minecraft:green_banner",
           "minecraft:magenta_bed=minecraft:green_bed",
           "minecraft:magenta_candle=minecraft:green_candle",
@@ -167,9 +150,7 @@
           "minecraft:purpur_block=minecraft:mossy_stone_bricks",
           "minecraft:purpur_pillar=minecraft:mossy_stone_bricks",
           "minecraft:purpur_slab=minecraft:mossy_stone_brick_slab",
-          "minecraft:purpur_stairs=minecraft:mossy_stone_brick_stairs",
-          "minecraft:stripped_dark_oak_log=minecraft:stripped_mangrove_log",
-          "minecraft:stripped_dark_oak_wood=minecraft:stripped_mangrove_wood"
+          "minecraft:purpur_stairs=minecraft:mossy_stone_brick_stairs"
         ]
       }
     }
