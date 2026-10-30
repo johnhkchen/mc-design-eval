@@ -11,7 +11,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { basename, join } from "node:path";
 import { gunzipSync, inflateSync } from "node:zlib";
 
-function readNbt(buf) {                                          // the same minimal reader as check-asset.mjs
+export function readNbt(buf) {                                        // the same minimal reader as check-asset.mjs
   if (buf[0] === 0x1f && buf[1] === 0x8b) buf = gunzipSync(buf); else if (buf[0] === 0x78) buf = inflateSync(buf);
   let o = 0;
   const str = () => { const n = buf.readUInt16BE(o); o += 2; const s = buf.toString("utf8", o, o + n); o += n; return s; };

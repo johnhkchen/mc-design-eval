@@ -3,6 +3,7 @@
 //   contract  check-asset.mjs (version, blocks, points of interest, light where mobs spawn, the stair walk)
 //   relief    relief.mjs (facade depth and detail; skipped for parts and yard tiles)
 //   interior  interior.mjs over the client's floorplan.py (for anything with beds)
+//   support   support.mjs (no block hanging in the air: each reaches the ground by faces or edges; skipped for parts)
 // Thresholds come from quality.json. An asset's `relief_faces` (in its JSON) names the faces relief applies to. Metadata is the .json beside each .nbt (a variant's comes from its base).
 //   node tools/gate.mjs <file.nbt | dir>... [--json] [--no-relief] [--no-interior] [--faces south,north,...]
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
@@ -10,6 +11,7 @@ import { join, basename } from "node:path";
 import { check } from "./check-asset.mjs";
 import { relief } from "./relief.mjs";
 import { interior } from "./interior.mjs";
+import { support } from "./support.mjs";
 
 const Q = existsSync(new URL("../quality.json", import.meta.url)) ? JSON.parse(readFileSync(new URL("../quality.json", import.meta.url), "utf8")) : {};
 const argv = process.argv.slice(2), opt = (k, d) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : d);
@@ -38,6 +40,7 @@ for (const f of files) {
     try { const i = interior(f); row.stages.interior = { ok: i.ok, errors: i.fails }; }
     catch (e) { row.stages.interior = { ok: false, errors: [`floorplan.py failed: ${e.message.split("\n")[0]}`] }; }
   }
+  if (!isPart) { const s = support(f); row.stages.support = { ok: s.ok, errors: s.loose.length ? [`${s.loose.length} loose: ${s.loose.slice(0, 6).map((l) => `${l.block}@${l.at.join(",")}`).join(" ")}`] : [] }; }
   row.ok = Object.values(row.stages).every((s) => s.ok);
   rows.push(row);
 }
