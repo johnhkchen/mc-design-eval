@@ -1,0 +1,65 @@
+{
+  "id": "enterprise:dalaran/spires/home/tower_house_10x10_a",
+  "rev": 1,
+  "style": "dalaran",
+  "kind": "home",
+  "palette": "base",
+  "tiles": [
+    3,
+    3
+  ],
+  "footprint": [
+    10,
+    10
+  ],
+  "height": 30,
+  "ground": 2,
+  "mirror": true,
+  "entrances": [
+    {
+      "at": [
+        4,
+        4,
+        8
+      ],
+      "facing": "south",
+      "width": 1
+    }
+  ],
+  "beds": [
+    {
+      "head": [
+        2,
+        8,
+        2
+      ],
+      "foot": [
+        3,
+        8,
+        2
+      ]
+    },
+    {
+      "head": [
+        5,
+        8,
+        2
+      ],
+      "foot": [
+        6,
+        8,
+        2
+      ]
+    }
+  ],
+  "workstations": [],
+  "lockers": [],
+  "markers": [],
+  "entities": [],
+  "relief_faces": [
+    "south",
+    "north",
+    "east",
+    "west"
+  ]
+}
