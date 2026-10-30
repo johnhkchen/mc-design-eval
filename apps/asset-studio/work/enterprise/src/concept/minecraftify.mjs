@@ -71,8 +71,8 @@ export const KIND = {
 
 export function mcPrompt(v, asset, ground = "grass") {
   const P = PROMPTS[v], [W, D] = asset.footprint;
-  const size = asset.storeys ? `${W} blocks wide by ${D} blocks deep, ${asset.storeys} storey${asset.storeys > 1 ? "s" : ""}` : `${W} blocks wide by ${D} blocks long`;
-  const kind = v !== "v1" && KIND[asset.id] ? ["", `WHAT IT IS: ${KIND[asset.id]}`] : [];
+  const size = asset.tiles ? `${W} blocks wide by ${D} blocks deep (${asset.tiles[0]} x ${asset.tiles[1]} building tiles of 4 x 4 blocks), ${asset.storeys} storey${asset.storeys > 1 ? "s" : ""}, its outer 1-block ring left as ground` : asset.storeys ? `${W} blocks wide by ${D} blocks deep, ${asset.storeys} storey${asset.storeys > 1 ? "s" : ""}` : `${W} blocks wide by ${D} blocks long`;
+  const form = asset.form || KIND[asset.id], kind = v !== "v1" && form ? ["", `WHAT IT IS: ${form}`] : [];
   if (v === "v4" && RUN[asset.id]) kind.push(`HOW TO SHOW IT: ${RUN[asset.id]}`);
   return [P.intent, "", "RULES:", ...P.grid.map((r) => `- ${r}`), "", `SCALE: ${P.scale.replace("SIZE", size)}`, ...kind, "", `VIEW: ${P.view.replace("GROUND", ground)}`, "", `KEEP: ${P.keep}`, "", `THIS ASSET: ${asset.what}.`].join("\n");
 }

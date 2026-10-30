@@ -36,11 +36,311 @@
   "assets": {
     "tavern": {
       "storeys": 1,
-      "what": "the village's great lodge (its tavern): one big single-storey hall under a broad hide roof, a long feast table and casks round a central hearth, three small sleeping alcoves for guests each opening off the hall, a hide banner over the door"
+      "what": "the village's great lodge (its tavern): one big single-storey hall under a broad hide roof, a long feast table and casks round a central hearth, three small sleeping alcoves for guests each opening off the hall, a hide banner over the door",
+      "form": "A long hide hall on a 20 x 16 plot (5 x 4 tiles of 4 blocks): the hall about 17 x 11, a stepped barrel vault of hide from a low skirt to a ridge about 10-11 blocks up, rounded at both ends like a long tent (never a gable), log ribs arching over it and crossing above the ridge, a deck in front on totem posts under a deep hide awning, the front closed by a hide wall with one broad door in the middle. The hide walls are NOT walls: they lean inward from no more than 2-3 blocks above the ground (a short upright skirt of hide, then stairs stepping in every one or two blocks), so the whole outline is a curve from the ground to the peak. No vertical wall above 3 blocks anywhere, no gable ends, no window rows, no second floor.",
+      "tiles": [
+        5,
+        4
+      ],
+      "footprint": [
+        20,
+        16
+      ],
+      "shell": {
+        "fn": "vault",
+        "opts": {
+          "box": [
+            1,
+            4,
+            18,
+            14
+          ],
+          "y": 1,
+          "height": 10,
+          "skirt": 2,
+          "bands": [
+            [
+              "smooth_sandstone",
+              2
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              1
+            ],
+            [
+              "mud_bricks",
+              1
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              2
+            ]
+          ],
+          "zigzag": [
+            {
+              "y": 0,
+              "h": 2,
+              "a": "red_terracotta",
+              "b": "white_terracotta",
+              "teeth": 16
+            },
+            {
+              "y": 4,
+              "h": 3,
+              "a": "mud_bricks",
+              "b": "smooth_sandstone",
+              "teeth": 12
+            }
+          ],
+          "ribs": 4,
+          "door": {
+            "face": "north",
+            "width": 2,
+            "wood": "spruce",
+            "frame": "spruce_log"
+          },
+          "floor": "spruce_planks"
+        }
+      }
     },
     "workshop_smith": {
       "storeys": 1,
-      "what": "a smith's forge tent and home: an open-fronted forge under a hide awning with anvil, quench trough and the smith's job blocks, joined at the back to a closed round sleeping tent with its own door and two beds"
+      "what": "a smith's forge tent and home: an open-fronted forge under a hide awning with anvil, quench trough and the smith's job blocks, joined at the back to a closed round sleeping tent with its own door and two beds",
+      "tiles": [
+        4,
+        3
+      ],
+      "footprint": [
+        16,
+        12
+      ],
+      "form": "A forge tent and a sleeping tent on a 16 x 12 plot (4 x 3 tiles of 4 blocks): at the front, a smithy under a broad hide awning on log posts, walled on three sides and closed at the front by a hide wall with a broad door (no open front: the forge is reached from inside); joined at the back, a closed round sleeping tent with its own inner doorway off the forge. Both leaning hide over log frames, the poles crossing above each peak. The hide walls are NOT walls: they lean inward from no more than 2-3 blocks above the ground (a short upright skirt of hide, then stairs stepping in every one or two blocks), so the whole outline is a curve from the ground to the peak. No vertical wall above 3 blocks anywhere, no gable ends, no window rows, no second floor.",
+      "shell": {
+        "fn": "tent",
+        "opts": {
+          "box": [
+            8,
+            3,
+            14,
+            10
+          ],
+          "y": 1,
+          "height": 9,
+          "skirt": 2,
+          "bands": [
+            [
+              "smooth_sandstone",
+              2
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              1
+            ],
+            [
+              "mud_bricks",
+              1
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              2
+            ]
+          ],
+          "zigzag": [
+            {
+              "y": 0,
+              "h": 2,
+              "a": "red_terracotta",
+              "b": "white_terracotta",
+              "teeth": 10
+            },
+            {
+              "y": 4,
+              "h": 3,
+              "a": "mud_bricks",
+              "b": "smooth_sandstone",
+              "teeth": 8
+            }
+          ],
+          "poles": 6,
+          "door": {
+            "face": "west",
+            "width": 1,
+            "wood": "spruce",
+            "frame": "spruce_log"
+          },
+          "floor": "spruce_planks"
+        }
+      }
+    },
+    "cottage_7x7": {
+      "tiles": [
+        3,
+        3
+      ],
+      "footprint": [
+        12,
+        12
+      ],
+      "storeys": 1,
+      "what": "a family tent: one round-shouldered conical hide tent on a log frame, its frame poles crossing and sticking out above the peak, a broad low doorway under a hide flap with a wooden deck and broad steps in front on log posts, carved totems with bone horns at the deck corners, hay bales and pots, four beds round a central hearth inside",
+      "form": "A single conical tent on a 12 x 12 plot (3 x 3 tiles of 4 blocks): the cone about 9 blocks across at its foot, a stepped cone of hide from a low skirt to a peak about 10-11 blocks up, frame poles crossing above it, the deck and steps in front of the door inside the plot. The hide walls are NOT walls: they lean inward from no more than 2-3 blocks above the ground (a short upright skirt of hide, then stairs stepping in every one or two blocks), so the whole outline is a curve from the ground to the peak. No vertical wall above 3 blocks anywhere, no gable ends, no window rows, no second floor.",
+      "shell": {
+        "fn": "tent",
+        "opts": {
+          "box": [
+            1,
+            3,
+            10,
+            10
+          ],
+          "y": 1,
+          "height": 10,
+          "skirt": 2,
+          "bands": [
+            [
+              "smooth_sandstone",
+              2
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              1
+            ],
+            [
+              "mud_bricks",
+              1
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              2
+            ]
+          ],
+          "zigzag": [
+            {
+              "y": 0,
+              "h": 2,
+              "a": "red_terracotta",
+              "b": "white_terracotta",
+              "teeth": 10
+            },
+            {
+              "y": 4,
+              "h": 3,
+              "a": "mud_bricks",
+              "b": "smooth_sandstone",
+              "teeth": 8
+            }
+          ],
+          "poles": 6,
+          "door": {
+            "face": "north",
+            "width": 2,
+            "wood": "spruce",
+            "frame": "spruce_log"
+          },
+          "floor": "spruce_planks"
+        }
+      }
+    },
+    "house_10x7": {
+      "tiles": [
+        4,
+        3
+      ],
+      "footprint": [
+        16,
+        12
+      ],
+      "storeys": 1,
+      "what": "a family yurt: one broad domed hide yurt on a log frame, the dome ribbed by log poles that cross above the crown, painted bands round its belly, a wide low doorway with a deck and broad steps, carved totems at the front corners, six beds round a hearth inside on one floor",
+      "form": "A single broad dome tent (a yurt) on a 16 x 12 plot (4 x 3 tiles of 4 blocks): the dome an oval about 13 x 9 at its foot, a low upright hide skirt about 2-3 blocks high, then a stepped dome rising to a crown about 10 blocks up, its log ribs standing proud of the hide and crossing above the crown, a deck and steps at the door. Broader than the cone tent, not much taller. The hide walls are NOT walls: they lean inward from no more than 2-3 blocks above the ground (a short upright skirt of hide, then stairs stepping in every one or two blocks), so the whole outline is a curve from the ground to the peak. No vertical wall above 3 blocks anywhere, no gable ends, no window rows, no second floor.",
+      "shell": {
+        "fn": "yurt",
+        "opts": {
+          "box": [
+            2,
+            3,
+            13,
+            10
+          ],
+          "y": 1,
+          "height": 9,
+          "skirt": 3,
+          "bands": [
+            [
+              "smooth_sandstone",
+              2
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              1
+            ],
+            [
+              "mud_bricks",
+              1
+            ],
+            [
+              "sandstone",
+              2
+            ],
+            [
+              "smooth_sandstone",
+              2
+            ]
+          ],
+          "zigzag": [
+            {
+              "y": 0,
+              "h": 3,
+              "a": "red_terracotta",
+              "b": "white_terracotta",
+              "teeth": 12
+            },
+            {
+              "y": 5,
+              "h": 3,
+              "a": "mud_bricks",
+              "b": "smooth_sandstone",
+              "teeth": 8
+            }
+          ],
+          "poles": 8,
+          "door": {
+            "face": "north",
+            "width": 2,
+            "wood": "spruce",
+            "frame": "spruce_log"
+          },
+          "floor": "spruce_planks"
+        }
+      }
     }
   },
   "factions": {

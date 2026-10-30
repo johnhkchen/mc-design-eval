@@ -15,12 +15,12 @@ const JOB = /^minecraft:(barrel|blast_furnace|brewing_stand|cartography_table|(w
 const SLOT_OF = { blast_furnace: "armorer", smithing_table: "toolsmith", grindstone: "weaponsmith", brewing_stand: "cleric" };
 // what each build is in the town: its folder, id, slot, tiers, and which job block (if any) it keeps as the workstation
 const SET = [
-  { src: "cottage_7x7", kind: "home", id: "cottage_7x7_a", keep: [] },
-  { src: "house_10x7", kind: "home", id: "house_10x7_a", keep: [] },
-  { src: "workshop_smith", hold: "interior: its blast furnace stands in the open forge front, reached from the street but not from the door (the interior walk starts at doors only; asked on 0015 with batch 040)", kind: "workshop", id: "workshop_smith_12x9_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"] },
+  { src: "cottage_7x7", tiles: [3, 3], kind: "home", id: "tent_10x10_a", keep: [] },
+  { src: "house_10x7", tiles: [4, 3], kind: "home", id: "yurt_14x10_a", keep: [] },
+  { src: "workshop_smith", tiles: [4, 3], kind: "workshop", id: "forge_tent_14x10_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"] },
   { src: "stall", ver: "v1.nbt", kind: "stall", id: "stall_3x3_a", marker: "anvil", tiers: ["hamlet", "village", "town"] },
   { src: "forum_centre", kind: "forum", id: "forum_centre_7x7_a", open: true },
-  { src: "tavern", hold: "interior: walk 2.23 (cap 2.0): the guests walk round the central hearth to the back alcoves; asked on 0015 whether halls take their own cap", clear: [[6, 3, 8], [10, 3, 8]], fill: [[8, 10, 6, "minecraft:sandstone_slab[type=bottom,waterlogged=false]"]], kind: "hall", id: "tavern_15x9_a", keep: [], tiers: ["village", "town"] },
+  { src: "tavern", tiles: [5, 4], kind: "hall", id: "lodge_18x14_a", keep: [], tiers: ["village", "town"] },
   { src: "temple", kind: "hall", id: "temple_9x9_a", keep: ["brewing_stand"], tiers: ["village", "town"] },
   { src: "watchtower", kind: "wall", id: "watchtower_7x7_a", keep: [], tiers: ["town"] },
   { src: "wall_curtain", kind: "wall", id: "curtain_8_a", part: true, tiers: ["town"] },
@@ -36,18 +36,28 @@ const HELD = SET.filter((a) => a.hold), LIVE = SET.filter((a) => !a.hold);
 for (const a of LIVE) {
   // the build's latest version (revisions count up from v1), or the one named (the stall's shape pass floated its beam)
   const ver = a.ver || fs.readdirSync(join(SRC, a.src)).filter((f) => /^v\d+\.nbt$/.test(f)).sort((x, y) => parseInt(x.slice(1)) - parseInt(y.slice(1))).at(-1);
-  const src = Grid.load(join(SRC, a.src, ver)), [W, H, D] = src.size;
+  let src = Grid.load(join(SRC, a.src, ver));
+  // a tiled build is authored on its whole tiles; the outer ring is yard (the placer fills it), so the part is the body
+  if (a.tiles) {
+    const [w, h, d] = src.size, body = new Grid([w - 2, h, d - 2]);
+    for (const [x, y, z, s] of src.each()) if (x > 0 && z > 0 && x < w - 1 && z < d - 1) body.set(x - 1, y, z - 1, s);
+    if (w - 2 > 4 * a.tiles[0] - 2 || d - 2 > 4 * a.tiles[1] - 2) throw new Error(`${a.id}: body ${w - 2} x ${d - 2} does not fit tiles ${a.tiles}`);
+    src = body;
+  }
+  const [W, H, D] = src.size;
   // a roof Sonnet laid in the plinth's deepslate brick goes to the roof's deepslate tile (so the clans' roofs apply)
   if (a.roof) for (const [x, y, z, st] of [...src.each()]) if (y >= a.roof.from) {
     const t = st.replace(/deepslate_brick_(stairs|slab)/, "deepslate_tile_$1").replace(a.roof.full ? /deepslate_bricks$/ : /^$/, "deepslate_tiles");
     if (t !== st) src.set(x, y, z, t);
   }
   // turn to face south, lift onto two dirt layers, the 1.21.1 chain, a lightning rod (a point of interest) to an end rod,
-  // the hide's red sandstone (it renders bright orange) to mud brick
+  // the hide's red sandstone (it renders bright orange) to mud brick; bone has no stairs or slabs (an invented one is a
+  // missing block), so those go to smooth sandstone's
   const g = new Grid([W, H + 2, D]);
   for (let x = 0; x < W; x++) for (let z = 0; z < D; z++) { g.set(x, 0, z, "dirt"); g.set(x, 1, z, "dirt"); }
   g.paste(src, 0, 2, 0, { q: 2, map: (s) => s.replace(/^minecraft:iron_chain/, "minecraft:chain").replace(/^minecraft:lightning_rod/, "minecraft:end_rod")
-    .replace(/^minecraft:(smooth_|cut_|chiseled_)?red_sandstone(?=$|\[)/, "minecraft:mud_bricks").replace(/^minecraft:(smooth_)?red_sandstone_(stairs|slab|wall)/, "minecraft:mud_brick_$2") });
+    .replace(/^minecraft:(smooth_|cut_|chiseled_)?red_sandstone(?=$|\[)/, "minecraft:mud_bricks").replace(/^minecraft:(smooth_)?red_sandstone_(stairs|slab|wall)/, "minecraft:mud_brick_$2")
+    .replace(/^minecraft:bone_block_(stairs|slab)/, "minecraft:smooth_sandstone_$1") });
   // every cell stored: an unstored cell is void to the placer and the walk check (a structure block keeps air as air)
   for (let x = 0; x < W; x++) for (let y = 2; y < H + 2; y++) for (let z = 0; z < D; z++) if (!g.get(x, y, z)) g.set(x, y, z, "air");
   // a hearth flue walled to the roof but open to the sky makes the whole room "outside" to the interior walk: cap its
@@ -61,7 +71,7 @@ for (const a of LIVE) {
     if (k >= H + 2 && top && top[0] > y + 2) g.set(x, top[0], z, top[1]);
   }
   const meta = { id: `enterprise:tauren/${a.kind}/${a.id}`, rev: 1, style: "tauren", kind: a.part ? "part" : a.kind, ...(a.part ? { slot: "wall:curtain" } : {}),
-    ...(a.tiers ? { tiers: a.tiers } : {}), palette: "base", footprint: [W, D], height: H + 2, ground: 2, mirror: true,
+    ...(a.tiers ? { tiers: a.tiers } : {}), palette: "base", ...(a.tiles ? { tiles: a.tiles } : {}), footprint: [W, D], height: H + 2, ground: 2, mirror: true,
     entrances: [], beds: [], workstations: [], lockers: [], markers: [], entities: [], relief_faces: a.part || a.ends ? ["south", "north"] : ["south", "north", "east", "west"] };
   const cands = [];
   for (const [x, y, z, s] of [...g.each()]) {
