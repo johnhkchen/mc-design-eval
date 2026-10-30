@@ -1,0 +1,36 @@
+{
+  "id": "nightelf",
+  "name": "Night elf grove town",
+  "faction": "Alliance",
+  "status": "draft",
+  "concept": {
+    "setting": "a night elf town in an ancient moonlit forest of colossal trees, eternal twilight under a huge pale moon, mist between the trunks, soft violet and teal light everywhere",
+    "buildings": "graceful buildings grown from living wood rather than built: walls of curved dark bark and pale polished timber, sweeping roofs shaped like great curling leaves and petals, rising to swept-up points, round and crescent-moon windows and doorways, tall slender arches, houses wrapped around the bases of giant trees and perched in their branches on curved platforms, carved owl and crescent-moon motifs, violet cloth awnings and banners",
+    "landmark": "a temple of the moon in a ring of pale stone: a tall open pavilion of slender columns under a sweeping crescent roof, a glowing moonwell pool at its heart reflecting the moon, a statue of a priestess with a raised hand, moonlight streaming down",
+    "street_life": "glowing violet and teal lamps hung from curled wooden posts like hanging flowers, a moonwell fountain, hippogryph roosts, archers' practice targets, wisps of light drifting between the trees, curving wooden bridges between giant trunks, druid stones circled by mushrooms",
+    "greenery": "moss-covered forest floor with ferns and glowing mushrooms, giant ancient trees with dark purple-green leaves, vines and hanging moss",
+    "materials": "dark oak and mangrove logs and wood, stripped dark oak, purple and magenta terracotta, purple wool and carpet, amethyst blocks, warped planks for teal accents, calcite and smooth quartz for pale stone, polished deepslate, soul lanterns, end rods and sea lanterns for moonlight, moss blocks, azalea leaves",
+    "colours": [
+      "deep violet",
+      "moonlit teal",
+      "pale silver",
+      "dark bark brown",
+      "soft blue-white glow"
+    ],
+    "avoid": [
+      "square boxy buildings",
+      "bright pink cherry blossom",
+      "heavy gold trim",
+      "stone castles"
+    ],
+    "ground": "moss and forest floor with ferns under giant trees"
+  },
+  "build": {
+    "shell": null,
+    "roles": null,
+    "earthworks": null,
+    "bridge": null,
+    "harbour": null,
+    "founding": null
+  }
+}
