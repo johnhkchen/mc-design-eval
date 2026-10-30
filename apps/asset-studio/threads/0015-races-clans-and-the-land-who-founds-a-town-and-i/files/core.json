@@ -1,12 +1,12 @@
 {
-  "set": "goblin/core",
+  "set": "nightelf/core",
   "rev": 1,
-  "style": "goblin",
-  "about": "The goblin town's core set: ten whole buildings, each authored in the goblin base palette (jungle timber; Rustbolt recolours it to spruce). A town's clan comes from styles/settlement.json; recolour every part at placement with that clan's `swaps` from styles/goblin.json (every cartel has some, Rustbolt included). Every part is on the usual contract: layers 0-1 dirt, layer 2 the surface, the front to the south, every cell stored (air as air), points of interest declared or decorative twins, every walkable cell lit. The yard round each building is authored in red_sand with dead_bush: swap them for the land's ground and plant from the town's settlement entry (`ground`, `plant`).",
+  "style": "nightelf",
+  "about": "The night elf town's core set: ten whole buildings, each authored in the night elf base palette (Silverleaf). A town's clan comes from styles/settlement.json; recolour every part at placement with that clan's `swaps` from styles/nightelf.json (Silverleaf has none). Every part is on the usual contract: layers 0-1 dirt, layer 2 the surface, the front to the south, every cell stored (air as air), points of interest declared or decorative twins, every walkable cell lit. The yard round each building is authored in red_sand with dead_bush: swap them for the land's ground and plant from the town's settlement entry (`ground`, `plant`).",
   "parts": [
     {
       "id": "cottage_7x7_a",
-      "part": "enterprise:goblin/home/cottage_7x7_a",
+      "part": "enterprise:nightelf/home/cottage_7x7_a",
       "kind": "home",
       "size": [
         9,
@@ -18,11 +18,11 @@
     },
     {
       "id": "house_10x7_a",
-      "part": "enterprise:goblin/home/house_10x7_a",
+      "part": "enterprise:nightelf/home/house_10x7_a",
       "kind": "home",
       "size": [
         12,
-        22,
+        24,
         9
       ],
       "beds": 0,
@@ -30,7 +30,7 @@
     },
     {
       "id": "stall_3x3_a",
-      "part": "enterprise:goblin/stall/stall_3x3_a",
+      "part": "enterprise:nightelf/stall/stall_3x3_a",
       "kind": "stall",
       "slot": "stall:any",
       "tiers": [
@@ -48,40 +48,8 @@
     },
     {
       "id": "forum_centre_7x7_a",
-      "part": "enterprise:goblin/forum/forum_centre_7x7_a",
+      "part": "enterprise:nightelf/forum/forum_centre_7x7_a",
       "kind": "forum",
-      "size": [
-        7,
-        14,
-        7
-      ],
-      "beds": 0,
-      "workstations": []
-    },
-    {
-      "id": "tavern_15x9_a",
-      "part": "enterprise:goblin/hall/tavern_15x9_a",
-      "kind": "hall",
-      "tiers": [
-        "village",
-        "town"
-      ],
-      "size": [
-        17,
-        22,
-        11
-      ],
-      "beds": 3,
-      "workstations": []
-    },
-    {
-      "id": "temple_9x9_a",
-      "part": "enterprise:goblin/hall/temple_9x9_a",
-      "kind": "hall",
-      "tiers": [
-        "village",
-        "town"
-      ],
       "size": [
         9,
         16,
@@ -91,15 +59,34 @@
       "workstations": []
     },
     {
+      "id": "temple_9x9_a",
+      "part": "enterprise:nightelf/hall/temple_9x9_a",
+      "kind": "hall",
+      "slot": "hall:cleric",
+      "tiers": [
+        "village",
+        "town"
+      ],
+      "size": [
+        9,
+        18,
+        9
+      ],
+      "beds": 0,
+      "workstations": [
+        "minecraft:brewing_stand"
+      ]
+    },
+    {
       "id": "watchtower_7x7_a",
-      "part": "enterprise:goblin/wall/watchtower_7x7_a",
+      "part": "enterprise:nightelf/wall/watchtower_7x7_a",
       "kind": "wall",
       "tiers": [
         "town"
       ],
       "size": [
         11,
-        30,
+        32,
         11
       ],
       "beds": 0,
@@ -107,7 +94,7 @@
     },
     {
       "id": "curtain_8_a",
-      "part": "enterprise:goblin/wall/curtain_8_a",
+      "part": "enterprise:nightelf/wall/curtain_8_a",
       "kind": "part",
       "slot": "wall:curtain",
       "tiers": [
@@ -115,7 +102,7 @@
       ],
       "size": [
         8,
-        9,
+        11,
         3
       ],
       "beds": 0,
@@ -123,14 +110,14 @@
     },
     {
       "id": "gatehouse_11x7_a",
-      "part": "enterprise:goblin/wall/gatehouse_11x7_a",
+      "part": "enterprise:nightelf/wall/gatehouse_11x7_a",
       "kind": "wall",
       "tiers": [
         "town"
       ],
       "size": [
-        13,
-        22,
+        15,
+        26,
         9
       ],
       "beds": 0,
@@ -140,7 +127,11 @@
   "held": [
     {
       "id": "workshop_smith_12x9_a",
-      "why": "interior: its smithing table stands in the open forge front, reached from the street but not from the door (the interior walk starts at doors only)"
+      "why": "interior: attic passage with 2 of clear height; 12.5 floor cells per bed (cap 8.5), after three fix rounds"
+    },
+    {
+      "id": "tavern_15x9_a",
+      "why": "contract: a guest bed not reachable from the door; interior circulation 0.12 (floor 0.15), after three fix rounds"
     }
   ],
   "notes": [
