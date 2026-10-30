@@ -18,7 +18,7 @@ const SET = [
   { src: "cottage_7x7", kind: "home", id: "cottage_7x7_a", keep: [] },
   { src: "house_10x7", kind: "home", id: "house_10x7_a", keep: [] },
   { src: "workshop_smith", hold: "interior: its blast furnace stands in the open forge front, reached from the street but not from the door (the interior walk starts at doors only; asked on 0015 with batch 040)", kind: "workshop", id: "workshop_smith_12x9_a", keep: ["blast_furnace", "smithing_table", "grindstone"], tiers: ["village", "town"] },
-  { src: "stall", kind: "stall", id: "stall_3x3_a", marker: "anvil", tiers: ["hamlet", "village", "town"] },
+  { src: "stall", ver: "v1.nbt", kind: "stall", id: "stall_3x3_a", marker: "anvil", tiers: ["hamlet", "village", "town"] },
   { src: "forum_centre", kind: "forum", id: "forum_centre_7x7_a", open: true },
   { src: "tavern", hold: "interior: walk 2.23 (cap 2.0): the guests walk round the central hearth to the back alcoves; asked on 0015 whether halls take their own cap", clear: [[6, 3, 8], [10, 3, 8]], fill: [[8, 10, 6, "minecraft:sandstone_slab[type=bottom,waterlogged=false]"]], kind: "hall", id: "tavern_15x9_a", keep: [], tiers: ["village", "town"] },
   { src: "temple", kind: "hall", id: "temple_9x9_a", keep: ["brewing_stand"], tiers: ["village", "town"] },
@@ -34,7 +34,7 @@ fs.rmSync(OUT, { recursive: true, force: true }); fs.mkdirSync(PREV, { recursive
 // held builds pass the contract but not yet the interior check: built and gated here, not delivered
 const HELD = SET.filter((a) => a.hold), LIVE = SET.filter((a) => !a.hold);
 for (const a of LIVE) {
-  // the build's latest version (revisions count up from v1)
+  // the build's latest version (revisions count up from v1), or the one named (the stall's shape pass floated its beam)
   const ver = a.ver || fs.readdirSync(join(SRC, a.src)).filter((f) => /^v\d+\.nbt$/.test(f)).sort((x, y) => parseInt(x.slice(1)) - parseInt(y.slice(1))).at(-1);
   const src = Grid.load(join(SRC, a.src, ver)), [W, H, D] = src.size;
   // a roof Sonnet laid in the plinth's deepslate brick goes to the roof's deepslate tile (so the clans' roofs apply)

@@ -1,0 +1,45 @@
+{
+  "id": "enterprise:tauren/home/house_10x7_a",
+  "rev": 1,
+  "style": "tauren",
+  "kind": "home",
+  "palette": "base",
+  "footprint": [
+    12,
+    9
+  ],
+  "height": 24,
+  "ground": 2,
+  "mirror": true,
+  "entrances": [
+    {
+      "at": [
+        6,
+        3,
+        8
+      ],
+      "facing": "south",
+      "width": 1
+    },
+    {
+      "at": [
+        5,
+        3,
+        8
+      ],
+      "facing": "south",
+      "width": 1
+    }
+  ],
+  "beds": [],
+  "workstations": [],
+  "lockers": [],
+  "markers": [],
+  "entities": [],
+  "relief_faces": [
+    "south",
+    "north",
+    "east",
+    "west"
+  ]
+}
